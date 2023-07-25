@@ -62,7 +62,7 @@ const Profile = sequelize.define('Profile', {
     // allowNull: true,
   },
   pictureSlider: {
-    type: DataTypes.ARRAY(DataTypes.STRING), 
+    type: DataTypes.JSON, 
     // allowNull: true,
   },
   createdAt: {
