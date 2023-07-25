@@ -35,7 +35,7 @@ const Profile = sequelize.define('Profile', {
     //validate: { notEmpty: true }
   },
   profileDesc: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
     // allowNull: false 
     //validate: { notEmpty: true }
   },

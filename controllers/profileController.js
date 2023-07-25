@@ -1,6 +1,12 @@
 const Profile = require('../models/Profile');
 
 const createProfile = async (req, res) => {
+
+  if (!req.files) {
+    return res.status(400).json({ error: 'No image provided' });
+  }
+
+  
   // Get other fields from the request body
   let {
     name,
@@ -31,20 +37,13 @@ const createProfile = async (req, res) => {
     }
   }
 
-  // Check if at least one image is provided for the imagePath field
-  if (!req.file) {
-    return res.status(400).json({ error: 'Image required' });
-  }
 
   try {
-    // Get the image path for the imagePath field
-    const imagePath = req.file.path;
+    // Get the image path 
 
-    // Get the array of image paths for the pictureSlider field
-    let pictureSlider = [];
-    if (req.files && req.files.pictureSlider) {
-      pictureSlider = req.files.pictureSlider.map((file) => file.path);
-    }
+    const imagePath = req.files.imagePath[0].path;
+    const featuredImagePath = req.files.featuredImage[0].path;
+    const pictureSliderPaths = req.files.pictureSlider.map((file) => file.path);
 
     // Create the new Profile entry in the database
     const newProfile = await Profile.create({
@@ -57,14 +56,15 @@ const createProfile = async (req, res) => {
       heading,
       paragraph,
       imagePath,
-      pictureSlider: JSON.stringify(pictureSlider), 
+      featuredImage : featuredImagePath,
+      pictureSlider: JSON.stringify(pictureSliderPaths), 
     });
 
     return res
       .status(200)
-      .json({ message: 'Data added successfully', Profile: newProfile });
+      .json({ message: 'Profile created successfully', Profile: newProfile });
   } catch (err) {
-    res.status(500).json({ error: 'Error uploading profile: ', err });
+    res.status(500).json({ error: 'Error creating profile: ', err });
   }
 };
 
@@ -82,8 +82,7 @@ const getAllProfiles = async(req, res) => {
 
 const getProfileById = async(req, res) => {
     try{
-        let profileId = req.body;
-        const profile = await Profile.findByPk(profileId)
+        const profile = await Profile.findByPk(req.params.id)
         if (!profile) {
             return res.status(404).json({ message: 'No Profile found' });
         }
@@ -129,9 +128,23 @@ const updateProfile = async (req, res) => {
         
 }
 
+const deleteProfile = async (req, res) => {
+  try {
+    const profile = await Profile.findByPk(req.params.id);
+    if (!profile) {
+      return res.status(404).json({ error: 'Profile not found' });
+    }
+    await profile.destroy();
+    res.json({ message: 'Profile deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Profile Not Deleted' });
+  }
+};
+
 module.exports = {
     createProfile,
     getAllProfiles,
     getProfileById,
-    updateProfile
+    updateProfile,
+    deleteProfile,
 }
