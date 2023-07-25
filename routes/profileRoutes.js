@@ -11,13 +11,13 @@ router.post('/createProfile', upload.fields([{ name: 'imagePath', maxCount: 1 },
 router.get ('/getAllProfiles', getAllProfiles)
 
 // Route for fetching a Profile by ID
-router.get ('/geProfileById', getProfileById)
+router.get ('/:id', getProfileById)
 
 // Route for updating a Profile by ID
 router.put('/updateProfile/:id', updateProfile )
 
 // Route for deleting a Profile by ID
-router.delete('/:id', deleteProfile);
+router.delete('/deleteProfile/:id', deleteProfile);
 
 
 

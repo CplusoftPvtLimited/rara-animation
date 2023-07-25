@@ -130,7 +130,8 @@ const updateProfile = async (req, res) => {
 
 const deleteProfile = async (req, res) => {
   try {
-    const profile = await Profile.findByPk(req.params.id);
+    let id = req.params.id;
+    const profile = await Profile.findByPk(id);
     if (!profile) {
       return res.status(404).json({ error: 'Profile not found' });
     }
