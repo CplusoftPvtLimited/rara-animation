@@ -3,7 +3,7 @@ const router = express.Router();
 const upload = require('../middleware/multerMid');
 const {
   createBlogPost,
-  getAllBlogPosts,
+  getAllBlogs,
   getBlogPostById,
   updateBlogPost,
   deleteBlogPost,
@@ -13,13 +13,13 @@ const {
 router.post('/createBlog', upload.single('imagePath'), createBlogPost);
 
 // Route for getting all blog posts
-router.get('/getAllBlogPosts', getAllBlogPosts);
+router.get('/getAllBlogPosts', getAllBlogs);
 
 // Route for getting a single blog post by ID
 router.get('/:id', getBlogPostById);
 
 // Update a blog post by ID
-router.patch('/:id', updateBlogPost);
+router.patch('/:id', upload.single('imagePath'), updateBlogPost);
 
 // Route for deleting a blog post by ID
 router.delete('/:id', deleteBlogPost);

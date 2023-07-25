@@ -1,7 +1,7 @@
 // models/BlogPost.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
-
+const Category = require('../models/category').Category;
 const Blog = sequelize.define('Blog', {
   title: {
     type: DataTypes.STRING,
@@ -33,8 +33,16 @@ const Blog = sequelize.define('Blog', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
+  categoryId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: Category,
+      key: 'id',
+    },
+  },
 });
 
-// Blog.belongsTo(Category, { foreignKey: 'categoryId' });
+module.exports = { Blog };
 
-module.exports = Blog;
+// Blog.belongsTo(Category, { foreignKey: 'categoryId' });
