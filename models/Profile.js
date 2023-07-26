@@ -65,6 +65,18 @@ const Profile = sequelize.define('Profile', {
     type: DataTypes.JSON, 
     // allowNull: true,
   },
+  facebookUrl: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  twitterUrl: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  ritsumeiUrl: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
   createdAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
