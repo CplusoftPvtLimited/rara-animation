@@ -71,6 +71,7 @@ const createProfile = async (req, res) => {
 const getAllProfiles = async(req, res) => {
     try{
         const profiles = await Profile.findAll()
+        console.log ("************Profile", profiles)
         if (!profiles.length) {
             return res.status(404).json({ message: 'No Profiles found' });
         }
