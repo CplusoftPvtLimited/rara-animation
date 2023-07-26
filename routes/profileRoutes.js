@@ -19,6 +19,4 @@ router.put('/updateProfile/:id', updateProfile )
 // Route for deleting a Profile by ID
 router.delete('/deleteProfile/:id', deleteProfile);
 
-
-
 module.exports = router;
