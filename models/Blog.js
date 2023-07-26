@@ -23,6 +23,13 @@ const Blog = sequelize.define('Blog', {
     type: DataTypes.STRING,
     // allowNull: true,
   },
+  profile: {
+    type : DataTypes.STRING,
+     // allowNull: false,
+    // validate: {
+    //   notEmpty: true,
+    // },
+  },
   region: {
     type : DataTypes.STRING,
   },
