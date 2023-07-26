@@ -23,6 +23,9 @@ const Blog = sequelize.define('Blog', {
     type: DataTypes.STRING,
     // allowNull: true,
   },
+  region: {
+    type : DataTypes.STRING,
+  },
   activationDate: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
