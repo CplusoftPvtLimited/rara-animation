@@ -1,42 +1,43 @@
 var Blog = require('../models/blog').Blog;
 
 const createBlogPost = async (req, res) => {
-  const { title, content, categoryId } = req.body;
+  const { title, content, category, fellow, region } = req.body;
   console.log('req.body: ', req.body);
-  if (!req.file) {
-    return res.status(400).json({ error: 'No image provided' });
-  }
+  // if (!req.file) {
+  //   return res.status(400).json({ error: 'No image provided' });
+  // }
   if (!title || !content) {
     return res.status(400).json({ error: 'Please enter title and content' });
   }
 
   try {
-    const { originalname, path } = req.file;
+    // const { originalname, path } = req.file;
 
-    let imagePath = null;
-    if (req.file) {
-      imagePath = path;
-    }
+    // let imagePath = null;
+    // if (req.file) {
+    //   imagePath = req.file.path;
+    // }
 
     const newBlog = await Blog.create({
+      // imagePath: path,
       title: title,
       content: content,
-      imagePath: path,
-      categoryId: categoryId,
+      category: category,
+      fellow: fellow,
+      region: region,
     });
     return res
       .status(200)
       .send({ message: 'data added successfully', Blog: newBlog });
   } catch (err) {
+    console.log('err: ', err);
     res.status(403).json({ err });
   }
 };
 
 const getAllBlogs = async (req, res) => {
   try {
-    const blogPosts = await Blog.findAll({
-      include: ['categories'],
-    });
+    const blogPosts = await Blog.findAll({});
 
     if (!blogPosts.length) {
       return res.status(404).json({ message: 'No blog posts found' });
