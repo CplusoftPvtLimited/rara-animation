@@ -1,9 +1,10 @@
 import React from "react";
 import './index.css'
+import Hand from '../../assets/images/hand.png'
 function hero() {
   return (
     <div>
-      {/************************** Svgs ******************************/}
+      {/************************** Svg ******************************/}
       <div className="flex mt-[300px] ml-[200px] gap-12">
         <div className="w-[58%] ">
           <h1 className="lFellows-title-main" data-fellows-title="">
@@ -53,8 +54,8 @@ function hero() {
       </div>
       {/************************** Description ******************************/}
       <div className="w-[75%] mx-auto my-[100px]">
-      <div className="">
-        <p className="text-[17px]">
+      <div>
+        <p className="text-[17px] pl-28">
           RARAフェローは、多様な研究者を繋ぐNodes(結合点)となり、<br/>
           その研究力をもって先例にとらわれず、本学の未来を切り開く先進的研究者です。<br/>
           RARAフェローへのステップアップに向け実績を積み重ねる<br/>
@@ -63,12 +64,15 @@ function hero() {
           「RARA学生フェロー」を加えた多層的な研究者支援を行っています。<br/>
         </p>
       </div>
+      <div className="">
+        <img className="hand" src={Hand} alt="" />
       <div className="layers">
         <ul className="layer-inner">
             <li className="layer-item-1">RARAフェロー</li>
             <li className="layer-item-2"> RARAフェロー</li>
             <li className="layer-item-3">RARAフェロー</li>
         </ul>
+      </div>
       </div>
       </div>
     </div>
