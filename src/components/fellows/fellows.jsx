@@ -6,7 +6,6 @@ import Footer from "../../assets/images/fellow-beforefooter.png";
 import websiteIcon from '../../assets/images/website-icon.svg'
 import Logo from '../../assets/images/b-logo-rara.svg'
 
-
 function Fellows() {
   const [fellowsData, setFellowsData] = useState([]);
   const [fellows, setFellows] = useState([]);
@@ -18,7 +17,7 @@ function Fellows() {
     const fetchFellowData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4500/api/profile/getAllProfiles"
+          `${process.env.REACT_APP_SERVER}/profile/getAllProfiles`
         );
         const data = await response.json();
         setFellowsData(data.profiles);
