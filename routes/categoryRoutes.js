@@ -13,10 +13,7 @@ const {
 // Route for creating a new category
 router.post('/createCategory', createCategory);
 router.get('/', getAllCategory);
-router.get('/category/:id', getCategoryById);
-router.put('/category/:id', updateCategoryById);
-router.delete('/category/:id', deleteCategoryById);
-
-// get all post on the basis of the category
-router.get('/categoryTitle', getBlogPostsByTitle);
+router.get('/:id', getCategoryById);
+router.put('/:id', updateCategoryById);
+router.delete('/:id', deleteCategoryById);
 module.exports = router;

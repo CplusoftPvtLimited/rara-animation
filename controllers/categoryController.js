@@ -83,7 +83,7 @@ const updateCategoryById = async (req, res) => {
 
 const deleteCategoryById = async (req, res) => {
   const categoryId = req.params.id;
-  console.log('delete');
+
   if (!categoryId) {
     return res.status(400).json({ error: 'Please add id' });
   }
@@ -94,42 +94,9 @@ const deleteCategoryById = async (req, res) => {
     if (!category) {
       return res.status(404).json({ error: 'Category not found' });
     }
-    await Blog.destroy({ where: { categoryId } });
-
-    await Category.destroy({ where: { id: categoryId } });
+    await category.destroy();
 
     res.status(200).json({ message: 'Category deleted successfully' });
-  } catch (err) {
-    res.status(403).json({ err });
-  }
-};
-
-// get all post by their respective category
-const getBlogPostsByTitle = async (req, res) => {
-  const { title } = req.body;
-  if (!title) {
-    return res.status(400).json({ message: 'Please add a title' });
-  }
-  try {
-    const category = await Category.findOne({ where: { title } });
-    console.log('Category:', category);
-
-    if (!category) {
-      return res.status(404).json({ error: 'Category not found' });
-    }
-
-    const posts = await Blog.findAll({
-      where: {},
-      include: [
-        {
-          model: Category,
-          as: 'categories',
-          where: { title },
-        },
-      ],
-    });
-
-    res.status(200).json({ posts });
   } catch (err) {
     res.status(403).json({ err });
   }
@@ -141,5 +108,4 @@ module.exports = {
   getCategoryById,
   updateCategoryById,
   deleteCategoryById,
-  getBlogPostsByTitle,
 };

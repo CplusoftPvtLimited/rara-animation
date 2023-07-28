@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 //route
-app.use('/api', blogRoutes);
-app.use('/api', categoryRoutes);
+app.use('/api/blog', blogRoutes);
+app.use('/api/category', categoryRoutes);
 
 // Start the server
 app.listen(PORT, () => {
