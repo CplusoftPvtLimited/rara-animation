@@ -7,7 +7,6 @@ const {
   getCategoryById,
   updateCategoryById,
   deleteCategoryById,
-  getBlogPostsByTitle,
 } = require('../controllers/categoryController');
 
 // Route for creating a new category
