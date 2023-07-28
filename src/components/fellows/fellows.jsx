@@ -1,10 +1,11 @@
 import React from "react";
 import "./index.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Pic from "../../assets/images/pic.jpg";
 import Footer from "../../assets/images/fellow-beforefooter.png";
-import websiteIcon from '../../assets/images/website-icon.svg'
-import Logo from '../../assets/images/b-logo-rara.svg'
+import websiteIcon from "../../assets/images/website-icon.svg";
+import Logo from "../../assets/images/b-logo-rara.svg";
 
 function Fellows() {
   const [fellowsData, setFellowsData] = useState([]);
@@ -12,6 +13,7 @@ function Fellows() {
   const [associateFellows, setAssociateFellows] = useState([]);
   const [fellowsCount, setFellowsCount] = useState(0);
   const [AssociateFellowsCount, setAssociateFellowsCount] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFellowData = async () => {
@@ -46,6 +48,10 @@ function Fellows() {
     };
     fetchFellowData();
   }, []);
+
+  const handleViewDetails = (fellowId) => {
+    navigate(`/fellow/${fellowId}`);
+  };
 
   return (
     <section className="mt-[45px]">
@@ -85,8 +91,13 @@ function Fellows() {
                           <h6 className="tag">{fellow.tagLine}</h6>
                         </div>
                         <div className="flex justify-end">
-                          <a href="#">VIEW DETIALS</a>
-                          <div class="bullet"></div>
+                          <div
+                            className="flex justify-end"
+                            onClick={() => handleViewDetails(fellow.id)}
+                          >
+                            <a href="#">VIEW DETAILS</a>
+                            <div className="bullet"></div>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -121,7 +132,11 @@ function Fellows() {
                   <div className="fellows-container flex gap-4 w-[95%] mx-auto">
                     {/* Generate three boxes for each row */}
                     {fellowsData.slice(index, index + 3).map((fellow) => (
-                      <div key={fellow.id} className="fellow-box">
+                      <div
+                        key={fellow.id}
+                        className="fellow-box"
+                        onClick={() => handleViewDetails(fellow.id)}
+                      >
                         <div className="job-post">
                           <h5>{fellow.jobPost}</h5>
                         </div>
@@ -134,8 +149,13 @@ function Fellows() {
                           <h6 className="tag">{fellow.tagLine}</h6>
                         </div>
                         <div className="flex justify-end">
-                          <a href="#">VIEW DETIALS</a>
-                          <div class="bullet"></div>
+                          <div
+                            className="flex justify-end"
+                            onClick={() => handleViewDetails(fellow.id)}
+                          >
+                            <a href="#">VIEW DETAILS</a>
+                            <div className="bullet"></div>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -158,31 +178,43 @@ function Fellows() {
       {/************************** RARA Student Fellows Content ******************************/}
 
       <div className="w-[100%]  my-[150px]">
-          <div className="flex justify-center ">
-            <div className="my-auto">
-          <p className="text-[19px]">
-            RARA学生フェローとして選抜された博士後期課程学生には、<br/>
-            RARAを基盤に個々の研究力を向上させ、<br/>
-            分野の異なる国内外の研究者と交わる中で、<br/>
-            国際性と学際性、さらに複眼的視野を兼ね備えた<br/>
-            博士人材へと成長していくことを期待します。
-          </p>
-          <div className="website-btn mt-8">
-          <a href=""> VIEW WEBSITE <img className="inline" src={websiteIcon} alt="" width={20}/> </a>
-          </div>
+        <div className="flex justify-center ">
+          <div className="my-auto">
+            <p className="text-[19px]">
+              RARA学生フェローとして選抜された博士後期課程学生には、
+              <br />
+              RARAを基盤に個々の研究力を向上させ、
+              <br />
+              分野の異なる国内外の研究者と交わる中で、
+              <br />
+              国際性と学際性、さらに複眼的視野を兼ね備えた
+              <br />
+              博士人材へと成長していくことを期待します。
+            </p>
+            <div className="website-btn mt-8">
+              <a href="#id">
+                {" "}
+                VIEW WEBSITE{" "}
+                <img
+                  className="inline"
+                  src={websiteIcon}
+                  alt=""
+                  width={20}
+                />{" "}
+              </a>
+            </div>
           </div>
           <div>
-          <img src={Footer} alt="" />
+            <img src={Footer} alt="" />
           </div>
-          </div>
+        </div>
       </div>
 
       {/************************** Before Footer Logo******************************/}
 
-      <div className="py-[16rem] border border-[#aaa]">        
+      <div className="before-footer py-[16rem] border border-[#aaa]">
         <img className="m-auto" src={Logo} alt="" width={133} height={139} />
       </div>
-
     </section>
   );
 }
