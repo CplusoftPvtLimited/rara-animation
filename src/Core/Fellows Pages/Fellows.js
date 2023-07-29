@@ -4,28 +4,28 @@ import { Col, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
 import { RiDeleteBin3Line, RiAddFill, RiEditLine } from 'react-icons/ri';
 import image from '../../Assets/khan.jpeg';
-import './Blogs.css';
+import '../Blogs Pages/Blogs.css';
 import ReactLoading from 'react-loading';
 import { Link } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 
-const Blogs = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Fellows = () => {
+  const [fellows, setFellows] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    getBlogs();
-  }, []);
+  // useEffect(() => {
+  //   getFellows();
+  // }, []);
 
-  const getBlogs = () => {
-    setBlogs([]);
+  const getFellows = () => {
+    setFellows([]);
     axios({
       method: 'get',
       url: 'http://localhost:4500/api/blog/getAllBlogPosts',
     })
       .then((response) => {
         console.log('response: ', response.data.blogPosts);
-        setBlogs(response.data.blogPosts);
+        setFellows(response.data.blogPosts);
         setLoading(false);
       })
       .catch((err) => {
@@ -33,15 +33,15 @@ const Blogs = () => {
       });
   };
 
-  const deleteBlog = (blogId) => {
-    axios({
-      method: 'delete',
-      url: `http://localhost:4500/api/blog/${blogId}`,
-    }).then((response) => {
-      console.log(response);
-      getBlogs();
-    });
-  };
+  // const deleteBlog = (blogId) => {
+  //   axios({
+  //     method: 'delete',
+  //     url: `http://localhost:4500/api/${blogId}`,
+  //   }).then((response) => {
+  //     console.log(response);
+  //     getBlogs();
+  //   });
+  // };
 
   return (
     <div className='dashboard-parent-div'>
@@ -52,8 +52,8 @@ const Blogs = () => {
         <Col className='categories-content' lg={10}>
           <Row>
             <Col lg={10}>
-              <h4>Our Blogs</h4>
-              <p>Below are the Blogs currently added.</p>
+              <h4>Our Fellows</h4>
+              <p>Below are the Fellows are currently added.</p>
             </Col>
             <Col className='add-cat-col' lg={2}>
               <OverlayTrigger
@@ -94,52 +94,46 @@ const Blogs = () => {
                     <tr>
                       <th>#</th>
                       <th>Image</th>
-                      <th>Title</th>
-                      <th>Category</th>
-                      <th>Content</th>
-                      <th>Fellow</th>
-                      <th>Region</th>
-                      <th>Profile</th>
+                      <th>Name</th>
+                      <th>English Name</th>
+                      <th>Tag</th>
+                      <th>Job Post</th>
+                      <th>Description</th>
+                      <th>Heading</th>
+                      <th>Paragraph</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {blogs.map((blog, index) => {
-                      return (
-                        <tr key={index}>
-                          <td> {blog.id}</td>
-                          <td>
-                            <img
-                              src={image}
-                              // src={getImageSrc(blog.imagePath)}
-                              alt='blogImage'
-                              style={{ width: '100px', height: '100px' }}
-                            />
-                          </td>
-                          <td>{blog.title}</td>
-                          <td>{blog.category}</td>
-                          <td
-                            dangerouslySetInnerHTML={{ __html: blog.content }}
-                          ></td>
-                          <td>{blog.fellow}</td>
-                          <td>{blog.region}</td>
-                          <td>{blog.profile}</td>
-                          <td>
-                            <Link to={`/blog/edit/${blog.id}`}>
-                              <RiEditLine className='category-product-card-icon' />
-                            </Link>
+                    {/* {blogs.map((blog, index) => {
+                      return ( */}
+                    <tr>
+                      <td> 1</td>
+                      <td>
+                        <img
+                          src={image}
+                          // src={getImageSrc(blog.imagePath)}
+                          alt='blogImage'
+                          style={{ width: '100px', height: '100px' }}
+                        />
+                      </td>
+                      <td>Name</td>
+                      <td>English Name</td>
+                      <td>Tag</td>
+                      <td>Job Post</td>
+                      <td>Description</td>
+                      <td>Heading</td>
+                      <td>Paragraph</td>
+                      <td>
+                        <Link>
+                          <RiEditLine className='category-product-card-icon' />
+                        </Link>
 
-                            <RiDeleteBin3Line
-                              onClick={(event) => {
-                                event.preventDefault();
-                                deleteBlog(blog.id);
-                              }}
-                              className='view-prod-btn'
-                            />
-                          </td>
-                        </tr>
-                      );
-                    })}
+                        <RiDeleteBin3Line />
+                      </td>
+                    </tr>
+                    {/* ); */}
+                    {/* })} */}
                   </tbody>
                 </Table>
               </Col>
@@ -151,4 +145,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default Fellows;

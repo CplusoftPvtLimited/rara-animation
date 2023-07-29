@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
-import axios from 'axios';
-import './AddBlog.css';
-import { useHistory } from 'react-router';
 import image from '../../Assets/khan.jpeg';
-
+import { useHistory } from 'react-router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import axios from 'axios';
+import './AddBlog.css';
+
 function EditBlog(props) {
   const [blogData, setBlogData] = useState();
   const blogId = props.match.params.blogId;
@@ -23,7 +23,7 @@ function EditBlog(props) {
     setBlogData();
     axios({
       method: 'get',
-      url: `http://localhost:4500/api/${blogId}`,
+      url: `http://localhost:4500/api/blog/${blogId}`,
     })
       .then((response) => {
         setBlogData(response.data?.blogPost);
@@ -54,7 +54,7 @@ function EditBlog(props) {
     try {
       console.log('updatedData: ', updatedData);
       axios
-        .patch(`http://localhost:4500/api/${blogId}`, updatedData)
+        .patch(`http://localhost:4500/api/blog/${blogId}`, updatedData)
         .then((response) => {
           console.log('edit data', response);
           setBlogData({
@@ -74,8 +74,6 @@ function EditBlog(props) {
     }
   };
 
-  console.log('blogData: ', blogData);
-
   return (
     <div className='dashboard-parent-div'>
       <Row>
@@ -92,7 +90,6 @@ function EditBlog(props) {
               <Form>
                 <Row>
                   <Col>
-                    {' '}
                     <div className='add-product-input-div'>
                       <p>Blog title</p>
                       <input
@@ -177,12 +174,13 @@ function EditBlog(props) {
                     </div>
                   </Col>
                 </Row>
+
                 <button
                   onClick={editBlog}
                   type='submit'
                   className='add-category-btn'
                 >
-                  Edit Blog
+                  Update Blog
                 </button>
               </Form>
             )}

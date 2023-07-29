@@ -4,17 +4,20 @@ import Sidebar from '../../Components/Sidebar';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import image from '../../Assets/khan.jpeg';
-
+import { useHistory } from 'react-router';
 import axios from 'axios';
 import './AddBlog.css';
 
 const AddBlog = () => {
+  const history = useHistory();
+
   const [formData, setFormData] = useState({
     title: '',
     content: '',
     fellow: '',
     category: '',
     region: '',
+    profile: '',
   });
 
   function handleChange(event) {
@@ -32,25 +35,28 @@ const AddBlog = () => {
     try {
       console.log('Adding');
       const formDataToSend = new FormData();
-      // console.log('title: ', formData.title);
-      console.log('formData: ', formData);
 
       formDataToSend.append('title', formData.title);
       formDataToSend.append('content', formData.content);
       formDataToSend.append('fellow', formData.fellow);
       formDataToSend.append('category', formData.category);
       formDataToSend.append('region', formData.region);
+      formDataToSend.append('profile', formData.profile);
+
       console.log('formDataToSend: ', formDataToSend);
       axios
-        .post('http://localhost:4500/api/createBlog', formDataToSend)
+        .post('http://localhost:4500/api/blog/createBlog', formDataToSend)
         .then((response) => {
           console.log('response: ', response);
           setFormData({
             title: '',
             content: '',
             fellow: '',
+            category: '',
             region: '',
+            profile: '',
           });
+          history.push('/blogs');
         })
         .catch((error) => {
           console.log('Error: ' + error.message);
@@ -59,6 +65,18 @@ const AddBlog = () => {
       console.log('Error: ' + err.message);
     }
   }
+  const regionOptions = [
+    'Pakistan',
+    'United States',
+    'Canada',
+    'United Kingdom',
+    'Australia',
+    'Germany',
+    'France',
+    'Italy',
+    'Japan',
+    'China',
+  ];
   return (
     <div className='dashboard-parent-div'>
       <Row>
@@ -113,27 +131,44 @@ const AddBlog = () => {
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Region</p>
-                    <input
-                      type='text'
+                    <select
                       name='region'
                       value={formData.region}
                       onChange={handleChange}
-                    />
+                      style={{ border: 'none' }}
+                    >
+                      <option value=''>Select Region</option>
+                      {regionOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </Col>
               </Row>
 
               <Row>
                 <Col>
-                  {' '}
+                  <div className='add-product-input-div'>
+                    <p>Profile</p>
+                    <input
+                      type='text'
+                      name='profile'
+                      value={formData.profile}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
                   <div className='add-product-input-div'>
                     <p>Blog Content</p>
                     <CKEditor
                       editor={ClassicEditor}
                       // data='<p>lets start blog content</p>'ss
-                      onReady={(editor) => {
-                        // console.log('Editor is ready to use!', editor);
-                      }}
+                      onReady={(editor) => {}}
                       onChange={(event, editor) => {
                         const data = editor.getData();
                         console.log('Editor Data:', data);
@@ -166,7 +201,6 @@ const AddBlog = () => {
           </Card>
         </Col>
       </Row>
-      {/* <Ckeditor /> */}
     </div>
   );
 };

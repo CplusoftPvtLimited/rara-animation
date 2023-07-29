@@ -59,10 +59,10 @@ function Sidebar() {
               <p>Add Blogs</p>
             </div>
           </Link>
-          <Link to='/fellow' className='sidebar-link'>
+          <Link to='/fellows' className='sidebar-link'>
             <div
               className={`sidebar-item ${
-                isActive(history, '/fellow') && 'active'
+                isActive(history, '/fellows') && 'active'
               }`}
             >
               <IoIosLaptop className='sidebar-icon' />
@@ -89,10 +89,10 @@ function Sidebar() {
               <p>Categories</p>
             </div>
           </Link>
-          <Link to='/addCategory' className='sidebar-link'>
+          <Link to='/category/add' className='sidebar-link'>
             <div
               className={`sidebar-item ${
-                isActive(history, '/addCategory') && 'active'
+                isActive(history, '/category/add') && 'active'
               }`}
             >
               <RiAddFill className='sidebar-icon' />
