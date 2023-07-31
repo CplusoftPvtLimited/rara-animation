@@ -13,19 +13,19 @@ const Fellows = () => {
   const [fellows, setFellows] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   getFellows();
-  // }, []);
+  useEffect(() => {
+    getFellows();
+  }, []);
 
   const getFellows = () => {
     setFellows([]);
     axios({
       method: 'get',
-      url: 'http://localhost:4500/api/blog/getAllBlogPosts',
+      url: 'http://localhost:4500/api/profile/getAllProfiles',
     })
       .then((response) => {
-        console.log('response: ', response.data.blogPosts);
-        setFellows(response.data.blogPosts);
+        console.log('response: ', response);
+        setFellows(response.data.profiles);
         setLoading(false);
       })
       .catch((err) => {
@@ -33,15 +33,16 @@ const Fellows = () => {
       });
   };
 
-  // const deleteBlog = (blogId) => {
-  //   axios({
-  //     method: 'delete',
-  //     url: `http://localhost:4500/api/${blogId}`,
-  //   }).then((response) => {
-  //     console.log(response);
-  //     getBlogs();
-  //   });
-  // };
+  const deleteFellow = (fellowId) => {
+    console.log('deleteFellow : ', fellowId);
+    axios({
+      method: 'delete',
+      url: `http://localhost:4500/api/profile/deleteProfile/${fellowId}`,
+    }).then((response) => {
+      console.log(response);
+      getFellows();
+    });
+  };
 
   return (
     <div className='dashboard-parent-div'>
@@ -95,45 +96,38 @@ const Fellows = () => {
                       <th>#</th>
                       <th>Image</th>
                       <th>Name</th>
-                      <th>English Name</th>
-                      <th>Tag</th>
                       <th>Job Post</th>
-                      <th>Description</th>
-                      <th>Heading</th>
-                      <th>Paragraph</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {blogs.map((blog, index) => {
-                      return ( */}
-                    <tr>
-                      <td> 1</td>
-                      <td>
-                        <img
-                          src={image}
-                          // src={getImageSrc(blog.imagePath)}
-                          alt='blogImage'
-                          style={{ width: '100px', height: '100px' }}
-                        />
-                      </td>
-                      <td>Name</td>
-                      <td>English Name</td>
-                      <td>Tag</td>
-                      <td>Job Post</td>
-                      <td>Description</td>
-                      <td>Heading</td>
-                      <td>Paragraph</td>
-                      <td>
-                        <Link>
-                          <RiEditLine className='category-product-card-icon' />
-                        </Link>
-
-                        <RiDeleteBin3Line />
-                      </td>
-                    </tr>
-                    {/* ); */}
-                    {/* })} */}
+                    {fellows.map((fellow, index) => {
+                      return (
+                        <tr key={index}>
+                          <td> {fellow.id}</td>
+                          <td>
+                            <img
+                              src={image}
+                              alt='blogImage'
+                              style={{ width: '100px', height: '100px' }}
+                            />
+                          </td>
+                          <td>{fellow.name}</td>
+                          <td>{fellow.jobPost}</td>
+                          <td>
+                            <Link to={`/fellow/edit/${fellow.id}`}>
+                              <RiEditLine className='category-product-card-icon' />
+                            </Link>
+                            <RiDeleteBin3Line
+                              onClick={(event) => {
+                                event.preventDefault();
+                                deleteFellow(fellow.id);
+                              }}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </Table>
               </Col>

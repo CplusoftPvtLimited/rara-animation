@@ -69,10 +69,10 @@ function Sidebar() {
               <p>Fellows</p>
             </div>
           </Link>
-          <Link to='/addFellow' className='sidebar-link'>
+          <Link to='/fellow/add' className='sidebar-link'>
             <div
               className={`sidebar-item ${
-                isActive(history, '/addFellow') && 'active'
+                isActive(history, '/fellow/add') && 'active'
               }`}
             >
               <RiAddFill className='sidebar-icon' />
