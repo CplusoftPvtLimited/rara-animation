@@ -1,11 +1,12 @@
 // const Category = require('../models/category');
 var Category = require('../models/Category').Category;
-var Blog = require('../models/blog').Blog;
+// var Blog = require('../models/blog').Blog;
 
 const createCategory = async (req, res) => {
   const { title } = req.body;
+  console.log('title', title);
   if (!title) {
-    return res.status(404).send({ message: 'title is required' });
+    return res.status(400).send({ message: 'title is required' });
   }
 
   try {

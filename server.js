@@ -21,7 +21,6 @@ app.use(cors());
 app.use('/api/blog', blogRoutes);
 //category route
 app.use('/api/category', categoryRoutes);
-
 //Profile Route
 app.use('/api/profile', profileRoutes);
 

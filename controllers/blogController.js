@@ -1,7 +1,8 @@
-var Blog = require('../models/blog').Blog;
+// const Blog = require('../models/Blog');
 
+const Blog = require('../models/Blog');
 const createBlogPost = async (req, res) => {
-  const { title, content, category, fellow, region } = req.body;
+  const { title, content, category, fellow, region, profile } = req.body;
   console.log('req.body: ', req.body);
   // if (!req.file) {
   //   return res.status(400).json({ error: 'No image provided' });
@@ -25,6 +26,7 @@ const createBlogPost = async (req, res) => {
       category: category,
       fellow: fellow,
       region: region,
+      profile: profile,
     });
     return res
       .status(200)
@@ -37,7 +39,7 @@ const createBlogPost = async (req, res) => {
 
 const getAllBlogs = async (req, res) => {
   try {
-    const blogPosts = await Blog.findAll({});
+    const blogPosts = await Blog.findAll({ order: [['createdAt', 'DESC']] });
 
     if (!blogPosts.length) {
       return res.status(404).json({ message: 'No blog posts found' });
@@ -45,6 +47,7 @@ const getAllBlogs = async (req, res) => {
 
     res.status(200).send({ blogPosts });
   } catch (err) {
+    console.log('err: ', err);
     res.status(403).json({ err });
   }
 };

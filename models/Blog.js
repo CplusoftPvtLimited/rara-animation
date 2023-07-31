@@ -55,10 +55,4 @@ const Blog = sequelize.define('Blog', {
   },
 });
 
-// Blog.belongsTo(Profile);
-// Profile.hasMany(Blog);
-
-// Blog.belongsTo(Category, { foreignKey: 'categoryId' });
-// Blog.belongsTo(Profile, { foreignKey: 'profileId' });
-
 module.exports = Blog;
