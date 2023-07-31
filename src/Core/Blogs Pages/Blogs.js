@@ -96,7 +96,7 @@ const Blogs = () => {
                       <th>Image</th>
                       <th>Title</th>
                       <th>Category</th>
-                      <th>Content</th>
+                      {/* <th>Content</th> */}
                       <th>Fellow</th>
                       <th>Region</th>
                       <th>Profile</th>
@@ -118,9 +118,9 @@ const Blogs = () => {
                           </td>
                           <td>{blog.title}</td>
                           <td>{blog.category}</td>
-                          <td
+                          {/* <td
                             dangerouslySetInnerHTML={{ __html: blog.content }}
-                          ></td>
+                          ></td> */}
                           <td>{blog.fellow}</td>
                           <td>{blog.region}</td>
                           <td>{blog.profile}</td>
