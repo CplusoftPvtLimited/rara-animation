@@ -13,6 +13,6 @@ const {
 router.post('/createCategory', createCategory);
 router.get('/', getAllCategory);
 router.get('/:id', getCategoryById);
-router.put('/:id', updateCategoryById);
+router.patch('/:id', updateCategoryById);
 router.delete('/:id', deleteCategoryById);
 module.exports = router;

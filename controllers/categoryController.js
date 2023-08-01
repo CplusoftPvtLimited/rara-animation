@@ -1,11 +1,12 @@
 // const Category = require('../models/category');
 var Category = require('../models/Category').Category;
-var Blog = require('../models/blog').Blog;
+// var Blog = require('../models/blog').Blog;
 
 const createCategory = async (req, res) => {
   const { title } = req.body;
+  console.log('title', title);
   if (!title) {
-    return res.status(404).send({ message: 'title is required' });
+    return res.status(400).send({ message: 'title is required' });
   }
 
   try {
@@ -29,7 +30,9 @@ const createCategory = async (req, res) => {
 
 const getAllCategory = async (req, res) => {
   try {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({
+      order: [['createdAt', 'DESC']],
+    });
     console.log('categories', categories);
     res.status(200).json(categories);
   } catch (err) {

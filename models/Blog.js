@@ -38,9 +38,6 @@ const Blog = sequelize.define('Blog', {
     //   notEmpty: true,
     // },
   },
-  region: {
-    type: DataTypes.STRING,
-  },
   activationDate: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
@@ -54,11 +51,5 @@ const Blog = sequelize.define('Blog', {
     defaultValue: DataTypes.NOW,
   },
 });
-
-// Blog.belongsTo(Profile);
-// Profile.hasMany(Blog);
-
-// Blog.belongsTo(Category, { foreignKey: 'categoryId' });
-// Blog.belongsTo(Profile, { foreignKey: 'profileId' });
 
 module.exports = Blog;
