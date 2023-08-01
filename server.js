@@ -6,6 +6,7 @@ const sequelize = require('./config/db');
 
 const app = express();
 const PORT = process.env.PORT || 4500;
+const path = require('path');
 
 sequelize.sync();
 const blogRoutes = require('./routes/blogRoutes');
@@ -16,6 +17,8 @@ const profileRoutes = require('./routes/profileRoutes');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //blog route
 app.use('/api/blog', blogRoutes);

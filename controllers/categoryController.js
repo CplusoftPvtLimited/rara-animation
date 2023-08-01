@@ -30,7 +30,9 @@ const createCategory = async (req, res) => {
 
 const getAllCategory = async (req, res) => {
   try {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({
+      order: [['createdAt', 'DESC']],
+    });
     console.log('categories', categories);
     res.status(200).json(categories);
   } catch (err) {
