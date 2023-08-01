@@ -20,6 +20,7 @@ function App() {
             <Route path='/blogs' exact component={Blogs} />
             <Route path='/blog/add' exact component={AddBlog} />
             <Route path='/blog/edit/:blogId' exact component={EditBlog} />
+
             <Route path='/categories' exact component={Categories} />
             <Route path='/category/add' exact component={AddCategory} />
             <Route
@@ -27,6 +28,7 @@ function App() {
               exact
               component={EditCategory}
             />
+
             <Route path='/fellows' exact component={Fellows} />
             <Route path='/fellow/add' exact component={AddFellow} />
             <Route path='/fellow/edit/:fellowId' exact component={EditFellow} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
 import image from '../../Assets/khan.jpeg';
@@ -10,7 +10,11 @@ import '../Blogs Pages/AddBlog.css';
 
 function EditFellow(props) {
   const [profileData, setProfileData] = useState();
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
+
   const profileId = props.match.params.fellowId;
+  const fileInputRef = useRef(null);
+
   console.log('profileId: ' + profileId);
   const history = useHistory();
 
@@ -34,11 +38,33 @@ function EditFellow(props) {
       });
   };
 
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setProfileData((prev) => {
+  //     return { ...prev, [name]: value };
+  //   });
+  // };
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setProfileData((prev) => {
-      return { ...prev, [name]: value };
-    });
+    const { name, value, files } = event.target;
+    if (name === 'imagePath') {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreviewUrl(reader.result);
+      };
+      if (files && files.length > 0) {
+        reader.readAsDataURL(files[0]);
+        setProfileData((prev) => ({
+          ...prev,
+          imagePath: files[0],
+        }));
+      }
+    } else {
+      setProfileData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleImageClick = () => {
+    fileInputRef.current.click();
   };
 
   const editFellow = (event) => {
@@ -55,6 +81,7 @@ function EditFellow(props) {
     updatedData.append('heading', profileData.heading);
     updatedData.append('paragraph', profileData.paragraph);
     // updatedData.append('featuredImage', profileData.featuredImage);
+    updatedData.append('imagePath', imagePreviewUrl ?? profileData.imagePath);
 
     try {
       console.log('updatedData: ', updatedData);
@@ -69,7 +96,7 @@ function EditFellow(props) {
             name: '',
             nameEnglish: '',
             tagLine: '',
-            // imagePath: '',
+            imagePath: '',
             jobPost: '',
             profileDesc: '',
             websiteUrl: '',
@@ -203,7 +230,32 @@ function EditFellow(props) {
                   <Col>
                     <div className='add-product-image-div'>
                       <div className='product-image-div'>
-                        <img src={image} alt='preview' />
+                        {/* <input
+                          type='file'
+                          name='imagePath'
+                          // value={formData.imagePath?.name}
+                          src={blogData.imagePath}
+                          // value={blogData.imagePath}
+                          onChange={handleChange}
+                        /> */}
+
+                        <img
+                          src={imagePreviewUrl ?? profileData?.imagePath}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='imagePath'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          style={{ display: 'none' }}
+                        />
                       </div>
                     </div>
                   </Col>

@@ -15,7 +15,7 @@ const AddProfile = () => {
     name: '',
     nameEnglish: '',
     tagLine: '',
-    // imagePath: '',
+    imagePath: '',
     jobPost: '',
     profileDesc: '',
     websiteUrl: '',
@@ -26,10 +26,19 @@ const AddProfile = () => {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === 'imagePath') {
+      console.log('event.target.files[0]', event.target.files[0]);
+      console.log('name', name);
+      setFormData({
+        ...formData,
+        [name]: event.target.files[0],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   }
 
   console.log('formData: ', formData);
@@ -43,7 +52,7 @@ const AddProfile = () => {
       formDataToSend.append('name', formData.name);
       formDataToSend.append('nameEnglish', formData.nameEnglish);
       formDataToSend.append('tagLine', formData.tagLine);
-      // formDataToSend.append('imagePath', formData.imagePath);
+      formDataToSend.append('imagePath', formData.imagePath);
       formDataToSend.append('jobPost', formData.jobPost);
       formDataToSend.append('profileDesc', formData.profileDesc);
       formDataToSend.append('websiteUrl', formData.websiteUrl);
@@ -60,7 +69,7 @@ const AddProfile = () => {
             name: '',
             nameEnglish: '',
             tagLine: '',
-            // imagePath: '',
+            imagePath: '',
             jobPost: '',
             profileDesc: '',
             websiteUrl: '',
@@ -193,7 +202,13 @@ const AddProfile = () => {
                 <Col>
                   <div className='add-product-image-div'>
                     <div className='product-image-div'>
-                      <img src={image} alt='preview' />
+                      {/* <img src={image} alt='preview' /> */}
+                      <input
+                        type='file'
+                        name='imagePath'
+                        // value={formData.imagePath?.name}
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                 </Col>

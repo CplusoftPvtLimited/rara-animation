@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
 import image from '../../Assets/khan.jpeg';
@@ -10,9 +10,13 @@ import './AddBlog.css';
 
 function EditBlog(props) {
   const [blogData, setBlogData] = useState();
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
+  const [newImageFile, setNewImageFile] = useState(null);
+
   const blogId = props.match.params.blogId;
   console.log('blogId: ' + blogId);
   const history = useHistory();
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     getBlogs();
@@ -35,21 +39,38 @@ function EditBlog(props) {
   };
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setBlogData((prev) => {
-      return { ...prev, [name]: value };
-    });
+    const { name, value, files } = event.target;
+    console.log('file: ', files);
+    if (name === 'imagePath') {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreviewUrl(reader.result);
+      };
+      if (files && files.length > 0) {
+        reader.readAsDataURL(files[0]);
+        setBlogData((prev) => ({
+          ...prev,
+          imagePath: files[0],
+        }));
+      }
+    } else {
+      setBlogData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
+  const handleImageClick = () => {
+    fileInputRef.current.click();
+  };
   const editBlog = (event) => {
     event.preventDefault();
-
+    console.log('fiels: ', blogData.imagePath);
     const updatedData = new FormData();
     updatedData.append('title', blogData.title);
     updatedData.append('content', blogData.content);
     updatedData.append('fellow', blogData.fellow);
     updatedData.append('category', blogData.category);
     updatedData.append('region', blogData.region);
+    updatedData.append('imagePath', blogData.imagePath);
 
     try {
       console.log('updatedData: ', updatedData);
@@ -63,6 +84,7 @@ function EditBlog(props) {
             category: '',
             region: '',
             content: '',
+            imagePath: '',
           });
           history.push('/blogs');
         })
@@ -169,7 +191,32 @@ function EditBlog(props) {
                   <Col>
                     <div className='add-product-image-div'>
                       <div className='product-image-div'>
-                        <img src={image} alt='preview' />
+                        {/* <input
+                          type='file'
+                          name='imagePath'
+                          // value={formData.imagePath?.name}
+                          src={blogData.imagePath}
+                          // value={blogData.imagePath}
+                          onChange={handleChange}
+                        /> */}
+
+                        <img
+                          src={imagePreviewUrl ?? blogData?.imagePath}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='imagePath'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          style={{ display: 'none' }}
+                        />
                       </div>
                     </div>
                   </Col>

@@ -18,22 +18,39 @@ const AddBlog = () => {
     category: '',
     region: '',
     profile: '',
+    imagePath: '',
   });
+
+  // function handleChange(event) {
+  //   const { name, value } = event.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // }
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === 'imagePath') {
+      console.log('event.target.files[0]', event.target.files[0]);
+      console.log('name', name);
+      setFormData({
+        ...formData,
+        [name]: event.target.files[0],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   }
-
   console.log('formData: ', formData);
 
   function handleSubmit(event) {
     event.preventDefault();
     try {
-      console.log('Adding');
+      console.log('Adding: image path: ', formData.imagePath);
       const formDataToSend = new FormData();
 
       formDataToSend.append('title', formData.title);
@@ -42,10 +59,16 @@ const AddBlog = () => {
       formDataToSend.append('category', formData.category);
       formDataToSend.append('region', formData.region);
       formDataToSend.append('profile', formData.profile);
+      // formDataToSend.append('imagePath', formData.imagePath);
+      formDataToSend.append('imagePath', formData.imagePath); // Append the image File object here
 
       console.log('formDataToSend: ', formDataToSend);
       axios
-        .post('http://localhost:4500/api/blog/createBlog', formDataToSend)
+        .post('http://localhost:4500/api/blog/createBlog', formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
         .then((response) => {
           console.log('response: ', response);
           setFormData({
@@ -55,6 +78,7 @@ const AddBlog = () => {
             category: '',
             region: '',
             profile: '',
+            imagePath: '',
           });
           history.push('/blogs');
         })
@@ -65,6 +89,7 @@ const AddBlog = () => {
       console.log('Error: ' + err.message);
     }
   }
+
   const regionOptions = [
     'Pakistan',
     'United States',
@@ -77,6 +102,7 @@ const AddBlog = () => {
     'Japan',
     'China',
   ];
+
   return (
     <div className='dashboard-parent-div'>
       <Row>
@@ -92,7 +118,6 @@ const AddBlog = () => {
             <Form onSubmit={handleSubmit}>
               <Row>
                 <Col>
-                  {' '}
                   <div className='add-product-input-div'>
                     <p>Blog title</p>
                     <input
@@ -188,7 +213,12 @@ const AddBlog = () => {
                 <Col>
                   <div className='add-product-image-div'>
                     <div className='product-image-div'>
-                      <img src={image} alt='preview' />
+                      <input
+                        type='file'
+                        name='imagePath'
+                        // value={formData.imagePath?.name}
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                 </Col>

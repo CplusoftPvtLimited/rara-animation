@@ -107,7 +107,7 @@ const Fellows = () => {
                           <td> {fellow.id}</td>
                           <td>
                             <img
-                              src={image}
+                              src={fellow.imagePath ? fellow.imagePath : image}
                               alt='blogImage'
                               style={{ width: '100px', height: '100px' }}
                             />
