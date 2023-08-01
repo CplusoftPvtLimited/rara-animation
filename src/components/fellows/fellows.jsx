@@ -172,7 +172,7 @@ function Fellows() {
           <div class="bullet-point"></div>
           <h2 className="rara-text">RARA学生フェロー</h2>
         </div>
-        <h3 className="my-auto">{fellowsCount} RARA STUDENT FELLOWS</h3>
+        <h3 className="my-auto">RARA STUDENT FELLOWS</h3>
       </div>
 
 

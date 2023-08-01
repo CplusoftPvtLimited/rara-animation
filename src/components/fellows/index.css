@@ -82,6 +82,19 @@
   padding: 55px 0px;
   border-bottom: 1px solid #aaa ;
 }
+
+.mid-bar h2{
+  font-size: 34px;
+  font-weight: 600;
+  color: #000;
+}
+
+.mid-bar h3{
+  font-size: 21px;
+  font-weight: 400;
+  color: #aaaaaa;
+  text-align: center;
+}
 .bottom-bar{
   width: 95%;
   margin: auto;
@@ -89,6 +102,18 @@
   border-bottom: 1px solid #aaa ;
 }
 
+.bottom-bar h2{
+  font-size: 34px;
+  font-weight: 600;
+  color: #000;
+}
+
+.bottom-bar h3{
+  font-size: 21px;
+  font-weight: 400;
+  color: #aaaaaa;
+  text-align: center;
+}
 .rara-text:before{
     content: "";
     display: inline-block;
