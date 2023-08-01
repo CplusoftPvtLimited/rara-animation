@@ -17,10 +17,12 @@ const createBlogPost = async (req, res) => {
       imagePath = path;
     }
 
+    const baseUrl = "http://localhost:4500/"
+
     const newBlog = await Blog.create({
       title: title,
       content: content,
-      imagePath: path,
+      imagePath: baseUrl + path,
     });
     return res
       .status(200)
@@ -59,7 +61,6 @@ const getBlogPostById = async (req, res) => {
 
 const updateBlogPost = async (req, res) => {
   const { title, content } = req.body;
-  console.log('body: ', req.body);
   const blogPost = await Blog.findByPk(req.params.id);
   if (!blogPost) {
     return res.status(404).json({ error: 'Blog post not found' });

@@ -19,7 +19,7 @@ router.get('/getAllBlogPosts', getAllBlogPosts);
 router.get('/:id', getBlogPostById);
 
 // Update a blog post by ID
-router.patch('/:id', updateBlogPost);
+router.put('/:id', updateBlogPost);
 
 // Route for deleting a blog post by ID
 router.delete('/:id', deleteBlogPost);

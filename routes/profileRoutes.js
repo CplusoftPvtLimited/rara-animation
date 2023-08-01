@@ -5,7 +5,7 @@ const upload = require('../middleware/multerMid');
 const { createProfile, getAllProfiles, getProfileById, updateProfile, deleteProfile } = require('../controllers/profileController');
 
 // Create New Fellow Profile
-router.post('/createProfile', upload.fields([{ name: 'imagePath', maxCount: 1 }, { name: 'featuredImage', maxCount: 1 }, { name: 'pictureSlider', maxCount: 10 } ]), createProfile);
+router.post('/createProfile', upload.fields([{ name: 'imagePath', maxCount: 1 }, {name: 'thumbnailPath', maxCount: 1}, { name: 'featuredImage', maxCount: 1 }, { name: 'pictureSlider', maxCount: 10 } ]), createProfile);
 
 // Route for fetching all Profiles
 router.get ('/getAllProfiles', getAllProfiles)

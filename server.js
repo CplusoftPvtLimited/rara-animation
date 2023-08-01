@@ -3,15 +3,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const sequelize = require('./config/db');
+const path = require('path');
+const blogRoutes = require('./routes/blogRoutes');
+const profileRoutes = require('./routes/profileRoutes')
 
 const app = express();
 const PORT = process.env.PORT || 4500;
 
 sequelize.sync();
-const blogRoutes = require('./routes/blogRoutes');
-const profileRoutes = require('./routes/profileRoutes')
 
 // Middleware
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());

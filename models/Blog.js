@@ -21,7 +21,7 @@ const Blog = sequelize.define('Blog', {
   },
   imagePath: {
     type: DataTypes.STRING,
-    // allowNull: true,
+    allowNull: true,
   },
   profile: {
     type : DataTypes.STRING,
@@ -33,6 +33,7 @@ const Blog = sequelize.define('Blog', {
   region: {
     type : DataTypes.STRING,
   },
+
   activationDate: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
