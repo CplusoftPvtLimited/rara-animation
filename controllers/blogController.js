@@ -1,7 +1,11 @@
-const Blog = require('../models/Blog');
+// const Blog = require('../models/Blog');
 
+const Blog = require('../models/Blog');
 const createBlogPost = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content, category, fellow, region, profile, imagePath } =
+    req.body;
+  console.log('req.body: ', req.body);
+
   if (!req.file) {
     return res.status(400).json({ error: 'No image provided' });
   }
@@ -11,30 +15,36 @@ const createBlogPost = async (req, res) => {
 
   try {
     const { originalname, path } = req.file;
-
+    console.log('path: ', req.file);
     let imagePath = null;
     if (req.file) {
-      imagePath = path;
+      imagePath = req.file.path;
     }
 
-    const baseUrl = "http://localhost:4500/"
+    const baseUrl = 'http://localhost:4500/';
 
     const newBlog = await Blog.create({
+      imagePath: baseUrl + path,
       title: title,
       content: content,
-      imagePath: baseUrl + path,
+      category: category,
+      fellow: fellow,
+      region: region,
+      profile: profile,
     });
+
     return res
       .status(200)
       .send({ message: 'data added successfully', Blog: newBlog });
   } catch (err) {
-    res.status(500).json({ error: 'Error uploading post : ', err });
+    console.log('err: ', err);
+    res.status(403).json({ err });
   }
 };
 
-const getAllBlogPosts = async (req, res) => {
+const getAllBlogs = async (req, res) => {
   try {
-    const blogPosts = await Blog.findAll();
+    const blogPosts = await Blog.findAll({ order: [['createdAt', 'DESC']] });
 
     if (!blogPosts.length) {
       return res.status(404).json({ message: 'No blog posts found' });
@@ -42,11 +52,17 @@ const getAllBlogPosts = async (req, res) => {
 
     res.status(200).send({ blogPosts });
   } catch (err) {
-    res.status(500).json({ error: 'Error fetching blog posts' });
+    console.log('err: ', err);
+    res.status(403).json({ err });
   }
 };
 
 const getBlogPostById = async (req, res) => {
+  if (!req.params.id) {
+    res
+      .status(400)
+      .json({ message: 'Please add a blog post id to get a blog post' });
+  }
   try {
     const blogPost = await Blog.findByPk(req.params.id);
 
@@ -55,54 +71,59 @@ const getBlogPostById = async (req, res) => {
     }
     res.status(200).send({ blogPost });
   } catch (err) {
-    res.status(500).json({ error: 'Error fetching blog post' });
+    res.status(403).json({ err });
   }
 };
 
 const updateBlogPost = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content, fellow, category } = req.body;
   const blogPost = await Blog.findByPk(req.params.id);
   if (!blogPost) {
     return res.status(404).json({ error: 'Blog post not found' });
   }
 
-  if (title) {
-    blogPost.title = title;
-  }
-  if (content) {
-    blogPost.content = content;
-  }
+  blogPost.title = title;
+  blogPost.content = content;
+  blogPost.fellow = fellow;
+  blogPost.category = category;
+
+  console.log('blogPost: ', blogPost);
+  const baseUrl = 'http://localhost:4500/';
   if (req.file) {
-    const { path } = req.file;
-    blogPost.imagePath = path;
+    const imagePath = req.file.path;
+    console.log('path: ' + imagePath);
+    blogPost.dataValues.imagePath = baseUrl + imagePath;
   }
+  console.log('blogPost: ', blogPost);
 
   try {
-    await blogPost.save();
-    res.status(200).json(blogPost);
+    await Blog.update(blogPost.dataValues, { where: { id: req.params.id } });
+    const updatedBlogPost = await Blog.findByPk(req.params.id);
+    res.status(200).json(updatedBlogPost);
   } catch (err) {
-    console.error('Error updating blog post:', err);
-    res.status(500).json({ error: 'Error updating blog post' });
+    res.status(403).json({ err });
   }
 };
 
 const deleteBlogPost = async (req, res) => {
+  if (!req.params.id) {
+    return res.status(400).json({ error: 'Add a id to delete a blog post' });
+  }
   try {
     const blogPost = await Blog.findByPk(req.params.id);
     if (!blogPost) {
       return res.status(404).json({ error: 'Blog post not found' });
     }
     await blogPost.destroy();
-    res.json({ message: 'Blog post deleted successfully' });
+    res.status(200).json({ message: 'Blog post deleted successfully' });
   } catch (err) {
-    console.error('Error deleting blog post:', err);
-    res.status(500).json({ error: 'Error deleting blog post' });
+    res.status(403).json({ err });
   }
 };
 
 module.exports = {
   createBlogPost,
-  getAllBlogPosts,
+  getAllBlogs,
   getBlogPostById,
   updateBlogPost,
   deleteBlogPost,
