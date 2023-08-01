@@ -16,6 +16,7 @@ function Fellows() {
   const navigate = useNavigate();
 
   useEffect(() => {
+
     const fetchFellowData = async () => {
       try {
         const response = await fetch(
@@ -37,6 +38,7 @@ function Fellows() {
             AssociateFellowsCount++;
           }
         });
+        
 
         setFellows(fellows);
         setFellowsCount(fellowsCount);
@@ -56,7 +58,7 @@ function Fellows() {
   return (
     <section className="mt-[45px]">
       {/************************** RARA Fellow Section ******************************/}
-      <div className="top-bar flex justify-between">
+      <div className="top-bar lg:flex lg:justify-between">
         <div className="flex">
           <div class="bullet-point"></div>
           <h2 className="rara-text">RARAフェロー</h2>
@@ -65,6 +67,7 @@ function Fellows() {
       </div>
 
       {/************************** RARA Fellow Profile Section ******************************/}
+
       <div className="rows-wrapper">
         {fellows.length === 0 ? (
           <div className="mx-auto my-[50px]">
@@ -78,16 +81,16 @@ function Fellows() {
                   <div className="fellows-container flex gap-4 w-[95%] mx-auto">
                     {/* Generate three boxes for each row */}
                     {fellowsData.slice(index, index + 3).map((fellow) => (
-                      <div key={fellow.id} className="fellow-box">
+                      <div key={fellow.id} className="fellow-box" onClick={() => handleViewDetails(fellow.id)}>
                         <div className="job-post">
                           <h5>{fellow.jobPost}</h5>
                         </div>
                         <div>
-                          <img className="thumbnail" src={Pic} alt="" />
+                          <img className="thumbnail" src={fellow.thumbnailPath} alt="" />
                         </div>
                         <div className="mt-[25px] pl-[40px]">
-                          <h4>{fellow.name}</h4>
-                          <p>{fellow.nameEnglish}</p>
+                          <h4>{fellow.nameEnglish}</h4>
+                          <p>{fellow.name}</p>
                           <h6 className="tag">{fellow.tagLine}</h6>
                         </div>
                         <div className="flex justify-end">
@@ -95,7 +98,7 @@ function Fellows() {
                             className="flex justify-end"
                             onClick={() => handleViewDetails(fellow.id)}
                           >
-                            <a href="#">VIEW DETAILS</a>
+                            <a href="#" className="det-btn text-[10px] lg:text-[12px]">VIEW DETAILS</a>
                             <div className="bullet"></div>
                           </div>
                         </div>
@@ -108,13 +111,14 @@ function Fellows() {
         )}
       </div>
 
+
       {/************************** RARA Associate Fellow Section ******************************/}
-      <div className="associate-bar flex justify-between">
+      <div className="mid-bar lg:flex lg:justify-between">
         <div className="flex">
           <div class="bullet-point"></div>
           <h2 className="rara-text">RARAアソシエイトフェロー</h2>
         </div>
-        <h3 className="my-auto">{AssociateFellowsCount} RARA FELLOWS</h3>
+        <h3 className="my-auto">{fellowsCount} RARA ASSOCIATE FELLOWS</h3>
       </div>
 
       {/************************** RARA Assosiate Profile Section ******************************/}
@@ -122,30 +126,26 @@ function Fellows() {
       <div className="rows-wrapper">
         {fellows.length === 0 ? (
           <div className="mx-auto my-[50px]">
-            <p className="text-center">No Associate Fellow Found</p>
+            <p>Loading...</p>
           </div>
         ) : (
-          fellowsData.map(
+          fellows.map(
             (fellow, index) =>
               index % 3 === 0 && (
                 <div key={`row-${index}`} className="row">
                   <div className="fellows-container flex gap-4 w-[95%] mx-auto">
                     {/* Generate three boxes for each row */}
                     {fellowsData.slice(index, index + 3).map((fellow) => (
-                      <div
-                        key={fellow.id}
-                        className="fellow-box"
-                        onClick={() => handleViewDetails(fellow.id)}
-                      >
+                      <div key={fellow.id} className="fellow-box" onClick={() => handleViewDetails(fellow.id)}>
                         <div className="job-post">
                           <h5>{fellow.jobPost}</h5>
                         </div>
                         <div>
-                          <img className="thumbnail" src={Pic} alt="" />
+                          <img className="thumbnail" src={fellow.thumbnailPath} alt="" />
                         </div>
                         <div className="mt-[25px] pl-[40px]">
-                          <h4>{fellow.name}</h4>
-                          <p>{fellow.nameEnglish}</p>
+                          <h4>{fellow.nameEnglish}</h4>
+                          <p>{fellow.name}</p>
                           <h6 className="tag">{fellow.tagLine}</h6>
                         </div>
                         <div className="flex justify-end">
@@ -167,20 +167,21 @@ function Fellows() {
       </div>
 
       {/************************** RARA Student Fellows Section ******************************/}
-      <div className="associate-bar flex justify-between">
+      <div className="bottom-bar lg:flex lg:justify-between">
         <div className="flex">
           <div class="bullet-point"></div>
           <h2 className="rara-text">RARA学生フェロー</h2>
         </div>
-        <h3 className="my-auto">RARA STUDENT FELLOWS</h3>
+        <h3 className="my-auto">{fellowsCount} RARA STUDENT FELLOWS</h3>
       </div>
+
 
       {/************************** RARA Student Fellows Content ******************************/}
 
       <div className="w-[100%]  my-[150px]">
-        <div className="flex justify-center ">
+        <div className=" px-[30px] lg:flex lg:justify-center ">
           <div className="my-auto">
-            <p className="text-[19px]">
+            <p className="text-[14px] lg:text-[19px]">
               RARA学生フェローとして選抜された博士後期課程学生には、
               <br />
               RARAを基盤に個々の研究力を向上させ、
@@ -212,7 +213,7 @@ function Fellows() {
 
       {/************************** Before Footer Logo******************************/}
 
-      <div className="before-footer py-[16rem] border border-[#aaa]">
+      <div className="before-footer py-[16rem]">
         <img className="m-auto" src={Logo} alt="" width={133} height={139} />
       </div>
     </section>

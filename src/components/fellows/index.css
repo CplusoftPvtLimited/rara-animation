@@ -6,10 +6,14 @@
     stroke-miterlimit: 10;
 }
 
+.main{
+  width: 58%;
+}
+
 .hand{
     position: absolute;
-    right: 35%;
-    top: 98%;
+    right: 32%;
+    top: 94%;
     transform: translateY(-50%);
     z-index: 100;
 }
@@ -70,6 +74,19 @@
     padding: 55px 0px;
     border: solid #aaa ;
     border-width: 1px 0px 1px 0px;
+}
+
+.mid-bar{
+  width: 95%;
+  margin: auto;
+  padding: 55px 0px;
+  border-bottom: 1px solid #aaa ;
+}
+.bottom-bar{
+  width: 95%;
+  margin: auto;
+  padding: 55px 0px;
+  border-bottom: 1px solid #aaa ;
 }
 
 .rara-text:before{
@@ -254,7 +271,7 @@
     text-underline-offset: 0.4em;
   }
 
-@media screen and (min-width: 768px) {
+
     .layers {
     background-image: url("../../assets/images/fellow-hero.png");
     background-repeat: no-repeat; 
@@ -265,4 +282,9 @@
     margin-left: auto;
     margin-right: -1.0625rem;
 }
+
+.before-footer{
+  border-top: solid 1px #aaaaaa;
+  width: 90%;
+  margin: auto;
 }

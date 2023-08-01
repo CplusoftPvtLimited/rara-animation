@@ -1,12 +1,26 @@
 import React from "react";
 import './index.css'
+import './mobile.css'
 import Hand from '../../assets/images/hand.png'
-function hero() {
+import { useEffect, useState } from 'react'
+function Hero() {
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+  
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
   return (
     <div>
       {/************************** Svg ******************************/}
-      <div className="flex mt-[300px] ml-[200px] gap-12">
-        <div className="w-[58%] ">
+      <div className="gap-12 mt-[150px] lg:mt-[300px] lg:ml-[200px] lg:flex">
+        <div className=" w-[80%] pl-[30px] lg:w-[58%] ">
           <h1 className="lFellows-title-main" data-fellows-title="">
             <svg viewBox="0 0 936.1 150.5">
               <title>FELLOWS</title>
@@ -48,14 +62,14 @@ function hero() {
             </svg>
           </h1>
         </div>
-        <div className="my-auto">
-          <p className="text-[19px]">フェロー紹介</p>
+        <div className="mt-[20px] w-[80%] pl-[30px] lg:w-[58%] lg:my-auto ">
+          <p className="text-[13px] lg:text-[19px]">フェロー紹介</p>
         </div>
       </div>
       {/************************** Description ******************************/}
-      <div className="w-[75%] mx-auto my-[100px]">
+      <div className="w-[80%] mx-auto mt-[100px] lg:w-[75%]">
       <div>
-        <p className="text-[17px] pl-28">
+        <p className="text-[14px] lg:text-[17px] lg:pl-28">
           RARAフェローは、多様な研究者を繋ぐNodes(結合点)となり、<br/>
           その研究力をもって先例にとらわれず、本学の未来を切り開く先進的研究者です。<br/>
           RARAフェローへのステップアップに向け実績を積み重ねる<br/>
@@ -64,8 +78,8 @@ function hero() {
           「RARA学生フェロー」を加えた多層的な研究者支援を行っています。<br/>
         </p>
       </div>
-      <div className="">
-        <img className="hand" src={Hand} alt="" />
+      <div>
+        <img className="hand w-[175px] lg:w-auto" src={Hand} alt="" />
       <div className="layers">
         <ul className="layer-inner">
             <li className="layer-item-1">RARAフェロー</li>
@@ -79,4 +93,4 @@ function hero() {
   );
 }
 
-export default hero;
+export default Hero;

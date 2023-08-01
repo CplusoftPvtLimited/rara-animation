@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Profile from "../../assets/images/profile.jpg";
 import "./index.css";
 import { BiLogoTwitter } from "react-icons/bi";
+import { RiFacebookFill } from "react-icons/ri";
 import Circle from "../../assets/images/fellow-circle.png";
 import partialBall from "../../assets/images/partial-ball.png";
 import BlogImage from "../../assets/images/blog-img.jpeg";
@@ -15,12 +16,13 @@ import image4 from "../../assets/images/slider/slider4.jpg";
 import Logo from '../../assets/images/b-logo-rara.svg'
 
 
+
 function FellowSingle() {
    const { fellowId } = useParams();
-   console.log ('********Id from params', fellowId)
   const [fellow, setFellow] = useState({});
   const [blogData, setBlogData] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   const images = [
     image1,
@@ -38,6 +40,14 @@ function FellowSingle() {
   };
 
   useEffect(() => {
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+  
+
     const fetchFellow = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_SERVER}/profile/${fellowId}`
@@ -53,9 +63,11 @@ function FellowSingle() {
       );
       const data = await response.json();
       setBlogData(data.blogPosts);
-      console.log ("***********Blog", blogData)
     };
     fetchBlogs();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
     // Sort blogData based on publicationDate in descending order
@@ -68,72 +80,90 @@ function FellowSingle() {
 
   return (
     <section>
-      <div className="flex justify-between">
-        <div className="max-w-[50%] m-auto pl-[175px]">
-          {" "}
+      <div className="pl-[30px] mt-[100px] lg:flex lg:justify-between w-[100%] lg:mt-[0px]">
+        <div className="lg:max-w-[50%] lg:m-auto lg:pl-[175px] w-[75%] lg;w-[100%]">
           {/** Left */}
           <div>
-            {fellow.name && <p className="profile-name">{fellow.name}</p>}
+            {fellow.name && <p className="profile-name">{fellow.nameEnglish}</p>}
           </div>
           <div className="flex gap-8 mt-4">
             {fellow.nameEnglish && (
-              <p className="profile-nameJapnese">{fellow.nameEnglish}</p>
+              <p className="profile-nameJapnese">{fellow.name}</p>
             )}
             {fellow.jobPost && (
-              <p className="text-[12px] my-auto"> {fellow.jobPost}</p>
+              <p className="text-[10px] lg:text-[12px] my-auto"> {fellow.jobPost}</p>
             )}
           </div>
-          <div className="mt-[70px]">
+          <div className="flex gap-2">
+          { fellow.twitterUrl ?<a href={fellow.twitterUrl}>
+          <div className="mt-[40px] lg:mt-[70px]">
             <BiLogoTwitter style={{ fontSize: "24px", color: "#acacac" }} />
+          </div></a> : null
+          }
+           { fellow.facebookUrl ?<a href={fellow.twitterUrl}>
+          <div className="mt-[40px] lg:mt-[70px]">
+            <RiFacebookFill style={{ fontSize: "24px", color: "#acacac" }} />
+          </div></a> : null
+          }
           </div>
+          <div className="my-16 lg:mt-32">
+          {fellow.tagLine && <p>{fellow.tagLine}</p>}
         </div>
-        <div className="w-[50%]">
-          {" "}
+        </div>
+        <div className="w-[100%]  lg:w-[50%]">
           {/** Right */}
-          <img className="profile-pic" src={Profile} alt="" />
+          <img className="profile-pic" src={fellow.imagePath} alt="" />
         </div>
       </div>
 
       {/************************** 2nd section ******************************/}
 
+      {isMobile ? null :
       <div className="flex justify-between w-[95%] m-auto">
-        <div className="pl-[150px] mt-8">
-          {fellow.tagLine && <p>{fellow.tagLine}</p>}
-        </div>
-        <div className="circle-container mt-[-75px]">
+        <div></div>
+        <a href="#profile">
+        <div className="circle-container mt-[-105px]">
           <div className="scroll-circle">
             <p>SCROLL</p>
           </div>
         </div>
+        </a>
       </div>
+     }
 
       {/************************** 3rd section ******************************/}
 
-      <div className="flex w-[95%] m-auto mt-[75px]">
-        <div className="pl-[150px] mt-8 w-[50%]">
-          <img src={Circle} alt="" />
+      <div className="lg:flex w-[95%] m-auto mt-[40px] lg:mt-[75px]">
+        <div className="py-2 w-[95%] lg:pl-[150px] lg:w-[50%]">
+          <img className="red-circle" src={Circle} alt="" />
         </div>
-        <div className="fellow-profile w-[50%] pt-6">
+        <div className="fellow-profile w-[95%] lg:w-[50%] pt-6">
           <div className="profile-desc">
-            <h5>FELLOW PROFILE</h5>
+            <h5 id="profile">FELLOW PROFILE</h5>
             <p className="">{fellow.profileDesc}</p>
           </div>
-
+          { fellow.websiteUrl ?
           <div className="fellow-website pt-6">
             <h5>SEE ALSO</h5>
-            <div className="flex justify-between py-10">
+            <div className="lg:flex lg:justify-between py-10">
+            <a href={fellow.websiteUrl}>
               <h3 className="">Vision Care Co., Ltd.</h3>
-              <div className="flex gap-3">
+              </a>
+              <div className="">
+                <a href={fellow.websiteUrl}>
                 <h6 className="my-auto">Visit site</h6>
+                </a>
               </div>
             </div>
-          </div>
+          </div> : null
+      }
         </div>
       </div>
+    
 
       {/************************** 4th section ******************************/}
 
-      <div className="mt-[300px] w-[70%] m-auto px-[20px]">
+      <div className="w-[80%] mt-[150px] lg:mt-[300px] lg:w-[70%] m-auto lg:px-[20px]">
         <div>
           <h2 className="text-[25px]">{fellow.heading}</h2>
           <p className="text-[17px] mt-6">{fellow.paragraph}</p>
@@ -142,44 +172,45 @@ function FellowSingle() {
 
       {/************************** Background Image Section ******************************/}
 
-      <div className="flex justify-end mt-[100px] h-[800px]">
+      <div className="flex justify-end mt-[100px] lg:h-[800px]">
         <div className="bg-fellow w-[90%] flex justify-between pl-[35px]">
           <div>
-            <img className="mt-[40px] " src={Circle} alt="" />
+            <img className="w-[50%] lg:w-auto lg:mt-[40px] " src={Circle} alt="" />
           </div>
           <div>
-            <img className="mt-[500px]" src={partialBall} alt="" />
+            <img className="w-[40%] mt-[100px] lg:w-auto  lg:mt-[500px]" src={partialBall} alt="" />
           </div>
         </div>
       </div>
 
       {/************************** Blog Section ******************************/}
 
-      <div className="reports mt-[400px] flex w-[95%] m-auto px-[50px] pt-[50px] gap ">
-        <div className="w-[40%]">
+      <div className="reports mt-[150px] px-[30px] lg:mt-[400px] lg:flex w-[95%] m-auto lg:px-[50px] pt-[50px] gap ">
+        <div className=" w-[100%] lg:w-[40%]">
           <h4>最新の研究活動レポート</h4>
         </div>
-        <div className="w-[60%]  mb-[100px] mt-[80px]">
+        <div className=" w-[100%] mt-[80px] lg:w-[60%]  lg:mb-[100px]">
           {latestThreeBlogs.map((blog) => (
-            <div key={blog.id} className="flex mt-[40px]">
+            <div key={blog.id} className=" lg:flex mt-[40px]">
               <div className="blog">
-                <img className="bog-img" src={BlogImage} alt="" />
+                <img className="bog-img" src={blog.imagePath} alt="" />
               </div>
               <div className="blog-inner mt-[7px]">
+                {/* <p> 研究活動レポート / {fellow.category} / {fellow.profile</p> */}
                 <p>研究活動レポート / 小西 聡 / 高橋 政代</p>
-                <h3 className="mt-[55px]">{blog.title}</h3>
+                <h3 className="mt-[30px] lg:mt-[55px]">{blog.title}</h3>
                 <div className="date-box flex mt-[55px] justify-between">
                   <div>
                     <p>{new Date(blog.publicationDate).toLocaleDateString()}</p>
                   </div>
                   <div>
-                    <h3>VIEW DETAILS</h3>
+                    <h5 className="text-[10px] lg:text-[14px]">VIEW DETAILS</h5>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-          <div className="all-report flex justify-end mt-[150px]">
+          <div className="all-report flex justify-center pt-[75px] pb-[175px] lg:justify-end lg:mt-[150px]">
             <a href="">VIEW ALL REPORT</a>
           </div>
         </div>
@@ -187,12 +218,12 @@ function FellowSingle() {
 
       {/************************** Slider Section ******************************/}
 
-      <div className="w-[95%] m-auto px-[50px]">
+      <div className="w-[90%] m-auto lg:px-[50px]">
       <div className="title mt-[75px]">
         <h4>紹介写真</h4>
       </div>
       <div className="slider-parent pt-[75px] pb-[125px]">
-      <div className="slider w-[60%]">
+      <div className="slider w-[100%] lg:w-[60%]">
         <div
           className="slider-container"
           style={{ transform: `translateX(-${currentSlide * 50}%)` }}
