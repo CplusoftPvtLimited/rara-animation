@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Profile from "../../assets/images/profile.jpg";
 import "./index.css";
 import { BiLogoTwitter } from "react-icons/bi";
@@ -17,14 +17,16 @@ import Logo from '../../assets/images/b-logo-rara.svg'
 
 
 
+
 function FellowSingle() {
-   const { fellowId } = useParams();
+  const { fellowId } = useParams();
+  const navigate = useNavigate();
   const [fellow, setFellow] = useState({});
   const [blogData, setBlogData] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  const images = [
+  const sliderImages = [
     image1,
     image2,
     image3,
@@ -32,11 +34,11 @@ function FellowSingle() {
   ];
 
   const handlePrevSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide === 0 ? images.length - 1 : prevSlide - 1));
+    setCurrentSlide((prevSlide) => (prevSlide === 0 ? sliderImages.length - 1 : prevSlide - 1));
   };
 
   const handleNextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide === images.length - 1 ? 0 : prevSlide + 1));
+    setCurrentSlide((prevSlide) => (prevSlide === sliderImages.length - 1 ? 0 : prevSlide + 1));
   };
 
   useEffect(() => {
@@ -204,7 +206,7 @@ function FellowSingle() {
                     <p>{new Date(blog.publicationDate).toLocaleDateString()}</p>
                   </div>
                   <div>
-                    <h5 className="text-[10px] lg:text-[14px]">VIEW DETAILS</h5>
+                    <h5 className="text-[10px] lg:text-[11px]">VIEW DETAILS</h5>
                   </div>
                 </div>
               </div>
@@ -218,52 +220,38 @@ function FellowSingle() {
 
       {/************************** Slider Section ******************************/}
 
-      <div className="w-[90%] m-auto lg:px-[50px]">
-      <div className="title mt-[75px]">
+      <div className="w-[100%] m-auto pb-[100px]">
+      <div className="title mt-[75px] pl-[95px]">
         <h4>紹介写真</h4>
       </div>
-      <div className="slider-parent pt-[75px] pb-[125px]">
-      <div className="slider w-[100%] lg:w-[60%]">
-        <div
-          className="slider-container"
-          style={{ transform: `translateX(-${currentSlide * 50}%)` }}
-        >
-          {/* Repeat the images three times for infinite scrolling */}
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Slide ${index}`}
-              className={index === currentSlide || index === currentSlide - 1 ? "" : "partial"}
-            />
-          ))}
-          {/* Repeating the images to achieve the infinite slider effect */}
-          {images.map((image, index) => (
-            <img
-              key={`duplicate-${index}`}
-              src={image}
-              alt={`Slide ${index}`}
-              className={index === currentSlide || index === currentSlide - 1 ? "" : "partial"}
-            />
+       {/* Slider Section */}
+       <div className="flex justify-end mt-[50px]">
+       <div className="slider-section">
+        <div className="slider-container" style={{ transform: `translateX(-${currentSlide * 50}%)` }}>
+          {sliderImages.map((image, index) => (
+            <div className="slider-item" key={index}>
+              <img src={image} alt={`Slide ${index}`} />
+              <p>Short Description for Image {index + 1}</p>
+            </div>
           ))}
         </div>
-        <div className="flex gap-8 mt-[10px]">
-        <div className="slider-prev" onClick={handlePrevSlide}>
-         <p>Next</p> 
-        </div>
-        <div className="slider-next" onClick={handleNextSlide}>
-          <p>Previous</p> 
-        </div>
+        <div className="slider-controls">
+          <div className="slider-prev" onClick={handlePrevSlide}>
+            <p>Previous</p>
+          </div>
+          <div className="slider-next" onClick={handleNextSlide}>
+            <p>Next</p>
+          </div>
         </div>
       </div>
       </div>
-    </div>
+      </div>
 
 
       {/************************** Index Section ******************************/}
       <div>
         <div className="index flex w-[95%] m-auto">
-          <a>BACK TO INDEX</a>
+          <a className="cursor-pointer" onClick= {() => {navigate ('/')} }>BACK TO INDEX</a>
         </div>
       </div>
 
