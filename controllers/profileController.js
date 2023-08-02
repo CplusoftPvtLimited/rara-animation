@@ -5,7 +5,6 @@ const createProfile = async (req, res) => {
     return res.status(400).json({ error: 'No image provided' });
   }
 
-  console.log ("***********", req.body)
 
   // Get other fields from the request body
   let {

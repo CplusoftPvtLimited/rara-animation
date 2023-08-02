@@ -6,6 +6,7 @@ const sequelize = require('./config/db');
 const blogRoutes = require('./routes/blogRoutes');
 const profileRoutes = require('./routes/profileRoutes')
 const categoryRoutes = require('./routes/categoryRoutes');
+const RssFeedRoutes = require('./routes/RssFeedRoutes');
 
 
 const app = express();
@@ -22,12 +23,14 @@ app.use(cors());
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-//blog route
+//Blog Route
 app.use('/api/blog', blogRoutes);
-//category route
+//Category Route
 app.use('/api/category', categoryRoutes);
 //Profile Route
 app.use('/api/profile', profileRoutes);
+// RSS Route
+app.use('/api/news', RssFeedRoutes)
 
 // Start the server
 app.listen(PORT, () => {
