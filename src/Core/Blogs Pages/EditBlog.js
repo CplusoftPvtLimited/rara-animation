@@ -63,7 +63,7 @@ function EditBlog(props) {
   };
   const editBlog = (event) => {
     event.preventDefault();
-    console.log('fiels: ', blogData.imagePath);
+    console.log('image: ', blogData.imagePath);
     const updatedData = new FormData();
     updatedData.append('title', blogData.title);
     updatedData.append('content', blogData.content);
@@ -95,6 +95,31 @@ function EditBlog(props) {
       console.log('Error: ' + err.message);
     }
   };
+  const fellowOptions = [
+    'fellow 1',
+    'fellow 2',
+    'fellow 3',
+    'fellow 4',
+    'fellow 5',
+    'fellow 6',
+    'fellow 7',
+    'fellow 8',
+    'fellow 9',
+    'fellow 10',
+  ];
+
+  const regionOptions = [
+    'Pakistan',
+    'United States',
+    'Canada',
+    'United Kingdom',
+    'Australia',
+    'Germany',
+    'France',
+    'Italy',
+    'Japan',
+    'China',
+  ];
 
   return (
     <div className='dashboard-parent-div'>
@@ -125,12 +150,19 @@ function EditBlog(props) {
                   <Col>
                     <div className='add-product-input-div'>
                       <p>Region</p>
-                      <input
-                        type='text'
+                      <select
                         name='region'
                         value={blogData.region}
                         onChange={handleChange}
-                      />
+                        style={{ border: 'none' }}
+                      >
+                        <option value=''>Select Region</option>
+                        {regionOptions.map((region) => (
+                          <option key={region} value={region}>
+                            {region}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </Col>
                 </Row>
@@ -139,12 +171,19 @@ function EditBlog(props) {
                   <Col>
                     <div className='add-product-input-div'>
                       <p>Fellow</p>
-                      <input
-                        type='text'
+                      <select
                         name='fellow'
                         value={blogData.fellow}
                         onChange={handleChange}
-                      />
+                        style={{ border: 'none' }}
+                      >
+                        <option value=''>Select Fellow</option>
+                        {fellowOptions.map((fellow) => (
+                          <option key={fellow} value={fellow}>
+                            {fellow}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </Col>
                   <Col>

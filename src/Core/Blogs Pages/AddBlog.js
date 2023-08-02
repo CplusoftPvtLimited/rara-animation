@@ -31,14 +31,6 @@ const AddBlog = () => {
     imagePath: '',
   });
 
-  // function handleChange(event) {
-  //   const { name, value } = event.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // }
-
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === 'imagePath') {
@@ -120,6 +112,18 @@ const AddBlog = () => {
     'Japan',
     'China',
   ];
+  const fellowOptions = [
+    'fellow 1',
+    'fellow 2',
+    'fellow 3',
+    'fellow 4',
+    'fellow 5',
+    'fellow 6',
+    'fellow 7',
+    'fellow 8',
+    'fellow 9',
+    'fellow 10',
+  ];
 
   const validateForm = () => {
     let errors = {};
@@ -184,12 +188,26 @@ const AddBlog = () => {
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Fellow</p>
-                    <input
+                    {/* <input
                       type='text'
                       name='fellow'
                       value={formData.fellow}
                       onChange={handleChange}
-                    />
+                    /> */}
+                    <select
+                      name='fellow'
+                      value={formData.fellow}
+                      onChange={handleChange}
+                      style={{ border: 'none' }}
+                    >
+                      <option value=''>Select Fellow</option>
+                      {fellowOptions.map((fellow) => (
+                        <option key={fellow} value={fellow}>
+                          {fellow}
+                        </option>
+                      ))}
+                    </select>
+
                     {validationErrors.fellow && (
                       <p style={{ color: 'red' }}>{validationErrors.fellow}</p>
                     )}
