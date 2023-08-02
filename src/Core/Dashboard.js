@@ -16,49 +16,141 @@ import { FaDollarSign } from 'react-icons/fa';
 import { BsViewList } from 'react-icons/bs';
 import { FaLaptopMedical } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
-
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Dashboard() {
+  const [blogs, setBlogs] = useState();
+  const [categories, setCategories] = useState();
+  const [fellow, setFellows] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getBlogs();
+    getFellow();
+    getCategory();
+  }, []);
+
+  const getBlogs = () => {
+    setBlogs();
+    setLoading(true);
+    axios
+      .get('http://localhost:4500/api/blog/getAllBlogPosts')
+      .then((response) => {
+        console.log('setBlogs: ', response.data.blogPosts.length);
+        setBlogs(response?.data?.blogPosts?.length);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getFellow = () => {
+    setFellows();
+    setLoading(true);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/profile/getAllProfiles',
+    })
+      .then((response) => {
+        console.log('setFellows: ', response);
+        setFellows(response?.data?.profiles);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getCategory = () => {
+    setCategories();
+    setLoading(true);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/category',
+    }).then((response) => {
+      console.log('setCategories: ', response);
+      setCategories(response?.data);
+      setLoading(false);
+    });
+  };
+
   return (
     <div className='dashboard-parent-div'>
       <Row>
         <Col lg={2}>
           <Sidebar />
         </Col>
+
         <Col className='dashboard-home-content' lg={10}>
           <h4>Dashboard</h4>
           <p>Here's an overview of your RARA.</p>
           <Row>
             <Col>
-              <Card className='dashboard-card'>
-                <RiUser3Line className='card-icon' />
-                <h4>Our Blogs</h4>
-                <p> Created Blogs</p>
-              </Card>
+              {loading ? (
+                <ReactLoading
+                  type='spokes'
+                  color='#2D46B9'
+                  height={50}
+                  width={50}
+                />
+              ) : (
+                blogs && (
+                  <Card className='dashboard-card'>
+                    <RiUser3Line className='card-icon' />
+                    <h4>Our Blogs</h4>
+                    <p>{blogs}</p>
+                  </Card>
+                )
+              )}
             </Col>
+
             <Col>
               <Card className='dashboard-card'>
                 <RiUser3Line className='card-icon' />
                 <h4>Our Regions</h4>
-                <p> Created Regions</p>
+                <p> 8</p>
               </Card>
             </Col>
+
             <Col>
-              <Card className='dashboard-card'>
-                <RiUser3Line className='card-icon' />
-                <h4>Our Fellow</h4>
-                <p> Created Fellow</p>
-              </Card>
+              {loading ? (
+                <ReactLoading
+                  type='spokes'
+                  color='#2D46B9'
+                  height={50}
+                  width={50}
+                />
+              ) : (
+                fellow && (
+                  <Card className='dashboard-card'>
+                    <RiUser3Line className='card-icon' />
+                    <h4>Our Fellow</h4>
+                    <p> {fellow.length}</p>
+                  </Card>
+                )
+              )}
             </Col>
+
             <Col>
-              <Card className='dashboard-card'>
-                <RiUser3Line className='card-icon' />
-                <h4>Our Category</h4>
-                <p> Created Category</p>
-              </Card>
+              {loading ? (
+                <ReactLoading
+                  type='spokes'
+                  color='#2D46B9'
+                  height={50}
+                  width={50}
+                />
+              ) : (
+                categories && (
+                  <Card className='dashboard-card'>
+                    <RiUser3Line className='card-icon' />
+                    <h4>Our Category</h4>
+                    <p>{categories.length}</p>
+                  </Card>
+                )
+              )}
             </Col>
           </Row>
 
@@ -69,7 +161,7 @@ function Dashboard() {
                 <IoIosLaptop className='action-icon' />
                 <h4>All Blogs</h4>
                 <p>
-                  <Link to='/products'>Click here</Link> to view, remove or edit
+                  <Link to='/blogs'>Click here</Link> to view, remove or edit
                   blogs
                 </p>
               </Card>
@@ -79,7 +171,7 @@ function Dashboard() {
                 <FaLaptopMedical className='action-icon' />
                 <h4>Add Blogs</h4>
                 <p>
-                  <Link to='/products/add'>Click here</Link> to add new blogs
+                  <Link to='/blog/add'>Click here</Link> to add new blogs
                 </p>
               </Card>
             </Col>
@@ -89,8 +181,8 @@ function Dashboard() {
                 <BsViewList className='action-icon' />
                 <h4>All Fellows</h4>
                 <p>
-                  <Link to='/categories'>Click here</Link> to add, remove or
-                  edit fellows
+                  <Link to='/fellows'>Click here</Link> to add, remove or edit
+                  fellows
                 </p>
               </Card>
             </Col>
@@ -101,7 +193,8 @@ function Dashboard() {
                 <RiShoppingCart2Line className='action-icon' />
                 <h4>Add Fellows</h4>
                 <p>
-                  <Link to='/'>Click here</Link> to view, remove or edit fellows
+                  <Link to='/fellow/add'>Click here</Link> to view, remove or
+                  edit fellows
                 </p>
               </Card>
             </Col>
@@ -120,8 +213,8 @@ function Dashboard() {
                 <RiUser3Line className='action-icon' />
                 <h4>Add Categories</h4>
                 <p>
-                  <Link to='/'>Click here</Link> to view, remove or edit
-                  categories
+                  <Link to='/category/add'>Click here</Link> to view, remove or
+                  edit categories
                 </p>
               </Card>
             </Col>

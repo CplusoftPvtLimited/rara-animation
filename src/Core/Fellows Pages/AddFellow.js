@@ -18,12 +18,22 @@ const AddProfile = () => {
     imagePath: '',
     jobPost: '',
     profileDesc: '',
-    websiteUrl: '',
+    // websiteUrl: '',
     heading: '',
     paragraph: '',
     // featuredImage:''
   });
 
+  const [validationErrors, setValidationErrors] = useState({
+    name: '',
+    nameEnglish: '',
+    tagLine: '',
+    jobPost: '',
+    heading: '',
+    paragraph: '',
+    profileDesc: '',
+    imagePath: '',
+  });
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === 'imagePath') {
@@ -39,12 +49,19 @@ const AddProfile = () => {
         [name]: value,
       });
     }
+    setValidationErrors((prev) => ({ ...prev, [name]: '' }));
   }
 
   console.log('formData: ', formData);
 
   function handleSubmit(event) {
     event.preventDefault();
+    const errors = validateForm();
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
     try {
       console.log('Adding');
       const formDataToSend = new FormData();
@@ -86,6 +103,44 @@ const AddProfile = () => {
       console.log('Error: ' + err.message);
     }
   }
+  const validateForm = () => {
+    let errors = {};
+
+    if (formData.name.trim() === '') {
+      errors.name = 'This field is required';
+    }
+
+    if (formData.nameEnglish.trim() === '') {
+      errors.nameEnglish = 'This field is required';
+    }
+
+    if (formData.tagLine.trim() === '') {
+      errors.tagLine = 'This field is required';
+    }
+
+    if (formData.jobPost.trim() === '') {
+      errors.jobPost = 'This field is required';
+    }
+
+    if (formData.heading.trim() === '') {
+      errors.heading = 'This field is required';
+    }
+
+    if (formData.paragraph.trim() === '') {
+      errors.paragraph = 'This field is required';
+    }
+
+    if (!formData.profileDesc || formData.profileDesc.trim() === '') {
+      errors.profileDesc = 'This field is required';
+    }
+
+    if (!formData.imagePath) {
+      errors.imagePath = 'Please select an image';
+    }
+
+    return errors;
+  };
+
   return (
     <div className='dashboard-parent-div'>
       <Row>
@@ -93,7 +148,7 @@ const AddProfile = () => {
           <Sidebar />
         </Col>
         <Col className='add-category-content' lg={10}>
-          <h4>Add Blog</h4>
+          <h4>Add Fellow</h4>
           <p>
             Please fill the Fellow details in the form below to add a new
             fellow.
@@ -110,6 +165,9 @@ const AddProfile = () => {
                       value={formData.name}
                       onChange={handleChange}
                     />
+                    {validationErrors.name && (
+                      <p style={{ color: 'red' }}>{validationErrors.name}</p>
+                    )}
                   </div>
                 </Col>
                 <Col>
@@ -121,6 +179,11 @@ const AddProfile = () => {
                       value={formData.nameEnglish}
                       onChange={handleChange}
                     />
+                    {validationErrors.nameEnglish && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.nameEnglish}
+                      </p>
+                    )}
                   </div>
                 </Col>
               </Row>
@@ -135,6 +198,9 @@ const AddProfile = () => {
                       value={formData.tagLine}
                       onChange={handleChange}
                     />
+                    {validationErrors.tagLine && (
+                      <p style={{ color: 'red' }}>{validationErrors.tagLine}</p>
+                    )}
                   </div>
                 </Col>
                 <Col>
@@ -146,6 +212,9 @@ const AddProfile = () => {
                       value={formData.jobPost}
                       onChange={handleChange}
                     />
+                    {validationErrors.jobPost && (
+                      <p style={{ color: 'red' }}>{validationErrors.jobPost}</p>
+                    )}
                   </div>
                 </Col>
               </Row>
@@ -160,6 +229,9 @@ const AddProfile = () => {
                       value={formData.heading}
                       onChange={handleChange}
                     />
+                    {validationErrors.heading && (
+                      <p style={{ color: 'red' }}>{validationErrors.heading}</p>
+                    )}
                   </div>
                 </Col>
                 <Col>
@@ -171,6 +243,11 @@ const AddProfile = () => {
                       value={formData.paragraph}
                       onChange={handleChange}
                     />
+                    {validationErrors.paragraph && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.paragraph}
+                      </p>
+                    )}
                   </div>
                 </Col>
               </Row>
@@ -178,7 +255,7 @@ const AddProfile = () => {
               <Row>
                 <Col>
                   <div className='add-product-input-div'>
-                    <p>Profile Description</p>
+                    <p>Fellow Description</p>
                     <CKEditor
                       editor={ClassicEditor}
                       // data='<p>lets start blog content</p>'ss
@@ -197,6 +274,11 @@ const AddProfile = () => {
                         console.log('Focus.', editor);
                       }}
                     />
+                    {validationErrors.profileDesc && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.profileDesc}
+                      </p>
+                    )}
                   </div>
                 </Col>
                 <Col>
@@ -209,13 +291,18 @@ const AddProfile = () => {
                         // value={formData.imagePath?.name}
                         onChange={handleChange}
                       />
+                      {validationErrors.imagePath && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.imagePath}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </Col>
               </Row>
 
               <button type='submit' className='add-category-btn'>
-                Add Blog
+                Add Fellow
               </button>
             </Form>
           </Card>

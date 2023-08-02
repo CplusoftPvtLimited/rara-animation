@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
-import image from '../../Assets/khan.jpeg';
 import { useHistory } from 'react-router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -38,12 +37,6 @@ function EditFellow(props) {
       });
   };
 
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setProfileData((prev) => {
-  //     return { ...prev, [name]: value };
-  //   });
-  // };
   const handleChange = (event) => {
     const { name, value, files } = event.target;
     if (name === 'imagePath') {
@@ -69,6 +62,7 @@ function EditFellow(props) {
 
   const editFellow = (event) => {
     event.preventDefault();
+    console.log('files: ', profileData.imagePath);
 
     const updatedData = new FormData();
     updatedData.append('name', profileData.name);
@@ -81,7 +75,7 @@ function EditFellow(props) {
     updatedData.append('heading', profileData.heading);
     updatedData.append('paragraph', profileData.paragraph);
     // updatedData.append('featuredImage', profileData.featuredImage);
-    updatedData.append('imagePath', imagePreviewUrl ?? profileData.imagePath);
+    updatedData.append('imagePath', profileData.imagePath);
 
     try {
       console.log('updatedData: ', updatedData);
@@ -230,15 +224,6 @@ function EditFellow(props) {
                   <Col>
                     <div className='add-product-image-div'>
                       <div className='product-image-div'>
-                        {/* <input
-                          type='file'
-                          name='imagePath'
-                          // value={formData.imagePath?.name}
-                          src={blogData.imagePath}
-                          // value={blogData.imagePath}
-                          onChange={handleChange}
-                        /> */}
-
                         <img
                           src={imagePreviewUrl ?? profileData?.imagePath}
                           alt='preview'

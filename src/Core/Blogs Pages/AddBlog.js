@@ -21,6 +21,16 @@ const AddBlog = () => {
     imagePath: '',
   });
 
+  const [validationErrors, setValidationErrors] = useState({
+    title: '',
+    content: '',
+    fellow: '',
+    category: '',
+    region: '',
+    profile: '',
+    imagePath: '',
+  });
+
   // function handleChange(event) {
   //   const { name, value } = event.target;
   //   setFormData({
@@ -44,11 +54,19 @@ const AddBlog = () => {
         [name]: value,
       });
     }
+    setValidationErrors((prev) => ({ ...prev, [name]: '' }));
   }
   console.log('formData: ', formData);
 
   function handleSubmit(event) {
     event.preventDefault();
+    const errors = validateForm();
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+
     try {
       console.log('Adding: image path: ', formData.imagePath);
       const formDataToSend = new FormData();
@@ -103,6 +121,38 @@ const AddBlog = () => {
     'China',
   ];
 
+  const validateForm = () => {
+    let errors = {};
+
+    if (formData.title.trim() === '') {
+      errors.title = 'This field is required';
+    }
+    if (formData.content.trim() === '') {
+      errors.content = 'This field is required';
+    }
+    if (formData.fellow.trim() === '') {
+      errors.fellow = 'This field is required';
+    }
+
+    if (formData.category.trim() === '') {
+      errors.category = 'This field is required';
+    }
+
+    if (formData.region.trim() === '') {
+      errors.region = 'This field is required';
+    }
+
+    if (formData.profile.trim() === '') {
+      errors.profile = 'This field is required';
+    }
+
+    if (!formData.imagePath) {
+      errors.imagePath = 'Please select an image';
+    }
+
+    return errors;
+  };
+
   return (
     <div className='dashboard-parent-div'>
       <Row>
@@ -126,6 +176,9 @@ const AddBlog = () => {
                       value={formData.title}
                       onChange={handleChange}
                     />
+                    {validationErrors.title && (
+                      <p style={{ color: 'red' }}>{validationErrors.title}</p>
+                    )}
                   </div>
                 </Col>
                 <Col>
@@ -137,6 +190,9 @@ const AddBlog = () => {
                       value={formData.fellow}
                       onChange={handleChange}
                     />
+                    {validationErrors.fellow && (
+                      <p style={{ color: 'red' }}>{validationErrors.fellow}</p>
+                    )}
                   </div>
                 </Col>
               </Row>
@@ -151,6 +207,11 @@ const AddBlog = () => {
                       value={formData.category}
                       onChange={handleChange}
                     />
+                    {validationErrors.category && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.category}
+                      </p>
+                    )}
                   </div>
                 </Col>
                 <Col>
@@ -169,6 +230,9 @@ const AddBlog = () => {
                         </option>
                       ))}
                     </select>
+                    {validationErrors.region && (
+                      <p style={{ color: 'red' }}>{validationErrors.region}</p>
+                    )}
                   </div>
                 </Col>
               </Row>
@@ -183,6 +247,9 @@ const AddBlog = () => {
                       value={formData.profile}
                       onChange={handleChange}
                     />
+                    {validationErrors.profile && (
+                      <p style={{ color: 'red' }}>{validationErrors.profile}</p>
+                    )}
                   </div>
                 </Col>
               </Row>
@@ -208,6 +275,9 @@ const AddBlog = () => {
                         console.log('Focus.', editor);
                       }}
                     />
+                    {validationErrors.content && (
+                      <p style={{ color: 'red' }}>{validationErrors.content}</p>
+                    )}
                   </div>
                 </Col>
                 <Col>
@@ -219,6 +289,11 @@ const AddBlog = () => {
                         // value={formData.imagePath?.name}
                         onChange={handleChange}
                       />
+                      {validationErrors.title && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.imagePath}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </Col>
