@@ -7,9 +7,6 @@
 }
 
 .filter-1{
-    border-top: solid 1px #aaaaaa;
-}
-.filter-2{
     border-bottom: solid 1px #aaaaaa;
     border-top: solid 1px #aaaaaa;
 }
@@ -41,6 +38,11 @@
     padding: 0.275rem 1.25rem;
     border-radius: 0.875rem;
     border: 0.1rem solid #dcdcdc;
+  }
+
+  .filter-btn.active{
+    background-color: #000;
+    color: white;
   }
 
   .date{
@@ -113,4 +115,32 @@
   border-top: solid 1px #aaaaaa;
   width: 90%;
   margin: auto;
+}
+
+.bold-text {
+  font-weight: bold;
+  color: #000;
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .filter-btn{
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 0.78125rem;
+    border: 1px solid #787878;
+    width: fit-content;
+  }
+
+  .filter-btn.active{
+    background-color: #000;
+    color: white;
+  }
+
+  .img-box{
+    width: 21rem;
+    height: 13rem;
+  }
+  .news-card {
+    width: 21rem;
+  }
 }
