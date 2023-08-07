@@ -12,11 +12,10 @@ function Fellows() {
   const [fellows, setFellows] = useState([]);
   const [associateFellows, setAssociateFellows] = useState([]);
   const [fellowsCount, setFellowsCount] = useState(0);
-  const [AssociateFellowsCount, setAssociateFellowsCount] = useState(0);
+  const [associateFellowsCount, setAssociateFellowsCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-
     const fetchFellowData = async () => {
       try {
         const response = await fetch(
@@ -35,7 +34,7 @@ function Fellows() {
             fellowsCount++;
           } else if (fellow.jobPost === "Associate RARA fellow") {
             associateFellows.push(fellow);
-            AssociateFellowsCount++;
+            associateFellowsCount++;
           }
         });
         
@@ -43,7 +42,7 @@ function Fellows() {
         setFellows(fellows);
         setFellowsCount(fellowsCount);
         setAssociateFellows(associateFellows);
-        setAssociateFellowsCount(AssociateFellowsCount);
+        setAssociateFellowsCount(associateFellowsCount);
       } catch (err) {
         console.error("Error fetching fellows data:", err);
       }

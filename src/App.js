@@ -5,6 +5,7 @@ import FellowSingle from "./components/fellow-single";
 import Header from "./components/header/index"
 import Footer from "./components/footer";
 import News from './components/News/index'
+import Updates from './components/Updates/index'
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +14,8 @@ function App() {
     <Routes>
       <Route path="/" element={ <Fellows/>}/>
       <Route path="/fellow/:fellowId" element={ <FellowSingle/>}/>
-      <Route path='/News' element={<News />}/>
+      <Route path='/news' element={<News />}/>
+      <Route path='/updates' element={<Updates />}/>
     </Routes>
     <Footer/>
     </div>
