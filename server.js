@@ -7,7 +7,7 @@ const blogRoutes = require('./routes/blogRoutes');
 const profileRoutes = require('./routes/profileRoutes')
 const categoryRoutes = require('./routes/categoryRoutes');
 const RssFeedRoutes = require('./routes/RssFeedRoutes');
-
+const homeRoutes = require('./routes/homeRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4500;
@@ -31,6 +31,8 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/profile', profileRoutes);
 // RSS Route
 app.use('/api/news', RssFeedRoutes)
+// Home Route
+app.use('/api/home', homeRoutes);
 
 // Start the server
 app.listen(PORT, () => {
