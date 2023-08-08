@@ -65,7 +65,7 @@ const Categories = () => {
                   </Tooltip>
                 }
               >
-                <Link to='/blogs/add'>
+                <Link to='/category/add'>
                   <div>
                     <RiAddFill className='add-cat-btn' />
                   </div>
@@ -101,7 +101,7 @@ const Categories = () => {
                   {categories.map((category, index) => {
                     return (
                       <tr key={index}>
-                        <td>{category.id}</td>
+                        <td>{index + 1}</td>
                         <td>{category.title}</td>
 
                         <td>

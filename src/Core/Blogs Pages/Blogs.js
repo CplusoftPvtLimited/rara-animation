@@ -49,8 +49,6 @@ const Blogs = () => {
         <Col lg={2}>
           <Sidebar />
         </Col>
-        {/* {!blogs && <h2>cart is empty</h2>} */}
-
         {!blogs.length ? (
           <Col className='categories-content' lg={10}>
             <h2 style={{ display: 'flex', justifyContent: 'center' }}>
@@ -73,7 +71,7 @@ const Blogs = () => {
                     </Tooltip>
                   }
                 >
-                  <Link to='/blogs/add'>
+                  <Link to='/blog/add'>
                     <div>
                       <RiAddFill className='add-cat-btn' />
                     </div>
@@ -105,7 +103,6 @@ const Blogs = () => {
                         <th>Image</th>
                         <th>Title</th>
                         <th>Category</th>
-                        {/* <th>Content</th> */}
                         <th>Fellow</th>
                         <th>Region</th>
                         <th>Profile</th>
@@ -119,9 +116,7 @@ const Blogs = () => {
                             <td> {blog.id}</td>
                             <td>
                               <img
-                                // src={image}
                                 src={blog.imagePath}
-                                // src={getImageSrc(blog.imagePath)}
                                 alt='blogImage'
                                 style={{ width: '100px', height: '100px' }}
                               />

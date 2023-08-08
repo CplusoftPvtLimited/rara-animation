@@ -99,6 +99,17 @@ function Sidebar() {
               <p>Add Categories</p>
             </div>
           </Link>
+
+          <Link to='/stripe' className='sidebar-link'>
+            <div
+              className={`sidebar-item ${
+                isActive(history, '/stripe') && 'active'
+              }`}
+            >
+              <IoIosLaptop className='sidebar-icon' />
+              <p>Stripe</p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

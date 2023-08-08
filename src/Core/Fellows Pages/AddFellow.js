@@ -38,11 +38,21 @@ const AddProfile = () => {
     const { name, value } = event.target;
     if (name === 'imagePath') {
       console.log('event.target.files[0]', event.target.files[0]);
-      console.log('name', name);
-      setFormData({
-        ...formData,
-        [name]: event.target.files[0],
-      });
+      const file = event.target.files[0];
+      const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+      if (file && allowedFileTypes.includes(file.type)) {
+        setFormData({
+          ...formData,
+          [name]: file,
+        });
+      } else {
+        setValidationErrors((prev) => ({
+          ...prev,
+          [name]:
+            'Invalid file type. Only JPEG, PNG, and GIF files are allowed.',
+        }));
+      }
     } else {
       setFormData({
         ...formData,
