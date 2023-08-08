@@ -19,7 +19,7 @@ router.get('/getAllBlogPosts', getAllBlogs);
 router.get('/:id', getBlogPostById);
 
 // Update a blog post by ID
-router.patch('/:id', upload.single('imagePath'), updateBlogPost);
+router.put('/:id', upload.single('imagePath'), updateBlogPost);
 
 // Route for deleting a blog post by ID
 router.delete('/:id', deleteBlogPost);

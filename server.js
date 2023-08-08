@@ -3,15 +3,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const sequelize = require('./config/db');
+const blogRoutes = require('./routes/blogRoutes');
+const profileRoutes = require('./routes/profileRoutes')
+const categoryRoutes = require('./routes/categoryRoutes');
+const checkoutRoute = require('./routes/checkRoute');
+const RssFeedRoutes = require('./routes/RssFeedRoutes');
+
+
 const app = express();
 const PORT = process.env.PORT || 4500;
 const path = require('path');
-
 sequelize.sync();
-const blogRoutes = require('./routes/blogRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const profileRoutes = require('./routes/profileRoutes');
-const checkoutRoute = require('./routes/checkRoute');
 
 // Middleware
 app.use(
@@ -28,14 +30,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-//blog route
+//Blog Route
 app.use('/api/blog', blogRoutes);
-//category route
+//Category Route
 app.use('/api/category', categoryRoutes);
 //Profile Route
 app.use('/api/profile', profileRoutes);
 //Stripe Payment Route
 app.use('/api/checkout', checkoutRoute);
+// RSS Route
+app.use('/api/news', RssFeedRoutes)
 
 // Start the server
 app.listen(PORT, () => {

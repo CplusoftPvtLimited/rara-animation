@@ -10,7 +10,7 @@ const {
 } = require('../controllers/profileController');
 
 // Create New Fellow Profile
-router.post('/createProfile', upload.single('imagePath'), createProfile);
+router.post('/createProfile', upload.fields([{ name: 'imagePath', maxCount: 1 }, {name: 'thumbnailPath', maxCount: 1}, { name: 'featuredImage', maxCount: 1 }, { name: 'pictureSlider', maxCount: 10 } ]), createProfile);
 
 // Route for fetching all Profiles
 router.get('/getAllProfiles', getAllProfiles);
@@ -19,7 +19,7 @@ router.get('/getAllProfiles', getAllProfiles);
 router.get('/:id', getProfileById);
 
 // Route for updating a Profile by ID
-router.put('/updateProfile/:id', upload.single('imagePath'), updateProfile);
+router.patch('/updateProfile/:id', upload.single('imagePath'), updateProfile);
 
 // Route for deleting a Profile by ID
 router.delete('/deleteProfile/:id', deleteProfile);
