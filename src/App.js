@@ -34,7 +34,7 @@ function App() {
             <Route path='/fellow/add' exact component={AddFellow} />
             <Route path='/fellow/edit/:fellowId' exact component={EditFellow} />
 
-            <Route path='/stripe' exact component={Stripe} />
+            {/* <Route path='/stripe' exact component={Stripe} /> */}
           </Switch>
         </Router>
       </SnackbarProvider>
