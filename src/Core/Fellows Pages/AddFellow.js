@@ -18,10 +18,8 @@ const AddProfile = () => {
     imagePath: '',
     jobPost: '',
     profileDesc: '',
-    // websiteUrl: '',
     heading: '',
     paragraph: '',
-    // featuredImage:''
   });
 
   const [validationErrors, setValidationErrors] = useState({
@@ -82,16 +80,15 @@ const AddProfile = () => {
       formDataToSend.append('imagePath', formData.imagePath);
       formDataToSend.append('jobPost', formData.jobPost);
       formDataToSend.append('profileDesc', formData.profileDesc);
-      formDataToSend.append('websiteUrl', formData.websiteUrl);
       formDataToSend.append('heading', formData.heading);
       formDataToSend.append('paragraph', formData.paragraph);
-      // formDataToSend.append('featuredImage', formData.featuredImage);
 
-      console.log('formDataToSend: ', formDataToSend);
       axios
-        .post('http://localhost:4500/api/profile/createProfile', formDataToSend)
+        .post(
+          'http://localhost:4500/api/profile/adminCreateProfile',
+          formDataToSend
+        )
         .then((response) => {
-          console.log('response: ', response);
           setFormData({
             name: '',
             nameEnglish: '',
@@ -99,10 +96,8 @@ const AddProfile = () => {
             imagePath: '',
             jobPost: '',
             profileDesc: '',
-            websiteUrl: '',
             heading: '',
             paragraph: '',
-            // featuredImage: '',
           });
           history.push('/fellows');
         })
