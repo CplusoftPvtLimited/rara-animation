@@ -5,11 +5,10 @@ const { Sequelize } = require('sequelize');
 //   dialect: 'mysql',
 // });
 
-const sequelize = new Sequelize('mydatabase', 'root', 'Total123', {
+const sequelize = new Sequelize('abdullah', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
 });
-
 
 sequelize
   .authenticate()

@@ -25,22 +25,22 @@ const Profile = sequelize.define('Profile', {
     //   notEmpty: true,
     // },
   },
-  thumbnailPath: {
-    type: DataTypes.STRING,
-    validate: { notEmpty: true }
-  },
+  // thumbnailPath: {
+  //   type: DataTypes.STRING,
+  //   // validate: { notEmpty: true }
+  // },
   imagePath: {
     type: DataTypes.STRING,
-    validate: { notEmpty: true }
+    validate: { notEmpty: true },
   },
   jobPost: {
-    type: DataTypes.STRING
-    // allowNull: false 
+    type: DataTypes.STRING,
+    // allowNull: false
     //validate: { notEmpty: true }
   },
   profileDesc: {
-    type: DataTypes.TEXT
-    // allowNull: false 
+    type: DataTypes.TEXT,
+    // allowNull: false
     //validate: { notEmpty: true }
   },
   websiteUrl: {
@@ -66,7 +66,7 @@ const Profile = sequelize.define('Profile', {
     // allowNull: true,
   },
   pictureSlider: {
-    type: DataTypes.JSON, 
+    type: DataTypes.JSON,
     // allowNull: true,
   },
   facebookUrl: {
@@ -87,7 +87,7 @@ const Profile = sequelize.define('Profile', {
   },
 });
 
-// Profile.hasMany(Blog); 
+// Profile.hasMany(Blog);
 // Blog.belongsTo(Profile);
 
 module.exports = Profile;

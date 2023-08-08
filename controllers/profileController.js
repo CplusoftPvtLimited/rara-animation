@@ -1,10 +1,10 @@
-const Profile = require("../models/Profile");
+const Profile = require('../models/Profile');
 
 const createProfile = async (req, res) => {
-  if (!req.files) {
+  console.log('req.file file: ', req.file);
+  if (!req.file) {
     return res.status(400).json({ error: 'No image provided' });
   }
-
 
   // Get other fields from the request body
   let {
@@ -13,23 +13,20 @@ const createProfile = async (req, res) => {
     tagLine,
     jobPost,
     profileDesc,
-    websiteUrl,
+    // websiteUrl,
     heading,
     paragraph,
-    facebookUrl,
-    twitterUrl,
-    ritsumeiUrl,
   } = req.body;
 
   // Check for required fields
   const requiredFields = [
-    "name",
-    "nameEnglish",
-    "tagLine",
-    "jobPost",
-    "profileDesc",
-    "heading",
-    "paragraph",
+    'name',
+    'nameEnglish',
+    'tagLine',
+    'jobPost',
+    'profileDesc',
+    'heading',
+    'paragraph',
   ];
 
   for (let field of requiredFields) {
@@ -43,12 +40,13 @@ const createProfile = async (req, res) => {
     }
   }
   try {
+    const baseUrl = 'http://localhost:4500/';
+
     // Get the image path
-    const thumbnailPath = req.files.thumbnailPath[0].path;
-    const imagePath = req.files.imagePath[0].path;
-    const featuredImagePath = req.files.featuredImage[0].path;
-    const pictureSliderPaths = req.files.pictureSlider.map((file) => file.path);
-    const baseUrl = "http://localhost:4500/"
+    const path = req.file.path;
+    console.log('path: ' + path);
+    // const featuredImagePath = req.files.featuredImage[0].path;
+    // const pictureSliderPaths = req.files.pictureSlider.map((file) => file.path);
 
     // Create the new Profile entry in the database
     const newProfile = await Profile.create({
@@ -57,38 +55,35 @@ const createProfile = async (req, res) => {
       tagLine,
       jobPost,
       profileDesc,
-      websiteUrl,
+      // websiteUrl,
       heading,
       paragraph,
-      thumbnailPath: baseUrl + thumbnailPath,
-      imagePath: baseUrl + imagePath,
-      featuredImage: baseUrl + featuredImagePath,
-      pictureSlider: JSON.stringify(baseUrl + pictureSliderPaths),
-      facebookUrl,
-      twitterUrl,
-      ritsumeiUrl,
+      imagePath: baseUrl + path,
+      // featuredImage: featuredImagePath,
+      // pictureSlider: JSON.stringify(pictureSliderPaths),
     });
 
     console.log('new profile: ', newProfile);
 
     return res
       .status(200)
-      .json({ message: "Profile created successfully", Profile: newProfile });
+      .json({ message: 'Profile created successfully', Profile: newProfile });
   } catch (err) {
-    res.status(500).json({ error: "Error creating profile: " + err.message });
+    res.status(500).json({ error: 'Error creating profile: ', err });
   }
 };
 
 const getAllProfiles = async (req, res) => {
-  try {
-    const profiles = await Profile.findAll({ order: [['createdAt', 'DESC']] });
-    if (!profiles.length) {
-      return res.status(404).json({ message: 'No Profiles found' });
-    }
-    res.status(200).send({ profiles });
-  } catch (err) {
-    res.status(400).json({ error: 'Error fetching Profiles' });
+  // try {
+  const profiles = await Profile.findAll({ order: [['createdAt', 'DESC']] });
+  console.log('************Profile', profiles);
+  if (!profiles.length) {
+    return res.status(404).json({ message: 'No Profiles found' });
   }
+  res.status(200).send({ profiles });
+  // } catch (err) {
+  //   res.status(400).json({ error: 'Error fetching Profiles' });
+  // }
 };
 
 const getProfileById = async (req, res) => {
@@ -103,58 +98,98 @@ const getProfileById = async (req, res) => {
   }
 };
 
+// const updateProfile = async (req, res) => {
+//   try {
+//     let id = req.params.id;
+//     const profile = await Profile.findByPk(id);
+//     if (!profile) {
+//       return res.status(400).json({ error: 'Profile not found' });
+//     }
+//     const updateObj = {};
+//     const allowedKeys = [
+//       'name',
+//       'nameEnglish',
+//       'tagLine',
+//       'jobPost',
+//       'profileDesc',
+//       'websiteUrl',
+//       'heading',
+//       'paragraph',
+//       'imagePath',
+//     ];
+//     allowedKeys.forEach((key) => {
+//       if (req.body[key]) {
+//         updateObj[key] = req.body[key];
+//       }
+//     });
+
+//     console.log('updateObj: ', updateObj);
+
+//     await Profile.update(updateObj, {
+//       where: { id },
+//     });
+//     const updatedProfile = await Profile.findByPk(id);
+//     return res.status(200).json({
+//       message: 'Profile updated successfully',
+//       profile: updatedProfile,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({ error: 'Error updating profile', error });
+//   }
+// };
+
 const updateProfile = async (req, res) => {
+  const {
+    name,
+    nameEnglish,
+    tagLine,
+    jobPost,
+    profileDesc,
+    heading,
+    paragraph,
+  } = req.body;
+  console.log('file file: ', req.file);
+
+  const profilePost = await Profile.findByPk(req.params.id);
+  if (!profilePost) {
+    return res.status(404).json({ error: 'Profile post not found' });
+  }
+  profilePost.name = name;
+  profilePost.nameEnglish = nameEnglish;
+  profilePost.tagLine = tagLine;
+  profilePost.jobPost = jobPost;
+  profilePost.profileDesc = profileDesc;
+  profilePost.heading = heading;
+  profilePost.paragraph = paragraph;
+
+  const baseUrl = 'http://localhost:4500/';
+  if (req.file) {
+    const imagePath = req.file.path;
+    profilePost.dataValues.imagePath = baseUrl + imagePath;
+  }
+  console.log('profilePost: ', profilePost);
   try {
-    let id = req.params.id;
-    const profile = await Profile.findByPk(id);
-    if (!profile) {
-      return res.status(400).json({ error: 'Profile not found' });
-    }
-    
-    const updateObj = {
-      name: req.body.name || profile.name,
-      nameEnglish: req.body.nameEnglish || profile.nameEnglish,
-      tagLine: req.body.tagLine || profile.tagLine,
-      jobPost: req.body.jobPost || profile.jobPost,
-      profileDesc: req.body.profileDesc || profile.profileDesc,
-      websiteUrl: req.body.websiteUrl || profile.websiteUrl,
-      heading: req.body.heading || profile.heading,
-      paragraph: req.body.paragraph || profile.paragraph,
-    };
-
-    const baseUrl = 'http://localhost:4500/';
-    if (req.file) {
-      const imagePath = req.file.path;
-      updateObj.imagePath = baseUrl + imagePath;
-    }
-
-    console.log('updateObj: ', updateObj);
-
-    await Profile.update(updateObj, {
-      where: { id },
+    await Profile.update(profilePost.dataValues, {
+      where: { id: req.params.id },
     });
-    const updatedProfile = await Profile.findByPk(id);
-    return res.status(200).json({
-      message: 'Profile updated successfully',
-      profile: updatedProfile,
-    });
-  } catch (error) {
-    return res.status(500).json({ error: 'Error updating profile', error });
+    const updateProfilePost = await Profile.findByPk(req.params.id);
+    res.status(200).json(updateProfilePost);
+  } catch (err) {
+    res.status(403).json({ err });
   }
 };
-
 
 const deleteProfile = async (req, res) => {
   try {
     let id = req.params.id;
     const profile = await Profile.findByPk(id);
     if (!profile) {
-      return res.status(404).json({ error: "Profile not found" });
+      return res.status(404).json({ error: 'Profile not found' });
     }
     await profile.destroy();
-    res.json({ message: "Profile deleted successfully" });
+    res.json({ message: 'Profile deleted successfully' });
   } catch (err) {
-    res.status(500).json({ error: "Profile Not Deleted" });
+    res.status(500).json({ error: 'Profile Not Deleted' });
   }
 };
 
