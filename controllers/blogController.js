@@ -76,7 +76,8 @@ const getBlogPostById = async (req, res) => {
 };
 
 const updateBlogPost = async (req, res) => {
-  const { title, content, region, fellow, category } = req.body;
+  const { title, content, region, fellow, category, profile } = req.body;
+  console.log('body: ', req.body);
   const blogPost = await Blog.findByPk(req.params.id);
   if (!blogPost) {
     return res.status(404).json({ error: 'Blog post not found' });
@@ -87,7 +88,7 @@ const updateBlogPost = async (req, res) => {
   blogPost.region = region;
   blogPost.fellow = fellow;
   blogPost.category = category;
-
+  blogPost.profile = profile;
   console.log('blogPost: ', blogPost);
   const baseUrl = 'http://localhost:4500/';
   if (req.file) {

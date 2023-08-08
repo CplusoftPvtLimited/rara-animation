@@ -24,7 +24,7 @@ router.post('/stripe', async (req, res) => {
   console.log('body: ', req.body);
   const totalCost = req.body.totalCost;
   const paymentIntent = await initPaymentIntent(totalCost);
-
+  console.log('paymentIntent.client_secret: ', paymentIntent.client_secret);
   res.send({
     clientSecret: paymentIntent.client_secret,
   });
@@ -32,20 +32,21 @@ router.post('/stripe', async (req, res) => {
 
 router.post('/coinbase', async (req, res) => {
   console.log('body: ', req.body);
-  const { amount, currency } = req.body;
+  const { amount } = req.body;
   try {
     const charge = await resources.Charge.create({
       name: 'khan',
       description: 'coinbase',
       local_price: {
         amount: amount,
-        currency: currency,
+        currency: 'USD',
       },
       pricing_type: 'fixed_price',
       metadata: {
         user_id: '1234',
       },
     });
+
     res.status(200).json({
       charge: charge,
     });
