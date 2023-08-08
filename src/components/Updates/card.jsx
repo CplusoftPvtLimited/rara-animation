@@ -7,6 +7,7 @@ function Card() {
   const [postData, setPostData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState("All News");
+  const [sortFellowOption, setSortFellowOption] = useState("All Fellows");
   const [sortedPostData, setSortedPostData] = useState([]);
   const [fellowToggle, setFellowToggle] = useState(false);
   const itemsPerPage = 21;
@@ -39,42 +40,25 @@ function Card() {
   };
 
   // Filter Buttons Setup
-  const filterByCategory = (option) => {
-    switch (option) {
-      case "All News":
-        setSortedPostData(postData);
-        break;
-      case "RARA Commons":
-        setSortedPostData(
-          postData.filter((post) => post.category === "RARA Commons")
-        );
-        break;
-      case "お知らせ":
-        setSortedPostData(
-          postData.filter((post) => post.category === "お知らせ")
-        );
-        break;
-      case "コラム":
-        setSortedPostData(
-          postData.filter((post) => post.category === "コラム")
-        );
-        break;
-      case "All Fellows":
-        setSortedPostData(postData);
-        break;
-        case option:
-          setSortedPostData(postData.filter((post) => post.fellow === option));
-          break;
-      default:
-        setSortedPostData(postData);
-        break;
+  const filterByCategoryAndFellows = (categoryOption, fellowOption) => {
+    let filteredData = postData;
+
+    // Apply category filter
+    if (categoryOption !== "All News" ) {
+      filteredData = filteredData.filter(post => post.category === categoryOption);
     }
+    // Apply fellow filter
+    if (fellowOption !== "All Fellows") {
+      filteredData = filteredData.filter(post => post.fellow === fellowOption);
+    }
+    setSortedPostData(filteredData);
   };
 
   // Handle Active Button
-  const handleSortingOption = (option) => {
-    setSortOption(option);
-    filterByCategory(option);
+  const handleSortingOption = (categoryOption, fellowOption) => {
+    setSortOption(categoryOption);
+    setSortFellowOption(fellowOption);
+    filterByCategoryAndFellows(categoryOption, fellowOption);
   };
 
   const fellowToggleHandler = () => {
@@ -93,7 +77,7 @@ function Card() {
             className={`filter-btn ${
               sortOption === "All News" ? "active" : " "
             }`}
-            onClick={() => handleSortingOption("All News")}
+            onClick={() => handleSortingOption("All News", sortFellowOption)}
           >
             ALL NEWS
           </button>
@@ -101,7 +85,7 @@ function Card() {
             className={`filter-btn ${
               sortOption === "RARA Commons" ? "active" : " "
             }`}
-            onClick={() => handleSortingOption("RARA Commons")}
+            onClick={() => handleSortingOption("RARA Commons", sortFellowOption)}
           >
             RARA Commons
           </button>
@@ -109,13 +93,13 @@ function Card() {
             className={`filter-btn ${
               sortOption === "お知らせ" ? "active" : " "
             }`}
-            onClick={() => handleSortingOption("お知らせ")}
+            onClick={() => handleSortingOption("お知らせ", sortFellowOption)}
           >
             お知らせ
           </button>
           <button
             className={`filter-btn ${sortOption === "コラム" ? "active" : " "}`}
-            onClick={() => handleSortingOption("コラム")}
+            onClick={() => handleSortingOption("コラム", sortFellowOption)}
           >
             コラム
           </button>
@@ -129,9 +113,9 @@ function Card() {
           <h5 className="my-auto">SORT BY FELLOWS</h5>
           <button
             className={`filter-btn ${
-              sortOption === "All Fellows" ? "active" : ""
+              sortFellowOption === "All Fellows" ? "active" : ""
             }`}
-            onClick={() => handleSortingOption("All Fellows")}
+            onClick={() => handleSortingOption(sortOption,"All Fellows")}
           >
             ALL FELLOWS
           </button>
@@ -154,9 +138,9 @@ function Card() {
               <button
                 key={index}
                 className={`filter-btn ${
-                  sortOption === fellow ? "active" : ""
+                  sortFellowOption === fellow ? "active" : ""
                 }`}
-                onClick={() => handleSortingOption(fellow)}
+                onClick={() => handleSortingOption(sortOption, fellow)}
               >
                 {fellow}
               </button>
