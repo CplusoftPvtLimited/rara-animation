@@ -61,11 +61,11 @@ const Fellows = () => {
                 placement='top'
                 overlay={
                   <Tooltip>
-                    <div className='add-cat-overlay'>Add new Blog.</div>
+                    <div className='add-cat-overlay'>Add new Fellow.</div>
                   </Tooltip>
                 }
               >
-                <Link to='/blogs/add'>
+                <Link to='/fellow/add'>
                   <div>
                     <RiAddFill className='add-cat-btn' />
                   </div>

@@ -10,6 +10,28 @@ import './AddBlog.css';
 
 const AddBlog = () => {
   const history = useHistory();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const getCategories = () => {
+    setCategories([]);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/category',
+    })
+      .then((response) => {
+        console.log('response: ', response?.data);
+        setCategories(response?.data);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
+      });
+  };
+
+  console.log('category: ', categories[0]?.title);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -34,12 +56,21 @@ const AddBlog = () => {
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === 'imagePath') {
-      console.log('event.target.files[0]', event.target.files[0]);
-      console.log('name', name);
-      setFormData({
-        ...formData,
-        [name]: event.target.files[0],
-      });
+      const file = event.target.files[0];
+      const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+      if (file && allowedFileTypes.includes(file.type)) {
+        setFormData({
+          ...formData,
+          [name]: file,
+        });
+      } else {
+        setValidationErrors((prev) => ({
+          ...prev,
+          [name]:
+            'Invalid file type. Only JPEG, PNG, and GIF files are allowed.',
+        }));
+      }
     } else {
       setFormData({
         ...formData,
@@ -112,6 +143,7 @@ const AddBlog = () => {
     'Japan',
     'China',
   ];
+
   const fellowOptions = [
     'fellow 1',
     'fellow 2',
@@ -153,7 +185,6 @@ const AddBlog = () => {
     if (!formData.imagePath) {
       errors.imagePath = 'Please select an image';
     }
-
     return errors;
   };
 
@@ -188,17 +219,12 @@ const AddBlog = () => {
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Fellow</p>
-                    {/* <input
-                      type='text'
-                      name='fellow'
-                      value={formData.fellow}
-                      onChange={handleChange}
-                    /> */}
+
                     <select
                       name='fellow'
                       value={formData.fellow}
                       onChange={handleChange}
-                      style={{ border: 'none' }}
+                      style={{ border: 'none', width: '100%' }}
                     >
                       <option value=''>Select Fellow</option>
                       {fellowOptions.map((fellow) => (
@@ -219,12 +245,20 @@ const AddBlog = () => {
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Category</p>
-                    <input
-                      type='text'
+                    <select
                       name='category'
                       value={formData.category}
                       onChange={handleChange}
-                    />
+                      style={{ border: 'none', width: '100%' }}
+                    >
+                      <option value=''>Select Category</option>
+                      {categories.map((category, index) => (
+                        <option value={category?.title} key={index}>
+                          {category?.title}
+                        </option>
+                      ))}
+                    </select>
+
                     {validationErrors.category && (
                       <p style={{ color: 'red' }}>
                         {validationErrors.category}
@@ -239,7 +273,7 @@ const AddBlog = () => {
                       name='region'
                       value={formData.region}
                       onChange={handleChange}
-                      style={{ border: 'none' }}
+                      style={{ border: 'none', width: '100%' }}
                     >
                       <option value=''>Select Region</option>
                       {regionOptions.map((option) => (
@@ -307,7 +341,7 @@ const AddBlog = () => {
                         // value={formData.imagePath?.name}
                         onChange={handleChange}
                       />
-                      {validationErrors.title && (
+                      {validationErrors.imagePath && (
                         <p style={{ color: 'red' }}>
                           {validationErrors.imagePath}
                         </p>

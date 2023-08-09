@@ -18,10 +18,8 @@ const AddProfile = () => {
     imagePath: '',
     jobPost: '',
     profileDesc: '',
-    // websiteUrl: '',
     heading: '',
     paragraph: '',
-    // featuredImage:''
   });
 
   const [validationErrors, setValidationErrors] = useState({
@@ -38,11 +36,21 @@ const AddProfile = () => {
     const { name, value } = event.target;
     if (name === 'imagePath') {
       console.log('event.target.files[0]', event.target.files[0]);
-      console.log('name', name);
-      setFormData({
-        ...formData,
-        [name]: event.target.files[0],
-      });
+      const file = event.target.files[0];
+      const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+      if (file && allowedFileTypes.includes(file.type)) {
+        setFormData({
+          ...formData,
+          [name]: file,
+        });
+      } else {
+        setValidationErrors((prev) => ({
+          ...prev,
+          [name]:
+            'Invalid file type. Only JPEG, PNG, and GIF files are allowed.',
+        }));
+      }
     } else {
       setFormData({
         ...formData,
@@ -72,16 +80,15 @@ const AddProfile = () => {
       formDataToSend.append('imagePath', formData.imagePath);
       formDataToSend.append('jobPost', formData.jobPost);
       formDataToSend.append('profileDesc', formData.profileDesc);
-      formDataToSend.append('websiteUrl', formData.websiteUrl);
       formDataToSend.append('heading', formData.heading);
       formDataToSend.append('paragraph', formData.paragraph);
-      // formDataToSend.append('featuredImage', formData.featuredImage);
 
-      console.log('formDataToSend: ', formDataToSend);
       axios
-        .post('http://localhost:4500/api/profile/createProfile', formDataToSend)
+        .post(
+          'http://localhost:4500/api/profile/adminCreateProfile',
+          formDataToSend
+        )
         .then((response) => {
-          console.log('response: ', response);
           setFormData({
             name: '',
             nameEnglish: '',
@@ -89,10 +96,8 @@ const AddProfile = () => {
             imagePath: '',
             jobPost: '',
             profileDesc: '',
-            websiteUrl: '',
             heading: '',
             paragraph: '',
-            // featuredImage: '',
           });
           history.push('/fellows');
         })

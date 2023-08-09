@@ -11,15 +11,25 @@ import './AddBlog.css';
 function EditBlog(props) {
   const [blogData, setBlogData] = useState();
   const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
-  const [newImageFile, setNewImageFile] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [validationErrors, setValidationErrors] = useState({
+    title: '',
+    content: '',
+    fellow: '',
+    category: '',
+    region: '',
+    profile: '',
+    imagePath: '',
+  });
 
+  const [newImageFile, setNewImageFile] = useState(null);
   const blogId = props.match.params.blogId;
-  console.log('blogId: ' + blogId);
   const history = useHistory();
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     getBlogs();
+    getCategories();
   }, []);
 
   const getBlogs = () => {
@@ -35,6 +45,21 @@ function EditBlog(props) {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  const getCategories = () => {
+    setCategories([]);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/category',
+    })
+      .then((response) => {
+        console.log('response: ', response?.data);
+        setCategories(response?.data);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
       });
   };
 
@@ -61,14 +86,21 @@ function EditBlog(props) {
   const handleImageClick = () => {
     fileInputRef.current.click();
   };
+
   const editBlog = (event) => {
     event.preventDefault();
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
     console.log('image: ', blogData.imagePath);
     const updatedData = new FormData();
     updatedData.append('title', blogData.title);
     updatedData.append('content', blogData.content);
     updatedData.append('fellow', blogData.fellow);
     updatedData.append('category', blogData.category);
+    updatedData.append('profile', blogData.profile);
     updatedData.append('region', blogData.region);
     updatedData.append('imagePath', blogData.imagePath);
 
@@ -121,6 +153,36 @@ function EditBlog(props) {
     'China',
   ];
 
+  const validateForm = () => {
+    let errors = {};
+
+    if (blogData.title.trim() === '') {
+      errors.title = 'This field is required';
+    }
+    if (blogData.content.trim() === '') {
+      errors.content = 'This field is required';
+    }
+    if (blogData.fellow.trim() === '') {
+      errors.fellow = 'This field is required';
+    }
+
+    if (blogData.category.trim() === '') {
+      errors.category = 'This field is required';
+    }
+
+    if (blogData.region.trim() === '') {
+      errors.region = 'This field is required';
+    }
+
+    if (blogData.profile.trim() === '') {
+      errors.profile = 'This field is required';
+    }
+
+    if (!blogData.imagePath) {
+      errors.imagePath = 'Please select an image';
+    }
+    return errors;
+  };
   return (
     <div className='dashboard-parent-div'>
       <Row>
@@ -145,6 +207,9 @@ function EditBlog(props) {
                         value={blogData.title}
                         onChange={handleChange}
                       />
+                      {validationErrors.title && (
+                        <p style={{ color: 'red' }}>{validationErrors.title}</p>
+                      )}
                     </div>
                   </Col>
                   <Col>
@@ -154,7 +219,7 @@ function EditBlog(props) {
                         name='region'
                         value={blogData.region}
                         onChange={handleChange}
-                        style={{ border: 'none' }}
+                        style={{ border: 'none', width: '700px' }}
                       >
                         <option value=''>Select Region</option>
                         {regionOptions.map((region) => (
@@ -163,6 +228,11 @@ function EditBlog(props) {
                           </option>
                         ))}
                       </select>
+                      {validationErrors.region && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.region}
+                        </p>
+                      )}
                     </div>
                   </Col>
                 </Row>
@@ -175,7 +245,7 @@ function EditBlog(props) {
                         name='fellow'
                         value={blogData.fellow}
                         onChange={handleChange}
-                        style={{ border: 'none' }}
+                        style={{ border: 'none', width: '700px' }}
                       >
                         <option value=''>Select Fellow</option>
                         {fellowOptions.map((fellow) => (
@@ -184,17 +254,55 @@ function EditBlog(props) {
                           </option>
                         ))}
                       </select>
+                      {validationErrors.fellow && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.fellow}
+                        </p>
+                      )}
                     </div>
                   </Col>
                   <Col>
                     <div className='add-product-input-div'>
                       <p>Category</p>
+                      <label>
+                        <select
+                          name='category'
+                          value={blogData.category}
+                          onChange={handleChange}
+                          style={{ border: 'none', width: '700px' }}
+                        >
+                          <option value=''>Select Category</option>
+                          {categories.map((category, index) => (
+                            <option value={category?.title} key={index}>
+                              {category?.title}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      {validationErrors.category && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.category}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <div className='add-product-input-div'>
+                      <p>Blog Profile</p>
                       <input
                         type='text'
-                        name='category'
-                        value={blogData.category}
+                        name='profile'
+                        value={blogData.profile}
                         onChange={handleChange}
                       />
+                      {validationErrors.profile && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.profile}
+                        </p>
+                      )}
                     </div>
                   </Col>
                 </Row>
@@ -224,6 +332,11 @@ function EditBlog(props) {
                           console.log('Focus.', editor);
                         }}
                       />
+                      {validationErrors.content && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.content}
+                        </p>
+                      )}
                     </div>
                   </Col>
 
@@ -254,8 +367,15 @@ function EditBlog(props) {
                           name='imagePath'
                           ref={fileInputRef}
                           onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
                           style={{ display: 'none' }}
                         />
+
+                        {validationErrors.imagePath && (
+                          <p style={{ color: 'red' }}>
+                            {validationErrors.imagePath}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </Col>
