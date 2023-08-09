@@ -123,12 +123,12 @@ function Fellows() {
       {/************************** RARA Assosiate Profile Section ******************************/}
 
       <div className="rows-wrapper">
-        {fellows.length === 0 ? (
+        {associateFellows.length === 0 ? (
           <div className="mx-auto my-[50px]">
-            <p>Loading...</p>
+            <p className="text-center">Loading...</p>
           </div>
         ) : (
-          fellows.map(
+          associateFellows.map(
             (fellow, index) =>
               index % 3 === 0 && (
                 <div key={`row-${index}`} className="row">

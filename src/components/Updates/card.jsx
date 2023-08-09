@@ -129,10 +129,12 @@ function Card() {
       {/***********************Toggle Section ***************************/}
 
       {fellowToggle ?
-      <div className="filter-2 mx-auto w-[80%] py-[50px] gap-20 pr-[150px] lg:flex lg:pl-[100px] ">
+      <div className="filter-2 mx-auto w-[80%] py-[50px] pr-[150px] lg:pl-[100px] ">
+          <div className="flex gap-32">
         <div className="filter-by-fellow my-auto">
           <h5>Fellows</h5>
         </div>
+      
           <div className="flex gap-8 mt-[25px] lg:mt-auto">
             {Array.from(uniqueFellows).map((fellow, index) => (
               <button
@@ -146,6 +148,27 @@ function Card() {
               </button>
             ))}
           </div>
+</div>
+{/**Associate Fellows filter section */}
+{/* <div className="flex gap-16 mt-10">
+        <div className="filter-by-fellow my-auto">
+          <h5>Associate Fellows</h5>
+        </div>
+      
+          <div className="flex gap-8 mt-[25px] lg:mt-auto">
+            {Array.from(uniqueFellows).map((fellow, index) => (
+              <button
+                key={index}
+                className={`filter-btn ${
+                  sortFellowOption === fellow ? "active" : ""
+                }`}
+                onClick={() => handleSortingOption(sortOption, fellow)}
+              >
+                {fellow}
+              </button>
+            ))}
+          </div>
+</div> */}
       </div> : null
       }
 
