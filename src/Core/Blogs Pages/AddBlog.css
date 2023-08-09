@@ -154,3 +154,7 @@
   background-color: rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
+
+.add-fellow-image{
+  padding: 20px !important;
+}
