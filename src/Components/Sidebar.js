@@ -99,6 +99,19 @@ function Sidebar() {
               <p>Add Categories</p>
             </div>
           </Link>
+
+
+          <Link to='/Home' className='sidebar-link'>
+            <div
+              className={`sidebar-item ${
+                isActive(history, '/Home') && 'active'
+              }`}
+            >
+              <p>Home</p>
+            </div>
+          </Link>
+
+
         </div>
       </div>
     </div>
