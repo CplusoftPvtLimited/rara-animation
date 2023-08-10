@@ -1,27 +1,27 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const upload = require('../middleware/multerMid');
+const upload = require("../middleware/multerMid");
 const {
   createBlogPost,
   getAllBlogs,
   getBlogPostById,
   updateBlogPost,
   deleteBlogPost,
-} = require('../controllers/blogController');
+} = require("../controllers/blogController");
 
 // Route for creating a new blog post
-router.post('/createBlog', upload.single('imagePath'), createBlogPost);
+router.post("/createBlog", upload.single("imagePath"), createBlogPost);
 
 // Route for getting all blog posts
-router.get('/getAllBlogPosts', getAllBlogs);
+router.get("/getAllBlogPosts", getAllBlogs);
 
 // Route for getting a single blog post by ID
-router.get('/:id', getBlogPostById);
+router.get("/:id", getBlogPostById);
 
 // Update a blog post by ID
-router.put('/:id', upload.single('imagePath'), updateBlogPost);
+router.put("/:id", upload.single("imagePath"), updateBlogPost);
 
 // Route for deleting a blog post by ID
-router.delete('/:id', deleteBlogPost);
+router.delete("/:id", deleteBlogPost);
 
 module.exports = router;

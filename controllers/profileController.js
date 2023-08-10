@@ -2,9 +2,8 @@ const Profile = require("../models/Profile");
 
 const createProfile = async (req, res) => {
   if (!req.files) {
-    return res.status(400).json({ error: 'No image provided' });
+    return res.status(400).json({ error: "No image provided" });
   }
-
 
   // Get other fields from the request body
   let {
@@ -35,7 +34,7 @@ const createProfile = async (req, res) => {
   for (let field of requiredFields) {
     if (
       !req.body[field] ||
-      req.body[field] === '' ||
+      req.body[field] === "" ||
       req.body[field] === undefined ||
       req.body[field] === null
     ) {
@@ -47,8 +46,8 @@ const createProfile = async (req, res) => {
     const baseUrl = "http://localhost:4500/"
     const thumbnailPath = req.files.thumbnailPath[0].path;
     const imagePath = req.files.imagePath[0].path;
-    const featuredImage = req.files.featuredImage[0].path;
-    const pictureSliderPaths = req.files.pictureSlider ? req.files.pictureSlider.map((file) => baseUrl + file.path) : [];
+    const featuredImagePath = req.files.featuredImage[0].path;
+    const pictureSliderPaths = req.files.pictureSlider.map((file) => file.path);
 
     // Create the new Profile entry in the database
     const newProfile = await Profile.create({
@@ -69,7 +68,7 @@ const createProfile = async (req, res) => {
       ritsumeiUrl,
     });
 
-    console.log('new profile: ', newProfile);
+    console.log("new profile: ", newProfile);
 
     return res
       .status(200)
@@ -81,13 +80,13 @@ const createProfile = async (req, res) => {
 
 const getAllProfiles = async (req, res) => {
   try {
-    const profiles = await Profile.findAll({ order: [['createdAt', 'DESC']] });
+    const profiles = await Profile.findAll({ order: [["createdAt", "DESC"]] });
     if (!profiles.length) {
-      return res.status(404).json({ message: 'No Profiles found' });
+      return res.status(404).json({ message: "No Profiles found" });
     }
     res.status(200).send({ profiles });
   } catch (err) {
-    res.status(400).json({ error: 'Error fetching Profiles' });
+    res.status(400).json({ error: "Error fetching Profiles" });
   }
 };
 
@@ -95,11 +94,11 @@ const getProfileById = async (req, res) => {
   try {
     const profile = await Profile.findByPk(req.params.id);
     if (!profile) {
-      return res.status(404).json({ message: 'No Profile found' });
+      return res.status(404).json({ message: "No Profile found" });
     }
     res.status(200).send({ profile });
   } catch (err) {
-    res.status(400).json({ error: 'Error fetching Profile' });
+    res.status(400).json({ error: "Error fetching Profile" });
   }
 };
 
@@ -108,9 +107,26 @@ const updateProfile = async (req, res) => {
     let id = req.params.id;
     const profile = await Profile.findByPk(id);
     if (!profile) {
-      return res.status(400).json({ error: 'Profile not found' });
+      return res.status(400).json({ error: "Profile not found" });
     }
 
+<<<<<<< HEAD
+=======
+    const thumbnailPath = req.files?.thumbnailPath
+      ? req.files?.thumbnailPath[0].path
+      : profile.thumbnailPath;
+    const imagePath = req.files?.imagePath
+      ? req.files?.imagePath[0].path
+      : profile.imagePath;
+    const featuredImagePath = req.files?.featuredImage
+      ? req.files?.featuredImage[0].path
+      : profile.featuredImage;
+    const pictureSliderPaths = req.files?.pictureSlider
+      ? req.files?.pictureSlider.map((file) => file.path)
+      : profile.pictureSlider;
+    const baseUrl = "http://localhost:4500/";
+
+>>>>>>> b6de53d4a26d7e1d42e30e9801785228d184f783
     const updateObj = {
       name: req.body.name || profile.name,
       nameEnglish: req.body.nameEnglish || profile.nameEnglish,
@@ -120,46 +136,33 @@ const updateProfile = async (req, res) => {
       websiteUrl: req.body.websiteUrl || profile.websiteUrl,
       heading: req.body.heading || profile.heading,
       paragraph: req.body.paragraph || profile.paragraph,
+      thumbnailPath: baseUrl + thumbnailPath,
+      imagePath: baseUrl + imagePath,
+      featuredImage: baseUrl + featuredImagePath,
+      pictureSlider: JSON.stringify(baseUrl + pictureSliderPaths),
     };
-    const baseUrl = 'http://localhost:4500/';
 
-    if (req.files.thumbnailPath) {
-      const thumbnailPath = req.files.thumbnailPath[0].path;
-      updateObj.thumbnailPath = baseUrl + thumbnailPath;
-    }
+    // const baseUrl = "http://localhost:4500/";
+    // if (req.file) {
+    //   const imagePath = req.file.path;
+    //   updateObj.imagePath = baseUrl + imagePath;
+    // }
 
-    if (req.files.imagePath) {
-      const imagePath = req.files.imagePath[0].path;
-      updateObj.imagePath = baseUrl + imagePath;
-    }
-
-    if (req.files.featuredImage) {
-      const featuredImage = req.files.featuredImage[0].path;
-      updateObj.featuredImage = baseUrl + featuredImage;
-    }
-
-    // Update only if files are provided for pictureSlider
-    if (req.files.pictureSlider) {
-      const pictureSliderPaths = req.files.pictureSlider.map((file) => baseUrl + file.path);
-      updateObj.pictureSlider = JSON.stringify(pictureSliderPaths);
-      console.log("pictureSlider", updateObj.pictureSlider)
-    }
-
-    console.log('updateObj: ', updateObj);
+    console.log("updateObj: ", updateObj);
 
     await Profile.update(updateObj, {
       where: { id },
     });
     const updatedProfile = await Profile.findByPk(id);
     return res.status(200).json({
-      message: 'Profile updated successfully',
+      message: "Profile updated successfully",
       profile: updatedProfile,
     });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    console.log("ERROR ------------", error);
+    return res.status(500).json({ error: "Error updating profile", error });
   }
 };
-
 
 const deleteProfile = async (req, res) => {
   try {

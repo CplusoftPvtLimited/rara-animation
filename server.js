@@ -7,8 +7,8 @@ const blogRoutes = require('./routes/blogRoutes');
 const profileRoutes = require('./routes/profileRoutes')
 const categoryRoutes = require('./routes/categoryRoutes');
 const RssFeedRoutes = require('./routes/RssFeedRoutes');
+const checkoutRoute = require('./routes/checkRoute');
 const homeRoutes = require('./routes/homeRoutes');
-
 const app = express();
 const PORT = process.env.PORT || 4500;
 const path = require('path');
@@ -16,11 +16,18 @@ const path = require('path');
 sequelize.sync();
 
 // Middleware
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
-app.use(bodyParser.json());
+app.use(
+  bodyParser.json({
+    verify: (req, res, buf) => {
+      const url = req.originalUrl;
+      if (url.startsWith('/webhook')) {
+        req.rawBody = buf.toString();
+      }
+    },
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //Blog Route
@@ -33,6 +40,8 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/news', RssFeedRoutes)
 // Home Route
 app.use('/api/home', homeRoutes);
+//Stripe Payment Route
+app.use('/api/checkout', checkoutRoute);
 
 // Start the server
 app.listen(PORT, () => {
