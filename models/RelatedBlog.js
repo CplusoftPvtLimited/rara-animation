@@ -1,16 +1,16 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const Blog = require('./Blog');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
+const Blog = require("./Blog");
 
-const RelatedBlog = sequelize.define('RelatedBlog', {
+const RelatedBlog = sequelize.define("Related_Blog", {
+  relatedBlogId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
   blogId: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-});
-
-RelatedBlog.belongsTo(Blog, {
-  foreignKey: 'relatedBlogId', // This is the foreign key in the RelatedBlog table
 });
 
 module.exports = RelatedBlog;

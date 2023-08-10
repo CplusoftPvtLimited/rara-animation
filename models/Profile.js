@@ -1,9 +1,9 @@
 // models/BlogPost.js
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
 // const Blog = require('./Blog');
 
-const Profile = sequelize.define('Profile', {
+const Profile = sequelize.define("Profile", {
   name: {
     type: DataTypes.STRING,
     // allowNull: false,
