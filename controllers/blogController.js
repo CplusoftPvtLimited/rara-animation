@@ -2,9 +2,18 @@
 
 const Blog = require('../models/Blog');
 const createBlogPost = async (req, res) => {
-  const { title, content, category, fellow, region, profile, imagePath } =
-    req.body;
-  console.log('req.body: ', req.body);
+  const {
+    title,
+    content,
+    category,
+    fellow,
+    associatedFellow,
+    relatedBlogs,
+    region,
+    profile,
+    imagePath,
+  } = req.body;
+  console.log('req.body body: ', req.body);
 
   if (!req.file) {
     return res.status(400).json({ error: 'No image provided' });
@@ -30,8 +39,14 @@ const createBlogPost = async (req, res) => {
       category: category,
       fellow: fellow,
       region: region,
+      associatedFellow: associatedFellow,
+      // relatedBlogs: relatedBlogs,
       profile: profile,
     });
+
+    await newBlog.setRelatedBlogs(relatedBlogs);
+
+    console.log('newBlog: ', newBlog);
 
     return res
       .status(200)

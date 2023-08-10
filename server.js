@@ -4,11 +4,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const sequelize = require('./config/db');
 const blogRoutes = require('./routes/blogRoutes');
-const profileRoutes = require('./routes/profileRoutes')
+const profileRoutes = require('./routes/profileRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const checkoutRoute = require('./routes/checkRoute');
 const RssFeedRoutes = require('./routes/RssFeedRoutes');
-
 
 const app = express();
 const PORT = process.env.PORT || 4500;
@@ -39,7 +38,7 @@ app.use('/api/profile', profileRoutes);
 //Stripe Payment Route
 app.use('/api/checkout', checkoutRoute);
 // RSS Route
-app.use('/api/news', RssFeedRoutes)
+app.use('/api/news', RssFeedRoutes);
 
 // Start the server
 app.listen(PORT, () => {

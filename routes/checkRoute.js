@@ -30,6 +30,26 @@ router.post('/stripe', async (req, res) => {
   });
 });
 
+router.post('/create-subscription', async (req, res) => {
+  console.log('create subscription: ', req.body);
+  // try {
+  const customer = await stripeClient.customers.create({
+    email: req.body.email,
+    source: req.body.source, // Payment source token from Stripe Elements
+  });
+
+  console.log('Customer: ', customer.id);
+  //   const subscription = await stripe.subscriptions.create({
+  //     customer: customer.id,
+  //     items: [{ price: 'your_price_id' }], // Replace with your Stripe Price ID
+  //   });
+
+  //   res.json({ subscription });
+  // } catch (error) {
+  //   res.status(500).json({ error: error.message });
+  // }
+});
+
 router.post('/coinbase', async (req, res) => {
   console.log('body: ', req.body);
   const { amount } = req.body;
@@ -58,24 +78,24 @@ router.post('/coinbase', async (req, res) => {
 });
 
 router.post('/webhooks', (req, res) => {
-  // console.log('webhook');
-  // try {
-  //   const event = Webhook.verifyEventBody(
-  //     req.rawBody,
-  //     req.headers['x-cc-webhook-signature'],
-  //     process.env.COINBASE_WEBHOOK_SECRET
-  //   );
-  //   if (event.type === 'charge:confirmed') {
-  //     let amount = event.data.pricing.local.amount;
-  //     let currency = event.data.pricing.local.currency;
-  //     let user_id = event.data.metadata.user_id;
-  //     console.log('data: ', amount, currency, user_id);
-  //   }
-  //   console.log('Received event:', event);
-  //   res.status(200).end();
-  // } catch (err) {
-  //   res.status(500).json({ err });
-  // }
+  console.log('webhook');
+  try {
+    const event = Webhook.verifyEventBody(
+      req.rawBody,
+      req.headers['x-cc-webhook-signature'],
+      process.env.COINBASE_WEBHOOK_SECRET
+    );
+    if (event.type === 'charge:confirmed') {
+      let amount = event.data.pricing.local.amount;
+      let currency = event.data.pricing.local.currency;
+      let user_id = event.data.metadata.user_id;
+      console.log('data: ', amount, currency, user_id);
+    }
+    console.log('Received event:', event);
+    res.status(200).end();
+  } catch (err) {
+    res.status(500).json({ err });
+  }
 });
 
 module.exports = router;
