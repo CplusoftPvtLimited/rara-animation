@@ -27,6 +27,7 @@ const AddProfile = () => {
     nameEnglish: '',
     tagLine: '',
     jobPost: '',
+    // type: '',
     heading: '',
     paragraph: '',
     profileDesc: '',
@@ -79,6 +80,7 @@ const AddProfile = () => {
       formDataToSend.append('tagLine', formData.tagLine);
       formDataToSend.append('imagePath', formData.imagePath);
       formDataToSend.append('jobPost', formData.jobPost);
+      // formDataToSend.append('type', formData.type);
       formDataToSend.append('profileDesc', formData.profileDesc);
       formDataToSend.append('heading', formData.heading);
       formDataToSend.append('paragraph', formData.paragraph);
@@ -95,6 +97,7 @@ const AddProfile = () => {
             tagLine: '',
             imagePath: '',
             jobPost: '',
+            // type: '',
             profileDesc: '',
             heading: '',
             paragraph: '',
@@ -127,6 +130,10 @@ const AddProfile = () => {
       errors.jobPost = 'This field is required';
     }
 
+    // if (formData.type.trim() === '') {
+    //   errors.type = 'This field is required';
+    // }
+
     if (formData.heading.trim() === '') {
       errors.heading = 'This field is required';
     }
@@ -145,6 +152,7 @@ const AddProfile = () => {
 
     return errors;
   };
+  const fellowOptions = ['fellow', 'associated fellow'];
 
   return (
     <div className='dashboard-parent-div'>
@@ -225,6 +233,29 @@ const AddProfile = () => {
               </Row>
 
               <Row>
+                {/* <Col>
+                  <div className='add-product-input-div'>
+                    <p>Type</p>
+
+                    <select
+                      name='type'
+                      value={formData.type}
+                      // onChange={handleChange}
+                      style={{ border: 'none', width: '100%' }}
+                    >
+                      <option value=''>Select Fellow</option>
+                      {fellowOptions.map((fellow) => (
+                        <option key={fellow} value={fellow}>
+                          {fellow}
+                        </option>
+                      ))}
+                    </select>
+
+                    {validationErrors.type && (
+                      <p style={{ color: 'red' }}>{validationErrors.type}</p>
+                    )}
+                  </div>
+                </Col> */}
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Heading</p>
@@ -239,14 +270,36 @@ const AddProfile = () => {
                     )}
                   </div>
                 </Col>
+              </Row>
+
+              <Row>
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Paragraph</p>
-                    <input
+                    {/* <input
                       type='text'
                       name='paragraph'
                       value={formData.paragraph}
                       onChange={handleChange}
+                    /> */}
+
+                    <CKEditor
+                      editor={ClassicEditor}
+                      // data='<p>lets start blog content</p>'ss
+                      onReady={(editor) => {}}
+                      onChange={(event, editor) => {
+                        const data = editor.getData();
+                        console.log('Editor Data:', data);
+                        handleChange({
+                          target: { name: 'paragraph', value: data },
+                        });
+                      }}
+                      onBlur={(event, editor) => {
+                        console.log('Blur.', editor);
+                      }}
+                      onFocus={(event, editor) => {
+                        console.log('Focus.', editor);
+                      }}
                     />
                     {validationErrors.paragraph && (
                       <p style={{ color: 'red' }}>

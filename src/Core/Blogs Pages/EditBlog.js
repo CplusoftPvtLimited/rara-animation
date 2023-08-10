@@ -10,6 +10,7 @@ import './AddBlog.css';
 
 function EditBlog(props) {
   const [blogData, setBlogData] = useState();
+  const [fellows, setFellows] = useState([]);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
   const [categories, setCategories] = useState([]);
   const [validationErrors, setValidationErrors] = useState({
@@ -30,6 +31,7 @@ function EditBlog(props) {
   useEffect(() => {
     getBlogs();
     getCategories();
+    getFellows();
   }, []);
 
   const getBlogs = () => {
@@ -63,6 +65,20 @@ function EditBlog(props) {
       });
   };
 
+  const getFellows = () => {
+    setCategories([]);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/profile/getAllProfiles',
+    })
+      .then((response) => {
+        console.log('profiles: ', response?.data?.profiles);
+        setFellows(response?.data?.profiles);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
+      });
+  };
   const handleChange = (event) => {
     const { name, value, files } = event.target;
     console.log('file: ', files);
@@ -214,12 +230,55 @@ function EditBlog(props) {
                   </Col>
                   <Col>
                     <div className='add-product-input-div'>
+                      <p>Blog Profile</p>
+                      <input
+                        type='text'
+                        name='profile'
+                        value={blogData.profile}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.profile && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.profile}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <div className='add-product-input-div'>
+                      <p>Category</p>
+                      <select
+                        name='category'
+                        value={blogData.category}
+                        onChange={handleChange}
+                        style={{ border: 'none', width: '100%' }}
+                      >
+                        <option value=''>Select Category</option>
+                        {categories.map((category, index) => (
+                          <option value={category?.title} key={index}>
+                            {category?.title}
+                          </option>
+                        ))}
+                      </select>
+
+                      {validationErrors.category && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.category}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className='add-product-input-div'>
                       <p>Region</p>
                       <select
                         name='region'
                         value={blogData.region}
                         onChange={handleChange}
-                        style={{ border: 'none', width: '700px' }}
+                        style={{ border: 'none', width: '100%' }}
                       >
                         <option value=''>Select Region</option>
                         {regionOptions.map((region) => (
@@ -245,62 +304,18 @@ function EditBlog(props) {
                         name='fellow'
                         value={blogData.fellow}
                         onChange={handleChange}
-                        style={{ border: 'none', width: '700px' }}
+                        style={{ border: 'none', width: '100%' }}
                       >
                         <option value=''>Select Fellow</option>
-                        {fellowOptions.map((fellow) => (
-                          <option key={fellow} value={fellow}>
-                            {fellow}
+                        {fellows.map((fellow) => (
+                          <option key={fellow} value={fellow?.name}>
+                            {fellow?.name}
                           </option>
                         ))}
                       </select>
                       {validationErrors.fellow && (
                         <p style={{ color: 'red' }}>
                           {validationErrors.fellow}
-                        </p>
-                      )}
-                    </div>
-                  </Col>
-                  <Col>
-                    <div className='add-product-input-div'>
-                      <p>Category</p>
-                      <label>
-                        <select
-                          name='category'
-                          value={blogData.category}
-                          onChange={handleChange}
-                          style={{ border: 'none', width: '700px' }}
-                        >
-                          <option value=''>Select Category</option>
-                          {categories.map((category, index) => (
-                            <option value={category?.title} key={index}>
-                              {category?.title}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-                      {validationErrors.category && (
-                        <p style={{ color: 'red' }}>
-                          {validationErrors.category}
-                        </p>
-                      )}
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col>
-                    <div className='add-product-input-div'>
-                      <p>Blog Profile</p>
-                      <input
-                        type='text'
-                        name='profile'
-                        value={blogData.profile}
-                        onChange={handleChange}
-                      />
-                      {validationErrors.profile && (
-                        <p style={{ color: 'red' }}>
-                          {validationErrors.profile}
                         </p>
                       )}
                     </div>

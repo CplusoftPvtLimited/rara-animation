@@ -113,7 +113,7 @@ const Blogs = () => {
                       {blogs.map((blog, index) => {
                         return (
                           <tr key={index}>
-                            <td> {blog.id}</td>
+                            <td>{index + 1}</td>
                             <td>
                               <img
                                 src={blog.imagePath}

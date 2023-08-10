@@ -80,7 +80,7 @@ function EditFellow(props) {
     try {
       console.log('updatedData: ', updatedData);
       axios
-        .put(
+        .patch(
           `http://localhost:4500/api/profile/updateProfile/${profileId}`,
           updatedData
         )

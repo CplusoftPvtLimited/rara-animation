@@ -104,7 +104,7 @@ const Fellows = () => {
                     {fellows.map((fellow, index) => {
                       return (
                         <tr key={index}>
-                          <td> {fellow.id}</td>
+                          <td>{index + 1}</td>
                           <td>
                             <img
                               src={fellow.imagePath ? fellow.imagePath : image}
