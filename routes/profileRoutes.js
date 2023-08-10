@@ -19,7 +19,7 @@ router.get('/getAllProfiles', getAllProfiles);
 router.get('/:id', getProfileById);
 
 // Route for updating a Profile by ID
-router.patch('/updateProfile/:id', upload.single('imagePath'), updateProfile);
+router.patch('/updateProfile/:id', upload.fields([{ name: 'imagePath', maxCount: 1 }, {name: 'thumbnailPath', maxCount: 1}, { name: 'featuredImage', maxCount: 1 }, { name: 'pictureSlider', maxCount: 10 } ]), updateProfile);
 
 // Route for deleting a Profile by ID
 router.delete('/deleteProfile/:id', deleteProfile);

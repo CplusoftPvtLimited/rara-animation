@@ -44,11 +44,11 @@ const createProfile = async (req, res) => {
   }
   try {
     // Get the image path
+    const baseUrl = "http://localhost:4500/"
     const thumbnailPath = req.files.thumbnailPath[0].path;
     const imagePath = req.files.imagePath[0].path;
-    const featuredImagePath = req.files.featuredImage[0].path;
-    const pictureSliderPaths = req.files.pictureSlider.map((file) => file.path);
-    const baseUrl = "http://localhost:4500/"
+    const featuredImage = req.files.featuredImage[0].path;
+    const pictureSliderPaths = req.files.pictureSlider ? req.files.pictureSlider.map((file) => baseUrl + file.path) : [];
 
     // Create the new Profile entry in the database
     const newProfile = await Profile.create({
@@ -62,8 +62,8 @@ const createProfile = async (req, res) => {
       paragraph,
       thumbnailPath: baseUrl + thumbnailPath,
       imagePath: baseUrl + imagePath,
-      featuredImage: baseUrl + featuredImagePath,
-      pictureSlider: JSON.stringify(baseUrl + pictureSliderPaths),
+      featuredImage: baseUrl + featuredImage,
+      pictureSlider: pictureSliderPaths.length > 0 ? JSON.stringify(baseUrl + pictureSliderPaths) : null,
       facebookUrl,
       twitterUrl,
       ritsumeiUrl,
@@ -110,7 +110,7 @@ const updateProfile = async (req, res) => {
     if (!profile) {
       return res.status(400).json({ error: 'Profile not found' });
     }
-    
+
     const updateObj = {
       name: req.body.name || profile.name,
       nameEnglish: req.body.nameEnglish || profile.nameEnglish,
@@ -121,11 +121,28 @@ const updateProfile = async (req, res) => {
       heading: req.body.heading || profile.heading,
       paragraph: req.body.paragraph || profile.paragraph,
     };
-
     const baseUrl = 'http://localhost:4500/';
-    if (req.file) {
-      const imagePath = req.file.path;
+
+    if (req.files.thumbnailPath) {
+      const thumbnailPath = req.files.thumbnailPath[0].path;
+      updateObj.thumbnailPath = baseUrl + thumbnailPath;
+    }
+
+    if (req.files.imagePath) {
+      const imagePath = req.files.imagePath[0].path;
       updateObj.imagePath = baseUrl + imagePath;
+    }
+
+    if (req.files.featuredImage) {
+      const featuredImage = req.files.featuredImage[0].path;
+      updateObj.featuredImage = baseUrl + featuredImage;
+    }
+
+    // Update only if files are provided for pictureSlider
+    if (req.files.pictureSlider) {
+      const pictureSliderPaths = req.files.pictureSlider.map((file) => baseUrl + file.path);
+      updateObj.pictureSlider = JSON.stringify(pictureSliderPaths);
+      console.log("pictureSlider", updateObj.pictureSlider)
     }
 
     console.log('updateObj: ', updateObj);
@@ -139,7 +156,7 @@ const updateProfile = async (req, res) => {
       profile: updatedProfile,
     });
   } catch (error) {
-    return res.status(500).json({ error: 'Error updating profile', error });
+    return res.status(500).json({ error: error.message });
   }
 };
 

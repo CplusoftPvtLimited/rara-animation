@@ -2,7 +2,7 @@
 
 const Blog = require('../models/Blog');
 const createBlogPost = async (req, res) => {
-  const { title, content, category, fellow, region, profile, imagePath } =
+  const { title, content, category, fellow, region, imagePath } =
     req.body;
   console.log('req.body: ', req.body);
 
@@ -30,7 +30,6 @@ const createBlogPost = async (req, res) => {
       category: category,
       fellow: fellow,
       region: region,
-      profile: profile,
     });
 
     return res
