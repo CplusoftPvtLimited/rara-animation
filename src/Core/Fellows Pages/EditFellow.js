@@ -6,13 +6,31 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 import "../Blogs Pages/AddBlog.css";
+import Dropzone from "dropzone";
+import "dropzone/dist/dropzone.css";
 
 function EditFellow(props) {
   const [profileData, setProfileData] = useState();
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
-
+  const [imagePreviewUrl, setImagePreviewUrl] = useState([]);
+  const [pictureSliderArray, setPictureSliderArray] = useState([]);
   const profileId = props.match.params.fellowId;
-  const fileInputRef = useRef(null);
+  const file1InputRef = useRef(null);
+  const file2InputRef = useRef(null);
+  const file3InputRef = useRef(null);
+  const file4InputRef = useRef(null);
+  const getFileInputRef = (name) => {
+    switch (name) {
+      case "pictureSlider_0":
+        return file1InputRef;
+      case "pictureSlider_1":
+        return file2InputRef;
+      case "pictureSlider_2":
+        return file3InputRef;
+      // Add more cases as needed...
+      default:
+        return null;
+    }
+  };
 
   console.log("profileId: " + profileId);
   const history = useHistory();
@@ -21,119 +39,104 @@ function EditFellow(props) {
   useEffect(() => {
     getProfile();
   }, []);
-
   const getProfile = async () => {
-    console.log("getBlogs");
     setProfileData();
-    await axios({
-      method: "get",
-      url: `http://localhost:4500/api/profile/${profileId}`,
-    })
-      .then((response) => {
-        setProfileData(response.data?.profile);
-        console.log("response", response.data.profile);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const response = await axios.get(
+        `http://localhost:4500/api/profile/${profileId}`
+      );
+      setProfileData(response.data?.profile);
+      console.log("response", response.data.profile);
+      if (response.data?.profile?.pictureSlider) {
+        const parsedPictureSlider = JSON.parse(
+          response.data.profile.pictureSlider
+        );
+        setPictureSliderArray(parsedPictureSlider);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleChange = (event) => {
-    const { name, value, files } = event.target;
-    if (name === "imagePath") {
-      const file = files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreviewUrl(reader.result);
-      };
-      if (file) {
-        reader.readAsDataURL(file);
+    const { name, value } = event.target;
+    setProfileData((prev) => ({ ...prev, [name]: value }));
+  };
+
+ const handleImageInputChange = (event, name) => {
+    const file = event.target.files[0];
+    console.log("File:", file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (name) {
+        setImagePreviewUrl((prev) => [
+          ...prev,
+          { path: name, file: reader.result },
+        ]);
         setProfileData((prev) => ({
           ...prev,
-          imagePath: file, // Set the File object
+          [name]: file,
         }));
       }
-    } else {
-      setProfileData((prev) => ({ ...prev, [name]: value }));
+    };
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
-  
 
-  const handleImageClick = () => {
-
-    fileInputRef.current.click();
+  const handleImageClick = (fileInput) => {
+    fileInput.current.click();
   };
-const handleImageChange = (event) => {
-  console.log("reF -----",fileInputRef.current);
-  console.log("EVENT TARGET ------",event.target.files);
-  const file = event.target.files[0];
-  console.log("🚀 ~ file: EditFellow.js:67 ~ handleImageChange ~ file:", file)
-  const reader = new FileReader();
-  reader.onloadend = () => {
-    setImagePreviewUrl(reader.result);
-  };
-  if (file) {
-    reader.readAsDataURL(file);
-    setProfileData((prev) => ({
-      ...prev,
-      imagePath: file,
-    }));
-  }
-};
 
-  const editFellow = (event) => {
+  const editFellow = async (event) => {
     event.preventDefault();
-    console.log("files: ", profileData.imagePath);
-
     const updatedData = new FormData();
-    updatedData.append("name", profileData.name);
-    updatedData.append("nameEnglish", profileData.nameEnglish);
-    updatedData.append("tagLine", profileData.tagLine);
-    updatedData.append("imagePath", profileData.imagePath);
-    updatedData.append("jobPost", profileData.jobPost);
-    updatedData.append("profileDesc", profileData.profileDesc);
-    updatedData.append("websiteUrl", profileData.websiteUrl);
-    updatedData.append("heading", profileData.heading);
-    updatedData.append("paragraph", profileData.paragraph);
-    updatedData.append("featuredImage", profileData.featuredImage);
-    updatedData.append("imagePath", profileData.imagePath);
-
+    const pictureSlider = [];
+    if (profileData.pictureSlider_0) {
+      pictureSlider.push(profileData.pictureSlider_0);
+    }
+    if (profileData.pictureSlider_1) {
+      pictureSlider.push(profileData.pictureSlider_1);
+    }
+    for (const [key, value] of Object.entries(profileData)) {
+      if (!key.includes("Path")) {
+        updatedData.append(key, value);
+      }
+    }
     try {
       console.log("updatedData: ", updatedData);
-      axios
-        .patch(
-          `http://localhost:4500/api/profile/updateProfile/${profileId}`,
-          updatedData
-        )
-        .then((response) => {
-          console.log("edit data", response);
-          setProfileData({
-            name: "",
-            nameEnglish: "",
-            tagLine: "",
-            imagePath: "",
-            jobPost: "",
-            profileDesc: "",
-            websiteUrl: "",
-            heading: "",
-            paragraph: "",
-            featuredImage: "",
-            thumbnailPath: "",
-            pictureSlider: "",
-            facebookUrl: "",
-            twitterUrl: "",
-            ritsumeiUrl: "",
-          });
-          history.push("/fellows");
-        })
-        .catch((err) => {
-          console.log("err: ", err);
-        });
+      const response = await axios.patch(
+        `http://localhost:4500/api/profile/updateProfile/${profileId}`,
+        updatedData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("edit data", response);
+      setProfileData({
+        name: "",
+        nameEnglish: "",
+        tagLine: "",
+        imagePath: "",
+        jobPost: "",
+        profileDesc: "",
+        websiteUrl: "",
+        heading: "",
+        paragraph: "",
+        featuredImage: "",
+        thumbnailPath: "",
+        pictureSlider: [],
+        facebookUrl: "",
+        twitterUrl: "",
+        ritsumeiUrl: "",
+      });
+      history.push("/fellows");
     } catch (err) {
-      console.log("Error: " + err.message);
+      console.log("err: ", err);
     }
   };
-
   return (
     <div className="dashboard-parent-div">
       <Row>
@@ -278,29 +281,6 @@ const handleImageChange = (event) => {
                       />
                     </div>
                   </Col>
-                  <Col>
-                    <div className="add-product-image-div">
-                      <div className="product-image-div">
-                        <img
-                          src={imagePreviewUrl ?? profileData?.imagePath}
-                          alt="preview"
-                          style={{
-                            width: "100px",
-                            height: "100px",
-                            cursor: "pointer",
-                          }}
-                          onClick={handleImageChange}
-                        />
-                        <input
-                          type="file"
-                          name="imagePath"
-                          ref={fileInputRef}
-                          onChange= {handleImageChange}
-                          style={{ display: "none" }}
-                        />
-                      </div>
-                    </div> 
-                  </Col>
                 </Row>
 
                 <Row>
@@ -344,20 +324,55 @@ const handleImageChange = (event) => {
                     <div className="add-product-image-div">
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? profileData?.thumbnailPath}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "imagePath"
+                            )?.file ?? profileData?.imagePath
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file1InputRef)}
+                        />
+                        <input
+                          type="file"
+                          name="imagePath"
+                          ref={file1InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "imagePath")
+                          }
+                          style={{ display: "none" }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="add-product-image-div">
+                      <div className="product-image-div">
+                        <img
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "thumbnailPath"
+                            )?.file ?? profileData?.thumbnailPath
+                          }
+                          alt="preview"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleImageClick(file2InputRef)}
                         />
                         <input
                           type="file"
                           name="thumbnailPath"
-                          ref={fileInputRef}
-                          onChange={handleImageChange}
+                          ref={file2InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "thumbnailPath")
+                          }
                           style={{ display: "none" }}
                         />
                       </div>
@@ -368,51 +383,81 @@ const handleImageChange = (event) => {
                     <div className="add-product-image-div">
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? profileData?.featuredImage}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path === "featuredImage"
+                            )?.file ?? profileData?.featuredImage
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file3InputRef)}
                         />
                         <input
                           type="file"
                           name="featuredImage"
-                          ref={fileInputRef}
-                          onChange={handleImageChange}
+                          ref={file3InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "featuredImage")
+                          }
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
-                    <div className='add-product-image-div'>
-                      <div className='product-image-div'>
-                        <img
-                          src={imagePreviewUrl ?? profileData?.pictureSlider}
-                          alt='preview'
-                          style={{
-                            width: '100px',
-                            height: '100px',
-                            cursor: 'pointer',
-                          }}
-                          onClick={handleImageClick}
-                        />
-                        <input
-                          type='file'
-                          name='pictureSlider'
-                          ref={fileInputRef}
-                          onChange={handleChange}
-                          style={{ display: 'none' }}
-                        />
-                      </div>
-                    </div>
-                  </Col>   
                 </Row>
-               
 
+                <Col>
+                  <div className="add-product-image-div">
+                    <div className="product-image-div">
+                      {/* Dropzone for uploading new images */}
+                      <form
+                        action="/file-upload"
+                        className="dropzone"
+                        id="my-awesome-dropzone"
+                      >
+                        <input type="file" name="file" multiple />
+                      </form>
+                    </div>
+                  </div>
+                </Col>
+                <Row>
+                <Col>
+                {pictureSliderArray.map((imagePath, index) => (
+                        <div key={index}>
+                          <img
+                            src={imagePath}
+                            alt={`slider-image-${index}`}
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              cursor: "pointer",
+                            }}
+                            onClick={() =>
+                              handleImageClick(
+                                getFileInputRef(`pictureSlider_${index}`)
+                              )
+                            }
+                          />
+                          <input
+                            type="file"
+                            name={`pictureSlider_${index}`}
+                            ref={getFileInputRef(`pictureSlider_${index}`)}
+                            onChange={(event) =>
+                              handleImageInputChange(
+                                event,
+                                `pictureSlider_${index}`
+                              )
+                            }
+                            style={{ display: "none" }}
+                          />
+                        </div>
+                      ))}
+                      </Col>
+                      </Row>
                 <button
                   onClick={editFellow}
                   type="submit"
