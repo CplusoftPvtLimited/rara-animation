@@ -8,7 +8,7 @@ const profileRoutes = require("./routes/profileRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const RssFeedRoutes = require("./routes/RssFeedRoutes");
 const checkoutRoute = require("./routes/checkRoute");
-
+const homeRoutes = require("./routes/homeRoutes");
 const app = express();
 const PORT = process.env.PORT || 4500;
 const path = require("path");
@@ -38,6 +38,8 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/profile", profileRoutes);
 // RSS Route
 app.use("/api/news", RssFeedRoutes);
+// Home Route
+app.use("/api/home", homeRoutes);
 //Stripe Payment Route
 app.use("/api/checkout", checkoutRoute);
 

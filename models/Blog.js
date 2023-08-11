@@ -31,13 +31,13 @@ const Blog = sequelize.define('Blog', {
   region: {
     type: DataTypes.TEXT,
   },
-  profile: {
-    type: DataTypes.STRING,
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true,
-    // },
-  },
+  // profile: {
+  //   type: DataTypes.STRING,
+  //   // allowNull: false,
+  //   // validate: {
+  //   //   notEmpty: true,
+  //   // },
+  // },
   activationDate: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
