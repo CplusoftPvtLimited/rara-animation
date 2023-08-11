@@ -100,16 +100,18 @@ function Sidebar() {
             </div>
           </Link>
 
-          {/* <Link to='/stripe' className='sidebar-link'>
+
+          <Link to='/Home' className='sidebar-link'>
             <div
               className={`sidebar-item ${
-                isActive(history, '/stripe') && 'active'
+                isActive(history, '/Home') && 'active'
               }`}
             >
-              <IoIosLaptop className='sidebar-icon' />
-              <p>Stripe</p>
+              <p>Home</p>
             </div>
-          </Link> */}
+          </Link>
+
+
         </div>
       </div>
     </div>

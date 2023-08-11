@@ -20,6 +20,13 @@ const AddProfile = () => {
     profileDesc: '',
     heading: '',
     paragraph: '',
+    thumbnailPath: '',
+    featuredImage: '',
+    pictureSlider: '',
+    websiteUrl: '',
+    facebookUrl: '',
+    twitterUrl: '',
+    ritsumeiUrl: '',
   });
 
   const [validationErrors, setValidationErrors] = useState({
@@ -27,16 +34,35 @@ const AddProfile = () => {
     nameEnglish: '',
     tagLine: '',
     jobPost: '',
-    // type: '',
     heading: '',
     paragraph: '',
     profileDesc: '',
     imagePath: '',
+    thumbnailPath: '',
+    featuredImage: '',
+    pictureSlider: '',
+    websiteUrl: '',
+    facebookUrl: '',
+    twitterUrl: '',
+    ritsumeiUrl: '',
   });
+
+  const handleImageChange = (event) => {
+    const selectedImages = Array.from(event.target.files);
+    setFormData({
+      ...formData,
+      pictureSlider: selectedImages,
+    });
+  };
+
+  const fellowOptions = ['Fellow', 'Associated Fellow'];
   function handleChange(event) {
     const { name, value } = event.target;
-    if (name === 'imagePath') {
-      console.log('event.target.files[0]', event.target.files[0]);
+    if (
+      name === 'imagePath' ||
+      name === 'thumbnailPath' ||
+      name === 'featuredImage'
+    ) {
       const file = event.target.files[0];
       const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
@@ -79,17 +105,20 @@ const AddProfile = () => {
       formDataToSend.append('nameEnglish', formData.nameEnglish);
       formDataToSend.append('tagLine', formData.tagLine);
       formDataToSend.append('imagePath', formData.imagePath);
+      formDataToSend.append('thumbnailPath', formData.thumbnailPath);
+      formDataToSend.append('featuredImage', formData.featuredImage);
+      formDataToSend.append('pictureSlider', formData.pictureSlider);
       formDataToSend.append('jobPost', formData.jobPost);
-      // formDataToSend.append('type', formData.type);
       formDataToSend.append('profileDesc', formData.profileDesc);
       formDataToSend.append('heading', formData.heading);
       formDataToSend.append('paragraph', formData.paragraph);
+      formDataToSend.append('websiteUrl', formData.websiteUrl);
+      formDataToSend.append('facebookUrl', formData.facebookUrl);
+      formDataToSend.append('twitterUrl', formData.twitterUrl);
+      formDataToSend.append('ritsumeiUrl', formData.ritsumeiUrl); //
 
       axios
-        .post(
-          'http://localhost:4500/api/profile/adminCreateProfile',
-          formDataToSend
-        )
+        .post('http://localhost:4500/api/profile/createProfile', formDataToSend)
         .then((response) => {
           setFormData({
             name: '',
@@ -101,6 +130,13 @@ const AddProfile = () => {
             profileDesc: '',
             heading: '',
             paragraph: '',
+            thumbnailPath: '',
+            featuredImage: '',
+            pictureSlider: '',
+            websiteUrl: '',
+            facebookUrl: '',
+            twitterUrl: '',
+            ritsumeiUrl: '',
           });
           history.push('/fellows');
         })
@@ -152,7 +188,6 @@ const AddProfile = () => {
 
     return errors;
   };
-  const fellowOptions = ['fellow', 'associated fellow'];
 
   return (
     <div className='dashboard-parent-div'>
@@ -204,7 +239,7 @@ const AddProfile = () => {
               <Row>
                 <Col>
                   <div className='add-product-input-div'>
-                    <p>Tag</p>
+                    <p>Tagline</p>
                     <input
                       type='text'
                       name='tagLine'
@@ -219,28 +254,10 @@ const AddProfile = () => {
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Job Post</p>
-                    <input
-                      type='text'
+                    <select
                       name='jobPost'
                       value={formData.jobPost}
                       onChange={handleChange}
-                    />
-                    {validationErrors.jobPost && (
-                      <p style={{ color: 'red' }}>{validationErrors.jobPost}</p>
-                    )}
-                  </div>
-                </Col>
-              </Row>
-
-              <Row>
-                {/* <Col>
-                  <div className='add-product-input-div'>
-                    <p>Type</p>
-
-                    <select
-                      name='type'
-                      value={formData.type}
-                      // onChange={handleChange}
                       style={{ border: 'none', width: '100%' }}
                     >
                       <option value=''>Select Fellow</option>
@@ -250,12 +267,14 @@ const AddProfile = () => {
                         </option>
                       ))}
                     </select>
-
-                    {validationErrors.type && (
-                      <p style={{ color: 'red' }}>{validationErrors.type}</p>
+                    {validationErrors.fellow && (
+                      <p style={{ color: 'red' }}>{validationErrors.fellow}</p>
                     )}
                   </div>
-                </Col> */}
+                </Col>
+              </Row>
+
+              <Row>
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Heading</p>
@@ -270,18 +289,16 @@ const AddProfile = () => {
                     )}
                   </div>
                 </Col>
-              </Row>
 
-              <Row>
                 <Col>
                   <div className='add-product-input-div'>
-                    <p>Paragraph</p>
-                    {/* <input
+                    <p>Website Url</p>
+                    <input
                       type='text'
-                      name='paragraph'
-                      value={formData.paragraph}
+                      name='websiteUrl'
+                      value={formData.websiteUrl}
                       onChange={handleChange}
-                    /> */}
+                    />
 
                     <CKEditor
                       editor={ClassicEditor}
@@ -301,9 +318,9 @@ const AddProfile = () => {
                         console.log('Focus.', editor);
                       }}
                     />
-                    {validationErrors.paragraph && (
+                    {validationErrors.websiteUrl && (
                       <p style={{ color: 'red' }}>
-                        {validationErrors.paragraph}
+                        {validationErrors.websiteUrl}
                       </p>
                     )}
                   </div>
@@ -311,6 +328,37 @@ const AddProfile = () => {
               </Row>
 
               <Row>
+                <Col>
+                  <div className='add-product-input-div'>
+                    <p>Paragraph</p>
+                    <CKEditor
+                      editor={ClassicEditor}
+                      onReady={(editor) => {}}
+                      onChange={(event, editor) => {
+                        const data = editor.getData();
+                        console.log('Editor Data:', data);
+                        handleChange({
+                          target: {
+                            name: 'paragraph',
+                            value: data,
+                          },
+                        });
+                      }}
+                      onBlur={(event, editor) => {
+                        console.log('Blur.', editor);
+                      }}
+                      onFocus={(event, editor) => {
+                        console.log('Focus.', editor);
+                      }}
+                    />
+                    {validationErrors.paragraph && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.formData.paragraph}
+                      </p>
+                    )}
+                  </div>
+                </Col>
+
                 <Col>
                   <div className='add-product-input-div'>
                     <p>Fellow Description</p>
@@ -339,10 +387,16 @@ const AddProfile = () => {
                     )}
                   </div>
                 </Col>
+              </Row>
+
+              <Row>
                 <Col>
                   <div className='add-product-image-div'>
+                    <div className='add-fellow-image'>
+                      <p>Fellow Image</p>
+                    </div>
+                    {/* <img src={image} alt='preview' /> */}
                     <div className='product-image-div'>
-                      {/* <img src={image} alt='preview' /> */}
                       <input
                         type='file'
                         name='imagePath'
@@ -355,6 +409,128 @@ const AddProfile = () => {
                         </p>
                       )}
                     </div>
+                  </div>
+                </Col>
+
+                <Col>
+                  <div className='add-product-image-div'>
+                    <div className='add-fellow-image'>
+                      <p>Fellow Thumbnail</p>
+                    </div>
+                    {/* <img src={image} alt='preview' /> */}
+                    <div className='product-image-div'>
+                      <input
+                        type='file'
+                        name='thumbnailPath'
+                        // value={formData.imagePath?.name}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.thumbnailPath && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.thumbnailPath}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col>
+                  <div className='add-product-image-div'>
+                    <div className='add-fellow-image'>
+                      <p>Featured Image</p>
+                    </div>
+                    {/* <img src={image} alt='preview' /> */}
+                    <div className='product-image-div'>
+                      <input
+                        type='file'
+                        name='featuredImage'
+                        // value={formData.imagePath?.name}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.featuredImage && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.featuredImage}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+
+                <Col>
+                  <div className='add-product-image-div'>
+                    <div className='add-fellow-image'>
+                      <p>Slider Images</p>
+                    </div>
+                    <div className='product-image-div'>
+                      <input
+                        type='file'
+                        name='pictureSlider'
+                        onChange={handleImageChange}
+                        multiple
+                      />
+                      {validationErrors.pictureSlider && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.pictureSlider}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col>
+                  <div className='add-product-input-div'>
+                    <p>Facebook Url</p>
+                    <input
+                      type='text'
+                      name='facebookUrl'
+                      value={formData.facebookUrl}
+                      onChange={handleChange}
+                    />
+                    {validationErrors.facebookUrl && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.facebookUrl}
+                      </p>
+                    )}
+                  </div>
+                </Col>
+
+                <Col>
+                  <div className='add-product-input-div'>
+                    <p>Twitter Url</p>
+                    <input
+                      type='text'
+                      name='twitterUrl'
+                      value={formData.twitterUrl}
+                      onChange={handleChange}
+                    />
+                    {validationErrors.twitterUrl && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.twitterUrl}
+                      </p>
+                    )}
+                  </div>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col>
+                  <div className='add-product-input-div'>
+                    <p>Ritsumei Url</p>
+                    <input
+                      type='text'
+                      name='ritsumeiUrl'
+                      value={formData.ritsumeiUrl}
+                      onChange={handleChange}
+                    />
+                    {validationErrors.ritsumeiUrl && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.ritsumeiUrl}
+                      </p>
+                    )}
                   </div>
                 </Col>
               </Row>

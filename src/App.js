@@ -10,7 +10,8 @@ import EditCategory from './Core/Categories Pages/EditCategory';
 import Fellows from './Core/Fellows Pages/Fellows';
 import AddFellow from './Core/Fellows Pages/AddFellow';
 import EditFellow from './Core/Fellows Pages/EditFellow';
-import Stripe from './Core/Payment Pages/Stripe';
+import Home from './Core/Home/Home.js';
+
 function App() {
   return (
     <div className='App'>
@@ -33,8 +34,9 @@ function App() {
             <Route path='/fellows' exact component={Fellows} />
             <Route path='/fellow/add' exact component={AddFellow} />
             <Route path='/fellow/edit/:fellowId' exact component={EditFellow} />
+            <Route path='/fellows' exact component={Fellows} />
 
-            {/* <Route path='/stripe' exact component={Stripe} /> */}
+            <Route path='/home' exact component={Home} />
           </Switch>
         </Router>
       </SnackbarProvider>
