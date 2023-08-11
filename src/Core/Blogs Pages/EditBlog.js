@@ -27,11 +27,9 @@ function EditBlog(props) {
   const history = useHistory();
   const fileInputRef = useRef(null);
 
-  const [selectedOptions, setSelectedOptions] = useState(
-    blogData?.relatedBlogs
-  );
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
-  console.log('blogData?.relatedBlogs: ', blogData?.relatedBlogs);
+  console.log('selectedOptions: ', selectedOptions);
   // const [removedOptions, setRemovedOptions] = useState([]);
 
   useEffect(() => {
@@ -57,6 +55,7 @@ function EditBlog(props) {
     })
       .then((response) => {
         setBlogData(response.data?.blogPost);
+        setSelectedOptions(response.data?.blogPost?.relatedBlogs);
         console.log('blogData: ', response.data.blogPost);
       })
       .catch((err) => {
