@@ -61,7 +61,7 @@ const createProfile = async (req, res) => {
       paragraph,
       thumbnailPath: baseUrl + thumbnailPath,
       imagePath: baseUrl + imagePath,
-      featuredImage: baseUrl + featuredImage,
+      featuredImage: baseUrl + featuredImagePath,
       pictureSlider: pictureSliderPaths.length > 0 ? JSON.stringify(baseUrl + pictureSliderPaths) : null,
       facebookUrl,
       twitterUrl,
@@ -110,8 +110,6 @@ const updateProfile = async (req, res) => {
       return res.status(400).json({ error: "Profile not found" });
     }
 
-<<<<<<< HEAD
-=======
     const thumbnailPath = req.files?.thumbnailPath
       ? req.files?.thumbnailPath[0].path
       : profile.thumbnailPath;
@@ -126,7 +124,6 @@ const updateProfile = async (req, res) => {
       : profile.pictureSlider;
     const baseUrl = "http://localhost:4500/";
 
->>>>>>> b6de53d4a26d7e1d42e30e9801785228d184f783
     const updateObj = {
       name: req.body.name || profile.name,
       nameEnglish: req.body.nameEnglish || profile.nameEnglish,
