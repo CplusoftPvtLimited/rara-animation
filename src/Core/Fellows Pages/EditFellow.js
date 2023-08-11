@@ -68,6 +68,7 @@ function EditFellow(props) {
 
   const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
+      {console.log("files ---------", file)}
       <div style={thumbInner}>
         <img
           src={file.preview}
@@ -155,6 +156,7 @@ function EditFellow(props) {
       // }
     }
     if (files.length > 0) {
+      console.log("Files -----------", files)
       files.map((file) => updatedData.append("pictureSlider", file));
     }
 

@@ -10,7 +10,7 @@ import "../Blogs Pages/AddBlog.css";
 
 const AddProfile = () => {
   const history = useHistory();
-  
+  const [pictureSlider, setPictureSlider] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     nameEnglish: "",
@@ -22,7 +22,7 @@ const AddProfile = () => {
     paragraph: "",
     thumbnailPath : "",
     featuredImage : "",
-    pictureSlider : "",
+    // pictureSlider : "",
     websiteUrl : "",
     facebookUrl : "",
     twitterUrl : "",
@@ -40,7 +40,7 @@ const AddProfile = () => {
     imagePath: "",
     thumbnailPath : "",
     featuredImage : "",
-    pictureSlider : "",
+    // pictureSlider : "",
     websiteUrl : "",
     facebookUrl : "",
     twitterUrl : "",
@@ -49,10 +49,11 @@ const AddProfile = () => {
 
   const handleImageChange = (event) => {
     const selectedImages = Array.from(event.target.files);
-    setFormData({
-      ...formData,
-      pictureSlider: selectedImages
-    });
+    setPictureSlider(selectedImages);
+    // setFormData({
+    //   ...formData,
+    //   pictureSlider: selectedImages
+    // });
   };
 
   const fellowOptions = ["Fellow", "Associated Fellow"];
@@ -103,7 +104,7 @@ const AddProfile = () => {
       formDataToSend.append("imagePath", formData.imagePath);
       formDataToSend.append("thumbnailPath", formData.thumbnailPath);
       formDataToSend.append("featuredImage", formData.featuredImage);
-      formDataToSend.append("pictureSlider", formData.pictureSlider);
+      // formDataToSend.append("pictureSlider", formData.pictureSlider);
       formDataToSend.append("jobPost", formData.jobPost);
       formDataToSend.append("profileDesc", formData.profileDesc);
       formDataToSend.append("heading", formData.heading);
@@ -112,7 +113,7 @@ const AddProfile = () => {
       formDataToSend.append("facebookUrl", formData.facebookUrl);
       formDataToSend.append("twitterUrl", formData.twitterUrl);
       formDataToSend.append("ritsumeiUrl", formData.ritsumeiUrl); //
-
+      pictureSlider.map((image) => {formDataToSend.append("pictureSlider", image)});
       axios
         .post(
           "http://localhost:4500/api/profile/createProfile",
@@ -130,7 +131,7 @@ const AddProfile = () => {
             paragraph: "",
             thumbnailPath : "",
             featuredImage : "",
-            pictureSlider : "",
+            // pictureSlider : "",
             websiteUrl : "",
             facebookUrl : "",
             twitterUrl : "",
