@@ -170,23 +170,8 @@ function EditFellow(props) {
         }
       );
       console.log("edit data", response);
-      setProfileData({
-        name: "",
-        nameEnglish: "",
-        tagLine: "",
-        imagePath: "",
-        jobPost: "",
-        profileDesc: "",
-        websiteUrl: "",
-        heading: "",
-        paragraph: "",
-        featuredImage: "",
-        thumbnailPath: "",
-        facebookUrl: "",
-        twitterUrl: "",
-        ritsumeiUrl: "",
-      });
-      // history.push("/fellows");
+      setProfileData(response?.data?.profile);
+      history.push("/fellows");
     } catch (err) {
       console.log("err: ", err);
     }
