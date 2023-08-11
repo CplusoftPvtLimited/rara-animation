@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
-import image from '../../Assets/khan.jpeg';
 import { useHistory } from 'react-router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Multiselect } from 'multiselect-react-dropdown';
 import axios from 'axios';
 import './AddBlog.css';
 
@@ -22,17 +22,31 @@ function EditBlog(props) {
     profile: '',
     imagePath: '',
   });
-
   const [newImageFile, setNewImageFile] = useState(null);
   const blogId = props.match.params.blogId;
   const history = useHistory();
   const fileInputRef = useRef(null);
+
+  const [selectedOptions, setSelectedOptions] = useState(
+    blogData?.relatedBlogs
+  );
+
+  console.log('blogData?.relatedBlogs: ', blogData?.relatedBlogs);
+  // const [removedOptions, setRemovedOptions] = useState([]);
 
   useEffect(() => {
     getBlogs();
     getCategories();
     getFellows();
   }, []);
+
+  const onSelectOptions = (selectedList, selectedItem) => {
+    setSelectedOptions([...selectedOptions, selectedItem]);
+  };
+
+  const onRemoveOptions = (selectedList, removedItem) => {
+    setSelectedOptions(selectedOptions.filter((item) => item !== removedItem));
+  };
 
   const getBlogs = () => {
     console.log('getBlogs');
@@ -115,6 +129,7 @@ function EditBlog(props) {
     updatedData.append('title', blogData.title);
     updatedData.append('content', blogData.content);
     updatedData.append('fellow', blogData.fellow);
+    updatedData.append('associatedFellow', blogData.associatedFellow);
     updatedData.append('category', blogData.category);
     updatedData.append('profile', blogData.profile);
     updatedData.append('region', blogData.region);
@@ -318,6 +333,50 @@ function EditBlog(props) {
                           {validationErrors.fellow}
                         </p>
                       )}
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className='add-product-input-div'>
+                      <p>Associated Fellow</p>
+                      <select
+                        name='fellow'
+                        value={blogData.associatedFellow}
+                        onChange={handleChange}
+                        style={{ border: 'none', width: '100%' }}
+                      >
+                        <option value=''>Select Fellow</option>
+                        {fellows.map((fellow) => (
+                          <option key={fellow} value={fellow?.name}>
+                            {fellow?.name}
+                          </option>
+                        ))}
+                      </select>
+                      {validationErrors.fellow && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.fellow}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+
+                {/* related blogs */}
+
+                <Row>
+                  <Col>
+                    <div className='add-product-input-div'>
+                      <p>Related Blogs</p>
+                      <Multiselect
+                        name='relatedBlogs'
+                        onSelect={onSelectOptions}
+                        onRemove={onRemoveOptions}
+                        onChange={handleChange}
+                        displayValue='title'
+                        closeIcon='cancel'
+                        placeholder='Select Options'
+                        selectedValues={selectedOptions}
+                        className='multiSelectContainer'
+                      />
                     </div>
                   </Col>
                 </Row>

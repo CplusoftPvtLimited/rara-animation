@@ -26,6 +26,8 @@ const AddBlog = () => {
     setRemovedOptions([...removedOptions, removedItem]);
   };
 
+  console.log('selectedOptions: ', selectedOptions);
+
   useEffect(() => {
     getCategories();
     getFellows();
@@ -83,7 +85,7 @@ const AddBlog = () => {
     region: '',
     fellow: '',
     associatedFellow: '',
-    // relatedBlogs: '',
+    relatedBlogs: [],
     content: '',
     imagePath: '',
   });
@@ -102,6 +104,7 @@ const AddBlog = () => {
 
   function handleChange(event) {
     const { name, value } = event.target;
+    console.log('name value: ', name, value);
     if (name === 'imagePath') {
       const file = event.target.files[0];
       const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -127,6 +130,7 @@ const AddBlog = () => {
     setValidationErrors((prev) => ({ ...prev, [name]: '' }));
   }
 
+  console.log('relatedBlogs : ', relatedBlogs);
   function handleSubmit(event) {
     console.log('add blog');
     event.preventDefault();
@@ -138,6 +142,9 @@ const AddBlog = () => {
     }
 
     try {
+      const relatedBlogIds = selectedOptions.map((option) => option.id); // Extracting IDs from selected options
+
+      console.log('related blog id', relatedBlogIds);
       console.log('relatedBlogs: ', formData.relatedBlogs);
       const formDataToSend = new FormData();
 
@@ -147,7 +154,16 @@ const AddBlog = () => {
       formDataToSend.append('region', formData.region);
       formDataToSend.append('fellow', formData.fellow);
       formDataToSend.append('associatedFellow', formData.associatedFellow);
-      formDataToSend.append('relatedBlogs', formData.relatedBlogs);
+
+      // formDataToSend.append(
+      //   'relatedBlogs',
+      //   formData.JSON.stringify(relatedBlogIds)
+      // );
+      if (typeof JSON !== 'undefined' && typeof JSON.stringify === 'function') {
+        formDataToSend.append('relatedBlogs', JSON.stringify(relatedBlogIds));
+      } else {
+        formDataToSend.append('relatedBlogs', relatedBlogIds.join(','));
+      }
       formDataToSend.append('content', formData.content);
       formDataToSend.append('imagePath', formData.imagePath);
 
