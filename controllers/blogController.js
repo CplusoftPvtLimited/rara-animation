@@ -91,14 +91,34 @@ const getBlogPostById = async (req, res) => {
   }
   try {
     const blogPost = await Blog.findByPk(req.params.id, {
-      include: 'relatedBlogs', // This should match the 'as' name in the association definition
+      include: 'relatedBlogs',
     });
-    console.log('RELATED BLOGS -------------', blogPost);
+
+    console.log('Blog Post -------------', blogPost);
+
+    // Extract relatedBlogIds from the relatedBlogs
+    const relatedBlogIds = blogPost.relatedBlogs.map(
+      (relatedBlog) => relatedBlog.relatedBlogId
+    );
+
+    console.log('relatedBlogIds: ', relatedBlogIds);
+    // Fetch the actual blog data for each related blog
+    const relatedBlogData = await Blog.findAll({
+      where: {
+        id: relatedBlogIds,
+      },
+    });
+    console.log('relatedBlogData: ', relatedBlogData);
+
+    const modifiedBlogPost = {
+      ...blogPost.toJSON(), // Convert blogPost to plain object
+      relatedBlogs: relatedBlogData, // Replace relatedBlogs with relatedBlogData
+    };
 
     if (!blogPost) {
       return res.status(404).json({ error: 'Blog post not found' });
     }
-    res.status(200).send({ blogPost });
+    res.status(200).send({ blogPost: modifiedBlogPost });
   } catch (err) {
     res.status(403).json({ err });
   }
@@ -131,7 +151,8 @@ const updateBlogPost = async (req, res) => {
   const baseUrl = 'http://localhost:4500/';
   if (req.file) {
     const imagePath = req.file.path;
-    blogPost.dataValues.imagePath = baseUrl + imagePath;
+    // blogPost.dataValues.imagePath = baseUrl + imagePath;
+    blogPost.imagePath = baseUrl + imagePath;
   }
 
   try {
@@ -149,15 +170,10 @@ const updateBlogPost = async (req, res) => {
       blogId: req.params.id,
     }));
 
-    console.log('updatedRelatedBlogData: ', updatedRelatedBlogData);
     await RelatedBlog.bulkCreate(updatedRelatedBlogData);
 
     const updatedBlogPost = await Blog.findByPk(req.params.id);
     res.status(200).json(updatedBlogPost);
-
-    // await Blog.update(blogPost.dataValues, { where: { id: req.params.id } });
-    // const updatedBlogPost = await Blog.findByPk(req.params.id);
-    // res.status(200).json(updatedBlogPost);
   } catch (err) {
     res.status(403).json({ err });
   }
