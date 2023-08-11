@@ -377,6 +377,7 @@ function EditFellow(props) {
                   <Col>
                     <div className="add-product-image-div">
                       <div className="product-image-div">
+                      {console.log ("Profile ---------",profileData.imagePath)}
                         <img
                           src={
                             imagePreviewUrl.find(
