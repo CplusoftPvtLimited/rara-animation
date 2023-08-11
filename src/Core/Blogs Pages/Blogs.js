@@ -1,13 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Col, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
-import Sidebar from '../../Components/Sidebar';
 import { RiDeleteBin3Line, RiAddFill, RiEditLine } from 'react-icons/ri';
-import image from '../../Assets/khan.jpeg';
-import './Blogs.css';
-import ReactLoading from 'react-loading';
 import { Link } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import Table from 'react-bootstrap/Table';
+import Sidebar from '../../Components/Sidebar';
+import './Blogs.css';
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -24,8 +23,7 @@ const Blogs = () => {
       url: 'http://localhost:4500/api/blog/getAllBlogPosts',
     })
       .then((response) => {
-        console.log('response: ', response.data.blogPosts);
-        setBlogs(response.data.blogPosts);
+        setBlogs(response.data?.blogPosts);
         setLoading(false);
       })
       .catch((err) => {

@@ -13,6 +13,7 @@ function EditBlog(props) {
   const [fellows, setFellows] = useState([]);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
   const [categories, setCategories] = useState([]);
+  const [relatedBlogs, setRelatedBlogs] = useState([]);
   const [validationErrors, setValidationErrors] = useState({
     title: '',
     content: '',
@@ -22,31 +23,20 @@ function EditBlog(props) {
     profile: '',
     imagePath: '',
   });
-  const [newImageFile, setNewImageFile] = useState(null);
   const blogId = props.match.params.blogId;
   const history = useHistory();
   const fileInputRef = useRef(null);
 
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  console.log('selectedOptions: ', selectedOptions);
-  // const [removedOptions, setRemovedOptions] = useState([]);
-
   useEffect(() => {
     getBlogs();
+    getBlogById();
     getCategories();
     getFellows();
   }, []);
 
-  const onSelectOptions = (selectedList, selectedItem) => {
-    setSelectedOptions([...selectedOptions, selectedItem]);
-  };
-
-  const onRemoveOptions = (selectedList, removedItem) => {
-    setSelectedOptions(selectedOptions.filter((item) => item !== removedItem));
-  };
-
-  const getBlogs = () => {
+  const getBlogById = () => {
     console.log('getBlogs');
     setBlogData();
     axios({
@@ -92,6 +82,21 @@ function EditBlog(props) {
         console.log('error: ', err);
       });
   };
+
+  const getBlogs = () => {
+    setRelatedBlogs([]);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/blog/getAllBlogPosts',
+    })
+      .then((response) => {
+        setRelatedBlogs(response?.data.blogPosts);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
+      });
+  };
+
   const handleChange = (event) => {
     const { name, value, files } = event.target;
     console.log('file: ', files);
@@ -116,6 +121,14 @@ function EditBlog(props) {
     fileInputRef.current.click();
   };
 
+  const onSelectOptions = (selectedList, selectedItem) => {
+    setSelectedOptions([...selectedOptions, selectedItem]);
+  };
+
+  const onRemoveOptions = (selectedList, removedItem) => {
+    setSelectedOptions(selectedOptions.filter((item) => item !== removedItem));
+  };
+
   const editBlog = (event) => {
     event.preventDefault();
     const errors = validateForm();
@@ -123,7 +136,9 @@ function EditBlog(props) {
       setValidationErrors(errors);
       return;
     }
-    console.log('image: ', blogData.imagePath);
+
+    const relatedBlogIds = selectedOptions.map((option) => option.id); // Extracting IDs from selected options
+    console.log('relatedBlogIds: ', relatedBlogIds);
     const updatedData = new FormData();
     updatedData.append('title', blogData.title);
     updatedData.append('content', blogData.content);
@@ -134,10 +149,15 @@ function EditBlog(props) {
     updatedData.append('region', blogData.region);
     updatedData.append('imagePath', blogData.imagePath);
 
+    if (typeof JSON !== 'undefined' && typeof JSON.stringify === 'function') {
+      updatedData.append('relatedBlogs', JSON.stringify(relatedBlogIds));
+    } else {
+      updatedData.append('relatedBlogs', relatedBlogIds.join(','));
+    }
+
     try {
-      console.log('updatedData: ', updatedData);
       axios
-        .patch(`http://localhost:4500/api/blog/${blogId}`, updatedData)
+        .put(`http://localhost:4500/api/blog/${blogId}`, updatedData)
         .then((response) => {
           console.log('edit data', response);
           setBlogData({
@@ -157,18 +177,6 @@ function EditBlog(props) {
       console.log('Error: ' + err.message);
     }
   };
-  const fellowOptions = [
-    'fellow 1',
-    'fellow 2',
-    'fellow 3',
-    'fellow 4',
-    'fellow 5',
-    'fellow 6',
-    'fellow 7',
-    'fellow 8',
-    'fellow 9',
-    'fellow 10',
-  ];
 
   const regionOptions = [
     'Pakistan',
@@ -359,14 +367,13 @@ function EditBlog(props) {
                   </Col>
                 </Row>
 
-                {/* related blogs */}
-
                 <Row>
                   <Col>
                     <div className='add-product-input-div'>
                       <p>Related Blogs</p>
                       <Multiselect
                         name='relatedBlogs'
+                        options={relatedBlogs}
                         onSelect={onSelectOptions}
                         onRemove={onRemoveOptions}
                         onChange={handleChange}
@@ -416,15 +423,6 @@ function EditBlog(props) {
                   <Col>
                     <div className='add-product-image-div'>
                       <div className='product-image-div'>
-                        {/* <input
-                          type='file'
-                          name='imagePath'
-                          // value={formData.imagePath?.name}
-                          src={blogData.imagePath}
-                          // value={blogData.imagePath}
-                          onChange={handleChange}
-                        /> */}
-
                         <img
                           src={imagePreviewUrl ?? blogData?.imagePath}
                           alt='preview'

@@ -1,33 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import image from '../../Assets/khan.jpeg';
+import { Multiselect } from 'multiselect-react-dropdown';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import './AddBlog.css';
-
-import { Multiselect } from 'multiselect-react-dropdown';
 
 const AddBlog = () => {
   const history = useHistory();
   const [categories, setCategories] = useState([]);
   const [fellows, setFellows] = useState([]);
   const [relatedBlogs, setRelatedBlogs] = useState([]);
-  const [selectedBlogs, setSelectedBlogs] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [removedOptions, setRemovedOptions] = useState([]);
-
-  const onSelectOptions = (selectedList, selectedItem) => {
-    setSelectedOptions([...selectedOptions, selectedItem]);
-  };
-  const onRemoveOptions = (selectedList, removedItem) => {
-    setRemovedOptions([...removedOptions, removedItem]);
-  };
-
-  console.log('selectedOptions: ', selectedOptions);
-
+  const [formData, setFormData] = useState({
+    title: '',
+    profile: '',
+    category: '',
+    region: '',
+    fellow: '',
+    associatedFellow: '',
+    relatedBlogs: [],
+    content: '',
+    imagePath: '',
+  });
+  const [validationErrors, setValidationErrors] = useState({
+    title: '',
+    profile: '',
+    category: '',
+    region: '',
+    fellow: '',
+    associatedFellow: '',
+    relatedBlogs: '',
+    content: '',
+    imagePath: '',
+  });
   useEffect(() => {
     getCategories();
     getFellows();
@@ -78,29 +87,13 @@ const AddBlog = () => {
       });
   };
 
-  const [formData, setFormData] = useState({
-    title: '',
-    profile: '',
-    category: '',
-    region: '',
-    fellow: '',
-    associatedFellow: '',
-    relatedBlogs: [],
-    content: '',
-    imagePath: '',
-  });
+  const onSelectOptions = (selectedList, selectedItem) => {
+    setSelectedOptions([...selectedOptions, selectedItem]);
+  };
 
-  const [validationErrors, setValidationErrors] = useState({
-    title: '',
-    profile: '',
-    category: '',
-    region: '',
-    fellow: '',
-    associatedFellow: '',
-    // relatedBlogs: '',
-    content: '',
-    imagePath: '',
-  });
+  const onRemoveOptions = (selectedList, removedItem) => {
+    setRemovedOptions([...removedOptions, removedItem]);
+  };
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -132,10 +125,8 @@ const AddBlog = () => {
 
   console.log('relatedBlogs : ', relatedBlogs);
   function handleSubmit(event) {
-    console.log('add blog');
     event.preventDefault();
     const errors = validateForm();
-
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
       return;
@@ -154,11 +145,6 @@ const AddBlog = () => {
       formDataToSend.append('region', formData.region);
       formDataToSend.append('fellow', formData.fellow);
       formDataToSend.append('associatedFellow', formData.associatedFellow);
-
-      // formDataToSend.append(
-      //   'relatedBlogs',
-      //   formData.JSON.stringify(relatedBlogIds)
-      // );
       if (typeof JSON !== 'undefined' && typeof JSON.stringify === 'function') {
         formDataToSend.append('relatedBlogs', JSON.stringify(relatedBlogIds));
       } else {
@@ -167,7 +153,6 @@ const AddBlog = () => {
       formDataToSend.append('content', formData.content);
       formDataToSend.append('imagePath', formData.imagePath);
 
-      console.log('formDataToSend: ', formDataToSend);
       axios
         .post('http://localhost:4500/api/blog/createBlog', formDataToSend, {
           headers: {
@@ -396,37 +381,24 @@ const AddBlog = () => {
               {/* related blogs */}
               <Row>
                 <Col>
-                  <div className='add-product-input-div'>
-                    <p>Related Blogs</p>
-                    {/* <select
-                      name='relatedBlogs'
-                      value={formData.relatedBlogs}
-                      onChange={handleChange}
-                      // multiple
-                      // multiselect-select-all='true'
-                      style={{ border: 'none', width: '100%' }}
-                    >
-                      <option value=''>Select Related Blogs</option>
-                      {relatedBlogs.map((relatedBlog, index) => (
-                        <option value={relatedBlog.title} key={index}>
-                          {relatedBlog?.title}
-                        </option>
-                      ))}
-                    </select> */}
-                    <Multiselect
-                      options={relatedBlogs}
-                      // name='particulars'
-                      name='relatedBlogs'
-                      onSelect={onSelectOptions}
-                      onRemove={onRemoveOptions}
-                      onChange={handleChange}
-                      displayValue='title'
-                      closeIcon='cancel'
-                      placeholder='Select Options'
-                      selectedValues={selectedOptions}
-                      className='multiSelectContainer'
-                    />
-                  </div>
+                  {relatedBlogs.length > 0 && (
+                    <div className='add-product-input-div'>
+                      <p>Related Blogs</p>
+                      <Multiselect
+                        options={relatedBlogs}
+                        // name='particulars'
+                        name='relatedBlogs'
+                        onSelect={onSelectOptions}
+                        onRemove={onRemoveOptions}
+                        onChange={handleChange}
+                        displayValue='title'
+                        closeIcon='cancel'
+                        placeholder='Select Options'
+                        selectedValues={selectedOptions}
+                        className='multiSelectContainer'
+                      />
+                    </div>
+                  )}
                 </Col>
               </Row>
 
