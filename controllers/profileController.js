@@ -110,19 +110,22 @@ const updateProfile = async (req, res) => {
       return res.status(400).json({ error: "Profile not found" });
     }
 
-    const thumbnailPath = req.files?.thumbnailPath
-      ? req.files?.thumbnailPath[0].path
-      : profile.thumbnailPath;
-    const imagePath = req.files?.imagePath
-      ? req.files?.imagePath[0].path
-      : profile.imagePath;
-    const featuredImagePath = req.files?.featuredImage
-      ? req.files?.featuredImage[0].path
-      : profile.featuredImage;
+    const baseUrl = "http://localhost:4500/";
+    const thumbnailPath =
+      req.files?.thumbnailPath && typeof req.files?.thumbnailPath == "object"
+        ? baseUrl + req.files?.thumbnailPath[0].path
+        : profile.thumbnailPath;
+    const imagePath =
+      req.files?.imagePath && typeof req.files?.imagePath == "object"
+        ? baseUrl + req.files?.imagePath[0].path
+        : profile.imagePath;
+    const featuredImagePath =
+      req.files?.featuredImage && typeof req.files?.featuredImage == "object"
+        ? baseUrl + req.files?.featuredImage[0].path
+        : profile.featuredImage;
     const pictureSliderPaths = req.files?.pictureSlider
       ? req.files?.pictureSlider.map((file) => file.path)
       : profile.pictureSlider;
-    const baseUrl = "http://localhost:4500/";
 
     const updateObj = {
       name: req.body.name || profile.name,
@@ -133,9 +136,9 @@ const updateProfile = async (req, res) => {
       websiteUrl: req.body.websiteUrl || profile.websiteUrl,
       heading: req.body.heading || profile.heading,
       paragraph: req.body.paragraph || profile.paragraph,
-      thumbnailPath: baseUrl + thumbnailPath,
-      imagePath: baseUrl + imagePath,
-      featuredImage: baseUrl + featuredImagePath,
+      thumbnailPath: thumbnailPath,
+      imagePath: imagePath,
+      featuredImage: featuredImagePath,
       pictureSlider: JSON.stringify(baseUrl + pictureSliderPaths),
     };
 
@@ -144,8 +147,6 @@ const updateProfile = async (req, res) => {
     //   const imagePath = req.file.path;
     //   updateObj.imagePath = baseUrl + imagePath;
     // }
-
-    console.log("updateObj: ", updateObj);
 
     await Profile.update(updateObj, {
       where: { id },
@@ -156,7 +157,6 @@ const updateProfile = async (req, res) => {
       profile: updatedProfile,
     });
   } catch (error) {
-    console.log("ERROR ------------", error);
     return res.status(500).json({ error: "Error updating profile", error });
   }
 };
