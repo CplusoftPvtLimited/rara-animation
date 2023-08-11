@@ -211,20 +211,6 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                </Row>
-
-                <Row>
-                <Col>
-                    <div className='add-product-input-div'>
-                      <p>Main Research Image</p>
-                      <input
-                        type='text'
-                        name='mainResearchImage'
-                        value={homeData.mainResearchImage}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </Col>
                   <Col>
                     <div className='add-product-input-div'>
                       <p>Main ResearchTitle</p>
@@ -237,8 +223,33 @@ function EditHome(props) {
                     </div>
                   </Col>
                 </Row>
-
-
+                <Row>
+                <Col>
+                    <div className='add-product-input-div'>
+                      <p>Main Research Image</p>
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.mainResearchImage}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='mainResearchImage'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
                 <Row>
                   <Col>
                     <div className='add-product-input-div'>
@@ -312,21 +323,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                  <Col>
-                    <div className='add-product-input-div'>
-                      <p>Card 1 Image</p>
-                      <input
-                        type='text'
-                        name='card1Image'
-                        value={homeData.card1Image}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                <Col>
+                    <Col>
                     <div className='add-product-input-div'>
                       <p>Card 1 Title</p>
                       <input
@@ -337,16 +334,57 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
+                </Row>
 
+                <Row>
                   <Col>
-                    <div className='add-product-input-div'>
+                      <div className='add-product-input-div'>
+                      <p>Card 1 Image</p>
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.card1Image}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='card1Image'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col>
+                      <div className='add-product-input-div'>
                       <p>Card 1 Inside Image</p>
-                      <input
-                        type='text'
-                        name='card1InsideImage'
-                        value={homeData.card1InsideImage}
-                        onChange={handleChange}
-                      />
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.card1InsideImage}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='card1InsideImage'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
                     </div>
                   </Col>
                 </Row>
@@ -396,20 +434,6 @@ function EditHome(props) {
                   </Col>
                   <Col>
                     <div className='add-product-input-div'>
-                      <p>Card 2 Image</p>
-                      <input
-                        type='text'
-                        name='card1Image'
-                        value={homeData.card2Image}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                <Col>
-                    <div className='add-product-input-div'>
                       <p> Card 2 Title </p>
                       <input
                         type='text'
@@ -419,16 +443,57 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
+                </Row>
 
+                <Row>
                   <Col>
-                    <div className='add-product-input-div'>
+                      <div className='add-product-input-div'>
+                      <p>Card 2 Image</p>
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.card2Image}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='card2Image'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col>
+                      <div className='add-product-input-div'>
                       <p>Card 2 Inside Image</p>
-                      <input
-                        type='text'
-                        name='card1InsideImage'
-                        value={homeData.card2InsideImage}
-                        onChange={handleChange}
-                      />
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.card2InsideImage}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='card2InsideImage'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
                     </div>
                   </Col>
                 </Row>
@@ -476,21 +541,8 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                  <Col>
-                    <div className='add-product-input-div'>
-                      <p>Card 3 Image</p>
-                      <input
-                        type='text'
-                        name='card3Image'
-                        value={homeData.card3Image}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </Col>
-                </Row>
 
-                <Row>
-                <Col>
+                  <Col>
                     <div className='add-product-input-div'>
                       <p> Card 3 Title </p>
                       <input
@@ -501,16 +553,57 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
+                </Row>
 
+                <Row>
                   <Col>
-                    <div className='add-product-input-div'>
+                      <div className='add-product-input-div'>
+                      <p>Card 3 Image</p>
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.card3Image}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='card3Image'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col>
+                      <div className='add-product-input-div'>
                       <p>Card 3 Inside Image</p>
-                      <input
-                        type='text'
-                        name='card3InsideImage'
-                        value={homeData.card3InsideImage}
-                        onChange={handleChange}
-                      />
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.card3InsideImage}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='card3InsideImage'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
                     </div>
                   </Col>
                 </Row>
@@ -543,7 +636,6 @@ function EditHome(props) {
                     </div>
                   </Col>
                 </Row>
-
                  {/** Cards 4*/}
 
                  <Row>
@@ -558,21 +650,8 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
+              
                   <Col>
-                    <div className='add-product-input-div'>
-                      <p>Card 4 Image</p>
-                      <input
-                        type='text'
-                        name='card4Image'
-                        value={homeData.card4Image}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                <Col>
                     <div className='add-product-input-div'>
                       <p> Card 4 Title </p>
                       <input
@@ -583,20 +662,60 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
+                </Row>
 
+                <Row>
                   <Col>
-                    <div className='add-product-input-div'>
+                      <div className='add-product-input-div'>
+                      <p>Card 4 Image</p>
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.card4Image}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='card4Image'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col>
+                      <div className='add-product-input-div'>
                       <p>Card 4 Inside Image</p>
-                      <input
-                        type='text'
-                        name='card4InsideImage'
-                        value={homeData.card4InsideImage}
-                        onChange={handleChange}
-                      />
+                      <div className='product-image-div'>
+                        <img
+                          src={imagePreviewUrl ?? homeData?.card4InsideImage}
+                          alt='preview'
+                          style={{
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
+                          }}
+                          onClick={handleImageClick}
+                        />
+                        <input
+                          type='file'
+                          name='card4InsideImage'
+                          ref={fileInputRef}
+                          onChange={handleChange}
+                          accept='image/jpeg, image/png, image/gif'
+                          style={{ display: 'none' }}
+                        />
+                      </div>
                     </div>
                   </Col>
                 </Row>
-
                 <Row>
                   <Col>
                     <div className='add-product-input-div'>
