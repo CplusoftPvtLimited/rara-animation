@@ -68,7 +68,6 @@ function EditFellow(props) {
 
   const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
-      {console.log("files ---------", file)}
       <div style={thumbInner}>
         <img
           src={file.preview}
@@ -95,20 +94,17 @@ function EditFellow(props) {
       const response = await axios.get(
         `http://localhost:4500/api/profile/${profileId}`
       );
+      const data = response.data.profile;
+      console.log("🚀 ~ file: EditFellow.js:98 ~ getProfile ~ data:", data);
       const { pictureSlider, ...profileDataWithoutPictureSlider } =
         response.data?.profile;
-
-      console.log(
-        "PROFILE WITHOUT PS -------",
-        profileDataWithoutPictureSlider
-      );
       setProfileData(profileDataWithoutPictureSlider);
-      console.log("response", response.data.profile);
       if (response.data?.profile?.pictureSlider) {
         const parsedPictureSlider = JSON.parse(
           response.data.profile.pictureSlider
         );
         setPictureSliderArray(parsedPictureSlider);
+
       }
     } catch (err) {
       console.log(err);
@@ -145,10 +141,8 @@ function EditFellow(props) {
     fileInput.current.click();
   };
 
-  console.log("PROFILE DATA --------------", profileData);
   const editFellow = async (event) => {
     event.preventDefault();
-    console.log("FILES -----------", files, "-----------", profileData);
     const updatedData = new FormData();
     for (const [key, value] of Object.entries(profileData)) {
       // if (!key.includes("Path")) {
@@ -156,7 +150,6 @@ function EditFellow(props) {
       // }
     }
     if (files.length > 0) {
-      console.log("Files -----------", files)
       files.map((file) => updatedData.append("pictureSlider", file));
     }
 
@@ -364,7 +357,10 @@ function EditFellow(props) {
                   <Col>
                     <div className="add-product-image-div">
                       <div className="product-image-div">
-                      {console.log ("Profile ---------",profileData.imagePath)}
+                        {console.log(
+                          "Profile ---------",
+                          profileData.imagePath
+                        )}
                         <img
                           src={
                             imagePreviewUrl.find(
@@ -453,7 +449,7 @@ function EditFellow(props) {
                 </Row>
 
                 <Col>
-                  <div>
+                  <div style={{cursor : "pointer"}}>
                     <div {...getRootProps({ className: "dropzone" })}>
                       <input {...getInputProps()} />
                       <p>
@@ -463,40 +459,31 @@ function EditFellow(props) {
                     <aside style={thumbsContainer}>{thumbs}</aside>
                   </div>
                 </Col>
+                
                 {/* <Row>
-                  <Col>
-                    {pictureSliderArray.map((imagePath, index) => (
-                      <div key={index}>
+                  <h3>Slider Images Preview</h3>
+                  <div className="slider-preview">
+                      <div className="product-image-div">
+                        {pictureSliderArray.length > 0 && 
+                    pictureSliderArray.map((item, index) => (
+                      <Col key={index}>
                         <img
-                          src={imagePath}
-                          alt={`slider-image-${index}`}
+                          src={item}
+                          alt={`preview-${index}`}
                           style={{
-                            width: "100px",
-                            height: "100px",
+                            display: 'flex-wrap',
+                            width: "200px",
+                            height: "200px",
                             cursor: "pointer",
                           }}
-                          onClick={() =>
-                            handleImageClick(
-                              getFileInputRef(`pictureSlider_${index}`)
-                            )
-                          }
                         />
-                        <input
-                          type="file"
-                          name={`pictureSlider_${index}`}
-                          ref={getFileInputRef(`pictureSlider_${index}`)}
-                          onChange={(event) =>
-                            handleImageInputChange(
-                              event,
-                              `pictureSlider_${index}`
-                            )
-                          }
-                          style={{ display: "none" }}
-                        />
-                      </div>
-                    ))}
-                  </Col>
+                      </Col>
+                    ))
+                    }
+                    </div>
+                    </div>
                 </Row> */}
+
                 <button
                   onClick={editFellow}
                   type="submit"
