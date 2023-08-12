@@ -117,7 +117,7 @@ const updateProfile = async (req, res) => {
         : profile.thumbnailPath;
     const imagePath =
       req.files?.imagePath && typeof req.files?.imagePath == "object"
-        ? baseUrl + req.fxiles?.imagePath[0].path
+        ? baseUrl + req.files?.imagePath[0].path
         : profile.imagePath;
     const featuredImagePath =
       req.files?.featuredImage && typeof req.files?.featuredImage == "object"
