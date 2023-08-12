@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Card, Col, Form, Row } from "react-bootstrap";
-import Sidebar from "../../Components/Sidebar";
-import { useHistory } from "react-router";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import axios from "axios";
-import "../Blogs Pages/AddBlog.css";
-import { useDropzone } from "react-dropzone";
-import "./index.css";
+import React, { useEffect, useState, useRef } from 'react';
+import { Card, Col, Form, Row } from 'react-bootstrap';
+import Sidebar from '../../Components/Sidebar';
+import { useHistory } from 'react-router';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import axios from 'axios';
+import '../Blogs Pages/AddBlog.css';
+import { useDropzone } from 'react-dropzone';
+import './index.css';
 
 function EditFellow(props) {
   const [profileData, setProfileData] = useState();
@@ -20,40 +20,40 @@ function EditFellow(props) {
   const file4InputRef = useRef(null);
 
   const thumbsContainer = {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginTop: 16,
   };
 
   const thumb = {
-    display: "inline-flex",
+    display: 'inline-flex',
     borderRadius: 2,
-    border: "1px solid #eaeaea",
+    border: '1px solid #eaeaea',
     marginBottom: 8,
     marginRight: 8,
     width: 100,
     height: 100,
     padding: 4,
-    boxSizing: "border-box",
+    boxSizing: 'border-box',
   };
 
   const thumbInner = {
-    display: "flex",
+    display: 'flex',
     minWidth: 0,
-    overflow: "hidden",
+    overflow: 'hidden',
   };
 
   const img = {
-    display: "block",
-    width: "auto",
-    height: "100%",
+    display: 'block',
+    width: 'auto',
+    height: '100%',
   };
 
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      "image/*": [],
+      'image/*': [],
     },
     onDrop: (acceptedFiles) => {
       setFiles(
@@ -81,9 +81,9 @@ function EditFellow(props) {
     </div>
   ));
 
-  console.log("profileId: " + profileId);
+  console.log('profileId: ' + profileId);
   const history = useHistory();
-  const fellowOptions = ["Fellow", "Associated Fellow"];
+  const fellowOptions = ['Fellow', 'Associated Fellow'];
 
   useEffect(() => {
     getProfile();
@@ -118,7 +118,7 @@ function EditFellow(props) {
 
   const handleImageInputChange = (event, name) => {
     const file = event.target.files[0];
-    console.log("File:", file);
+    console.log('File:', file);
     const reader = new FileReader();
     reader.onloadend = () => {
       if (name) {
@@ -150,59 +150,74 @@ function EditFellow(props) {
       // }
     }
     if (files.length > 0) {
-      files.map((file) => updatedData.append("pictureSlider", file));
+      files.map((file) => updatedData.append('pictureSlider', file));
     }
 
     try {
-      console.log("updatedData: ", updatedData);
+      console.log('updatedData: ', updatedData);
       const response = await axios.patch(
         `http://localhost:4500/api/profile/updateProfile/${profileId}`,
         updatedData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
-      console.log("edit data", response);
-      setProfileData(response?.data?.profile);
-      history.push("/fellows");
+      console.log('edit data', response);
+      setProfileData({
+        name: '',
+        nameEnglish: '',
+        tagLine: '',
+        imagePath: '',
+        jobPost: '',
+        profileDesc: '',
+        websiteUrl: '',
+        heading: '',
+        paragraph: '',
+        featuredImage: '',
+        thumbnailPath: '',
+        facebookUrl: '',
+        twitterUrl: '',
+        ritsumeiUrl: '',
+      });
+      // history.push("/fellows");
     } catch (err) {
-      console.log("err: ", err);
+      console.log('err: ', err);
     }
   };
   return (
-    <div className="dashboard-parent-div">
+    <div className='dashboard-parent-div'>
       <Row>
         <Col lg={2}>
           <Sidebar />
         </Col>
-        <Col className="add-category-content" lg={10}>
+        <Col className='add-category-content' lg={10}>
           <h4>Edit Fellow</h4>
           <p>
             Please fill the Fellow details in the form below to update a fellow.
           </p>
-          <Card className="add-product-form-card">
+          <Card className='add-product-form-card'>
             {profileData && (
               <Form>
                 <Row>
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Name</p>
                       <input
-                        type="text"
-                        name="name"
+                        type='text'
+                        name='name'
                         value={profileData.name}
                         onChange={handleChange}
                       />
                     </div>
                   </Col>
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>English Name</p>
                       <input
-                        type="text"
-                        name="nameEnglish"
+                        type='text'
+                        name='nameEnglish'
                         value={profileData.nameEnglish}
                         onChange={handleChange}
                       />
@@ -212,11 +227,11 @@ function EditFellow(props) {
 
                 <Row>
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Tag</p>
                       <input
-                        type="text"
-                        name="tagLine"
+                        type='text'
+                        name='tagLine'
                         value={profileData.tagLine}
                         onChange={handleChange}
                       />
@@ -225,24 +240,31 @@ function EditFellow(props) {
                   {/* <Col>
                     <div className='add-product-input-div'>
                       <p>Job Post</p>
-                      <input
-                        type='text'
+                      <select
                         name='jobPost'
                         value={profileData.jobPost}
                         onChange={handleChange}
-                      />
+                        style={{ border: 'none', width: '100%' }}
+                      >
+                        <option value=''>{profileData.jobPost}</option>
+                        {fellowOptions.map((fellow) => (
+                          <option key={fellow} value={fellow}>
+                            {fellow}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </Col> */}
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Job Post</p>
                       <select
-                        name="jobPost"
+                        name='jobPost'
                         value={profileData.jobPost}
                         onChange={handleChange}
-                        style={{ border: "none", width: "100%" }}
+                        style={{ border: 'none', width: '100%' }}
                       >
-                        <option value="">{profileData.jobPost}</option>
+                        <option value=''>{profileData.jobPost}</option>
                         {fellowOptions.map((fellow) => (
                           <option key={fellow} value={fellow}>
                             {fellow}
@@ -255,11 +277,11 @@ function EditFellow(props) {
 
                 <Row>
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Heading</p>
                       <input
-                        type="text"
-                        name="heading"
+                        type='text'
+                        name='heading'
                         value={profileData.heading}
                         onChange={handleChange}
                       />
@@ -269,7 +291,7 @@ function EditFellow(props) {
 
                 <Row>
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Profile Description</p>
                       <CKEditor
                         editor={ClassicEditor}
@@ -277,23 +299,23 @@ function EditFellow(props) {
                         onReady={(editor) => {}}
                         onChange={(event, editor) => {
                           const data = editor.getData();
-                          console.log("Editor Data:", data);
+                          console.log('Editor Data:', data);
                           handleChange({
-                            target: { name: "profileDesc", value: data },
+                            target: { name: 'profileDesc', value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
-                          console.log("Blur.", editor);
+                          console.log('Blur.', editor);
                         }}
                         onFocus={(event, editor) => {
-                          console.log("Focus.", editor);
+                          console.log('Focus.', editor);
                         }}
                       />
                     </div>
                   </Col>
 
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Paragraph</p>
                       <CKEditor
                         editor={ClassicEditor}
@@ -301,16 +323,16 @@ function EditFellow(props) {
                         onReady={(editor) => {}}
                         onChange={(event, editor) => {
                           const data = editor.getData();
-                          console.log("Editor Data:", data);
+                          console.log('Editor Data:', data);
                           handleChange({
-                            target: { name: "paragraph", value: data },
+                            target: { name: 'paragraph', value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
-                          console.log("Blur.", editor);
+                          console.log('Blur.', editor);
                         }}
                         onFocus={(event, editor) => {
-                          console.log("Focus.", editor);
+                          console.log('Focus.', editor);
                         }}
                       />
                     </div>
@@ -319,33 +341,33 @@ function EditFellow(props) {
 
                 <Row>
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Facebook URL</p>
                       <input
-                        type="text"
-                        name="facebookUrl"
+                        type='text'
+                        name='facebookUrl'
                         value={profileData.facebookUrl}
                         onChange={handleChange}
                       />
                     </div>
                   </Col>
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Twitter Url</p>
                       <input
-                        type="text"
-                        name="twitterUrl"
+                        type='text'
+                        name='twitterUrl'
                         value={profileData.twitterUrl}
                         onChange={handleChange}
                       />
                     </div>
                   </Col>
                   <Col>
-                    <div className="add-product-input-div">
+                    <div className='add-product-input-div'>
                       <p>Ritsumei Url</p>
                       <input
-                        type="text"
-                        name="ritsumeiUrl"
+                        type='text'
+                        name='ritsumeiUrl'
                         value={profileData.ritsumeiUrl}
                         onChange={handleChange}
                       />
@@ -364,84 +386,84 @@ function EditFellow(props) {
                         <img
                           src={
                             imagePreviewUrl.find(
-                              (item) => item.path == "imagePath"
+                              (item) => item.path == 'imagePath'
                             )?.file ?? profileData?.imagePath
                           }
-                          alt="preview"
+                          alt='preview'
                           style={{
-                            width: "100px",
-                            height: "100px",
-                            cursor: "pointer",
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
                           }}
                           onClick={() => handleImageClick(file1InputRef)}
                         />
                         <input
-                          type="file"
-                          name="imagePath"
+                          type='file'
+                          name='imagePath'
                           ref={file1InputRef}
                           onChange={(event) =>
-                            handleImageInputChange(event, "imagePath")
+                            handleImageInputChange(event, 'imagePath')
                           }
-                          style={{ display: "none" }}
+                          style={{ display: 'none' }}
                         />
                       </div>
                     </div>
                   </Col>
                   <Col>
-                    <div className="add-product-image-div">
-                      <div className="product-image-div">
+                    <div className='add-product-image-div'>
+                      <div className='product-image-div'>
                         <img
                           src={
                             imagePreviewUrl.find(
-                              (item) => item.path == "thumbnailPath"
+                              (item) => item.path == 'thumbnailPath'
                             )?.file ?? profileData?.thumbnailPath
                           }
-                          alt="preview"
+                          alt='preview'
                           style={{
-                            width: "100px",
-                            height: "100px",
-                            cursor: "pointer",
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
                           }}
                           onClick={() => handleImageClick(file2InputRef)}
                         />
                         <input
-                          type="file"
-                          name="thumbnailPath"
+                          type='file'
+                          name='thumbnailPath'
                           ref={file2InputRef}
                           onChange={(event) =>
-                            handleImageInputChange(event, "thumbnailPath")
+                            handleImageInputChange(event, 'thumbnailPath')
                           }
-                          style={{ display: "none" }}
+                          style={{ display: 'none' }}
                         />
                       </div>
                     </div>
                   </Col>
 
                   <Col>
-                    <div className="add-product-image-div">
-                      <div className="product-image-div">
+                    <div className='add-product-image-div'>
+                      <div className='product-image-div'>
                         <img
                           src={
                             imagePreviewUrl.find(
-                              (item) => item.path === "featuredImage"
+                              (item) => item.path === 'featuredImage'
                             )?.file ?? profileData?.featuredImage
                           }
-                          alt="preview"
+                          alt='preview'
                           style={{
-                            width: "100px",
-                            height: "100px",
-                            cursor: "pointer",
+                            width: '100px',
+                            height: '100px',
+                            cursor: 'pointer',
                           }}
                           onClick={() => handleImageClick(file3InputRef)}
                         />
                         <input
-                          type="file"
-                          name="featuredImage"
+                          type='file'
+                          name='featuredImage'
                           ref={file3InputRef}
                           onChange={(event) =>
-                            handleImageInputChange(event, "featuredImage")
+                            handleImageInputChange(event, 'featuredImage')
                           }
-                          style={{ display: "none" }}
+                          style={{ display: 'none' }}
                         />
                       </div>
                     </div>
@@ -486,8 +508,8 @@ function EditFellow(props) {
 
                 <button
                   onClick={editFellow}
-                  type="submit"
-                  className="add-category-btn"
+                  type='submit'
+                  className='add-category-btn'
                 >
                   Update Fellow
                 </button>

@@ -37,7 +37,6 @@ function App() {
             <Route path='/fellows' exact component={Fellows} />
 
             <Route path='/home' exact component={Home} />
-
           </Switch>
         </Router>
       </SnackbarProvider>

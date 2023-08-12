@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import image from '../../Assets/khan.jpeg';
+import { Multiselect } from 'multiselect-react-dropdown';
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import './AddBlog.css';
@@ -11,9 +11,36 @@ import './AddBlog.css';
 const AddBlog = () => {
   const history = useHistory();
   const [categories, setCategories] = useState([]);
-
+  const [fellows, setFellows] = useState([]);
+  const [relatedBlogs, setRelatedBlogs] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [removedOptions, setRemovedOptions] = useState([]);
+  const [formData, setFormData] = useState({
+    title: '',
+    profile: '',
+    category: '',
+    region: '',
+    fellow: '',
+    associatedFellow: '',
+    relatedBlogs: [],
+    content: '',
+    imagePath: '',
+  });
+  const [validationErrors, setValidationErrors] = useState({
+    title: '',
+    profile: '',
+    category: '',
+    region: '',
+    fellow: '',
+    associatedFellow: '',
+    relatedBlogs: '',
+    content: '',
+    imagePath: '',
+  });
   useEffect(() => {
     getCategories();
+    getFellows();
+    getBlogs();
   }, []);
 
   const getCategories = () => {
@@ -31,30 +58,46 @@ const AddBlog = () => {
       });
   };
 
-  console.log('category: ', categories[0]?.title);
+  const getFellows = () => {
+    setCategories([]);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/profile/getAllProfiles',
+    })
+      .then((response) => {
+        console.log('profiles: ', response?.data?.profiles);
+        setFellows(response?.data?.profiles);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
+      });
+  };
 
-  const [formData, setFormData] = useState({
-    title: '',
-    content: '',
-    fellow: '',
-    category: '',
-    region: '',
-    profile: '',
-    imagePath: '',
-  });
+  const getBlogs = () => {
+    setRelatedBlogs([]);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/blog/getAllBlogPosts',
+    })
+      .then((response) => {
+        setRelatedBlogs(response?.data.blogPosts);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
+      });
+  };
 
-  const [validationErrors, setValidationErrors] = useState({
-    title: '',
-    content: '',
-    fellow: '',
-    category: '',
-    region: '',
-    profile: '',
-    imagePath: '',
-  });
+  const onSelectOptions = (selectedList, selectedItem) => {
+    setSelectedOptions([...selectedOptions, selectedItem]);
+  };
+
+  const onRemoveOptions = (selectedList, removedItem) => {
+    setRemovedOptions([...removedOptions, removedItem]);
+  };
 
   function handleChange(event) {
     const { name, value } = event.target;
+    console.log('name value: ', name, value);
     if (name === 'imagePath') {
       const file = event.target.files[0];
       const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -79,31 +122,37 @@ const AddBlog = () => {
     }
     setValidationErrors((prev) => ({ ...prev, [name]: '' }));
   }
-  console.log('formData: ', formData);
 
+  console.log('relatedBlogs : ', relatedBlogs);
   function handleSubmit(event) {
     event.preventDefault();
     const errors = validateForm();
-
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
       return;
     }
 
     try {
-      console.log('Adding: image path: ', formData.imagePath);
+      const relatedBlogIds = selectedOptions.map((option) => option.id); // Extracting IDs from selected options
+
+      console.log('related blog id', relatedBlogIds);
+      console.log('relatedBlogs: ', formData.relatedBlogs);
       const formDataToSend = new FormData();
 
       formDataToSend.append('title', formData.title);
-      formDataToSend.append('content', formData.content);
-      formDataToSend.append('fellow', formData.fellow);
+      formDataToSend.append('profile', formData.profile);
       formDataToSend.append('category', formData.category);
       formDataToSend.append('region', formData.region);
-      formDataToSend.append('profile', formData.profile);
-      // formDataToSend.append('imagePath', formData.imagePath);
-      formDataToSend.append('imagePath', formData.imagePath); // Append the image File object here
+      formDataToSend.append('fellow', formData.fellow);
+      formDataToSend.append('associatedFellow', formData.associatedFellow);
+      if (typeof JSON !== 'undefined' && typeof JSON.stringify === 'function') {
+        formDataToSend.append('relatedBlogs', JSON.stringify(relatedBlogIds));
+      } else {
+        formDataToSend.append('relatedBlogs', relatedBlogIds.join(','));
+      }
+      formDataToSend.append('content', formData.content);
+      formDataToSend.append('imagePath', formData.imagePath);
 
-      console.log('formDataToSend: ', formDataToSend);
       axios
         .post('http://localhost:4500/api/blog/createBlog', formDataToSend, {
           headers: {
@@ -111,14 +160,16 @@ const AddBlog = () => {
           },
         })
         .then((response) => {
-          console.log('response: ', response);
+          console.log('response response: ', response);
           setFormData({
             title: '',
-            content: '',
-            fellow: '',
+            profile: '',
             category: '',
             region: '',
-            profile: '',
+            fellow: '',
+            associatedFellow: '',
+            relatedBlogs: '',
+            content: '',
             imagePath: '',
           });
           history.push('/blogs');
@@ -144,19 +195,6 @@ const AddBlog = () => {
     'China',
   ];
 
-  const fellowOptions = [
-    'fellow 1',
-    'fellow 2',
-    'fellow 3',
-    'fellow 4',
-    'fellow 5',
-    'fellow 6',
-    'fellow 7',
-    'fellow 8',
-    'fellow 9',
-    'fellow 10',
-  ];
-
   const validateForm = () => {
     let errors = {};
 
@@ -168,6 +206,9 @@ const AddBlog = () => {
     }
     if (formData.fellow.trim() === '') {
       errors.fellow = 'This field is required';
+    }
+    if (formData.associatedFellow.trim() === '') {
+      errors.associatedFellow = 'This field is required';
     }
 
     if (formData.category.trim() === '') {
@@ -185,6 +226,11 @@ const AddBlog = () => {
     if (!formData.imagePath) {
       errors.imagePath = 'Please select an image';
     }
+
+    // if (!formData.relatedBlogs) {
+    //   errors.relatedBlogs = 'Please select an relatedBlogs';
+    // }
+
     return errors;
   };
 
@@ -194,6 +240,7 @@ const AddBlog = () => {
         <Col lg={2}>
           <Sidebar />
         </Col>
+
         <Col className='add-category-content' lg={10}>
           <h4>Add Blog</h4>
           <p>
@@ -218,24 +265,15 @@ const AddBlog = () => {
                 </Col>
                 <Col>
                   <div className='add-product-input-div'>
-                    <p>Fellow</p>
-
-                    <select
-                      name='fellow'
-                      value={formData.fellow}
+                    <p>Blog Profile</p>
+                    <input
+                      type='text'
+                      name='profile'
+                      value={formData.profile}
                       onChange={handleChange}
-                      style={{ border: 'none', width: '100%' }}
-                    >
-                      <option value=''>Select Fellow</option>
-                      {fellowOptions.map((fellow) => (
-                        <option key={fellow} value={fellow}>
-                          {fellow}
-                        </option>
-                      ))}
-                    </select>
-
-                    {validationErrors.fellow && (
-                      <p style={{ color: 'red' }}>{validationErrors.fellow}</p>
+                    />
+                    {validationErrors.profile && (
+                      <p style={{ color: 'red' }}>{validationErrors.profile}</p>
                     )}
                   </div>
                 </Col>
@@ -289,22 +327,81 @@ const AddBlog = () => {
                 </Col>
               </Row>
 
+              {/* fellow and associated fellow */}
               <Row>
                 <Col>
                   <div className='add-product-input-div'>
-                    <p>Profile</p>
-                    <input
-                      type='text'
-                      name='profile'
-                      value={formData.profile}
+                    <p>Fellow</p>
+                    <select
+                      name='fellow'
+                      value={formData.fellow}
                       onChange={handleChange}
-                    />
-                    {validationErrors.profile && (
-                      <p style={{ color: 'red' }}>{validationErrors.profile}</p>
+                      style={{ border: 'none', width: '100%' }}
+                    >
+                      <option value=''>Select Fellow</option>
+                      {fellows.map((fellow) => (
+                        <option key={fellow} value={fellow.name}>
+                          {fellow.name}
+                        </option>
+                      ))}
+                    </select>
+
+                    {validationErrors.fellow && (
+                      <p style={{ color: 'red' }}>{validationErrors.fellow}</p>
+                    )}
+                  </div>
+                </Col>
+                <Col>
+                  <div className='add-product-input-div'>
+                    <p>Associated Fellow</p>
+
+                    <select
+                      name='associatedFellow'
+                      value={formData.associatedFellow}
+                      onChange={handleChange}
+                      style={{ border: 'none', width: '100%' }}
+                    >
+                      <option value=''>Select Associated Fellow</option>
+                      {fellows.map((fellow) => (
+                        <option key={fellow} value={fellow.name}>
+                          {fellow.name}
+                        </option>
+                      ))}
+                    </select>
+
+                    {validationErrors.associatedFellow && (
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.associatedFellow}
+                      </p>
                     )}
                   </div>
                 </Col>
               </Row>
+
+              {/* related blogs */}
+              <Row>
+                <Col>
+                  {relatedBlogs.length > 0 && (
+                    <div className='add-product-input-div'>
+                      <p>Related Blogs</p>
+                      <Multiselect
+                        options={relatedBlogs}
+                        // name='particulars'
+                        name='relatedBlogs'
+                        onSelect={onSelectOptions}
+                        onRemove={onRemoveOptions}
+                        onChange={handleChange}
+                        displayValue='title'
+                        closeIcon='cancel'
+                        placeholder='Select Options'
+                        selectedValues={selectedOptions}
+                        className='multiSelectContainer'
+                      />
+                    </div>
+                  )}
+                </Col>
+              </Row>
+
               <Row>
                 <Col>
                   <div className='add-product-input-div'>

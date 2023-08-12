@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Card, Col, Form, Row } from "react-bootstrap";
-import Sidebar from "../../Components/Sidebar";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import image from "../../Assets/khan.jpeg";
-import { useHistory } from "react-router";
-import axios from "axios";
-import "../Blogs Pages/AddBlog.css";
+import React, { useEffect, useState } from 'react';
+import { Card, Col, Form, Row } from 'react-bootstrap';
+import Sidebar from '../../Components/Sidebar';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import image from '../../Assets/khan.jpeg';
+import { useHistory } from 'react-router';
+import axios from 'axios';
+import '../Blogs Pages/AddBlog.css';
 
 const AddProfile = () => {
   const history = useHistory();
@@ -56,13 +56,17 @@ const AddProfile = () => {
     // });
   };
 
-  const fellowOptions = ["Fellow", "Associated Fellow"];
+  const fellowOptions = ['Fellow', 'Associated Fellow'];
   function handleChange(event) {
     const { name, value } = event.target;
-    if (name === "imagePath" || name === "thumbnailPath" || name === "featuredImage") {
+    if (
+      name === 'imagePath' ||
+      name === 'thumbnailPath' ||
+      name === 'featuredImage'
+    ) {
       const file = event.target.files[0];
-      const allowedFileTypes = ["image/jpeg", "image/png", "image/gif"];
-  
+      const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
       if (file && allowedFileTypes.includes(file.type)) {
         setFormData({
           ...formData,
@@ -71,7 +75,8 @@ const AddProfile = () => {
       } else {
         setValidationErrors((prev) => ({
           ...prev,
-          [name]: "Invalid file type. Only JPEG, PNG, and GIF files are allowed.",
+          [name]:
+            'Invalid file type. Only JPEG, PNG, and GIF files are allowed.',
         }));
       }
     } else {
@@ -80,11 +85,10 @@ const AddProfile = () => {
         [name]: value,
       });
     }
-    setValidationErrors((prev) => ({ ...prev, [name]: "" }));
+    setValidationErrors((prev) => ({ ...prev, [name]: '' }));
   }
-  
 
-  console.log("formData: ", formData);
+  console.log('formData: ', formData);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -95,7 +99,7 @@ const AddProfile = () => {
       return;
     }
     try {
-      console.log("Adding");
+      console.log('Adding');
       const formDataToSend = new FormData();
 
       formDataToSend.append("name", formData.name);
@@ -115,10 +119,7 @@ const AddProfile = () => {
       formDataToSend.append("ritsumeiUrl", formData.ritsumeiUrl); //
       pictureSlider.map((image) => {formDataToSend.append("pictureSlider", image)});
       axios
-        .post(
-          "http://localhost:4500/api/profile/createProfile",
-          formDataToSend
-        )
+        .post('http://localhost:4500/api/profile/createProfile', formDataToSend)
         .then((response) => {
           setFormData({
             name: "",
@@ -137,93 +138,97 @@ const AddProfile = () => {
             twitterUrl : "",
             ritsumeiUrl : "",
           });
-          history.push("/fellows");
+          history.push('/fellows');
         })
         .catch((error) => {
-          console.log("Error: " + error.message);
+          console.log('Error: ' + error.message);
         });
     } catch (err) {
-      console.log("Error: " + err.message);
+      console.log('Error: ' + err.message);
     }
   }
   const validateForm = () => {
     let errors = {};
 
-    if (formData.name.trim() === "") {
-      errors.name = "This field is required";
+    if (formData.name.trim() === '') {
+      errors.name = 'This field is required';
     }
 
-    if (formData.nameEnglish.trim() === "") {
-      errors.nameEnglish = "This field is required";
+    if (formData.nameEnglish.trim() === '') {
+      errors.nameEnglish = 'This field is required';
     }
 
-    if (formData.tagLine.trim() === "") {
-      errors.tagLine = "This field is required";
+    if (formData.tagLine.trim() === '') {
+      errors.tagLine = 'This field is required';
     }
 
-    if (formData.jobPost.trim() === "") {
-      errors.jobPost = "This field is required";
+    if (formData.jobPost.trim() === '') {
+      errors.jobPost = 'This field is required';
     }
 
-    if (formData.heading.trim() === "") {
-      errors.heading = "This field is required";
+    // if (formData.type.trim() === '') {
+    //   errors.type = 'This field is required';
+    // }
+
+    if (formData.heading.trim() === '') {
+      errors.heading = 'This field is required';
     }
 
-    if (formData.paragraph.trim() === "") {
-      errors.paragraph = "This field is required";
+    if (formData.paragraph.trim() === '') {
+      errors.paragraph = 'This field is required';
     }
 
-    if (!formData.profileDesc || formData.profileDesc.trim() === "") {
-      errors.profileDesc = "This field is required";
+    if (!formData.profileDesc || formData.profileDesc.trim() === '') {
+      errors.profileDesc = 'This field is required';
     }
 
     if (!formData.imagePath) {
-      errors.imagePath = "Please select an image";
+      errors.imagePath = 'Please select an image';
     }
 
     return errors;
   };
 
   return (
-    <div className="dashboard-parent-div">
+    <div className='dashboard-parent-div'>
       <Row>
         <Col lg={2}>
           <Sidebar />
         </Col>
-        <Col className="add-category-content" lg={10}>
+        <Col className='add-category-content' lg={10}>
           <h4>Add Fellow</h4>
           <p>
             Please fill the Fellow details in the form below to add a new
             fellow.
           </p>
-          <Card className="add-product-form-card">
+          <Card className='add-product-form-card'>
             <Form onSubmit={handleSubmit}>
               <Row>
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Name</p>
                     <input
-                      type="text"
-                      name="name"
+                      type='text'
+                      name='name'
                       value={formData.name}
                       onChange={handleChange}
                     />
                     {validationErrors.name && (
-                      <p style={{ color: "red" }}>{validationErrors.name}</p>
+                      <p style={{ color: 'red' }}>{validationErrors.name}</p>
                     )}
                   </div>
                 </Col>
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>English Name</p>
                     <input
-                      type="text"
-                      name="nameEnglish"
+                      type='text'
+                      name='nameEnglish'
                       value={formData.nameEnglish}
                       onChange={handleChange}
                     />
                     {validationErrors.nameEnglish && (
-                      <p style={{ color: "red" }}>
+                      <p style={{ color: 'red' }}>
                         {validationErrors.nameEnglish}
                       </p>
                     )}
@@ -233,29 +238,29 @@ const AddProfile = () => {
 
               <Row>
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Tagline</p>
                     <input
-                      type="text"
-                      name="tagLine"
+                      type='text'
+                      name='tagLine'
                       value={formData.tagLine}
                       onChange={handleChange}
                     />
                     {validationErrors.tagLine && (
-                      <p style={{ color: "red" }}>{validationErrors.tagLine}</p>
+                      <p style={{ color: 'red' }}>{validationErrors.tagLine}</p>
                     )}
                   </div>
                 </Col>
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Job Post</p>
                     <select
-                      name="jobPost"
+                      name='jobPost'
                       value={formData.jobPost}
                       onChange={handleChange}
-                      style={{ border: "none", width: "100%" }}
+                      style={{ border: 'none', width: '100%' }}
                     >
-                      <option value="">Select Fellow</option>
+                      <option value=''>Select Fellow</option>
                       {fellowOptions.map((fellow) => (
                         <option key={fellow} value={fellow}>
                           {fellow}
@@ -263,7 +268,7 @@ const AddProfile = () => {
                       ))}
                     </select>
                     {validationErrors.fellow && (
-                      <p style={{ color: "red" }}>{validationErrors.fellow}</p>
+                      <p style={{ color: 'red' }}>{validationErrors.fellow}</p>
                     )}
                   </div>
                 </Col>
@@ -271,31 +276,50 @@ const AddProfile = () => {
 
               <Row>
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Heading</p>
                     <input
-                      type="text"
-                      name="heading"
+                      type='text'
+                      name='heading'
                       value={formData.heading}
                       onChange={handleChange}
                     />
                     {validationErrors.heading && (
-                      <p style={{ color: "red" }}>{validationErrors.heading}</p>
+                      <p style={{ color: 'red' }}>{validationErrors.heading}</p>
                     )}
                   </div>
                 </Col>
 
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Website Url</p>
                     <input
-                      type="text"
-                      name="websiteUrl"
+                      type='text'
+                      name='websiteUrl'
                       value={formData.websiteUrl}
                       onChange={handleChange}
                     />
+
+                    <CKEditor
+                      editor={ClassicEditor}
+                      // data='<p>lets start blog content</p>'ss
+                      onReady={(editor) => {}}
+                      onChange={(event, editor) => {
+                        const data = editor.getData();
+                        console.log('Editor Data:', data);
+                        handleChange({
+                          target: { name: 'paragraph', value: data },
+                        });
+                      }}
+                      onBlur={(event, editor) => {
+                        console.log('Blur.', editor);
+                      }}
+                      onFocus={(event, editor) => {
+                        console.log('Focus.', editor);
+                      }}
+                    />
                     {validationErrors.websiteUrl && (
-                      <p style={{ color: "red" }}>
+                      <p style={{ color: 'red' }}>
                         {validationErrors.websiteUrl}
                       </p>
                     )}
@@ -305,30 +329,30 @@ const AddProfile = () => {
 
               <Row>
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Paragraph</p>
                     <CKEditor
                       editor={ClassicEditor}
                       onReady={(editor) => {}}
                       onChange={(event, editor) => {
                         const data = editor.getData();
-                        console.log("Editor Data:", data);
+                        console.log('Editor Data:', data);
                         handleChange({
                           target: {
-                            name: "paragraph",
+                            name: 'paragraph',
                             value: data,
                           },
                         });
                       }}
                       onBlur={(event, editor) => {
-                        console.log("Blur.", editor);
+                        console.log('Blur.', editor);
                       }}
                       onFocus={(event, editor) => {
-                        console.log("Focus.", editor);
+                        console.log('Focus.', editor);
                       }}
                     />
                     {validationErrors.paragraph && (
-                      <p style={{ color: "red" }}>
+                      <p style={{ color: 'red' }}>
                         {validationErrors.formData.paragraph}
                       </p>
                     )}
@@ -336,7 +360,7 @@ const AddProfile = () => {
                 </Col>
 
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Fellow Description</p>
                     <CKEditor
                       editor={ClassicEditor}
@@ -344,20 +368,20 @@ const AddProfile = () => {
                       onReady={(editor) => {}}
                       onChange={(event, editor) => {
                         const data = editor.getData();
-                        console.log("Editor Data:", data);
+                        console.log('Editor Data:', data);
                         handleChange({
-                          target: { name: "profileDesc", value: data },
+                          target: { name: 'profileDesc', value: data },
                         });
                       }}
                       onBlur={(event, editor) => {
-                        console.log("Blur.", editor);
+                        console.log('Blur.', editor);
                       }}
                       onFocus={(event, editor) => {
-                        console.log("Focus.", editor);
+                        console.log('Focus.', editor);
                       }}
                     />
                     {validationErrors.profileDesc && (
-                      <p style={{ color: "red" }}>
+                      <p style={{ color: 'red' }}>
                         {validationErrors.profileDesc}
                       </p>
                     )}
@@ -367,20 +391,20 @@ const AddProfile = () => {
 
               <Row>
                 <Col>
-                  <div className="add-product-image-div">
-                    <div className="add-fellow-image">
+                  <div className='add-product-image-div'>
+                    <div className='add-fellow-image'>
                       <p>Fellow Image</p>
                     </div>
                     {/* <img src={image} alt='preview' /> */}
-                    <div className="product-image-div">
+                    <div className='product-image-div'>
                       <input
-                        type="file"
-                        name="imagePath"
+                        type='file'
+                        name='imagePath'
                         // value={formData.imagePath?.name}
                         onChange={handleChange}
                       />
                       {validationErrors.imagePath && (
-                        <p style={{ color: "red" }}>
+                        <p style={{ color: 'red' }}>
                           {validationErrors.imagePath}
                         </p>
                       )}
@@ -389,20 +413,20 @@ const AddProfile = () => {
                 </Col>
 
                 <Col>
-                  <div className="add-product-image-div">
-                    <div className="add-fellow-image">
+                  <div className='add-product-image-div'>
+                    <div className='add-fellow-image'>
                       <p>Fellow Thumbnail</p>
                     </div>
                     {/* <img src={image} alt='preview' /> */}
-                    <div className="product-image-div">
+                    <div className='product-image-div'>
                       <input
-                        type="file"
-                        name="thumbnailPath"
+                        type='file'
+                        name='thumbnailPath'
                         // value={formData.imagePath?.name}
                         onChange={handleChange}
                       />
                       {validationErrors.thumbnailPath && (
-                        <p style={{ color: "red" }}>
+                        <p style={{ color: 'red' }}>
                           {validationErrors.thumbnailPath}
                         </p>
                       )}
@@ -413,20 +437,20 @@ const AddProfile = () => {
 
               <Row>
                 <Col>
-                  <div className="add-product-image-div">
-                    <div className="add-fellow-image">
+                  <div className='add-product-image-div'>
+                    <div className='add-fellow-image'>
                       <p>Featured Image</p>
                     </div>
                     {/* <img src={image} alt='preview' /> */}
-                    <div className="product-image-div">
+                    <div className='product-image-div'>
                       <input
-                        type="file"
-                        name="featuredImage"
+                        type='file'
+                        name='featuredImage'
                         // value={formData.imagePath?.name}
                         onChange={handleChange}
                       />
                       {validationErrors.featuredImage && (
-                        <p style={{ color: "red" }}>
+                        <p style={{ color: 'red' }}>
                           {validationErrors.featuredImage}
                         </p>
                       )}
@@ -435,19 +459,19 @@ const AddProfile = () => {
                 </Col>
 
                 <Col>
-                  <div className="add-product-image-div">
-                    <div className="add-fellow-image">
+                  <div className='add-product-image-div'>
+                    <div className='add-fellow-image'>
                       <p>Slider Images</p>
                     </div>
-                    <div className="product-image-div">
+                    <div className='product-image-div'>
                       <input
-                        type="file"
-                        name="pictureSlider"
+                        type='file'
+                        name='pictureSlider'
                         onChange={handleImageChange}
                         multiple
                       />
                       {validationErrors.pictureSlider && (
-                        <p style={{ color: "red" }}>
+                        <p style={{ color: 'red' }}>
                           {validationErrors.pictureSlider}
                         </p>
                       )}
@@ -458,31 +482,33 @@ const AddProfile = () => {
 
               <Row>
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Facebook Url</p>
                     <input
-                      type="text"
-                      name="facebookUrl"
+                      type='text'
+                      name='facebookUrl'
                       value={formData.facebookUrl}
                       onChange={handleChange}
                     />
                     {validationErrors.facebookUrl && (
-                      <p style={{ color: "red" }}>{validationErrors.facebookUrl}</p>
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.facebookUrl}
+                      </p>
                     )}
                   </div>
                 </Col>
 
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Twitter Url</p>
                     <input
-                      type="text"
-                      name="twitterUrl"
+                      type='text'
+                      name='twitterUrl'
                       value={formData.twitterUrl}
                       onChange={handleChange}
                     />
                     {validationErrors.twitterUrl && (
-                      <p style={{ color: "red" }}>
+                      <p style={{ color: 'red' }}>
                         {validationErrors.twitterUrl}
                       </p>
                     )}
@@ -492,23 +518,24 @@ const AddProfile = () => {
 
               <Row>
                 <Col>
-                  <div className="add-product-input-div">
+                  <div className='add-product-input-div'>
                     <p>Ritsumei Url</p>
                     <input
-                      type="text"
-                      name="ritsumeiUrl"
+                      type='text'
+                      name='ritsumeiUrl'
                       value={formData.ritsumeiUrl}
                       onChange={handleChange}
                     />
                     {validationErrors.ritsumeiUrl && (
-                      <p style={{ color: "red" }}>{validationErrors.ritsumeiUrl}</p>
+                      <p style={{ color: 'red' }}>
+                        {validationErrors.ritsumeiUrl}
+                      </p>
                     )}
                   </div>
                 </Col>
               </Row>
 
-
-              <button type="submit" className="add-category-btn">
+              <button type='submit' className='add-category-btn'>
                 Add Fellow
               </button>
             </Form>

@@ -1,17 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import Sidebar from '../../Components/Sidebar';
-import image from '../../Assets/khan.jpeg';
 import { useHistory } from 'react-router';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Multiselect } from 'multiselect-react-dropdown';
 import axios from 'axios';
 import './AddBlog.css';
 
 function EditBlog(props) {
   const [blogData, setBlogData] = useState();
+  const [fellows, setFellows] = useState([]);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
   const [categories, setCategories] = useState([]);
+  const [relatedBlogs, setRelatedBlogs] = useState([]);
   const [validationErrors, setValidationErrors] = useState({
     title: '',
     content: '',
@@ -21,18 +23,20 @@ function EditBlog(props) {
     profile: '',
     imagePath: '',
   });
-
-  const [newImageFile, setNewImageFile] = useState(null);
   const blogId = props.match.params.blogId;
   const history = useHistory();
   const fileInputRef = useRef(null);
 
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
   useEffect(() => {
     getBlogs();
+    getBlogById();
     getCategories();
+    getFellows();
   }, []);
 
-  const getBlogs = () => {
+  const getBlogById = () => {
     console.log('getBlogs');
     setBlogData();
     axios({
@@ -41,6 +45,7 @@ function EditBlog(props) {
     })
       .then((response) => {
         setBlogData(response.data?.blogPost);
+        setSelectedOptions(response.data?.blogPost?.relatedBlogs);
         console.log('blogData: ', response.data.blogPost);
       })
       .catch((err) => {
@@ -57,6 +62,35 @@ function EditBlog(props) {
       .then((response) => {
         console.log('response: ', response?.data);
         setCategories(response?.data);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
+      });
+  };
+
+  const getFellows = () => {
+    setCategories([]);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/profile/getAllProfiles',
+    })
+      .then((response) => {
+        console.log('profiles: ', response?.data?.profiles);
+        setFellows(response?.data?.profiles);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
+      });
+  };
+
+  const getBlogs = () => {
+    setRelatedBlogs([]);
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/blog/getAllBlogPosts',
+    })
+      .then((response) => {
+        setRelatedBlogs(response?.data.blogPosts);
       })
       .catch((err) => {
         console.log('error: ', err);
@@ -87,6 +121,14 @@ function EditBlog(props) {
     fileInputRef.current.click();
   };
 
+  const onSelectOptions = (selectedList, selectedItem) => {
+    setSelectedOptions([...selectedOptions, selectedItem]);
+  };
+
+  const onRemoveOptions = (selectedList, removedItem) => {
+    setSelectedOptions(selectedOptions.filter((item) => item !== removedItem));
+  };
+
   const editBlog = (event) => {
     event.preventDefault();
     const errors = validateForm();
@@ -94,20 +136,28 @@ function EditBlog(props) {
       setValidationErrors(errors);
       return;
     }
-    console.log('image: ', blogData.imagePath);
+
+    const relatedBlogIds = selectedOptions.map((option) => option.id); // Extracting IDs from selected options
+    console.log('relatedBlogIds: ', relatedBlogIds);
     const updatedData = new FormData();
     updatedData.append('title', blogData.title);
     updatedData.append('content', blogData.content);
     updatedData.append('fellow', blogData.fellow);
+    updatedData.append('associatedFellow', blogData.associatedFellow);
     updatedData.append('category', blogData.category);
     updatedData.append('profile', blogData.profile);
     updatedData.append('region', blogData.region);
     updatedData.append('imagePath', blogData.imagePath);
 
+    if (typeof JSON !== 'undefined' && typeof JSON.stringify === 'function') {
+      updatedData.append('relatedBlogs', JSON.stringify(relatedBlogIds));
+    } else {
+      updatedData.append('relatedBlogs', relatedBlogIds.join(','));
+    }
+
     try {
-      console.log('updatedData: ', updatedData);
       axios
-        .patch(`http://localhost:4500/api/blog/${blogId}`, updatedData)
+        .put(`http://localhost:4500/api/blog/${blogId}`, updatedData)
         .then((response) => {
           console.log('edit data', response);
           setBlogData({
@@ -127,18 +177,6 @@ function EditBlog(props) {
       console.log('Error: ' + err.message);
     }
   };
-  const fellowOptions = [
-    'fellow 1',
-    'fellow 2',
-    'fellow 3',
-    'fellow 4',
-    'fellow 5',
-    'fellow 6',
-    'fellow 7',
-    'fellow 8',
-    'fellow 9',
-    'fellow 10',
-  ];
 
   const regionOptions = [
     'Pakistan',
@@ -214,12 +252,55 @@ function EditBlog(props) {
                   </Col>
                   <Col>
                     <div className='add-product-input-div'>
+                      <p>Blog Profile</p>
+                      <input
+                        type='text'
+                        name='profile'
+                        value={blogData.profile}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.profile && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.profile}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <div className='add-product-input-div'>
+                      <p>Category</p>
+                      <select
+                        name='category'
+                        value={blogData.category}
+                        onChange={handleChange}
+                        style={{ border: 'none', width: '100%' }}
+                      >
+                        <option value=''>Select Category</option>
+                        {categories.map((category, index) => (
+                          <option value={category?.title} key={index}>
+                            {category?.title}
+                          </option>
+                        ))}
+                      </select>
+
+                      {validationErrors.category && (
+                        <p style={{ color: 'red' }}>
+                          {validationErrors.category}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className='add-product-input-div'>
                       <p>Region</p>
                       <select
                         name='region'
                         value={blogData.region}
                         onChange={handleChange}
-                        style={{ border: 'none', width: '700px' }}
+                        style={{ border: 'none', width: '100%' }}
                       >
                         <option value=''>Select Region</option>
                         {regionOptions.map((region) => (
@@ -245,12 +326,12 @@ function EditBlog(props) {
                         name='fellow'
                         value={blogData.fellow}
                         onChange={handleChange}
-                        style={{ border: 'none', width: '700px' }}
+                        style={{ border: 'none', width: '100%' }}
                       >
                         <option value=''>Select Fellow</option>
-                        {fellowOptions.map((fellow) => (
-                          <option key={fellow} value={fellow}>
-                            {fellow}
+                        {fellows.map((fellow) => (
+                          <option key={fellow} value={fellow?.name}>
+                            {fellow?.name}
                           </option>
                         ))}
                       </select>
@@ -263,25 +344,23 @@ function EditBlog(props) {
                   </Col>
                   <Col>
                     <div className='add-product-input-div'>
-                      <p>Category</p>
-                      <label>
-                        <select
-                          name='category'
-                          value={blogData.category}
-                          onChange={handleChange}
-                          style={{ border: 'none', width: '700px' }}
-                        >
-                          <option value=''>Select Category</option>
-                          {categories.map((category, index) => (
-                            <option value={category?.title} key={index}>
-                              {category?.title}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-                      {validationErrors.category && (
+                      <p>Associated Fellow</p>
+                      <select
+                        name='fellow'
+                        value={blogData.associatedFellow}
+                        onChange={handleChange}
+                        style={{ border: 'none', width: '100%' }}
+                      >
+                        <option value=''>Select Fellow</option>
+                        {fellows.map((fellow) => (
+                          <option key={fellow} value={fellow?.name}>
+                            {fellow?.name}
+                          </option>
+                        ))}
+                      </select>
+                      {validationErrors.fellow && (
                         <p style={{ color: 'red' }}>
-                          {validationErrors.category}
+                          {validationErrors.fellow}
                         </p>
                       )}
                     </div>
@@ -291,18 +370,19 @@ function EditBlog(props) {
                 <Row>
                   <Col>
                     <div className='add-product-input-div'>
-                      <p>Blog Profile</p>
-                      <input
-                        type='text'
-                        name='profile'
-                        value={blogData.profile}
+                      <p>Related Blogs</p>
+                      <Multiselect
+                        name='relatedBlogs'
+                        options={relatedBlogs}
+                        onSelect={onSelectOptions}
+                        onRemove={onRemoveOptions}
                         onChange={handleChange}
+                        displayValue='title'
+                        closeIcon='cancel'
+                        placeholder='Select Options'
+                        selectedValues={selectedOptions}
+                        className='multiSelectContainer'
                       />
-                      {validationErrors.profile && (
-                        <p style={{ color: 'red' }}>
-                          {validationErrors.profile}
-                        </p>
-                      )}
                     </div>
                   </Col>
                 </Row>
@@ -343,15 +423,6 @@ function EditBlog(props) {
                   <Col>
                     <div className='add-product-image-div'>
                       <div className='product-image-div'>
-                        {/* <input
-                          type='file'
-                          name='imagePath'
-                          // value={formData.imagePath?.name}
-                          src={blogData.imagePath}
-                          // value={blogData.imagePath}
-                          onChange={handleChange}
-                        /> */}
-
                         <img
                           src={imagePreviewUrl ?? blogData?.imagePath}
                           alt='preview'
