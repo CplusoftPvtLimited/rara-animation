@@ -7,6 +7,7 @@ const blogRoutes = require('./routes/blogRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const checkoutRoute = require('./routes/checkRoute');
+const keysRoutes = require('./routes/keysRoutes');
 const RssFeedRoutes = require('./routes/RssFeedRoutes');
 
 const app = express();
@@ -37,6 +38,8 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/profile', profileRoutes);
 //Stripe Payment Route
 app.use('/api/checkout', checkoutRoute);
+// stripe secrete keys routes
+app.use('/api/secret', keysRoutes);
 // RSS Route
 app.use('/api/news', RssFeedRoutes);
 

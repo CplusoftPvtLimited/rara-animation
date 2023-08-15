@@ -31,23 +31,60 @@ router.post('/stripe', async (req, res) => {
 });
 
 router.post('/create-subscription', async (req, res) => {
-  console.log('create subscription: ', req.body);
-  // try {
-  const customer = await stripeClient.customers.create({
-    email: req.body.email,
-    source: req.body.source, // Payment source token from Stripe Elements
-  });
+  try {
+    const paymentMethodId = req.body.paymentMethodId;
+    const email = req.body.email;
 
-  console.log('Customer: ', customer.id);
-  //   const subscription = await stripe.subscriptions.create({
-  //     customer: customer.id,
-  //     items: [{ price: 'your_price_id' }], // Replace with your Stripe Price ID
-  //   });
+    // Create a customer
+    const customer = await stripeClient.customers.create({
+      email: email,
+    });
+    console.log('Customer: ', customer);
 
-  //   res.json({ subscription });
-  // } catch (error) {
-  //   res.status(500).json({ error: error.message });
-  // }
+    // Create a subscription using the payment method and subscription plan ID
+
+    // payment_method: 'pm_card_us',
+
+    // Set the default payment method on the customer
+    try {
+      await stripeClient.paymentMethods.attach('pm_card_us', {
+        customer: customer.id,
+      });
+    } catch (error) {
+      return res.status('402').send({ error: { message: error.message } });
+    }
+
+    const subscription = await stripeClient.subscriptions.create({
+      customer: customer.id,
+      items: [{ price: 'price_1NechALdgPiiadryq6NubUwN' }], // Replace with the actual price ID
+      // payment_behavior: 'default_incomplete',
+      // expand: ['latest_invoice.payment_intent'],
+      // items: [
+      //   {
+      //     price_data: {
+      //       currency: 'USD',
+      //       product: 'prod_ORViYzkPNSFKgI',
+      //       recurring: {
+      //         interval: 'month',
+      //         interval_count: 3,
+      //       },
+      //       unit_amount: 1000,
+      //     },
+      //     quantity: 1,
+      //   },
+      // ],
+    });
+
+    console.log('subscription: ', subscription);
+
+    res.status(200).json({
+      message: 'Subscription created successfully.',
+      subscription: subscription,
+    });
+  } catch (error) {
+    console.error('Error creating subscription:', error);
+    res.status(500).json({ error: `An error occurred: ${error.message}` });
+  }
 });
 
 router.post('/coinbase', async (req, res) => {
