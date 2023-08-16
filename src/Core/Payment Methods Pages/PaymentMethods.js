@@ -10,10 +10,15 @@ import './stripe.css';
 
 const PaymentMethods = () => {
   const [activeTab, setActiveTab] = useState('stripe');
-  const [checked, setChecked] = useState(false);
   const [keyData, setKeyData] = useState();
   const [coinbaseData, setCoinbaseData] = useState();
   const [bankData, setBankData] = useState();
+  // const [checked, setChecked] = useState(false);
+
+  const [stripeChecked, setStripeChecked] = useState();
+  const [coinbaseChecked, setCoinbaseChecked] = useState();
+  const [bankChecked, setBankChecked] = useState();
+  // console.log('keyData?.active: ', keyData?.active);
 
   useEffect(() => {
     getStripeKey();
@@ -30,6 +35,7 @@ const PaymentMethods = () => {
       .then((response) => {
         console.log('keyData: ', response);
         setKeyData(response?.data);
+        setStripeChecked(response?.data?.active);
       })
       .catch((err) => {
         console.log(err);
@@ -45,6 +51,7 @@ const PaymentMethods = () => {
       .then((response) => {
         console.log('coinbase: ', response);
         setCoinbaseData(response?.data);
+        setCoinbaseChecked(response?.data?.active);
       })
       .catch((err) => {
         console.log(err);
@@ -60,6 +67,7 @@ const PaymentMethods = () => {
       .then((response) => {
         console.log('bank Details: ', response);
         setBankData(response?.data);
+        setBankChecked(response?.data?.active);
       })
       .catch((err) => {
         console.log(err);
@@ -68,29 +76,54 @@ const PaymentMethods = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setKeyData((prev) => {
-      return { ...prev, [name]: value };
-    });
-    console.log('setKeyData: ', setKeyData);
-  };
-
-  const handleChange2 = (newChecked) => {
-    setChecked(newChecked);
+    if (name === 'active') {
+      // Handle active toggle separately
+      setStripeChecked(value === 'true'); // Assuming value is either 'true' or 'false'
+      setKeyData((prev) => {
+        return { ...prev, active: value === 'true' };
+      });
+    } else {
+      setKeyData((prev) => {
+        return { ...prev, [name]: value };
+      });
+    }
   };
 
   const handleChange3 = (event) => {
     const { name, value } = event.target;
-    setCoinbaseData((prev) => {
-      return { ...prev, [name]: value };
-    });
+    if (name === 'active') {
+      setCoinbaseChecked(value === 'true');
+      setCoinbaseData((prev) => {
+        return { ...prev, active: value === 'true' };
+      });
+    } else {
+      setCoinbaseData((prev) => {
+        return { ...prev, [name]: value };
+      });
+    }
   };
 
   const handleChange4 = (event) => {
+    // const { name, value } = event.target;
+    // setBankData((prev) => {
+    //   return { ...prev, [name]: value };
+    // });
     const { name, value } = event.target;
-    setBankData((prev) => {
-      return { ...prev, [name]: value };
-    });
+    if (name === 'active') {
+      setBankChecked(value === 'true');
+      setBankData((prev) => {
+        return { ...prev, active: value === 'true' };
+      });
+    } else {
+      setBankData((prev) => {
+        return { ...prev, [name]: value };
+      });
+    }
   };
+
+  // console.log('stripeChecked: ', stripeChecked);
+  // console.log('coinbaseChecked: ', coinbaseChecked);
+  console.log('bankChecked: ', bankChecked);
 
   const editStripeKey = (event) => {
     event.preventDefault();
@@ -98,6 +131,8 @@ const PaymentMethods = () => {
     const updatedData = new FormData();
     updatedData.append('clientKey', keyData.clientKey);
     updatedData.append('secretKey', keyData.secretKey);
+    updatedData.append('active', stripeChecked);
+    console.log('data data: ', keyData);
 
     try {
       axios
@@ -118,6 +153,7 @@ const PaymentMethods = () => {
     console.log('editCoinbaseKey');
     const updatedData = new FormData();
     updatedData.append('checkoutId', coinbaseData.checkoutId);
+    updatedData.append('active', coinbaseChecked);
 
     try {
       axios
@@ -138,7 +174,8 @@ const PaymentMethods = () => {
     console.log('editCoinbaseKey');
     const updatedData = new FormData();
     updatedData.append('bankTransfer', bankData.bankTransfer);
-
+    updatedData.append('active', bankChecked);
+    console.log('bankData: ', bankData);
     try {
       axios
         .put('http://localhost:4500/api/bank/1', bankData)
@@ -151,6 +188,19 @@ const PaymentMethods = () => {
     } catch (err) {
       console.log('Error: ' + err.message);
     }
+  };
+
+  const stripeHandleChange = (newChecked) => {
+    console.log('new Checked: ', newChecked);
+    setStripeChecked(newChecked);
+  };
+
+  const coinbaseHandleChange = (newChecked) => {
+    setCoinbaseChecked(newChecked);
+  };
+
+  const bankHandleChange = (newChecked) => {
+    setBankChecked(newChecked);
   };
 
   return (
@@ -199,9 +249,17 @@ const PaymentMethods = () => {
                   <Tab.Pane eventKey='first'>
                     <label style={{ display: 'flex' }}>
                       <Switch
-                        onChange={handleChange2}
-                        checked={checked}
-                        // style={{ marginRight: '5px !important' }}
+                        name='active'
+                        // onChange={stripeHandleChange}
+                        onChange={(newChecked) =>
+                          handleChange({
+                            target: {
+                              name: 'active',
+                              value: newChecked.toString(),
+                            },
+                          })
+                        }
+                        checked={stripeChecked}
                       />
                       <span>Display Stripe</span>
                     </label>
@@ -240,9 +298,21 @@ const PaymentMethods = () => {
                       Submit
                     </button>
                   </Tab.Pane>
+
                   <Tab.Pane eventKey='second'>
                     <label style={{ display: 'flex' }}>
-                      <Switch onChange={handleChange2} checked={checked} />
+                      <Switch
+                        // onChange={coinbaseHandleChange}
+                        onChange={(newChecked) =>
+                          handleChange3({
+                            target: {
+                              name: 'active',
+                              value: newChecked.toString(),
+                            },
+                          })
+                        }
+                        checked={coinbaseChecked}
+                      />
                       <span>Display Coinbase</span>
                     </label>
 
@@ -271,7 +341,18 @@ const PaymentMethods = () => {
 
                   <Tab.Pane eventKey='third'>
                     <label style={{ display: 'flex' }}>
-                      <Switch onChange={handleChange2} checked={checked} />
+                      <Switch
+                        // onChange={bankHandleChange}
+                        onChange={(newChecked) =>
+                          handleChange4({
+                            target: {
+                              name: 'active',
+                              value: newChecked.toString(),
+                            },
+                          })
+                        }
+                        checked={bankChecked}
+                      />
                       <span>Display Bank Transfer</span>
                     </label>
                     <Row>
