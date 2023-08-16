@@ -4,6 +4,7 @@ const Key = require('../models/SecretKeys');
 const createKey = async (req, res) => {
   try {
     const { secretKey, clientKey } = req.body;
+    console.log('body: ', req.body);
     if (!secretKey || !clientKey) {
       return res
         .status(400)
@@ -22,7 +23,7 @@ const createKey = async (req, res) => {
 // Get all keys
 const getAllKeys = async (req, res) => {
   try {
-    const keys = await Key.findAll();
+    const keys = await Key.findAll({ order: [['createdAt', 'DESC']] });
     res.json(keys);
   } catch (error) {
     console.error(error);

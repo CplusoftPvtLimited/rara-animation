@@ -8,6 +8,8 @@ const profileRoutes = require('./routes/profileRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const checkoutRoute = require('./routes/checkRoute');
 const keysRoutes = require('./routes/keysRoutes');
+const coinbaseKeysRoutes = require('./routes/coinbaseKeysRoutes');
+const bankRoutes = require('./routes/bankRoutes');
 const RssFeedRoutes = require('./routes/RssFeedRoutes');
 
 const app = express();
@@ -40,6 +42,12 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/checkout', checkoutRoute);
 // stripe secrete keys routes
 app.use('/api/secret', keysRoutes);
+// coinbase secrete keys routes
+app.use('/api/secret', coinbaseKeysRoutes);
+
+// bank details
+app.use('/api/bank', bankRoutes);
+
 // RSS Route
 app.use('/api/news', RssFeedRoutes);
 
