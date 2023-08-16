@@ -9,10 +9,6 @@ import Circle from "../../assets/images/fellow-circle.png";
 import partialBall from "../../assets/images/partial-ball.png";
 import BlogImage from "../../assets/images/blog-img.jpeg";
 import BackIcon from "../../assets/images/b-back_icon.svg";
-import image1 from "../../assets/images/slider/slider1.jpg";
-import image2 from "../../assets/images/slider/slider2.jpg";
-import image3 from "../../assets/images/slider/slider3.jpg";
-import image4 from "../../assets/images/slider/slider4.jpg";
 import Logo from '../../assets/images/b-logo-rara.svg'
 
 
@@ -25,13 +21,7 @@ function FellowSingle() {
   const [blogData, setBlogData] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  const sliderImages = [
-    image1,
-    image2,
-    image3,
-    image4
-  ];
+  const [sliderImages, setSliderImages] = useState([]);
 
   const handlePrevSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide === 0 ? sliderImages.length - 1 : prevSlide - 1));
@@ -55,7 +45,10 @@ function FellowSingle() {
         `${process.env.REACT_APP_SERVER}/profile/${fellowId}`
       );
       const data = await response.json();
+      console.log("🚀 ~ file: index.jsx:53 ~ fetchFellow ~ data:", data.profile);
       setFellow(data.profile);
+      const pictureSliderJson = JSON.parse(data.profile.pictureSlider);
+      setSliderImages(pictureSliderJson);
     };
     fetchFellow();
 
@@ -267,3 +260,4 @@ function FellowSingle() {
 }
 
 export default FellowSingle;
+

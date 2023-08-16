@@ -3,6 +3,9 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Pic from "../../assets/images/pic.jpg";
+import graphics1 from "../../assets/images/graphic03-2.png";
+import graphics2 from "../../assets/images/graphic04-2.png";
+import graphics3 from "../../assets/images/graphics05-2.svg";
 import Footer from "../../assets/images/fellow-beforefooter.png";
 import websiteIcon from "../../assets/images/website-icon.svg";
 import Logo from "../../assets/images/b-logo-rara.svg";
@@ -37,7 +40,6 @@ function Fellows() {
             associateFellowsCount++;
           }
         });
-        
 
         setFellows(fellows);
         setFellowsCount(fellowsCount);
@@ -80,12 +82,45 @@ function Fellows() {
                   <div className="fellows-container flex gap-4 w-[95%] mx-auto">
                     {/* Generate three boxes for each row */}
                     {fellowsData.slice(index, index + 3).map((fellow) => (
-                      <div key={fellow.id} className="fellow-box" onClick={() => handleViewDetails(fellow.id)}>
+                      <div
+                        key={fellow.id}
+                        className="fellow-box"
+                        onClick={() => handleViewDetails(fellow.id)}
+                      >
                         <div className="job-post">
                           <h5>{fellow.jobPost}</h5>
                         </div>
-                        <div>
-                          <img className="thumbnail" src={fellow.thumbnailPath} alt="" />
+                        <div className="flex ml-[110px] mb-[-70px] z-50">
+                          <img
+                            className="graphics-2 z-50"
+                            src={graphics2}
+                            alt=""
+                          />
+                        </div>
+                        <div className="relative">
+                          <div className="graphics-3box flex z-50 ">
+                            <img
+                              className="graphics-3 z-50"
+                              src={graphics3}
+                              alt=""
+                            />
+                          </div>
+                          <div className="thumbnail-container">
+                            <div className="thumbnail-wrapper w-[18rem] h-[31.25rem] m-auto rounded-[25px]">
+                              <img
+                                className="thumbnail-image"
+                                src={fellow.thumbnailPath}
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                          <div className="flex justify-end mt-[-90px] mr-[70px]">
+                            <img
+                              className="graphics-1"
+                              src={graphics1}
+                              alt=""
+                            />
+                          </div>
                         </div>
                         <div className="mt-[25px] pl-[40px]">
                           <h4>{fellow.nameEnglish}</h4>
@@ -97,7 +132,12 @@ function Fellows() {
                             className="flex justify-end"
                             onClick={() => handleViewDetails(fellow.id)}
                           >
-                            <a href="#" className="det-btn text-[10px] lg:text-[12px]">VIEW DETAILS</a>
+                            <a
+                              href="#"
+                              className="det-btn text-[10px] lg:text-[12px]"
+                            >
+                              VIEW DETAILS
+                            </a>
                             <div className="bullet"></div>
                           </div>
                         </div>
@@ -109,7 +149,6 @@ function Fellows() {
           )
         )}
       </div>
-
 
       {/************************** RARA Associate Fellow Section ******************************/}
       <div className="mid-bar lg:flex lg:justify-between">
@@ -135,12 +174,20 @@ function Fellows() {
                   <div className="fellows-container flex gap-4 w-[95%] mx-auto">
                     {/* Generate three boxes for each row */}
                     {fellowsData.slice(index, index + 3).map((fellow) => (
-                      <div key={fellow.id} className="fellow-box" onClick={() => handleViewDetails(fellow.id)}>
+                      <div
+                        key={fellow.id}
+                        className="fellow-box"
+                        onClick={() => handleViewDetails(fellow.id)}
+                      >
                         <div className="job-post">
                           <h5>{fellow.jobPost}</h5>
                         </div>
                         <div>
-                          <img className="thumbnail" src={fellow.thumbnailPath} alt="" />
+                          <img
+                            className="thumbnail"
+                            src={fellow.thumbnailPath}
+                            alt=""
+                          />
                         </div>
                         <div className="mt-[25px] pl-[40px]">
                           <h4>{fellow.nameEnglish}</h4>
@@ -173,7 +220,6 @@ function Fellows() {
         </div>
         <h3 className="my-auto">RARA STUDENT FELLOWS</h3>
       </div>
-
 
       {/************************** RARA Student Fellows Content ******************************/}
 
