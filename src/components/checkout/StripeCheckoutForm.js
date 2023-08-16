@@ -91,11 +91,6 @@ export default function StripeCheckoutForm({ donate }) {
       />
       <PaymentElement id='payment-element' options={paymentElementOptions} />
 
-      {/* <div>
-        <label>Total Cost: </label>
-        <span>{donate}$</span>
-      </div> */}
-
       <button
         className='paymentButton'
         disabled={isLoading || !stripe || !elements}

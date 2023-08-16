@@ -6,13 +6,15 @@ import {
   Button,
   ButtonGroup,
   Form,
+  Modal,
 } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './donate.css';
 
 const Donate = () => {
@@ -20,10 +22,17 @@ const Donate = () => {
   const [selectedButton, setSelectedButton] = useState('once');
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [showRightColumn, setShowRightColumn] = useState(false);
-
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [error, setError] = useState(null);
+  const [coinbaseData, setCoinbaseData] = useState();
   const [hostedUrl, setHostedUrl] = useState();
+  const [showBankTransferModal, setShowBankTransferModal] = useState(false);
+  const [bankData, setBankData] = useState();
+
+  useEffect(() => {
+    getCoinbaseKey();
+    getBankDetails();
+  }, []);
 
   useEffect(() => {
     axios
@@ -59,7 +68,12 @@ const Donate = () => {
   };
 
   const handlePaymentMethodChange = (event) => {
-    setSelectedPaymentMethod(event.target.value);
+    // setSelectedPaymentMethod(event.target.value);
+    const selectedMethod = event.target.value;
+    setSelectedPaymentMethod(selectedMethod);
+    if (selectedMethod === 'bankTransfer') {
+      setShowBankTransferModal(true);
+    }
   };
 
   const renderTickSign = (amount) => {
@@ -68,22 +82,50 @@ const Donate = () => {
     ) : null;
   };
 
+  const getCoinbaseKey = () => {
+    setCoinbaseData();
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/secret/coinbase/1',
+    })
+      .then((response) => {
+        console.log('coinbase: ', response);
+        setCoinbaseData(response?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getBankDetails = (req, res) => {
+    setBankData();
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/bank/1',
+    })
+      .then((response) => {
+        console.log('bank Details: ', response);
+        setBankData(response?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   switch (selectedPaymentMethod) {
     case 'stripe':
       navigate('/stripe');
       break;
     case 'coinbase':
-      if (hostedUrl) {
+      if (coinbaseData?.active) {
         window.location.href = hostedUrl;
+      } else {
+        navigate('/coinbase');
       }
-      break;
-    case 'bankTransfer':
-      navigate('/bankAccount');
       break;
     default:
       break;
   }
-
   return (
     <div>
       <Container className='donateUs'>
@@ -125,17 +167,7 @@ const Donate = () => {
               <Form>
                 <Form.Group controlId='paymentMethod'>
                   <Form.Label>Select Payment Method:</Form.Label>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      border: '1px solid #ccc',
-                      padding: '12px 10px',
-                      marginBottom: '10px',
-                      backgroundColor: 'rgba(227, 227, 227, 1)',
-                    }}
-                  >
+                  <div className='paymentMethod'>
                     <label style={{ margin: 0 }}>
                       <input
                         type='radio'
@@ -148,17 +180,7 @@ const Donate = () => {
                       Stripe
                     </label>
                   </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      border: '1px solid #ccc',
-                      padding: '12px 10px',
-                      marginBottom: '10px',
-                      backgroundColor: 'rgba(227, 227, 227, 1)',
-                    }}
-                  >
+                  <div className='paymentMethod'>
                     <label style={{ margin: 0 }}>
                       <input
                         type='radio'
@@ -171,16 +193,7 @@ const Donate = () => {
                       Coinbase
                     </label>
                   </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      border: '1px solid #ccc',
-                      padding: '12px 10px',
-                      backgroundColor: 'rgba(227, 227, 227, 1)',
-                    }}
-                  >
+                  <div className='paymentMethod'>
                     <label style={{ margin: 0 }}>
                       <input
                         type='radio'
@@ -194,6 +207,69 @@ const Donate = () => {
                     </label>
                   </div>
                 </Form.Group>
+                {bankData?.active ? (
+                  <Modal
+                    show={showBankTransferModal}
+                    onHide={() => setShowBankTransferModal(false)}
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>Bank Transfer Payment</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {/* <p>Enter details for Bank Transfer</p> */}
+                      <p>Bank Transfer</p>
+                      <CKEditor
+                        editor={ClassicEditor}
+                        data={bankData?.bankTransfer}
+                        config={{
+                          readOnly: true, // Set the editor to read-only mode
+                        }}
+                        onReady={(editor) => {}}
+                        // onChange={(event, editor) => {
+                        //   const data = editor.getData();
+                        //   console.log('Editor Data:', data);
+                        //   handleChange4({
+                        //     target: { name: 'bankTransfer', value: data },
+                        //   });
+                        // }}
+                        // onBlur={(event, editor) => {
+                        //   console.log('Blur.', editor);
+                        // }}
+                        onFocus={(event, editor) => {
+                          console.log('Focus.', editor);
+                        }}
+                      />
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button
+                        variant='secondary'
+                        onClick={() => setShowBankTransferModal(false)}
+                      >
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                ) : (
+                  <Modal
+                    show={showBankTransferModal}
+                    onHide={() => setShowBankTransferModal(false)}
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>Bank Transfer Payment</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>Bank Transfer is not present at the moment.</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button
+                        variant='secondary'
+                        onClick={() => setShowBankTransferModal(false)}
+                      >
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                )}
               </Form>
             </Col>
           ) : (
@@ -337,6 +413,7 @@ const Donate = () => {
             </Col>
           )}
         </Row>
+        f{' '}
       </Container>
     </div>
   );

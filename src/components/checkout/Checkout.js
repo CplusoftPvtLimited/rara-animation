@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import StripeCheckoutForm from './StripeCheckoutForm.js';
+import SubscriptionFrom from './SubscriptionFrom.js';
 import axios from 'axios';
 import './Checkout.css';
 
@@ -12,12 +13,19 @@ export default function Checkout({ donate }) {
 
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState('');
+  const [keyData, setKeyData] = useState();
+
+  useEffect(() => {
+    getStripeKey();
+  }, []);
 
   useEffect(() => {
     const loadStripe = require('@stripe/stripe-js').loadStripe;
-    const stripePromise = loadStripe(stripePromiseKey);
-    setStripePromise(stripePromise);
-  }, []);
+    if (keyData && keyData.clientKey) {
+      const stripePromise = loadStripe(keyData.clientKey);
+      setStripePromise(stripePromise);
+    }
+  }, [keyData]);
 
   useEffect(() => {
     axios
@@ -33,6 +41,21 @@ export default function Checkout({ donate }) {
       });
   }, []);
 
+  const getStripeKey = () => {
+    setKeyData();
+    axios({
+      method: 'get',
+      url: 'http://localhost:4500/api/secret/1',
+    })
+      .then((response) => {
+        console.log('keyData: ', response);
+        setKeyData(response?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const appearance = {
     theme: 'stripe',
   };
@@ -41,11 +64,34 @@ export default function Checkout({ donate }) {
     appearance,
   };
 
+  // const handlePayment = async (paymentMethodId) => {
+  //   try {
+  //     const response = await axios.post(
+  //       'http://localhost:4500/api/process-payment',
+  //       {
+  //         paymentMethodId: paymentMethodId,
+  //         email: 'khansaffy1@gmail.com',
+  //       }
+  //     );
+
+  //     console.log('Payment response:', response.data);
+  //   } catch (error) {
+  //     console.error('Error processing payment:', error);
+  //   }
+  // };
+
   return (
     <div className='App' style={{ paddingTop: '50px' }}>
       {clientSecret && (
         <Elements stripe={stripePromise} options={options}>
           <StripeCheckoutForm donate={donate} />
+
+          {/* Subscription Payment */}
+          {/* <SubscriptionFrom
+            donate={donate}
+            isSubscription={true}
+            handleSubmit={handlePayment}
+          /> */}
         </Elements>
       )}
     </div>

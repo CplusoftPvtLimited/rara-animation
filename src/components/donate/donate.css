@@ -25,3 +25,10 @@
   padding: 15rem 0rem;
   color: #ececec;
 }
+
+.paymentMethod {
+  border: 1px solid #ccc;
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  background-color: rgba(227, 227, 227, 1);
+}
