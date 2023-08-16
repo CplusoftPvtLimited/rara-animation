@@ -1,0 +1,32 @@
+.sidebar-item .sidebar-icon {
+  font-size: 20px;
+}
+
+.sidebar-item p {
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 6px !important;
+}
+
+.dashboard-parent-div .sidebar-item.active {
+  background-color: #2d47b99d;
+  color: #fff;
+}
+
+.dashboard-parent-div .sidebar-item:hover {
+  background-color: #2d47b99d;
+  color: white;
+  cursor: pointer;
+}
+
+.dashboard-parent-div .sidebar-item:hover.active {
+  background-color: #2d47b99d;
+}
+
+.dashboard-parent-div .react-switch-bg {
+  /* background-color: #2d47b99d !important; */
+}
+
+.react-switch-bg {
+  margin-right: 18px !important;
+}

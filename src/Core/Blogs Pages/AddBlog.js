@@ -135,7 +135,6 @@ const AddBlog = () => {
     try {
       const relatedBlogIds = selectedOptions.map((option) => option.id); // Extracting IDs from selected options
 
-      console.log('related blog id', relatedBlogIds);
       console.log('relatedBlogs: ', formData.relatedBlogs);
       const formDataToSend = new FormData();
 
