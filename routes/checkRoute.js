@@ -3,6 +3,7 @@ const router = express.Router();
 const Stripe = require('stripe');
 var coinbase = require('coinbase-commerce-node');
 var Webhook = require('coinbase-commerce-node').Webhook;
+const axios = require('axios'); // Import the axios library
 
 var Client = coinbase.Client;
 Client.init(process.env.COINBASE_API_KEY);
@@ -11,8 +12,28 @@ var resources = coinbase.resources;
 const stripe = process.env.STRIPE_SECRET;
 const stripeClient = new Stripe(stripe);
 
+// Utility function to fetch the key data
+// async function fetchKeyData() {
+//   try {
+//     const response = await axios.get('http://localhost:4500/api/secret/1');
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error(`Failed to fetch key data: ${error.message}`);
+//   }
+// }
+
+// let stripeClient;
+
+// (async () => {
+//   const keyData = await fetchKeyData();
+//   const stripeSecretKey = keyData?.secretKey;
+//   stripeClient = new Stripe(stripeSecretKey);
+//   console.log('stripeClient: ', stripeClient);
+// })();
+
 async function initPaymentIntent(amount) {
-  console.log(amount);
+  // console.log('stripeClient: ', stripeClient.api);
   return stripeClient.paymentIntents.create({
     payment_method_types: ['card'],
     amount: amount * 100,

@@ -1,7 +1,7 @@
 const Bank = require('../models/BankTransfer');
 
 const createBank = async (req, res) => {
-  const { bankTransfer } = req.body;
+  const { bankTransfer, active } = req.body;
   console.log('bankTransfer', bankTransfer);
   if (!bankTransfer) {
     return res.status(400).send({ message: 'bankTransfer is required' });
@@ -10,6 +10,7 @@ const createBank = async (req, res) => {
   try {
     const bankDetails = await Bank.create({
       bankTransfer,
+      active,
     });
     console.log('bankDetails: ', bankDetails);
     res.status(201).send({ message: 'Success', bankDetails: bankDetails });
@@ -40,8 +41,8 @@ const getBankDetails = async (req, res) => {
 
 const updateBankDetailsById = async (req, res) => {
   const id = req.params.id;
-  const { bankTransfer } = req.body;
-  console.log('bankTransfer: ', bankTransfer);
+  const { bankTransfer, active } = req.body;
+  console.log('active: ', active);
   if (!bankTransfer) {
     return res
       .status(400)
@@ -53,9 +54,16 @@ const updateBankDetailsById = async (req, res) => {
       return res.status(404).json({ error: 'Bank Details not found' });
     }
 
-    if (bankTransfer) {
+    // console.log('bankData: ', bankData);
+
+    if (bankTransfer !== undefined) {
       bankData.bankTransfer = bankTransfer;
     }
+    if (active !== undefined) {
+      bankData.active = active;
+    }
+    console.log('bankData: ', bankData);
+
     await bankData.save();
 
     res.status(200).json(bankData);

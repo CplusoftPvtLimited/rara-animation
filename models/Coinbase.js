@@ -6,6 +6,11 @@ const Coinbase = sequelize.define('Coinbase', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  active: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false, // Set default value to false
+  },
 });
 
 module.exports = Coinbase;

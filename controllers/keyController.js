@@ -3,14 +3,14 @@ const Key = require('../models/SecretKeys');
 // Create a new key
 const createKey = async (req, res) => {
   try {
-    const { secretKey, clientKey } = req.body;
+    const { secretKey, clientKey, active } = req.body;
     console.log('body: ', req.body);
     if (!secretKey || !clientKey) {
       return res
         .status(400)
         .json({ message: 'Both secretKey and clientKey are required.' });
     }
-    const key = await Key.create({ secretKey, clientKey });
+    const key = await Key.create({ secretKey, clientKey, active });
     res.status(201).json({ message: 'key is successfully created', key: key });
   } catch (error) {
     console.error(error);
@@ -52,8 +52,8 @@ const getKeyById = async (req, res) => {
 // Update a key
 const updateKey = async (req, res) => {
   const id = req.params.id;
-  const { secretKey, clientKey } = req.body;
-
+  const { secretKey, clientKey, active } = req.body;
+  console.log('body: ', req.body);
   try {
     const key = await Key.findByPk(id);
     if (!key) {
@@ -64,6 +64,10 @@ const updateKey = async (req, res) => {
     }
     if (clientKey !== undefined) {
       key.clientKey = clientKey;
+    }
+
+    if (active !== undefined) {
+      key.active = active;
     }
 
     await key.save();
