@@ -216,27 +216,10 @@ const Donate = () => {
                       <Modal.Title>Bank Transfer Payment</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      {/* <p>Enter details for Bank Transfer</p> */}
                       <p>Bank Transfer</p>
-                      <CKEditor
-                        editor={ClassicEditor}
-                        data={bankData?.bankTransfer}
-                        config={{
-                          readOnly: true, // Set the editor to read-only mode
-                        }}
-                        onReady={(editor) => {}}
-                        // onChange={(event, editor) => {
-                        //   const data = editor.getData();
-                        //   console.log('Editor Data:', data);
-                        //   handleChange4({
-                        //     target: { name: 'bankTransfer', value: data },
-                        //   });
-                        // }}
-                        // onBlur={(event, editor) => {
-                        //   console.log('Blur.', editor);
-                        // }}
-                        onFocus={(event, editor) => {
-                          console.log('Focus.', editor);
+                      <h2
+                        dangerouslySetInnerHTML={{
+                          __html: bankData?.bankTransfer || '',
                         }}
                       />
                     </Modal.Body>

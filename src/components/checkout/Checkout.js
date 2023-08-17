@@ -5,8 +5,8 @@ import SubscriptionFrom from './SubscriptionFrom.js';
 import axios from 'axios';
 import './Checkout.css';
 
-const stripePromiseKey =
-  'pk_test_51KYPqJLdgPiiadryliSCj8R0YZ9rYVnOIECcgxmOy11EYLoIresrd5sygDAnGfN5F2rxA7t1qnT6SwPkISmDAecJ00FtNIJOiq';
+// const stripePromiseKey =
+// 'pk_test_51KYPqJLdgPiiadryliSCj8R0YZ9rYVnOIECcgxmOy11EYLoIresrd5sygDAnGfN5F2rxA7t1qnT6SwPkISmDAecJ00FtNIJOiq';
 
 export default function Checkout({ donate }) {
   console.log('donate: ', donate);
