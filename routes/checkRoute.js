@@ -3,37 +3,29 @@ const router = express.Router();
 const Stripe = require('stripe');
 var coinbase = require('coinbase-commerce-node');
 var Webhook = require('coinbase-commerce-node').Webhook;
-const axios = require('axios'); // Import the axios library
-
+const Key = require('../models/SecretKeys');
 var Client = coinbase.Client;
 Client.init(process.env.COINBASE_API_KEY);
 var resources = coinbase.resources;
 
-const stripe = process.env.STRIPE_SECRET;
-const stripeClient = new Stripe(stripe);
+// const stripe = process.env.STRIPE_SECRET;
 
-// Utility function to fetch the key data
-// async function fetchKeyData() {
-//   try {
-//     const response = await axios.get('http://localhost:4500/api/secret/1');
-//     return response.data;
-//   } catch (error) {
-//     console.error(error);
-//     throw new Error(`Failed to fetch key data: ${error.message}`);
-//   }
-// }
+async function createStripeClient() {
+  try {
+    const keyData = await Key.findByPk(1); // Modify as needed based on your data
+    const secret_Key = keyData.secretKey;
 
-// let stripeClient;
-
-// (async () => {
-//   const keyData = await fetchKeyData();
-//   const stripeSecretKey = keyData?.secretKey;
-//   stripeClient = new Stripe(stripeSecretKey);
-//   console.log('stripeClient: ', stripeClient);
-// })();
+    return new Stripe(secret_Key);
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to create Stripe client');
+  }
+}
 
 async function initPaymentIntent(amount) {
-  // console.log('stripeClient: ', stripeClient.api);
+  const stripeClient = await createStripeClient();
+  console.log('stripeClient: ', stripeClient);
+
   return stripeClient.paymentIntents.create({
     payment_method_types: ['card'],
     amount: amount * 100,
@@ -42,10 +34,9 @@ async function initPaymentIntent(amount) {
 }
 
 router.post('/stripe', async (req, res) => {
-  console.log('body: ', req.body);
   const totalCost = req.body.totalCost;
   const paymentIntent = await initPaymentIntent(totalCost);
-  console.log('paymentIntent.client_secret: ', paymentIntent.client_secret);
+  // console.log('paymentIntent.client_secret: ', paymentIntent.client_secret);
   res.send({
     clientSecret: paymentIntent.client_secret,
   });
