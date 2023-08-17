@@ -154,7 +154,7 @@ function Hero() {
     <div>
       {/************************** Svg ******************************/}
       <div className="gap-12 mt-[150px]  lg:mt-[300px] lg:ml-[200px] lg:flex">
-        <div className=" w-[80%] pl-[30px] lg:w-[65%] ">
+        <div className=" w-[80%] pl-[30px] lg:w-[65%] xl:w-[65%]">
           <h1 className="lFellows-title-main" data-fellows-title="">
             <svg viewBox="0 0 936.1 150.5">
               <title>FELLOWS</title>

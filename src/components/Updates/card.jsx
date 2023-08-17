@@ -1,10 +1,13 @@
 import React from "react";
 import "./index.css";
+import { TweenMax, Power3 } from "gsap";
 import Image from "../../assets/images/news-image.jpg";
 import { useState, useEffect } from "react";
-import { HiPlus } from 'react-icons/hi';
+import { HiPlus } from "react-icons/hi";
+import { HiMinus } from "react-icons/hi";
 function Card() {
   const [postData, setPostData] = useState([]);
+  const [fellowData, setFellowData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState("All News");
   const [sortFellowOption, setSortFellowOption] = useState("All Fellows");
@@ -26,6 +29,42 @@ function Card() {
     fetchNews();
   }, []);
 
+  useEffect(() => {
+    const fetchFellow = async () => {
+      const response = await fetch(
+        "http://localhost:4500/api/profile/getAllProfiles"
+      );
+      const data = await response.json();
+      console.log("🚀 ~ file: card.jsx:38 ~ fetchFellow ~ data:", data);
+      setFellowData(data.profiles);
+    };
+    fetchFellow();
+  }, []);
+
+  useEffect(() => {
+    const filterSection = document.querySelector(".filter-3");
+
+    if (fellowToggle) {
+      TweenMax.set(filterSection, { display: "block", opacity: 0, height: 0 });
+      TweenMax.to(filterSection, 0.9, {
+        // Adjust duration for opening animation
+        opacity: 1,
+        height: "auto",
+        ease: Power3.easeInOut, // Easing function for opening
+        onComplete: () => {
+          filterSection.style.height = "auto"; // Set height to auto after animation
+        },
+      });
+    } else {
+      TweenMax.to(filterSection, 0.7, {
+        // Adjust duration for closing animation
+        opacity: 0,
+        height: 0,
+        ease: Power3.easeIn, // Easing function for closing
+      });
+    }
+  }, [fellowToggle]);
+
   // Cut short the blog title
   function truncateText(text, maxLength) {
     if (text.length > maxLength) {
@@ -44,12 +83,16 @@ function Card() {
     let filteredData = postData;
 
     // Apply category filter
-    if (categoryOption !== "All News" ) {
-      filteredData = filteredData.filter(post => post.category === categoryOption);
+    if (categoryOption !== "All News") {
+      filteredData = filteredData.filter(
+        (post) => post.category === categoryOption
+      );
     }
     // Apply fellow filter
     if (fellowOption !== "All Fellows") {
-      filteredData = filteredData.filter(post => post.fellow === fellowOption);
+      filteredData = filteredData.filter(
+        (post) => post.fellow === fellowOption
+      );
     }
     setSortedPostData(filteredData);
   };
@@ -63,7 +106,7 @@ function Card() {
 
   const fellowToggleHandler = () => {
     setFellowToggle(!fellowToggle);
-  }
+  };
 
   const uniqueFellows = new Set(postData.map((post) => post.fellow));
   return (
@@ -85,7 +128,9 @@ function Card() {
             className={`filter-btn ${
               sortOption === "RARA Commons" ? "active" : " "
             }`}
-            onClick={() => handleSortingOption("RARA Commons", sortFellowOption)}
+            onClick={() =>
+              handleSortingOption("RARA Commons", sortFellowOption)
+            }
           >
             RARA Commons
           </button>
@@ -115,62 +160,69 @@ function Card() {
             className={`filter-btn ${
               sortFellowOption === "All Fellows" ? "active" : ""
             }`}
-            onClick={() => handleSortingOption(sortOption,"All Fellows")}
+            onClick={() => handleSortingOption(sortOption, "All Fellows")}
           >
             ALL FELLOWS
           </button>
         </div>
-        <div className="flex justify-end gap-8 cursor-pointer" onClick={() => fellowToggleHandler()}>
-        <p>フェローで絞り込む</p>
-          <HiPlus className="m-auto"  />
+        <div
+          className="flex justify-end gap-8 cursor-pointer"
+          onClick={() => fellowToggleHandler()}
+        >
+          <p>フェローで絞り込む</p>
+          {fellowToggle ? (
+            <HiMinus className="m-auto" />
+          ) : (
+            <HiPlus className="m-auto" />
+          )}
         </div>
       </div>
 
       {/***********************Toggle Section ***************************/}
 
-      {fellowToggle ?
-      <div className="filter-2 mx-auto w-[80%] py-[50px] pr-[150px] lg:pl-[100px] ">
+      {fellowToggle ? (
+        <div className="filter-3 mx-auto w-[80%] py-[50px] pr-[150px] lg:pl-[100px] ">
           <div className="flex gap-32">
-        <div className="filter-by-fellow my-auto">
-          <h5>Fellows</h5>
-        </div>
-      
-          <div className="flex gap-8 mt-[25px] lg:mt-auto">
-            {Array.from(uniqueFellows).map((fellow, index) => (
-              <button
-                key={index}
-                className={`filter-btn ${
-                  sortFellowOption === fellow ? "active" : ""
-                }`}
-                onClick={() => handleSortingOption(sortOption, fellow)}
-              >
-                {fellow}
-              </button>
-            ))}
+            <div className="filter-by-fellow my-auto">
+              <h5>Fellows</h5>
+            </div>
+
+            <div className="flex gap-8 mt-[25px] lg:mt-auto">
+              {Array.from(uniqueFellows).map((fellow, index) => (
+                <button
+                  key={index}
+                  className={`filter-btn ${
+                    sortFellowOption === fellow ? "active" : ""
+                  }`}
+                  onClick={() => handleSortingOption(sortOption, fellow)}
+                >
+                  {fellow}
+                </button>
+              ))}
+            </div>
           </div>
-</div>
-{/**Associate Fellows filter section */}
-{/* <div className="flex gap-16 mt-10">
-        <div className="filter-by-fellow my-auto">
-          <h5>Associate Fellows</h5>
+          {/**Associate Fellows filter section */}
+          {/* <div className="flex gap-16 mt-10">
+            <div className="filter-by-fellow my-auto">
+              <h5>Associate Fellows</h5>
+            </div>
+
+            <div className="flex gap-8 mt-[25px] lg:mt-auto">
+              {Array.from(uniqueFellows).map((fellow, index) => (
+                <button
+                  key={index}
+                  className={`filter-btn ${
+                    sortFellowOption === fellow ? "active" : ""
+                  }`}
+                  onClick={() => handleSortingOption(sortOption, fellow)}
+                >
+                  {fellow}
+                </button>
+              ))}
+            </div>
+          </div> */}
         </div>
-      
-          <div className="flex gap-8 mt-[25px] lg:mt-auto">
-            {Array.from(uniqueFellows).map((fellow, index) => (
-              <button
-                key={index}
-                className={`filter-btn ${
-                  sortFellowOption === fellow ? "active" : ""
-                }`}
-                onClick={() => handleSortingOption(sortOption, fellow)}
-              >
-                {fellow}
-              </button>
-            ))}
-          </div>
-</div> */}
-      </div> : null
-      }
+      ) : null}
 
       {/***********************Cards ***************************/}
       {postData.length > 0 ? (

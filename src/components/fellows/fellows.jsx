@@ -69,7 +69,7 @@ function Fellows() {
 
       {/************************** RARA Fellow Profile Section ******************************/}
 
-      <div className="rows-wrapper">
+      <div className="rows-wrapper px-[20px] lg:px-[0px]">
         {fellows.length === 0 ? (
           <div className="mx-auto my-[50px]">
             <p>Loading...</p>
@@ -90,7 +90,7 @@ function Fellows() {
                         <div className="job-post">
                           <h5>{fellow.jobPost}</h5>
                         </div>
-                        <div className="flex ml-[110px] mb-[-70px] z-50">
+                        <div className="graphics-2div flex ml-[110px] mb-[-70px] z-50  ">
                           <img
                             className="graphics-2 z-50"
                             src={graphics2}
@@ -98,7 +98,7 @@ function Fellows() {
                           />
                         </div>
                         <div className="relative">
-                          <div className="graphics-3box flex z-50 ">
+                          <div className="graphics-3div graphics-3box flex z-50 sm:hidden ">
                             <img
                               className="graphics-3 z-50"
                               src={graphics3}
@@ -114,7 +114,7 @@ function Fellows() {
                               />
                             </div>
                           </div>
-                          <div className="flex justify-end mt-[-90px] mr-[70px]">
+                          <div className="graphics-1div flex justify-end mt-[-90px] mr-[70px] ">
                             <img
                               className="graphics-1"
                               src={graphics1}
