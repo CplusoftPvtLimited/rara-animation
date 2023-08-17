@@ -47,11 +47,9 @@ const createProfile = async (req, res) => {
     const thumbnailPath = req.files.thumbnailPath[0].path;
     const imagePath = req.files.imagePath[0].path;
     const featuredImagePath = req.files.featuredImage[0].path;
-    if (req.files.pictureSlider) {
-      const pictureSliderPaths = req.files.pictureSlider.map(
-        (file) => baseUrl + file.path
-      );
-    }
+    const pictureSliderPaths = req.files.pictureSlider.map(
+      (file) => baseUrl + file.path
+    );
 
     // Create the new Profile entry in the database
     const newProfile = await Profile.create({
@@ -146,7 +144,7 @@ const updateProfile = async (req, res) => {
       thumbnailPath: thumbnailPath,
       imagePath: imagePath,
       featuredImage: featuredImagePath,
-      pictureSlider: JSON.stringify(pictureSliderPaths),
+      pictureSlider: pictureSliderPaths,
     };
 
     await Profile.update(updateObj, {
