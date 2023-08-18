@@ -8,12 +8,14 @@ import { HiMinus } from "react-icons/hi";
 function Card() {
   const [postData, setPostData] = useState([]);
   const [fellowData, setFellowData] = useState([]);
+  const [fellowArray, setFellowArray] = useState([]);
+  const [associateFellowArray, setAssociateFellowArray] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState("All News");
   const [sortFellowOption, setSortFellowOption] = useState("All Fellows");
   const [sortedPostData, setSortedPostData] = useState([]);
   const [fellowToggle, setFellowToggle] = useState(false);
-  const itemsPerPage = 21;
+  const itemsPerPage = 15;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -35,8 +37,18 @@ function Card() {
         "http://localhost:4500/api/profile/getAllProfiles"
       );
       const data = await response.json();
-      console.log("🚀 ~ file: card.jsx:38 ~ fetchFellow ~ data:", data);
       setFellowData(data.profiles);
+
+      const fellowSorting = data.profiles.filter((profile) => {
+        return profile.jobPost === "RARA Fellow";
+      });
+
+      const associateFellowSorting = data.profiles.filter((profile) => {
+        return profile.jobPost === "Associate Fellow";
+      });
+
+      setFellowArray(fellowSorting);
+      setAssociateFellowArray(associateFellowSorting);
     };
     fetchFellow();
   }, []);
@@ -108,14 +120,18 @@ function Card() {
     setFellowToggle(!fellowToggle);
   };
 
-  const uniqueFellows = new Set(postData.map((post) => post.fellow));
+  const uniqueFellows = new Set(fellowArray.map((post) => post.name));
+  const uniqueAssociateFellows = new Set(
+    associateFellowArray.map((post) => post.name)
+  );
+
   return (
     <section>
-      <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[80%] py-[50px] gap-32 pr-[150px lg:flex ">
+      <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[90%] lg:w-[80%] py-[50px] gap-32 pr-[150px lg:flex ">
         <div className="filter-by-date my-auto">
           <h5>SORT BY CATEGORY</h5>
         </div>
-        <div className="flex gap-8 mt-[25px] lg:mt-auto">
+        <div className="flex gap-2 lg:gap-8 mt-[25px] lg:mt-auto">
           <button
             className={`filter-btn ${
               sortOption === "All News" ? "active" : " "
@@ -150,14 +166,14 @@ function Card() {
           </button>
         </div>
       </div>
-
       {/*********************** Sort By Fellow ***************************/}
 
-      <div className="filter-2 mx-auto w-[80%] py-[50px] justify-between pr-[150px lg:flex ">
-        <div className="filter-by-date my-auto flex gap-32 ">
+      {console.log("Fellow Array", fellowArray)}
+      <div className="filter-2 mx-auto w-[90%] lg:w-[80%] py-[50px] justify-between pr-[150px lg:flex ">
+        <div className="filter-by-date my-auto md:flex gap-32 ">
           <h5 className="my-auto">SORT BY FELLOWS</h5>
           <button
-            className={`filter-btn ${
+            className={`plus-btn mt-[20px] md:mt-0 block filter-btn ${
               sortFellowOption === "All Fellows" ? "active" : ""
             }`}
             onClick={() => handleSortingOption(sortOption, "All Fellows")}
@@ -165,29 +181,29 @@ function Card() {
             ALL FELLOWS
           </button>
         </div>
-        <div
-          className="flex justify-end gap-8 cursor-pointer"
-          onClick={() => fellowToggleHandler()}
-        >
-          <p>フェローで絞り込む</p>
-          {fellowToggle ? (
-            <HiMinus className="m-auto" />
-          ) : (
-            <HiPlus className="m-auto" />
-          )}
+        <div className="toggle-wrapper">
+          <div
+            className="w-[50%] sm:w-auto flex justify-end md:gap-8 cursor-pointer mt-[50px] md:mt-0"
+            onClick={() => fellowToggleHandler()}
+          >
+            <p>フェローで絞り込む</p>
+            {fellowToggle ? (
+              <HiMinus className="m-auto" />
+            ) : (
+              <HiPlus className="m-auto" />
+            )}
+          </div>
         </div>
       </div>
-
       {/***********************Toggle Section ***************************/}
-
       {fellowToggle ? (
         <div className="filter-3 mx-auto w-[80%] py-[50px] pr-[150px] lg:pl-[100px] ">
-          <div className="flex gap-32">
+          <div className="lg:flex lg:gap-32">
             <div className="filter-by-fellow my-auto">
               <h5>Fellows</h5>
             </div>
 
-            <div className="flex gap-8 mt-[25px] lg:mt-auto">
+            <div className="flex gap-4 lg:gap-8 mt-[25px] lg:mt-auto">
               {Array.from(uniqueFellows).map((fellow, index) => (
                 <button
                   key={index}
@@ -202,13 +218,13 @@ function Card() {
             </div>
           </div>
           {/**Associate Fellows filter section */}
-          {/* <div className="flex gap-16 mt-10">
+          <div className="lg:flex gap-4 lg:gap-16 mt-10">
             <div className="filter-by-fellow my-auto">
               <h5>Associate Fellows</h5>
             </div>
 
             <div className="flex gap-8 mt-[25px] lg:mt-auto">
-              {Array.from(uniqueFellows).map((fellow, index) => (
+              {Array.from(uniqueAssociateFellows).map((fellow, index) => (
                 <button
                   key={index}
                   className={`filter-btn ${
@@ -220,10 +236,9 @@ function Card() {
                 </button>
               ))}
             </div>
-          </div> */}
+          </div>
         </div>
       ) : null}
-
       {/***********************Cards ***************************/}
       {postData.length > 0 ? (
         <div className="Cards mt-[50px] mb-[100px] w-[80%] m-auto" id="card">
@@ -249,12 +264,12 @@ function Card() {
                         {new Date(post.publicationDate).toLocaleDateString()}
                       </p>
                     </div>
-                    <div>
-                      {" "}
+                    <div className="flex">
                       {/* <a href={post.link}> */}
                       <h5 className="text-[10px] lg:text-[11px]">
                         VIEW DETAILS
                       </h5>
+                      <div className="bullet"></div>
                       {/* </a> */}
                     </div>
                   </div>
@@ -266,7 +281,6 @@ function Card() {
       ) : (
         <div>Loading...</div>
       )}
-
       {/* Pagination */}
       <div className="pagination-box flex justify-center mb-2 w-[90%] m-auto">
         {Array.from({ length: Math.ceil(postData.length / itemsPerPage) }).map(

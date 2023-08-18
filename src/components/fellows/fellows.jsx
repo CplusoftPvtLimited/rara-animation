@@ -3,9 +3,9 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Pic from "../../assets/images/pic.jpg";
-import graphics1 from "../../assets/images/graphic03-2.png";
-import graphics2 from "../../assets/images/graphic04-2.png";
-import graphics3 from "../../assets/images/graphics05-2.svg";
+// import graphics1 from "../../assets/images/graphic03-2.png";
+// import graphics2 from "../../assets/images/graphic04-2.png";
+// import graphics3 from "../../assets/images/graphics05-2.svg";
 import Footer from "../../assets/images/fellow-beforefooter.png";
 import websiteIcon from "../../assets/images/website-icon.svg";
 import Logo from "../../assets/images/b-logo-rara.svg";
@@ -13,7 +13,7 @@ import Logo from "../../assets/images/b-logo-rara.svg";
 function Fellows() {
   const [fellowsData, setFellowsData] = useState([]);
   const [fellows, setFellows] = useState([]);
-  const [associateFellows, setAssociateFellows] = useState([]);
+  const [associateFellow, setAssociateFellows] = useState([]);
   const [fellowsCount, setFellowsCount] = useState(0);
   const [associateFellowsCount, setAssociateFellowsCount] = useState(0);
   const navigate = useNavigate();
@@ -30,12 +30,15 @@ function Fellows() {
         let fellows = [];
         let associateFellows = [];
         let fellowsCount = 0;
+        let associateFellowsCount = 0;
 
         data.profiles.forEach((fellow) => {
           if (fellow.jobPost === "RARA Fellow") {
             fellows.push(fellow);
             fellowsCount++;
-          } else if (fellow.jobPost === "Associate RARA fellow") {
+          }
+          if (fellow.jobPost === "RARA Associate Fellow") {
+            console.log("********Fellow", fellow);
             associateFellows.push(fellow);
             associateFellowsCount++;
           }
@@ -59,7 +62,7 @@ function Fellows() {
   return (
     <section className="mt-[45px]">
       {/************************** RARA Fellow Section ******************************/}
-      <div className="top-bar lg:flex lg:justify-between">
+      <div className="top-bar lg:flex lg:justify-between" id="fellow">
         <div className="flex">
           <div class="bullet-point"></div>
           <h2 className="rara-text">RARAフェロー</h2>
@@ -81,7 +84,7 @@ function Fellows() {
                 <div key={`row-${index}`} className="row">
                   <div className="fellows-container flex gap-4 w-[95%] mx-auto">
                     {/* Generate three boxes for each row */}
-                    {fellowsData.slice(index, index + 3).map((fellow) => (
+                    {fellows.slice(index, index + 3).map((fellow) => (
                       <div
                         key={fellow.id}
                         className="fellow-box"
@@ -93,15 +96,15 @@ function Fellows() {
                         <div className="graphics-2div flex ml-[110px] mb-[-70px] z-50  ">
                           <img
                             className="graphics-2 z-50"
-                            src={graphics2}
+                            src={fellow.graphic2}
                             alt=""
                           />
                         </div>
                         <div className="relative">
-                          <div className="graphics-3div graphics-3box flex z-50 sm:hidden ">
+                          <div className="graphics-3div graphics-3box flex z-50  ">
                             <img
                               className="graphics-3 z-50"
-                              src={graphics3}
+                              src={fellow.graphic3}
                               alt=""
                             />
                           </div>
@@ -117,7 +120,7 @@ function Fellows() {
                           <div className="graphics-1div flex justify-end mt-[-90px] mr-[70px] ">
                             <img
                               className="graphics-1"
-                              src={graphics1}
+                              src={fellow.graphic1}
                               alt=""
                             />
                           </div>
@@ -151,29 +154,31 @@ function Fellows() {
       </div>
 
       {/************************** RARA Associate Fellow Section ******************************/}
-      <div className="mid-bar lg:flex lg:justify-between">
+      <div className="mid-bar lg:flex lg:justify-between" id="associate-fellow">
         <div className="flex">
           <div class="bullet-point"></div>
           <h2 className="rara-text">RARAアソシエイトフェロー</h2>
         </div>
-        <h3 className="my-auto">{fellowsCount} RARA ASSOCIATE FELLOWS</h3>
+        <h3 className="my-auto">
+          {associateFellowsCount} RARA ASSOCIATE FELLOWS
+        </h3>
       </div>
 
       {/************************** RARA Assosiate Profile Section ******************************/}
 
-      <div className="rows-wrapper">
-        {associateFellows.length === 0 ? (
+      <div className="rows-wrapper px-[20px] lg:px-[0px]">
+        {associateFellow.length === 0 ? (
           <div className="mx-auto my-[50px]">
-            <p className="text-center">Loading...</p>
+            <p>Loading...</p>
           </div>
         ) : (
-          associateFellows.map(
+          associateFellow.map(
             (fellow, index) =>
               index % 3 === 0 && (
                 <div key={`row-${index}`} className="row">
                   <div className="fellows-container flex gap-4 w-[95%] mx-auto">
                     {/* Generate three boxes for each row */}
-                    {fellowsData.slice(index, index + 3).map((fellow) => (
+                    {associateFellow.slice(index, index + 3).map((fellow) => (
                       <div
                         key={fellow.id}
                         className="fellow-box"
@@ -182,12 +187,38 @@ function Fellows() {
                         <div className="job-post">
                           <h5>{fellow.jobPost}</h5>
                         </div>
-                        <div>
+                        <div className="graphics-2div flex ml-[110px] mb-[-70px] z-50  ">
                           <img
-                            className="thumbnail"
-                            src={fellow.thumbnailPath}
+                            className="graphics-2 z-50"
+                            src={fellow.graphic2}
                             alt=""
                           />
+                        </div>
+                        <div className="relative">
+                          <div className="graphics-3div graphics-3box flex z-50  ">
+                            {console.log("*********Graphices", fellow.graphic3)}
+                            <img
+                              className="graphics-3 z-50"
+                              src={fellow.graphic3}
+                              alt=""
+                            />
+                          </div>
+                          <div className="thumbnail-container">
+                            <div className="thumbnail-wrapper w-[18rem] h-[31.25rem] m-auto rounded-[25px]">
+                              <img
+                                className="thumbnail-image"
+                                src={fellow.thumbnailPath}
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                          <div className="graphics-1div flex justify-end mt-[-90px] mr-[70px] ">
+                            <img
+                              className="graphics-1"
+                              src={fellow.graphic1}
+                              alt=""
+                            />
+                          </div>
                         </div>
                         <div className="mt-[25px] pl-[40px]">
                           <h4>{fellow.nameEnglish}</h4>
@@ -199,7 +230,12 @@ function Fellows() {
                             className="flex justify-end"
                             onClick={() => handleViewDetails(fellow.id)}
                           >
-                            <a href="#">VIEW DETAILS</a>
+                            <a
+                              href="#"
+                              className="det-btn text-[10px] lg:text-[12px]"
+                            >
+                              VIEW DETAILS
+                            </a>
                             <div className="bullet"></div>
                           </div>
                         </div>
@@ -211,9 +247,22 @@ function Fellows() {
           )
         )}
       </div>
+      {/* 
+      {console.log(
+        "🚀 ~ file: fellows.jsx:15 ~ Fellows ~ fellowsData:",
+        fellowsData
+      )}
+      {console.log("🚀 ~ file: fellows.jsx:16 ~ Fellows ~ fellows:", fellows)}
+      {console.log(
+        "🚀 ~ file: fellows.jsx:17 ~ Fellows ~ associateFellows:",
+        associateFellow
+      )} */}
 
       {/************************** RARA Student Fellows Section ******************************/}
-      <div className="bottom-bar lg:flex lg:justify-between">
+      <div
+        className="bottom-bar lg:flex lg:justify-between"
+        id="student-fellow"
+      >
         <div className="flex">
           <div class="bullet-point"></div>
           <h2 className="rara-text">RARA学生フェロー</h2>
