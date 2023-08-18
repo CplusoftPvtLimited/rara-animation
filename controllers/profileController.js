@@ -47,6 +47,10 @@ const createProfile = async (req, res) => {
     const thumbnailPath = req.files.thumbnailPath[0].path;
     const imagePath = req.files.imagePath[0].path;
     const featuredImagePath = req.files.featuredImage[0].path;
+    const graphic1 = req.files.graphic1[0].path;
+    const graphic2 = req.files.graphic2[0].path;
+    const graphic3 = req.files.graphic3[0].path;
+
     const pictureSliderPaths = req.files.pictureSlider.map(
       (file) => baseUrl + file.path
     );
@@ -64,6 +68,9 @@ const createProfile = async (req, res) => {
       thumbnailPath: baseUrl + thumbnailPath,
       imagePath: baseUrl + imagePath,
       featuredImage: baseUrl + featuredImagePath,
+      graphic1: baseUrl + graphic1,
+      graphic2: baseUrl + graphic2,
+      graphic3: baseUrl + graphic3,
       pictureSlider:
         pictureSliderPaths.length > 0
           ? JSON.stringify(pictureSliderPaths)
@@ -91,7 +98,7 @@ const getAllProfiles = async (req, res) => {
     }
     res.status(200).send({ profiles });
   } catch (err) {
-    res.status(400).json({ error: "Error fetching Profiles" });
+    res.status(400).json(err.message);
   }
 };
 
@@ -128,6 +135,18 @@ const updateProfile = async (req, res) => {
       req.files?.featuredImage && typeof req.files?.featuredImage == "object"
         ? baseUrl + req.files?.featuredImage[0].path
         : profile.featuredImage;
+    const graphic1 =
+      req.files?.graphic1 && typeof req.files?.graphic1 == "object"
+        ? baseUrl + req.files?.graphic1[0].path
+        : profile.graphic1;
+    const graphic2 =
+      req.files?.graphic2 && typeof req.files?.graphic2 == "object"
+        ? baseUrl + req.files?.graphic2[0].path
+        : profile.graphic2;
+    const graphic3 =
+      req.files?.graphic3 && typeof req.files?.graphic3 == "object"
+        ? baseUrl + req.files?.graphic3[0].path
+        : profile.graphic3;
     const pictureSliderPaths = req.files?.pictureSlider
       ? req.files?.pictureSlider.map((file) => baseUrl + file.path)
       : profile.pictureSlider;
@@ -145,6 +164,9 @@ const updateProfile = async (req, res) => {
       imagePath: imagePath,
       featuredImage: featuredImagePath,
       pictureSlider: pictureSliderPaths,
+      graphic1: graphic1,
+      graphic2: graphic2,
+      graphic3: graphic3,
     };
 
     await Profile.update(updateObj, {

@@ -1,9 +1,9 @@
 // models/BlogPost.js
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
 // const Blog = require('./Blog');
 
-const Profile = sequelize.define('Profile', {
+const Profile = sequelize.define("Profile", {
   name: {
     type: DataTypes.STRING,
     // allowNull: false,
@@ -27,20 +27,20 @@ const Profile = sequelize.define('Profile', {
   },
   thumbnailPath: {
     type: DataTypes.STRING,
-    validate: { notEmpty: true }
+    validate: { notEmpty: true },
   },
   imagePath: {
     type: DataTypes.STRING,
-    validate: { notEmpty: true }
+    validate: { notEmpty: true },
   },
   jobPost: {
-    type: DataTypes.STRING
-    // allowNull: false 
+    type: DataTypes.STRING,
+    // allowNull: false
     //validate: { notEmpty: true }
   },
   profileDesc: {
-    type: DataTypes.TEXT
-    // allowNull: false 
+    type: DataTypes.TEXT,
+    // allowNull: false
     //validate: { notEmpty: true }
   },
   websiteUrl: {
@@ -65,8 +65,20 @@ const Profile = sequelize.define('Profile', {
     type: DataTypes.STRING,
     // allowNull: true,
   },
+  graphic1: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  graphic2: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  graphic3: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
   pictureSlider: {
-    type: DataTypes.JSON, 
+    type: DataTypes.JSON,
     // allowNull: true,
   },
   facebookUrl: {
@@ -87,7 +99,7 @@ const Profile = sequelize.define('Profile', {
   },
 });
 
-// Profile.hasMany(Blog); 
+// Profile.hasMany(Blog);
 // Blog.belongsTo(Profile);
 
 module.exports = Profile;

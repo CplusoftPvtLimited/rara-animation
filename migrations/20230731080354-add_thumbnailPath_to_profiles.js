@@ -1,17 +1,26 @@
-'use strict';
+"use strict";
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn('Profiles', 'thumbnailPath', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.addColumn("Profiles", "graphic1", {
       type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      allowNull: true,
+    });
+
+    await queryInterface.addColumn("Profiles", "graphic2", {
+      type: Sequelize.STRING,
+      allowNull: true,
+    });
+
+    await queryInterface.addColumn("Profiles", "graphic3", {
+      type: Sequelize.STRING,
+      allowNull: true,
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('Profiles', 'thumbnailPath');
-  }
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.removeColumn("Profiles", "graphic1");
+    await queryInterface.removeColumn("Profiles", "graphic2");
+    await queryInterface.removeColumn("Profiles", "graphic3");
+  },
 };

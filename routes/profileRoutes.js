@@ -14,6 +14,9 @@ router.post(
   "/createProfile",
   upload.fields([
     { name: "imagePath", maxCount: 1 },
+    { name: "graphic1", maxCount: 1 },
+    { name: "graphic2", maxCount: 1 },
+    { name: "graphic3", maxCount: 1 },
     { name: "thumbnailPath", maxCount: 1 },
     { name: "featuredImage", maxCount: 1 },
     { name: "pictureSlider", maxCount: 10 },
@@ -32,6 +35,9 @@ router.patch(
   "/updateProfile/:id",
   upload.fields([
     { name: "imagePath", maxCount: 1 },
+    { name: "graphic1", maxCount: 1 },
+    { name: "graphic2", maxCount: 1 },
+    { name: "graphic3", maxCount: 1 },
     { name: "thumbnailPath", maxCount: 1 },
     { name: "featuredImage", maxCount: 1 },
     { name: "pictureSlider", maxCount: 10 },
