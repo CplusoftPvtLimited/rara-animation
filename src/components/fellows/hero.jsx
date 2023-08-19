@@ -254,6 +254,7 @@ function Hero() {
               src={handMob}
               alt=""
             />
+            <img src="" alt="" />
           </div>
 
           <div className="layers">

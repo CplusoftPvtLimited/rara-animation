@@ -5,6 +5,8 @@ import Image from "../../assets/images/news-image.jpg";
 import { useState, useEffect } from "react";
 import { HiPlus } from "react-icons/hi";
 import { HiMinus } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+
 function Card() {
   const [postData, setPostData] = useState([]);
   const [fellowData, setFellowData] = useState([]);
@@ -18,6 +20,7 @@ function Card() {
   const itemsPerPage = 15;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -120,6 +123,10 @@ function Card() {
     setFellowToggle(!fellowToggle);
   };
 
+  const handleClick = (blogId) => {
+    navigate(`/blog/${blogId}`);
+  };
+
   const uniqueFellows = new Set(fellowArray.map((post) => post.name));
   const uniqueAssociateFellows = new Set(
     associateFellowArray.map((post) => post.name)
@@ -163,6 +170,24 @@ function Card() {
             onClick={() => handleSortingOption("コラム", sortFellowOption)}
           >
             コラム
+          </button>
+          <button
+            className={`filter-btn ${
+              sortOption === "更新情報" ? "active" : " "
+            }`}
+            onClick={() => handleSortingOption("更新情報", sortFellowOption)}
+          >
+            更新情報
+          </button>
+          <button
+            className={`filter-btn ${
+              sortOption === "研究活動レポート" ? "active" : " "
+            }`}
+            onClick={() =>
+              handleSortingOption("研究活動レポート", sortFellowOption)
+            }
+          >
+            研究活動レポート
           </button>
         </div>
       </div>
@@ -245,36 +270,37 @@ function Card() {
           <div className="flex flex-wrap justify-between">
             {console.log("Data", postData)}
             {sortedPostData.slice(startIndex, endIndex).map((post, index) => (
-              <a href={post.link}>
-                <div className="news-card mt-[70px] cursor-pointer" key={index}>
-                  <div className="img-box">
-                    <img className="img" src={post.imagePath} alt="" />
+              <div
+                className="news-card mt-[70px] cursor-pointer"
+                key={index}
+                onClick={() => handleClick(post.id)}
+              >
+                <div className="img-box">
+                  <img className="img" src={post.imagePath} alt="" />
+                </div>
+                <div className="news-cat my-auto">
+                  <h5>
+                    ${post.category} / ${post.fellow}
+                  </h5>
+                </div>
+
+                <div className="mt-[30px]">
+                  <p>{truncateText(post.title, 80)}</p>
+                </div>
+                <div className="date-box flex mt-[90px] justify-between">
+                  <div>
+                    <p className="date">
+                      {new Date(post.publicationDate).toLocaleDateString()}
+                    </p>
                   </div>
-                  <div className="news-cat my-auto">
-                    <h5>
-                      ${post.category} / ${post.fellow}
-                    </h5>
-                  </div>
-                  <div className="mt-[30px]">
-                    <p>{truncateText(post.title, 80)}</p>
-                  </div>
-                  <div className="date-box flex mt-[90px] justify-between">
-                    <div>
-                      <p className="date">
-                        {new Date(post.publicationDate).toLocaleDateString()}
-                      </p>
-                    </div>
-                    <div className="flex">
-                      {/* <a href={post.link}> */}
-                      <h5 className="text-[10px] lg:text-[11px]">
-                        VIEW DETAILS
-                      </h5>
-                      <div className="bullet"></div>
-                      {/* </a> */}
-                    </div>
+                  <div className="flex">
+                    {/* <a href={post.link}> */}
+                    <h5 className="text-[10px] lg:text-[11px]">VIEW DETAILS</h5>
+                    <div className="bullet"></div>
+                    {/* </a> */}
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>

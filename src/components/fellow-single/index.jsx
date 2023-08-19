@@ -7,10 +7,10 @@ import { BiLogoTwitter } from "react-icons/bi";
 import { RiFacebookFill } from "react-icons/ri";
 import Circle from "../../assets/images/fellow-circle.png";
 import partialBall from "../../assets/images/partial-ball.png";
-import BlogImage from "../../assets/images/blog-img.jpeg";
-import BackIcon from "../../assets/images/b-back_icon.svg";
-import graphics1 from "../../assets/images/graphic03-2.png";
-import graphics2 from "../../assets/images/graphic04-2.png";
+// import BlogImage from "../../assets/images/blog-img.jpeg";
+// import BackIcon from "../../assets/images/b-back_icon.svg";
+// import graphics1 from "../../assets/images/graphic03-2.png";
+// import graphics2 from "../../assets/images/graphic04-2.png";
 import Logo from "../../assets/images/b-logo-rara.svg";
 import { TweenMax, Power3, Linear, gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -55,37 +55,16 @@ function FellowSingle() {
         scrub: true,
       },
     });
-
-    // gsap.to(shape3Ref.current, {
-    //   y: 40,
-    //   opacity: 1,
-    //   scrollTrigger: {
-    //     trigger: shape3Ref.current,
-    //     start: "top",
-    //     duration: 70,
-    //     markers: true,
-    //     // end: "bottom 50px",
-    //     scrub: true,
-    //   },
-    // });
-
-    // gsap.to(shape4Ref.current, {
-    //   y: 40,
-    //   opacity: 1,
-    //   scrollTrigger: {
-    //     trigger: shape4Ref.current,
-    //     start: "top 700px",
-    //     duration: 70,
-    //     end: "bottom 150px",
-    //     scrub: true,
-    //   },
-    // });
   }, []);
 
   const handlePrevSlide = () => {
     setCurrentSlide((prevSlide) =>
       prevSlide === 0 ? sliderImages.length - 1 : prevSlide - 1
     );
+  };
+
+  const handleClick = (blogId) => {
+    navigate(`/blog/${blogId}`);
   };
 
   const handleNextSlide = () => {
@@ -139,6 +118,7 @@ function FellowSingle() {
 
   return (
     <section>
+      {console.log("*************Blog", blogData)}
       <div className="pl-[30px] mt-[100px] lg:flex lg:justify-between w-[100%] lg:mt-[0px]">
         <div className="left lg:max-w-[50%] lg:m-auto lg:pl-[20px] xl:pl-[175px] w-[75%] lg;w-[100%]">
           {/** Left */}
@@ -281,15 +261,21 @@ function FellowSingle() {
         <div className=" w-[100%] lg:w-[40%]">
           <h4>最新の研究活動レポート</h4>
         </div>
-        <div className=" w-[100%] mt-[80px] lg:w-[60%]  lg:mb-[100px]">
+        <div className=" w-[100%] mt-[80px] lg:w-[60%]  lg:mb-[100px] cursor-pointer">
           {latestThreeBlogs.map((blog) => (
-            <div key={blog.id} className=" lg:flex mt-[40px]">
+            <div
+              key={blog.id}
+              className=" lg:flex mt-[40px]"
+              onClick={() => handleClick(blog.id)}
+            >
               <div className="blog">
                 <img className="bog-img" src={blog.imagePath} alt="" />
               </div>
               <div className="blog-inner mt-[7px]">
                 {/* <p> 研究活動レポート / {fellow.category} / {fellow.profile</p> */}
-                <p>研究活動レポート / 小西 聡 / 高橋 政代</p>
+                <p>
+                  {blog.category} / {blog.fellow}
+                </p>
                 <h3 className="mt-[30px] lg:mt-[55px]">{blog.title}</h3>
                 <div className="date-box flex mt-[55px] justify-between">
                   <div>

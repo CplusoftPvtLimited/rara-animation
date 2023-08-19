@@ -3,12 +3,12 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Pic from "../../assets/images/pic.jpg";
-// import graphics1 from "../../assets/images/graphic03-2.png";
-// import graphics2 from "../../assets/images/graphic04-2.png";
-// import graphics3 from "../../assets/images/graphics05-2.svg";
 import Footer from "../../assets/images/fellow-beforefooter.png";
 import websiteIcon from "../../assets/images/website-icon.svg";
 import Logo from "../../assets/images/b-logo-rara.svg";
+// import graphics1 from "../../assets/images/graphic03-2.png";
+// import graphics2 from "../../assets/images/graphic04-2.png";
+// import graphics3 from "../../assets/images/graphics05-2.svg";
 
 function Fellows() {
   const [fellowsData, setFellowsData] = useState([]);
