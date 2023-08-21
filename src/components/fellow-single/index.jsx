@@ -20,6 +20,7 @@ function FellowSingle() {
   const navigate = useNavigate();
   const [fellow, setFellow] = useState({});
   const [blogData, setBlogData] = useState([]);
+  const [sortedBlogData, setSortedBlogData] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [sliderImages, setSliderImages] = useState([]);
@@ -108,8 +109,14 @@ function FellowSingle() {
     };
   }, []);
 
+  //Filtering Blogs w.r.t Fellow
+  const filteredBlogs = blogData.filter((blog) => {
+    return blog.fellow === fellow.name;
+  });
+  console.log("**********Filtered Blog", filteredBlogs);
+
   // Sort blogData based on publicationDate in descending order
-  const sortedBlogs = blogData.sort(
+  const sortedBlogs = filteredBlogs.sort(
     (a, b) => new Date(b.publicationDate) - new Date(a.publicationDate)
   );
 
