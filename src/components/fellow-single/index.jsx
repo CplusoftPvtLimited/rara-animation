@@ -263,45 +263,52 @@ function FellowSingle() {
       </div>
 
       {/************************** Blog Section ******************************/}
+      {latestThreeBlogs > 0 ? (
+        <div className="reports mt-[150px] px-[30px] lg:mt-[400px] lg:flex w-[95%] m-auto lg:px-[50px] pt-[50px] gap ">
+          <div className=" w-[100%] lg:w-[40%]">
+            <h4>最新の研究活動レポート</h4>
+          </div>
 
-      <div className="reports mt-[150px] px-[30px] lg:mt-[400px] lg:flex w-[95%] m-auto lg:px-[50px] pt-[50px] gap ">
-        <div className=" w-[100%] lg:w-[40%]">
-          <h4>最新の研究活動レポート</h4>
-        </div>
-        <div className=" w-[100%] mt-[80px] lg:w-[60%]  lg:mb-[100px] cursor-pointer">
-          {latestThreeBlogs.map((blog) => (
-            <div
-              key={blog.id}
-              className=" lg:flex mt-[40px]"
-              onClick={() => handleClick(blog.id)}
-            >
-              <div className="blog">
-                <img className="bog-img" src={blog.imagePath} alt="" />
-              </div>
-              <div className="blog-inner mt-[7px]">
-                {/* <p> 研究活動レポート / {fellow.category} / {fellow.profile</p> */}
-                <p>
-                  {blog.category} / {blog.fellow}
-                </p>
-                <h3 className="mt-[30px] lg:mt-[55px]">{blog.title}</h3>
-                <div className="date-box flex mt-[55px] justify-between">
-                  <div>
-                    <p>{new Date(blog.publicationDate).toLocaleDateString()}</p>
-                  </div>
-                  <div>
-                    <h5 className="text-[10px] lg:text-[11px]">VIEW DETAILS</h5>
+          <div className=" w-[100%] mt-[80px] lg:w-[60%]  lg:mb-[100px] cursor-pointer">
+            {latestThreeBlogs.map((blog) => (
+              <div
+                key={blog.id}
+                className=" lg:flex mt-[40px]"
+                onClick={() => handleClick(blog.id)}
+              >
+                <div className="blog">
+                  <img className="bog-img" src={blog.imagePath} alt="" />
+                </div>
+                <div className="blog-inner mt-[7px]">
+                  {/* <p> 研究活動レポート / {fellow.category} / {fellow.profile</p> */}
+                  <p>
+                    {blog.category} / {blog.fellow}
+                  </p>
+                  <h3 className="mt-[30px] lg:mt-[55px]">{blog.title}</h3>
+                  <div className="date-box flex mt-[55px] justify-between">
+                    <div>
+                      <p>
+                        {new Date(blog.publicationDate).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div>
+                      <h5 className="text-[10px] lg:text-[11px]">
+                        VIEW DETAILS
+                      </h5>
+                    </div>
                   </div>
                 </div>
               </div>
+            ))}
+            <div className="all-report flex justify-center pt-[75px] pb-[175px] lg:justify-end lg:mt-[150px]">
+              <a href="">VIEW ALL REPORT</a>
             </div>
-          ))}
-          <div className="all-report flex justify-center pt-[75px] pb-[175px] lg:justify-end lg:mt-[150px]">
-            <a href="">VIEW ALL REPORT</a>
           </div>
         </div>
-      </div>
+      ) : null}
 
       {/************************** Slider Section ******************************/}
+      {console.log("*****Slider", sliderImages)}
 
       <div className="w-[100%] m-auto pb-[100px] overflow-hidden">
         <div className="title mt-[75px] pl-[95px]">
