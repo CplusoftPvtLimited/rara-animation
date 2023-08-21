@@ -99,7 +99,27 @@ function Sidebar() {
               <p>Add Categories</p>
             </div>
           </Link>
+          <Link to='/paymentMethods' className='sidebar-link'>
+            <div
+              className={`sidebar-item ${
+                isActive(history, '/paymentMethods') && 'active'
+              }`}
+            >
+              <RiFileList3Line className='sidebar-icon' />
+              <p>Payment</p>
+            </div>
+          </Link>
 
+          {/* <Link to='/stripeKey/add' className='sidebar-link'>
+            <div
+              className={`sidebar-item ${
+                isActive(history, '/stripeKey/add') && 'active'
+              }`}
+            >
+              <RiFileList3Line className='sidebar-icon' />
+              <p>Add Stripe Keys</p>
+            </div>
+          </Link> */}
 
           <Link to='/Home' className='sidebar-link'>
             <div
@@ -110,8 +130,6 @@ function Sidebar() {
               <p>Home</p>
             </div>
           </Link>
-
-
         </div>
       </div>
     </div>

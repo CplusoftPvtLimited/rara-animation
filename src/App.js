@@ -10,6 +10,8 @@ import EditCategory from './Core/Categories Pages/EditCategory';
 import Fellows from './Core/Fellows Pages/Fellows';
 import AddFellow from './Core/Fellows Pages/AddFellow';
 import EditFellow from './Core/Fellows Pages/EditFellow';
+import PaymentMethods from './Core/Payment Methods Pages/PaymentMethods';
+
 import Home from './Core/Home/Home.js';
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
         <Router>
           <Switch>
             <Route path='/' exact component={Dashboard} />
+
             <Route path='/blogs' exact component={Blogs} />
             <Route path='/blog/add' exact component={AddBlog} />
             <Route path='/blog/edit/:blogId' exact component={EditBlog} />
@@ -34,7 +37,8 @@ function App() {
             <Route path='/fellows' exact component={Fellows} />
             <Route path='/fellow/add' exact component={AddFellow} />
             <Route path='/fellow/edit/:fellowId' exact component={EditFellow} />
-            <Route path='/fellows' exact component={Fellows} />
+
+            <Route path='/paymentMethods' exact component={PaymentMethods} />
 
             <Route path='/home' exact component={Home} />
           </Switch>
