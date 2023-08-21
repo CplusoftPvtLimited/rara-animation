@@ -46,6 +46,7 @@ const createProfile = async (req, res) => {
     const baseUrl = "http://localhost:4500/";
     const thumbnailPath = req.files.thumbnailPath[0].path;
     const imagePath = req.files.imagePath[0].path;
+    const animatedImage = req.files.animatedImage[0].path;
     const featuredImagePath = req.files.featuredImage[0].path;
     const graphic1 = req.files.graphic1[0].path;
     const graphic2 = req.files.graphic2[0].path;
@@ -67,6 +68,7 @@ const createProfile = async (req, res) => {
       paragraph,
       thumbnailPath: baseUrl + thumbnailPath,
       imagePath: baseUrl + imagePath,
+      animatedImage: baseUrl + animatedImage,
       featuredImage: baseUrl + featuredImagePath,
       graphic1: baseUrl + graphic1,
       graphic2: baseUrl + graphic2,
@@ -131,6 +133,10 @@ const updateProfile = async (req, res) => {
       req.files?.imagePath && typeof req.files?.imagePath == "object"
         ? baseUrl + req.files?.imagePath[0].path
         : profile.imagePath;
+    const animatedImage =
+      req.files?.animatedImage && typeof req.files?.animatedImage == "object"
+        ? baseUrl + req.files?.animatedImage[0].path
+        : profile.imagePath;
     const featuredImagePath =
       req.files?.featuredImage && typeof req.files?.featuredImage == "object"
         ? baseUrl + req.files?.featuredImage[0].path
@@ -148,8 +154,12 @@ const updateProfile = async (req, res) => {
         ? baseUrl + req.files?.graphic3[0].path
         : profile.graphic3;
     const pictureSliderPaths = req.files?.pictureSlider
-      ? req.files?.pictureSlider.map((file) => baseUrl + file.path)
+      ? req.files?.pictureSlider.map((file) => `${baseUrl}${file.path}`)
       : profile.pictureSlider;
+    let pictureSliderJSON;
+    if (req.files?.pictureSlider) {
+      pictureSliderJSON = JSON.stringify(pictureSliderPaths);
+    }
 
     const updateObj = {
       name: req.body.name || profile.name,
@@ -162,8 +172,9 @@ const updateProfile = async (req, res) => {
       paragraph: req.body.paragraph || profile.paragraph,
       thumbnailPath: thumbnailPath,
       imagePath: imagePath,
+      animatedImage: animatedImage,
       featuredImage: featuredImagePath,
-      pictureSlider: pictureSliderPaths,
+      pictureSlider: pictureSliderJSON,
       graphic1: graphic1,
       graphic2: graphic2,
       graphic3: graphic3,
@@ -178,7 +189,7 @@ const updateProfile = async (req, res) => {
       profile: updatedProfile,
     });
   } catch (error) {
-    return res.status(500).json({ error: "Error updating profile", error });
+    return res.status(500).json(error.message);
   }
 };
 

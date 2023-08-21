@@ -33,6 +33,10 @@ const Profile = sequelize.define("Profile", {
     type: DataTypes.STRING,
     validate: { notEmpty: true },
   },
+  animatedImage: {
+    type: DataTypes.STRING,
+    validate: { notEmpty: true },
+  },
   jobPost: {
     type: DataTypes.STRING,
     // allowNull: false
