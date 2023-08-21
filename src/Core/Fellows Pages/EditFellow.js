@@ -608,7 +608,7 @@ function EditFellow(props) {
                   </Col>
                 </Row>
 
-                {/* <Row>
+                <Row>
                   <h3>Slider Images Preview</h3>
                   <div className="slider-preview">
                     <div className="product-image-div">
@@ -629,7 +629,7 @@ function EditFellow(props) {
                         ))}
                     </div>
                   </div>
-                </Row> */}
+                </Row>
 
                 <button
                   onClick={editFellow}
