@@ -33,31 +33,19 @@ function EditStudent(props) {
     const { name, value } = event.target;
     setStudentData((prev) => ({ ...prev, [name]: value }));
   };
-  const editStudent = (event) => {
+  const editStudent = async (event) => {
     event.preventDefault();
     const updatedData = new FormData();
     for (const [key, value] of Object.entries(studentData)) {
       updatedData.append(key, value);
       console.log("Updated Data:", key, value);
     }
-
-    // const updatedData = new FormData();
-    // updatedData.append("about", studentData.about);
-    // console.log("***Here-------- ", updatedData.about);
-    // updatedData.append("program", studentData.program);
-    // updatedData.append("businessPassage", studentData.businessPassage);
-    // updatedData.append("specializedField", studentData.specializedField);
-    // updatedData.append("externalCommittee", studentData.externalCommittee);
-    // updatedData.append("outline", studentData.outline);
-    // updatedData.append("targetAudience", studentData.targetAudience);
-    // updatedData.append("responsibilities", studentData.responsibilities);
-    // updatedData.append("recruitment", studentData.recruitment);
     try {
-      console.log("***updatedData: ", updatedData);
-      axios
-        .put(
+      console.log("***updatedData: ", studentData);
+      const response = await axios
+        .patch(
           `http://localhost:4500/api/student/updateStudentPage/1`,
-          updatedData
+          studentData
         )
         .then((response) => {
           console.log("edit data", response);
@@ -103,7 +91,7 @@ function EditStudent(props) {
                           }}
                           onChange={(event, editor) => {
                             const data = editor.getData();
-                            console.log("Editor Data:", data);
+                            console.log("***Editor Data:", data);
                             handleChange({
                               target: { name: "about", value: data },
                             });
