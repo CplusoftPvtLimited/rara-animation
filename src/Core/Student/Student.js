@@ -43,7 +43,7 @@ function EditStudent(props) {
     try {
       console.log("***updatedData: ", studentData);
       const response = await axios
-        .patch(
+        .put(
           `http://localhost:4500/api/student/updateStudentPage/1`,
           studentData
         )
