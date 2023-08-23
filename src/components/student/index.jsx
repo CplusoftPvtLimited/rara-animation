@@ -91,7 +91,7 @@ function Student() {
             </div>
 
             <div className="logo-text w-[70%] m-auto xl:w-[80%]">
-              <h4 className="">
+              <h4>
                 立命館先進研究アカデミー 次世代研究者育成プログラム
                 RARA学生フェロー
               </h4>
@@ -139,7 +139,7 @@ function Student() {
             </div>
             {/** About content */}
             <div className="about-content">
-              <p>{studentData.about}</p>
+              <div dangerouslySetInnerHTML={{ __html: studentData.about }} />
             </div>
             {/** Image section */}
             <div className="mt-[3.75rem] flex justify-center">
@@ -182,10 +182,7 @@ function Student() {
               {/**Right */}
               <div className="w-[100%]">
                 <div className="business-divider">
-                  <p>
-                    副学長（研究・学術情報・国際連携・D&I・起業事業化推進
-                    担当）、経営学部教授
-                  </p>
+                  <p>{studentData.businessPassage}</p>
                 </div>
                 {/** Specialized Field */}
                 <div className=" business-divider-middle md:flex">
