@@ -6,6 +6,10 @@ const Student = sequelize.define("Student", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  aboutBottom: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   program: {
     type: DataTypes.TEXT,
     allowNull: false,

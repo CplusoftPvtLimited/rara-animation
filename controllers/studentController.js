@@ -4,6 +4,7 @@ const addStudent = async (req, res) => {
   try {
     const {
       about,
+      aboutBottom,
       program,
       businessPassage,
       specializedField,
@@ -15,6 +16,8 @@ const addStudent = async (req, res) => {
     } = req.body;
 
     const requiredFields = [
+      "about",
+      "aboutBottom",
       "program",
       "businessPassage",
       "specializedField",
@@ -31,6 +34,7 @@ const addStudent = async (req, res) => {
     }
     const newStudent = await Student.create({
       about,
+      aboutBottom,
       program,
       businessPassage,
       specializedField,
@@ -64,6 +68,7 @@ const updateStudent = async (req, res) => {
     // Assign new values to updatedFields
     const updatedFields = {
       about: req.body.about || student.about,
+      aboutBottom: req.body.aboutBottom || student.aboutBottom,
       program: req.body.program || student.program,
       businessPassage: req.body.businessPassage || student.businessPassage,
       specializedField: req.body.specializedField || student.specializedField,
