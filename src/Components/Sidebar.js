@@ -7,6 +7,9 @@ import {
   RiFileList3Line,
 } from "react-icons/ri";
 
+import { HiOutlineHome } from "react-icons/hi";
+import { PiStudentLight } from "react-icons/pi";
+
 import { IoIosLaptop } from "react-icons/io";
 
 import logo from "../Assets/logo.png";
@@ -127,6 +130,7 @@ function Sidebar() {
                 isActive(history, "/Home") && "active"
               }`}
             >
+              <HiOutlineHome className="sidebar-icon" />
               <p>Home</p>
             </div>
           </Link>
@@ -137,7 +141,8 @@ function Sidebar() {
                 isActive(history, "/student") && "active"
               }`}
             >
-              <p>student</p>
+              <PiStudentLight className="sidebar-icon" />
+              <p>Student</p>
             </div>
           </Link>
         </div>

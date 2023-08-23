@@ -80,7 +80,7 @@ function EditStudent(props) {
                   <Row>
                     <Col>
                       <div className="add-product-input-div">
-                        <p>About RARA</p>
+                        <p>About RARA -1</p>
 
                         <CKEditor
                           style={{ height: "100px" }}
@@ -94,6 +94,34 @@ function EditStudent(props) {
                             console.log("***Editor Data:", data);
                             handleChange({
                               target: { name: "about", value: data },
+                            });
+                          }}
+                          onBlur={(event, editor) => {
+                            console.log("Blur.", editor);
+                          }}
+                          onFocus={(event, editor) => {
+                            console.log("Focus.", editor);
+                          }}
+                        />
+                      </div>
+                    </Col>
+
+                    <Col>
+                      <div className="add-product-input-div">
+                        <p>About RARA -2</p>
+
+                        <CKEditor
+                          style={{ height: "100px" }}
+                          editor={ClassicEditor}
+                          data={studentData.aboutBottom}
+                          onReady={(editor) => {
+                            console.log("Editor is ready to use!", editor);
+                          }}
+                          onChange={(event, editor) => {
+                            const data = editor.getData();
+                            console.log("***Editor Data:", data);
+                            handleChange({
+                              target: { name: "aboutBottom", value: data },
                             });
                           }}
                           onBlur={(event, editor) => {
