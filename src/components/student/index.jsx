@@ -147,7 +147,9 @@ function Student() {
             </div>
             {/** Below Image */}
             <div className="about-content">
-              <p>{studentData.aboutBottom}</p>
+              <div
+                dangerouslySetInnerHTML={{ __html: studentData.aboutBottom }}
+              />
             </div>
           </div>
 
@@ -162,7 +164,7 @@ function Student() {
 
             {/** About content */}
             <div className="program-content">
-              <p>{studentData.program}</p>
+              <div dangerouslySetInnerHTML={{ __html: studentData.program }} />
             </div>
           </div>
 
@@ -190,7 +192,11 @@ function Student() {
                     <p>専門分野</p>
                   </div>
                   <div className="w-[100%]">
-                    <p>{studentData.specializedField}</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: studentData.specializedField,
+                      }}
+                    />
                   </div>
                 </div>
 
@@ -200,7 +206,11 @@ function Student() {
                     <p>学外委員</p>
                   </div>
                   <div className="w-[100%]">
-                    <p>{studentData.externalCommittee}</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: studentData.externalCommittee,
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -218,7 +228,11 @@ function Student() {
 
             {/** Outline content */}
             <div className="outline-content">
-              <p>{studentData.outline}</p>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: studentData.outline,
+                }}
+              />
             </div>
 
             {/** Outline */}
@@ -230,7 +244,11 @@ function Student() {
                     <p>対象者</p>
                   </div>
                   <div className="w-[100%]">
-                    <p>{studentData.targetAudience}</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: studentData.targetAudience,
+                      }}
+                    />
                   </div>
                 </div>
 
@@ -243,7 +261,11 @@ function Student() {
                     <p>RARA学生フェローの 責務</p>
                   </div>
                   <div className="w-[100%]">
-                    <p>{studentData.responsibilities}</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: studentData.targetAudience,
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -265,7 +287,11 @@ function Student() {
 
             {/** Application content */}
             <div className="application-content">
-              <p>{studentData.recruitment}</p>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: studentData.recruitment,
+                }}
+              />
             </div>
           </div>
 
