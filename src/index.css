@@ -1,27 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap");
 
 body {
   margin: 0;
-  font-family: 'Shippori Mincho B1', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Shippori Mincho B1", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f0f0f0;
 }
 
 code {
-  font-family: 'Shippori Mincho B1', 'Courier New', 
-    monospace;
+  font-family: "Shippori Mincho B1", "Courier New", monospace;
 }
 
 @font-face {
-  font-family: 'Hiragino';
-  src: url('../src/assets/fonts/Hiragino\ Kaku\ Gothic\ ProN\ W3.otf') format('opentype');
+  font-family: "Hiragino";
+  src: url("../src/assets/fonts/Hiragino\ Kaku\ Gothic\ ProN\ W3.otf")
+    format("opentype");
 }
