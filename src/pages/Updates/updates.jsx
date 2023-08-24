@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./card";
 import Logo from "../../assets/images/b-logo-rara.svg";
-import "./index.css";
+import "./updates.css";
 function News() {
   return (
     <section>

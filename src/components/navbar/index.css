@@ -34,6 +34,10 @@
     margin: 2.4rem 3.2rem;
     padding: 0rem 0;
   }
+  .cMenu-btn-inner-btn {
+    display: inline-flex;
+    align-items: center;
+  }
   ._sp {
     display: none;
   }
@@ -251,4 +255,25 @@
   border-left: 4px solid transparent;
   margin-left: 5px;
   margin-top: -5px;
+}
+
+.button4.-isOpen {
+  z-index: 1;
+  color: #e9e9e9;
+  border: 2px solid #e9e9e9;
+}
+.dropbtn.-isOpen{
+  color: #e9e9e9;
+  border: 2px solid #e9e9e9;
+}
+
+.cMenu-btn-inner.-isOpen .cMenu-btn-icon:before {
+  transform: translateY(2px) rotate(15deg);
+}
+.cMenu-btn-inner.-isOpen .cMenu-btn-icon:after {
+  transform: translateY(2px) rotate(-15deg);
+}
+.cMenu-btn-inner.-isOpen .cMenu-btn-text:after,
+.cMenu-btn-inner.-isOpen .cMenu-btn-text:before {
+  transform: translateY(-100%);
 }

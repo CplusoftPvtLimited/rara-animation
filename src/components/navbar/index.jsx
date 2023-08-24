@@ -7,6 +7,16 @@ gsap.registerPlugin(ScrollTrigger);
 const index = () => {
   useEffect(() => {
     const menuBtnElement = document.querySelector(".cMenu-btn-inner");
+    const donationBtnElement = document.querySelector(".button4");
+    console.log(
+      "🚀 ~ file: index.jsx:11 ~ useEffect ~ donationBtnElement:",
+      donationBtnElement
+    );
+    const countryBtnElement = document.querySelector(".dropbtn");
+    console.log(
+      "🚀 ~ file: index.jsx:13 ~ useEffect ~ countryBtnElement:",
+      countryBtnElement
+    );
 
     const tl = gsap.timeline({ paused: true, reversed: true });
 
@@ -67,6 +77,8 @@ const index = () => {
 
       menuBtn.classList.toggle("-isWhite");
       menuBtn.classList.toggle("-isOpen");
+      donationBtnElement.classList.toggle("-isOpen");
+      countryBtnElement.classList.toggle("-isOpen");
       menucontent.classList.toggle("-open");
       gsap.fromTo(
         ".cMenuContent-list-svg > :nth-child(1)",
@@ -183,15 +195,15 @@ const index = () => {
             </div>
             <div className="cMenu-btn">
               <div className="cMenu-btn-container">
-                <a className="cMenu-btn-inner" style={{ margin: 0 }}>
-                  <button class="button button4">DONATE</button>
+                <a className="cMenu-btn-inner-btn" style={{ margin: 0 }}>
+                  <button className="button button4">DONATE</button>
                 </a>
-                <a className="cMenu-btn-inner" style={{ margin: 0 }}>
-                  <div class="dropdown">
-                    <button class="dropbtn">
-                      COUNTRY <span class="caret"></span>
+                <a className="cMenu-btn-inner-btn" style={{ margin: 0 }}>
+                  <div className="dropdown">
+                    <button className="dropbtn">
+                      COUNTRY <span className="caret"></span>
                     </button>
-                    <div class="dropdown-content">
+                    <div className="dropdown-content">
                       <a href="#">Option 1</a>
                       <a href="#">Option 2</a>
                       <a href="#">Option 3</a>

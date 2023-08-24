@@ -385,12 +385,7 @@ body {
     transform: scale(1);
   }
 
-  .cMenu-btn-inner.-isOpen .cMenu-btn-icon:before {
-    transform: translateY(2px) rotate(15deg);
-  }
-  .cMenu-btn-inner.-isOpen .cMenu-btn-icon:after {
-    transform: translateY(2px) rotate(-15deg);
-  }
+
   .cMenu-btn-inner.-isWhite .cMenu-btn-icon:after,
   .cMenu-btn-inner.-isWhite .cMenu-btn-icon:before {
     background-color: #fff;
@@ -408,10 +403,7 @@ body {
       background-color 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .cMenu-btn-inner.-isOpen .cMenu-btn-text:after,
-  .cMenu-btn-inner.-isOpen .cMenu-btn-text:before {
-    transform: translateY(-100%);
-  }
+ 
   .cMenu-btn-inner.-isWhite .cMenu-btn-text {
     color: #fff;
   }

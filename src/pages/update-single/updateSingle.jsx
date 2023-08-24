@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import "./index.css";
+import "./updateSingle.css";
 import Logo from "../../assets/images/b-logo-rara.svg";
 
 function UpdateSingle() {

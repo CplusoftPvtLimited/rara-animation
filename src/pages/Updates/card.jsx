@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./updates.css";
 import { TweenMax, Power3 } from "gsap";
 import Image from "../../assets/images/news-image.jpg";
 import { useState, useEffect } from "react";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import "./index.css";
+import "./student.css";
 import About from "../../assets/images/about-rara.jpeg";
 import Program from "../../assets/images/program-rara.jpeg";
 import Outline from "../../assets/images/outline-rara.jpeg";
