@@ -1,0 +1,725 @@
+.left-container {
+  position: fixed;
+}
+
+.right-container {
+  padding-left: 50%;
+  position: relative;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+/** About */
+
+.about-container {
+  padding: 6.25rem 6.25rem 0;
+}
+
+.about-section p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+
+.about-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d1d5d8;
+}
+.about-content {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 3.75rem;
+}
+
+.about-content p {
+  line-height: 2.28571;
+}
+
+/** Program*/
+
+.program-container {
+  padding: 6.25rem 6.25rem 0;
+}
+
+.program-section p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+
+.program-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d1d5d8;
+}
+
+.program-content {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 3.75rem;
+}
+
+.program-content p {
+  line-height: 2.28571;
+}
+
+/** Business*/
+
+.business-container {
+  padding: 1.25rem 6.25rem 0;
+}
+
+.business-section p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+
+.business-section {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d1d5d8;
+}
+
+.business-content {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 1.75rem;
+  border-bottom: 1px solid #d1d5d8;
+}
+
+.business-content p {
+  line-height: 2.28571;
+}
+
+.business-content h2 {
+  font-size: 21px;
+}
+.business-divider {
+  padding-bottom: 30px;
+  border-bottom: solid 1px #d1d5d8;
+}
+
+.business-divider-middle {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: solid 1px #d1d5d8;
+}
+
+.business-divider-bottom {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/** Outline*/
+
+.outline-container {
+  padding: 6.25rem 6.25rem 0;
+}
+
+.outline-section p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+
+.outline-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d1d5d8;
+}
+
+.outline-content {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 3.75rem;
+  padding-bottom: 3.75rem;
+  border-bottom: 1px solid #d1d5d8;
+}
+
+.outline-content p {
+  line-height: 2.28571;
+}
+
+.outline-content h2 {
+  font-size: 21px;
+}
+.outline-divider {
+  padding-bottom: 30px;
+  border-bottom: solid 1px #d1d5d8;
+}
+
+.outline-divider-middle {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: solid 1px #d1d5d8;
+}
+
+.outline-divider-bottom {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/** Application*/
+
+.application-container {
+  padding: 6.25rem 6.25rem 0;
+}
+
+.application-section p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.application-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d1d5d8;
+}
+
+.application-content {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 3.75rem;
+  padding-bottom: 3.75rem;
+}
+
+.application-content p {
+  line-height: 2.28571;
+  letter-spacing: 0.12rem;
+}
+
+.application-content h2 {
+  font-size: 21px;
+}
+
+.application-divider-bottom {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/** Contact*/
+
+.contact-container {
+  padding: 2.25rem 6.25rem 0;
+}
+
+.contact-section p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.contact-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d1d5d8;
+}
+
+.contact-content {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 3.75rem;
+  padding-bottom: 3.75rem;
+}
+
+.contact-content p {
+  line-height: 2.28571;
+  letter-spacing: 0.12rem;
+}
+
+.contact-content h2 {
+  font-size: 21px;
+}
+
+.contact-divider-bottom {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.divide {
+  border-right: 1px solid #d1d5d8;
+}
+
+/** Student Footer */
+
+.footer-container {
+  padding: 6.25rem 6.25rem 0;
+}
+
+.footer-section p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.footer-section {
+  padding-bottom: 60px;
+  border-bottom: 1px solid #d1d5d8;
+}
+
+.footer-content {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 3.75rem;
+  padding-bottom: 3.75rem;
+}
+
+.footer-content p {
+  font-family: "DM Sans";
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09rem;
+  text-align: center;
+}
+
+.footer-content h2 {
+  font-size: 21px;
+}
+
+.footer-divider-bottom {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.divide {
+  border-right: 1px solid #d1d5d8;
+}
+
+.footer-menu {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/** Left Side Logo */
+.logo-student {
+  position: relative;
+  top: 3.75rem;
+  left: 3.75rem;
+  width: 11rem;
+}
+
+.main-logo {
+  width: 13.75rem;
+  margin: 25vh auto 40px auto;
+}
+
+.logo-text h4 {
+  margin: auto;
+  text-align: center;
+  color: white;
+  font-size: 19px;
+  line-height: 2;
+}
+
+.main-buttons h4 {
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+}
+
+.main-buttons h4::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-color: "#fff";
+  border-style: solid;
+  border-width: 0;
+  margin: 0px 0px 4px 10px !important;
+  transform: rotate(45deg);
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+}
+
+/** For Small Laptops */
+
+@media screen and (min-width: 768px) and (max-width: 1240px) {
+  .main-logo {
+    width: 8.75rem;
+    margin: 25vh auto 40px auto;
+  }
+
+  .main-buttons h4 {
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+  }
+
+  .main-buttons h4::after {
+    display: none;
+  }
+  .logo-text h4 {
+    margin: auto;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .about-container {
+    padding: 6.25rem 3.25rem 0;
+  }
+
+  .about-section p {
+    font-size: 10px;
+  }
+  .about-content p {
+    font-size: 10px;
+  }
+
+  .program-container {
+    padding: 3.25rem 3.25rem 0;
+  }
+
+  .program-section p {
+    font-size: 10px;
+  }
+  .program-content p {
+    font-size: 10px;
+  }
+
+  /** Business*/
+
+  .business-container {
+    padding: 3.25rem 3.25rem 0;
+  }
+
+  .business-section p {
+    font-size: 10px;
+  }
+  .business-content p {
+    font-size: 10px;
+  }
+
+  .business-content h2 {
+    font-size: 13px;
+  }
+
+  /** Outline*/
+
+  .outline-container {
+    padding: 3.25rem 3.25rem 0;
+  }
+
+  .outline-section p {
+    font-size: 10px;
+  }
+
+  .outline-content p {
+    font-size: 10px;
+  }
+
+  .outline-content h2 {
+    font-size: 13px;
+  }
+
+  .outline-section {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d1d5d8;
+  }
+
+  .outline-content {
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid #d1d5d8;
+  }
+
+  .outline-divider {
+    padding-bottom: 10px;
+  }
+
+  .outline-divider-middle {
+    padding-top: 0px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #d1d5d8;
+  }
+
+  .outline-divider-bottom {
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+
+  /** Application*/
+
+  .application-container {
+    padding: 3.25rem 3.25rem 0;
+  }
+
+  .application-section p {
+    font-size: 10px;
+  }
+
+  .application-section {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d1d5d8;
+  }
+
+  .application-content {
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .application-content p {
+    font-size: 10px;
+  }
+
+  .application-content h2 {
+    font-size: 13px;
+  }
+
+  .application-divider-bottom {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  /** Contact*/
+
+  .contact-container {
+    padding: 2.25rem 3.25rem 0;
+  }
+
+  .contact-section p {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 10px;
+  }
+  .contact-content {
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 3.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .contact-content p {
+    line-height: 2.28571;
+    letter-spacing: 0.12rem;
+  }
+
+  .contact-content h2 {
+    font-size: 13px;
+  }
+
+  .contact-divider-bottom {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .divide {
+    border-right: 1px solid #d1d5d8;
+  }
+
+  .footer-container {
+    padding: 6.25rem 3.25rem 0;
+  }
+
+  .footer-section p {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .footer-content {
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 3.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .footer-content p {
+    font-family: "DM Sans";
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.09rem;
+    text-align: center;
+  }
+
+  .footer-content h2 {
+    font-size: 13px;
+  }
+
+  .footer-menu {
+    font-size: 10px;
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .right-container {
+    padding-left: 0%;
+    position: relative;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+
+  .about-container {
+    padding: 4.25rem 2.25rem 0;
+  }
+  .outline-container {
+    padding: 1.25rem 2.25rem 0;
+  }
+  .program-container {
+    padding: 1.25rem 2.25rem 0;
+  }
+  .business-container {
+    padding: 1.25rem 2.25rem 0;
+  }
+
+  .application-container {
+    padding: 1.25rem 2.25rem 0;
+  }
+  .contact-container {
+    padding: 1.25rem 2.25rem 0;
+  }
+  .footer-container {
+    padding: 6.25rem 2.25rem 0;
+  }
+
+  /** Outline*/
+  .outline-section p {
+    font-size: 14px;
+  }
+
+  .outline-section {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d1d5d8;
+  }
+
+  .outline-content {
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid #d1d5d8;
+  }
+  .outline-content h2 {
+    font-size: 18px;
+  }
+  .outline-divider {
+    padding-bottom: 10px;
+    border-bottom: solid 1px #d1d5d8;
+  }
+
+  .outline-divider-middle {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #d1d5d8;
+  }
+
+  .outline-divider-bottom {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /** Business*/
+
+  .business-section p {
+    font-size: 15px;
+  }
+
+  .business-content h2 {
+    font-size: 18px;
+  }
+  .business-divider {
+    padding-bottom: 10px;
+    border-bottom: solid 1px #d1d5d8;
+  }
+
+  .business-divider-middle {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #d1d5d8;
+  }
+
+  .business-divider-bottom {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /** Application*/
+  .application-section p {
+    font-size: 12px;
+  }
+
+  .application-section {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d1d5d8;
+  }
+
+  .application-content {
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .application-content h2 {
+    font-size: 18px;
+  }
+
+  .application-divider-bottom {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .email {
+    border: 1px solid #901d22;
+    padding: 15px;
+    border-radius: 30px;
+  }
+
+  /** Left Side */
+  .logo-student {
+    position: relative;
+    top: 1.75rem;
+    left: 1.75rem;
+    width: 8rem;
+  }
+
+  .main-logo {
+    width: 8.75rem;
+    margin: 13vh auto 40px auto;
+  }
+
+  .logo-text h4 {
+    margin: auto;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    line-height: 2;
+  }
+
+  .main-buttons h4 {
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+  }
+
+  .main-buttons h4::after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-color: "#fff";
+    border-style: solid;
+    border-width: 0;
+    margin: 0px 0px 4px 10px !important;
+    transform: rotate(45deg);
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+  }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Profile from "../../assets/images/profile.jpg";
 import "./index.css";
@@ -7,28 +7,65 @@ import { BiLogoTwitter } from "react-icons/bi";
 import { RiFacebookFill } from "react-icons/ri";
 import Circle from "../../assets/images/fellow-circle.png";
 import partialBall from "../../assets/images/partial-ball.png";
-import BlogImage from "../../assets/images/blog-img.jpeg";
-import BackIcon from "../../assets/images/b-back_icon.svg";
-import image1 from "../../assets/images/slider/slider1.jpg";
-import image2 from "../../assets/images/slider/slider2.jpg";
-import image3 from "../../assets/images/slider/slider3.jpg";
-import image4 from "../../assets/images/slider/slider4.jpg";
+// import BlogImage from "../../assets/images/blog-img.jpeg";
+// import BackIcon from "../../assets/images/b-back_icon.svg";
+// import graphics1 from "../../assets/images/graphic03-2.png";
+// import graphics2 from "../../assets/images/graphic04-2.png";
 import Logo from "../../assets/images/b-logo-rara.svg";
+import { TweenMax, Power3, Linear, gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function FellowSingle() {
   const { fellowId } = useParams();
   const navigate = useNavigate();
   const [fellow, setFellow] = useState({});
   const [blogData, setBlogData] = useState([]);
+  const [sortedBlogData, setSortedBlogData] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [sliderImages, setSliderImages] = useState([]);
+  gsap.registerPlugin(ScrollTrigger);
+  const shape1Ref = useRef(null);
+  const shape2Ref = useRef(null);
+  const shape3Ref = useRef(null);
+  const shape4Ref = useRef(null);
 
-  const sliderImages = [image1, image2, image3, image4];
+  useEffect(() => {
+    gsap.defaults({ ease: Linear.easeNone });
+
+    gsap.to(shape1Ref.current, {
+      y: 40,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: shape1Ref.current,
+        start: "top 50px",
+        duration: 70,
+        end: "bottom 50px",
+        scrub: true,
+      },
+    });
+
+    gsap.to(shape2Ref.current, {
+      y: 40,
+      opacity: 1,
+      scrollTrigger: {
+        trigger: shape2Ref.current,
+        start: "top 700px",
+        duration: 70,
+        end: "bottom 150px",
+        scrub: true,
+      },
+    });
+  }, []);
 
   const handlePrevSlide = () => {
     setCurrentSlide((prevSlide) =>
       prevSlide === 0 ? sliderImages.length - 1 : prevSlide - 1
     );
+  };
+
+  const handleClick = (blogId) => {
+    navigate(`/blog/${blogId}`);
   };
 
   const handleNextSlide = () => {
@@ -49,7 +86,13 @@ function FellowSingle() {
         `${process.env.REACT_APP_SERVER}/profile/${fellowId}`
       );
       const data = await response.json();
+      console.log(
+        "🚀 ~ file: index.jsx:53 ~ fetchFellow ~ data:",
+        data.profile
+      );
       setFellow(data.profile);
+      const pictureSliderJson = JSON.parse(data.profile.pictureSlider);
+      setSliderImages(pictureSliderJson);
     };
     fetchFellow();
 
@@ -66,8 +109,14 @@ function FellowSingle() {
     };
   }, []);
 
+  //Filtering Blogs w.r.t Fellow
+  const filteredBlogs = blogData.filter((blog) => {
+    return blog.fellow === fellow.name;
+  });
+  console.log("**********Filtered Blog", filteredBlogs);
+
   // Sort blogData based on publicationDate in descending order
-  const sortedBlogs = blogData.sort(
+  const sortedBlogs = filteredBlogs.sort(
     (a, b) => new Date(b.publicationDate) - new Date(a.publicationDate)
   );
 
@@ -76,10 +125,15 @@ function FellowSingle() {
 
   return (
     <section>
+      {console.log("*************Blog", blogData)}
       <div className="pl-[30px] mt-[100px] lg:flex lg:justify-between w-[100%] lg:mt-[0px]">
-        <div className="lg:max-w-[50%] lg:m-auto lg:pl-[175px] w-[75%] lg;w-[100%]">
+        <div className="left lg:max-w-[50%] lg:m-auto lg:pl-[20px] xl:pl-[175px] w-[75%] lg;w-[100%]">
           {/** Left */}
-          <div>
+          <div className="shape-1 hidden lg:block" ref={shape1Ref}>
+            <img className="w-[70px]" src={fellow.graphic2} alt="" />
+          </div>
+
+          <div className="lg:mt-[200px]">
             {fellow.name && (
               <p className="profile-name">{fellow.nameEnglish}</p>
             )}
@@ -90,7 +144,6 @@ function FellowSingle() {
             )}
             {fellow.jobPost && (
               <p className="text-[10px] lg:text-[12px] my-auto">
-                {" "}
                 {fellow.jobPost}
               </p>
             )}
@@ -98,7 +151,7 @@ function FellowSingle() {
           <div className="flex gap-2">
             {fellow.twitterUrl ? (
               <a href={fellow.twitterUrl}>
-                <div className="mt-[40px] lg:mt-[70px]">
+                <div className=" xl:mt-[70px] lg:mt-[30px]">
                   <BiLogoTwitter
                     style={{ fontSize: "24px", color: "#acacac" }}
                   />
@@ -107,7 +160,7 @@ function FellowSingle() {
             ) : null}
             {fellow.facebookUrl ? (
               <a href={fellow.twitterUrl}>
-                <div className="mt-[40px] lg:mt-[70px]">
+                <div className="xl:mt-[70px] lg:mt-[30px]">
                   <RiFacebookFill
                     style={{ fontSize: "24px", color: "#acacac" }}
                   />
@@ -119,8 +172,11 @@ function FellowSingle() {
             {fellow.tagLine && <p>{fellow.tagLine}</p>}
           </div>
         </div>
-        <div className="w-[100%]  lg:w-[50%]">
+        <div className="w-[100%]">
           {/** Right */}
+          <div className="shape-2  hidden lg:block" ref={shape2Ref}>
+            <img className="w-[150px]" src={fellow.graphic1} alt="" />
+          </div>
           <img className="profile-pic" src={fellow.imagePath} alt="" />
         </div>
       </div>
@@ -131,7 +187,7 @@ function FellowSingle() {
         <div className="flex justify-between w-[95%] m-auto">
           <div></div>
           <a href="#profile">
-            <div className="circle-container mt-[-105px]">
+            <div className="circle-container lg:mt-[-250px] xl:mt-[-135px]">
               <div className="scroll-circle">
                 <p>SCROLL</p>
               </div>
@@ -181,10 +237,16 @@ function FellowSingle() {
       {/************************** Background Image Section ******************************/}
 
       <div className="flex justify-end mt-[100px] lg:h-[800px]">
-        <div className="bg-fellow w-[90%] flex justify-between pl-[35px]">
+        <div
+          className="bg-fellow w-[90%] flex justify-between pl-[35px]"
+          style={{
+            backgroundImage: `url(${fellow.featuredImage})`,
+          }}
+        >
           <div>
             <img
-              className="w-[50%] lg:w-auto lg:mt-[40px] "
+              className="w-[50%] lg:w-auto lg:mt-[40px]"
+              ref={shape3Ref}
               src={Circle}
               alt=""
             />
@@ -192,6 +254,7 @@ function FellowSingle() {
           <div>
             <img
               className="w-[40%] mt-[100px] lg:w-auto  lg:mt-[500px]"
+              ref={shape4Ref}
               src={partialBall}
               alt=""
             />
@@ -200,41 +263,54 @@ function FellowSingle() {
       </div>
 
       {/************************** Blog Section ******************************/}
+      {latestThreeBlogs > 0 ? (
+        <div className="reports mt-[150px] px-[30px] lg:mt-[400px] lg:flex w-[95%] m-auto lg:px-[50px] pt-[50px] gap ">
+          <div className=" w-[100%] lg:w-[40%]">
+            <h4>最新の研究活動レポート</h4>
+          </div>
 
-      <div className="reports mt-[150px] px-[30px] lg:mt-[400px] lg:flex w-[95%] m-auto lg:px-[50px] pt-[50px] gap ">
-        <div className=" w-[100%] lg:w-[40%]">
-          <h4>最新の研究活動レポート</h4>
-        </div>
-        <div className=" w-[100%] mt-[80px] lg:w-[60%]  lg:mb-[100px]">
-          {latestThreeBlogs.map((blog) => (
-            <div key={blog.id} className=" lg:flex mt-[40px]">
-              <div className="blog">
-                <img className="bog-img" src={blog.imagePath} alt="" />
-              </div>
-              <div className="blog-inner mt-[7px]">
-                {/* <p> 研究活動レポート / {fellow.category} / {fellow.profile</p> */}
-                <p>研究活動レポート / 小西 聡 / 高橋 政代</p>
-                <h3 className="mt-[30px] lg:mt-[55px]">{blog.title}</h3>
-                <div className="date-box flex mt-[55px] justify-between">
-                  <div>
-                    <p>{new Date(blog.publicationDate).toLocaleDateString()}</p>
-                  </div>
-                  <div>
-                    <h5 className="text-[10px] lg:text-[11px]">VIEW DETAILS</h5>
+          <div className=" w-[100%] mt-[80px] lg:w-[60%]  lg:mb-[100px] cursor-pointer">
+            {latestThreeBlogs.map((blog) => (
+              <div
+                key={blog.id}
+                className=" lg:flex mt-[40px]"
+                onClick={() => handleClick(blog.id)}
+              >
+                <div className="blog">
+                  <img className="bog-img" src={blog.imagePath} alt="" />
+                </div>
+                <div className="blog-inner mt-[7px]">
+                  {/* <p> 研究活動レポート / {fellow.category} / {fellow.profile</p> */}
+                  <p>
+                    {blog.category} / {blog.fellow}
+                  </p>
+                  <h3 className="mt-[30px] lg:mt-[55px]">{blog.title}</h3>
+                  <div className="date-box flex mt-[55px] justify-between">
+                    <div>
+                      <p>
+                        {new Date(blog.publicationDate).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div>
+                      <h5 className="text-[10px] lg:text-[11px]">
+                        VIEW DETAILS
+                      </h5>
+                    </div>
                   </div>
                 </div>
               </div>
+            ))}
+            <div className="all-report flex justify-center pt-[75px] pb-[175px] lg:justify-end lg:mt-[150px]">
+              <a href="">VIEW ALL REPORT</a>
             </div>
-          ))}
-          <div className="all-report flex justify-center pt-[75px] pb-[175px] lg:justify-end lg:mt-[150px]">
-            <a href="">VIEW ALL REPORT</a>
           </div>
         </div>
-      </div>
+      ) : null}
 
       {/************************** Slider Section ******************************/}
+      {console.log("*****Slider", sliderImages)}
 
-      <div className="w-[100%] m-auto pb-[100px]">
+      <div className="w-[100%] m-auto pb-[100px] overflow-hidden">
         <div className="title mt-[75px] pl-[95px]">
           <h4>紹介写真</h4>
         </div>

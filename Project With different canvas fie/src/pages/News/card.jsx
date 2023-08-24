@@ -79,14 +79,6 @@ function Card() {
           >
             Old to new
           </button>
-          <button
-            className={`filter-btn ${
-              sortOption === "更新情報" ? "active" : " "
-            }`}
-            onClick={() => handleSortingOption("更新情報")}
-          >
-            更新情報
-          </button>
         </div>
       </div>
 
@@ -98,12 +90,12 @@ function Card() {
             {sortedNewsData.slice(startIndex, endIndex).map((news, index) => (
               <a href={news.link}>
                 <div className="news-card mt-[70px] cursor-pointer" key={index}>
-                  <div className="img-box">
+                  {/* <div className="img-box">
                     <img className="img" src={Image} alt="" />
-                  </div>
-                  <div className="news-cat my-auto">
+                  </div> */}
+                  {/* <div className="news-cat my-auto">
                     <h5>研究活動レポート / 松村 浩由</h5>
-                  </div>
+                  </div> */}
                   <div className="mt-[30px]">
                     <p>{truncateText(news.title, 80)}</p>
                   </div>
