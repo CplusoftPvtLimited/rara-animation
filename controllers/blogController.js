@@ -1,5 +1,6 @@
 // const Blog = require('../models/Blog');
-
+const { Category } = require('../models/Category');
+const Profile = require('../models/Profile');
 const {
   Blog,
   RelatedBlog,
@@ -76,7 +77,62 @@ const getAllBlogs = async (req, res) => {
       return res.status(404).json({ message: 'No blog posts found' });
     }
 
-    res.status(200).send({ blogPosts });
+    // Extract unique category IDs
+    const categoryIds = [...new Set(blogPosts.map((blog) => blog.category))];
+
+    // Extract unique fellow IDs
+    const fellowIds = [...new Set(blogPosts.map((blog) => blog.fellow))];
+
+    // Extract unique fellow IDs
+    const associatedfellowIds = [
+      ...new Set(blogPosts.map((blog) => blog.associatedFellow)),
+    ];
+
+    // Fetch categories in bulk using the unique category IDs
+    const categories = await Category.findAll({
+      where: { id: categoryIds },
+    });
+
+    // Fetch fellows in bulk using the unique fellow IDs
+    const fellows = await Profile.findAll({
+      where: { id: fellowIds },
+    });
+    console.log('fellows...................fellows: ', fellows);
+
+    // Fetch fellows in bulk using the unique fellow IDs
+    const associfellows = await Profile.findAll({
+      where: { id: associatedfellowIds },
+    });
+
+    console.log('associfellows: ', associfellows);
+    // Create a mapping of category IDs to their data
+    const categoryMap = {};
+    categories.forEach((category) => {
+      categoryMap[category.id] = category;
+    });
+
+    // Create a mapping of fellow IDs to their data
+    const fellowMap = {};
+    fellows.forEach((fellow) => {
+      fellowMap[fellow.id] = fellow;
+    });
+
+    // Create a mapping of fellow IDs to their data
+    const assFellowMap = {};
+    associfellows.forEach((fellow) => {
+      assFellowMap[fellow.id] = fellow;
+    });
+
+    // Combine blog data with corresponding category data
+    const blogsWithCategories = blogPosts.map((blog) => ({
+      ...blog.toJSON(),
+      category: categoryMap[blog.category] || null,
+      fellow: fellowMap[blog.fellow] || null,
+      associatedFellow: assFellowMap[blog.fellow] || null,
+    }));
+
+    res.status(200).send({ blogPosts: blogsWithCategories });
+    // res.status(200).send({ blogPosts });
   } catch (err) {
     console.log('err: ', err);
     res.status(403).json({ err });
@@ -94,8 +150,18 @@ const getBlogPostById = async (req, res) => {
       include: 'relatedBlogs',
     });
 
-    console.log('Blog Post -------------', blogPost);
+    const fellowId = parseInt(blogPost.fellow);
+    const associatedFellowId = parseInt(blogPost.associatedFellow);
 
+    const category = await Category.findByPk(blogPost.category);
+    const fellow = await Profile.findByPk(fellowId);
+    const associatedFellow = await Profile.findByPk(associatedFellowId);
+
+    if (!category) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+
+    console.log('Blog Post -------------', blogPost);
     // Extract relatedBlogIds from the relatedBlogs
     const relatedBlogIds = blogPost.relatedBlogs.map(
       (relatedBlog) => relatedBlog.relatedBlogId
@@ -113,6 +179,9 @@ const getBlogPostById = async (req, res) => {
     const modifiedBlogPost = {
       ...blogPost.toJSON(), // Convert blogPost to plain object
       relatedBlogs: relatedBlogData, // Replace relatedBlogs with relatedBlogData
+      category: category.toJSON(),
+      fellow: fellow.toJSON(),
+      associatedFellow: associatedFellow.toJSON(),
     };
 
     if (!blogPost) {
