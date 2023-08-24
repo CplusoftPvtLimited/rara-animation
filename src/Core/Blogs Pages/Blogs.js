@@ -11,6 +11,7 @@ import './Blogs.css';
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [categoryMap, setCategoryMap] = useState({});
 
   useEffect(() => {
     getBlogs();
@@ -40,6 +41,8 @@ const Blogs = () => {
       getBlogs();
     });
   };
+
+  console.log('blogs: ', blogs);
 
   return (
     <div className='dashboard-parent-div'>
@@ -120,11 +123,12 @@ const Blogs = () => {
                               />
                             </td>
                             <td>{blog.title}</td>
-                            <td>{blog.category}</td>
+                            <td>{blog?.category?.title}</td>
+                            {/* Update this line */}
                             {/* <td
                             dangerouslySetInnerHTML={{ __html: blog.content }}
                           ></td> */}
-                            <td>{blog.fellow}</td>
+                            <td>{blog.fellow?.name}</td>
                             <td>{blog.region}</td>
                             <td>{blog.profile}</td>
                             <td>

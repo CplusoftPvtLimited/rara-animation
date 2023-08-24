@@ -37,7 +37,6 @@ function EditBlog(props) {
   }, []);
 
   const getBlogById = () => {
-    console.log('getBlogs');
     setBlogData();
     axios({
       method: 'get',
@@ -46,7 +45,7 @@ function EditBlog(props) {
       .then((response) => {
         setBlogData(response.data?.blogPost);
         setSelectedOptions(response.data?.blogPost?.relatedBlogs);
-        console.log('blogData: ', response.data.blogPost);
+        // console.log('blogData: ', response.data.blogPost);
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +59,7 @@ function EditBlog(props) {
       url: 'http://localhost:4500/api/category',
     })
       .then((response) => {
-        console.log('response: ', response?.data);
+        // console.log('response: ', response?.data);
         setCategories(response?.data);
       })
       .catch((err) => {
@@ -128,6 +127,7 @@ function EditBlog(props) {
   const onRemoveOptions = (selectedList, removedItem) => {
     setSelectedOptions(selectedOptions.filter((item) => item !== removedItem));
   };
+  console.log('blog data: ', blogData);
 
   const editBlog = (event) => {
     event.preventDefault();
@@ -155,6 +155,7 @@ function EditBlog(props) {
       updatedData.append('relatedBlogs', relatedBlogIds.join(','));
     }
 
+    console.log('blog updated data:', updatedData);
     try {
       axios
         .put(`http://localhost:4500/api/blog/${blogId}`, updatedData)
@@ -200,9 +201,9 @@ function EditBlog(props) {
     if (blogData.content.trim() === '') {
       errors.content = 'This field is required';
     }
-    if (blogData.fellow.trim() === '') {
-      errors.fellow = 'This field is required';
-    }
+    // if (blogData.fellow.trim() === '') {
+    //   errors.fellow = 'This field is required';
+    // }
 
     if (blogData.category.trim() === '') {
       errors.category = 'This field is required';
@@ -221,6 +222,9 @@ function EditBlog(props) {
     }
     return errors;
   };
+
+  console.log('..........blogData: ', blogData);
+
   return (
     <div className='dashboard-parent-div'>
       <Row>
@@ -274,13 +278,13 @@ function EditBlog(props) {
                       <p>Category</p>
                       <select
                         name='category'
-                        value={blogData.category}
+                        defaultValue={blogData?.category?.id}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
                       >
                         <option value=''>Select Category</option>
                         {categories.map((category, index) => (
-                          <option value={category?.title} key={index}>
+                          <option value={category?.id} key={category?.id}>
                             {category?.title}
                           </option>
                         ))}
@@ -324,13 +328,13 @@ function EditBlog(props) {
                       <p>Fellow</p>
                       <select
                         name='fellow'
-                        value={blogData.fellow}
+                        value={blogData?.fellow?.id}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
                       >
                         <option value=''>Select Fellow</option>
                         {fellows.map((fellow) => (
-                          <option key={fellow} value={fellow?.name}>
+                          <option key={fellow.id} value={fellow?.id}>
                             {fellow?.name}
                           </option>
                         ))}
@@ -346,14 +350,14 @@ function EditBlog(props) {
                     <div className='add-product-input-div'>
                       <p>Associated Fellow</p>
                       <select
-                        name='fellow'
-                        value={blogData.associatedFellow}
+                        name='associatedFellow'
+                        value={blogData?.associatedFellow?.id}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
                       >
                         <option value=''>Select Fellow</option>
                         {fellows.map((fellow) => (
-                          <option key={fellow} value={fellow?.name}>
+                          <option key={fellow.id} value={fellow?.id}>
                             {fellow?.name}
                           </option>
                         ))}

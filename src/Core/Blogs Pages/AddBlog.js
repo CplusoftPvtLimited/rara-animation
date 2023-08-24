@@ -26,6 +26,8 @@ const AddBlog = () => {
     content: '',
     imagePath: '',
   });
+  console.log('categories: ', categories);
+  console.log('fellows: ', fellows);
   const [validationErrors, setValidationErrors] = useState({
     title: '',
     profile: '',
@@ -151,7 +153,7 @@ const AddBlog = () => {
       }
       formDataToSend.append('content', formData.content);
       formDataToSend.append('imagePath', formData.imagePath);
-
+      console.log('formDataToSend', formDataToSend);
       axios
         .post('http://localhost:4500/api/blog/createBlog', formDataToSend, {
           headers: {
@@ -290,7 +292,7 @@ const AddBlog = () => {
                     >
                       <option value=''>Select Category</option>
                       {categories.map((category, index) => (
-                        <option value={category?.title} key={index}>
+                        <option value={category.id} key={category.id}>
                           {category?.title}
                         </option>
                       ))}
@@ -339,7 +341,7 @@ const AddBlog = () => {
                     >
                       <option value=''>Select Fellow</option>
                       {fellows.map((fellow) => (
-                        <option key={fellow} value={fellow.name}>
+                        <option key={fellow} value={fellow.id}>
                           {fellow.name}
                         </option>
                       ))}
@@ -362,7 +364,7 @@ const AddBlog = () => {
                     >
                       <option value=''>Select Associated Fellow</option>
                       {fellows.map((fellow) => (
-                        <option key={fellow} value={fellow.name}>
+                        <option key={fellow} value={fellow.id}>
                           {fellow.name}
                         </option>
                       ))}
