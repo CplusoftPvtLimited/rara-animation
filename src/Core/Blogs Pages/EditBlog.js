@@ -37,6 +37,7 @@ function EditBlog(props) {
   }, []);
 
   const getBlogById = () => {
+    console.log('getBlogs');
     setBlogData();
     axios({
       method: 'get',
@@ -45,7 +46,7 @@ function EditBlog(props) {
       .then((response) => {
         setBlogData(response.data?.blogPost);
         setSelectedOptions(response.data?.blogPost?.relatedBlogs);
-        // console.log('blogData: ', response.data.blogPost);
+        console.log('blogData: ', response.data.blogPost);
       })
       .catch((err) => {
         console.log(err);
@@ -59,7 +60,7 @@ function EditBlog(props) {
       url: 'http://localhost:4500/api/category',
     })
       .then((response) => {
-        // console.log('response: ', response?.data);
+        console.log('response: ', response?.data);
         setCategories(response?.data);
       })
       .catch((err) => {
@@ -201,9 +202,9 @@ function EditBlog(props) {
     if (blogData.content.trim() === '') {
       errors.content = 'This field is required';
     }
-    // if (blogData.fellow.trim() === '') {
-    //   errors.fellow = 'This field is required';
-    // }
+    if (blogData.fellow.trim() === '') {
+      errors.fellow = 'This field is required';
+    }
 
     if (blogData.category.trim() === '') {
       errors.category = 'This field is required';
@@ -278,6 +279,7 @@ function EditBlog(props) {
                       <p>Category</p>
                       <select
                         name='category'
+                        // value={blogData.category}
                         defaultValue={blogData?.category?.id}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
@@ -328,7 +330,8 @@ function EditBlog(props) {
                       <p>Fellow</p>
                       <select
                         name='fellow'
-                        value={blogData?.fellow?.id}
+                        // value={blogData.fellow}
+                        defaultValue={blogData?.fellow?.id}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
                       >
@@ -350,8 +353,9 @@ function EditBlog(props) {
                     <div className='add-product-input-div'>
                       <p>Associated Fellow</p>
                       <select
-                        name='associatedFellow'
-                        value={blogData?.associatedFellow?.id}
+                        name='fellow'
+                        // value={blogData.associatedFellow}
+                        defaultValue={blogData?.fellow?.id}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
                       >
