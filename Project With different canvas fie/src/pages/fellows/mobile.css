@@ -1,0 +1,107 @@
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .hand {
+    position: absolute;
+    right: 50%;
+    top: 99%;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+
+  .layers {
+    background-image: url("../../assets/images/fellow-hero.png");
+    width: 23.4375rem;
+    height: 20.5rem;
+    padding-top: 6.25rem;
+    margin-top: 2.75rem;
+  }
+
+  .layer-item-1 {
+    color: #ad181f;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: -10px;
+    font-family: "Hiragino";
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
+  }
+
+  .layer-item-2 {
+    color: #ad181f;
+    font-weight: 600;
+    margin-top: 50px;
+    font-family: "Hiragino";
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
+    font-size: 11px;
+    padding-right: 0.3125rem;
+    letter-spacing: 0.01em;
+    line-height: 1.92308;
+  }
+
+  .layer-item-3 {
+    color: #ad181f;
+    font-size: 11px;
+    margin-top: 50px;
+    font-weight: 600;
+    font-family: "Hiragino";
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
+  }
+
+  .top-bar h2 {
+    font-size: 21px;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .top-bar h3 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #aaaaaa;
+    text-align: start;
+    margin-top: 10px;
+    padding-left: 40px;
+  }
+  .fellow-box {
+    width: 100%;
+    flex-basis: 100%;
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: 45px;
+    border-bottom: solid 1px #aaaaaa;
+  }
+  .fellows-container {
+    flex-wrap: wrap;
+    margin-top: 50px;
+    border-bottom: none;
+    cursor: pointer;
+  }
+
+  .website-btn{
+    color: #ad181f;
+    font-size: 21px;
+    font-family: "Cormorant Garamond";
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
+  }
+
+  .det-btn{
+    text-decoration: underline;
+    text-underline-offset: 0.4em;
+    padding-top: 50px;
+  }
+
+  .det-btn::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent; 
+    border-left: 5px solid black; 
+    margin-left: 5px; 
+  }
+  
+  
+}

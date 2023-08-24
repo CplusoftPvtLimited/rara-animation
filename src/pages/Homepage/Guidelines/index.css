@@ -1,0 +1,157 @@
+.gt0 {
+    fill: #E6E6E6;
+    stroke: #000000;
+    stroke-width: 0.2;
+    stroke-miterlimit: 10;
+  }
+
+.guideline_wrapper {
+    transform: translate3d(0, 0, 0);
+    width: 100%;
+}
+.lGuideline-title-inner{
+    padding: 9% 50px;
+    position: absolute;
+    right: 0;
+    width: 60pc; /* Change this for responsiveness */
+}
+.lGuideline-title-sub {
+    margin-top: 2.5rem;
+    font-size: 1.125rem;
+}
+.cSubTitle {
+    padding-bottom: 0.13em;
+}
+.cSubTitle-text {
+    display: inline-block;
+}
+.guideline_item{
+    height: 4500px;
+    padding: 125px 50px 0px 50px;
+    overflow: hidden;
+}
+
+.lGuideline-card-item {
+    position: relative;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+.lGuideline-card-item-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(180deg);
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    padding: 3.75rem 2.5rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: -1;
+}
+
+.lGuideline-card-item-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    background-color: #bebebe;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+}
+
+@media screen and (min-width: 768px){
+    .cSubTitle.-right {
+        text-align: right;
+    }
+    .cSubTitle {
+        font-size: 1.125rem;
+    }
+    .lGuideline-card-item-headline {
+        height: 10rem;
+        margin-bottom: 3.75rem;
+    }
+    .lGuideline-card-item {
+        width: 21.5rem;
+        height: 30.625rem;
+        transform: translateX(100vw) perspective(225rem);
+    }
+    .lGuideline-card-item-title {
+        font-size: 1.625rem;
+        margin-left: 0.3125rem;
+    }
+    .lGuideline-card-item-text {
+        letter-spacing: -.06em;
+        font-size: 1rem;
+    }
+    .lGuideline-card-item-number.-l01 {
+        width: 4.5rem;
+        height: 8.125rem;
+    }
+    .cContainer.-rightSmall {
+        padding-right: 3.125rem;
+    }
+    .lGuideline-text {
+        font-size: 1.125rem;
+        transform: translateY(-20vh);
+    }
+    
+        
+}
+
+.lGuideline-card-item-number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.lGuideline-card-item-text {
+    line-height: 2;
+}
+
+.lGuideline-card-item-title {
+    letter-spacing: .35em;
+}
+
+.lGuideline-card-item {
+    position: relative;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+.lGuideline-card {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5.625rem;
+}
+
+
+.lGuideline-card-item-headline {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lGuideline-card-item-back-illust {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.lGuideline-text {
+    overflow: hidden;
+    line-height: 2;
+    text-align: center;
+    letter-spacing: -.05em;
+}
