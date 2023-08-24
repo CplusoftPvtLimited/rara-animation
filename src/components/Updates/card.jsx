@@ -163,7 +163,7 @@ function Card() {
 
   return (
     <section>
-      <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[90%] lg:w-[80%] py-[50px] gap-32 pr-[150px lg:flex ">
+      <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[90%] lg:w-[85%] py-[50px] gap-32 pr-[150px lg:flex ">
         <div className="filter-by-date my-auto">
           <h5>SORT BY CATEGORY</h5>
         </div>
@@ -236,7 +236,7 @@ function Card() {
       {/*********************** Sort By Fellow ***************************/}
 
       {console.log("Fellow Array", fellowArray)}
-      <div className="filter-2 mx-auto w-[90%] lg:w-[80%] py-[50px] md:flex-wrap justify-between pr-[150px lg:flex ">
+      <div className="filter-2 mx-auto w-[90%] lg:w-[85%] py-[50px] md:flex-wrap justify-between pr-[150px lg:flex ">
         <div className="filter-by-date my-auto md:flex gap-32 ">
           <h5 className="my-auto">SORT BY FELLOWS</h5>
           <button
@@ -264,7 +264,7 @@ function Card() {
       </div>
       {/***********************Toggle Section ***************************/}
       {fellowToggle ? (
-        <div className="filter-3 mx-auto w-[80%] py-[50px] pr-[150px] lg:pl-[100px] ">
+        <div className="filter-3 mx-auto w-[85%] py-[50px] pr-[150px] lg:pl-[100px] ">
           <div className="lg:flex lg:gap-32">
             <div className="filter-by-fellow my-auto">
               <h5>Fellows</h5>
@@ -308,8 +308,8 @@ function Card() {
       ) : null}
       {/***********************Cards ***************************/}
       {postData.length > 0 ? (
-        <div className="Cards mt-[50px] mb-[100px] w-[80%] m-auto" id="card">
-          <div className="flex flex-wrap gap-4 justify-center mx-auto">
+        <div className="Cards mt-[50px] mb-[100px] w-[85%] m-auto" id="card">
+          <div className="flex flex-wrap gap-4 justify-evenly">
             {console.log("Data", postData)}
             {sortedPostData.slice(startIndex, endIndex).map((post, index) => (
               <div
