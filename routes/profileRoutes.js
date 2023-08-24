@@ -10,6 +10,8 @@ const {
 } = require("../controllers/profileController");
 
 // Create New Fellow Profile
+router.post("/adminCreateProfile", upload.single("imagePath"), createProfile);
+
 router.post(
   "/createProfile",
   upload.fields([

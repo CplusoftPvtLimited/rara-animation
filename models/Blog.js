@@ -1,28 +1,22 @@
-// models/BlogPost.js
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-// const Profile = require('./Profile.js');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
+const RelatedBlog = require("./RelatedBlog");
 
-const Blog = sequelize.define('Blog', {
+const Blog = sequelize.define("Blog", {
   imagePath: {
     type: DataTypes.STRING,
-    // allowNull: true,
+    allowNull: true,
   },
   title: {
     type: DataTypes.STRING,
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true,
-    // },
   },
   content: {
     type: DataTypes.TEXT,
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true,
-    // },
   },
   fellow: {
+    type: DataTypes.TEXT,
+  },
+  associatedFellow: {
     type: DataTypes.TEXT,
   },
   category: {
@@ -31,13 +25,9 @@ const Blog = sequelize.define('Blog', {
   region: {
     type: DataTypes.TEXT,
   },
-  // profile: {
-  //   type: DataTypes.STRING,
-  //   // allowNull: false,
-  //   // validate: {
-  //   //   notEmpty: true,
-  //   // },
-  // },
+  profile: {
+    type: DataTypes.STRING,
+  },
   activationDate: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
