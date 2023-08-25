@@ -89,6 +89,14 @@ function Dashboard() {
           <p>Here's an overview of your RARA.</p>
           <Row>
             <Col>
+              <Card className='dashboard-card'>
+                <RiUser3Line className='card-icon' />
+                <h4>Home</h4>
+                <p>1</p>
+              </Card>
+            </Col>
+
+            <Col>
               {loading ? (
                 <ReactLoading
                   type='spokes'
@@ -105,14 +113,6 @@ function Dashboard() {
                   </Card>
                 )
               )}
-            </Col>
-
-            <Col>
-              <Card className='dashboard-card'>
-                <RiUser3Line className='card-icon' />
-                <h4>Our Regions</h4>
-                <p> 8</p>
-              </Card>
             </Col>
 
             <Col>
@@ -134,7 +134,7 @@ function Dashboard() {
               )}
             </Col>
 
-            <Col>
+            {/* <Col>
               {loading ? (
                 <ReactLoading
                   type='spokes'
@@ -151,6 +151,13 @@ function Dashboard() {
                   </Card>
                 )
               )}
+            </Col> */}
+            <Col>
+              <Card className='dashboard-card'>
+                <RiUser3Line className='card-icon' />
+                <h4>Payment</h4>
+                <p>1</p>
+              </Card>
             </Col>
           </Row>
 
@@ -159,14 +166,14 @@ function Dashboard() {
             <Col>
               <Card className='dashboard-action-card'>
                 <IoIosLaptop className='action-icon' />
-                <h4>All Blogs</h4>
+                <h4>Blogs</h4>
                 <p>
                   <Link to='/blogs'>Click here</Link> to view, remove or edit
                   blogs
                 </p>
               </Card>
             </Col>
-            <Col>
+            {/* <Col>
               <Card className='dashboard-action-card'>
                 <FaLaptopMedical className='action-icon' />
                 <h4>Add Blogs</h4>
@@ -174,30 +181,19 @@ function Dashboard() {
                   <Link to='/blog/add'>Click here</Link> to add new blogs
                 </p>
               </Card>
-            </Col>
+            </Col> */}
 
             <Col>
               <Card className='dashboard-action-card'>
                 <BsViewList className='action-icon' />
-                <h4>All Fellows</h4>
+                <h4>Fellows</h4>
                 <p>
                   <Link to='/fellows'>Click here</Link> to add, remove or edit
                   fellows
                 </p>
               </Card>
             </Col>
-          </Row>
-          <Row>
-            <Col lg={4}>
-              <Card className='dashboard-action-card'>
-                <RiShoppingCart2Line className='action-icon' />
-                <h4>Add Fellows</h4>
-                <p>
-                  <Link to='/fellow/add'>Click here</Link> to view, remove or
-                  edit fellows
-                </p>
-              </Card>
-            </Col>
+
             <Col>
               <Card className='dashboard-action-card'>
                 <BsViewList className='action-icon' />
@@ -208,13 +204,79 @@ function Dashboard() {
                 </p>
               </Card>
             </Col>
-            <Col lg={4}>
+          </Row>
+          <Row>
+            {/* <Col lg={4}>
+              <Card className='dashboard-action-card'>
+                <RiShoppingCart2Line className='action-icon' />
+                <h4>Add Fellows</h4>
+                <p>
+                  <Link to='/fellow/add'>Click here</Link> to view, remove or
+                  edit fellows
+                </p>
+              </Card>
+            </Col> */}
+            {/* <Col>
+              <Card className='dashboard-action-card'>
+                <BsViewList className='action-icon' />
+                <h4> Categories</h4>
+                <p>
+                  <Link to='/categories'>Click here</Link> to add, remove or
+                  edit categories
+                </p>
+              </Card>
+            </Col> */}
+            {/* <Col lg={4}>
               <Card className='dashboard-action-card'>
                 <RiUser3Line className='action-icon' />
                 <h4>Add Categories</h4>
                 <p>
                   <Link to='/category/add'>Click here</Link> to view, remove or
                   edit categories
+                </p>
+              </Card>
+            </Col> */}
+          </Row>
+
+          <Row>
+            <Col>
+              <Card className='dashboard-action-card'>
+                <IoIosLaptop className='action-icon' />
+                <h4>Home</h4>
+                <p>
+                  <Link to='/Home'>Click here</Link> to view, remove or edit
+                  home
+                </p>
+              </Card>
+            </Col>
+            {/* <Col>
+              <Card className='dashboard-action-card'>
+                <FaLaptopMedical className='action-icon' />
+                <h4>Add Blogs</h4>
+                <p>
+                  <Link to='/blog/add'>Click here</Link> to add new blogs
+                </p>
+              </Card>
+            </Col> */}
+
+            <Col>
+              <Card className='dashboard-action-card'>
+                <BsViewList className='action-icon' />
+                <h4>Payment</h4>
+                <p>
+                  <Link to='/paymentMethods'>Click here</Link> to add, remove or
+                  edit payment
+                </p>
+              </Card>
+            </Col>
+
+            <Col>
+              <Card className='dashboard-action-card'>
+                <BsViewList className='action-icon' />
+                <h4>Students</h4>
+                <p>
+                  <Link to='/student'>Click here</Link> to add, remove or edit
+                  students
                 </p>
               </Card>
             </Col>
