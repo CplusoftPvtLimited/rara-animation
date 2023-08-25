@@ -11,19 +11,20 @@ import Updates from "./pages/Updates/index";
 import UpdateSingle from "./pages/update-single/index";
 import Student from "./pages/student/index";
 import Donation from "./pages/donate/index";
-import Checkout from "./components/checkout/Checkout";
+import Checkout from "./components/Donation/checkout/Checkout";
+import PaymentCompletionPage from "./pages/donate/PaymentSuccess";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
-  const [keyData, setKeyData] = useState();
+  const [keyData, setKeyData] = useState(null);
 
   useEffect(() => {
     getStripeKey();
   }, []);
 
   const getStripeKey = () => {
-    setKeyData();
     axios({
       method: "get",
       url: "http://localhost:4500/api/secret/1",
@@ -50,13 +51,32 @@ function App() {
           <Route path="/student" element={<Student />} />
           <Route path="/donation" element={<Donation />} />
           {keyData?.active ? (
-            <Route path="/stripe" element={<Checkout donate={10} />} />
+            <Route path="/stripe" element={<Checkout />} />
           ) : (
             <Route
               path="/stripe"
               element={
-                <div>Stripe Payment is not available at the moment.</div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100vh",
+                    padding: "20px",
+                    fontSize: 25,
+                    fontWeight: 600,
+                  }}
+                >
+                  Stripe Payment is not available at the moment.
+                </div>
               }
+            />
+          )}
+          {keyData?.active && (
+            <Route
+              path="/payment-success"
+              element={<PaymentCompletionPage />}
             />
           )}
 

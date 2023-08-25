@@ -1,6 +1,7 @@
 import React from "react";
 import footerLogo from "../../assets/images/footer-logo.jpeg";
 import linkIcon from "../../assets/images/link.jpeg";
+import "./index.css";
 
 function Footer() {
   return (
