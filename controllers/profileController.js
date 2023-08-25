@@ -74,16 +74,16 @@ const createProfile = async (req, res) => {
 };
 
 const getAllProfiles = async (req, res) => {
-  // try {
-  const profiles = await Profile.findAll({ order: [['createdAt', 'DESC']] });
-  console.log('************Profile', profiles);
-  if (!profiles.length) {
-    return res.status(404).json({ message: 'No Profiles found' });
+  try {
+    const profiles = await Profile.findAll({ order: [['createdAt', 'DESC']] });
+    console.log('************Profile', profiles);
+    if (!profiles.length) {
+      return res.status(404).json({ message: 'No Profiles found' });
+    }
+    res.status(200).send({ profiles });
+  } catch (err) {
+    res.status(400).json({ error: 'Error fetching Profiles' });
   }
-  res.status(200).send({ profiles });
-  // } catch (err) {
-  //   res.status(400).json({ error: 'Error fetching Profiles' });
-  // }
 };
 
 const getProfileById = async (req, res) => {

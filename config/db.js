@@ -4,6 +4,10 @@ const sequelize = new Sequelize('abdullah', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
 });
+// const sequelize = new Sequelize('RARA', 'root', '', {
+//   host: 'localhost',
+//   dialect: 'mysql',
+// });
 
 sequelize
   .authenticate()
