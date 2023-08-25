@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./index.css";
@@ -6,8 +6,16 @@ import "./index.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const index = () => {
+  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+  const [SliderMove, setSliderMove] = useState(null);
+  const [sliderRotate, setsliderRotate] = useState(150);
+  const [FellowName, setFellowName] = useState(null);
+  const [FellowDescription1, setFellowDescription1] = useState(null);
+  const [FellowDescription2, setFellowDescription2] = useState(null);
   useEffect(() => {
     const scrollContainer = document.querySelector(".custom-container");
+
+    // sliderRotateElement.classList.add("-isCurrent");
     console.log(
       "🚀 ~ file:FELLOWS index.jsx:12 ~ useEffect ~ useEffect:",
       scrollContainer
@@ -18,14 +26,11 @@ const index = () => {
       trigger: "#fellows_trigger",
       scroller: scrollContainer,
       start: "top +85%",
-      onEnter: () => {
-        console.log("🚀 ~ file:FELLOWS index.jsx:18 ~ useEffect ~ onEnter:");
-      },
       onUpdate: (self) => {
-        console.log(
-          "🚀 ~ file:FELLOWS index.jsx:21 ~ useEffect ~ onUpdate:",
-          self.progress
-        );
+        // console.log(
+        //   "🚀 ~ file:FELLOWS index.jsx:21 ~ useEffect ~ onUpdate:",
+        //   self.progress
+        // );
         const progress = self.progress;
         let bigCirlceValue = 0;
         let circleBackground = 0;
@@ -56,17 +61,241 @@ const index = () => {
           }
         }
       },
-      onLeave: () => {
-        console.log("🚀 ~ file:FELLOWS index.jsx:24 ~ useEffect ~ onLeave:");
-      },
-      onLeaveBack: () => {
-        console.log(
-          "🚀 ~ file:FELLOWS index.jsx:27 ~ useEffect ~ onLeaveBack:"
-        );
-      },
     });
   }, []);
 
+  useEffect(() => {
+    const sliderRotateElement = document.querySelector(
+      `[data-rotate="${sliderRotate}"]`
+    );
+    setFellowName("Masayo Takahashi");
+    setFellowDescription1("高橋 政代");
+    setFellowDescription2("次世代の視覚再建");
+    sliderRotateElement.classList.add("-isCurrent");
+    console.log(
+      "🚀 ~ file: index.jsx:17 ~ useEffect ~ sliderRotateElement:",
+      sliderRotateElement
+    );
+  }, []);
+
+  const handleMouseLeave = () => {
+    const SliderMoveDiv = document.querySelector(".cSliderMouseStalker-circle");
+    SliderMoveDiv.style.transform = "scale(0)";
+  };
+
+  function handleMouseMovement() {
+    const { clientX, clientY } = event;
+    const SliderMoveDiv = document.querySelector(".cSliderMouseStalker-circle");
+    const prevSliderDiv = document.querySelector(
+      ".cSliderMouseStalker-text.-prev"
+    );
+    const nextSliderDiv = document.querySelector(
+      ".cSliderMouseStalker-text.-next"
+    );
+
+    const adjustedX = clientX + window.scrollX;
+    console.log(
+      "🚀 ~ file: index.jsx:91 ~ handleMouseMovement ~ adjustedX:",
+      adjustedX
+    );
+    const adjustedY = clientY + window.scrollY;
+    console.log(
+      "🚀 ~ file: index.jsx:93 ~ handleMouseMovement ~ adjustedY:",
+      adjustedY
+    );
+    SliderMoveDiv.style.transform = "translate(0px,0px)";
+    if (adjustedX < 610) {
+      setSliderMove(1);
+      // console.log(
+      //   "🚀 ~ file: index.jsx:96 ~ handleMouseMovement ~ SliderMove:",
+      //   SliderMove
+      // );
+      prevSliderDiv.style.transform = "translate3d(0%,0%,0px)";
+      nextSliderDiv.style.transform = "translateX(110%)";
+
+      setCoordinates({ x: adjustedX, y: adjustedY });
+    } else if (adjustedX > 870) {
+      setSliderMove(2);
+      nextSliderDiv.style.transform = "translate3d(0%,0%,0px)";
+      prevSliderDiv.style.transform = "translateX(110%)";
+      setCoordinates({ x: adjustedX, y: adjustedY });
+    } else {
+      SliderMoveDiv.style.transform = "scale(0)";
+    }
+  }
+
+  async function handleSliderRotation() {
+    const sliderElements = document.querySelectorAll(".lFellows-slider-item");
+    sliderElements.forEach((element) => {
+      element.classList.remove("-isCurrent");
+    });
+    // console.log(
+    //   "🚀 ~ file: index.jsx:119 ~ handleSliderRotation ~ coordinates:",
+    //   coordinates
+    // );
+    if (coordinates && SliderMove) {
+      // console.log(
+      //   "🚀 ~ file: index.jsx:119 ~ handleSliderRotation ~ SliderMove:",
+      //   SliderMove
+      // );
+      if (SliderMove == 1) {
+        const sliderRotateElement = document.querySelector(
+          `[data-rotate="${sliderRotate - 15}"]`
+        );
+
+        FellowData(sliderRotate - 15);
+        setsliderRotate(sliderRotate - 15);
+        // console.log(
+        //   "🚀 ~ file: index.jsx:120 ~ handleSliderRotation ~ sliderRotate:",
+        //   sliderRotate
+        // );
+        sliderRotateElement.classList.add("-isCurrent");
+      }
+      if (SliderMove == 2) {
+        const sliderRotateElement = document.querySelector(
+          `[data-rotate="${sliderRotate + 15}"]`
+        );
+
+        FellowData(sliderRotate + 15);
+        setsliderRotate(sliderRotate + 15);
+
+        sliderRotateElement.classList.add("-isCurrent");
+      }
+    }
+  }
+
+  const FellowData = (rotation) => {
+    const sliderRotation = rotation;
+    console.log(
+      "🚀 ~ file: index.jsx:169 ~ FellowData ~ sliderRotate:",
+      sliderRotate
+    );
+    if (sliderRotation == 0) {
+      setFellowName("Masayo Takahashi");
+      setFellowDescription1("高橋 政代");
+      setFellowDescription2("次世代の視覚再建");
+    } else if (sliderRotation == 15) {
+      setFellowName("Norihiro Sadato");
+      setFellowDescription1("定藤 規弘");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>ポストコロナ社会にWell-being をもたらす<br>社会性研究：ネットワーク型MRIシステム</p>"
+      );
+    } else if (sliderRotation == 30) {
+      setFellowName("Masaaki Mochimaru");
+      setFellowDescription1("持丸 正明");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>スポーツトレーニングのDXに関する研究</p>"
+      );
+    } else if (sliderRotation == 45) {
+      setFellowName("Satoshi Konishi");
+      setFellowDescription1("小西 聡");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>デジタル変革時代の未知との遭遇を開拓する<br>センサ・マイクロマシン研究</p>"
+      );
+    } else if (sliderRotation == 60) {
+      setFellowName("Kota Suechika");
+      setFellowDescription1("末近 浩太");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>中東・イスラーム研究の方法論的革新を通した<br>新たな地域研究の開発</p>"
+      );
+    } else if (sliderRotation == 75) {
+      setFellowName("Satoshi Tanaka");
+      setFellowDescription1("田中 覚");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>３次元計測ビッグデータの超高精細可視化と<br>VR応用、多層性ビッグデータの統合的可視化<br></p>"
+      );
+    } else if (sliderRotation == 90) {
+      setFellowName("Tadahiro Taniguchi");
+      setFellowDescription1("谷口 忠大");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>次世代共生社会に向けた実世界人工知能を生む<br>記号創発システム科学創成</p>"
+      );
+    } else if (sliderRotation == 105) {
+      setFellowName("Yuki Orikasa");
+      setFellowDescription1("折笠 有基");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>電池・水素エネルギーデバイス解析に基づく<br>革新的な反応原理の創世</p>"
+      );
+    } else if (sliderRotation == 120) {
+      setFellowName("Sayaka Ogawa");
+      setFellowDescription1("小川 さやか");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>マルチモーダルなプラットフォーム<br>エスノグラフィの構築</p>"
+      );
+    } else if (sliderRotation == 135) {
+      setFellowName("Takeshi Nakagawa");
+      setFellowDescription1("中川 毅");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>地質年代の「世界標準ものさし」の品質向上と、<br>気候変動の履歴の復元　—水月湖年縞に含まれる<br>花粉の化石の同位体比測定—</p>"
+      );
+    } else if (sliderRotation == 150) {
+      setFellowName("Masayo Takahashi");
+      setFellowDescription1("高橋 政代");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>次世代の視覚再建</p>"
+      );
+    } else if (sliderRotation == 165) {
+      setFellowName("Norihiro Sadato");
+      setFellowDescription1("定藤 規弘");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>ポストコロナ社会にWell-being をもたらす<br>社会性研究：ネットワーク型MRIシステム</p>"
+      );
+    } else if (sliderRotation == 180) {
+      setFellowName("Masaaki Mochimaru");
+      setFellowDescription1("持丸 正明");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>スポーツトレーニングのDXに関する研究</p>"
+      );
+    } else if (sliderRotation == 195) {
+      setFellowName("Satoshi Konishi");
+      setFellowDescription1("小西 聡");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>デジタル変革時代の未知との遭遇を開拓する<br>センサ・マイクロマシン研究</p>"
+      );
+    } else if (sliderRotation == 210) {
+      setFellowName("Kota Suechika");
+      setFellowDescription1("末近 浩太");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>中東・イスラーム研究の方法論的革新を通した<br>新たな地域研究の開発</p>"
+      );
+    } else if (sliderRotation == 225) {
+      setFellowName("Satoshi Tanaka");
+      setFellowDescription1("田中 覚");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>３次元計測ビッグデータの超高精細可視化と<br>VR応用、多層性ビッグデータの統合的可視化<br></p>"
+      );
+    } else if (sliderRotation == 240) {
+      setFellowName("Tadahiro Taniguchi");
+      setFellowDescription1("谷口 忠大");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>次世代共生社会に向けた実世界人工知能を生む<br>記号創発システム科学創成</p>"
+      );
+    } else if (sliderRotation == 255) {
+      setFellowName("Yuki Orikasa");
+      setFellowDescription1("折笠 有基");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>電池・水素エネルギーデバイス解析に基づく<br>革新的な反応原理の創世</p>"
+      );
+    } else if (sliderRotation == 270) {
+      setFellowName("Sayaka Ogawa");
+      setFellowDescription1("小川 さやか");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>マルチモーダルなプラットフォーム<br>エスノグラフィの構築</p>"
+      );
+    } else if (sliderRotation == 285) {
+      setFellowName("Takeshi Nakagawa");
+      setFellowDescription1("中川 毅");
+      setFellowDescription2(
+        "<p data-slider-info-study=''>地質年代の「世界標準ものさし」の品質向上と、<br>気候変動の履歴の復元　—水月湖年縞に含まれる<br>花粉の化石の同位体比測定—</p>"
+      );
+    }
+  };
+  // console.log(
+  //   "🚀 ~ file: index.jsx:120 ~ handleSliderRotation ~ sliderRotate:",
+  //   sliderRotate
+  // );
+
+  console.log("🚀 ~ file: index.jsx:299 ~ index ~ FellowName:", FellowName);
   return (
     <div className="lFellows" id="fellows_trigger">
       <div
@@ -197,11 +426,17 @@ const index = () => {
                 </div>
               </div>
             </div>
-            <div className="lFellows-slider-inner" data-slider-inner="">
+            <div
+              className="lFellows-slider-inner"
+              data-slider-inner=""
+              onMouseMove={handleMouseMovement}
+              onMouseLeave={handleMouseLeave}
+              onClick={handleSliderRotation}
+            >
               <div
                 className="cSliderMouseStalker"
                 data-slider-stalker=""
-                style={{ top: 161.57, left: 883 }}
+                style={{ top: coordinates["y"], left: coordinates["x"] }}
               >
                 <div className="cSliderMouseStalker-inner">
                   <div
@@ -242,7 +477,7 @@ const index = () => {
                 <ul
                   className="lFellows-slider-list"
                   data-slider-list=""
-                  style={{ transform: "rotate(-150deg)" }}
+                  style={{ transform: `rotate(-${sliderRotate}deg)` }}
                 >
                   <li
                     className="lFellows-slider-item"
@@ -1146,7 +1381,7 @@ const index = () => {
                     </a>
                   </li>
                   <li
-                    className="lFellows-slider-item -isCurrent"
+                    className="lFellows-slider-item"
                     data-slider-item=""
                     data-index="17"
                     data-rotate="255"
@@ -1314,7 +1549,7 @@ const index = () => {
                   data-slider-info-name-en=""
                   style={{ transform: "translate(0px, 0%)" }}
                 >
-                  Yuki Orikasa
+                  {FellowName}
                 </p>
               </div>
               <div
@@ -1328,7 +1563,7 @@ const index = () => {
                     data-slider-info-name-ja=""
                     style={{ transform: "translate(0px, 0%)" }}
                   >
-                    折笠 有基
+                    {FellowDescription1}
                   </p>
                 </div>
                 <div
@@ -1338,11 +1573,9 @@ const index = () => {
                     transform: "translate(0px, 0%)",
                   }}
                 >
-                  <p data-slider-info-study="">
-                    電池・水素エネルギーデバイス解析に基づく
-                    <br />
-                    革新的な反応原理の創世
-                  </p>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: FellowDescription2 }}
+                  ></div>
                 </div>
               </div>
               <div className="lFellows-slider-info-more">

@@ -195,8 +195,14 @@ const index = () => {
             </div>
             <div className="cMenu-btn">
               <div className="cMenu-btn-container">
-                <a className="cMenu-btn-inner-btn" style={{ margin: 0 }}>
-                  <button className="button button4">DONATE</button>
+                <a
+                  className="cMenu-btn-inner-btn"
+                  href="/donation"
+                  style={{ margin: 0 }}
+                >
+                  <button type="button" className="custom_button button4">
+                    DONATE
+                  </button>
                 </a>
                 <a className="cMenu-btn-inner-btn" style={{ margin: 0 }}>
                   <div className="dropdown">
@@ -895,7 +901,7 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/fellow"
+                  href="/updates"
                   data-disable-hash=""
                 >
                   RESEARCH
@@ -927,7 +933,7 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/news"
+                  href="/fellows"
                   data-disable-hash=""
                 >
                   FELLOWS

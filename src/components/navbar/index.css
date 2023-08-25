@@ -1,4 +1,15 @@
-#pIndex .cHeader-logo {
+  a{
+    color: #383838 !important;
+    text-decoration: none !important;
+  }
+  p{
+    margin: 0 !important;
+  }
+  ul{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #pIndex .cHeader-logo {
     width: 23.5rem;
   }
   .cHeader-logo {
@@ -34,7 +45,7 @@
     margin: 2.4rem 3.2rem;
     padding: 0rem 0;
   }
-  .cMenu-btn-inner-btn {
+  .cMenu-btn-inner {
     display: inline-flex;
     align-items: center;
   }
@@ -160,7 +171,7 @@
     transform-origin: center top;
   }
 
-  .button {
+  .custom_button {
     font-family: Open Sans, Shippori Mincho B1, YuMincho, 游明朝, Times New Roman, Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif;
     font-weight: 600;
     letter-spacing: 0.03em;
@@ -276,4 +287,25 @@
 .cMenu-btn-inner.-isOpen .cMenu-btn-text:after,
 .cMenu-btn-inner.-isOpen .cMenu-btn-text:before {
   transform: translateY(-100%);
+}
+.cMenu-btn-inner.-isWhite .cMenu-btn-icon:after,
+  .cMenu-btn-inner.-isWhite .cMenu-btn-icon:before {
+    background-color: #fff;
+  }
+.cMenu-btn-inner-btn {
+  z-index: 1501;
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  pointer-events: auto;
+}
+.cMenu-btn-inner {
+  z-index: 1500;
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  pointer-events: auto;
+}
+.cMenu-btn-inner.-isWhite .cMenu-btn-text {
+  color: #fff;
 }

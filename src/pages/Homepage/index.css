@@ -217,12 +217,7 @@ body {
       top: -11.25rem;
       right: -15.25rem;
     }
-    .cMenu-btn-inner {
-      display: inline-flex;
-      align-items: center;
-      margin: 2.4rem 3.2rem;
-      padding: 0rem 0;
-    }
+    
     ._sp {
       display: none;
     }
@@ -385,11 +380,6 @@ body {
     transform: scale(1);
   }
 
-
-  .cMenu-btn-inner.-isWhite .cMenu-btn-icon:after,
-  .cMenu-btn-inner.-isWhite .cMenu-btn-icon:before {
-    background-color: #fff;
-  }
   .cMenu-btn-icon:after {
     transform-origin: left top;
   }
@@ -404,9 +394,7 @@ body {
   }
 
  
-  .cMenu-btn-inner.-isWhite .cMenu-btn-text {
-    color: #fff;
-  }
+  
 
   .cHeader-logo-item {
     will-change: inherit !important;
@@ -620,13 +608,7 @@ body {
     text-decoration: none;
     cursor: pointer;
   }
-  .cMenu-btn-inner {
-    z-index: 1500;
-    position: relative;
-    text-align: center;
-    margin-left: auto;
-    pointer-events: auto;
-  }
+  
   .cMenu-btn-container {
     display: block;
     text-align: right;

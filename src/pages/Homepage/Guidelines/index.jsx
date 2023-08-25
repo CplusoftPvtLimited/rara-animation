@@ -170,10 +170,10 @@ const index = () => {
       },
       onUpdate: (self) => {
         const scrollProgress = self.progress;
-        console.log(
-          "🚀 ~ file: index.jsx:176 ~ useEffect ~ scrollProgress:",
-          scrollProgress
-        );
+        // console.log(
+        //   "🚀 ~ file: index.jsx:176 ~ useEffect ~ scrollProgress:",
+        //   scrollProgress
+        // );
 
         // Calculate the starting point for x position (right of the screen)
         const startingX = window.innerWidth; // Assuming you want the element to start from the right edge of the screen
@@ -251,7 +251,7 @@ const index = () => {
         }
       },
       onEnterBack: () => {
-        console.log("🚀 ~ file: index.jsx:158 ~ useEffect ~ onEnterBack:");
+        // console.log("🚀 ~ file: index.jsx:158 ~ useEffect ~ onEnterBack:");
 
         gsap.to(".lGuideline-text-child", {
           transform: "translate(0px,120%)",
@@ -269,7 +269,7 @@ const index = () => {
         });
       },
       onLeaveBack: () => {
-        console.log("🚀 ~ file: index.jsx:164 ~ useEffect ~ onLeaveBack:");
+        // console.log("🚀 ~ file: index.jsx:164 ~ useEffect ~ onLeaveBack:");
       },
     });
 
