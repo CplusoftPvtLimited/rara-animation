@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "root",
-    "password": "",
-    "database": "rara",
+    "password": "Total123",
+    "database": "mydatabase",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "",
-    "database": "rara",
+    "database": "mydatabase",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "",
-    "database": "rara",
+    "database": "mydatabase",
     "host": "localhost",
     "dialect": "mysql"
   }

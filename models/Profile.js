@@ -25,11 +25,15 @@ const Profile = sequelize.define("Profile", {
     //   notEmpty: true,
     // },
   },
-  // thumbnailPath: {
-  //   type: DataTypes.STRING,
-  //   // validate: { notEmpty: true }
-  // },
+  thumbnailPath: {
+    type: DataTypes.STRING,
+    validate: { notEmpty: true },
+  },
   imagePath: {
+    type: DataTypes.STRING,
+    validate: { notEmpty: true },
+  },
+  animatedImage: {
     type: DataTypes.STRING,
     validate: { notEmpty: true },
   },
@@ -62,6 +66,18 @@ const Profile = sequelize.define("Profile", {
     // },
   },
   featuredImage: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  graphic1: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  graphic2: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  graphic3: {
     type: DataTypes.STRING,
     // allowNull: true,
   },

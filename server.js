@@ -11,6 +11,9 @@ const keysRoutes = require("./routes/keysRoutes");
 const coinbaseKeysRoutes = require("./routes/coinbaseKeysRoutes");
 const bankRoutes = require("./routes/bankRoutes");
 const RssFeedRoutes = require("./routes/RssFeedRoutes");
+const homeRoutes = require("./routes/homeRoutes");
+
+const studentRoutes = require("./routes/studentRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 4500;
@@ -51,6 +54,8 @@ app.use("/api/bank", bankRoutes);
 
 // RSS Route
 app.use("/api/news", RssFeedRoutes);
+
+app.use("/api/student", studentRoutes);
 
 // Start the server
 app.listen(PORT, () => {
