@@ -40,8 +40,6 @@ const createProfile = async (req, res) => {
     }
   }
   try {
-    const baseUrl = "http://localhost:4500/";
-
     // Get the image path
     const baseUrl = "http://localhost:4500/";
     const thumbnailPath = req.files.thumbnailPath[0].path;
@@ -102,7 +100,6 @@ const getAllProfiles = async (req, res) => {
   } catch (err) {
     res.status(400).json(err.message);
   }
-  res.status(200).send({ profiles });
   // } catch (err) {
   //   res.status(400).json({ error: 'Error fetching Profiles' });
   // }
@@ -159,6 +156,14 @@ const getProfileById = async (req, res) => {
 //     return res.status(500).json({ error: 'Error updating profile', error });
 //   }
 // };
+
+const updateProfile = async (req, res) => {
+  try {
+    let id = req.params.id;
+    const profile = await Profile.findByPk(id);
+    if (!profile) {
+      return res.status(400).json({ error: "Profile not found" });
+    }
 
     const baseUrl = "http://localhost:4500/";
     const thumbnailPath =
