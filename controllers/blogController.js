@@ -204,6 +204,8 @@ const updateBlogPost = async (req, res) => {
     profile,
     relatedBlogs,
   } = req.body;
+
+  console.log('req.body...', req.body);
   const blogPost = await Blog.findByPk(req.params.id);
   if (!blogPost) {
     return res.status(404).json({ error: 'Blog post not found' });
@@ -262,6 +264,7 @@ const deleteBlogPost = async (req, res) => {
         blogId: req.params.id,
       },
     });
+
     await blogPost.destroy();
     res.status(200).json({ message: 'Blog post deleted successfully' });
   } catch (err) {
