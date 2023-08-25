@@ -309,7 +309,7 @@ function Card() {
       {/***********************Cards ***************************/}
       {postData.length > 0 ? (
         <div className="Cards mt-[50px] mb-[100px] w-[85%] m-auto" id="card">
-          <div className="flex flex-wrap gap-4 justify-evenly">
+          <div className="flex flex-wrap gap-4 xl:ml-12 xl:gap-8">
             {console.log("Data", postData)}
             {sortedPostData.slice(startIndex, endIndex).map((post, index) => (
               <div
