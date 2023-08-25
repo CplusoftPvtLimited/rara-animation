@@ -6,6 +6,7 @@ import "./index.css";
 import { BiLogoTwitter } from "react-icons/bi";
 import { RiFacebookFill } from "react-icons/ri";
 import Circle from "../../assets/images/fellow-circle.png";
+import ritsumei from "../../assets/images/ritsumei.png";
 import partialBall from "../../assets/images/partial-ball.png";
 // import BlogImage from "../../assets/images/blog-img.jpeg";
 // import BackIcon from "../../assets/images/b-back_icon.svg";
@@ -82,38 +83,64 @@ function FellowSingle() {
     window.addEventListener("resize", handleResize);
 
     const fetchFellow = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVER}/profile/${fellowId}`
-      );
-      const data = await response.json();
-      console.log(
-        "🚀 ~ file: index.jsx:53 ~ fetchFellow ~ data:",
-        data.profile
-      );
-      setFellow(data.profile);
-      const pictureSliderJson = JSON.parse(data.profile.pictureSlider);
-      setSliderImages(pictureSliderJson);
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER}/profile/${fellowId}`
+        );
+
+        if (!response.ok) {
+          console.error("Error fetching fellow profile");
+          return;
+        }
+
+        const data = await response.json();
+        console.log("Fellow profile data:", data.profile);
+        setFellow(data.profile);
+
+        const pictureSliderJson = JSON.parse(data.profile.pictureSlider);
+        setSliderImages(pictureSliderJson);
+      } catch (error) {
+        console.error(
+          "An error occurred while fetching fellow profile:",
+          error.message
+        );
+      }
     };
     fetchFellow();
 
     const fetchBlogs = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVER}/blog/getAllBlogPosts`
-      );
-      const data = await response.json();
-      setBlogData(data.blogPosts);
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER}/blog/getAllBlogPosts`
+        );
+
+        if (!response.ok) {
+          console.error("Error fetching blogs");
+          return;
+        }
+
+        const data = await response.json();
+        setBlogData(data.blogPosts);
+      } catch (error) {
+        console.error("An error occurred while fetching blogs:", error);
+      }
     };
     fetchBlogs();
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   //Filtering Blogs w.r.t Fellow
-  const filteredBlogs = blogData.filter((blog) => {
-    return blog.fellow === fellow.name;
-  });
-  console.log("**********Filtered Blog", filteredBlogs);
+  let filteredBlogs = [];
+  if (blogData.length > 0) {
+    filteredBlogs = blogData.filter((blog) => {
+      return blog.fellow === fellow.name;
+    });
+    console.log("**********Filtered Blog", filteredBlogs);
+    // Now you can use the filteredBlogs array as needed
+  }
 
   // Sort blogData based on publicationDate in descending order
   const sortedBlogs = filteredBlogs.sort(
@@ -127,7 +154,7 @@ function FellowSingle() {
     <section>
       {console.log("*************Blog", blogData)}
       <div className="pl-[30px] mt-[100px] lg:flex lg:justify-between w-[100%] lg:mt-[0px]">
-        <div className="left lg:max-w-[50%] lg:m-auto lg:pl-[20px] xl:pl-[175px] w-[75%] lg;w-[100%]">
+        <div className="left lg:max-w-[50%] lg:m-auto lg:pl-[20px] xl:pl-[120px] w-[75%] lg;w-[100%]">
           {/** Left */}
           <div className="shape-1 hidden lg:block" ref={shape1Ref}>
             <img className="w-[70px]" src={fellow.graphic2} alt="" />
@@ -159,11 +186,18 @@ function FellowSingle() {
               </a>
             ) : null}
             {fellow.facebookUrl ? (
-              <a href={fellow.twitterUrl}>
+              <a href={fellow.facebookUrl}>
                 <div className="xl:mt-[70px] lg:mt-[30px]">
                   <RiFacebookFill
                     style={{ fontSize: "24px", color: "#acacac" }}
                   />
+                </div>
+              </a>
+            ) : null}
+            {fellow.ritsumeiUrl ? (
+              <a href={fellow.ritsumeiUrl}>
+                <div className="xl:mt-[70px] lg:mt-[30px]">
+                  <img className="w-[20px]" src={ritsumei} alt="" />
                 </div>
               </a>
             ) : null}
@@ -188,7 +222,7 @@ function FellowSingle() {
           <div></div>
           <a href="#profile">
             <div className="circle-container lg:mt-[-250px] xl:mt-[-135px]">
-              <div className="scroll-circle">
+              <div className="scroll-circle z-50">
                 <p>SCROLL</p>
               </div>
             </div>
@@ -205,7 +239,11 @@ function FellowSingle() {
         <div className="fellow-profile w-[95%] lg:w-[50%] pt-6">
           <div className="profile-desc">
             <h5 id="profile">FELLOW PROFILE</h5>
-            <p className="">{fellow.profileDesc}</p>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: fellow.profileDesc,
+              }}
+            />
           </div>
           {fellow.websiteUrl ? (
             <div className="fellow-website pt-6">
@@ -229,38 +267,44 @@ function FellowSingle() {
 
       <div className="w-[80%] mt-[150px] lg:mt-[300px] lg:w-[70%] m-auto lg:px-[20px]">
         <div>
-          <h2 className="text-[25px]">{fellow.heading}</h2>
-          <p className="text-[17px] mt-6">{fellow.paragraph}</p>
+          <h2 className="text-[25px] mb-[50px]">{fellow.heading}</h2>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: fellow.paragraph,
+            }}
+          />
         </div>
       </div>
 
       {/************************** Background Image Section ******************************/}
 
-      <div className="flex justify-end mt-[100px] lg:h-[800px]">
-        <div
-          className="bg-fellow w-[90%] flex justify-between pl-[35px]"
-          style={{
-            backgroundImage: `url(${fellow.featuredImage})`,
-          }}
-        >
-          <div>
-            <img
-              className="w-[50%] lg:w-auto lg:mt-[40px]"
-              ref={shape3Ref}
-              src={Circle}
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="w-[40%] mt-[100px] lg:w-auto  lg:mt-[500px]"
-              ref={shape4Ref}
-              src={partialBall}
-              alt=""
-            />
+      {fellow.featuredImage ? (
+        <div className="flex justify-end mt-[100px] lg:h-[800px]">
+          <div
+            className="bg-fellow w-[90%] flex justify-between pl-[35px]"
+            style={{
+              backgroundImage: `url(${fellow.featuredImage})`,
+            }}
+          >
+            <div>
+              <img
+                className="w-[50%] lg:w-auto lg:mt-[40px]"
+                ref={shape3Ref}
+                src={Circle}
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                className="w-[40%] mt-[100px] lg:w-auto  lg:mt-[500px]"
+                ref={shape4Ref}
+                src={partialBall}
+                alt=""
+              />
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
 
       {/************************** Blog Section ******************************/}
       {latestThreeBlogs > 0 ? (
