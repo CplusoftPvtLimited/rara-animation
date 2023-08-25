@@ -221,6 +221,14 @@ const Home = sequelize.define("Home", {
       notEmpty: true,
     },
   },
+  fellows: {
+    type: DataTypes.JSON,
+    allowNull: false,
+  },
+  blogs: {
+    type: DataTypes.JSON,
+    allowNull: false,
+  },
   contactEmail: {
     type: DataTypes.STRING,
     allowNull: false,
