@@ -83,6 +83,9 @@ function EditHome(props) {
       .then((response) => {
         setHomeData(response.data.home[0]);
         console.log("homeData: ", response.data.home[0]);
+        // if (response.data.home[0]) {
+        //   setSelectedFellowOptions(response.data.home[0].fellows);
+        // }
       })
       .catch((err) => {
         console.log(err);
