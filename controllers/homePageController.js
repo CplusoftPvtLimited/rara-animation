@@ -79,8 +79,6 @@ const addHome = async (req, res) => {
     let card2InsideImage = baseUrl + req.files.card2InsideImage[0].path;
     let card3InsideImage = baseUrl + req.files.card3InsideImage[0].path;
     let card4InsideImage = baseUrl + req.files.card4InsideImage[0].path;
-    let fellowsJSON = JSON.stringify(fellows);
-    let blogsJSON = JSON.stringify(blogs);
 
     const newHome = await Home.create({
       mainHeading,
@@ -113,8 +111,8 @@ const addHome = async (req, res) => {
       card4Description,
       card4InsideImage,
       cardGuidelineDescription,
-      fellows: fellowsJSON,
-      blogs: blogsJSON,
+      fellows,
+      blogs,
       contactHeading,
       contactEmail,
       contactMailchimpKey,
@@ -147,6 +145,7 @@ const getHome = async (req, res) => {
 // Update Home Page Content
 const updateHome = async (req, res) => {
   const homeId = req.params.id;
+  console.log("*****Req.Body: ", req.body);
   try {
     const home = await Home.findByPk(homeId);
     if (!home) {
@@ -204,9 +203,6 @@ const updateHome = async (req, res) => {
         ? baseUrl + req.files?.card4InsideImage[0].path
         : home.card4InsideImage;
 
-    // let fellowsJson = JSON.stringify(req.body.fellows);
-    // let blogsJson = JSON.stringify(req.body.blogs);
-
     // Assign new values to updatedFields
     const updatedFields = {
       mainHeading: req.body.mainHeading || home.mainHeading,
@@ -239,10 +235,10 @@ const updateHome = async (req, res) => {
       card4Heading: req.body.card4Heading || home.card4Heading,
       card4Title: req.body.card4Title || home.card4Title,
       card4Description: req.body.card4Description || home.card4Description,
-      fellows: req.body.fellows || home.fellows,
-      blogs: req.body.blogs || home.blogs,
       cardGuidelineDescription:
         req.body.cardGuidelineDescription || home.cardGuidelineDescription,
+      fellows: req.body.fellow,
+      blogs: req.body.blogs,
       contactHeading: req.body.contactHeading || home.contactHeading,
       contactEmail: req.body.contactEmail || home.contactEmail,
       contactMailchimpKey:
