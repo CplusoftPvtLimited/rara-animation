@@ -1,20 +1,19 @@
 import './App.css';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header.js';
 import Donation from './components/donate/Donate';
 import Checkout from './components/checkout/Checkout';
 
 function App() {
-  const [keyData, setKeyData] = useState();
+  const [keyData, setKeyData] = useState(null);
 
   useEffect(() => {
     getStripeKey();
   }, []);
 
   const getStripeKey = () => {
-    setKeyData();
     axios({
       method: 'get',
       url: 'http://localhost:4500/api/secret/1',
@@ -32,9 +31,9 @@ function App() {
       <Header />
       <Routes className='App'>
         <Route path='/' element={<Donation />} />
-        {/* <Route path='/stripe' element={<Checkout donate={10} />} /> */}
+
         {keyData?.active ? (
-          <Route path='/stripe' element={<Checkout donate={10} />} />
+          <Route path='/stripe' element={<Checkout />} />
         ) : (
           <Route
             path='/stripe'

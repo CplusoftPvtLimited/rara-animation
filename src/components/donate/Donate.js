@@ -15,10 +15,17 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { setPaymentMethod, setAmount } from '../../store/donationSlice';
+import { setFrequency } from '../../store/paymentFrequencySlice';
 import './donate.css';
+
+import DonatePage from './DonatePage';
 
 const Donate = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [selectedButton, setSelectedButton] = useState('once');
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [showRightColumn, setShowRightColumn] = useState(false);
@@ -28,7 +35,11 @@ const Donate = () => {
   const [hostedUrl, setHostedUrl] = useState();
   const [showBankTransferModal, setShowBankTransferModal] = useState(false);
   const [bankData, setBankData] = useState();
+  const actualSelectedAmount = useSelector(
+    (state) => state.donation.selectedAmount
+  );
 
+  console.log('actualSelectedAmount: ', actualSelectedAmount);
   useEffect(() => {
     getCoinbaseKey();
     getBankDetails();
@@ -37,7 +48,7 @@ const Donate = () => {
   useEffect(() => {
     axios
       .post('http://localhost:4500/api/checkout/coinbase', {
-        amount: 10,
+        amount: actualSelectedAmount,
       })
       .then((response) => {
         console.log('response', response.data.charge.hosted_url);
@@ -55,6 +66,7 @@ const Donate = () => {
 
   const handleAmountClick = (amount) => {
     setSelectedAmount(amount);
+    dispatch(setAmount(amount));
   };
 
   const handleDonateClick = () => {
@@ -70,6 +82,9 @@ const Donate = () => {
   const handlePaymentMethodChange = (event) => {
     // setSelectedPaymentMethod(event.target.value);
     const selectedMethod = event.target.value;
+    console.log('selectedMethod: ', selectedMethod);
+    dispatch(setPaymentMethod(event.target.value));
+
     setSelectedPaymentMethod(selectedMethod);
     if (selectedMethod === 'bankTransfer') {
       setShowBankTransferModal(true);
@@ -112,20 +127,26 @@ const Donate = () => {
       });
   };
 
-  switch (selectedPaymentMethod) {
-    case 'stripe':
-      navigate('/stripe');
-      break;
-    case 'coinbase':
-      if (coinbaseData?.active) {
-        window.location.href = hostedUrl;
-      } else {
-        navigate('/coinbase');
+  useEffect(() => {
+    if (selectedPaymentMethod) {
+      switch (selectedPaymentMethod) {
+        case 'stripe':
+          navigate('/stripe');
+          break;
+        case 'coinbase':
+          if (coinbaseData?.active) {
+            window.location.href = hostedUrl;
+          } else {
+            navigate('/coinbase');
+          }
+          break;
+        default:
+          break;
       }
-      break;
-    default:
-      break;
-  }
+    }
+  }, [selectedPaymentMethod]);
+
+  console.log('selectedAmount: ', selectedAmount);
   return (
     <div>
       <Container className='donateUs'>
@@ -135,32 +156,7 @@ const Donate = () => {
       <Container style={{ marginTop: '40px' }}>
         <Row>
           <Col xs={6}>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
+            <DonatePage />
           </Col>
           {showRightColumn ? (
             <Col xs={6}>
@@ -388,7 +384,6 @@ const Donate = () => {
                   }}
                   size='lg'
                   onClick={handleDonateClick}
-                  // onClick={handlePaymentMethodSubmit}
                 >
                   Donate
                 </Button>
@@ -396,7 +391,6 @@ const Donate = () => {
             </Col>
           )}
         </Row>
-        f{' '}
       </Container>
     </div>
   );

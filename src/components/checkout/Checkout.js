@@ -4,12 +4,15 @@ import StripeCheckoutForm from './StripeCheckoutForm.js';
 import SubscriptionFrom from './SubscriptionFrom.js';
 import axios from 'axios';
 import './Checkout.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAmount } from '../../store/donationSlice.js';
 
 // const stripePromiseKey =
 // 'pk_test_51KYPqJLdgPiiadryliSCj8R0YZ9rYVnOIECcgxmOy11EYLoIresrd5sygDAnGfN5F2rxA7t1qnT6SwPkISmDAecJ00FtNIJOiq';
 
 export default function Checkout({ donate }) {
-  console.log('donate: ', donate);
+  const dispatch = useDispatch();
+  const selectedAmount = useSelector((state) => state.donation.selectedAmount);
 
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState('');
@@ -30,7 +33,8 @@ export default function Checkout({ donate }) {
   useEffect(() => {
     axios
       .post('http://localhost:4500/api/checkout/stripe', {
-        totalCost: donate,
+        // totalCost: donate,
+        totalCost: selectedAmount,
       })
       .then((response) => {
         console.log('response', response);
@@ -84,7 +88,7 @@ export default function Checkout({ donate }) {
     <div className='App' style={{ paddingTop: '50px' }}>
       {clientSecret && (
         <Elements stripe={stripePromise} options={options}>
-          <StripeCheckoutForm donate={donate} />
+          <StripeCheckoutForm donate={selectedAmount} />
 
           {/* Subscription Payment */}
           {/* <SubscriptionFrom
