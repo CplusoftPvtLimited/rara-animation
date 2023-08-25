@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/db");
-const Blog = require("./Blog");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
+const Blog = require('./Blog');
 
-const RelatedBlog = sequelize.define("Related_Blog", {
+const RelatedBlog = sequelize.define('RelatedBlog', {
   relatedBlogId: {
     type: DataTypes.INTEGER,
     allowNull: false,

@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/db");
-const RelatedBlog = require("./RelatedBlog");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
+const RelatedBlog = require('./RelatedBlog');
 
-const Blog = sequelize.define("Blog", {
+const Blog = sequelize.define('Blog', {
   imagePath: {
     type: DataTypes.STRING,
     allowNull: true,
@@ -14,10 +14,10 @@ const Blog = sequelize.define("Blog", {
     type: DataTypes.TEXT,
   },
   fellow: {
-    type: DataTypes.TEXT,
+    type: DataTypes.INTEGER, // Change the data type to INTEGER
   },
   associatedFellow: {
-    type: DataTypes.TEXT,
+    type: DataTypes.INTEGER, // Change the data type to INTEGER
   },
   category: {
     type: DataTypes.TEXT,
