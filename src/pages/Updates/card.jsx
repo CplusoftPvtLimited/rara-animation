@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Card() {
   const [postData, setPostData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
   const [fellowData, setFellowData] = useState([]);
   const [fellowArray, setFellowArray] = useState([]);
   const [associateFellowArray, setAssociateFellowArray] = useState([]);
@@ -32,6 +33,16 @@ function Card() {
       setSortedPostData(data.blogPosts);
     };
     fetchNews();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const response = await fetch("http://localhost:4500/api/category");
+      const data = await response.json();
+      console.log("🚀 ~ file: card.jsx:42 ~ fetchCategory ~ data:", data);
+      setCategoryData(data);
+    };
+    fetchCategory();
   }, []);
 
   useEffect(() => {
@@ -95,18 +106,33 @@ function Card() {
 
   // Filter Buttons Setup
   const filterByCategoryAndFellows = (categoryOption, fellowOption) => {
+    console.log(
+      "🚀 ~ file: card.jsx:109 ~ filterByCategoryAndFellows ~ categoryOption:",
+      categoryOption
+    );
+
     let filteredData = postData;
 
+    const selectedCategoryId = categoryData.find(
+      (category) => category.title === categoryOption
+    )?.id;
+    const selectedFellowId = fellowData.find(
+      (fellow) => fellow.name === fellowOption
+    )?.id;
     // Apply category filter
     if (categoryOption !== "All News") {
       filteredData = filteredData.filter(
-        (post) => post.category === categoryOption
+        (post) => post.category == selectedCategoryId
       );
     }
     // Apply fellow filter
     if (fellowOption !== "All Fellows") {
       filteredData = filteredData.filter(
-        (post) => post.fellow === fellowOption
+        (post) => post.fellow == selectedFellowId
+      );
+      console.log(
+        "*********🚀 ~ file: card.jsx:131 ~ filterByCategoryAndFellows ~ filteredData:",
+        filteredData
       );
     }
     setSortedPostData(filteredData);
@@ -128,13 +154,16 @@ function Card() {
   };
 
   const uniqueFellows = new Set(fellowArray.map((post) => post.name));
+  const uniqueCategory = new Set(
+    categoryData.map((category) => category.title)
+  );
   const uniqueAssociateFellows = new Set(
     associateFellowArray.map((post) => post.name)
   );
 
   return (
     <section>
-      <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[90%] lg:w-[80%] py-[50px] gap-32 pr-[150px lg:flex ">
+      <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[90%] lg:w-[85%] py-[50px] gap-32 pr-[150px lg:flex ">
         <div className="filter-by-date my-auto">
           <h5>SORT BY CATEGORY</h5>
         </div>
@@ -147,7 +176,20 @@ function Card() {
           >
             ALL NEWS
           </button>
-          <button
+
+          {Array.from(uniqueCategory).map((category, index) => (
+            <button
+              key={index}
+              className={`filter-btn ${
+                sortOption === category ? "active" : ""
+              }`}
+              onClick={() => handleSortingOption(category, sortFellowOption)}
+            >
+              {category}
+            </button>
+          ))}
+
+          {/* <button
             className={`filter-btn ${
               sortOption === "RARA Commons" ? "active" : " "
             }`}
@@ -188,13 +230,13 @@ function Card() {
             }
           >
             研究活動レポート
-          </button>
+          </button> */}
         </div>
       </div>
       {/*********************** Sort By Fellow ***************************/}
 
       {console.log("Fellow Array", fellowArray)}
-      <div className="filter-2 mx-auto w-[90%] lg:w-[80%] py-[50px] md:flex-wrap justify-between pr-[150px lg:flex ">
+      <div className="filter-2 mx-auto w-[90%] lg:w-[85%] py-[50px] md:flex-wrap justify-between pr-[150px lg:flex ">
         <div className="filter-by-date my-auto md:flex gap-32 ">
           <h5 className="my-auto">SORT BY FELLOWS</h5>
           <button
@@ -222,7 +264,7 @@ function Card() {
       </div>
       {/***********************Toggle Section ***************************/}
       {fellowToggle ? (
-        <div className="filter-3 mx-auto w-[80%] py-[50px] pr-[150px] lg:pl-[100px] ">
+        <div className="filter-3 mx-auto w-[85%] py-[50px] pr-[150px] lg:pl-[100px] ">
           <div className="lg:flex lg:gap-32">
             <div className="filter-by-fellow my-auto">
               <h5>Fellows</h5>
@@ -266,8 +308,8 @@ function Card() {
       ) : null}
       {/***********************Cards ***************************/}
       {postData.length > 0 ? (
-        <div className="Cards mt-[50px] mb-[100px] w-[80%] m-auto" id="card">
-          <div className="flex flex-wrap gap-4 justify-center mx-auto">
+        <div className="Cards mt-[50px] mb-[100px] w-[85%] m-auto" id="card">
+          <div className="flex flex-wrap gap-4 justify-evenly">
             {console.log("Data", postData)}
             {sortedPostData.slice(startIndex, endIndex).map((post, index) => (
               <div

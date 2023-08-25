@@ -38,7 +38,6 @@ function Fellows() {
             fellowsCount++;
           }
           if (fellow.jobPost === "RARA Associate Fellow") {
-            console.log("********Fellow", fellow);
             associateFellows.push(fellow);
             associateFellowsCount++;
           }
