@@ -147,7 +147,6 @@ const getHome = async (req, res) => {
 // Update Home Page Content
 const updateHome = async (req, res) => {
   const homeId = req.params.id;
-  console.log("*****Req.Body: ", req.body);
   try {
     const home = await Home.findByPk(homeId);
     if (!home) {

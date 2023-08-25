@@ -58,7 +58,6 @@ const updateStudent = async (req, res) => {
     "🚀 ~ file: studentController.js:53 ~ updateStudent ~ studentId:",
     studentId
   );
-  console.log("*****Req.Body: ", req.body);
   try {
     const student = await Student.findByPk(studentId);
     if (!student) {
