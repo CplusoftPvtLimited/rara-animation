@@ -9,7 +9,7 @@ import axios from 'axios';
 import './AddBlog.css';
 
 function EditBlog(props) {
-  const [blogData, setBlogData] = useState();
+  const [blogData, setBlogData] = useState({});
   const [fellows, setFellows] = useState([]);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
   const [categories, setCategories] = useState([]);
@@ -112,6 +112,12 @@ function EditBlog(props) {
           imagePath: files[0],
         }));
       }
+    } else if (
+      name === 'fellow' ||
+      name === 'associatedFellow' ||
+      name === 'category'
+    ) {
+      setBlogData((prev) => ({ ...prev, [name]: { id: value } }));
     } else {
       setBlogData((prev) => ({ ...prev, [name]: value }));
     }
@@ -139,13 +145,16 @@ function EditBlog(props) {
     }
 
     const relatedBlogIds = selectedOptions.map((option) => option.id); // Extracting IDs from selected options
-    console.log('relatedBlogIds: ', relatedBlogIds);
+    console.log('editBlog: ', blogData);
     const updatedData = new FormData();
     updatedData.append('title', blogData.title);
     updatedData.append('content', blogData.content);
-    updatedData.append('fellow', blogData.fellow);
-    updatedData.append('associatedFellow', blogData.associatedFellow);
-    updatedData.append('category', blogData.category);
+    // updatedData.append('fellow', blogData.fellow);
+    // updatedData.append('associatedFellow', blogData.associatedFellow);
+    // updatedData.append('category', blogData.category);
+    updatedData.append('fellow', blogData?.fellow?.id);
+    updatedData.append('associatedFellow', blogData?.associatedFellow?.id);
+    updatedData.append('category', blogData?.category?.id);
     updatedData.append('profile', blogData.profile);
     updatedData.append('region', blogData.region);
     updatedData.append('imagePath', blogData.imagePath);
@@ -155,6 +164,7 @@ function EditBlog(props) {
     } else {
       updatedData.append('relatedBlogs', relatedBlogIds.join(','));
     }
+    console.log('blogData.associatedFellow: ', blogData.associatedFellow);
 
     console.log('blog updated data:', updatedData);
     try {
@@ -162,14 +172,14 @@ function EditBlog(props) {
         .put(`http://localhost:4500/api/blog/${blogId}`, updatedData)
         .then((response) => {
           console.log('edit data', response);
-          setBlogData({
-            title: '',
-            fellow: '',
-            category: '',
-            region: '',
-            content: '',
-            imagePath: '',
-          });
+          // setBlogData({
+          //   title: '',
+          //   fellow: '',
+          //   category: '',
+          //   region: '',
+          //   content: '',
+          //   imagePath: '',
+          // });
           history.push('/blogs');
         })
         .catch((err) => {
@@ -202,13 +212,17 @@ function EditBlog(props) {
     if (blogData.content.trim() === '') {
       errors.content = 'This field is required';
     }
-    if (blogData.fellow.trim() === '') {
-      errors.fellow = 'This field is required';
-    }
+    // if (blogData.fellow.trim() === '') {
+    //   errors.fellow = 'This field is required';
+    // }
 
-    if (blogData.category.trim() === '') {
-      errors.category = 'This field is required';
-    }
+    // if (blogData.associatedFellow.trim() === '') {
+    //   errors.fellow = 'This field is required';
+    // }
+
+    // if (blogData.category.trim() === '') {
+    //   errors.category = 'This field is required';
+    // }
 
     if (blogData.region.trim() === '') {
       errors.region = 'This field is required';
@@ -225,7 +239,12 @@ function EditBlog(props) {
   };
 
   console.log('..........blogData: ', blogData);
-
+  console.log(
+    'blogData?.associatedFellow?.id: ',
+    blogData?.fellow?.id,
+    blogData?.associatedFellow?.id,
+    blogData?.category?.id
+  );
   return (
     <div className='dashboard-parent-div'>
       <Row>
@@ -280,7 +299,7 @@ function EditBlog(props) {
                       <select
                         name='category'
                         // value={blogData.category}
-                        defaultValue={blogData?.category?.id}
+                        defaultValue={blogData?.category?.id || ''}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
                       >
@@ -331,7 +350,7 @@ function EditBlog(props) {
                       <select
                         name='fellow'
                         // value={blogData.fellow}
-                        defaultValue={blogData?.fellow?.id}
+                        defaultValue={blogData?.fellow?.id || ''}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
                       >
@@ -342,20 +361,20 @@ function EditBlog(props) {
                           </option>
                         ))}
                       </select>
-                      {validationErrors.fellow && (
+                      {/* {validationErrors.fellow && (
                         <p style={{ color: 'red' }}>
                           {validationErrors.fellow}
                         </p>
-                      )}
+                      )} */}
                     </div>
                   </Col>
                   <Col>
                     <div className='add-product-input-div'>
                       <p>Associated Fellow</p>
                       <select
-                        name='fellow'
+                        name='associatedFellow'
                         // value={blogData.associatedFellow}
-                        defaultValue={blogData?.fellow?.id}
+                        defaultValue={blogData?.associatedFellow?.id || ''}
                         onChange={handleChange}
                         style={{ border: 'none', width: '100%' }}
                       >
@@ -366,11 +385,11 @@ function EditBlog(props) {
                           </option>
                         ))}
                       </select>
-                      {validationErrors.fellow && (
+                      {/* {validationErrors.associatedFellow && (
                         <p style={{ color: 'red' }}>
-                          {validationErrors.fellow}
+                          {validationErrors.associatedFellow}
                         </p>
-                      )}
+                      )} */}
                     </div>
                   </Col>
                 </Row>
