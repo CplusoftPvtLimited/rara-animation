@@ -4,17 +4,72 @@ import Sidebar from "../../Components/Sidebar";
 import { useHistory } from "react-router";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Multiselect } from "multiselect-react-dropdown";
 import axios from "axios";
 import "./Home.css";
 
 function EditHome(props) {
   const [homeData, setHomeData] = useState();
+  const [fellowData, setFellowData] = useState([]);
+  const [blogData, setBlogData] = useState([]);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
-  const [newImageFile, setNewImageFile] = useState(null);
+  const [selectedFellowOptions, setSelectedFellowOptions] = useState([]);
+  const [removedFellowOptions, setRemovedFellowOptions] = useState([]);
+  const [selectedBlogOptions, setSelectedBlogOptions] = useState([]);
+  const [removedBlogOptions, setRemovedBlogOptions] = useState([]);
 
   const history = useHistory();
   const fileInputRef = useRef(null);
 
+  const onFellowSelectOptions = (selectedList, selectedItem) => {
+    setSelectedFellowOptions([...selectedFellowOptions, selectedItem]);
+  };
+
+  const onFellowRemoveOptions = (selectedList, removedItem) => {
+    setRemovedFellowOptions([...removedFellowOptions, removedItem]);
+  };
+
+  const onBlogSelectOptions = (selectedList, selectedItem) => {
+    console.log(
+      "🚀 ~ file: Home.js:33 ~ onBlogSelectOptions ~ selectedItem:",
+      selectedItem
+    );
+    setSelectedBlogOptions([...selectedBlogOptions, selectedItem]);
+  };
+
+  const onBlogRemoveOptions = (selectedList, removedItem) => {
+    setRemovedBlogOptions([...removedBlogOptions, removedItem]);
+  };
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:4500/api/blog/getAllBlogPosts",
+    })
+      .then((response) => {
+        setBlogData(response.data.blogPosts);
+        console.log(
+          "***🚀 ~ file: Home.js:47 ~ .then ~ response.data.blogs:",
+          response.data.blogPosts
+        );
+      })
+      .catch((error) => {
+        console.log("No blog found", error.message);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:4500/api/profile/getAllProfiles",
+    })
+      .then((response) => {
+        setFellowData(response.data.profiles);
+      })
+      .catch((error) => {
+        console.log("No profile found", error.message);
+      });
+  }, []);
   useEffect(() => {
     getHome();
   }, []);
@@ -58,6 +113,15 @@ function EditHome(props) {
   const handleImageClick = () => {
     fileInputRef.current.click();
   };
+
+  const fellowIds = selectedFellowOptions.map((option) => option.id);
+  const blogIds = selectedBlogOptions.map((option) => option.id);
+  console.log(
+    "🚀 ~ file: Home.js:119 ~ EditHome ~ selectedBlogOptions:",
+    selectedBlogOptions
+  );
+  console.log("****🚀 ~ file: Home.js:119 ~ EditHome ~ blogIds:", blogIds);
+
   const editHome = (event) => {
     event.preventDefault();
     const updatedData = new FormData();
@@ -91,6 +155,14 @@ function EditHome(props) {
     updatedData.append("card4Heading", homeData.card4Heading);
     updatedData.append("card4Image", homeData.card4Image);
     updatedData.append("card4Title", homeData.card4Title);
+
+    // if (typeof JSON !== "undefined" && typeof JSON.stringify === "function") {
+    //   updatedData.append("fellows", JSON.stringify(homeData.fellows));
+    // } else {
+    //   updatedData.append("fellows", homeData.fellows.join(","));
+    // }
+    updatedData.append("fellows", fellowIds);
+    updatedData.append("blogs", blogIds);
     updatedData.append("card4Description", homeData.card4Description);
     updatedData.append("card4InsideImage", homeData.card4InsideImage);
     updatedData.append(
@@ -103,7 +175,7 @@ function EditHome(props) {
     try {
       console.log("updatedData: ", updatedData);
       axios
-        .put(`http://localhost:4500/api/home/updateHome/1`, updatedData)
+        .patch(`http://localhost:4500/api/home/updateHome/1`, updatedData)
         .then((response) => {
           console.log("edit data", response);
           setHomeData({
@@ -776,7 +848,44 @@ function EditHome(props) {
                     </div>
                   </Col>
                 </Row>
+                {/**MultiSelect */}
+                <Row>
+                  <Col>
+                    <div className="add-product-input-div">
+                      <p>Fellows</p>
+                      <Multiselect
+                        name="fellow"
+                        options={fellowData}
+                        onSelect={onFellowSelectOptions}
+                        onRemove={onFellowRemoveOptions}
+                        onChange={handleChange}
+                        displayValue="name"
+                        closeIcon="cancel"
+                        placeholder="Select Options"
+                        selectedValues={selectedFellowOptions}
+                        className="multiSelectContainer"
+                      />
+                    </div>
+                  </Col>
 
+                  <Col>
+                    <div className="add-product-input-div">
+                      <p>Blogs</p>
+                      <Multiselect
+                        name="fellow"
+                        options={blogData}
+                        onSelect={onBlogSelectOptions}
+                        onRemove={onBlogRemoveOptions}
+                        onChange={handleChange}
+                        displayValue="title"
+                        closeIcon="cancel"
+                        placeholder="Select Options"
+                        selectedValues={selectedBlogOptions}
+                        className="multiSelectContainer"
+                      />
+                    </div>
+                  </Col>
+                </Row>
                 <Row>
                   <Col>
                     <div className="add-product-input-div">
