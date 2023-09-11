@@ -31,6 +31,7 @@ import { BuildingTwoRedLines } from "../../components/homeCanvas/Images/Building
 import GuideLines from "./Guidelines/index";
 import Fellows from "./Fellows/index";
 import Blogs from "./Blogs/index";
+import Contact from "./Contact/index";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
@@ -2905,6 +2906,7 @@ const index = () => {
       <GuideLines />
       <Fellows />
       <Blogs />
+      {/* <Contact /> */}
     </div>
   );
 };

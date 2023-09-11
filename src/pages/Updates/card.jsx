@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./updates.css";
 import { TweenMax, Power3 } from "gsap";
 import Image from "../../assets/images/news-image.jpg";
@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 import { HiPlus } from "react-icons/hi";
 import { HiMinus } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function Card() {
   const [postData, setPostData] = useState([]);
@@ -22,6 +25,9 @@ function Card() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const navigate = useNavigate();
+
+  const scrollContainer = document.querySelector(".custom-container");
+  const targetElementRef = useRef(null); // Ref for the element to scroll into view
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -54,11 +60,11 @@ function Card() {
       setFellowData(data.profiles);
 
       const fellowSorting = data.profiles.filter((profile) => {
-        return profile.jobPost === "RARA Fellow";
+        return !profile.jobPost?.includes("Associate");
       });
 
       const associateFellowSorting = data.profiles.filter((profile) => {
-        return profile.jobPost === "Associate Fellow";
+        return profile.jobPost?.includes("Associate");
       });
 
       setFellowArray(fellowSorting);
@@ -107,8 +113,17 @@ function Card() {
   // Filter Buttons Setup
   const filterByCategoryAndFellows = (categoryOption, fellowOption) => {
     console.log(
+      "🚀 ~ file: card.jsx:109 ~ filterByCategoryAndFellows ~ fellowOption:",
+      fellowOption
+    );
+    console.log(
       "🚀 ~ file: card.jsx:109 ~ filterByCategoryAndFellows ~ categoryOption:",
       categoryOption
+    );
+
+    console.log(
+      "🚀 ~ file: card.jsx:126 ~ filterByCategoryAndFellows ~ fellowData:",
+      fellowData
     );
 
     let filteredData = postData;
@@ -119,19 +134,27 @@ function Card() {
     const selectedFellowId = fellowData.find(
       (fellow) => fellow.name === fellowOption
     )?.id;
+    console.log(
+      "🚀 ~ file: card.jsx:131 ~ filterByCategoryAndFellows ~ selectedFellowId:",
+      selectedFellowId
+    );
     // Apply category filter
     if (categoryOption !== "All News") {
       filteredData = filteredData.filter(
         (post) => post.category == selectedCategoryId
       );
     }
+    console.log(
+      "🚀 ~ file: card.jsx:140 ~ filterByCategoryAndFellows ~ filteredData:",
+      filteredData
+    );
     // Apply fellow filter
     if (fellowOption !== "All Fellows") {
       filteredData = filteredData.filter(
-        (post) => post.fellow == selectedFellowId
+        (post) => post.fellow?.id == selectedFellowId
       );
       console.log(
-        "*********🚀 ~ file: card.jsx:131 ~ filterByCategoryAndFellows ~ filteredData:",
+        "*********🚀 ~ file: card.jsx:131 ~ filterByCategoryAndFellows ~ filteredData2222:",
         filteredData
       );
     }
@@ -140,6 +163,14 @@ function Card() {
 
   // Handle Active Button
   const handleSortingOption = (categoryOption, fellowOption) => {
+    console.log(
+      "🚀 ~ file: card.jsx:143 ~ handleSortingOption ~ fellowOption:",
+      fellowOption
+    );
+    console.log(
+      "🚀 ~ file: card.jsx:143 ~ handleSortingOption ~ categoryOption:",
+      categoryOption
+    );
     setSortOption(categoryOption);
     setSortFellowOption(fellowOption);
     filterByCategoryAndFellows(categoryOption, fellowOption);
@@ -161,8 +192,42 @@ function Card() {
     associateFellowArray.map((post) => post.name)
   );
 
+  let scrollPos = 0;
+
+  function updateScrollbar() {
+    const scrollbar = document.querySelector(".c-scrollbar_thumb");
+    const scrollbarHeight =
+      (scrollContainer.offsetHeight * scrollContainer.offsetHeight) /
+      scrollContainer.scrollHeight;
+
+    gsap.set(scrollbar, {
+      height: scrollbarHeight,
+      y:
+        (scrollPos * (scrollContainer.offsetHeight - scrollbarHeight)) /
+        (scrollContainer.scrollHeight - scrollContainer.offsetHeight),
+    });
+  }
+  const scrollToElement = () => {
+    const targetElement = targetElementRef.current;
+    if (scrollContainer && targetElement) {
+      const targetPos = targetElement.offsetTop - scrollContainer.offsetTop; // Calculate relative position
+
+      scrollPos = scrollContainer.scrollTop + targetPos;
+
+      gsap.to(scrollContainer, {
+        scrollTop: scrollPos,
+        overwrite: "auto",
+        onUpdate: updateScrollbar,
+        duration: 0.5,
+        onComplete: () => {
+          ScrollTrigger.update();
+        },
+      });
+    }
+  };
+
   return (
-    <section>
+    <section ref={targetElementRef}>
       <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[90%] lg:w-[85%] py-[50px] gap-32 pr-[150px lg:flex ">
         <div className="filter-by-date my-auto">
           <h5>SORT BY CATEGORY</h5>
@@ -235,7 +300,7 @@ function Card() {
       </div>
       {/*********************** Sort By Fellow ***************************/}
 
-      {console.log("Fellow Array", fellowArray)}
+      {console.log("Fellow Array", uniqueAssociateFellows)}
       <div className="filter-2 mx-auto w-[90%] lg:w-[85%] py-[50px] md:flex-wrap justify-between pr-[150px lg:flex ">
         <div className="filter-by-date my-auto md:flex gap-32 ">
           <h5 className="my-auto">SORT BY FELLOWS</h5>
@@ -322,7 +387,9 @@ function Card() {
                 </div>
                 <div className="news-cat my-auto">
                   <h5>
-                    ${post.category} / ${post.fellow}
+                    ${post?.category?.title} {post?.fellow ? "/" : ""} $
+                    {post.fellow?.name} {post?.associatedFellow ? "/" : ""}
+                    {post?.associatedFellow?.name}
                   </h5>
                 </div>
 
@@ -357,7 +424,7 @@ function Card() {
               key={index}
               onClick={() => {
                 setCurrentPage(index + 1);
-                scrollToTop();
+                scrollToElement();
               }}
               className={`pagination ${
                 currentPage === index + 1 ? "bold-text" : ""

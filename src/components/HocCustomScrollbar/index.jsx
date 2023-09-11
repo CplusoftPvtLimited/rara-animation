@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Draggable } from "gsap/Draggable";
+import Footer from "../footer";
+import { useLocation } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger, Draggable);
 // Define the HOC
 const HocCustomScrollbar = (WrappedComponent) => {
@@ -131,7 +133,9 @@ const HocCustomScrollbar = (WrappedComponent) => {
       <div className="scrollContainer">
         <div className="custom-container">
           <WrappedComponent {...props} />
+          <FooterRoute />
         </div>
+
         <span className="c-scrollbar">
           <span
             className="c-scrollbar_thumb"
@@ -145,5 +149,11 @@ const HocCustomScrollbar = (WrappedComponent) => {
   // Return the enhanced component
   return CustomScrollbar;
 };
+
+function FooterRoute() {
+  const location = useLocation();
+  const isInStudentRoute = location.pathname.includes("/student");
+  return isInStudentRoute ? null : <Footer />;
+}
 
 export default HocCustomScrollbar;

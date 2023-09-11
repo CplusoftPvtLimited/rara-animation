@@ -87,7 +87,6 @@ function App() {
             }
           />
         </Routes>
-        <FooterRoute />
       </div>
     </BrowserRouter>
   );
@@ -97,12 +96,6 @@ function HeaderRoute() {
   const location = useLocation();
   const isInStudentRoute = location.pathname.includes("/student");
   return isInStudentRoute ? null : <Header />;
-}
-
-function FooterRoute() {
-  const location = useLocation();
-  const isInStudentRoute = location.pathname.includes("/student");
-  return isInStudentRoute ? null : <Footer />;
 }
 
 export default App;

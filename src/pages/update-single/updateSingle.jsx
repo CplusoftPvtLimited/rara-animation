@@ -48,13 +48,19 @@ function UpdateSingle() {
     }
     return text;
   }
+  console.log(
+    "🚀 ~ file: updateSingle.jsx:52 ~ UpdateSingle ~ blogData:",
+    blogData
+  );
   return (
     <section className="mt-[250px]">
       {/** Top Most Section */}
       <div className="top-section block mx-[3rem] md:flex justify-between md:mx-[3rem] md:gap-4 lg:gap-8 xl:gap-16 lg:mx-[5rem] xl:mx-[10.9375rem]">
         <div className="text w-[100%] xl:w-[80%]">
           <p>
-            {blogData.category} / {blogData.fellow}
+            {blogData?.category?.title} {blogData?.fellow ? "/" : ""} $
+            {blogData.fellow?.name} {blogData?.associatedFellow ? "/" : ""}
+            {blogData?.associatedFellow?.name}
           </p>
           <h3 className="md:mt-[70px]">{blogData.title}</h3>
           <h4>{new Date(blogData.createdAt).toLocaleDateString()}</h4>
@@ -114,7 +120,7 @@ function UpdateSingle() {
                   </div>
                   <div className="news-cat my-auto">
                     <h5>
-                      ${post.category} / ${post.fellow}
+                      ${post?.category?.title} / ${post?.fellow?.name}
                     </h5>
                   </div>
 
