@@ -1,0 +1,989 @@
+body {
+    overflow: hidden !important;
+    margin: 0;
+    background-color: #e9e9e9;
+  }
+  .custom-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
+  .spacer {
+    height: 111vh;
+    position: relative;
+    overflow: hidden;
+  }
+  canvas {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .lKv-people {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Adjust the height as per your requirement */
+    z-index: 2;
+    opacity: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-people {
+      height: 12.875rem;
+      bottom: 0;
+    }
+  }
+
+  .lKv-news,
+  .lKv-people,
+  .lKv-people-item {
+    position: absolute;
+  }
+
+  .lKv-people {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 768px) {
+    /* .people-item {
+  position: absolute;
+} */
+    /* .lKv-people01-container {
+  position: absolute;
+    top: 3.9375rem;
+    left: 8.25rem;
+    width: 1.8125rem;
+    height: 3.25rem;
+} */
+    .lKv-people-item.-l01 {
+      top: 6.3rem;
+      left: 7rem;
+      width: 1.8125rem;
+      height: 3.25rem;
+    }
+    .lKv-people02-container {
+      position: absolute;
+      top: 18.125rem;
+      left: 11.5625rem;
+      width: 1.9375rem;
+      height: 3.1875rem;
+    }
+  }
+
+  img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-people-item.-l02 {
+      top: 18.125rem;
+      left: 11.5625rem;
+      width: 1.9375rem;
+      height: 3.1875rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-people-item.-l03 {
+      top: 6.8rem;
+      left: 13.2rem;
+      width: 3.4375rem;
+      height: 3.5rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-people-item.-l04 {
+      top: 4.5rem;
+      left: 21rem;
+      width: 3.6875rem;
+      height: 3.5625rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-people-item.-l05 {
+      top: 10rem;
+      left: 23.3rem;
+      width: 1.75rem;
+      height: 3rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-people-item.-l06 {
+      top: 3rem;
+      right: 20.6rem;
+      width: 1.9375rem;
+      height: 3.4375rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-people-item.-l07 {
+      top: 10rem;
+      right: 14.5rem;
+      width: 1.875rem;
+      height: 3.25rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-people-item.-l08 {
+      top: 5rem;
+      right: 4.5rem;
+      width: 1.9375rem;
+      height: 3.1875rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .lKv-vision-title {
+      width: 55rem;
+    }
+    .lKv-vision-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 1;
+    }
+    .lKv-coreBall {
+      width: 16rem;
+      height: 25rem;
+    }
+    .st {
+      fill: #000;
+      fill-opacity: 0.3;
+      stroke: #000000;
+      stroke-width: 0.2;
+      stroke-miterlimit: 10;
+    }
+    .lKv-subTitle {
+      width: 19.5rem;
+      top: 30vh;
+    }
+    .lKv-subTitle-item.-lm01 {
+      width: 19rem;
+    }
+    .lKv-subTitle-item.-lm02 {
+      width: 15.1rem;
+      margin-top: 0.3rem;
+    }
+    .lKv-subTitle-item.-lm03 {
+      width: 10.25rem;
+      margin-top: 0.8rem;
+    }
+    .cContainer.-rightSmall {
+      padding-right: 3.125rem;
+    }
+    .cContainer.-leftSmall {
+      padding-left: 3.125rem;
+    }
+    #pIndex .cHeader-logo {
+      width: 23.5rem;
+    }
+    .cHeader-logo {
+      right: 0;
+      display: block;
+      margin: 0 auto;
+      width: 20.25rem;
+      top: 2.1875rem;
+      text-align: center;
+      transform-origin: center top;
+    }
+    .cMenu {
+      width: 31.5rem;
+      height: 35.25rem;
+    }
+    .cMenu {
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
+    .cMenu-bg,
+    .cMenu-bg-overlay {
+      width: 45.6rem;
+      height: 45.6rem;
+    }
+    .cMenu-bg {
+      top: -11.25rem;
+      right: -15.25rem;
+    }
+    
+    ._sp {
+      display: none;
+    }
+    .cFooter-text,
+    .cMenu-btn-text {
+      font-size: 10px;
+    }
+    .cMenu-btn-icon {
+      width: 40px;
+      height: 7px;
+      margin-top: 0.1875rem;
+      margin-left: 0.375rem;
+    }
+    .cMenuContent-inner {
+      padding-top: 5.25rem;
+      padding-left: 11rem;
+    }
+    .cMenuContent-list {
+      margin-top: 2.375rem;
+    }
+    .cMenuContent-list-link.-home {
+      width: 10.44rem;
+    }
+    .cMenuContent-list-link {
+      position: relative;
+    }
+    .cMenuContent-list-link {
+      display: inline-flex;
+      align-items: center;
+    }
+    .cMenuContent-list-link::after {
+      position: absolute;
+      bottom: -20%;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 1px;
+      background: #fff;
+      transform: scaleX(0);
+      transform-origin: right top;
+      transition: transform 0.3s cubic-bezier(0.56, -0.01, 0.04, 1);
+    }
+    .cMenuContent-list-item + .cMenuContent-list-item {
+      margin-top: 1.6875rem;
+    }
+    .cMenuContent-list-link.-vision {
+      width: 4.2rem;
+    }
+    .cMenuContent-list-link {
+      position: relative;
+    }
+
+    .cMenuContent-list-link.-guideline {
+      width: 6.34rem;
+    }
+
+    .cMenuContent-list-item.-anchor + .cMenuContent-list-item.-anchor {
+      margin-top: 1.25rem;
+    }
+
+    .cMenuContent-list-link.-contact {
+      width: 6.1rem;
+    }
+    .cMenuContent-list-item + .cMenuContent-list-item {
+      margin-top: 1.6875rem;
+    }
+    .cMenuContent-list-link.-fellows {
+      width: 15.54rem;
+    }
+    .cMenuContent-list-item + .cMenuContent-list-item {
+      margin-top: 1.6875rem;
+    }
+    .cMenuContent-list-link.-updates {
+      width: 14.76rem;
+    }
+    .cHeader-content-inner {
+      padding-top: 2.4rem;
+    }
+    .cHeader-list {
+      display: flex;
+      align-items: center;
+    }
+    .cHeader-list {
+      font-family: monospace;
+      font-weight: 600;
+    }
+    .cHeader-list-link {
+      position: relative;
+      font-size: 0.78125rem;
+      line-height: 1.75;
+    }
+    .cHeader-list-link:after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 1px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: right top;
+      transition: transform 0.3s cubic-bezier(0.56, -0.01, 0.04, 1);
+    }
+
+    .cHeader-list-item + .cHeader-list-item {
+      margin-left: 2rem;
+    }
+
+    #pIndex .cHeader-logo {
+      width: 23.5rem;
+    }
+
+    .cHeader-logo {
+      right: 0;
+      display: block;
+      margin: 0 auto;
+      width: 22.55rem;
+      top: 2.1875rem;
+      text-align: center;
+      transform-origin: center top;
+    }
+    .cContainer.-rightSmall {
+      padding-right: 3.125rem;
+    }
+    .cContainer.-leftSmall {
+      padding-left: 2.6rem;
+    }
+    .cMenuContent-list-link:after {
+      position: absolute;
+      bottom: -20%;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 1px;
+      background: #fff;
+      transform: scaleX(0);
+      transform-origin: right top;
+      transition: transform 0.3s cubic-bezier(0.56, -0.01, 0.04, 1);
+    }
+    .cHeader-list-link:hover:after {
+      transform-origin: left top;
+      transform: scale(1);
+    }
+    .cHeader-list-link:after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 1px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: right top;
+      transition: transform 0.3s cubic-bezier(0.56, -0.01, 0.04, 1);
+    }
+  }
+
+  .cMenuContent-list-link:hover:after {
+    transform-origin: left top;
+    transform: scale(1);
+  }
+
+  .cMenu-btn-icon:after {
+    transform-origin: left top;
+  }
+  .cMenu-btn-icon:after,
+  .cMenu-btn-icon:before {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+ 
+  
+
+  .cHeader-logo-item {
+    will-change: inherit !important;
+  }
+  .cHeader-logo {
+    pointer-events: auto;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: fill 0.5s ease;
+  }
+
+  .cHeader-list-link {
+    color: #383838;
+    display: inline-block;
+    pointer-events: auto;
+    transition: color 0.5s ease;
+  }
+  .cHeader-content-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+  .cHeader-content {
+    overflow: hidden;
+  }
+
+  .cMenuContent-list-link {
+    display: inline-flex;
+    align-items: center;
+  }
+  svg {
+    overflow: visible;
+  }
+  .cMenuContent-list-svg {
+    fill: #fff;
+    width: 100%;
+  }
+  blockquote,
+  body,
+  button,
+  dd,
+  dl,
+  fieldset,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  hr,
+  iframe,
+  input,
+  legend,
+  ol,
+  option,
+  p,
+  pre,
+  select,
+  td,
+  textarea,
+  th,
+  ul {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  ol,
+  ul {
+    list-style-type: none;
+  }
+  .cMenuContent-text {
+    font-family: Open Sans, Shippori Mincho B1, YuMincho, 游明朝,
+      Times New Roman, Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif;
+    font-weight: 600;
+    color: #fff;
+    opacity: 0;
+  }
+  .cMenuContent-text {
+    font-size: 0.625rem;
+  }
+
+  .cMenuContent-inner {
+    width: 100%;
+    height: 100%;
+  }
+  .cModal-backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-color: #f8f9f9;
+    cursor: pointer;
+  }
+  .cMenuContent-backdrop.cModal-backdrop {
+    background: transparent;
+  }
+  .cMenuContent-content {
+    margin-left: auto;
+  }
+  .cModal-content {
+    position: relative;
+    z-index: 1;
+    /* overflow-y: scroll; */
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cMenuContent-content {
+    width: 31.5rem;
+    height: 35.25rem;
+  }
+  .cModal {
+    z-index: 1300;
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .cMenu-btn-icon:after {
+    transform-origin: left top;
+  }
+  .cMenu-btn-icon:after,
+  .cMenu-btn-icon:before {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cMenu-btn-icon {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cMenu-btn-icon:after,
+  .cMenu-btn-icon:before {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cMenu-btn-text:after,
+  .cMenu-btn-text:before {
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cMenu-btn-text:before {
+    content: "MENU";
+    display: block;
+    transform: translateY(0);
+  }
+  .cMenu-btn-text:after {
+    content: "CLOSE";
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    top: 100%;
+    left: -0.08em;
+  }
+  .cMenu-btn-text:after,
+  .cMenu-btn-text:before {
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cMenu-btn-text {
+    font-family: Open Sans, Shippori Mincho B1, YuMincho, 游明朝,
+      Times New Roman, Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-top: 0.15625rem;
+    transition: color 1s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    pointer-events: auto;
+    overflow: hidden;
+    padding-left: 0.15625rem;
+    padding-right: 0.15625rem;
+  }
+  .cMenu-btn-circle {
+    display: inline-block;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 0.625rem;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+      width 1s cubic-bezier(0.16, 1, 0.3, 1),
+      height 1s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 1s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: #000;
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .cMenu-btn-circle-wrap {
+    position: relative;
+    height: 1.5625rem;
+  }
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .cMenu-btn-container {
+    display: block;
+    text-align: right;
+  }
+  .cMenu-bg-overlay {
+    background-color: #000;
+    border-radius: 50%;
+  }
+  .cModal {
+    z-index: 1300;
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .cModal.-open {
+    display: flex;
+    pointer-events: auto;
+  }
+  .cMenu-bg {
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: scale(0);
+    transform-origin: right top;
+  }
+  .cMenu-btn {
+    margin-left: auto;
+    display: block;
+    overflow: hidden;
+    height: 100vh;
+  }
+  .cHeader-logo {
+    pointer-events: auto;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: fill 0.5s ease;
+  }
+  .cHeader {
+    z-index: 900;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+  }
+
+  .lKv-coreBall {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    transform-origin: center;
+    transform: scale(0);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .lKv-subTitle {
+    position: absolute;
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+    pointer-events: none;
+  }
+  .lKv-subTitle-item {
+    display: inline-block;
+    overflow: hidden;
+  }
+  .lKv-subTitle-item img {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+  }
+  .box.animate {
+    transform: scale(1);
+  }
+  @media screen and (min-width: 768px) {
+    .lKv-lead-main {
+      font-size: 2rem;
+      letter-spacing: 0.2em;
+    }
+    .lKv-lead-sub {
+      font-size: 1.25rem;
+      letter-spacing: 0.1em;
+      margin-top: 1.25rem;
+    }
+    html.has-scroll-smooth {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+  }
+  html.has-scroll-smooth {
+    overflow: hidden;
+  }
+
+  .lKv-lead {
+    position: absolute;
+    right: 0;
+    left: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .lKv-lead-text {
+    display: inline-block;
+  }
+  .c-scrollbar {
+    z-index: 1200;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 11px;
+    height: 100%;
+    transform-origin: center right;
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 1;
+  }
+  .c-scrollbar_thumb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0.5;
+    width: 7px;
+    border-radius: 10px;
+    margin: 2px;
+    cursor: grab;
+    height: 100px;
+  }
+  .c-scrollbar:hover,
+  .has-scroll-dragging .c-scrollbar,
+  .has-scroll-scrolling .c-scrollbar {
+    opacity: 1;
+  }
+  .c-scrollbar:hover {
+    transform: scaleX(1.45);
+  }
+
+  @media screen and (min-width: 768px) {
+    .lVision {
+      padding-top: 7.5rem;
+    }
+    .lVision-section-writing-text {
+      font-size: 1.025rem;
+    }
+    .cLink[target="_blank"] {
+      padding-right: 1.375rem;
+      margin-right: 0.5rem;
+      position: relative;
+    }
+    .cLink {
+      white-space: nowrap;
+      margin-right: 0.1875rem;
+      margin-left: 0.1875rem;
+      position: relative;
+    }
+    .lVision-section-image.-first {
+      width: 37rem;
+      height: 35.875rem;
+      background-size: auto 100%;
+      position: relative;
+      right: -0.1875rem;
+    }
+    .lVision-illust.-first {
+      bottom: 12.5rem;
+      left: 11.25rem;
+      width: 5.6875rem;
+      height: 6.25rem;
+    }
+    .lVision-illust.-second {
+      width: 4.6875rem;
+      height: 4.6875rem;
+    }
+    .cLink:before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      bottom: -1px;
+      left: 0;
+    }
+    .cLink[target="_blank"]:after {
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      width: 1.0625rem;
+      height: 0.875rem;
+    }
+  }
+  .cLink[target="_blank"]:after {
+    content: "";
+    background: url(https://rara.ritsumei.ac.jp/assets/img/common/b-link_icon.png);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: contain;
+  }
+  .lVision-section.-first {
+    padding: 3.125rem 12.8125rem 6.375rem 18.75rem;
+    display: flex;
+  }
+  .lVision-section {
+    position: relative;
+  }
+
+  .lVision-section-writing.-first {
+    width: 31.25rem;
+    margin-right: 7.5rem;
+  }
+  .lVision-section-writing-text.-mb {
+    margin-bottom: 2.375rem;
+  }
+  .lVision-section-writing-text {
+    line-height: 2;
+    letter-spacing: -0.06em;
+  }
+  .lVision-section-link {
+    line-height: 1.44444;
+    margin-left: 0;
+  }
+  .cLink {
+    display: inline-block;
+  }
+  .cPlaySprite .cPlaySpriteHand {
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+  }
+  .lVision-illust {
+    position: absolute;
+    transform-origin: center;
+  }
+  .lVision-illust.-second {
+    bottom: 14.375rem;
+    right: 41.0625rem;
+  }
+  .lVision-illust img,
+  .lVision-illust picture {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  ._cl1 {
+    margin-left: -0.6rem;
+  }
+  ._cr1 {
+    margin-right: -0.6rem;
+  }
+  @keyframes vision01_play {
+    100% {
+      background-position: 100%;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .lVision-section-writing-text {
+      font-size: 1.025rem;
+    }
+    ._sp {
+      display: none !important;
+    }
+    .lVision-illust.-forth {
+      width: 4.625rem;
+      height: 5.75rem;
+    }
+    .lVision-illust.-fifth {
+      width: 4.4375rem;
+      height: 4.6875rem;
+    }
+    .lVision-illust.-third {
+      width: 8.625rem;
+      height: 7.0625rem;
+    }
+  }
+
+  .lVision-section.-second {
+    padding: 0 15.5rem 8.625rem 33.75rem;
+  }
+
+  .lVision-section-writing-text.-mb {
+    margin-bottom: 2.375rem;
+  }
+
+  .lVision-section-writing-text.-isTracking-short {
+    letter-spacing: -0.07em;
+  }
+  ._nowrap {
+    display: inline-block;
+  }
+  .lVision-section-writing-text {
+    line-height: 2;
+    letter-spacing: -0.06em;
+  }
+  .lVision-section-figure {
+    margin-top: -3.125rem;
+  }
+  .lVision-section-figure-text {
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+  .lVision-illust.-forth {
+    top: 3.125rem;
+    right: 3.75rem;
+  }
+  .lVision-illust.-fifth {
+    bottom: 29rem;
+    left: 21.75rem;
+  }
+  .lVision-node.-left {
+    width: 54.375rem;
+    top: -20.6875rem;
+    left: 0;
+  }
+  .lVision-node {
+    position: absolute;
+  }
+  .lVision-node.-right {
+    width: 7.75rem;
+    bottom: 3.75rem;
+    right: 0;
+  }
+  .lVision-node > img {
+    width: 100%;
+    height: unset;
+  }
+  .cPlaySprite {
+    animation: 0.8s steps(25) 0s 1 normal forwards running vision01_play;
+  }
+  .cPlaySpriteHand {
+    animation: 0.8s steps(24) 0s 1 normal forwards running vision01_play;
+  }
+  .lVision-illust.-third {
+    bottom: 2.5rem;
+    right: 5.5rem;
+  }
+  @media screen and (min-width: 768px) {
+    .lVision-illust.-sixth {
+      width: 4.25rem;
+      height: 4.125rem;
+    }
+  }
+
+  .lVision-section.-third {
+    padding: 0 20.9375rem 0 7.1875rem;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .lVision-section-writing.-third {
+    width: 44.375rem;
+  }
+  .lVision-section-image.-third {
+    width: 22rem;
+    height: 18.75rem;
+    margin-right: 7.375rem;
+    margin-top: 4.6875rem;
+  }
+  .lVision-illust.-sixth {
+    top: 0;
+    right: 6.5625rem;
+  }
