@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import "./student.css";
-import About from "../../assets/images/about-rara.jpeg";
+import About from "../../assets/images/updatedAbout.png";
 import Program from "../../assets/images/program-rara.jpeg";
 import Outline from "../../assets/images/outline-rara.jpeg";
 import Application from "../../assets/images/application-rara.jpeg";
@@ -134,7 +134,7 @@ function Student() {
           <div className="about-container">
             {/** About heading */}
             <div className="about-section flex gap-4" id="about">
-              <img className="w-[180px] xl:w-[270px]" src={About} alt="" />
+              <img className="w-[80px] xl:w-[120px]" src={About} alt="" />
               <p className="my-auto">The Endowment Fund</p>
             </div>
             {/** About content */}
