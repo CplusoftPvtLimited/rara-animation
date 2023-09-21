@@ -160,7 +160,7 @@ function FellowSingle() {
       <div className="pl-[30px] mt-[100px] lg:flex lg:justify-between w-[100%] lg:mt-[0px]">
         <div className="left lg:max-w-[50%] lg:m-auto lg:pl-[20px] xl:pl-[120px] w-[75%] lg;w-[100%]">
           {/** Left */}
-          <div className="shape-1 hidden lg:block" ref={shape1Ref}>
+          <div className="shape-1 absolute hidden lg:block" ref={shape1Ref}>
             <img className="w-[70px]" src={fellow.graphic2} alt="" />
           </div>
 
@@ -212,7 +212,7 @@ function FellowSingle() {
         </div>
         <div className="w-[100%]">
           {/** Right */}
-          <div className="shape-2  hidden lg:block" ref={shape2Ref}>
+          <div className="shape-2 absolute hidden lg:block" ref={shape2Ref}>
             <img className="w-[150px]" src={fellow.graphic1} alt="" />
           </div>
           <img className="profile-pic" src={fellow.imagePath} alt="" />
@@ -365,17 +365,21 @@ function FellowSingle() {
         {/* Slider Section */}
         <div className="flex justify-end mt-[50px]">
           <div className="slider-section">
-            <div
-              className="slider-container"
-              style={{ transform: `translateX(-${currentSlide * 50}%)` }}
-            >
-              {sliderImages.map((image, index) => (
-                <div className="slider-item" key={index}>
-                  <img src={image} alt={`Slide ${index}`} />
-                  <p>Short Description for Image {index + 1}</p>
-                </div>
-              ))}
-            </div>
+            {sliderImages ? (
+              <div
+                className="slider-container"
+                style={{ transform: `translateX(-${currentSlide * 50}%)` }}
+              >
+                {sliderImages.map((image, index) => (
+                  <div className="slider-item" key={index}>
+                    <img src={image} alt={`Slide ${index}`} />
+                    <p>Short Description for Image {index + 1}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No images to display.</p>
+            )}
             <div className="slider-controls">
               <div className="slider-prev" onClick={handlePrevSlide}>
                 <p>Previous</p>

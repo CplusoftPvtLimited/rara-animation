@@ -153,24 +153,12 @@ function Card() {
       filteredData = filteredData.filter(
         (post) => post.fellow?.id == selectedFellowId
       );
-      console.log(
-        "*********🚀 ~ file: card.jsx:131 ~ filterByCategoryAndFellows ~ filteredData2222:",
-        filteredData
-      );
     }
     setSortedPostData(filteredData);
   };
 
   // Handle Active Button
   const handleSortingOption = (categoryOption, fellowOption) => {
-    console.log(
-      "🚀 ~ file: card.jsx:143 ~ handleSortingOption ~ fellowOption:",
-      fellowOption
-    );
-    console.log(
-      "🚀 ~ file: card.jsx:143 ~ handleSortingOption ~ categoryOption:",
-      categoryOption
-    );
     setSortOption(categoryOption);
     setSortFellowOption(fellowOption);
     filterByCategoryAndFellows(categoryOption, fellowOption);
@@ -372,7 +360,7 @@ function Card() {
         </div>
       ) : null}
       {/***********************Cards ***************************/}
-      {postData.length > 0 ? (
+      {postData && postData.length > 0 ? (
         <div className="Cards mt-[50px] mb-[100px] w-[85%] m-auto" id="card">
           <div className="flex flex-wrap gap-4 justify-evenly">
             {console.log("Data", postData)}
@@ -418,22 +406,24 @@ function Card() {
       )}
       {/* Pagination */}
       <div className="pagination-box flex justify-center mb-2 w-[90%] m-auto">
-        {Array.from({ length: Math.ceil(postData.length / itemsPerPage) }).map(
-          (_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentPage(index + 1);
-                scrollToElement();
-              }}
-              className={`pagination ${
-                currentPage === index + 1 ? "bold-text" : ""
-              } mr-12`}
-            >
-              {index + 1}
-            </button>
-          )
-        )}
+        {postData &&
+          postData.length > 0 &&
+          Array.from({ length: Math.ceil(postData.length / itemsPerPage) }).map(
+            (_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentPage(index + 1);
+                  scrollToElement();
+                }}
+                className={`pagination ${
+                  currentPage === index + 1 ? "bold-text" : ""
+                } mr-12`}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
       </div>
     </section>
   );
