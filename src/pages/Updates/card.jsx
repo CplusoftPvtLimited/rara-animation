@@ -25,6 +25,7 @@ function Card() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const navigate = useNavigate();
+  const [regionFilter, setRegionFilter] = useState("All Regions");
 
   const scrollContainer = document.querySelector(".custom-container");
   const targetElementRef = useRef(null); // Ref for the element to scroll into view
@@ -35,6 +36,7 @@ function Card() {
         "http://localhost:4500/api/blog/getAllBlogPosts"
       );
       const data = await response.json();
+      console.log("🚀 ~ file: card.jsx:38 ~ fetchNews ~ data:", data.blogPosts);
       setPostData(data.blogPosts);
       setSortedPostData(data.blogPosts);
     };
@@ -99,8 +101,8 @@ function Card() {
 
   // Cut short the blog title
   function truncateText(text, maxLength) {
-    if (text.length > maxLength) {
-      return text.slice(0, maxLength) + "...";
+    if (text.length > 12) {
+      return text.slice(0, 30) + "...";
     }
     return text;
   }
@@ -111,57 +113,59 @@ function Card() {
   };
 
   // Filter Buttons Setup
-  const filterByCategoryAndFellows = (categoryOption, fellowOption) => {
-    console.log(
-      "🚀 ~ file: card.jsx:109 ~ filterByCategoryAndFellows ~ fellowOption:",
-      fellowOption
-    );
-    console.log(
-      "🚀 ~ file: card.jsx:109 ~ filterByCategoryAndFellows ~ categoryOption:",
-      categoryOption
-    );
-
-    console.log(
-      "🚀 ~ file: card.jsx:126 ~ filterByCategoryAndFellows ~ fellowData:",
-      fellowData
-    );
-
+  const filterByCategoryAndFellows = (
+    categoryOption,
+    fellowOption,
+    regionOption
+  ) => {
+    // Filter data based on category
     let filteredData = postData;
-
     const selectedCategoryId = categoryData.find(
       (category) => category.title === categoryOption
     )?.id;
-    const selectedFellowId = fellowData.find(
-      (fellow) => fellow.name === fellowOption
-    )?.id;
-    console.log(
-      "🚀 ~ file: card.jsx:131 ~ filterByCategoryAndFellows ~ selectedFellowId:",
-      selectedFellowId
-    );
-    // Apply category filter
+
     if (categoryOption !== "All News") {
       filteredData = filteredData.filter(
         (post) => post.category == selectedCategoryId
       );
     }
-    console.log(
-      "🚀 ~ file: card.jsx:140 ~ filterByCategoryAndFellows ~ filteredData:",
-      filteredData
-    );
-    // Apply fellow filter
+
+    // Filter data based on fellow
+    const selectedFellowId = fellowData.find(
+      (fellow) => fellow.name === fellowOption
+    )?.id;
+
     if (fellowOption !== "All Fellows") {
       filteredData = filteredData.filter(
         (post) => post.fellow?.id == selectedFellowId
       );
     }
+
+    // Filter data based on region
+    if (regionOption !== "All Regions") {
+      filteredData = filteredData.filter(
+        (post) => post.region === regionOption
+      );
+    }
+
+    // Update sorted data with filtered results
     setSortedPostData(filteredData);
   };
 
   // Handle Active Button
-  const handleSortingOption = (categoryOption, fellowOption) => {
+  const handleSortingOption = (
+    categoryOption,
+    fellowOption,
+    selectedRegionOption
+  ) => {
     setSortOption(categoryOption);
     setSortFellowOption(fellowOption);
-    filterByCategoryAndFellows(categoryOption, fellowOption);
+    setRegionFilter(selectedRegionOption);
+    filterByCategoryAndFellows(
+      categoryOption,
+      fellowOption,
+      selectedRegionOption
+    );
   };
 
   const fellowToggleHandler = () => {
@@ -218,74 +222,135 @@ function Card() {
     <section ref={targetElementRef}>
       <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[90%] lg:w-[85%] py-[50px] gap-32 pr-[150px lg:flex ">
         <div className="filter-by-date my-auto">
-          <h5>SORT BY CATEGORY</h5>
+          <h5>SORT BY FOCUS AREAS</h5>
         </div>
         <div className="flex flex-wrap gap-2 lg:gap-8 mt-[25px] lg:mt-auto">
           <button
             className={`filter-btn ${
-              sortOption === "All News" ? "active" : " "
+              sortOption === "All News" ? "active" : ""
             }`}
-            onClick={() => handleSortingOption("All News", sortFellowOption)}
+            onClick={() =>
+              handleSortingOption("All News", sortFellowOption, regionFilter)
+            }
           >
             ALL NEWS
           </button>
-
           {Array.from(uniqueCategory).map((category, index) => (
             <button
               key={index}
               className={`filter-btn ${
                 sortOption === category ? "active" : ""
               }`}
-              onClick={() => handleSortingOption(category, sortFellowOption)}
+              onClick={() =>
+                handleSortingOption(category, sortFellowOption, regionFilter)
+              }
             >
               {category}
             </button>
           ))}
-
-          {/* <button
-            className={`filter-btn ${
-              sortOption === "RARA Commons" ? "active" : " "
-            }`}
-            onClick={() =>
-              handleSortingOption("RARA Commons", sortFellowOption)
-            }
-          >
-            RARA Commons
-          </button>
-          <button
-            className={`filter-btn ${
-              sortOption === "お知らせ" ? "active" : " "
-            }`}
-            onClick={() => handleSortingOption("お知らせ", sortFellowOption)}
-          >
-            お知らせ
-          </button>
-          <button
-            className={`filter-btn ${sortOption === "コラム" ? "active" : " "}`}
-            onClick={() => handleSortingOption("コラム", sortFellowOption)}
-          >
-            コラム
-          </button>
-          <button
-            className={`filter-btn ${
-              sortOption === "更新情報" ? "active" : " "
-            }`}
-            onClick={() => handleSortingOption("更新情報", sortFellowOption)}
-          >
-            更新情報
-          </button>
-          <button
-            className={`filter-btn ${
-              sortOption === "研究活動レポート" ? "active" : " "
-            }`}
-            onClick={() =>
-              handleSortingOption("研究活動レポート", sortFellowOption)
-            }
-          >
-            研究活動レポート
-          </button> */}
         </div>
       </div>
+
+      <div className="filter-container filter-2 flex flex-wrap gap-16 py-[50px] w-[85%] mx-auto">
+        <div className="filter-by-date my-auto">
+          <h5>SORT BY REGION</h5>
+        </div>
+        <div className="flex flex-wrap gap-2 lg:gap-8 mt-[25px] lg:mt-auto">
+          <button
+            className={`filter-btn ${
+              regionFilter === "All Regions" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "All Regions")
+            }
+          >
+            ALL REGIONS
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Africa" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Africa")
+            }
+          >
+            AFRICA
+          </button>
+          <button
+            className={`filter-btn ${regionFilter === "Asia" ? "active" : ""}`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Asia")
+            }
+          >
+            ASIA
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Central America" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(
+                sortOption,
+                sortFellowOption,
+                "Central America"
+              )
+            }
+          >
+            CENTRAL AMERICA
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Europe" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Europe")
+            }
+          >
+            EUROPE
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Middle East" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Middle East")
+            }
+          >
+            MIDDLE EAST
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "North America" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "North America")
+            }
+          >
+            NORTH AMERICA
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "South America" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "South America")
+            }
+          >
+            SOUTH AMERICA
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Pacific" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Pacific")
+            }
+          >
+            PACIFIC
+          </button>
+        </div>
+      </div>
+
       {/*********************** Sort By Fellow ***************************/}
 
       {console.log("Fellow Array", uniqueAssociateFellows)}
