@@ -26,8 +26,8 @@ const AddBlog = () => {
     content: "",
     imagePath: "",
   });
-  console.log('categories: ', categories);
-  console.log('fellows: ', fellows);
+  console.log("categories: ", categories);
+  console.log("fellows: ", fellows);
   const [validationErrors, setValidationErrors] = useState({
     title: "",
     profile: "",
@@ -151,9 +151,9 @@ const AddBlog = () => {
       } else {
         formDataToSend.append("relatedBlogs", relatedBlogIds.join(","));
       }
-      formDataToSend.append('content', formData.content);
-      formDataToSend.append('imagePath', formData.imagePath);
-      console.log('formDataToSend', formDataToSend);
+      formDataToSend.append("content", formData.content);
+      formDataToSend.append("imagePath", formData.imagePath);
+      console.log("formDataToSend", formDataToSend);
       axios
         .post("http://localhost:4500/api/blog/createBlog", formDataToSend, {
           headers: {
@@ -184,16 +184,14 @@ const AddBlog = () => {
   }
 
   const regionOptions = [
-    "Pakistan",
-    "United States",
-    "Canada",
-    "United Kingdom",
-    "Australia",
-    "Germany",
-    "France",
-    "Italy",
-    "Japan",
-    "China",
+    "Africa",
+    "Asia",
+    "Central America",
+    "Europe",
+    "Middle East",
+    "North America",
+    "South America",
+    "Pacific",
   ];
 
   const validateForm = () => {
