@@ -273,17 +273,18 @@ function Fellows() {
 
       <div className="w-[100%]  my-[150px]">
         <div className=" px-[30px] lg:flex lg:justify-center ">
-          <div className="my-auto">
-            <p className="text-[14px] lg:text-[19px]">
-              RARA学生フェローとして選抜された博士後期課程学生には、
-              <br />
-              RARAを基盤に個々の研究力を向上させ、
-              <br />
-              分野の異なる国内外の研究者と交わる中で、
-              <br />
-              国際性と学際性、さらに複眼的視野を兼ね備えた
-              <br />
-              博士人材へと成長していくことを期待します。
+          <div className="my-auto w-[50%]">
+            <p className=" text-[14px] lg:text-[16px]">
+              Our Fellowship Program isn't just an opportunity; it's an
+              invitation to be part of a global hub of visionaries. Here, you'll
+              find a nurturing ecosystem that encourages creative thinking,
+              fosters groundbreaking research, and amplifies the voices of those
+              committed to making a real difference. Your journey into the world
+              of impactful finance and research begins with a single step:
+              applying for the Pecunia Fellowship Program. Your ideas, your
+              dedication, and your unique perspective could be the missing piece
+              of the puzzle needed to drive our shared mission forward. Apply
+              Today
             </p>
             <div className="website-btn mt-8">
               <a href="#id">

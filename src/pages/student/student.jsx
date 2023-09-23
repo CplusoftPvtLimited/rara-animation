@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import "./student.css";
-import About from "../../assets/images/about-rara.jpeg";
+import About from "../../assets/images/updatedAbout.png";
 import Program from "../../assets/images/program-rara.jpeg";
 import Outline from "../../assets/images/outline-rara.jpeg";
 import Application from "../../assets/images/application-rara.jpeg";
@@ -134,8 +134,8 @@ function Student() {
           <div className="about-container">
             {/** About heading */}
             <div className="about-section flex gap-4" id="about">
-              <img className="w-[180px] xl:w-[270px]" src={About} alt="" />
-              <p className="my-auto">RARAとは</p>
+              <img className="w-[80px] xl:w-[120px]" src={About} alt="" />
+              <p className="my-auto">The Endowment Fund</p>
             </div>
             {/** About content */}
             <div className="about-content">
@@ -159,7 +159,7 @@ function Student() {
           <div className="program-container mt-[4.5rem]" id="program">
             <div className="program-section flex gap-4">
               <img className="w-[130px] xl:w-[170px]" src={Program} alt="" />
-              <p className="my-auto">プログラムについて</p>
+              <p className="my-auto">Why Join Our Endowment Fund</p>
             </div>
 
             {/** About content */}
@@ -171,23 +171,23 @@ function Student() {
           {/******************************/}
 
           {/** Business heading */}
-          <div className="business-container mt-[4.5rem]" id="business">
+          {/* <div className="business-container mt-[4.5rem]" id="business">
             <div className="business-section flex gap-4">
               <p className="my-auto">事業統括</p>
-            </div>
-            {/** Business content */}
-            <div className="business-content md:flex ">
-              {/**Left */}
-              <div className="w-[50%]">
+            </div> */}
+          {/** Business content */}
+          {/* <div className="business-content md:flex "> */}
+          {/**Left */}
+          {/* <div className="w-[50%]">
                 <h2 className="my-auto">徳田 昭雄</h2>
-              </div>
-              {/**Right */}
-              <div className="w-[100%]">
+              </div> */}
+          {/**Right */}
+          {/* <div className="w-[100%]">
                 <div className="business-divider">
                   <p>{studentData.businessPassage}</p>
-                </div>
-                {/** Specialized Field */}
-                <div className=" business-divider-middle md:flex">
+                </div> */}
+          {/** Specialized Field */}
+          {/* <div className=" business-divider-middle md:flex">
                   <div className="w-[50%]">
                     <p>専門分野</p>
                   </div>
@@ -198,10 +198,10 @@ function Student() {
                       }}
                     />
                   </div>
-                </div>
+                </div> */}
 
-                {/** Specialized Field */}
-                <div className=" business-divider-bottom md:flex">
+          {/** Specialized Field */}
+          {/* <div className=" business-divider-bottom md:flex">
                   <div className="w-[50%]">
                     <p>学外委員</p>
                   </div>
@@ -215,7 +215,7 @@ function Student() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/******************************/}
 
@@ -223,7 +223,7 @@ function Student() {
           <div className="outline-container mt-[4.5rem]" id="outline">
             <div className="outline-section flex gap-4">
               <img className="w-[130px] xl:w-[160px]" src={Outline} alt="" />
-              <p className="my-auto">プログラム概要</p>
+              <p className="my-auto">Governance and the Fund</p>
             </div>
 
             {/** Outline content */}
@@ -236,13 +236,17 @@ function Student() {
             </div>
 
             {/** Outline */}
+            <div className="outline-section flex gap-4 mt-[150px]">
+              <img className="w-[130px] xl:w-[160px]" src={Outline} alt="" />
+              <p className="my-auto">Investment Streams</p>
+            </div>
             <div className="outline-content flex">
               <div>
-                {/** Target Audience*/}
-                <div className=" outline-divider-middle md:flex">
-                  <div className="w-[50%]">
-                    <p>対象者</p>
-                  </div>
+                {/** Research Excellence */}
+                <div className=" ">
+                  {/* <div className="w-[50%]">
+                    <p>Research Excellence</p>
+                  </div> */}
                   <div className="w-[100%]">
                     <div
                       dangerouslySetInnerHTML={{
@@ -252,13 +256,13 @@ function Student() {
                   </div>
                 </div>
 
-                {/** Responsibilities */}
-                <div
+                {/** Community Initiatives */}
+                {/* <div
                   className=" outline-divider-bottom md:flex"
                   id="responsibilities"
                 >
                   <div className="w-[100%] md:w-[50%] pr-[70px]">
-                    <p>RARA学生フェローの 責務</p>
+                    <p>Community Initiatives</p>
                   </div>
                   <div className="w-[100%]">
                     <div
@@ -267,7 +271,24 @@ function Student() {
                       }}
                     />
                   </div>
-                </div>
+                </div> */}
+
+                {/** Advocacy and Outreach */}
+                {/* <div
+                  className=" outline-divider-bottom md:flex"
+                  id="responsibilities"
+                >
+                  <div className="w-[100%] md:w-[50%] pr-[70px]">
+                    <p>Advocacy and Outreach</p>
+                  </div>
+                  <div className="w-[100%]">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: studentData.targetAudience,
+                      }}
+                    />
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -282,7 +303,7 @@ function Student() {
                 src={Application}
                 alt=""
               />
-              <p className="letters mt-[50px]">RARA学生フェロー募集について</p>
+              <p className="letters mt-[50px]">How to Join</p>
             </div>
 
             {/** Application content */}
@@ -301,20 +322,20 @@ function Student() {
           <div className="contact-container mt-[4.5rem]" id="contact">
             <div className="contact-section flex gap-4">
               <img className="w-[140px] xl:w-[180px]" src={Contact} alt="" />
-              <p className="my-auto">お問い合わせ</p>
+              <p className="my-auto">Fostering Change</p>
             </div>
 
             {/** Contact content */}
             <div className="contact-content flex">
               <div className="divide w-[100%] mr-[10px] hidden md:block xl:mr-[80px]">
-                <p>研究部 RARAオフィス</p>
+                <p>Pecunia Office of Endownment</p>
               </div>
               <div className="email w-[100%] flex gap-4 justify-center">
                 <AiOutlineMail
-                  className="mt-auto md:my-auto md:hidden lg:block text-[26px] lg:text-[26px]"
+                  className="mt-auto md:my-auto md:hidden lg:block text-[28px] lg:text-[28px]"
                   style={{ color: "#990001" }}
                 />
-                <h2>rara@st.ritsumei.ac.jp</h2>
+                <h2 className="my-auto">enquiries@pecunia.fund</h2>
               </div>
             </div>
           </div>

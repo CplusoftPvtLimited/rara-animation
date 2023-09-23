@@ -102,7 +102,7 @@ function FellowSingle() {
           "🚀 ~ file: fellowSingle.jsx:101 ~ fetchFellow ~ data.profile.pictureSlider:",
           data.profile.pictureSlider
         );
-        setSliderImages(JSON.parse(pictureSliderJson));
+        setSliderImages(pictureSliderJson);
       } catch (error) {
         console.error(
           "An error occurred while fetching fellow profile:",
@@ -158,13 +158,13 @@ function FellowSingle() {
     <section>
       {console.log("*************Blog", blogData)}
       <div className="pl-[30px] mt-[100px] lg:flex lg:justify-between w-[100%] lg:mt-[0px]">
-        <div className="left lg:max-w-[50%] lg:m-auto lg:pl-[20px] xl:pl-[120px] w-[75%] lg;w-[100%]">
+        <div className="left lg:max-w-[50%] lg:m-auto lg:pl-[10px] xl:pl-[100px] w-[75%] lg:w-[100%]">
           {/** Left */}
-          <div className="shape-1 hidden lg:block" ref={shape1Ref}>
+          <div className="shape-1 absolute hidden lg:block" ref={shape1Ref}>
             <img className="w-[70px]" src={fellow.graphic2} alt="" />
           </div>
 
-          <div className="lg:mt-[200px]">
+          <div className="lg:mt-[150px]">
             {fellow.name && (
               <p className="profile-name">{fellow.nameEnglish}</p>
             )}
@@ -206,13 +206,13 @@ function FellowSingle() {
               </a>
             ) : null}
           </div>
-          <div className="my-16 lg:mt-32">
+          <div className="my-16 lg:mt-16">
             {fellow.tagLine && <p>{fellow.tagLine}</p>}
           </div>
         </div>
         <div className="w-[100%]">
           {/** Right */}
-          <div className="shape-2  hidden lg:block" ref={shape2Ref}>
+          <div className="shape-2 absolute hidden lg:block" ref={shape2Ref}>
             <img className="w-[150px]" src={fellow.graphic1} alt="" />
           </div>
           <img className="profile-pic" src={fellow.imagePath} alt="" />
@@ -222,10 +222,10 @@ function FellowSingle() {
       {/************************** 2nd section ******************************/}
 
       {isMobile ? null : (
-        <div className="flex justify-between w-[95%] m-auto">
+        <div className="flex justify-between w-[95%] mt-8">
           <div></div>
           <a href="#profile">
-            <div className="circle-container lg:mt-[-250px] xl:mt-[-135px]">
+            <div className="circle-container lg:mt-[-150px] xl:mt-[-235px]">
               <div className="scroll-circle z-50">
                 <p>SCROLL</p>
               </div>
@@ -236,8 +236,8 @@ function FellowSingle() {
 
       {/************************** 3rd section ******************************/}
 
-      <div className="lg:flex w-[95%] m-auto mt-[40px] lg:mt-[75px]">
-        <div className="py-2 w-[95%] lg:pl-[150px] lg:w-[50%]">
+      <div className="lg:flex w-[95%] m-auto mt-[40px] lg:mt-[100px]">
+        <div className="py-8 w-[95%] lg:pl-[150px] lg:w-[50%]">
           <img className="red-circle" src={Circle} alt="" />
         </div>
         <div className="fellow-profile w-[95%] lg:w-[50%] pt-6">
@@ -271,8 +271,9 @@ function FellowSingle() {
 
       <div className="w-[80%] mt-[150px] lg:mt-[300px] lg:w-[70%] m-auto lg:px-[20px]">
         <div>
-          <h2 className="text-[25px] mb-[50px]">{fellow.heading}</h2>
+          <h2 className="text-[25px] mb-[50px] mt-[300px]">{fellow.heading}</h2>
           <div
+            className="fellow-paragraph-text"
             dangerouslySetInnerHTML={{
               __html: fellow.paragraph,
             }}
@@ -356,36 +357,39 @@ function FellowSingle() {
       ) : null}
 
       {/************************** Slider Section ******************************/}
-      {console.log("*****Slider", sliderImages)}
-
-      <div className="w-[100%] m-auto pb-[100px] overflow-hidden">
-        <div className="title mt-[75px] pl-[95px]">
-          <h4>紹介写真</h4>
-        </div>
-        {/* Slider Section */}
-        <div className="flex justify-end mt-[50px]">
-          <div className="slider-section">
-            <div
-              className="slider-container"
-              style={{ transform: `translateX(-${currentSlide * 50}%)` }}
-            >
-              {sliderImages.map((image, index) => (
-                <div className="slider-item" key={index}>
-                  <img src={image} alt={`Slide ${index}`} />
-                  <p>Short Description for Image {index + 1}</p>
-                </div>
-              ))}
+      <div className="w-[100%] m-auto pb-[100px] overflow-hidden ">
+        {sliderImages ? (
+          <div>
+            <div className="title mt-[175px] pl-[95px]">
+              <h4>紹介写真</h4>
             </div>
-            <div className="slider-controls">
-              <div className="slider-prev" onClick={handlePrevSlide}>
-                <p>Previous</p>
-              </div>
-              <div className="slider-next" onClick={handleNextSlide}>
-                <p>Next</p>
+            <div className="flex justify-end mt-[50px]">
+              <div className="slider-section">
+                <div
+                  className="slider-container"
+                  style={{ transform: `translateX(-${currentSlide * 50}%)` }}
+                >
+                  {sliderImages.map((image, index) => (
+                    <div className="slider-item" key={index}>
+                      <img src={image} alt={`Slide ${index}`} />
+                      <p>Short Description for Image {index + 1}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="slider-controls">
+                  <div className="slider-prev" onClick={handlePrevSlide}>
+                    <p>Previous</p>
+                  </div>
+                  <div className="slider-next" onClick={handleNextSlide}>
+                    <p>Next</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <p> No Slider Image to show</p>
+        )}
       </div>
 
       {/************************** Index Section ******************************/}

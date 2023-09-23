@@ -228,6 +228,8 @@
   transform-origin: left center;
   white-space: nowrap;
   writing-mode: vertical;
+  font-family: "Open Sans";
+  font-size: 11px;
 }
 
 .job-post h5::before {
