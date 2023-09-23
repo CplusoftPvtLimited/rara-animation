@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
 import {
-  Container,
-  Row,
-  Col,
   Button,
   ButtonGroup,
+  Col,
+  Container,
   Form,
   Modal,
+  Row,
 } from "react-bootstrap";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import { useDispatch, useSelector } from "react-redux";
-import { setPaymentMethod, setAmount } from "../../store/donationSlice";
-import { setFrequency } from "../../store/paymentFrequencySlice";
-import "./donate.css";
-
+import { setAmount, setPaymentMethod } from "../../store/donationSlice";
 import DonatePage from "../../components/Donation/donate/DonatePage";
+import "./donate.css";
 
 const Donate = () => {
   const navigate = useNavigate();
@@ -34,12 +29,12 @@ const Donate = () => {
   const [coinbaseData, setCoinbaseData] = useState();
   const [hostedUrl, setHostedUrl] = useState();
   const [showBankTransferModal, setShowBankTransferModal] = useState(false);
+  const [otherValue, setOtherValue] = useState(null);
   const [bankData, setBankData] = useState();
   const actualSelectedAmount = useSelector(
     (state) => state.donation.selectedAmount
   );
 
-  console.log("actualSelectedAmount: ", actualSelectedAmount);
   useEffect(() => {
     getCoinbaseKey();
     getBankDetails();
@@ -51,13 +46,12 @@ const Donate = () => {
         amount: actualSelectedAmount,
       })
       .then((response) => {
-        console.log("response", response.data.charge.hosted_url);
         setHostedUrl(response.data.charge.hosted_url);
       })
       .catch((error) => {
         console.error("Error calling API:", error);
       });
-  }, []);
+  }, [selectedAmount]);
 
   const handleButtonClick = (value) => {
     setSelectedButton(value);
@@ -65,13 +59,13 @@ const Donate = () => {
   };
 
   const handleAmountClick = (amount) => {
+    setOtherValue(null);
     setSelectedAmount(amount);
     dispatch(setAmount(amount));
   };
 
   const handleDonateClick = () => {
-    if (selectedAmount !== null) {
-      console.log("Selected Donation Amount: $" + selectedAmount);
+    if (selectedAmount !== null || otherValue !== null) {
       setError(null);
       setShowRightColumn(true);
     } else {
@@ -80,11 +74,8 @@ const Donate = () => {
   };
 
   const handlePaymentMethodChange = (event) => {
-    // setSelectedPaymentMethod(event.target.value);
     const selectedMethod = event.target.value;
-    console.log("selectedMethod: ", selectedMethod);
     dispatch(setPaymentMethod(event.target.value));
-
     setSelectedPaymentMethod(selectedMethod);
     if (selectedMethod === "bankTransfer") {
       setShowBankTransferModal(true);
@@ -104,7 +95,6 @@ const Donate = () => {
       url: "http://localhost:4500/api/secret/coinbase/1",
     })
       .then((response) => {
-        console.log("coinbase: ", response);
         setCoinbaseData(response?.data);
       })
       .catch((err) => {
@@ -119,7 +109,6 @@ const Donate = () => {
       url: "http://localhost:4500/api/bank/1",
     })
       .then((response) => {
-        console.log("bank Details: ", response);
         setBankData(response?.data);
       })
       .catch((err) => {
@@ -146,18 +135,18 @@ const Donate = () => {
     }
   }, [selectedPaymentMethod]);
 
-  console.log("selectedAmount: ", selectedAmount);
   return (
     <div>
       <Container className="donateUs">
         <h2 style={{ fontSize: "144px" }}>DONATE US</h2>
       </Container>
 
-      <Container style={{ marginTop: "40px" }}>
+      <Container style={{ marginTop: "40px", marginBottom: "40px" }}>
         <Row>
           <Col xs={6}>
             <DonatePage />
           </Col>
+
           {showRightColumn ? (
             <Col xs={6}>
               <Form>
@@ -259,6 +248,7 @@ const Donate = () => {
               }}
             >
               <h5 className="donate">How often would you like to donate?</h5>
+
               <ButtonGroup
                 style={{
                   display: "flex",
@@ -329,48 +319,53 @@ const Donate = () => {
                   <Button
                     variant="light"
                     className="rupee"
-                    onClick={() => handleAmountClick(10)}
+                    onClick={() => handleAmountClick(100)}
                   >
-                    $10{renderTickSign(10)}
-                  </Button>
-                  <Button
-                    variant="light"
-                    // variant={selectedAmount === 20 ? 'primary' : 'light'}
-                    className="rupee"
-                    onClick={() => handleAmountClick(20)}
-                  >
-                    $20{renderTickSign(20)}
+                    $100{renderTickSign(100)}
                   </Button>
                   <Button
                     variant="light"
                     className="rupee"
-                    onClick={() => handleAmountClick(30)}
+                    onClick={() => handleAmountClick(1000)}
                   >
-                    $30{renderTickSign(30)}
+                    $1,000{renderTickSign(1000)}
+                  </Button>
+                  <Button
+                    variant="light"
+                    className="rupee"
+                    onClick={() => handleAmountClick(10000)}
+                  >
+                    $10,000{renderTickSign(10000)}
                   </Button>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <Button
                     variant="light"
                     className="rupee"
-                    onClick={() => handleAmountClick(40)}
+                    onClick={() => handleAmountClick(100000)}
                   >
-                    $40{renderTickSign(40)}
+                    $100,000{renderTickSign(100000)}
                   </Button>
                   <Button
                     variant="light"
                     className="rupee"
-                    onClick={() => handleAmountClick(50)}
+                    onClick={() => handleAmountClick(1000000)}
                   >
-                    $50{renderTickSign(50)}
+                    $100,0000{renderTickSign(1000000)}
                   </Button>
-                  <Button
-                    variant="light"
-                    className="rupee"
-                    onClick={() => handleAmountClick(60)}
-                  >
-                    $60{renderTickSign(60)}
-                  </Button>
+                  <div>
+                    <input
+                      className="rupee"
+                      type="number"
+                      placeholder="other"
+                      style={{ textAlign: "center" }}
+                      onChange={(e) => {
+                        setSelectedAmount(null);
+                        setOtherValue(Number(e.target.value));
+                        dispatch(setAmount(Number(e.target.value)));
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               <Container style={{ display: "flex" }}>

@@ -1,6 +1,6 @@
 import React from "react";
-import HocCustomScrollbar from "../../components/HocCustomScrollbar";
 import DonationPage from "./Donate";
+import HocCustomScrollbar from "../../components/HocCustomScrollbar";
 
 const index = () => {
   const DonationpageHOC = HocCustomScrollbar(DonationPage);

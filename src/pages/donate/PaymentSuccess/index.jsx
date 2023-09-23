@@ -1,16 +1,10 @@
 import React from "react";
-import "./index.css";
-
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import "./index.css";
 
 const PaymentCompletionPage = () => {
   const navigate = useNavigate();
-  const selectedAmount = useSelector((state) => state.donation.selectedAmount);
-  console.log(
-    "🚀 ~ file: index.jsx:10 ~ PaymentCompletionPage ~ selectedAmount:",
-    selectedAmount
-  );
+
   return (
     <div className="completion-page">
       <div className="tick-button">
@@ -31,9 +25,6 @@ const PaymentCompletionPage = () => {
       <div className="completion-message">
         <h1>Payment Completed Successfully</h1>
         <p>
-          {/* You have donated ${selectedAmount}.
-          <br />
-          <br /> */}
           Thank you for your payment. <br />
           Your transaction has been successfully processed.
         </p>
