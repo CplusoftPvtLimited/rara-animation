@@ -509,6 +509,41 @@ const index = () => {
                   data-subtitle-item=""
                   style={{ transform: "translate(0px, 130%)" }}
                 >
+                  E
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  X
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  P
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  L
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  O
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
                   R
                 </span>
                 <span
@@ -516,7 +551,56 @@ const index = () => {
                   data-subtitle-item=""
                   style={{ transform: "translate(0px, 130%)" }}
                 >
-                  A
+                  I
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  N
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  G
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ marginLeft: 5, transform: "translate(0px, 130%)" }}
+                >
+                  T
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  H
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  E
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ marginLeft: 5, transform: "translate(0px, 130%)" }}
+                >
+                  H
+                </span>
+                <span
+                  className="cSubTitle-text"
+                  data-subtitle-item=""
+                  style={{ transform: "translate(0px, 130%)" }}
+                >
+                  O
                 </span>
                 <span
                   className="cSubTitle-text"
@@ -530,35 +614,28 @@ const index = () => {
                   data-subtitle-item=""
                   style={{ transform: "translate(0px, 130%)" }}
                 >
-                  A
+                  I
                 </span>
                 <span
                   className="cSubTitle-text"
                   data-subtitle-item=""
                   style={{ transform: "translate(0px, 130%)" }}
                 >
-                  行
+                  Z
                 </span>
                 <span
                   className="cSubTitle-text"
                   data-subtitle-item=""
                   style={{ transform: "translate(0px, 130%)" }}
                 >
-                  動
+                  O
                 </span>
                 <span
                   className="cSubTitle-text"
                   data-subtitle-item=""
                   style={{ transform: "translate(0px, 130%)" }}
                 >
-                  指
-                </span>
-                <span
-                  className="cSubTitle-text"
-                  data-subtitle-item=""
-                  style={{ transform: "translate(0px, 130%)" }}
-                >
-                  針
+                  N
                 </span>
               </div>
             </div>
@@ -598,8 +675,10 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
               >
-                RKN (Ritsumeikan Knowledge
-                Nodes)およびRARAの理念を深く理解するとともに、達成目標の実現を通じて、多様な研究者を繋ぐNodes（結合点）となることを志向すること。
+                Examining how cognitive biases and psychological factors
+                influence financial decision-making while aiming to develop
+                strategies that help individuals make more informed and
+                responsible financial choices.
               </div>
             </div>
             <div className="lGuideline-card-item-back">
@@ -644,7 +723,9 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
               >
-                多様な価値観や文化、習慣を尊重し、地域や国籍にとらわれることのない研究パートナーシップの構築を追及するとともに、他者に配慮した包括的なリーダーシップを発揮すること。
+                Exploring innovative ways to create inclusive financial systems
+                by designing financial products that cater to unique needs of
+                underserved and marginalized communities.
               </div>
             </div>
             <div className="lGuideline-card-item-back">
@@ -689,7 +770,10 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
               >
-                本大学を中心に国内外の研究者を結集した学際融合研究の実践に向けた戦略とビジョンを示し、次世代研究大学を牽引する社会共生価値を創出すること。
+                Researching ethical banking practices, ethical investment
+                vehicles, and how financial institutions can integrate ethical
+                principles into their operations while maintaining
+                profitability.
               </div>
             </div>
             <div className="lGuideline-card-item-back">
@@ -734,7 +818,10 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
               >
-                世界水準の研究・教育を展開する研究者として国際社会から広く信頼されるとともに、国際通用性のある先進研究アカデミーとしての認知度向上に努めること。
+                Pecunia focuses on research related to financing sustainable
+                development goals (SDGs). This includes examining financial
+                instruments, policies, and partnerships that can mobilize
+                capital for projects aligned with the SDGs.
               </div>
             </div>
             <div className="lGuideline-card-item-back">
@@ -762,18 +849,13 @@ const index = () => {
             transform: "translate(0px, 120%) scale(1.05, 1)",
           }}
         >
-          立命館大学はRARAの取り組みを通じて、
-          <br />
-          強い個、リーダーとなる多様な
-          <br className="_sp" />
-          トップ研究者が学際的<span className="_cb1">・</span>
-          国際的に繋がり合うことで、
-          <br />
-          未踏領域の研究を進め、
-          <br className="_sp" />
-          その成果を国際的に発信し、
-          <br />
-          社会にインパクトを与えることに努めていきます。
+          Our focus areas represent Pecunia core mission, driving our relentless
+          pursuit of transformative change in the realm of social finance.
+          Through dedicated exploration, we strive to catalyze meaningful
+          impact, fostering inclusivity and sustainability. We undertake
+          in-depth research to reveal opportunities, address challenges, and
+          advocate for best practices, shaping a more equitable financial
+          landscape.
         </div>
       </div>
     </div>

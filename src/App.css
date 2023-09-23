@@ -7,3 +7,7 @@ p ul li {
   padding: 0 !important;
   margin: 0 !important;
 }
+
+body{
+  background-color: #EFEFEF !important;
+}
