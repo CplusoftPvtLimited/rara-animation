@@ -271,11 +271,11 @@ img {
   }
 
   .cMenuContent-list-link.-guideline {
-    width: 6.34rem;
+    width: 5.34rem;
   }
 
   .cMenuContent-list-item.-anchor + .cMenuContent-list-item.-anchor {
-    margin-top: 1.25rem;
+    /* margin-top: 1.25rem; */
   }
 
   .cMenuContent-list-link.-contact {
@@ -567,8 +567,8 @@ ul {
   transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .cMenu-btn-text {
-  font-family: Open Sans, Shippori Mincho B1, YuMincho, 游明朝, Times New Roman,
-    Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif;
+  /* font-family: Open Sans, Shippori Mincho B1, YuMincho, 游明朝, Times New Roman,
+    Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif; */
   font-weight: 600;
   letter-spacing: 0.03em;
   margin-top: 0.15625rem;
