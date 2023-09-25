@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": "Total123",
+    "password": "123",
     "database": "mydatabase",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "",
+    "password": "123",
     "database": "mydatabase",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "",
+    "password": "123",
     "database": "mydatabase",
     "host": "localhost",
     "dialect": "mysql"
