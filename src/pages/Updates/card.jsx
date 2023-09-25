@@ -102,7 +102,7 @@ function Card() {
   // Cut short the blog title
   function truncateText(text, maxLength) {
     if (text.length > 12) {
-      return text.slice(0, 30) + "...";
+      return text.slice(0, 20) + "...";
     }
     return text;
   }
@@ -143,11 +143,28 @@ function Card() {
 
     // Filter data based on region
     if (regionOption !== "All Regions") {
-      filteredData = filteredData.filter((post) => post.region == regionOption);
+      filteredData = filteredData.filter((post) => {
+        const postRegion = post.region.toLowerCase();
+        const selectedRegion = regionOption.toLowerCase();
+
+        // Check if the post's region exactly matches the selected region
+        if (postRegion === selectedRegion) {
+          return true;
+        }
+
+        // If not, check if the post's country falls into the selected continent
+        const countryContinent = getContinentForCountry(post.country);
+        return countryContinent.toLowerCase() === selectedRegion;
+      });
     }
 
     // Update sorted data with filtered results
     setSortedPostData(filteredData);
+  };
+
+  // Function to get continent for a given country (you'll need a library for this)
+  const getContinentForCountry = (country) => {
+    // Implement logic to map country to continent, you can use a library like "countryjs" or create a custom mapping.
   };
 
   // Handle Active Button
@@ -424,12 +441,12 @@ function Card() {
       ) : null}
       {/***********************Cards ***************************/}
       {postData && postData.length > 0 ? (
-        <div className="Cards mt-[50px] mb-[100px] w-[85%] m-auto" id="card">
-          <div className="flex flex-wrap gap-4 xl:ml-12 xl:gap-8">
+        <div className="Cards mt-[50px] mb-[100px] w-[85%] mx-auto" id="card">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:ml-12 xl:gap-8">
             {console.log("Data", postData)}
             {sortedPostData.slice(startIndex, endIndex).map((post, index) => (
               <div
-                className="news-card mt-[70px] cursor-pointer"
+                className="news-card cursor-pointer flex flex-col"
                 key={index}
                 onClick={() => handleClick(post.id)}
               >
@@ -443,11 +460,10 @@ function Card() {
                     {post?.associatedFellow?.name}
                   </h5>
                 </div>
-
-                <div className="mt-[30px]">
+                <div className="mt-auto">
                   <p>{truncateText(post.title, 80)}</p>
                 </div>
-                <div className="date-box flex mt-[90px] justify-between">
+                <div className="date-box flex justify-between mt-2">
                   <div>
                     <p className="date">
                       {new Date(post.publicationDate).toLocaleDateString()}
@@ -455,7 +471,9 @@ function Card() {
                   </div>
                   <div className="flex">
                     {/* <a href={post.link}> */}
-                    <h5 className="text-[10px] lg:text-[11px]">VIEW DETAILS</h5>
+                    <h5 className="text-[10px] lg:text-[11px] view-details-link">
+                      VIEW DETAILS
+                    </h5>
                     <div className="bullet"></div>
                     {/* </a> */}
                   </div>
@@ -467,6 +485,7 @@ function Card() {
       ) : (
         <div>Loading...</div>
       )}
+
       {/* Pagination */}
       <div className="pagination-box flex justify-center mb-2 w-[90%] m-auto">
         {postData &&
