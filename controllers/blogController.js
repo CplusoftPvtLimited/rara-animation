@@ -36,7 +36,7 @@ const createBlogPost = async (req, res) => {
       imagePath = req.file.path;
     }
 
-    const baseUrl = "http://localhost:4500/";
+    const baseUrl = "https://backend.pecunia.institute/";
 
     const newBlog = await Blog.create({
       imagePath: baseUrl + path,
@@ -151,11 +151,20 @@ const getBlogPostById = async (req, res) => {
     });
 
     const fellowId = parseInt(blogPost.fellow);
+
     const associatedFellowId = parseInt(blogPost.associatedFellow);
 
     const category = await Category.findByPk(blogPost.category);
-    const fellow = await Profile.findByPk(fellowId);
-    const associatedFellow = await Profile.findByPk(associatedFellowId);
+    let fellow = null;
+    let associatedFellow = null;
+    if (fellowId) {
+      fellow = await Profile.findByPk(fellowId);
+      fellow = fellow?.toJSON();
+    }
+    if (associatedFellowId) {
+      associatedFellow = await Profile.findByPk(associatedFellowId);
+      associatedFellow = associatedFellow?.toJSON();
+    }
 
     if (!category) {
       return res.status(404).json({ error: "Category not found" });
@@ -179,9 +188,9 @@ const getBlogPostById = async (req, res) => {
     const modifiedBlogPost = {
       ...blogPost.toJSON(), // Convert blogPost to plain object
       relatedBlogs: relatedBlogData, // Replace relatedBlogs with relatedBlogData
-      category: category.toJSON(),
-      fellow: fellow.toJSON(),
-      associatedFellow: associatedFellow.toJSON(),
+      category: category?.toJSON(),
+      fellow: fellow,
+      associatedFellow: associatedFellow,
     };
 
     if (!blogPost) {
@@ -189,6 +198,10 @@ const getBlogPostById = async (req, res) => {
     }
     res.status(200).send({ blogPost: modifiedBlogPost });
   } catch (err) {
+    console.log(
+      "🚀 ~ file: blogController.js:201 ~ getBlogPostById ~ err:",
+      err
+    );
     res.status(403).json({ err });
   }
 };
@@ -219,7 +232,7 @@ const updateBlogPost = async (req, res) => {
   blogPost.category = category;
   blogPost.profile = profile;
 
-  const baseUrl = "http://localhost:4500/";
+  const baseUrl = "https://backend.pecunia.institute/";
   if (req.file) {
     const imagePath = req.file.path;
     // blogPost.dataValues.imagePath = baseUrl + imagePath;
