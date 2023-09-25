@@ -1,8 +1,8 @@
 const Profile = require("../models/Profile");
 
 const createProfile = async (req, res) => {
-  // console.log('req.file file: ', req.file);
-  if (!req.file) {
+  // console.log("req.file file: ", req.files);
+  if (!req.files) {
     return res.status(400).json({ error: "No image provided" });
   }
 
@@ -14,6 +14,9 @@ const createProfile = async (req, res) => {
     jobPost,
     profileDesc,
     // websiteUrl,
+    facebookUrl,
+    twitterUrl,
+    ritsumeiUrl,
     heading,
     paragraph,
   } = req.body;
@@ -25,7 +28,7 @@ const createProfile = async (req, res) => {
     "tagLine",
     "jobPost",
     "profileDesc",
-    "heading",
+    // "heading",
     "paragraph",
   ];
 
@@ -50,9 +53,13 @@ const createProfile = async (req, res) => {
     const graphic2 = req.files.graphic2[0].path;
     const graphic3 = req.files.graphic3[0].path;
 
-    const pictureSliderPaths = req.files.pictureSlider.map(
-      (file) => baseUrl + file.path
-    );
+    let pictureSliderPaths = [];
+
+    if (req.files.pictureSlider && req.files.pictureSlider.length > 0) {
+      pictureSliderPaths = req.files.pictureSlider.map(
+        (file) => baseUrl + file.path
+      );
+    }
 
     // Create the new Profile entry in the database
     const newProfile = await Profile.create({
@@ -80,13 +87,13 @@ const createProfile = async (req, res) => {
       ritsumeiUrl,
     });
 
-    console.log("new profile: ", newProfile);
-
     return res
       .status(200)
       .json({ message: "Profile created successfully", Profile: newProfile });
   } catch (err) {
-    res.status(500).json({ error: "Error creating profile: ", err });
+    res
+      .status(500)
+      .json({ error: "Error creating profile: ", error: err.message });
   }
 };
 
