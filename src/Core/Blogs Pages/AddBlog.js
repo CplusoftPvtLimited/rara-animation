@@ -188,16 +188,14 @@ const AddBlog = () => {
   }
 
   const regionOptions = [
-    "Pakistan",
-    "United States",
-    "Canada",
-    "United Kingdom",
-    "Australia",
-    "Germany",
-    "France",
-    "Italy",
-    "Japan",
-    "China",
+    "Africa",
+    "Asia",
+    "Central America",
+    "Europe",
+    "Middle East",
+    "North America",
+    "South America",
+    "Pacific",
   ];
 
   const validateForm = () => {
