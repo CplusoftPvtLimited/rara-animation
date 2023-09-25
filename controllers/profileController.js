@@ -44,7 +44,7 @@ const createProfile = async (req, res) => {
   }
   try {
     // Get the image path
-    const baseUrl = "http://localhost:4500/";
+    const baseUrl = "https://backend.pecunia.institute/";
     const thumbnailPath = req.files.thumbnailPath[0].path;
     const imagePath = req.files.imagePath[0].path;
     const animatedImage = req.files.animatedImage[0].path;
@@ -172,7 +172,7 @@ const updateProfile = async (req, res) => {
       return res.status(400).json({ error: "Profile not found" });
     }
 
-    const baseUrl = "http://localhost:4500/";
+    const baseUrl = "https://backend.pecunia.institute/";
     const thumbnailPath =
       req.files?.thumbnailPath && typeof req.files?.thumbnailPath == "object"
         ? baseUrl + req.files?.thumbnailPath[0].path
