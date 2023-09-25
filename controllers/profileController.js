@@ -87,8 +87,6 @@ const createProfile = async (req, res) => {
       ritsumeiUrl,
     });
 
-    console.log("new profile: ", newProfile);
-
     return res
       .status(200)
       .json({ message: "Profile created successfully", Profile: newProfile });
