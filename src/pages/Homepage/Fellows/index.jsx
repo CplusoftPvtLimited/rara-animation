@@ -150,8 +150,8 @@ const index = () => {
     const sliderRotateElement = document.querySelector(
       `[data-rotate="${sliderRotate}"]`
     );
-    setFellowName("Mrs. Tamaki Patel");
-    setFellowDescription1("Impact Investing and Measurement");
+    setFellowName("Dr. Maria Hernandez");
+    setFellowDescription1("Ethical Banking and Finance");
     setFellowDescription2("");
     sliderRotateElement?.classList.add("-isCurrent");
     console.log(
@@ -187,7 +187,7 @@ const index = () => {
     // );
     SliderMoveDiv.style.transform = "translate(0px,0px)";
     if (adjustedX < 610) {
-      setSliderMove(1);
+      setSliderMove(2);
       // console.log(
       //   "🚀 ~ file: index.jsx:96 ~ handleMouseMovement ~ SliderMove:",
       //   SliderMove
@@ -220,132 +220,145 @@ const index = () => {
       //   "🚀 ~ file: index.jsx:119 ~ handleSliderRotation ~ SliderMove:",
       //   SliderMove
       // );
-      if (SliderMove == 1) {
-        console.log(
-          "🚀 ~ file: index.jsx:276 ~ handleSliderRotation ~ previousClicked:",
-          previousClicked
-        );
-        if (previousClicked == 2) {
-          fellowRotation.map((item, index) => {
-            fellowRotation[index]["rotation"] = index * 15;
-          });
-        }
+      // if (SliderMove == 1) {
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:276 ~ handleSliderRotation ~ previousClicked:",
+      //     previousClicked
+      //   );
+      //   if (previousClicked == 2) {
+      //     fellowRotation.map((item, index) => {
+      //       fellowRotation[index]["rotation"] = index * 15;
+      //     });
+      //   }
 
-        previousTotal = previousTotal - 15;
-        fellowRotation[previousEffectedValueIndex]["rotation"] = previousTotal;
-        console.log(
-          "🚀 ~ file: index.jsx:245 ~ handleSliderRotation ~ fellowRotation:",
-          fellowRotation
-        );
+      //   previousTotal = previousTotal - 15;
+      //   fellowRotation[previousEffectedValueIndex]["rotation"] = previousTotal;
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:245 ~ handleSliderRotation ~ fellowRotation:",
+      //     fellowRotation
+      //   );
 
-        if (previousEffectedValueIndex >= 0) {
-          previousEffectedValueIndex -= 1;
-        } else {
-          previousEffectedValueIndex = 4;
-        }
-        console.log(
-          "🚀 ~ file: index.jsx:254 ~ handleSliderRotation ~ previousEffectedValueIndex:",
-          previousEffectedValueIndex
-        );
+      //   if (previousEffectedValueIndex >= 0) {
+      //     previousEffectedValueIndex -= 1;
+      //   } else {
+      //     previousEffectedValueIndex = 4;
+      //   }
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:254 ~ handleSliderRotation ~ previousEffectedValueIndex:",
+      //     previousEffectedValueIndex
+      //   );
 
-        console.log(
-          "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow222222:",
-          currentFellow
-        );
-        console.log(
-          "🚀 ~ file: index.jsx:258 ~ handleSliderRotation ~ fellowRotation.length:",
-          fellowRotation.length
-        );
-        if (currentFellow == 0) {
-          currentFellow = 4;
-        } else {
-          currentFellow -= 1;
-        }
-        console.log(
-          "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow:",
-          currentFellow
-        );
-        console.log(
-          "🚀 ~ file: index.jsx:263 ~ handleSliderRotation ~      fellowRotation[currentFellow]?.rotation:",
-          fellowRotation[currentFellow]?.rotation
-        );
-        const sliderRotateElement = document.querySelector(
-          `[data-rotate="${fellowRotation[currentFellow]?.rotation}"]`
-        );
-        setsliderRotate(sliderRotate + 15);
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow222222:",
+      //     currentFellow
+      //   );
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:258 ~ handleSliderRotation ~ fellowRotation.length:",
+      //     fellowRotation.length
+      //   );
+      //   if (currentFellow == 0) {
+      //     currentFellow = 4;
+      //   } else {
+      //     currentFellow -= 1;
+      //   }
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow:",
+      //     currentFellow
+      //   );
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:263 ~ handleSliderRotation ~      fellowRotation[currentFellow]?.rotation:",
+      //     fellowRotation[currentFellow]?.rotation
+      //   );
+      //   const sliderRotateElement = document.querySelector(
+      //     `[data-rotate="${fellowRotation[currentFellow]?.rotation}"]`
+      //   );
+      //   setsliderRotate(sliderRotate + 15);
 
-        sliderRotateElement.classList.add("-isCurrent");
+      //   sliderRotateElement.classList.add("-isCurrent");
 
-        previousClicked = 1;
-      }
-      if (SliderMove == 2) {
-        console.log(
-          "🚀 ~ file: index.jsx:283 ~ handleSliderRotation ~ previousClicked:",
-          previousClicked
-        );
-        // setfellowRotation(findindexFellowRotation);
-
-        // FellowData(sliderRotate + 15);
-
-        if (previousClicked == 1) {
-          fellowRotation.map((item, index) => {
-            fellowRotation[index]["rotation"] = index * 15;
-          });
-        }
-
-        total = total - 15;
-        fellowRotation[effectedValueIndex]["rotation"] = -total;
-        console.log(
-          "🚀 ~ file: index.jsx:245 ~ handleSliderRotation ~ fellowRotation:",
-          fellowRotation
-        );
-
-        if (effectedValueIndex < fellowRotation.length - 1) {
-          effectedValueIndex += 1;
-        } else {
-          effectedValueIndex = 0;
-        }
-        console.log(
-          "🚀 ~ file: index.jsx:254 ~ handleSliderRotation ~ effectedValueIndex:",
-          effectedValueIndex
-        );
-
-        console.log(
-          "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow222222:",
-          currentFellow
-        );
-        console.log(
-          "🚀 ~ file: index.jsx:258 ~ handleSliderRotation ~ fellowRotation.length:",
-          fellowRotation.length
-        );
-        if (currentFellow < fellowRotation.length - 1) {
-          currentFellow += 1;
-        } else {
-          currentFellow = 0;
-        }
-        console.log(
-          "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow:",
-          currentFellow
-        );
-        console.log(
-          "🚀 ~ file: index.jsx:263 ~ handleSliderRotation ~      fellowRotation[currentFellow]?.rotation:",
-          fellowRotation[currentFellow]?.rotation
-        );
-        const sliderRotateElement = document.querySelector(
-          `[data-rotate="${fellowRotation[currentFellow]?.rotation}"]`
-        );
-        setsliderRotate(sliderRotate - 15);
-
-        sliderRotateElement.classList.add("-isCurrent");
-
-        previousClicked = 2;
-      }
-
+      //   previousClicked = 1;
+      // }
+      // if (SliderMove == 2) {
       console.log(
-        "🚀 ~ file: index.jsx:299 ~ index ~ FellowName:",
+        "🚀 ~ file: index.jsx:283 ~ handleSliderRotation ~ previousClicked:",
+        previousClicked
+      );
+      // setfellowRotation(findindexFellowRotation);
+
+      // FellowData(sliderRotate + 15);
+
+      if (previousClicked == 1) {
+        fellowRotation.map((item, index) => {
+          fellowRotation[index]["rotation"] = index * 15;
+        });
+      }
+
+      total = total - 15;
+      fellowRotation[effectedValueIndex]["rotation"] = -total;
+      console.log(
+        "🚀 ~ file: index.jsx:245 ~ handleSliderRotation ~ fellowRotation:",
         fellowRotation
       );
+
+      if (effectedValueIndex < fellowRotation.length - 1) {
+        effectedValueIndex += 1;
+      } else {
+        effectedValueIndex = 0;
+      }
+      console.log(
+        "🚀 ~ file: index.jsx:254 ~ handleSliderRotation ~ effectedValueIndex:",
+        effectedValueIndex
+      );
+
+      console.log(
+        "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow222222:",
+        currentFellow
+      );
+      console.log(
+        "🚀 ~ file: index.jsx:258 ~ handleSliderRotation ~ fellowRotation.length:",
+        fellowRotation.length
+      );
+      if (currentFellow < fellowRotation.length - 1) {
+        currentFellow += 1;
+      } else {
+        currentFellow = 0;
+      }
+      console.log(
+        "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow:",
+        currentFellow
+      );
+      console.log(
+        "🚀 ~ file: index.jsx:263 ~ handleSliderRotation ~      fellowRotation[currentFellow]?.rotation:",
+        fellowRotation[currentFellow]?.rotation
+      );
+
+      let currentFellowData = fellowRotation[currentFellow];
+      console.log(
+        "🚀 ~ file: index.jsx:336 ~ handleSliderRotation ~ currentFellowData:",
+        currentFellowData
+      );
+
+      if (currentFellowData) {
+        setFellowName(currentFellowData?.data?.name);
+        setFellowDescription1(currentFellowData?.data?.description);
+        setFellowDescription2(currentFellowData?.data?.description_detailed);
+      }
+
+      const sliderRotateElement = document.querySelector(
+        `[data-rotate="${fellowRotation[currentFellow]?.rotation}"]`
+      );
+      setsliderRotate(sliderRotate - 15);
+
+      sliderRotateElement.classList.add("-isCurrent");
+
+      previousClicked = 2;
     }
+
+    console.log(
+      "🚀 ~ file: index.jsx:299 ~ index ~ FellowName:",
+      fellowRotation
+    );
+    // }
   }
 
   const FellowData = (rotation) => {
@@ -605,11 +618,17 @@ const index = () => {
                     >
                       NEXT
                     </span>
-                    <span
+                    {/* <span
                       className="cSliderMouseStalker-text -prev"
                       data-slider-stalker-prev
                     >
                       PREV
+                    </span> */}
+                    <span
+                      className="cSliderMouseStalker-text -prev"
+                      data-slider-stalker-prev
+                    >
+                      NEXT
                     </span>
                     <span
                       className="cSliderMouseStalker-text -drag"
@@ -686,75 +705,72 @@ const index = () => {
                 </ul>
               </div>
             </div>
-            {fellowRotation.length > 0 &&
-              fellowRotation.map((item) => (
-                <div className="lFellows-slider-info" data-slider-info="">
-                  <div className="lFellows-slider-info-en">
-                    <p
-                      className="lFellows-slider-info-en-text"
-                      data-slider-info-name-en=""
-                      style={{ transform: "translate(0px, 0%)" }}
-                    >
-                      {item?.data?.name}
-                    </p>
-                  </div>
-                  <div
-                    className="cFlatText lFellows-slider-info-textbox"
-                    data-flat-text=""
-                    style={{
-                      padding: "0px 22.65px",
-                      transform: "scaleX(1.05)",
-                    }}
+            <div className="lFellows-slider-info" data-slider-info="">
+              <div className="lFellows-slider-info-en">
+                <p
+                  className="lFellows-slider-info-en-text"
+                  data-slider-info-name-en=""
+                  style={{ transform: "translate(0px, 0%)" }}
+                >
+                  {FellowName}
+                </p>
+              </div>
+              <div
+                className="cFlatText lFellows-slider-info-textbox"
+                data-flat-text=""
+                style={{
+                  padding: "0px 22.65px",
+                  transform: "scaleX(1.05)",
+                }}
+              >
+                <div className="lFellows-slider-info-ja">
+                  <p
+                    className="lFellows-slider-info-ja-text"
+                    data-slider-info-name-ja=""
+                    style={{ transform: "translate(0px, 0%)" }}
                   >
-                    <div className="lFellows-slider-info-ja">
-                      <p
-                        className="lFellows-slider-info-ja-text"
-                        data-slider-info-name-ja=""
-                        style={{ transform: "translate(0px, 0%)" }}
-                      >
-                        {item?.data?.description}
-                      </p>
-                    </div>
-                    <div
-                      className="lFellows-slider-info-study"
-                      style={{
-                        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-                        transform: "translate(0px, 0%)",
-                      }}
-                    >
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: item?.data?.description_detailed,
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                  <div className="lFellows-slider-info-more">
-                    <a
-                      className="lFellows-slider-info-more-link"
-                      href="https://rara.ritsumei.ac.jp/fellows/yuki-orikasa/"
-                      data-slider-info-link=""
-                      style={{ transform: "translate(0px, 0%)" }}
-                    >
-                      VIEW DETAIL
-                      <svg
-                        className="lFellows-slider-info-more-icon"
-                        role="img"
-                        fill="currentColor"
-                        width="17"
-                        height="15"
-                      ></svg>
-                    </a>
-                  </div>
-                  <ul className="lFellows-slider-dots" data-slider-dots="">
+                    {FellowDescription1}
+                  </p>
+                </div>
+                <div
+                  className="lFellows-slider-info-study"
+                  style={{
+                    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                    transform: "translate(0px, 0%)",
+                  }}
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: FellowDescription2,
+                    }}
+                  ></div>
+                </div>
+              </div>
+              <div className="lFellows-slider-info-more">
+                <a
+                  className="lFellows-slider-info-more-link"
+                  href="https://rara.ritsumei.ac.jp/fellows/yuki-orikasa/"
+                  data-slider-info-link=""
+                  style={{ transform: "translate(0px, 0%)" }}
+                >
+                  VIEW DETAIL
+                  <svg
+                    className="lFellows-slider-info-more-icon"
+                    role="img"
+                    fill="currentColor"
+                    width="17"
+                    height="15"
+                  ></svg>
+                </a>
+              </div>
+              {/* <ul className="lFellows-slider-dots" data-slider-dots="">
                     <li className="lFellows-slider-dots-item"></li>
                     <li className="lFellows-slider-dots-item"></li>
                     <li className="lFellows-slider-dots-item -isCurrent"></li>
                     <li className="lFellows-slider-dots-item"></li>
                     <li className="lFellows-slider-dots-item"></li>
-                  </ul>
-                </div>
-              ))}
+                  </ul> */}
+            </div>
             <div className="lFellows-btn">
               <a className="lFellows-btn-link" href="/fellows">
                 VIEW ALL FELLOWS

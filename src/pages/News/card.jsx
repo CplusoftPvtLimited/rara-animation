@@ -14,7 +14,9 @@ function Card() {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const response = await fetch("http://localhost:4500/api/news/getAllNews");
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER}/news/getAllNews`
+      );
       const data = await response.json();
       setNewsData(data.items);
       setSortedNewsData(data.items);

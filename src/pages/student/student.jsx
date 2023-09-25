@@ -7,8 +7,8 @@ import Program from "../../assets/images/program-rara.jpeg";
 import Outline from "../../assets/images/outline-rara.jpeg";
 import Application from "../../assets/images/application-rara.jpeg";
 import Contact from "../../assets/images/contact-rara.jpeg";
-import Logo from "../../assets/images/student-logo.jpeg";
-import FooterLogo from "../../assets/images/student-footer.jpeg";
+import Logo from "../../assets/images/pecunia_logo_bg.png";
+import FooterLogo from "../../assets/images/pecunia_logo.png";
 import FooterLink from "../../assets/images/footer-link.jpeg";
 import MainLogo from "../../assets/images/student-main.svg";
 import img1 from "../../assets/images/img_01.jpg";
@@ -42,13 +42,13 @@ function Student() {
             </div>
 
             <div className="mx-auto">
-              <img className="main-logo" src={MainLogo} alt="" />
+              <img className="main-logo" src={Logo} alt="" />
             </div>
 
             <div className="logo-text w-[70%] m-auto xl:w-[80%]">
               <h4 className="">
-                立命館先進研究アカデミー 次世代研究者育成プログラム
-                RARA学生フェロー
+                Empowering Finance, Sustaining Impact: The Pecunia Endowment
+                Fund
               </h4>
             </div>
             {/** Buttons */}
@@ -57,22 +57,22 @@ function Student() {
               <div className="flex gap-8 justify-center xl:gap-24 mt-[70px]">
                 <a href="#about">
                   <div>
-                    <h4 className="">RARAとは</h4>
+                    <h4 className="">About</h4>
                   </div>
                 </a>
                 <a href="#program">
-                  <h4 className="cursor-pointer">プログラムについて</h4>
+                  <h4 className="cursor-pointer">Join</h4>
                 </a>
                 <a href="#outline">
-                  <h4>プログラム概要</h4>
+                  <h4>Structure</h4>
                 </a>
               </div>
               <div className="flex gap-8 xl:gap-24 justify-center mt-8">
                 <a href="#application" className="cursor-pointer">
-                  <h4>募集について</h4>
+                  <h4>Funding</h4>
                 </a>
                 <a href="#contact">
-                  <h4 className="">お問い合わせ</h4>
+                  <h4 className="">Contact</h4>
                 </a>
               </div>
             </div>
@@ -142,9 +142,9 @@ function Student() {
               <div dangerouslySetInnerHTML={{ __html: studentData.about }} />
             </div>
             {/** Image section */}
-            <div className="mt-[3.75rem] flex justify-center">
+            {/* <div className="mt-[3.75rem] flex justify-center">
               <img src={img1} alt="" />
-            </div>
+            </div> */}
             {/** Below Image */}
             <div className="about-content">
               <div
@@ -352,9 +352,9 @@ function Student() {
                   alt=""
                 />
               </div>
-              <div className="footer-menu mt-8 lg:mt-0">
+              {/* <div className="footer-menu mt-8 lg:mt-0">
                 <div className="flex gap-4 w-[100%] mx-auto">
-                  <p className="my-auto">プライバシーポリシー</p>
+                  <p className="my-auto"></p>
                   <img
                     className="w-[17px] h-[17px] my-auto"
                     src={FooterLink}
@@ -362,7 +362,7 @@ function Student() {
                   />
                 </div>
                 <div className="flex gap-4 w-[100%] mx-auto mt-4">
-                  <p className="my-auto">立命館大学（研究・産学連携</p>
+                  <p className="my-auto"></p>
                   <img
                     className="w-[17px] h-[17px] my-auto"
                     src={FooterLink}
@@ -370,20 +370,20 @@ function Student() {
                   />
                 </div>
                 <div className="flex gap-4 w-[100%] mx-auto mt-4">
-                  <p className="my-auto">立命館大学　研究部（学内者向け</p>
+                  <p className="my-auto"></p>
                   <img
                     className="w-[17px] h-[17px] my-auto "
                     src={FooterLink}
                     alt=""
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/** Contact content */}
             <div className="footer-content flex justify-center w-[100%]">
               <div className="divide w-[100%]">
-                <p>© Ritsumeikan Univ. All rights reserved.</p>
+                <p>© Pecunia. All rights reserved.</p>
               </div>
             </div>
           </div>

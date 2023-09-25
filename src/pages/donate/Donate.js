@@ -42,7 +42,7 @@ const Donate = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:4500/api/checkout/coinbase", {
+      .post(`${process.env.REACT_APP_SERVER}/checkout/coinbase`, {
         amount: actualSelectedAmount,
       })
       .then((response) => {
@@ -92,7 +92,7 @@ const Donate = () => {
     setCoinbaseData();
     axios({
       method: "get",
-      url: "http://localhost:4500/api/secret/coinbase/1",
+      url: `${process.env.REACT_APP_SERVER}/secret/coinbase/1`,
     })
       .then((response) => {
         setCoinbaseData(response?.data);
@@ -106,7 +106,7 @@ const Donate = () => {
     setBankData();
     axios({
       method: "get",
-      url: "http://localhost:4500/api/bank/1",
+      url: `${process.env.REACT_APP_SERVER}/bank/1`,
     })
       .then((response) => {
         setBankData(response?.data);

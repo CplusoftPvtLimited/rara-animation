@@ -15,7 +15,7 @@ function Hero() {
   let letterW = useRef(null);
   let letterS = useRef(null);
   let [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [handClass, setHandClass] = useState("hand-1");
+  const [handClass, setHandClass] = useState("hand-3");
   const [positionIndex, setPositionIndex] = useState(0);
 
   const positions = [
@@ -260,7 +260,7 @@ function Hero() {
                   <div
                     className="flex justify-center z-50 md:text-[10px] lg:text-[12px] cursor-pointer"
                     onMouseEnter={() => {
-                      setHandClass("hand-1");
+                      setHandClass("hand-3");
                     }}
                   >
                     RARAフェロー
@@ -273,7 +273,7 @@ function Hero() {
                   <div
                     className="flex justify-center z-50 md:text-[10px] lg:text-[12px] cursor-pointer"
                     onMouseEnter={() => {
-                      setHandClass("hand-2");
+                      setHandClass("hand-3");
                     }}
                   >
                     RARAアソシエイトフェロー

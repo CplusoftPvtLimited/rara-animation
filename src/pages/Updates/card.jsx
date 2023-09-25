@@ -33,7 +33,7 @@ function Card() {
   useEffect(() => {
     const fetchNews = async () => {
       const response = await fetch(
-        "http://localhost:4500/api/blog/getAllBlogPosts"
+        `${process.env.REACT_APP_SERVER}/blog/getAllBlogPosts`
       );
       const data = await response.json();
       console.log("🚀 ~ file: card.jsx:38 ~ fetchNews ~ data:", data.blogPosts);
@@ -45,7 +45,7 @@ function Card() {
 
   useEffect(() => {
     const fetchCategory = async () => {
-      const response = await fetch("http://localhost:4500/api/category");
+      const response = await fetch(`${process.env.REACT_APP_SERVER}/category`);
       const data = await response.json();
       console.log("🚀 ~ file: card.jsx:42 ~ fetchCategory ~ data:", data);
       setCategoryData(data);
@@ -56,7 +56,7 @@ function Card() {
   useEffect(() => {
     const fetchFellow = async () => {
       const response = await fetch(
-        "http://localhost:4500/api/profile/getAllProfiles"
+        `${process.env.REACT_APP_SERVER}/profile/getAllProfiles`
       );
       const data = await response.json();
       setFellowData(data.profiles);
@@ -143,9 +143,7 @@ function Card() {
 
     // Filter data based on region
     if (regionOption !== "All Regions") {
-      filteredData = filteredData.filter(
-        (post) => post.region === regionOption
-      );
+      filteredData = filteredData.filter((post) => post.region == regionOption);
     }
 
     // Update sorted data with filtered results
@@ -255,7 +253,7 @@ function Card() {
         <div className="filter-by-date my-auto">
           <h5>SORT BY REGION</h5>
         </div>
-        <div className="flex flex-wrap gap-2 lg:gap-8 mt-[25px] lg:mt-auto">
+        <div className="flex flex-wrap gap-2 lg:gap-8 mt-[25px] w-[80%] lg:mt-auto">
           <button
             className={`filter-btn ${
               regionFilter === "All Regions" ? "active" : ""

@@ -64,9 +64,9 @@ function Fellows() {
       <div className="top-bar lg:flex lg:justify-between" id="fellow">
         <div className="flex">
           <div class="bullet-point"></div>
-          <h2 className="rara-text">RARAフェロー</h2>
+          <h2 className="rara-text">FELLOWS</h2>
         </div>
-        <h3 className="my-auto">{fellowsCount} RARA FELLOWS</h3>
+        <h3 className="my-auto">{fellowsCount} Pecunia Fellows</h3>
       </div>
 
       {/************************** RARA Fellow Profile Section ******************************/}
@@ -156,10 +156,10 @@ function Fellows() {
       <div className="mid-bar lg:flex lg:justify-between" id="associate-fellow">
         <div className="flex">
           <div class="bullet-point"></div>
-          <h2 className="rara-text">RARAアソシエイトフェロー</h2>
+          <h2 className="rara-text">ASSOCIATE FELLOWS</h2>
         </div>
         <h3 className="my-auto">
-          {associateFellowsCount} RARA ASSOCIATE FELLOWS
+          {associateFellowsCount} Pecunia Associate Fellows
         </h3>
       </div>
 
@@ -264,9 +264,9 @@ function Fellows() {
       >
         <div className="flex">
           <div class="bullet-point"></div>
-          <h2 className="rara-text">RARA学生フェロー</h2>
+          <h2 className="rara-text">STUDENT FELLOWS</h2>
         </div>
-        <h3 className="my-auto">RARA STUDENT FELLOWS</h3>
+        <h3 className="my-auto">Pecunia Student Fellows</h3>
       </div>
 
       {/************************** RARA Student Fellows Content ******************************/}
@@ -287,7 +287,7 @@ function Fellows() {
               Today
             </p>
             <div className="website-btn mt-8">
-              <a href="#id">
+              <a href="/student">
                 {" "}
                 VIEW WEBSITE{" "}
                 <img

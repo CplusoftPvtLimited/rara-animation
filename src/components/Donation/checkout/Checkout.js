@@ -32,7 +32,7 @@ export default function Checkout({ donate }) {
 
   useEffect(() => {
     axios
-      .post("http://localhost:4500/api/checkout/stripe", {
+      .post(`${process.env.REACT_APP_SERVER}/checkout/stripe`, {
         // totalCost: donate,
         totalCost: selectedAmount,
       })
@@ -49,7 +49,7 @@ export default function Checkout({ donate }) {
     setKeyData();
     axios({
       method: "get",
-      url: "http://localhost:4500/api/secret/1",
+      url: `${process.env.REACT_APP_SERVER}/secret/1`,
     })
       .then((response) => {
         console.log("keyData: ", response);
@@ -71,7 +71,7 @@ export default function Checkout({ donate }) {
   // const handlePayment = async (paymentMethodId) => {
   //   try {
   //     const response = await axios.post(
-  //       'http://localhost:4500/api/process-payment',
+  //       `${process.env.REACT_APP_SERVER}/process-payment`,
   //       {
   //         paymentMethodId: paymentMethodId,
   //         email: 'khansaffy1@gmail.com',

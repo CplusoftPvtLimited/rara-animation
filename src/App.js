@@ -27,7 +27,7 @@ function App() {
   const getStripeKey = () => {
     axios({
       method: "get",
-      url: "http://localhost:4500/api/secret/1",
+      url: `${process.env.REACT_APP_SERVER}/secret/1`,
     })
       .then((response) => {
         console.log("keyData: ", response);

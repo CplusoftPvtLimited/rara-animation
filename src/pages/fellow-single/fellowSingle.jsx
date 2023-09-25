@@ -357,7 +357,7 @@ function FellowSingle() {
       ) : null}
 
       {/************************** Slider Section ******************************/}
-      <div className="w-[100%] m-auto pb-[100px] overflow-hidden ">
+      {/* <div className="w-[100%] m-auto pb-[100px] overflow-hidden ">
         {sliderImages ? (
           <div>
             <div className="title mt-[175px] pl-[95px]">
@@ -390,7 +390,7 @@ function FellowSingle() {
         ) : (
           <p> No Slider Image to show</p>
         )}
-      </div>
+      </div> */}
 
       {/************************** Index Section ******************************/}
       <div>
