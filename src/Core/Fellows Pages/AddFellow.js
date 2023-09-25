@@ -134,7 +134,10 @@ const AddProfile = () => {
         formDataToSend.append("pictureSlider", image);
       });
       axios
-        .post("http://localhost:4500/api/profile/createProfile", formDataToSend)
+        .post(
+          `${process.env.REACT_APP_BACKEND}/profile/createProfile`,
+          formDataToSend
+        )
         .then((response) => {
           setFormData({
             name: "",

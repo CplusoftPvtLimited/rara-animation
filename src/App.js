@@ -41,7 +41,7 @@ function App() {
 
             <Route path="/paymentMethods" exact component={PaymentMethods} />
 
-            <Route path="/home" exact component={Home} />
+            {/* <Route path="/home" exact component={Home} /> */}
             <Route path="/student" exact component={Student} />
           </Switch>
         </Router>

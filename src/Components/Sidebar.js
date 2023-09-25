@@ -31,7 +31,7 @@ function Sidebar() {
     <div className="sidebar-parent-div">
       <div className="sidebar-content-div">
         <div className="sidebar-logo-div">
-          <h4>RARA</h4>
+          <h4>PECUNIA</h4>
         </div>
         <div className="sidebar-links-div">
           <Link to="/" className="sidebar-link">
@@ -124,7 +124,7 @@ function Sidebar() {
             </div>
           </Link> */}
 
-          <Link to="/Home" className="sidebar-link">
+          {/* <Link to="/Home" className="sidebar-link">
             <div
               className={`sidebar-item ${
                 isActive(history, "/Home") && "active"
@@ -133,7 +133,7 @@ function Sidebar() {
               <HiOutlineHome className="sidebar-icon" />
               <p>Home</p>
             </div>
-          </Link>
+          </Link> */}
 
           <Link to="/student" className="sidebar-link">
             <div

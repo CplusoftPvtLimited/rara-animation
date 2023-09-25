@@ -1,13 +1,13 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Col, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
-import Sidebar from '../../Components/Sidebar';
-import { RiDeleteBin3Line, RiAddFill, RiEditLine } from 'react-icons/ri';
-import image from '../../Assets/khan.jpeg';
-import '../Blogs Pages/Blogs.css';
-import ReactLoading from 'react-loading';
-import { Link } from 'react-router-dom';
-import Table from 'react-bootstrap/Table';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import Sidebar from "../../Components/Sidebar";
+import { RiDeleteBin3Line, RiAddFill, RiEditLine } from "react-icons/ri";
+import image from "../../Assets/khan.jpeg";
+import "../Blogs Pages/Blogs.css";
+import ReactLoading from "react-loading";
+import { Link } from "react-router-dom";
+import Table from "react-bootstrap/Table";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -20,24 +20,24 @@ const Categories = () => {
   const getCategories = () => {
     setCategories([]);
     axios({
-      method: 'get',
-      url: 'http://localhost:4500/api/category',
+      method: "get",
+      url: `${process.env.REACT_APP_BACKEND}/category`,
     })
       .then((response) => {
-        console.log('response: ', response.data);
+        console.log("response: ", response.data);
         setCategories(response.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log('error: ', err);
+        console.log("error: ", err);
       });
   };
 
   const deleteCategory = (categoryId) => {
-    console.log('deleteCategory', categoryId);
+    console.log("deleteCategory", categoryId);
     axios({
-      method: 'delete',
-      url: `http://localhost:4500/api/category/${categoryId}`,
+      method: "delete",
+      url: `${process.env.REACT_APP_BACKEND}/category/${categoryId}`,
     }).then((response) => {
       console.log(response);
       getCategories();
@@ -45,29 +45,29 @@ const Categories = () => {
   };
 
   return (
-    <div className='dashboard-parent-div'>
+    <div className="dashboard-parent-div">
       <Row>
         <Col lg={2}>
           <Sidebar />
         </Col>
-        <Col className='categories-content' lg={10}>
+        <Col className="categories-content" lg={10}>
           <Row>
             <Col lg={10}>
               <h4>Our Categories</h4>
               <p>Below are the Categories that currently added.</p>
             </Col>
-            <Col className='add-cat-col' lg={2}>
+            <Col className="add-cat-col" lg={2}>
               <OverlayTrigger
-                placement='top'
+                placement="top"
                 overlay={
                   <Tooltip>
-                    <div className='add-cat-overlay'>Add new Category.</div>
+                    <div className="add-cat-overlay">Add new Category.</div>
                   </Tooltip>
                 }
               >
-                <Link to='/category/add'>
+                <Link to="/category/add">
                   <div>
-                    <RiAddFill className='add-cat-btn' />
+                    <RiAddFill className="add-cat-btn" />
                   </div>
                 </Link>
               </OverlayTrigger>
@@ -75,7 +75,7 @@ const Categories = () => {
           </Row>
           <hr />
 
-          <Row className='categories-row'>
+          <Row className="categories-row">
             {/* {loading ? (
               <div
                 style={{
@@ -106,7 +106,7 @@ const Categories = () => {
 
                         <td>
                           <Link to={`/category/${category.id}`}>
-                            <RiEditLine className='category-product-card-icon' />
+                            <RiEditLine className="category-product-card-icon" />
                           </Link>
 
                           <RiDeleteBin3Line
@@ -114,7 +114,7 @@ const Categories = () => {
                               event.preventDefault();
                               deleteCategory(category.id);
                             }}
-                            className='view-prod-btn'
+                            className="view-prod-btn"
                           />
                         </td>
                       </tr>

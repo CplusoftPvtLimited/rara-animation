@@ -95,7 +95,7 @@ function EditFellow(props) {
     setProfileData();
     try {
       const response = await axios.get(
-        `http://localhost:4500/api/profile/${profileId}`
+        `${process.env.REACT_APP_BACKEND}/profile/${profileId}`
       );
       const data = response.data.profile;
       console.log("🚀 ~ file: EditFellow.js:98 ~ getProfile ~ data:", data);
@@ -161,7 +161,7 @@ function EditFellow(props) {
     try {
       console.log("updatedData: ", updatedData);
       const response = await axios.patch(
-        `http://localhost:4500/api/profile/updateProfile/${profileId}`,
+        `${process.env.REACT_APP_BACKEND}/profile/updateProfile/${profileId}`,
         updatedData,
         {
           headers: {
@@ -191,6 +191,10 @@ function EditFellow(props) {
       console.log("err: ", err);
     }
   };
+  // console.log(
+  //   "🚀 ~ file: EditFellow.js:195 ~ EditFellow ~ pictureSliderArray:",
+  //   pictureSliderArray
+  // );
   return (
     <div className="dashboard-parent-div">
       <Row>
@@ -608,12 +612,12 @@ function EditFellow(props) {
                   </Col>
                 </Row>
 
-                <Row>
+                {/* <Row>
                   <h3>Slider Images Preview</h3>
                   <div className="slider-preview">
                     <div className="product-image-div">
                       {pictureSliderArray.length > 0 &&
-                        pictureSliderArray.map((item, index) => (
+                        pictureSliderArray?.map((item, index) => (
                           <Col key={index}>
                             <img
                               src={item}
@@ -629,7 +633,7 @@ function EditFellow(props) {
                         ))}
                     </div>
                   </div>
-                </Row>
+                </Row> */}
 
                 <button
                   onClick={editFellow}

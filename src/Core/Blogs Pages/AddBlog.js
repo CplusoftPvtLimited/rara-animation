@@ -26,8 +26,8 @@ const AddBlog = () => {
     content: "",
     imagePath: "",
   });
-  console.log('categories: ', categories);
-  console.log('fellows: ', fellows);
+  console.log("categories: ", categories);
+  console.log("fellows: ", fellows);
   const [validationErrors, setValidationErrors] = useState({
     title: "",
     profile: "",
@@ -49,7 +49,7 @@ const AddBlog = () => {
     setCategories([]);
     axios({
       method: "get",
-      url: "http://localhost:4500/api/category",
+      url: `${process.env.REACT_APP_BACKEND}/category`,
     })
       .then((response) => {
         console.log("response: ", response?.data);
@@ -64,7 +64,7 @@ const AddBlog = () => {
     setCategories([]);
     axios({
       method: "get",
-      url: "http://localhost:4500/api/profile/getAllProfiles",
+      url: `${process.env.REACT_APP_BACKEND}/profile/getAllProfiles`,
     })
       .then((response) => {
         console.log("profiles: ", response?.data?.profiles);
@@ -79,7 +79,7 @@ const AddBlog = () => {
     setRelatedBlogs([]);
     axios({
       method: "get",
-      url: "http://localhost:4500/api/blog/getAllBlogPosts",
+      url: `${process.env.REACT_APP_BACKEND}/blog/getAllBlogPosts`,
     })
       .then((response) => {
         setRelatedBlogs(response?.data.blogPosts);
@@ -151,15 +151,19 @@ const AddBlog = () => {
       } else {
         formDataToSend.append("relatedBlogs", relatedBlogIds.join(","));
       }
-      formDataToSend.append('content', formData.content);
-      formDataToSend.append('imagePath', formData.imagePath);
-      console.log('formDataToSend', formDataToSend);
+      formDataToSend.append("content", formData.content);
+      formDataToSend.append("imagePath", formData.imagePath);
+      console.log("formDataToSend", formDataToSend);
       axios
-        .post("http://localhost:4500/api/blog/createBlog", formDataToSend, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+        .post(
+          `${process.env.REACT_APP_BACKEND}/blog/createBlog`,
+          formDataToSend,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
         .then((response) => {
           console.log("response response: ", response);
           setFormData({

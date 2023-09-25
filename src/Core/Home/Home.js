@@ -12,9 +12,9 @@ function EditHome(props) {
   const [homeData, setHomeData] = useState();
   const [fellowData, setFellowData] = useState([]);
   const [blogData, setBlogData] = useState([]);
+
   const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
   const [selectedFellowOptions, setSelectedFellowOptions] = useState([]);
-  const [removedFellowOptions, setRemovedFellowOptions] = useState([]);
   const [selectedBlogOptions, setSelectedBlogOptions] = useState([]);
   const [removedBlogOptions, setRemovedBlogOptions] = useState([]);
 
@@ -26,32 +26,28 @@ function EditHome(props) {
   };
 
   const onFellowRemoveOptions = (selectedList, removedItem) => {
-    setRemovedFellowOptions([...removedFellowOptions, removedItem]);
+    setSelectedFellowOptions(
+      selectedFellowOptions.filter((item) => item != removedItem)
+    );
   };
 
   const onBlogSelectOptions = (selectedList, selectedItem) => {
-    console.log(
-      "🚀 ~ file: Home.js:33 ~ onBlogSelectOptions ~ selectedItem:",
-      selectedItem
-    );
     setSelectedBlogOptions([...selectedBlogOptions, selectedItem]);
   };
 
   const onBlogRemoveOptions = (selectedList, removedItem) => {
-    setRemovedBlogOptions([...removedBlogOptions, removedItem]);
+    setSelectedBlogOptions(
+      selectedBlogOptions.filter((item) => item != removedItem)
+    );
   };
 
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:4500/api/blog/getAllBlogPosts",
+      url: `${process.env.REACT_APP_BACKEND}/blog/getAllBlogPosts`,
     })
       .then((response) => {
         setBlogData(response.data.blogPosts);
-        console.log(
-          "***🚀 ~ file: Home.js:47 ~ .then ~ response.data.blogs:",
-          response.data.blogPosts
-        );
       })
       .catch((error) => {
         console.log("No blog found", error.message);
@@ -61,7 +57,7 @@ function EditHome(props) {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:4500/api/profile/getAllProfiles",
+      url: `${process.env.REACT_APP_BACKEND}/profile/getAllProfiles`,
     })
       .then((response) => {
         setFellowData(response.data.profiles);
@@ -72,20 +68,38 @@ function EditHome(props) {
   }, []);
   useEffect(() => {
     getHome();
-  }, []);
+  }, [blogData, fellowData]);
 
   const getHome = () => {
     setHomeData();
     axios({
       method: "get",
-      url: `http://localhost:4500/api/home/getHome`,
+      url: `${process.env.REACT_APP_BACKEND}/home/getHome`,
     })
       .then((response) => {
         setHomeData(response.data.home[0]);
-        console.log("homeData: ", response.data.home[0]);
-        // if (response.data.home[0]) {
-        //   setSelectedFellowOptions(response.data.home[0].fellows);
-        // }
+        const blogsArray = JSON.parse(response.data.home[0]?.blogs)?.split(",");
+        const fellowsArray = JSON.parse(response.data.home[0]?.fellows)?.split(
+          ","
+        );
+        if (blogsArray.length > 0) {
+          if (blogData.length > 0) {
+            const blogsFilterSelected = blogsArray
+              .map((item) => blogData.find((item2) => item2.id == item))
+              .filter((item) => item != undefined);
+
+            setSelectedBlogOptions(blogsFilterSelected);
+          }
+        }
+        if (fellowsArray.length > 0) {
+          if (fellowData.length > 0) {
+            const fellowFilterSelected = fellowsArray
+              .map((item) => fellowData.find((item2) => item2.id == item))
+              .filter((item) => item != undefined);
+
+            setSelectedFellowOptions(fellowFilterSelected);
+          }
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -117,13 +131,8 @@ function EditHome(props) {
     fileInputRef.current.click();
   };
 
-  const fellowIds = selectedFellowOptions.map((option) => option.id);
-  const blogIds = selectedBlogOptions.map((option) => option.id);
-  console.log(
-    "🚀 ~ file: Home.js:119 ~ EditHome ~ selectedBlogOptions:",
-    selectedBlogOptions
-  );
-  console.log("****🚀 ~ file: Home.js:119 ~ EditHome ~ blogIds:", blogIds);
+  const fellowIds = selectedFellowOptions.map((option) => option?.id);
+  const blogIds = selectedBlogOptions.map((option) => option?.id);
 
   const editHome = (event) => {
     event.preventDefault();
@@ -178,7 +187,10 @@ function EditHome(props) {
     try {
       console.log("updatedData: ", updatedData);
       axios
-        .patch(`http://localhost:4500/api/home/updateHome/1`, updatedData)
+        .patch(
+          `${process.env.REACT_APP_BACKEND}/home/updateHome/1`,
+          updatedData
+        )
         .then((response) => {
           console.log("edit data", response);
           setHomeData({
@@ -336,9 +348,6 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.mainDescription}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
@@ -363,9 +372,6 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.mainResearchDescription}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
@@ -475,9 +481,6 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.card1Description}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
@@ -584,9 +587,6 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.card2Description}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
@@ -694,9 +694,6 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.card3Description}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
@@ -802,9 +799,6 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.card4Description}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
@@ -831,9 +825,6 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.cardGuidelineDescription}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
@@ -874,18 +865,20 @@ function EditHome(props) {
                   <Col>
                     <div className="add-product-input-div">
                       <p>Blogs</p>
-                      <Multiselect
-                        name="fellow"
-                        options={blogData}
-                        onSelect={onBlogSelectOptions}
-                        onRemove={onBlogRemoveOptions}
-                        onChange={handleChange}
-                        displayValue="title"
-                        closeIcon="cancel"
-                        placeholder="Select Options"
-                        selectedValues={selectedBlogOptions}
-                        className="multiSelectContainer"
-                      />
+                      {blogData.length > 0 && (
+                        <Multiselect
+                          name="fellow"
+                          options={blogData}
+                          onSelect={onBlogSelectOptions}
+                          onRemove={onBlogRemoveOptions}
+                          onChange={handleChange}
+                          displayValue="title"
+                          closeIcon="cancel"
+                          placeholder="Select Options"
+                          selectedValues={selectedBlogOptions}
+                          className="multiSelectContainer"
+                        />
+                      )}
                     </div>
                   </Col>
                 </Row>
