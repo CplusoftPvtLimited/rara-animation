@@ -98,7 +98,6 @@ function EditFellow(props) {
         `${process.env.REACT_APP_BACKEND}/profile/${profileId}`
       );
       const data = response.data.profile;
-      console.log("🚀 ~ file: EditFellow.js:98 ~ getProfile ~ data:", data);
       const { pictureSlider, ...profileDataWithoutPictureSlider } =
         response.data?.profile;
       setProfileData(profileDataWithoutPictureSlider);
@@ -126,18 +125,21 @@ function EditFellow(props) {
     const file = event.target.files[0];
     console.log("File:", file);
     const reader = new FileReader();
+
     reader.onloadend = () => {
       if (name) {
-        setImagePreviewUrl((prev) => [
-          ...prev,
-          { path: name, file: reader.result },
-        ]);
+        setImagePreviewUrl((prev) => {
+          const updatedPreview = prev.filter((item) => item.path !== name);
+          return [...updatedPreview, { path: name, file: reader.result }];
+        });
+
         setProfileData((prev) => ({
           ...prev,
           [name]: file,
         }));
       }
     };
+
     if (file) {
       reader.readAsDataURL(file);
     }
@@ -437,10 +439,6 @@ function EditFellow(props) {
                     <p>Animated Image</p>
                     <div className="add-product-image-div">
                       <div className="product-image-div">
-                        {console.log(
-                          "Profile ---------",
-                          profileData.animatedImage
-                        )}
                         <img
                           src={
                             imagePreviewUrl.find(
@@ -505,7 +503,6 @@ function EditFellow(props) {
                     <p>Animated Graphic - 1</p>
                     <div className="add-product-image-div">
                       <div className="product-image-div">
-                        {console.log("Profile ---------", profileData.graphic1)}
                         <img
                           src={
                             imagePreviewUrl.find(

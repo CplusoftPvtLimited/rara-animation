@@ -98,8 +98,6 @@ const AddProfile = () => {
     setValidationErrors((prev) => ({ ...prev, [name]: "" }));
   }
 
-  console.log("formData: ", formData);
-
   function handleSubmit(event) {
     event.preventDefault();
     const errors = validateForm();
@@ -201,6 +199,30 @@ const AddProfile = () => {
 
     if (!formData.imagePath) {
       errors.imagePath = "Please select an image";
+    }
+
+    if (!formData.thumbnailPath) {
+      errors.thumbnailPath = "Please select an image";
+    }
+
+    if (!formData.animatedImage) {
+      errors.animatedImage = "Please select an image";
+    }
+
+    if (!formData.featuredImage) {
+      errors.featuredImage = "Please select an image";
+    }
+
+    if (!formData.graphic1) {
+      errors.graphic1 = "Please select an image";
+    }
+
+    if (!formData.graphic2) {
+      errors.graphic2 = "Please select an image";
+    }
+
+    if (!formData.graphic3) {
+      errors.graphic3 = "Please select an image";
     }
 
     return errors;
@@ -350,7 +372,7 @@ const AddProfile = () => {
                     />
                     {validationErrors.paragraph && (
                       <p style={{ color: "red" }}>
-                        {validationErrors.formData.paragraph}
+                        {validationErrors.paragraph}
                       </p>
                     )}
                   </div>
