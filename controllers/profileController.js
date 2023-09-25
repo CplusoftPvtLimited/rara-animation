@@ -172,7 +172,8 @@ const updateProfile = async (req, res) => {
       return res.status(400).json({ error: "Profile not found" });
     }
 
-    const baseUrl = "https://backend.pecunia.institute/";
+    // const baseUrl = "https://backend.pecunia.institute/";
+    const baseUrl = "http://localhost:4500/";
     const thumbnailPath =
       req.files?.thumbnailPath && typeof req.files?.thumbnailPath == "object"
         ? baseUrl + req.files?.thumbnailPath[0].path
