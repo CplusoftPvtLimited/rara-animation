@@ -25,6 +25,11 @@ import {
   getResponsiveRockWithLebelDimensions,
 } from "../../components/homeCanvas/Images/RockWithLabel";
 
+import {
+  getResponsiveGlassesPersonDimensions,
+  GlassesPerson,
+} from "../../components/homeCanvas/Images/GlassesPerson";
+
 import { CircleWithEllipseRotation } from "../../components/homeCanvas/CircleWithEllipseRotation";
 
 import { UploadedImage } from "../../components/homeCanvas/UploadedImage";
@@ -464,10 +469,6 @@ const index = () => {
       const RockWithLabelData = getResponsiveRockWithLebelDimensions(
         canvas,
         screenWidth
-      );
-      console.log(
-        "🚀 ~ file: home.jsx:468 ~ init ~ RockWithLabelData:",
-        RockWithLabelData
       );
       images.push(
         RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
@@ -910,6 +911,30 @@ const index = () => {
       // With hands open
       // const { width, height, radius, verticalScale } =
       //   getResponsiveEllipseDimensions(canvas, screenWidth);
+      // getResponsiveGlassesPersonDimensions
+
+      // const RockWithLabelData = getResponsiveRockWithLebelDimensions(
+      //   canvas,
+      //   screenWidth
+      // );
+      // images.push(
+      //   RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
+      // );
+
+      const GlassesPersonWithLabelData = getResponsiveGlassesPersonDimensions(
+        canvas,
+        screenWidth
+      );
+
+      images.push(
+        GlassesPerson(
+          GlassesPersonWithLabelData,
+          canvas,
+          gsap,
+          scrollContainer,
+          c
+        )
+      );
 
       images.push(
         new UploadedImage(

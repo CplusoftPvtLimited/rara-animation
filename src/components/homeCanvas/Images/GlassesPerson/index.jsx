@@ -1,147 +1,111 @@
-const responsiveEllipseValues = (canvas) => [
-  {
-    screenWidth: 320,
-    width: canvas.width / 2,
-    height: canvas.height / 2.2,
-    radius: canvas.width / 1.7,
-    verticalScale: canvas.width / 1.7,
-  },
-  {
-    screenWidth: 380,
-    width: canvas.width / 2,
-    height: canvas.height / 2.3,
-    radius: canvas.width / 1.6,
-    verticalScale: canvas.width / 1.6,
-  },
-  {
-    screenWidth: 480,
-    width: canvas.width / 2,
-    height: canvas.height / 2.2,
-    radius: canvas.width / 1.7,
-    verticalScale: canvas.width / 1.7,
-  },
-  {
-    screenWidth: 768,
-    width: canvas.width / 2,
-    height: canvas.height / 2,
-    radius: canvas.height / 2.7,
-    verticalScale: canvas.height / 2.7,
-  },
-  {
-    screenWidth: 1024,
-    width: canvas.width / 2,
-    height: canvas.height / 2,
-    radius: canvas.width / 3,
-    verticalScale: canvas.width / 3,
-  },
+import { UploadedImage } from "../../UploadedImage";
+
+const responsiveGlassesPersonValues = (canvas) => [
   {
     screenWidth: 1440,
-    width: canvas.width / 2,
-    height: canvas.height / 2,
-    radius: canvas.width / 3.5,
-    verticalScale: canvas.width / 3.5,
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    width: 370, // Set default width here
+    height: 440, // Set default height here
+    rotation: 0,
+    updatedX: canvas.width / 2 + 45,
+    updatedY: canvas.height / 2 - 95,
+    updatedWidth: 170,
+    updatedHeight: 125,
+    updatedRotation: 0,
   },
   {
     screenWidth: 1920,
-    width: canvas.width / 2,
-    height: canvas.height / 2,
-    radius: canvas.width / 3.5,
-    verticalScale: canvas.width / 3.5,
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    width: 0,
+    height: 0,
+    rotation: 0,
+    updatedX: canvas.width / 2 + 45,
+    updatedY: canvas.height / 2 - 95,
+    updatedWidth: 170,
+    updatedHeight: 125,
+    updatedRotation: 0,
   },
   {
     screenWidth: 2500,
-    width: canvas.width / 2,
-    height: canvas.height / 2,
-    radius: canvas.width / 3.5,
-    verticalScale: canvas.width / 3.5,
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    width: 0,
+    height: 0,
+    rotation: 0,
+    updatedX: canvas.width / 2 + 45,
+    updatedY: canvas.height / 2 - 95,
+    updatedWidth: 170,
+    updatedHeight: 125,
+    updatedRotation: 0,
   },
-  // Add more rules for larger screens if needed
 ];
-export function getResponsiveEllipseDimensions(canvas, screenWidth) {
-  let width = canvas.width / 2;
-  let height = canvas.height / 2;
-  let radius = canvas.height / 1.55;
-  let verticalScale = canvas.height / 1.55;
 
-  for (const rule of responsiveEllipseValues(canvas)) {
+export function getResponsiveGlassesPersonDimensions(canvas, screenWidth) {
+  console.log("***********Canvas:", canvas);
+  let x = canvas.width / 2;
+  let y = canvas.height / 2;
+  let width = 370;
+  let height = 440;
+  let rotation = 0;
+  let updatedX = canvas.width / 2 + 45;
+  let updatedY = canvas.height / 2 - 95;
+  let updatedWidth = 170;
+  let updatedHeight = 125;
+  let updatedRotation = 0;
+
+  for (const rule of responsiveGlassesPersonValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
+      x = rule.x;
+      y = rule.y;
       width = rule.width;
       height = rule.height;
-      radius = rule.radius;
-      verticalScale = rule.verticalScale;
+      rotation = rule.rotation;
+      updatedX = rule.updatedX;
+      updatedY = rule.updatedY;
+      updatedWidth = rule.updatedWidth;
+      updatedHeight = rule.updatedHeight;
+      updatedRotation = rule.updatedRotation;
+
       break;
     }
   }
 
-  return { width, height, radius, verticalScale };
+  return {
+    x,
+    y,
+    width,
+    height,
+    rotation,
+    updatedX,
+    updatedY,
+    updatedWidth,
+    updatedHeight,
+    updatedRotation,
+  };
 }
 
-export function Ellipse(
-  x,
-  y,
-  radius,
-  verticalScale,
-  color,
-  updatedX,
-  updatedY,
-  updatedRadius,
-  updatedVerticalScale,
+export const GlassesPerson = (
+  GlassesPersonData,
+  canvas,
   gsap,
   scrollContainer,
   c
-) {
-  this.x = x;
-  this.y = y;
-  this.radius = radius;
-  this.color = color;
-  this.radians = 0;
-  this.velocity = 0.05;
-  this.verticalScale = verticalScale;
-
-  this.updatedX = updatedX;
-  this.updatedY = updatedY;
-  this.updatedRadius = updatedRadius;
-  this.updatedVerticalScale = updatedVerticalScale;
-
-  this.update = () => {
-    this.draw();
-  };
-
-  this.draw = () => {
-    c.beginPath();
-    c.ellipse(
-      this.x,
-      this.y,
-      this.radius,
-      this.verticalScale,
-      0,
-      0,
-      2 * Math.PI,
-      false
-    );
-    c.lineWidth = 1;
-    c.strokeStyle = this.color;
-    c.stroke();
-  };
-
-  if (this.updatedX != undefined && this.updatedY != undefined) {
-    const timeline = gsap.timeline();
-    timeline.to(this, {
-      x: this.updatedX,
-      y: this.updatedY,
-      radius: this.updatedRadius,
-      verticalScale: this.updatedVerticalScale,
-      scrollTrigger: {
-        trigger: ".spacer",
-        scroller: scrollContainer,
-        start: "top top",
-        end: "+=1%",
-        scrub: 0.4,
-        animate: true,
-      },
-      onUpdate: () => {
-        this.draw();
-      },
-    });
-  }
-}
+) =>
+  new UploadedImage(
+    GlassesPersonData.x,
+    GlassesPersonData.y,
+    require("../../../../assets/home/images/header_28.png"),
+    GlassesPersonData.width,
+    GlassesPersonData.height,
+    GlassesPersonData.rotation,
+    GlassesPersonData.updatedX,
+    GlassesPersonData.updatedY,
+    GlassesPersonData.updatedWidth,
+    GlassesPersonData.updatedHeight,
+    GlassesPersonData.updatedRotation,
+    gsap,
+    scrollContainer,
+    c
+  );
