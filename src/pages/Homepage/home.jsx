@@ -909,15 +909,18 @@ const index = () => {
       );
 
       //glasses peron --- DONE
+      // With hands open
+      // const { width, height, radius, verticalScale } =
+      //   getResponsiveEllipseDimensions(canvas, screenWidth);
 
       images.push(
         new UploadedImage(
-          265,
+          265, // position-x
           canvas.height / 2 - 180,
           require("../../assets/home/images/header_10.png"),
-          370,
-          440,
-          0,
+          370, //width
+          440, //height
+          0, // rotation
           canvas.width / 2 - 210,
           canvas.height / 2 - 90,
           175,
