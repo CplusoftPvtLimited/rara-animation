@@ -20,6 +20,11 @@ import {
   getResponsiveEllipseDimensions,
 } from "../../components/homeCanvas/middleEllipse/index";
 
+import {
+  RockWithLabel,
+  getResponsiveRockWithLebelDimensions,
+} from "../../components/homeCanvas/Images/RockWithLabel";
+
 import { CircleWithEllipseRotation } from "../../components/homeCanvas/CircleWithEllipseRotation";
 
 import { UploadedImage } from "../../components/homeCanvas/UploadedImage";
@@ -456,23 +461,16 @@ const index = () => {
       images.push(BuildingTwoRedLines(canvas, gsap, scrollContainer, c));
 
       // Rock with red label --- done
+      const RockWithLabelData = getResponsiveRockWithLebelDimensions(
+        canvas,
+        screenWidth
+      );
+      console.log(
+        "🚀 ~ file: home.jsx:468 ~ init ~ RockWithLabelData:",
+        RockWithLabelData
+      );
       images.push(
-        new UploadedImage(
-          canvas.width / 2,
-          canvas.height / 2,
-          require("../../assets/home/images/header_28.png"),
-          0,
-          0,
-          0,
-          canvas.width / 2 + 45,
-          canvas.height / 2 - 95,
-          170,
-          125,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+        RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
       );
 
       // tower with clock center --- done
