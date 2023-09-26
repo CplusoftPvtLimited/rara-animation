@@ -26,9 +26,36 @@ import {
 } from "../../components/homeCanvas/Images/RockWithLabel";
 
 import {
+  getResponsivePersonWithRunPoseDimensions,
+  PersonWithRunPose,
+} from "../../components/homeCanvas/Images/PersonWithRunPose";
+
+import {
+  YoungGirl,
+  getResponsiveGirlDimensions,
+} from "../../components/homeCanvas/Images/YoungGirl/YoungGirl";
+
+import {
   getResponsiveGlassesPersonDimensions,
   GlassesPerson,
 } from "../../components/homeCanvas/Images/GlassesPerson";
+
+import {
+  getResponsiveEllipseWithCirclesDimensions,
+  EllipseWithCircles,
+} from "../../components/homeCanvas/Images/EllipseWithCircle/EllipseWithCircle";
+
+//getResponsiveShipDimensions
+
+import {
+  getResponsiveShipDimensions,
+  Ship,
+} from "../../components/homeCanvas/Images/Ship";
+
+import {
+  getResponsiveHeadSkullWithRedDotDimensions,
+  HeadSkullWithRedDot,
+} from "../../components/homeCanvas/Images/HeadSkullWithRedDot";
 
 import { CircleWithEllipseRotation } from "../../components/homeCanvas/CircleWithEllipseRotation";
 
@@ -661,6 +688,7 @@ const index = () => {
       );
 
       // girl --- done
+
       images.push(
         new UploadedImage(
           canvas.width / 2 + 205,
@@ -925,7 +953,6 @@ const index = () => {
         canvas,
         screenWidth
       );
-
       images.push(
         GlassesPerson(
           GlassesPersonWithLabelData,
@@ -936,24 +963,24 @@ const index = () => {
         )
       );
 
-      images.push(
-        new UploadedImage(
-          265, // position-x
-          canvas.height / 2 - 180,
-          require("../../assets/home/images/header_10.png"),
-          370, //width
-          440, //height
-          0, // rotation
-          canvas.width / 2 - 210,
-          canvas.height / 2 - 90,
-          175,
-          200,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      // images.push(
+      //   new UploadedImage(
+      //     265, // position-x
+      //     canvas.height / 2 - 180,
+      //     require("../../assets/home/images/header_10.png"),
+      //     370, //width
+      //     440, //height
+      //     0, // rotation
+      //     canvas.width / 2 - 210,
+      //     canvas.height / 2 - 90,
+      //     175,
+      //     200,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // red A alphabet --- done
 
@@ -1141,24 +1168,27 @@ const index = () => {
 
       //ship done
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 - 250,
-          canvas.height / 2 - 145,
-          require("../../assets/home/images/header_47.png"),
-          150,
-          165,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      const ShipLabelData = getResponsiveShipDimensions(canvas, screenWidth);
+      images.push(Ship(ShipLabelData, canvas, gsap, scrollContainer, c));
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 - 250,
+      //     canvas.height / 2 - 145,
+      //     require("../../assets/home/images/header_47.png"),
+      //     150,
+      //     165,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       //circle with colors on glasses person --- DONE
 
@@ -1183,45 +1213,78 @@ const index = () => {
 
       // person with lines and run pose ---done
 
+      const PersonWithRunPoseData = getResponsivePersonWithRunPoseDimensions(
+        canvas,
+        screenWidth
+      );
       images.push(
-        new UploadedImage(
-          -45,
-          77,
-          require("../../assets/home/images/header_13_1.png"),
-          295,
-          260,
-          0,
-          canvas.width / 2 - 420,
-          canvas.height / 2 - 62,
-          135,
-          115,
-          0,
+        PersonWithRunPose(
+          PersonWithRunPoseData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     -45,
+      //     77,
+      //     require("../../assets/home/images/header_13_1.png"),
+      //     295,
+      //     260,
+      //     0,
+      //     canvas.width / 2 - 420,
+      //     canvas.height / 2 - 62,
+      //     135,
+      //     115,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       //head skull with red dot --- done
 
+      //Here I am
+      // import {
+      //   getResponsiveHeadSkullWithRedDotDimensions,
+      //   HeadSkullWithRedDot,
+      // } from "../../components/homeCanvas/Images/HeadSkullWithRedDot";
+
+      const HeadSkullWithLabelData = getResponsiveHeadSkullWithRedDotDimensions(
+        canvas,
+        screenWidth
+      );
       images.push(
-        new UploadedImage(
-          340,
-          87,
-          require("../../assets/home/images/header_44.png"),
-          95,
-          90,
-          0,
-          canvas.width / 2 - 260,
-          canvas.height / 2 - 137,
-          60,
-          57,
-          0,
+        HeadSkullWithRedDot(
+          HeadSkullWithLabelData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+      // images.push(
+      //   new UploadedImage(
+      //     340,
+      //     87,
+      //     require("../../assets/home/images/header_44.png"),
+      //     95,
+      //     90,
+      //     0,
+      //     canvas.width / 2 - 260,
+      //     canvas.height / 2 - 137,
+      //     60,
+      //     57,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // person laptop above skull ---- done
 
@@ -1368,24 +1431,39 @@ const index = () => {
 
       // ellipse with circles and lines --- DONE
 
+      const EllipseWithCircleData = getResponsiveEllipseWithCirclesDimensions(
+        canvas,
+        screenWidth
+      );
+
       images.push(
-        new UploadedImage(
-          145,
-          220,
-          require("../../assets/home/images/header_12.png"),
-          270,
-          200,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        EllipseWithCircles(
+          EllipseWithCircleData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     145,
+      //     220,
+      //     require("../../assets/home/images/header_12.png"),
+      //     270,
+      //     200,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       //big red circle --- DONE
 

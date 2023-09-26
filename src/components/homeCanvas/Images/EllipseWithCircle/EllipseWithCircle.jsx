@@ -1,105 +1,117 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveGlassesPersonValues = (canvas) => [
+const responsiveEllipseWithCirclesValues = (canvas) => [
   {
-    screenWidth: 380,
-    x: 15,
-    y: canvas.height / 2 - 130,
-    width: 200,
-    height: 240,
+    screenWidth: 320,
+    x: -30,
+    y: 350,
+    width: 100,
+    height: 100,
     rotation: 0,
     updatedX: canvas.width / 2 - 210,
     updatedY: canvas.height / 2 - 90,
-    updatedWidth: 175,
-    updatedHeight: 200,
+    updatedWidth: 0,
+    updatedHeight: 0,
+    updatedRotation: 0,
+  },
+  {
+    screenWidth: 380,
+    x: -30,
+    y: 350,
+    width: 100,
+    height: 100,
+    rotation: 0,
+    updatedX: canvas.width / 2 - 210,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 0,
+    updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 425,
-    x: 15,
-    y: canvas.height / 2 - 130,
-    width: 200,
-    height: 240,
+    x: -30,
+    y: 350,
+    width: 100,
+    height: 100,
     rotation: 0,
     updatedX: canvas.width / 2 - 210,
     updatedY: canvas.height / 2 - 90,
-    updatedWidth: 175,
-    updatedHeight: 200,
+    updatedWidth: 0,
+    updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 768,
-    x: -20,
-    y: canvas.height / 2 - 150,
-    width: 350,
-    height: 400,
+    x: -30,
+    y: 360,
+    width: 170,
+    height: 100,
     rotation: 0,
     updatedX: canvas.width / 2 - 210,
     updatedY: canvas.height / 2 - 90,
     updatedWidth: 175,
-    updatedHeight: 200,
+    updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 1024,
-    x: 145,
-    y: canvas.height / 2 - 180,
-    width: 300,
-    height: 340,
+    x: 60,
+    y: 300,
+    width: 200,
+    height: 150,
     rotation: 0,
     updatedX: canvas.width / 2 - 210,
     updatedY: canvas.height / 2 - 90,
-    updatedWidth: 175,
-    updatedHeight: 200,
+    updatedWidth: 0,
+    updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 1440,
-    x: 265,
-    y: canvas.height / 2 - 180,
-    width: 370,
-    height: 440,
+    x: 145,
+    y: 360,
+    width: 270,
+    height: 200,
     rotation: 0,
     updatedX: canvas.width / 2 - 210,
     updatedY: canvas.height / 2 - 90,
-    updatedWidth: 175,
-    updatedHeight: 200,
+    updatedWidth: 0,
+    updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 1920,
-    x: 265,
-    y: canvas.height / 2 - 180,
-    width: 370,
-    height: 440,
+    x: 145,
+    y: 360,
+    width: 270,
+    height: 200,
     rotation: 0,
     updatedX: canvas.width / 2 - 210,
     updatedY: canvas.height / 2 - 90,
-    updatedWidth: 175,
-    updatedHeight: 200,
+    updatedWidth: 0,
+    updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 2500,
-    x: 265,
-    y: canvas.height / 2 - 180,
-    width: 370,
-    height: 440,
+    x: 145,
+    y: 360,
+    width: 270,
+    height: 200,
     rotation: 0,
     updatedX: canvas.width / 2 - 210,
     updatedY: canvas.height / 2 - 90,
-    updatedWidth: 175,
-    updatedHeight: 200,
+    updatedWidth: 0,
+    updatedHeight: 0,
     updatedRotation: 0,
   },
   // Add more rules for larger screens if needed
 ];
-
-export function getResponsiveGlassesPersonDimensions(canvas, screenWidth) {
-  let x = 265;
-  let y = canvas.height / 2 - 180;
-  let width = 370;
-  let height = 440;
+export function getResponsiveEllipseWithCirclesDimensions(canvas, screenWidth) {
+  let x = 145;
+  let y = 360;
+  let width = 270;
+  let height = 200;
   let rotation = 0;
   let updatedX = canvas.width / 2 + 45;
   let updatedY = canvas.height / 2 - 95;
@@ -107,7 +119,7 @@ export function getResponsiveGlassesPersonDimensions(canvas, screenWidth) {
   let updatedHeight = 125;
   let updatedRotation = 0;
 
-  for (const rule of responsiveGlassesPersonValues(canvas)) {
+  for (const rule of responsiveEllipseWithCirclesValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -137,26 +149,25 @@ export function getResponsiveGlassesPersonDimensions(canvas, screenWidth) {
     updatedRotation,
   };
 }
-
-export const GlassesPerson = (
-  GlassesPersonData,
+export const EllipseWithCircles = (
+  EllipseWithCirclesData,
   canvas,
   gsap,
   scrollContainer,
   c
 ) =>
   new UploadedImage(
-    GlassesPersonData.x,
-    GlassesPersonData.y,
-    require("../../../../assets/home/images/header_10.png"),
-    GlassesPersonData.width,
-    GlassesPersonData.height,
-    GlassesPersonData.rotation,
-    GlassesPersonData.updatedX,
-    GlassesPersonData.updatedY,
-    GlassesPersonData.updatedWidth,
-    GlassesPersonData.updatedHeight,
-    GlassesPersonData.updatedRotation,
+    EllipseWithCirclesData.x,
+    EllipseWithCirclesData.y,
+    require("../../../../assets/home/images/header_12.png"),
+    EllipseWithCirclesData.width,
+    EllipseWithCirclesData.height,
+    EllipseWithCirclesData.rotation,
+    EllipseWithCirclesData.updatedX,
+    EllipseWithCirclesData.updatedY,
+    EllipseWithCirclesData.updatedWidth,
+    EllipseWithCirclesData.updatedHeight,
+    EllipseWithCirclesData.updatedRotation,
     gsap,
     scrollContainer,
     c
