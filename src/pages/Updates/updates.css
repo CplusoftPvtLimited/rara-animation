@@ -119,6 +119,7 @@
 
 .news-card {
   width: 23.9375rem;
+  min-height: 26.625rem;
 }
 
 .pagination-box {
