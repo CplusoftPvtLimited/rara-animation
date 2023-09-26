@@ -15,7 +15,7 @@ function Hero() {
   let letterW = useRef(null);
   let letterS = useRef(null);
   let [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [handClass, setHandClass] = useState("hand-1");
+  const [handClass, setHandClass] = useState("hand-3");
   const [positionIndex, setPositionIndex] = useState(0);
 
   const positions = [
@@ -224,19 +224,15 @@ function Hero() {
       {/************************** Description ******************************/}
       <div className="w-[80%] mx-auto mt-[100px] lg:mb-[20px] lg:w-[75%]">
         <div>
-          <p className="text-[14px] lg:text-[17px] lg:pl-28">
-            RARAフェローは、多様な研究者を繋ぐNodes(結合点)となり、
-            <br />
-            その研究力をもって先例にとらわれず、本学の未来を切り開く先進的研究者です。
-            <br />
-            RARAフェローへのステップアップに向け実績を積み重ねる
-            <br />
-            研究者を対象にした「RARAアソシエイトフェロー」、
-            <br />
-            次世代の研究者として活躍が期待される博士課程学生を対象にした
-            <br />
-            「RARA学生フェロー」を加えた多層的な研究者支援を行っています。
-            <br />
+          <p className="text-[14px] lg:text-[17px] lg:pl-28 lg:w-[65%]">
+            Pecunia stands as a testament to the belief in the impact that
+            research and innovative ideas can have on the world of finance. Our
+            Fellowship Program is a unique avenue for forward-thinking
+            professionals to embark on a transformative journey, working
+            collaboratively within a diverse and dynamic community of esteemed
+            experts and scholars. Together, we are dedicated to pushing the
+            boundaries and propelling the field of social finance forward into
+            new realms of possibility.
           </p>
         </div>
         <div>
@@ -264,7 +260,7 @@ function Hero() {
                   <div
                     className="flex justify-center z-50 md:text-[10px] lg:text-[12px] cursor-pointer"
                     onMouseEnter={() => {
-                      setHandClass("hand-1");
+                      setHandClass("hand-3");
                     }}
                   >
                     RARAフェロー
@@ -277,7 +273,7 @@ function Hero() {
                   <div
                     className="flex justify-center z-50 md:text-[10px] lg:text-[12px] cursor-pointer"
                     onMouseEnter={() => {
-                      setHandClass("hand-2");
+                      setHandClass("hand-3");
                     }}
                   >
                     RARAアソシエイトフェロー

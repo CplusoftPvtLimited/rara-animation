@@ -27,7 +27,7 @@ function UpdateSingle() {
   useEffect(() => {
     const fetchNews = async () => {
       const response = await fetch(
-        "http://localhost:4500/api/blog/getAllBlogPosts"
+        `${process.env.REACT_APP_SERVER}/blog/getAllBlogPosts`
       );
       const data = await response.json();
       setPostData(data.blogPosts);

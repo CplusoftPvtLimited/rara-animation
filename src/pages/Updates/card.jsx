@@ -25,6 +25,7 @@ function Card() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const navigate = useNavigate();
+  const [regionFilter, setRegionFilter] = useState("All Regions");
 
   const scrollContainer = document.querySelector(".custom-container");
   const targetElementRef = useRef(null); // Ref for the element to scroll into view
@@ -32,9 +33,10 @@ function Card() {
   useEffect(() => {
     const fetchNews = async () => {
       const response = await fetch(
-        "http://localhost:4500/api/blog/getAllBlogPosts"
+        `${process.env.REACT_APP_SERVER}/blog/getAllBlogPosts`
       );
       const data = await response.json();
+      console.log("🚀 ~ file: card.jsx:38 ~ fetchNews ~ data:", data.blogPosts);
       setPostData(data.blogPosts);
       setSortedPostData(data.blogPosts);
     };
@@ -43,7 +45,7 @@ function Card() {
 
   useEffect(() => {
     const fetchCategory = async () => {
-      const response = await fetch("http://localhost:4500/api/category");
+      const response = await fetch(`${process.env.REACT_APP_SERVER}/category`);
       const data = await response.json();
       console.log("🚀 ~ file: card.jsx:42 ~ fetchCategory ~ data:", data);
       setCategoryData(data);
@@ -54,7 +56,7 @@ function Card() {
   useEffect(() => {
     const fetchFellow = async () => {
       const response = await fetch(
-        "http://localhost:4500/api/profile/getAllProfiles"
+        `${process.env.REACT_APP_SERVER}/profile/getAllProfiles`
       );
       const data = await response.json();
       setFellowData(data.profiles);
@@ -99,8 +101,8 @@ function Card() {
 
   // Cut short the blog title
   function truncateText(text, maxLength) {
-    if (text.length > maxLength) {
-      return text.slice(0, maxLength) + "...";
+    if (text.length > 12) {
+      return text.slice(0, 20) + "...";
     }
     return text;
   }
@@ -111,69 +113,74 @@ function Card() {
   };
 
   // Filter Buttons Setup
-  const filterByCategoryAndFellows = (categoryOption, fellowOption) => {
-    console.log(
-      "🚀 ~ file: card.jsx:109 ~ filterByCategoryAndFellows ~ fellowOption:",
-      fellowOption
-    );
-    console.log(
-      "🚀 ~ file: card.jsx:109 ~ filterByCategoryAndFellows ~ categoryOption:",
-      categoryOption
-    );
-
-    console.log(
-      "🚀 ~ file: card.jsx:126 ~ filterByCategoryAndFellows ~ fellowData:",
-      fellowData
-    );
-
+  const filterByCategoryAndFellows = (
+    categoryOption,
+    fellowOption,
+    regionOption
+  ) => {
+    // Filter data based on category
     let filteredData = postData;
-
     const selectedCategoryId = categoryData.find(
       (category) => category.title === categoryOption
     )?.id;
-    const selectedFellowId = fellowData.find(
-      (fellow) => fellow.name === fellowOption
-    )?.id;
-    console.log(
-      "🚀 ~ file: card.jsx:131 ~ filterByCategoryAndFellows ~ selectedFellowId:",
-      selectedFellowId
-    );
-    // Apply category filter
+
     if (categoryOption !== "All News") {
       filteredData = filteredData.filter(
         (post) => post.category == selectedCategoryId
       );
     }
-    console.log(
-      "🚀 ~ file: card.jsx:140 ~ filterByCategoryAndFellows ~ filteredData:",
-      filteredData
-    );
-    // Apply fellow filter
+
+    // Filter data based on fellow
+    const selectedFellowId = fellowData.find(
+      (fellow) => fellow.name === fellowOption
+    )?.id;
+
     if (fellowOption !== "All Fellows") {
       filteredData = filteredData.filter(
         (post) => post.fellow?.id == selectedFellowId
       );
-      console.log(
-        "*********🚀 ~ file: card.jsx:131 ~ filterByCategoryAndFellows ~ filteredData2222:",
-        filteredData
-      );
     }
+
+    // Filter data based on region
+    if (regionOption !== "All Regions") {
+      filteredData = filteredData.filter((post) => {
+        const postRegion = post.region.toLowerCase();
+        const selectedRegion = regionOption.toLowerCase();
+
+        // Check if the post's region exactly matches the selected region
+        if (postRegion === selectedRegion) {
+          return true;
+        }
+
+        // If not, check if the post's country falls into the selected continent
+        const countryContinent = getContinentForCountry(post.country);
+        return countryContinent.toLowerCase() === selectedRegion;
+      });
+    }
+
+    // Update sorted data with filtered results
     setSortedPostData(filteredData);
   };
 
+  // Function to get continent for a given country (you'll need a library for this)
+  const getContinentForCountry = (country) => {
+    // Implement logic to map country to continent, you can use a library like "countryjs" or create a custom mapping.
+  };
+
   // Handle Active Button
-  const handleSortingOption = (categoryOption, fellowOption) => {
-    console.log(
-      "🚀 ~ file: card.jsx:143 ~ handleSortingOption ~ fellowOption:",
-      fellowOption
-    );
-    console.log(
-      "🚀 ~ file: card.jsx:143 ~ handleSortingOption ~ categoryOption:",
-      categoryOption
-    );
+  const handleSortingOption = (
+    categoryOption,
+    fellowOption,
+    selectedRegionOption
+  ) => {
     setSortOption(categoryOption);
     setSortFellowOption(fellowOption);
-    filterByCategoryAndFellows(categoryOption, fellowOption);
+    setRegionFilter(selectedRegionOption);
+    filterByCategoryAndFellows(
+      categoryOption,
+      fellowOption,
+      selectedRegionOption
+    );
   };
 
   const fellowToggleHandler = () => {
@@ -230,74 +237,135 @@ function Card() {
     <section ref={targetElementRef}>
       <div className="filter-1 mt-[75px] lg:mt-[150px] mx-auto w-[90%] lg:w-[85%] py-[50px] gap-32 pr-[150px lg:flex ">
         <div className="filter-by-date my-auto">
-          <h5>SORT BY CATEGORY</h5>
+          <h5>SORT BY FOCUS AREAS</h5>
         </div>
         <div className="flex flex-wrap gap-2 lg:gap-8 mt-[25px] lg:mt-auto">
           <button
             className={`filter-btn ${
-              sortOption === "All News" ? "active" : " "
+              sortOption === "All News" ? "active" : ""
             }`}
-            onClick={() => handleSortingOption("All News", sortFellowOption)}
+            onClick={() =>
+              handleSortingOption("All News", sortFellowOption, regionFilter)
+            }
           >
             ALL NEWS
           </button>
-
           {Array.from(uniqueCategory).map((category, index) => (
             <button
               key={index}
               className={`filter-btn ${
                 sortOption === category ? "active" : ""
               }`}
-              onClick={() => handleSortingOption(category, sortFellowOption)}
+              onClick={() =>
+                handleSortingOption(category, sortFellowOption, regionFilter)
+              }
             >
               {category}
             </button>
           ))}
-
-          {/* <button
-            className={`filter-btn ${
-              sortOption === "RARA Commons" ? "active" : " "
-            }`}
-            onClick={() =>
-              handleSortingOption("RARA Commons", sortFellowOption)
-            }
-          >
-            RARA Commons
-          </button>
-          <button
-            className={`filter-btn ${
-              sortOption === "お知らせ" ? "active" : " "
-            }`}
-            onClick={() => handleSortingOption("お知らせ", sortFellowOption)}
-          >
-            お知らせ
-          </button>
-          <button
-            className={`filter-btn ${sortOption === "コラム" ? "active" : " "}`}
-            onClick={() => handleSortingOption("コラム", sortFellowOption)}
-          >
-            コラム
-          </button>
-          <button
-            className={`filter-btn ${
-              sortOption === "更新情報" ? "active" : " "
-            }`}
-            onClick={() => handleSortingOption("更新情報", sortFellowOption)}
-          >
-            更新情報
-          </button>
-          <button
-            className={`filter-btn ${
-              sortOption === "研究活動レポート" ? "active" : " "
-            }`}
-            onClick={() =>
-              handleSortingOption("研究活動レポート", sortFellowOption)
-            }
-          >
-            研究活動レポート
-          </button> */}
         </div>
       </div>
+
+      <div className="filter-container filter-2 flex flex-wrap gap-16 py-[50px] w-[85%] mx-auto">
+        <div className="filter-by-date my-auto">
+          <h5>SORT BY REGION</h5>
+        </div>
+        <div className="flex flex-wrap gap-2 lg:gap-8 mt-[25px] w-[80%] lg:mt-auto">
+          <button
+            className={`filter-btn ${
+              regionFilter === "All Regions" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "All Regions")
+            }
+          >
+            ALL REGIONS
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Africa" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Africa")
+            }
+          >
+            AFRICA
+          </button>
+          <button
+            className={`filter-btn ${regionFilter === "Asia" ? "active" : ""}`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Asia")
+            }
+          >
+            ASIA
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Central America" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(
+                sortOption,
+                sortFellowOption,
+                "Central America"
+              )
+            }
+          >
+            CENTRAL AMERICA
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Europe" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Europe")
+            }
+          >
+            EUROPE
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Middle East" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Middle East")
+            }
+          >
+            MIDDLE EAST
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "North America" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "North America")
+            }
+          >
+            NORTH AMERICA
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "South America" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "South America")
+            }
+          >
+            SOUTH AMERICA
+          </button>
+          <button
+            className={`filter-btn ${
+              regionFilter === "Pacific" ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSortingOption(sortOption, sortFellowOption, "Pacific")
+            }
+          >
+            PACIFIC
+          </button>
+        </div>
+      </div>
+
       {/*********************** Sort By Fellow ***************************/}
 
       {console.log("Fellow Array", uniqueAssociateFellows)}
@@ -372,13 +440,13 @@ function Card() {
         </div>
       ) : null}
       {/***********************Cards ***************************/}
-      {postData.length > 0 ? (
-        <div className="Cards mt-[50px] mb-[100px] w-[85%] m-auto" id="card">
-          <div className="flex flex-wrap gap-4 justify-evenly">
+      {postData && postData.length > 0 ? (
+        <div className="Cards mt-[50px] mb-[100px] w-[85%] mx-auto" id="card">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:ml-12 xl:gap-8">
             {console.log("Data", postData)}
             {sortedPostData.slice(startIndex, endIndex).map((post, index) => (
               <div
-                className="news-card mt-[70px] cursor-pointer"
+                className="news-card cursor-pointer flex flex-col"
                 key={index}
                 onClick={() => handleClick(post.id)}
               >
@@ -392,11 +460,10 @@ function Card() {
                     {post?.associatedFellow?.name}
                   </h5>
                 </div>
-
-                <div className="mt-[30px]">
+                <div className="mt-auto">
                   <p>{truncateText(post.title, 80)}</p>
                 </div>
-                <div className="date-box flex mt-[90px] justify-between">
+                <div className="date-box flex justify-between mt-2">
                   <div>
                     <p className="date">
                       {new Date(post.publicationDate).toLocaleDateString()}
@@ -404,7 +471,9 @@ function Card() {
                   </div>
                   <div className="flex">
                     {/* <a href={post.link}> */}
-                    <h5 className="text-[10px] lg:text-[11px]">VIEW DETAILS</h5>
+                    <h5 className="text-[10px] lg:text-[11px] view-details-link">
+                      VIEW DETAILS
+                    </h5>
                     <div className="bullet"></div>
                     {/* </a> */}
                   </div>
@@ -416,24 +485,27 @@ function Card() {
       ) : (
         <div>Loading...</div>
       )}
+
       {/* Pagination */}
       <div className="pagination-box flex justify-center mb-2 w-[90%] m-auto">
-        {Array.from({ length: Math.ceil(postData.length / itemsPerPage) }).map(
-          (_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentPage(index + 1);
-                scrollToElement();
-              }}
-              className={`pagination ${
-                currentPage === index + 1 ? "bold-text" : ""
-              } mr-12`}
-            >
-              {index + 1}
-            </button>
-          )
-        )}
+        {postData &&
+          postData.length > 0 &&
+          Array.from({ length: Math.ceil(postData.length / itemsPerPage) }).map(
+            (_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentPage(index + 1);
+                  scrollToElement();
+                }}
+                className={`pagination ${
+                  currentPage === index + 1 ? "bold-text" : ""
+                } mr-12`}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
       </div>
     </section>
   );

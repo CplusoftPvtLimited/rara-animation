@@ -64,9 +64,9 @@ function Fellows() {
       <div className="top-bar lg:flex lg:justify-between" id="fellow">
         <div className="flex">
           <div class="bullet-point"></div>
-          <h2 className="rara-text">RARAフェロー</h2>
+          <h2 className="rara-text">FELLOWS</h2>
         </div>
-        <h3 className="my-auto">{fellowsCount} RARA FELLOWS</h3>
+        <h3 className="my-auto">{fellowsCount} Pecunia Fellows</h3>
       </div>
 
       {/************************** RARA Fellow Profile Section ******************************/}
@@ -156,10 +156,10 @@ function Fellows() {
       <div className="mid-bar lg:flex lg:justify-between" id="associate-fellow">
         <div className="flex">
           <div class="bullet-point"></div>
-          <h2 className="rara-text">RARAアソシエイトフェロー</h2>
+          <h2 className="rara-text">ASSOCIATE FELLOWS</h2>
         </div>
         <h3 className="my-auto">
-          {associateFellowsCount} RARA ASSOCIATE FELLOWS
+          {associateFellowsCount} Pecunia Associate Fellows
         </h3>
       </div>
 
@@ -264,29 +264,30 @@ function Fellows() {
       >
         <div className="flex">
           <div class="bullet-point"></div>
-          <h2 className="rara-text">RARA学生フェロー</h2>
+          <h2 className="rara-text">STUDENT FELLOWS</h2>
         </div>
-        <h3 className="my-auto">RARA STUDENT FELLOWS</h3>
+        <h3 className="my-auto">Pecunia Student Fellows</h3>
       </div>
 
       {/************************** RARA Student Fellows Content ******************************/}
 
       <div className="w-[100%]  my-[150px]">
         <div className=" px-[30px] lg:flex lg:justify-center ">
-          <div className="my-auto">
-            <p className="text-[14px] lg:text-[19px]">
-              RARA学生フェローとして選抜された博士後期課程学生には、
-              <br />
-              RARAを基盤に個々の研究力を向上させ、
-              <br />
-              分野の異なる国内外の研究者と交わる中で、
-              <br />
-              国際性と学際性、さらに複眼的視野を兼ね備えた
-              <br />
-              博士人材へと成長していくことを期待します。
+          <div className="my-auto w-[50%]">
+            <p className=" text-[14px] lg:text-[16px]">
+              Our Fellowship Program isn't just an opportunity; it's an
+              invitation to be part of a global hub of visionaries. Here, you'll
+              find a nurturing ecosystem that encourages creative thinking,
+              fosters groundbreaking research, and amplifies the voices of those
+              committed to making a real difference. Your journey into the world
+              of impactful finance and research begins with a single step:
+              applying for the Pecunia Fellowship Program. Your ideas, your
+              dedication, and your unique perspective could be the missing piece
+              of the puzzle needed to drive our shared mission forward. Apply
+              Today
             </p>
             <div className="website-btn mt-8">
-              <a href="#id">
+              <a href="/student">
                 {" "}
                 VIEW WEBSITE{" "}
                 <img

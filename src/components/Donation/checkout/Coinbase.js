@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 const Coinbase = ({ donate }) => {
   const [hostedUrl, setHostedUrl] = useState();
-  console.log('donate: ', donate);
+  console.log("donate: ", donate);
   // useEffect(() => {
   //   axios
-  //     .post('http://localhost:4500/api/checkout/coinbase', {
+  //     .post(`${process.env.REACT_APP_SERVER}/checkout/coinbase`, {
   //       amount: donate,
   //     })
   //     .then((response) => {

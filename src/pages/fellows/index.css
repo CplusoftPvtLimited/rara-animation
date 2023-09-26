@@ -1,3 +1,6 @@
+.row{
+  margin-right: 0 !important;
+}
 .lFellows-title-main {
   color: aliceblue;
   fill: #d1d1d1;
@@ -116,6 +119,8 @@
   width: 95%;
   margin: auto;
   padding: 55px 0px;
+  
+  border-top: 1px solid #aaaaaa;
   border-bottom: 1px solid #aaa;
 }
 
@@ -135,6 +140,7 @@
   width: 95%;
   margin: auto;
   padding: 55px 0px;
+  border-top: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
 }
 
@@ -208,7 +214,6 @@
 .fellows-container {
   flex-wrap: wrap;
   margin-top: 50px;
-  border-bottom: 1px solid #aaaaaa;
   cursor: pointer;
 }
 
@@ -228,6 +233,8 @@
   transform-origin: left center;
   white-space: nowrap;
   writing-mode: vertical;
+  font-family: "Open Sans";
+  font-size: 11px;
 }
 
 .job-post h5::before {

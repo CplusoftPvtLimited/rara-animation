@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect } from "react";
 import "./index.css";
 import gsap from "gsap";
@@ -18,6 +19,11 @@ import {
   Ellipse,
   getResponsiveEllipseDimensions,
 } from "../../components/homeCanvas/middleEllipse/index";
+
+import {
+  RockWithLabel,
+  getResponsiveRockWithLebelDimensions,
+} from "../../components/homeCanvas/Images/RockWithLabel";
 
 import { CircleWithEllipseRotation } from "../../components/homeCanvas/CircleWithEllipseRotation";
 
@@ -459,23 +465,16 @@ const index = () => {
       images.push(BuildingTwoRedLines(canvas, gsap, scrollContainer, c));
 
       // Rock with red label --- done
+      const RockWithLabelData = getResponsiveRockWithLebelDimensions(
+        canvas,
+        screenWidth
+      );
+      console.log(
+        "🚀 ~ file: home.jsx:468 ~ init ~ RockWithLabelData:",
+        RockWithLabelData
+      );
       images.push(
-        new UploadedImage(
-          canvas.width / 2,
-          canvas.height / 2,
-          require("../../assets/home/images/header_28.png"),
-          0,
-          0,
-          0,
-          canvas.width / 2 + 45,
-          canvas.height / 2 - 95,
-          170,
-          125,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+        RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
       );
 
       // tower with clock center --- done
@@ -2228,7 +2227,7 @@ const index = () => {
   return (
     <div>
       <div className="spacer">
-        <div className="lKv-subTitle" data-kv-subtitle="">
+        {/* <div className="lKv-subTitle" data-kv-subtitle="">
           <div
             className="lKv-subTitle-item -lm01"
             data-kv-subtitle-item=""
@@ -2282,7 +2281,7 @@ const index = () => {
                     https://rara.ritsumei.ac.jp/assets/img/index/kv/b-logo_sub03.svg 2x"
             />
           </div>
-        </div>
+        </div> */}
         <div
           className="lKv-coreBall"
           data-kv-coreball=""
@@ -2528,14 +2527,20 @@ const index = () => {
                   color: "#707070",
                 }}
               >
-                立命館学園が掲げる、
-                <br />
+                Pecunia Institute is at the forefront of a financial revolution
+                with a vision deeply rooted in societal change. Founded on the
+                belief that finance holds the key to building a more socially
+                connected and sustainable world, we are dedicated to pioneering
+                innovative solutions that transcend traditional financial
+                boundaries. Our multidisciplinary team of experts, known as
+                Fellows, is committed to exploring the vast potential of social
+                finance as a catalyst for positive global transformation.
+                {/* <br />
                 <a
                   className="cLink lVision-section-link"
                   href="http://www.ritsumei.ac.jp/features/r2030/"
                   target="_blank"
                 >
-                  学園ビジョンR2030{" "}
                 </a>
                 <span className="_cl1">「</span>挑戦をもっと自由に
                 <span className="_cr1">」</span>
@@ -2552,7 +2557,7 @@ const index = () => {
                 社会共生価値の創造とイノベーションに取り組む
                 <br />
                 <span className="_cl1">「</span>
-                次世代研究大学」の実現を目指します。
+                次世代研究大学」の実現を目指します。 */}
                 <br />
               </div>
               <div
@@ -2565,13 +2570,20 @@ const index = () => {
                   fontFamily: "sans-serif",
                 }}
               >
-                Ritsumeikan Advanced Research Academy
-                <br />
+                At Pecunia, our mission is to empower individuals,
+                organizations, and communities to harness the power of finance
+                for social impact. Our relentless pursuit of groundbreaking
+                research, coupled with a dedication to sharing knowledge, forms
+                the cornerstone of our work. Through our extensive network and
+                partnerships, we create and disseminate cutting-edge insights,
+                equipping decision-makers with the tools they need to navigate
+                the evolving landscape of finance.
+                {/* <br />
                 (立命館先進研究アカデミー)は、次世代研究大学として、
                 <br className="_pc" />
                 未来社会に貢献する新しい研究分野の創出を
                 <br className="_pc" />
-                目指して設立されました。
+                目指して設立されました。 */}
               </div>
             </div>
             <div
@@ -2684,18 +2696,40 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
               >
-                RARAとは、立命館大学の先導的・先進的研究拠点の形成に向けてリーダーシップを発揮することが
+                At Pecunia, our overarching mission is deeply rooted in the
+                belief that finance can serve as a catalyst for positive global
+                change. We strive to create a world where the potential of
+                finance is harnessed not just for profit, but for the greater
+                good. Our commitment extends to empowering communities,
+                particularly those that have been marginalized or overlooked,
+                and fostering a sense of inclusivity that transcends
+                socioeconomic boundaries. We aim to address the most pressing
+                challenges faced by these communities, thereby contributing to a
+                more equitable and sustainable global landscape.
+                {/* RARAとは、立命館大学の先導的・先進的研究拠点の形成に向けてリーダーシップを発揮することが
                 <span className="_nowrap">期待される</span>
                 中核研究者の集まり(アカデミー)のことです。
                 <br className="_sp" />
-                RARAを基盤にする研究者(RARAフェロー)は、本大学の核となり、他の研究者を巻き込み、先進研究を構想・企画・牽引することを目指します。
+                RARAを基盤にする研究者(RARAフェロー)は、本大学の核となり、他の研究者を巻き込み、先進研究を構想・企画・牽引することを目指します。 */}
               </div>
               <div
                 className="cFlatText lVision-section-writing-text"
                 data-flat-text=""
                 style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
               >
-                RARAには、RARAフェロー同士の融合や他大学・他研究機関との連携を通じて、
+                Central to our mission is the Pecunia Endowment Fund that
+                embodies our long-term vision for change. This endowment fund
+                serves as a financial engine for sustainable transformation. It
+                aims to provide the necessary resources, stability, and
+                continuity to support our initiatives in perpetuity. Through
+                prudent investment and strategic allocation of funds, we ensure
+                that our impact continues to grow over time. The endowment fund
+                is not merely a financial vehicle; it is a commitment to the
+                enduring legacy of our mission. It enables us to remain at the
+                forefront of pioneering research, innovative financial
+                solutions, and collaborations that truly make a difference in
+                communities worldwide.
+                {/* RARAには、RARAフェロー同士の融合や他大学・他研究機関との連携を通じて、
                 <br />
                 新たな価値を生み出す先進的な学際研究拠点の創成に結びつける役割を
                 <br />
@@ -2709,39 +2743,10 @@ const index = () => {
                 <br />
                 世界と伍する先進研究拠点の
                 <br className="_sp" />
-                早期実現を目指します。
+                早期実現を目指します。 */}
               </div>
             </div>
-            <div className="lVision-section-figure">
-              <picture>
-                <source
-                  srcSet="
-                        https://rara.ritsumei.ac.jp/assets/img/index/vision/sp/1x/b-vision_figure.png    1x,
-                        https://rara.ritsumei.ac.jp/assets/img/index/vision/sp/2x/b-vision_figure@2x.png 2x
-                    "
-                  media="(max-width: 767px)"
-                />
-                <img
-                  className="lVision-section-figure-item"
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/vision/pc/1x/b-vision_figure.png"
-                  width="802"
-                  height="470"
-                  alt=""
-                  loading="lazy"
-                  srcSet="
-                        https://rara.ritsumei.ac.jp/assets/img/index/vision/pc/1x/b-vision_figure.png    1x,
-                        https://rara.ritsumei.ac.jp/assets/img/index/vision/pc/2x/b-vision_figure@2x.png 2x
-                    "
-                />
-              </picture>
-              <div
-                className="cFlatText lVision-section-figure-text"
-                data-flat-text=""
-                style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
-              >
-                先進研究拠点の創造と共生価値の創成
-              </div>
-            </div>
+
             <div
               className="lVision-illust -forth -view"
               data-scroll=""
@@ -2840,24 +2845,18 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 12.45px", transform: "scaleX(1.05)" }}
               >
-                RARAコロキアムとは、RARAフェローがそれぞれの目標達成に向けて、
-                <br />
-                中核研究者としてのスキルを研鑽する場です。RARAフェロー同士が切磋琢磨しあい、
-                <br />
-                新しい学術領域・先進研究の創生に向けた活動準備を行います。
-              </div>
-              <div
-                className="cFlatText lVision-section-writing-text"
-                data-flat-text=""
-                style={{ padding: "0px 12.45px", transform: "scaleX(1.05)" }}
-              >
-                RARAコモンズでは、RARAでの活動で得られた研究成果の発信を中心に行います。
-                <br />
-                RARAフェローがNodes(結合点)として、
-                <br className="_sp" />
-                他の研究者や研究機関と繋がりをもつことで、
-                <br />
-                研究活動のさらなる加速をはかります。
+                Central to our mission is the Pecunia Endowment Fund that
+                embodies our long-term vision for change. This endowment fund
+                serves as a financial engine for sustainable transformation. It
+                aims to provide the necessary resources, stability, and
+                continuity to support our initiatives in perpetuity. Through
+                prudent investment and strategic allocation of funds, we ensure
+                that our impact continues to grow over time. The endowment fund
+                is not merely a financial vehicle; it is a commitment to the
+                enduring legacy of our mission. It enables us to remain at the
+                forefront of pioneering research, innovative financial
+                solutions, and collaborations that truly make a difference in
+                communities worldwide.
               </div>
             </div>
             <div
@@ -2912,7 +2911,7 @@ const index = () => {
       <GuideLines />
       <Fellows />
       <Blogs />
-      {/* <Contact /> */}
+      <Contact />
     </div>
   );
 };

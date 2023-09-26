@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -5,10 +6,20 @@ import "./index.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+let effectedValueIndex = 0;
+let currentFellow = 2;
+
+var total = 300;
+
+let previousEffectedValueIndex = 4;
+var previousTotal = 360;
+
+var previousClicked = 0;
+
 const index = () => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const [SliderMove, setSliderMove] = useState(null);
-  const [sliderRotate, setsliderRotate] = useState(150);
+  const [sliderRotate, setsliderRotate] = useState(-30);
   const [FellowName, setFellowName] = useState(null);
   const [FellowDescription1, setFellowDescription1] = useState(null);
   const [FellowDescription2, setFellowDescription2] = useState(null);
@@ -64,14 +75,85 @@ const index = () => {
     });
   }, []);
 
+  const [fellowsData, setfellowsData] = useState([
+    {
+      image: require("../../../assets/fellows/david_chen.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/david_chen_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-7.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-7.png)",
+      name: "Professor David Chen",
+      description: "Behavioral Economics and Financial Decision-Making",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/d_mitchell.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/d_mitchell_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
+      name: "Mr. Dominick Mitchell",
+      description: "Sustainable Development Finance",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/maria_hernandez.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/maria_hernandez.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-5.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-5.png)",
+      name: "Dr. Maria Hernandez",
+      description: "Ethical Banking and Finance",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/tamaki_patel.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
+      name: "Mrs. Tamaki Patel",
+      description: "Impact Investing and Measurement",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/doran_reynolds.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/doran_reynolds.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/02.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
+      name: "Sir. Doran Reynolds",
+      description: "Inclusive Financial Systems",
+      description_detailed: "",
+    },
+  ]);
+  const [fellowRotation, setfellowRotation] = useState([]);
+
+  useEffect(() => {
+    let fellowRotateData = fellowsData.map((item, index) => {
+      return { data: item, rotation: index * 15 };
+    });
+    console.log(
+      "🚀 ~ file: index.jsx:100 ~ fellowRotateData ~ fellowRotateData:",
+      fellowRotateData
+    );
+
+    setfellowRotation(fellowRotateData);
+  }, []);
+
   useEffect(() => {
     const sliderRotateElement = document.querySelector(
       `[data-rotate="${sliderRotate}"]`
     );
-    setFellowName("Masayo Takahashi");
-    setFellowDescription1("高橋 政代");
-    setFellowDescription2("次世代の視覚再建");
-    sliderRotateElement.classList.add("-isCurrent");
+    setFellowName("Dr. Maria Hernandez");
+    setFellowDescription1("Ethical Banking and Finance");
+    setFellowDescription2("");
+    sliderRotateElement?.classList.add("-isCurrent");
     console.log(
       "🚀 ~ file: index.jsx:17 ~ useEffect ~ sliderRotateElement:",
       sliderRotateElement
@@ -94,18 +176,18 @@ const index = () => {
     );
 
     const adjustedX = clientX + window.scrollX;
-    console.log(
-      "🚀 ~ file: index.jsx:91 ~ handleMouseMovement ~ adjustedX:",
-      adjustedX
-    );
+    // console.log(
+    //   "🚀 ~ file: index.jsx:91 ~ handleMouseMovement ~ adjustedX:",
+    //   adjustedX
+    // );
     const adjustedY = clientY + window.scrollY;
-    console.log(
-      "🚀 ~ file: index.jsx:93 ~ handleMouseMovement ~ adjustedY:",
-      adjustedY
-    );
+    // console.log(
+    //   "🚀 ~ file: index.jsx:93 ~ handleMouseMovement ~ adjustedY:",
+    //   adjustedY
+    // );
     SliderMoveDiv.style.transform = "translate(0px,0px)";
     if (adjustedX < 610) {
-      setSliderMove(1);
+      setSliderMove(2);
       // console.log(
       //   "🚀 ~ file: index.jsx:96 ~ handleMouseMovement ~ SliderMove:",
       //   SliderMove
@@ -138,30 +220,145 @@ const index = () => {
       //   "🚀 ~ file: index.jsx:119 ~ handleSliderRotation ~ SliderMove:",
       //   SliderMove
       // );
-      if (SliderMove == 1) {
-        const sliderRotateElement = document.querySelector(
-          `[data-rotate="${sliderRotate - 15}"]`
-        );
+      // if (SliderMove == 1) {
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:276 ~ handleSliderRotation ~ previousClicked:",
+      //     previousClicked
+      //   );
+      //   if (previousClicked == 2) {
+      //     fellowRotation.map((item, index) => {
+      //       fellowRotation[index]["rotation"] = index * 15;
+      //     });
+      //   }
 
-        FellowData(sliderRotate - 15);
-        setsliderRotate(sliderRotate - 15);
-        // console.log(
-        //   "🚀 ~ file: index.jsx:120 ~ handleSliderRotation ~ sliderRotate:",
-        //   sliderRotate
-        // );
-        sliderRotateElement.classList.add("-isCurrent");
+      //   previousTotal = previousTotal - 15;
+      //   fellowRotation[previousEffectedValueIndex]["rotation"] = previousTotal;
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:245 ~ handleSliderRotation ~ fellowRotation:",
+      //     fellowRotation
+      //   );
+
+      //   if (previousEffectedValueIndex >= 0) {
+      //     previousEffectedValueIndex -= 1;
+      //   } else {
+      //     previousEffectedValueIndex = 4;
+      //   }
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:254 ~ handleSliderRotation ~ previousEffectedValueIndex:",
+      //     previousEffectedValueIndex
+      //   );
+
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow222222:",
+      //     currentFellow
+      //   );
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:258 ~ handleSliderRotation ~ fellowRotation.length:",
+      //     fellowRotation.length
+      //   );
+      //   if (currentFellow == 0) {
+      //     currentFellow = 4;
+      //   } else {
+      //     currentFellow -= 1;
+      //   }
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow:",
+      //     currentFellow
+      //   );
+      //   console.log(
+      //     "🚀 ~ file: index.jsx:263 ~ handleSliderRotation ~      fellowRotation[currentFellow]?.rotation:",
+      //     fellowRotation[currentFellow]?.rotation
+      //   );
+      //   const sliderRotateElement = document.querySelector(
+      //     `[data-rotate="${fellowRotation[currentFellow]?.rotation}"]`
+      //   );
+      //   setsliderRotate(sliderRotate + 15);
+
+      //   sliderRotateElement.classList.add("-isCurrent");
+
+      //   previousClicked = 1;
+      // }
+      // if (SliderMove == 2) {
+      console.log(
+        "🚀 ~ file: index.jsx:283 ~ handleSliderRotation ~ previousClicked:",
+        previousClicked
+      );
+      // setfellowRotation(findindexFellowRotation);
+
+      // FellowData(sliderRotate + 15);
+
+      if (previousClicked == 1) {
+        fellowRotation.map((item, index) => {
+          fellowRotation[index]["rotation"] = index * 15;
+        });
       }
-      if (SliderMove == 2) {
-        const sliderRotateElement = document.querySelector(
-          `[data-rotate="${sliderRotate + 15}"]`
-        );
 
-        FellowData(sliderRotate + 15);
-        setsliderRotate(sliderRotate + 15);
+      total = total - 15;
+      fellowRotation[effectedValueIndex]["rotation"] = -total;
+      console.log(
+        "🚀 ~ file: index.jsx:245 ~ handleSliderRotation ~ fellowRotation:",
+        fellowRotation
+      );
 
-        sliderRotateElement.classList.add("-isCurrent");
+      if (effectedValueIndex < fellowRotation.length - 1) {
+        effectedValueIndex += 1;
+      } else {
+        effectedValueIndex = 0;
       }
+      console.log(
+        "🚀 ~ file: index.jsx:254 ~ handleSliderRotation ~ effectedValueIndex:",
+        effectedValueIndex
+      );
+
+      console.log(
+        "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow222222:",
+        currentFellow
+      );
+      console.log(
+        "🚀 ~ file: index.jsx:258 ~ handleSliderRotation ~ fellowRotation.length:",
+        fellowRotation.length
+      );
+      if (currentFellow < fellowRotation.length - 1) {
+        currentFellow += 1;
+      } else {
+        currentFellow = 0;
+      }
+      console.log(
+        "🚀 ~ file: index.jsx:265 ~ handleSliderRotation ~ currentFellow:",
+        currentFellow
+      );
+      console.log(
+        "🚀 ~ file: index.jsx:263 ~ handleSliderRotation ~      fellowRotation[currentFellow]?.rotation:",
+        fellowRotation[currentFellow]?.rotation
+      );
+
+      let currentFellowData = fellowRotation[currentFellow];
+      console.log(
+        "🚀 ~ file: index.jsx:336 ~ handleSliderRotation ~ currentFellowData:",
+        currentFellowData
+      );
+
+      if (currentFellowData) {
+        setFellowName(currentFellowData?.data?.name);
+        setFellowDescription1(currentFellowData?.data?.description);
+        setFellowDescription2(currentFellowData?.data?.description_detailed);
+      }
+
+      const sliderRotateElement = document.querySelector(
+        `[data-rotate="${fellowRotation[currentFellow]?.rotation}"]`
+      );
+      setsliderRotate(sliderRotate - 15);
+
+      sliderRotateElement.classList.add("-isCurrent");
+
+      previousClicked = 2;
     }
+
+    console.log(
+      "🚀 ~ file: index.jsx:299 ~ index ~ FellowName:",
+      fellowRotation
+    );
+    // }
   }
 
   const FellowData = (rotation) => {
@@ -170,132 +367,98 @@ const index = () => {
       "🚀 ~ file: index.jsx:169 ~ FellowData ~ sliderRotate:",
       sliderRotate
     );
-    if (sliderRotation == 0) {
-      setFellowName("Masayo Takahashi");
-      setFellowDescription1("高橋 政代");
-      setFellowDescription2("次世代の視覚再建");
-    } else if (sliderRotation == 15) {
-      setFellowName("Norihiro Sadato");
-      setFellowDescription1("定藤 規弘");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>ポストコロナ社会にWell-being をもたらす<br>社会性研究：ネットワーク型MRIシステム</p>"
-      );
-    } else if (sliderRotation == 30) {
-      setFellowName("Masaaki Mochimaru");
-      setFellowDescription1("持丸 正明");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>スポーツトレーニングのDXに関する研究</p>"
-      );
-    } else if (sliderRotation == 45) {
-      setFellowName("Satoshi Konishi");
-      setFellowDescription1("小西 聡");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>デジタル変革時代の未知との遭遇を開拓する<br>センサ・マイクロマシン研究</p>"
-      );
-    } else if (sliderRotation == 60) {
-      setFellowName("Kota Suechika");
-      setFellowDescription1("末近 浩太");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>中東・イスラーム研究の方法論的革新を通した<br>新たな地域研究の開発</p>"
-      );
-    } else if (sliderRotation == 75) {
-      setFellowName("Satoshi Tanaka");
-      setFellowDescription1("田中 覚");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>３次元計測ビッグデータの超高精細可視化と<br>VR応用、多層性ビッグデータの統合的可視化<br></p>"
-      );
-    } else if (sliderRotation == 90) {
-      setFellowName("Tadahiro Taniguchi");
-      setFellowDescription1("谷口 忠大");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>次世代共生社会に向けた実世界人工知能を生む<br>記号創発システム科学創成</p>"
-      );
-    } else if (sliderRotation == 105) {
-      setFellowName("Yuki Orikasa");
-      setFellowDescription1("折笠 有基");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>電池・水素エネルギーデバイス解析に基づく<br>革新的な反応原理の創世</p>"
-      );
-    } else if (sliderRotation == 120) {
-      setFellowName("Sayaka Ogawa");
-      setFellowDescription1("小川 さやか");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>マルチモーダルなプラットフォーム<br>エスノグラフィの構築</p>"
-      );
-    } else if (sliderRotation == 135) {
-      setFellowName("Takeshi Nakagawa");
-      setFellowDescription1("中川 毅");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>地質年代の「世界標準ものさし」の品質向上と、<br>気候変動の履歴の復元　—水月湖年縞に含まれる<br>花粉の化石の同位体比測定—</p>"
-      );
-    } else if (sliderRotation == 150) {
-      setFellowName("Masayo Takahashi");
-      setFellowDescription1("高橋 政代");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>次世代の視覚再建</p>"
-      );
-    } else if (sliderRotation == 165) {
-      setFellowName("Norihiro Sadato");
-      setFellowDescription1("定藤 規弘");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>ポストコロナ社会にWell-being をもたらす<br>社会性研究：ネットワーク型MRIシステム</p>"
-      );
-    } else if (sliderRotation == 180) {
-      setFellowName("Masaaki Mochimaru");
-      setFellowDescription1("持丸 正明");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>スポーツトレーニングのDXに関する研究</p>"
-      );
-    } else if (sliderRotation == 195) {
-      setFellowName("Satoshi Konishi");
-      setFellowDescription1("小西 聡");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>デジタル変革時代の未知との遭遇を開拓する<br>センサ・マイクロマシン研究</p>"
-      );
-    } else if (sliderRotation == 210) {
-      setFellowName("Kota Suechika");
-      setFellowDescription1("末近 浩太");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>中東・イスラーム研究の方法論的革新を通した<br>新たな地域研究の開発</p>"
-      );
-    } else if (sliderRotation == 225) {
-      setFellowName("Satoshi Tanaka");
-      setFellowDescription1("田中 覚");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>３次元計測ビッグデータの超高精細可視化と<br>VR応用、多層性ビッグデータの統合的可視化<br></p>"
-      );
-    } else if (sliderRotation == 240) {
-      setFellowName("Tadahiro Taniguchi");
-      setFellowDescription1("谷口 忠大");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>次世代共生社会に向けた実世界人工知能を生む<br>記号創発システム科学創成</p>"
-      );
-    } else if (sliderRotation == 255) {
-      setFellowName("Yuki Orikasa");
-      setFellowDescription1("折笠 有基");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>電池・水素エネルギーデバイス解析に基づく<br>革新的な反応原理の創世</p>"
-      );
-    } else if (sliderRotation == 270) {
-      setFellowName("Sayaka Ogawa");
-      setFellowDescription1("小川 さやか");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>マルチモーダルなプラットフォーム<br>エスノグラフィの構築</p>"
-      );
-    } else if (sliderRotation == 285) {
-      setFellowName("Takeshi Nakagawa");
-      setFellowDescription1("中川 毅");
-      setFellowDescription2(
-        "<p data-slider-info-study=''>地質年代の「世界標準ものさし」の品質向上と、<br>気候変動の履歴の復元　—水月湖年縞に含まれる<br>花粉の化石の同位体比測定—</p>"
-      );
+    if (fellowRotation?.length > 0) {
+      if (sliderRotation == fellowRotation[0]) {
+        setFellowName("Mr. Dominick Mitchell");
+        setFellowDescription1("Sustainable Development Finance");
+        setFellowDescription2("");
+      } else if (sliderRotation == fellowRotation[1]) {
+        setFellowName("Dr. Maria Hernandez");
+        setFellowDescription1("Ethical Banking and Finance");
+        setFellowDescription2("");
+      } else if (sliderRotation == fellowRotation[2]) {
+        setFellowName("Mrs. Tamaki Patel");
+        setFellowDescription1("Impact Investing and Measurement");
+        setFellowDescription2("");
+      } else if (sliderRotation == fellowRotation[3]) {
+        setFellowName("Sir. Doran Reynolds");
+        setFellowDescription1("Inclusive Financial Systems");
+        setFellowDescription2("");
+      } else if (sliderRotation == fellowRotation[4]) {
+        setFellowName("Professor David Chen");
+        setFellowDescription1(
+          "Behavioral Economics and Financial Decision-Making"
+        );
+        setFellowDescription2("");
+      }
     }
+    // else if (sliderRotation == 90) {
+    //   setFellowName("Mr. Dominick Mitchell");
+    //   setFellowDescription1("Sustainable Development Finance");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 105) {
+    //   setFellowName("Dr. Maria Hernandez");
+    //   setFellowDescription1("Ethical Banking and Finance");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 120) {
+    //   setFellowName("Mrs. Tamaki Patel");
+    //   setFellowDescription1("Impact Investing and Measurement");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 135) {
+    //   setFellowName("Sir. Doran Reynolds");
+    //   setFellowDescription1("Inclusive Financial Systems");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 150) {
+    //   setFellowName("Professor David Chen");
+    //   setFellowDescription1(
+    //     "Behavioral Economics and Financial Decision-Making"
+    //   );
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 165) {
+    //   setFellowName("Mr. Dominick Mitchell");
+    //   setFellowDescription1("Sustainable Development Finance");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 180) {
+    //   setFellowName("Dr. Maria Hernandez");
+    //   setFellowDescription1("Ethical Banking and Finance");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 195) {
+    //   setFellowName("Mrs. Tamaki Patel");
+    //   setFellowDescription1("Impact Investing and Measurement");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 210) {
+    //   setFellowName("Sir. Doran Reynolds");
+    //   setFellowDescription1("Inclusive Financial Systems");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 225) {
+    //   setFellowName("Professor David Chen");
+    //   setFellowDescription1(
+    //     "Behavioral Economics and Financial Decision-Making"
+    //   );
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 240) {
+    //   setFellowName("Mr. Dominick Mitchell");
+    //   setFellowDescription1("Sustainable Development Finance");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 255) {
+    //   setFellowName("Dr. Maria Hernandez");
+    //   setFellowDescription1("Ethical Banking and Finance");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 270) {
+    //   setFellowName("Mrs. Tamaki Patel");
+    //   setFellowDescription1("Impact Investing and Measurement");
+    //   setFellowDescription2("");
+    // } else if (sliderRotation == 285) {
+    //   setFellowName("Sir. Doran Reynolds");
+    //   setFellowDescription1("Inclusive Financial Systems");
+    //   setFellowDescription2("");
+    // }
   };
   // console.log(
   //   "🚀 ~ file: index.jsx:120 ~ handleSliderRotation ~ sliderRotate:",
   //   sliderRotate
   // );
 
-  console.log("🚀 ~ file: index.jsx:299 ~ index ~ FellowName:", FellowName);
   return (
     <div className="lFellows" id="fellows_trigger">
       <div
@@ -455,11 +618,17 @@ const index = () => {
                     >
                       NEXT
                     </span>
-                    <span
+                    {/* <span
                       className="cSliderMouseStalker-text -prev"
                       data-slider-stalker-prev
                     >
                       PREV
+                    </span> */}
+                    <span
+                      className="cSliderMouseStalker-text -prev"
+                      data-slider-stalker-prev
+                    >
+                      NEXT
                     </span>
                     <span
                       className="cSliderMouseStalker-text -drag"
@@ -477,1068 +646,62 @@ const index = () => {
                 <ul
                   className="lFellows-slider-list"
                   data-slider-list=""
-                  style={{ transform: `rotate(-${sliderRotate}deg)` }}
+                  style={{ transform: `rotate(${sliderRotate}deg)` }}
                 >
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="0"
-                    data-rotate="0"
-                    style={{ transform: "rotate(0deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/masayo-takahashi/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/masayo-takahashi/"
-                        data-name-en="Masayo Takahashi"
-                        data-name-ja="高橋 政代"
-                        data-study="次世代の視覚再建"
+                  {fellowRotation.length > 0 &&
+                    fellowRotation.map((item, index) => (
+                      <li
+                        className="lFellows-slider-item"
+                        data-slider-item=""
+                        data-index={index}
+                        data-rotate={item?.rotation}
+                        style={{ transform: `rotate(${item?.rotation}deg)` }}
                       >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_takahashi.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_takahashi-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-2.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/01.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="1"
-                    data-rotate="15"
-                    style={{ transform: "rotate(15deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/norihiro-sadato/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/norihiro-sadato/"
-                        data-name-en="Norihiro Sadato"
-                        data-name-ja="定藤 規弘"
-                        data-study="ポストコロナ社会にWell-being をもたらす<br>社会性研究：ネットワーク型MRIシステム"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_sadato.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_sadato-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-1.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-1.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="2"
-                    data-rotate="30"
-                    style={{ transform: "rotate(30deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/masaaki-mochimaru/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/masaaki-mochimaru/"
-                        data-name-en="Masaaki Mochimaru"
-                        data-name-ja="持丸 正明"
-                        data-study="スポーツトレーニングのDXに関する研究"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_mochimaru.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_mochimaru-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="3"
-                    data-rotate="45"
-                    style={{ transform: "rotate(45deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/satoshi-konishi/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/satoshi-konishi/"
-                        data-name-en="Satoshi Konishi"
-                        data-name-ja="小西 聡"
-                        data-study="デジタル変革時代の未知との遭遇を開拓する<br>センサ・マイクロマシン研究"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_konishi.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_konishi-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-8.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-8.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="4"
-                    data-rotate="60"
-                    style={{ transform: "rotate(60deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/kota_suechika/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/kota_suechika/"
-                        data-name-en="Kota Suechika"
-                        data-name-ja="末近 浩太"
-                        data-study="中東・イスラーム研究の方法論的革新を通した<br>新たな地域研究の開発"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/03/b-fellows_suechika.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/03/b-fellows_suechika-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/03/graphic01.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/03/graphic02.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="5"
-                    data-rotate="75"
-                    style={{ transform: "rotate(75deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/satoshi-tanaka/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/satoshi-tanaka/"
-                        data-name-en="Satoshi Tanaka"
-                        data-name-ja="田中 覚"
-                        data-study="３次元計測ビッグデータの超高精細可視化と<br>VR応用、多層性ビッグデータの統合的可視化<br>"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_tanaka.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_tanaka-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-7.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-7.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="6"
-                    data-rotate="90"
-                    style={{ transform: "rotate(90deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/tadahiro-taniguchi/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/tadahiro-taniguchi/"
-                        data-name-en="Tadahiro Taniguchi"
-                        data-name-ja="谷口 忠大"
-                        data-study="次世代共生社会に向けた実世界人工知能を生む<br>記号創発システム科学創成"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_taniguchi.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_taniguchi-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="7"
-                    data-rotate="105"
-                    style={{ transform: "rotate(105deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/yuki-orikasa/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/yuki-orikasa/"
-                        data-name-en="Yuki Orikasa"
-                        data-name-ja="折笠 有基"
-                        data-study="電池・水素エネルギーデバイス解析に基づく<br>革新的な反応原理の創世"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_orikasa.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_orikasa-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-5.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-5.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="8"
-                    data-rotate="120"
-                    style={{ transform: "rotate(120deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/sayaka-ogawa/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/sayaka-ogawa/"
-                        data-name-en="Sayaka Ogawa"
-                        data-name-ja="小川 さやか"
-                        data-study="マルチモーダルなプラットフォーム<br>エスノグラフィの構築"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_ogawa.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_ogawa-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="9"
-                    data-rotate="135"
-                    style={{ transform: "rotate(135deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/takeshi-nakagawa/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/takeshi-nakagawa/"
-                        data-name-en="Takeshi Nakagawa"
-                        data-name-ja="中川 毅"
-                        data-study="地質年代の「世界標準ものさし」の品質向上と、<br>気候変動の履歴の復元　—水月湖年縞に含まれる<br>花粉の化石の同位体比測定—"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_nakagawa.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_nakagawa-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-3.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/02.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="10"
-                    data-rotate="150"
-                    style={{ transform: "rotate(150deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/masayo-takahashi/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/masayo-takahashi/"
-                        data-name-en="Masayo Takahashi"
-                        data-name-ja="高橋 政代"
-                        data-study="次世代の視覚再建"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_takahashi.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_takahashi-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-2.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/01.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="11"
-                    data-rotate="165"
-                    style={{ transform: "rotate(165deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/norihiro-sadato/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/norihiro-sadato/"
-                        data-name-en="Norihiro Sadato"
-                        data-name-ja="定藤 規弘"
-                        data-study="ポストコロナ社会にWell-being をもたらす<br>社会性研究：ネットワーク型MRIシステム"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_sadato.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_sadato-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-1.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-1.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="12"
-                    data-rotate="180"
-                    style={{ transform: "rotate(180deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/masaaki-mochimaru/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/masaaki-mochimaru/"
-                        data-name-en="Masaaki Mochimaru"
-                        data-name-ja="持丸 正明"
-                        data-study="スポーツトレーニングのDXに関する研究"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_mochimaru.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_mochimaru-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="13"
-                    data-rotate="195"
-                    style={{ transform: "rotate(195deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/satoshi-konishi/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/satoshi-konishi/"
-                        data-name-en="Satoshi Konishi"
-                        data-name-ja="小西 聡"
-                        data-study="デジタル変革時代の未知との遭遇を開拓する<br>センサ・マイクロマシン研究"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_konishi.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_konishi-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-8.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-8.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="14"
-                    data-rotate="210"
-                    style={{ transform: "rotate(210deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/kota_suechika/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/kota_suechika/"
-                        data-name-en="Kota Suechika"
-                        data-name-ja="末近 浩太"
-                        data-study="中東・イスラーム研究の方法論的革新を通した<br>新たな地域研究の開発"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/03/b-fellows_suechika.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/03/b-fellows_suechika-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/03/graphic01.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/03/graphic02.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="15"
-                    data-rotate="225"
-                    style={{ transform: "rotate(225deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/satoshi-tanaka/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/satoshi-tanaka/"
-                        data-name-en="Satoshi Tanaka"
-                        data-name-ja="田中 覚"
-                        data-study="３次元計測ビッグデータの超高精細可視化と<br>VR応用、多層性ビッグデータの統合的可視化<br>"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_tanaka.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_tanaka-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-7.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-7.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="16"
-                    data-rotate="240"
-                    style={{ transform: "rotate(240deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/tadahiro-taniguchi/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/tadahiro-taniguchi/"
-                        data-name-en="Tadahiro Taniguchi"
-                        data-name-ja="谷口 忠大"
-                        data-study="次世代共生社会に向けた実世界人工知能を生む<br>記号創発システム科学創成"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_taniguchi.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_taniguchi-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="17"
-                    data-rotate="255"
-                    style={{ transform: "rotate(255deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/yuki-orikasa/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/yuki-orikasa/"
-                        data-name-en="Yuki Orikasa"
-                        data-name-ja="折笠 有基"
-                        data-study="電池・水素エネルギーデバイス解析に基づく<br>革新的な反応原理の創世"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_orikasa.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_orikasa-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-5.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-5.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="18"
-                    data-rotate="270"
-                    style={{ transform: "rotate(270deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/sayaka-ogawa/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/sayaka-ogawa/"
-                        data-name-en="Sayaka Ogawa"
-                        data-name-ja="小川 さやか"
-                        data-study="マルチモーダルなプラットフォーム<br>エスノグラフィの構築"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_ogawa.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_ogawa-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li
-                    className="lFellows-slider-item"
-                    data-slider-item=""
-                    data-index="19"
-                    data-rotate="285"
-                    style={{ transform: "rotate(285deg)" }}
-                  >
-                    <a
-                      className="lFellows-slider-item-inner"
-                      href="https://rara.ritsumei.ac.jp/fellows/takeshi-nakagawa/"
-                      draggable="false"
-                    >
-                      <div
-                        className="lFellows-slider-item-content"
-                        data-has-data=""
-                        data-link="https://rara.ritsumei.ac.jp/fellows/takeshi-nakagawa/"
-                        data-name-en="Takeshi Nakagawa"
-                        data-name-ja="中川 毅"
-                        data-study="地質年代の「世界標準ものさし」の品質向上と、<br>気候変動の履歴の復元　—水月湖年縞に含まれる<br>花粉の化石の同位体比測定—"
-                      >
-                        <div className="lFellows-slider-item-thumbnail">
-                          <img
-                            className="lFellows-slider-item-thumbnail-img"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_nakagawa.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <img
-                            className="lFellows-slider-item-thumbnail-img -cover"
-                            src="https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/b-fellows_nakagawa-1.jpg"
-                            alt=""
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                      <div className="lFellows-slider-item-cover">
-                        <span
-                          className="lFellows-slider-item-coverItem -l02"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-3.png)",
-                          }}
-                        ></span>
-                        <span
-                          className="lFellows-slider-item-coverItem -l03"
-                          style={{
-                            backgroundImage:
-                              "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/02.png)",
-                          }}
-                        ></span>
-                      </div>
-                    </a>
-                  </li>
+                        <a
+                          className="lFellows-slider-item-inner"
+                          href="https://rara.ritsumei.ac.jp/fellows/masayo-takahashi/"
+                          draggable="false"
+                        >
+                          <div
+                            className="lFellows-slider-item-content"
+                            data-has-data=""
+                            data-link="https://rara.ritsumei.ac.jp/fellows/masayo-takahashi/"
+                            data-name-en="Masayo Takahashi"
+                            data-name-ja="高橋 政代"
+                            data-study="次世代の視覚再建"
+                          >
+                            <div className="lFellows-slider-item-thumbnail">
+                              <img
+                                className="lFellows-slider-item-thumbnail-img"
+                                src={item?.data?.image}
+                                alt=""
+                                loading="lazy"
+                              />
+                              <img
+                                className="lFellows-slider-item-thumbnail-img -cover"
+                                src={item?.data?.clothAnimatedImage}
+                                alt=""
+                                loading="lazy"
+                              />
+                            </div>
+                          </div>
+                          <div className="lFellows-slider-item-cover">
+                            <span
+                              className="lFellows-slider-item-coverItem -l02"
+                              style={{
+                                backgroundImage: item?.data?.firstGraphicImage,
+                              }}
+                            ></span>
+                            <span
+                              className="lFellows-slider-item-coverItem -l03"
+                              style={{
+                                backgroundImage: item?.data?.secondGraphicImage,
+                              }}
+                            ></span>
+                          </div>
+                        </a>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>
@@ -1555,7 +718,10 @@ const index = () => {
               <div
                 className="cFlatText lFellows-slider-info-textbox"
                 data-flat-text=""
-                style={{ padding: "0px 22.65px", transform: "scaleX(1.05)" }}
+                style={{
+                  padding: "0px 22.65px",
+                  transform: "scaleX(1.05)",
+                }}
               >
                 <div className="lFellows-slider-info-ja">
                   <p
@@ -1574,7 +740,9 @@ const index = () => {
                   }}
                 >
                   <div
-                    dangerouslySetInnerHTML={{ __html: FellowDescription2 }}
+                    dangerouslySetInnerHTML={{
+                      __html: FellowDescription2,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -1595,18 +763,13 @@ const index = () => {
                   ></svg>
                 </a>
               </div>
-              <ul className="lFellows-slider-dots" data-slider-dots="">
-                <li className="lFellows-slider-dots-item"></li>
-                <li className="lFellows-slider-dots-item"></li>
-                <li className="lFellows-slider-dots-item"></li>
-                <li className="lFellows-slider-dots-item"></li>
-                <li className="lFellows-slider-dots-item"></li>
-                <li className="lFellows-slider-dots-item"></li>
-                <li className="lFellows-slider-dots-item"></li>
-                <li className="lFellows-slider-dots-item -isCurrent"></li>
-                <li className="lFellows-slider-dots-item"></li>
-                <li className="lFellows-slider-dots-item"></li>
-              </ul>
+              {/* <ul className="lFellows-slider-dots" data-slider-dots="">
+                    <li className="lFellows-slider-dots-item"></li>
+                    <li className="lFellows-slider-dots-item"></li>
+                    <li className="lFellows-slider-dots-item -isCurrent"></li>
+                    <li className="lFellows-slider-dots-item"></li>
+                    <li className="lFellows-slider-dots-item"></li>
+                  </ul> */}
             </div>
             <div className="lFellows-btn">
               <a className="lFellows-btn-link" href="/fellows">
