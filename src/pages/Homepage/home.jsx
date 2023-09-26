@@ -26,7 +26,10 @@ import { UploadedImage } from "../../components/homeCanvas/UploadedImage";
 import { UploadedImageTransparent } from "../../components/homeCanvas/UploadImageTransparent";
 
 import { R_Alpabet } from "../../components/homeCanvas/Images/R_Aphabet";
+
 import { BuildingTwoRedLines } from "../../components/homeCanvas/Images/BuildingTwoRedLines";
+
+import { Eye } from "../../components/homeCanvas/Images/Eye";
 
 import GuideLines from "./Guidelines/index";
 import Fellows from "./Fellows/index";
@@ -378,6 +381,7 @@ const index = () => {
           c
         )
       );
+
       circleAboveImages.push(
         new CircleWithEllipseRotation(
           canvas.width / 2,
@@ -742,24 +746,26 @@ const index = () => {
       );
 
       // eye --- done
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 + 355,
-          canvas.height / 2 + 150,
-          require("../../assets/home/images/header_8.png"),
-          275,
-          215,
-          0,
-          canvas.width / 2 + 105,
-          canvas.height / 2 + 100,
-          130,
-          95,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 + 355,
+      //     canvas.height / 2 + 150,
+      //     require("../../assets/home/images/header_8.png"),
+      //     275,
+      //     215,
+      //     0,
+      //     canvas.width / 2 + 105,
+      //     canvas.height / 2 + 100,
+      //     130,
+      //     95,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
+
+      images.push(Eye(canvas, gsap, scrollContainer, c));
 
       // Leaf --- done
 
@@ -1259,6 +1265,7 @@ const index = () => {
       );
 
       //AEROPLANE MAN ---- done
+
       images.push(
         new UploadedImage(
           canvas.width / 2 - 70,
@@ -2272,8 +2279,7 @@ const index = () => {
               loading="lazy"
               srcSet="
                     https://rara.ritsumei.ac.jp/assets/img/index/kv/b-logo_sub03.svg 1x,
-                    https://rara.ritsumei.ac.jp/assets/img/index/kv/b-logo_sub03.svg 2x
-                "
+                    https://rara.ritsumei.ac.jp/assets/img/index/kv/b-logo_sub03.svg 2x"
             />
           </div>
         </div>
@@ -2285,8 +2291,7 @@ const index = () => {
           <picture>
             <source
               srcSet="
-                    https://rara.ritsumei.ac.jp//assets/img/index/kv/core_ball.png.webp
-                "
+                    https://rara.ritsumei.ac.jp//assets/img/index/kv/core_ball.png.webp"
               type="image/webp"
             />
             <img
