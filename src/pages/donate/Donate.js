@@ -1,7 +1,7 @@
-import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import {
   Button,
@@ -35,6 +35,7 @@ const Donate = () => {
     (state) => state.donation.selectedAmount
   );
 
+  console.log("actualSelectedAmount: ", actualSelectedAmount);
   useEffect(() => {
     getCoinbaseKey();
     getBankDetails();
@@ -46,6 +47,7 @@ const Donate = () => {
         amount: actualSelectedAmount,
       })
       .then((response) => {
+        console.log("response response response", response);
         setHostedUrl(response.data.charge.hosted_url);
       })
       .catch((error) => {
@@ -53,6 +55,7 @@ const Donate = () => {
       });
   }, [selectedAmount]);
 
+  console.log("hosted url: ", hostedUrl);
   const handleButtonClick = (value) => {
     setSelectedButton(value);
     setError(null);
@@ -66,6 +69,7 @@ const Donate = () => {
 
   const handleDonateClick = () => {
     if (selectedAmount !== null || otherValue !== null) {
+      console.log("Selected Donation Amount: $" + selectedAmount);
       setError(null);
       setShowRightColumn(true);
     } else {
@@ -74,8 +78,11 @@ const Donate = () => {
   };
 
   const handlePaymentMethodChange = (event) => {
+    // setSelectedPaymentMethod(event.target.value);
     const selectedMethod = event.target.value;
+    console.log("selectedMethod: ", selectedMethod);
     dispatch(setPaymentMethod(event.target.value));
+
     setSelectedPaymentMethod(selectedMethod);
     if (selectedMethod === "bankTransfer") {
       setShowBankTransferModal(true);
@@ -95,6 +102,7 @@ const Donate = () => {
       url: `${process.env.REACT_APP_SERVER}/secret/coinbase/1`,
     })
       .then((response) => {
+        console.log("coinbase: ", response);
         setCoinbaseData(response?.data);
       })
       .catch((err) => {
@@ -109,6 +117,7 @@ const Donate = () => {
       url: `${process.env.REACT_APP_SERVER}/bank/1`,
     })
       .then((response) => {
+        console.log("bank Details: ", response);
         setBankData(response?.data);
       })
       .catch((err) => {
@@ -123,11 +132,11 @@ const Donate = () => {
           navigate("/stripe");
           break;
         case "coinbase":
-          if (coinbaseData?.active) {
-            window.location.href = hostedUrl;
-          } else {
-            navigate("/coinbase");
-          }
+          // if (coinbaseData?.active) {
+          window.location.href = hostedUrl;
+          // } else {
+          //   navigate("/coinbase");
+          // }
           break;
         default:
           break;
@@ -135,6 +144,7 @@ const Donate = () => {
     }
   }, [selectedPaymentMethod]);
 
+  console.log("selectedAmount: ", selectedAmount);
   return (
     <div>
       <Container className="donateUs">
@@ -146,7 +156,6 @@ const Donate = () => {
           <Col xs={6}>
             <DonatePage />
           </Col>
-
           {showRightColumn ? (
             <Col xs={6}>
               <Form>
@@ -248,7 +257,6 @@ const Donate = () => {
               }}
             >
               <h5 className="donate">How often would you like to donate?</h5>
-
               <ButtonGroup
                 style={{
                   display: "flex",
@@ -325,6 +333,7 @@ const Donate = () => {
                   </Button>
                   <Button
                     variant="light"
+                    // variant={selectedAmount === 20 ? 'primary' : 'light'}
                     className="rupee"
                     onClick={() => handleAmountClick(1000)}
                   >
@@ -354,6 +363,7 @@ const Donate = () => {
                     $100,0000{renderTickSign(1000000)}
                   </Button>
                   <div>
+                    {/* Other */}
                     <input
                       className="rupee"
                       type="number"

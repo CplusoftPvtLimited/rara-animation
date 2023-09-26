@@ -2507,7 +2507,8 @@ const index = () => {
         </div>
         <canvas id="canvas1" width="1538" height="800"></canvas>
       </div>
-      <div className="lVision" data-vision="">
+
+      <div className="lVision" id="vision" data-vision="">
         <div className="lVision-contents">
           <div className="lVision-section -first -flex" data-vision-section="1">
             <div className="lVision-section-writing -first">
