@@ -1,6 +1,6 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveEyeWithLabelValues = (canvas) => [
+const responsiveLadyWithLabelValues = (canvas) => [
   {
     screenWidth: 375,
     x: canvas.width / 2 + 105,
@@ -29,60 +29,60 @@ const responsiveEyeWithLabelValues = (canvas) => [
   },
   {
     screenWidth: 768,
-    x: canvas.width / 2 + 180,
-    y: canvas.height / 2 + 150,
-    width: 150,
-    height: 120,
+    x: canvas.width / 2 + 40,
+    y: canvas.height / 2 - 80,
+    width: canvas.width / 2 - 200,
+    height: canvas.height / 2 - 90,
     rotation: 0,
-    updatedX: canvas.width / 2 + 105,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 80,
-    updatedHeight: 70,
+    updatedX: canvas.width / 2 - 105,
+    updatedY: 440,
+    updatedWidth: 170,
+    updatedHeight: 175,
     updatedRotation: 0,
   },
   {
     screenWidth: 1024,
-    x: canvas.width / 2 + 300,
-    y: canvas.height / 2 + 150,
-    width: 180,
-    height: 120,
+    x: canvas.width / 2 + 40,
+    y: canvas.height / 2 - 100,
+    width: canvas.width / 2 - 200,
+    height: canvas.height / 2 + 45,
     rotation: 0,
-    updatedX: canvas.width / 2 + 105,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 80,
-    updatedHeight: 70,
+    updatedX: canvas.width / 2 - 105,
+    updatedY: 440,
+    updatedWidth: 170,
+    updatedHeight: 175,
     updatedRotation: 0,
   },
   {
     screenWidth: 1440,
-    x: canvas.width / 2 + 355,
-    y: canvas.height / 2 + 150,
-    width: 275,
-    height: 215,
+    x: canvas.width / 2 + 40,
+    y: canvas.height / 2 - 80,
+    width: canvas.width / 2 - 330,
+    height: canvas.height / 2 + 85,
     rotation: 0,
-    updatedX: canvas.width / 2 + 105,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 80,
-    updatedHeight: 70,
+    updatedX: canvas.width / 2 + 40,
+    updatedY: 440,
+    updatedWidth: 170,
+    updatedHeight: 215,
     updatedRotation: 0,
   },
   // full
   {
     screenWidth: 1920,
-    x: canvas.width / 2 + 355,
-    y: canvas.height / 2 + 150,
-    width: 275,
-    height: 215,
+    x: canvas.width / 2 + 40,
+    y: canvas.height / 2 - 80,
+    width: canvas.width / 2 - 430,
+    height: canvas.height / 2 + 45,
     rotation: 0,
-    updatedX: canvas.width / 2 + 105,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 80,
-    updatedHeight: 70,
+    updatedX: canvas.width / 2 - 105,
+    updatedY: 440,
+    updatedWidth: 170,
+    updatedHeight: 175,
     updatedRotation: 0,
   },
 ];
 
-export function getResponsiveEyeDimensions(canvas, screenWidth) {
+export function getResponsiveLadyDimensions(canvas, screenWidth) {
   let x = canvas.width / 2 + 995;
   let y = canvas.height / 2 - 2055;
   let width = 0;
@@ -94,7 +94,7 @@ export function getResponsiveEyeDimensions(canvas, screenWidth) {
   let updatedHeight = 175;
   let updatedRotation = 0;
 
-  for (const rule of responsiveEyeWithLabelValues(canvas)) {
+  for (const rule of responsiveLadyWithLabelValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -125,11 +125,11 @@ export function getResponsiveEyeDimensions(canvas, screenWidth) {
   };
 }
 
-export const Eye = (RockWithLabelData, canvas, gsap, scrollContainer, c) =>
+export const Lady = (RockWithLabelData, canvas, gsap, scrollContainer, c) =>
   new UploadedImage(
     RockWithLabelData.x,
     RockWithLabelData.y,
-    require("../../../../assets/home/images/header_8.png"),
+    require("../../../../assets/home/images/header_14.png"),
     RockWithLabelData.width,
     RockWithLabelData.height,
     RockWithLabelData.rotation,

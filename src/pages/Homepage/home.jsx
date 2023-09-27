@@ -25,6 +25,31 @@ import {
   getResponsiveRockWithLebelDimensions,
 } from "../../components/homeCanvas/Images/RockWithLabel";
 
+import {
+  YoungGirl,
+  getResponsiveGirlDimensions,
+} from "../../components/homeCanvas/Images/YoungGirl";
+
+import {
+  Lady,
+  getResponsiveLadyDimensions,
+} from "../../components/homeCanvas/Images/Lady";
+
+import {
+  Eye,
+  getResponsiveEyeDimensions,
+} from "../../components/homeCanvas/Images/Eye";
+
+import {
+  Equipment,
+  getResponsiveEquipmentDimensions,
+} from "../../components/homeCanvas/Images/Equipment";
+
+import {
+  Aalphabet,
+  getResponsiveAalphabetDimensions,
+} from "../../components/homeCanvas/Images/Aalphabet";
+
 import { CircleWithEllipseRotation } from "../../components/homeCanvas/CircleWithEllipseRotation";
 
 import { UploadedImage } from "../../components/homeCanvas/UploadedImage";
@@ -35,12 +60,11 @@ import { R_Alpabet } from "../../components/homeCanvas/Images/R_Aphabet";
 
 import { BuildingTwoRedLines } from "../../components/homeCanvas/Images/BuildingTwoRedLines";
 
-import { Eye } from "../../components/homeCanvas/Images/Eye";
-
 import GuideLines from "./Guidelines/index";
 import Fellows from "./Fellows/index";
 import Blogs from "./Blogs/index";
 import Contact from "./Contact/index";
+// import { Equipment } from "../../components/homeCanvas/Images/equipment";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
@@ -473,6 +497,7 @@ const index = () => {
         "🚀 ~ file: home.jsx:468 ~ init ~ RockWithLabelData:",
         RockWithLabelData
       );
+
       images.push(
         RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
       );
@@ -499,24 +524,32 @@ const index = () => {
 
       // A alphabet ---- done
 
-      images.push(
-        new UploadedImage(
-          canvas.width - 115,
-          canvas.height / 2 - 140,
-          require("../../assets/home/images/header_31.png"),
-          40,
-          30,
-          -40,
-          canvas.width / 2 + 145,
-          canvas.height / 2 - 45,
-          115,
-          85,
-          95,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const AalphabetData = getResponsiveAalphabetDimensions(
+        canvas,
+        screenWidth
       );
+      console.log("🚀 ~ file: home.jsx:468 ~ init ~ GirlData:", AalphabetData);
+
+      images.push(Aalphabet(AalphabetData, canvas, gsap, scrollContainer, c));
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width - 115,
+      //     canvas.height / 2 - 140,
+      //     require("../../assets/home/images/header_31.png"),
+      //     40,
+      //     30,
+      //     -40,
+      //     canvas.width / 2 + 145,
+      //     canvas.height / 2 - 45,
+      //     115,
+      //     85,
+      //     95,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // man with hand direction ---- done
       images.push(
@@ -664,24 +697,30 @@ const index = () => {
       );
 
       // girl --- done
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 + 205,
-          canvas.height / 2 - 255,
-          require("../../assets/home/images/header_9.png"),
-          300,
-          340,
-          0,
-          canvas.width / 2 - 0,
-          canvas.height / 2 - 33,
-          170,
-          175,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 + 205,
+      //     canvas.height / 2 - 255,
+      //     require("../../assets/home/images/header_9.png"),
+      //     300,
+      //     340,
+      //     0,
+      //     canvas.width / 2 - 0,
+      //     canvas.height / 2 - 33,
+      //     170,
+      //     175,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
+
+      //Girl  --- done
+      const GirlData = getResponsiveGirlDimensions(canvas, screenWidth);
+      console.log("🚀 ~ file: home.jsx:468 ~ init ~ GirlData:", GirlData);
+
+      images.push(YoungGirl(GirlData, canvas, gsap, scrollContainer, c));
 
       //girl circle ---- DONE
 
@@ -763,8 +802,10 @@ const index = () => {
       //     c
       //   )
       // );
+      const EyeData = getResponsiveEyeDimensions(canvas, screenWidth);
+      console.log("🚀 ~ file: home.jsx:468 ~ init ~ LadyData:", EyeData);
 
-      images.push(Eye(canvas, gsap, scrollContainer, c));
+      images.push(Eye(EyeData, canvas, gsap, scrollContainer, c));
 
       // Leaf --- done
 
@@ -1056,25 +1097,29 @@ const index = () => {
       );
 
       // lady with the book --- DONE
+      const LadyData = getResponsiveLadyDimensions(canvas, screenWidth);
+      console.log("🚀 ~ file: home.jsx:468 ~ init ~ LadyData:", LadyData);
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 + 17,
-          canvas.height / 2 - 83,
-          require("../../assets/home/images/header_14.png"),
-          430,
-          500,
-          0,
-          canvas.width / 2 - 105,
-          canvas.height / 2 + 45,
-          205,
-          235,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      images.push(Lady(LadyData, canvas, gsap, scrollContainer, c));
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 + 17,
+      //     canvas.height / 2 - 83,
+      //     require("../../assets/home/images/header_14.png"),
+      //     430,
+      //     500,
+      //     0,
+      //     canvas.width / 2 - 105,
+      //     canvas.height / 2 + 45,
+      //     205,
+      //     235,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       //Circle with three colors of lady book --- done
       images.push(
@@ -1098,24 +1143,32 @@ const index = () => {
 
       //equipment --- done
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 + 45,
-          canvas.height / 2 + 75,
-          require("../../assets/home/images/header_1.png"),
-          150,
-          150,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const EquipmentData = getResponsiveEquipmentDimensions(
+        canvas,
+        screenWidth
       );
+      console.log("🚀 ~ file: home.jsx:468 ~ init ~ LadyData:", EquipmentData);
+
+      images.push(Equipment(EquipmentData, canvas, gsap, scrollContainer, c));
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 + 45,
+      //     canvas.height / 2 + 75,
+      //     require("../../assets/home/images/header_1.png"),
+      //     150,
+      //     150,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       //ship done
 
