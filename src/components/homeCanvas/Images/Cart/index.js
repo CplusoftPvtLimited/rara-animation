@@ -1,88 +1,88 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveEyeWithLabelValues = (canvas) => [
+const responsiveCartWithLabelValues = (canvas) => [
   {
     screenWidth: 375,
-    x: canvas.width / 2 + 85,
-    y: canvas.height / 2 + 45,
-    width: 40,
-    height: 50,
+    x: canvas.width - 70,
+    y: canvas.height / 2 - 200,
+    width: 80,
+    height: 90,
     rotation: 0,
-    updatedX: canvas.width / 2 + 40,
-    updatedY: canvas.height / 2 + 38,
-    updatedWidth: 60,
-    updatedHeight: 50,
+    updatedX: canvas.width / 2 + 148,
+    updatedY: canvas.height / 2 - 70,
+    updatedWidth: 40,
+    updatedHeight: 40,
     updatedRotation: 0,
   },
   // {
   //   screenWidth: 425,
-  //   x: canvas.width / 2 + 10,
-  //   y: canvas.height / 2 - 80,
-  //   width: 200,
-  //   height: 200,
-  //   rotation: 0,
-  //   updatedX: canvas.width / 2 - 105,
-  //   updatedY: 440,
-  //   updatedWidth: 170,
-  //   updatedHeight: 175,
-  //   updatedRotation: 0,
+  //   x: canvas.width - 40,
+  //   y: canvas.height / 2 - 140,
+  //   width: 30,
+  //   height: 30,
+  //   rotation: -40,
+  //   updatedX: canvas.width / 2 + 145,
+  //   updatedY: canvas.height / 2 - 75,
+  //   updatedWidth: 115,
+  //   updatedHeight: 85,
+  //   updatedRotation: 95,
   // },
   {
     screenWidth: 768,
-    x: canvas.width / 2 + 180,
-    y: canvas.height / 2 + 150,
-    width: 150,
-    height: 120,
+    x: canvas.width - 100,
+    y: canvas.height / 2 - 20,
+    width: 120,
+    height: 145,
     rotation: 0,
-    updatedX: canvas.width / 2 + 105,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 80,
-    updatedHeight: 70,
+    updatedX: canvas.width / 2 + 285,
+    updatedY: canvas.height / 2 - 30,
+    updatedWidth: 40,
+    updatedHeight: 40,
     updatedRotation: 0,
   },
   {
     screenWidth: 1024,
-    x: canvas.width / 2 + 300,
-    y: canvas.height / 2 + 150,
-    width: 180,
-    height: 120,
+    x: canvas.width - 125,
+    y: canvas.height / 2 - 20,
+    width: 150,
+    height: 175,
     rotation: 0,
-    updatedX: canvas.width / 2 + 105,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 80,
-    updatedHeight: 70,
+    updatedX: canvas.width / 2 + 285,
+    updatedY: canvas.height / 2 - 30,
+    updatedWidth: 65,
+    updatedHeight: 75,
     updatedRotation: 0,
   },
   {
     screenWidth: 1440,
-    x: canvas.width / 2 + 355,
-    y: canvas.height / 2 + 150,
-    width: 275,
-    height: 215,
+    x: canvas.width - 185,
+    y: canvas.height / 2 - 20,
+    width: 220,
+    height: 235,
     rotation: 0,
-    updatedX: canvas.width / 2 + 105,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 80,
-    updatedHeight: 70,
+    updatedX: canvas.width / 2 + 285,
+    updatedY: canvas.height / 2 - 30,
+    updatedWidth: 75,
+    updatedHeight: 85,
     updatedRotation: 0,
   },
   // full
   {
     screenWidth: 1920,
-    x: canvas.width / 2 + 355,
-    y: canvas.height / 2 + 150,
-    width: 275,
-    height: 215,
+    x: canvas.width - 185,
+    y: canvas.height / 2 - 20,
+    width: 230,
+    height: 255,
     rotation: 0,
-    updatedX: canvas.width / 2 + 105,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 80,
-    updatedHeight: 70,
+    updatedX: canvas.width / 2 + 285,
+    updatedY: canvas.height / 2 - 30,
+    updatedWidth: 75,
+    updatedHeight: 85,
     updatedRotation: 0,
   },
 ];
 
-export function getResponsiveEyeDimensions(canvas, screenWidth) {
+export function getResponsiveCartDimensions(canvas, screenWidth) {
   let x = canvas.width / 2 + 995;
   let y = canvas.height / 2 - 2055;
   let width = 0;
@@ -94,7 +94,7 @@ export function getResponsiveEyeDimensions(canvas, screenWidth) {
   let updatedHeight = 175;
   let updatedRotation = 0;
 
-  for (const rule of responsiveEyeWithLabelValues(canvas)) {
+  for (const rule of responsiveCartWithLabelValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -125,11 +125,11 @@ export function getResponsiveEyeDimensions(canvas, screenWidth) {
   };
 }
 
-export const Eye = (RockWithLabelData, canvas, gsap, scrollContainer, c) =>
+export const Cart = (RockWithLabelData, canvas, gsap, scrollContainer, c) =>
   new UploadedImage(
     RockWithLabelData.x,
     RockWithLabelData.y,
-    require("../../../../assets/home/images/header_8.png"),
+    require("../../../../assets/home/images/header_33.png"),
     RockWithLabelData.width,
     RockWithLabelData.height,
     RockWithLabelData.rotation,

@@ -1,88 +1,91 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveEquipmentWithLabelValues = (canvas) => [
+const responsiveManWithHandDirectionWithLabelValues = (canvas) => [
   {
     screenWidth: 375,
-    x: canvas.width / 2,
-    y: canvas.height / 2 + 50,
-    width: 40,
-    height: 70,
-    rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
-    updatedRotation: 0,
-  },
-  {
-    screenWidth: 425,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 150,
+    x: canvas.width,
+    y: canvas.height / 2 - 15,
+    width: 115,
     height: 150,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    updatedX: canvas.width / 2 + 115,
+    updatedY: canvas.height / 2,
+    updatedWidth: 75,
+    updatedHeight: 105,
     updatedRotation: 0,
   },
+  // {
+  //   screenWidth: 425,
+  //   x: canvas.width - 40,
+  //   y: canvas.height / 2 - 140,
+  //   width: 30,
+  //   height: 30,
+  //   rotation: -40,
+  //   updatedX: canvas.width / 2 + 145,
+  //   updatedY: canvas.height / 2 - 75,
+  //   updatedWidth: 115,
+  //   updatedHeight: 85,
+  //   updatedRotation: 95,
+  // },
   {
     screenWidth: 768,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 60,
-    height: 90,
+    x: canvas.width,
+    y: canvas.height / 2 - 15,
+    width: 115,
+    height: 150,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    updatedX: canvas.width / 2 + 135,
+    updatedY: canvas.height / 2,
+    updatedWidth: 75,
+    updatedHeight: 105,
     updatedRotation: 0,
   },
   {
     screenWidth: 1024,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 150,
+    x: canvas.width,
+    y: canvas.height / 2 - 15,
+    width: 115,
     height: 150,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    updatedX: canvas.width / 2 + 130,
+    updatedY: canvas.height / 2 + 15,
+    updatedWidth: 100,
+    updatedHeight: 140,
     updatedRotation: 0,
   },
   {
     screenWidth: 1440,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 150,
+    x: canvas.width,
+    y: canvas.height / 2 - 15,
+    width: 115,
     height: 150,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    updatedX: canvas.width / 2 + 175,
+    updatedY: canvas.height / 2 + 15,
+    updatedWidth: 115,
+    updatedHeight: 160,
     updatedRotation: 0,
   },
   // full
   {
     screenWidth: 1920,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 150,
+    x: canvas.width,
+    y: canvas.height / 2 - 15,
+    width: 115,
     height: 150,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    updatedX: canvas.width / 2 + 195,
+    updatedY: canvas.height / 2 + 15,
+    updatedWidth: 115,
+    updatedHeight: 160,
     updatedRotation: 0,
   },
 ];
 
-export function getResponsiveEquipmentDimensions(canvas, screenWidth) {
+export function getResponsiveManWithHandDirectionDimensions(
+  canvas,
+  screenWidth
+) {
   let x = canvas.width / 2 + 995;
   let y = canvas.height / 2 - 2055;
   let width = 0;
@@ -94,7 +97,7 @@ export function getResponsiveEquipmentDimensions(canvas, screenWidth) {
   let updatedHeight = 175;
   let updatedRotation = 0;
 
-  for (const rule of responsiveEquipmentWithLabelValues(canvas)) {
+  for (const rule of responsiveManWithHandDirectionWithLabelValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -125,7 +128,7 @@ export function getResponsiveEquipmentDimensions(canvas, screenWidth) {
   };
 }
 
-export const Equipment = (
+export const ManWithHandDirection = (
   RockWithLabelData,
   canvas,
   gsap,
@@ -135,7 +138,7 @@ export const Equipment = (
   new UploadedImage(
     RockWithLabelData.x,
     RockWithLabelData.y,
-    require("../../../../assets/home/images/header_1.png"),
+    require("../../../../assets/home/images/header_22.png"),
     RockWithLabelData.width,
     RockWithLabelData.height,
     RockWithLabelData.rotation,

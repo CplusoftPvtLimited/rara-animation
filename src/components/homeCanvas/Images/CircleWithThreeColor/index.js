@@ -1,67 +1,67 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveEquipmentWithLabelValues = (canvas) => [
+const responsiveCircleWithThreeColorWithLabelValues = (canvas) => [
   {
     screenWidth: 375,
-    x: canvas.width / 2,
-    y: canvas.height / 2 + 50,
-    width: 40,
-    height: 70,
+    x: canvas.width / 2 + 75,
+    y: canvas.height / 2 + 90,
+    width: 80,
+    height: 50,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
+    updatedX: canvas.width / 2 + 25,
+    updatedY: canvas.width / 2 + 160,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 425,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 150,
-    height: 150,
+    x: canvas.width / 2 + 260,
+    y: canvas.height / 2 + 210,
+    width: 220,
+    height: 165,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
+    updatedX: canvas.width / 2 + 25,
+    updatedY: canvas.width / 2 + 160,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 768,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 60,
+    x: canvas.width / 2 + 150,
+    y: canvas.height / 2 + 70,
+    width: 130,
     height: 90,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
+    updatedX: canvas.width / 2 + 25,
+    updatedY: canvas.width / 2 + 160,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 1024,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 150,
-    height: 150,
+    x: canvas.width / 2 + 260,
+    y: canvas.height / 2 + 210,
+    width: 170,
+    height: 135,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
+    updatedX: canvas.width / 2 + 25,
+    updatedY: canvas.width / 2 + 160,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 1440,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 150,
-    height: 150,
+    x: canvas.width / 2 + 260,
+    y: canvas.height / 2 + 210,
+    width: 220,
+    height: 165,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
+    updatedX: canvas.width / 2 + 25,
+    updatedY: canvas.width / 2 + 160,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
@@ -69,20 +69,23 @@ const responsiveEquipmentWithLabelValues = (canvas) => [
   // full
   {
     screenWidth: 1920,
-    x: canvas.width / 2 + 45,
-    y: canvas.height / 2 + 75,
-    width: 150,
-    height: 150,
+    x: canvas.width / 2 + 260,
+    y: canvas.height / 2 + 210,
+    width: 220,
+    height: 165,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.width / 2,
+    updatedX: canvas.width / 2 + 25,
+    updatedY: canvas.width / 2 + 160,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
 ];
 
-export function getResponsiveEquipmentDimensions(canvas, screenWidth) {
+export function getResponsiveCircleWithThreeColorDimensions(
+  canvas,
+  screenWidth
+) {
   let x = canvas.width / 2 + 995;
   let y = canvas.height / 2 - 2055;
   let width = 0;
@@ -94,7 +97,7 @@ export function getResponsiveEquipmentDimensions(canvas, screenWidth) {
   let updatedHeight = 175;
   let updatedRotation = 0;
 
-  for (const rule of responsiveEquipmentWithLabelValues(canvas)) {
+  for (const rule of responsiveCircleWithThreeColorWithLabelValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -125,7 +128,7 @@ export function getResponsiveEquipmentDimensions(canvas, screenWidth) {
   };
 }
 
-export const Equipment = (
+export const CircleWithThreeColor = (
   RockWithLabelData,
   canvas,
   gsap,
@@ -135,7 +138,7 @@ export const Equipment = (
   new UploadedImage(
     RockWithLabelData.x,
     RockWithLabelData.y,
-    require("../../../../assets/home/images/header_1.png"),
+    require("../../../../assets/home/images/header_3.png"),
     RockWithLabelData.width,
     RockWithLabelData.height,
     RockWithLabelData.rotation,
