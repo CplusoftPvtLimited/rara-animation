@@ -45,17 +45,65 @@ import {
   EllipseWithCircles,
 } from "../../components/homeCanvas/Images/EllipseWithCircle/EllipseWithCircle";
 
-//getResponsiveShipDimensions
-
 import {
   getResponsiveShipDimensions,
   Ship,
 } from "../../components/homeCanvas/Images/Ship";
 
 import {
+  getResponsiveInsectDimensions,
+  Insect,
+} from "../../components/homeCanvas/Images/Insect";
+
+import {
+  getResponsiveRoboticHandDimensions,
+  RoboticHand,
+} from "../../components/homeCanvas/Images/RoboticHand";
+
+import {
+  getResponsiveCircleOnGlassesPersonDimensions,
+  CircleOnGlassesPerson,
+} from "../../components/homeCanvas/Images/CircleOnGlassesPerson";
+
+import {
+  getResponsiveAeroplaneDimensions,
+  Aeroplane,
+} from "../../components/homeCanvas/Images/Aeroplane";
+
+import {
+  getResponsiveAeroplaneManDimensions,
+  AeroplaneMan,
+} from "../../components/homeCanvas/Images/AeroplaneMan";
+
+import {
+  getResponsiveHandDimensions,
+  Hand,
+} from "../../components/homeCanvas/Images/Hand";
+
+import {
+  getResponsivePersonWithBookDimensions,
+  PersonWithBook,
+} from "../../components/homeCanvas/Images/PersonWithBook";
+
+import {
+  getResponsiveResearchPersonDimensions,
+  ResearchPerson,
+} from "../../components/homeCanvas/Images/ResearchPerson";
+
+import {
   getResponsiveHeadSkullWithRedDotDimensions,
   HeadSkullWithRedDot,
 } from "../../components/homeCanvas/Images/HeadSkullWithRedDot";
+
+import {
+  getResponsiveMapDimensions,
+  Map,
+} from "../../components/homeCanvas/Images/Map";
+
+import {
+  getResponsivePenDimensions,
+  Pen,
+} from "../../components/homeCanvas/Images/Pen";
 
 import { CircleWithEllipseRotation } from "../../components/homeCanvas/CircleWithEllipseRotation";
 
@@ -63,7 +111,11 @@ import { UploadedImage } from "../../components/homeCanvas/UploadedImage";
 
 import { UploadedImageTransparent } from "../../components/homeCanvas/UploadImageTransparent";
 
-import { R_Alpabet } from "../../components/homeCanvas/Images/R_Aphabet";
+import {
+  getResponsiveRAlphabetDimensions,
+  RAlphabet,
+} from "../../components/homeCanvas/Images/RAlphabet";
+
 import { BuildingTwoRedLines } from "../../components/homeCanvas/Images/BuildingTwoRedLines";
 
 import GuideLines from "./Guidelines/index";
@@ -485,9 +537,17 @@ const index = () => {
         )
       );
 
-      // R alphabet --- DONE
+      // RAlphabet --- DONE
 
-      images.push(R_Alpabet(canvas, gsap, scrollContainer, c));
+      const RAlphabetWithLabelData = getResponsiveRAlphabetDimensions(
+        canvas,
+        screenWidth
+      );
+      images.push(
+        RAlphabet(RAlphabetWithLabelData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(RAlpabet(canvas, gsap, scrollContainer, c));
 
       // building with two red lines and left of center --- done
       images.push(BuildingTwoRedLines(canvas, gsap, scrollContainer, c));
@@ -875,24 +935,38 @@ const index = () => {
 
       // researcher person --- done
 
+      const ResearchPersonWithLabelData = getResponsiveResearchPersonDimensions(
+        canvas,
+        screenWidth
+      );
       images.push(
-        new UploadedImage(
-          canvas.width / 2 - 35,
-          canvas.height / 2 + 101,
-          require("../../assets/home/images/header_41.png"),
-          80,
-          130,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        ResearchPerson(
+          ResearchPersonWithLabelData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 - 35,
+      //     canvas.height / 2 + 101,
+      //     require("../../assets/home/images/header_41.png"),
+      //     80,
+      //     130,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // boy left to glasses man --- done
       images.push(
@@ -1192,24 +1266,36 @@ const index = () => {
 
       //circle with colors on glasses person --- DONE
 
+      const CircleOnGlassesPersonWithLabel =
+        getResponsiveCircleOnGlassesPersonDimensions(canvas, screenWidth);
       images.push(
-        new UploadedImage(
-          canvas.width / 2 - 445,
-          canvas.height / 2 - 13,
-          require("../../assets/home/images/header_4.png"),
-          215,
-          120,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        CircleOnGlassesPerson(
+          CircleOnGlassesPersonWithLabel,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 - 445,
+      //     canvas.height / 2 - 13,
+      //     require("../../assets/home/images/header_4.png"),
+      //     215,
+      //     120,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // person with lines and run pose ---done
 
@@ -1309,85 +1395,115 @@ const index = () => {
 
       // PEN ---- done
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 - 330,
-          -45,
-          require("../../assets/home/images/header_11.png"),
-          125,
-          240,
-          -3,
-          canvas.width / 2 - 180,
-          canvas.height / 2 - 190,
-          45,
-          72,
-          -10,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      const PenWithLabelData = getResponsivePenDimensions(canvas, screenWidth);
+      images.push(Pen(PenWithLabelData, canvas, gsap, scrollContainer, c));
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 - 330,
+      //     -45,
+      //     require("../../assets/home/images/header_11.png"),
+      //     125,
+      //     240,
+      //     -3,
+      //     canvas.width / 2 - 180,
+      //     canvas.height / 2 - 190,
+      //     45,
+      //     72,
+      //     -10,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // Map --- done
+
+      const MapWithLabelData = getResponsiveMapDimensions(canvas, screenWidth);
+      images.push(Map(MapWithLabelData, canvas, gsap, scrollContainer, c));
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 - 310,
+      //     5,
+      //     require("../../assets/home/images/header_54.png"),
+      //     215,
+      //     125,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
+
+      //AEROPLANE MAN ---- done
+
+      const AeroplaneManWithLabelData = getResponsiveAeroplaneManDimensions(
+        canvas,
+        screenWidth
+      );
       images.push(
-        new UploadedImage(
-          canvas.width / 2 - 310,
-          5,
-          require("../../assets/home/images/header_54.png"),
-          215,
-          125,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        AeroplaneMan(
+          AeroplaneManWithLabelData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
 
-      //AEROPLANE MAN ---- done
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 - 70,
-          10,
-          require("../../assets/home/images/header_20.png"),
-          40,
-          90,
-          -20,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 - 70,
+      //     10,
+      //     require("../../assets/home/images/header_20.png"),
+      //     40,
+      //     90,
+      //     -20,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // Aeroplane --- done
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 - 145,
-          45,
-          require("../../assets/home/images/header_2.png"),
-          180,
-          70,
-          0,
-          canvas.width / 2 + 70,
-          canvas.height / 2 - 243,
-          100,
-          40,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const AeroplaneWithLabelData = getResponsiveAeroplaneDimensions(
+        canvas,
+        screenWidth
       );
+      images.push(
+        Aeroplane(AeroplaneWithLabelData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 - 145,
+      //     45,
+      //     require("../../assets/home/images/header_2.png"),
+      //     180,
+      //     70,
+      //     0,
+      //     canvas.width / 2 + 70,
+      //     canvas.height / 2 - 243,
+      //     100,
+      //     40,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // Skull with brain --- done
       images.push(
@@ -1488,87 +1604,122 @@ const index = () => {
 
       // hand --- DONE
 
-      images.push(
-        new UploadedImage(
-          55,
-          canvas.height - 270,
-          require("../../assets/home/images/header_7.png"),
-          300,
-          285,
-          0,
-          canvas.width / 2 - 345,
-          canvas.height / 2 + 40,
-          165,
-          150,
-          5,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      const HandLabelData = getResponsiveHandDimensions(canvas, screenWidth);
+
+      images.push(Hand(HandLabelData, canvas, gsap, scrollContainer, c));
+
+      // images.push(
+      //   new UploadedImage(
+      //     55,
+      //     canvas.height - 270,
+      //     require("../../assets/home/images/header_7.png"),
+      //     300,
+      //     285,
+      //     0,
+      //     canvas.width / 2 - 345,
+      //     canvas.height / 2 + 40,
+      //     165,
+      //     150,
+      //     5,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // robotic hand --- done
 
-      images.push(
-        new UploadedImage(
-          275,
-          canvas.height - 185,
-          require("../../assets/home/images/header_5.png"),
-          255,
-          235,
-          0,
-          canvas.width / 2 - 275,
-          canvas.height / 2 + 100,
-          100,
-          100,
-          5,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const RoboticHanLabelData = getResponsiveRoboticHandDimensions(
+        canvas,
+        screenWidth
       );
+
+      images.push(
+        RoboticHand(RoboticHanLabelData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(
+      //   new UploadedImage(
+      //     275,
+      //     canvas.height - 185,
+      //     require("../../assets/home/images/header_5.png"),
+      //     255,
+      //     235,
+      //     0,
+      //     canvas.width / 2 - 275,
+      //     canvas.height / 2 + 100,
+      //     100,
+      //     100,
+      //     5,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // insect
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 - 280,
-          canvas.height - 115,
-          require("../../assets/home/images/header_53.png"),
-          150,
-          115,
-          0,
-          canvas.width / 2 - 160,
-          canvas.height / 2 + 175,
-          70,
-          55,
-          90,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const InsectLabelData = getResponsiveInsectDimensions(
+        canvas,
+        screenWidth
       );
+
+      images.push(Insect(InsectLabelData, canvas, gsap, scrollContainer, c));
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 - 280,
+      //     canvas.height - 115,
+      //     require("../../assets/home/images/header_53.png"),
+      //     150,
+      //     115,
+      //     0,
+      //     canvas.width / 2 - 160,
+      //     canvas.height / 2 + 175,
+      //     70,
+      //     55,
+      //     90,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       //person with book holding --- DONE
 
+      const PersonWithBookLabelData = getResponsivePersonWithBookDimensions(
+        canvas,
+        screenWidth
+      );
+
       images.push(
-        new UploadedImage(
-          75,
-          canvas.height - 135,
-          require("../../assets/home/images/header_40.png"),
-          100,
-          135,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        PersonWithBook(
+          PersonWithBookLabelData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     75,
+      //     canvas.height - 135,
+      //     require("../../assets/home/images/header_40.png"),
+      //     100,
+      //     135,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
     }
 
     // Animation Loop
