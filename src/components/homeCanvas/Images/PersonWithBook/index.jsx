@@ -69,9 +69,9 @@ const responsivePersonWithBookValues = (canvas) => [
   {
     screenWidth: 1920,
     x: 75,
-    y: canvas.height - 135,
-    width: 100,
-    height: 135,
+    y: canvas.height - 165,
+    width: 140,
+    height: 165,
     rotation: 0,
     updatedX: canvas.width / 2 - 275,
     updatedY: canvas.height / 2 + 100,

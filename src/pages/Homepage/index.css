@@ -777,17 +777,17 @@ html.has-scroll-smooth {
     position: relative;
   }
   .lVision-section-image.-first {
-    width: 37rem;
-    height: 35.875rem;
+    width: 34rem;
+    height: 17.875rem;
     background-size: auto 100%;
     position: relative;
     right: -0.1875rem;
   }
   .lVision-illust.-first {
-    bottom: 12.5rem;
-    left: 11.25rem;
-    width: 5.6875rem;
-    height: 6.25rem;
+    bottom: 4rem;
+    left: 3rem;
+    width: 3.6875rem;
+    height: 2.25rem;
   }
   .lVision-illust.-second {
     width: 4.6875rem;
@@ -830,8 +830,8 @@ html.has-scroll-smooth {
 }
 
 .lVision-section-writing.-first {
-  width: 31.25rem;
-  margin-right: 7.5rem;
+  width: 40.25rem;
+  margin-right: 2.5rem;
 }
 .lVision-section-writing-text.-mb {
   margin-bottom: 2.375rem;
@@ -877,8 +877,21 @@ html.has-scroll-smooth {
   }
 }
 @media screen and (min-width: 768px) {
+  .lVision-illust img,
+  .lVision-illust picture {
+    width: 75%;
+    height: auto;
+    display: block;
+  }
+
+  .lVision-section.-first {
+    padding: 8.125rem 3.125rem 8.125rem 8.125rem;
+    display: flex;
+  }
+
   .lVision-section-writing-text {
-    font-size: 1.025rem;
+    font-size: 12px;
+    gap: 100px;
   }
   ._sp {
     display: none !important;
@@ -898,7 +911,7 @@ html.has-scroll-smooth {
 }
 
 .lVision-section.-second {
-  padding: 0 15.5rem 8.625rem 33.75rem;
+  padding: 0 7.5rem 8.625rem 20.75rem;
 }
 
 .lVision-section-writing-text.-mb {
@@ -959,15 +972,16 @@ html.has-scroll-smooth {
   bottom: 2.5rem;
   right: 5.5rem;
 }
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   .lVision-illust.-sixth {
     width: 4.25rem;
     height: 4.125rem;
+    right: 0rem !important;
   }
 }
 
 .lVision-section.-third {
-  padding: 0 20.9375rem 0 7.1875rem;
+  padding: 0 5.9375rem 0 1.1875rem;
   display: flex;
   flex-direction: row-reverse;
 }
@@ -975,12 +989,134 @@ html.has-scroll-smooth {
   width: 44.375rem;
 }
 .lVision-section-image.-third {
-  width: 22rem;
-  height: 18.75rem;
-  margin-right: 7.375rem;
+  width: 33rem;
+  height: 14.75rem;
+  margin-right: 3.375rem;
   margin-top: 4.6875rem;
 }
 .lVision-illust.-sixth {
   top: 0;
   right: 6.5625rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .lVision-section.-first {
+    padding: 8.125rem 3.125rem 8.125rem 8.125rem;
+    display: flex;
+  }
+  .lVision-section-writing-text {
+    font-size: 12px;
+  }
+  .lVision-section-image.-first {
+    width: 42.1875rem;
+    height: 35.875rem;
+    background-size: auto 85%;
+    position: relative;
+    right: -0.1875rem;
+    background-repeat: no-repeat;
+  }
+  .lVision-section.-second {
+    /* padding: 0 13.5rem 8.625rem 25.75rem; */
+    /* padding: 0 13.5rem 8.625rem 35.75rem; */
+  }
+
+  .lVision-section.-third {
+    padding: 0 13.9375rem 0 4.1875rem;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .lVision-section.-third {
+    padding: 0px 19.9375rem 0 3.1875rem !important;
+    display: flex;
+    gap: 85px !important;
+    flex-direction: row-reverse;
+  }
+  .lVision-section.-first {
+    padding: 3.125rem 5.8125rem 6.375rem 18.75rem;
+    display: flex;
+  }
+  .lVision-section-writing-text {
+    font-size: 1.025rem;
+  }
+  .lVision-illust.-first {
+    bottom: 5rem;
+    left: 11.25rem;
+    width: 5.6875rem;
+    height: 6.25rem;
+  }
+  .lVision-section-image.-first {
+    width: 36.1875rem;
+    height: 35.875rem;
+    background-size: auto 100%;
+    position: relative;
+    right: -0.1875rem;
+  }
+  .lVision-section-image.-third {
+    width: 20rem;
+    height: 18.75rem;
+    margin-right: 3.375rem;
+    margin-top: 4.6875rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .lVision-section.-first {
+    padding: 3.125rem 0rem 6.375rem 2.75rem;
+    display: flex;
+  }
+  .lVision-section-writing-text {
+    font-size: 12px;
+  }
+  .lVision-section.-second {
+    padding: 0 2.5rem 8.625rem 2.75rem;
+  }
+  .lVision-section.-third {
+    padding: 0 2.5rem 8.625rem 2.75rem;
+    display: block;
+    flex-direction: row-reverse;
+  }
+  .lVision-section-writing.-third {
+    width: 100%;
+  }
+  .lVision-illust.-third {
+    display: none;
+  }
+  .lVision-node > img {
+    width: 100%;
+    display: none;
+    height: unset;
+  }
+  .lVision-illust img,
+  .lVision-illust picture {
+    width: 100%;
+    height: auto;
+    display: none;
+  }
+
+  .lVision-section-image.-third {
+    width: 13rem;
+    height: 11.75rem;
+    margin-right: 3.375rem;
+    margin-top: 4.6875rem;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1920) {
+  .lVision-section-writing-text {
+    font-size: 1.2rem;
+  }
+  .lVision-section.-second {
+    padding: 0 13.5rem 8.625rem 31.75rem;
+  }
+  .lVision-section-image.-third {
+    width: 13rem;
+    height: 11.75rem;
+    margin-right: 3.375rem;
+    margin-top: 4.6875rem;
+    margin: auto;
+  }
 }

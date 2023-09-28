@@ -69,9 +69,9 @@ const responsiveHandValues = (canvas) => [
   {
     screenWidth: 1920,
     x: 55,
-    y: canvas.height - 270,
-    width: 300,
-    height: 285,
+    y: canvas.height - 400,
+    width: 350,
+    height: 325,
     rotation: 0,
     updatedX: canvas.width / 2 - 345,
     updatedY: canvas.height / 2 + 40,

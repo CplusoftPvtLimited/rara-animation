@@ -82,9 +82,9 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   {
     screenWidth: 1920,
     x: 145,
-    y: 360,
-    width: 270,
-    height: 200,
+    y: 480,
+    width: 400,
+    height: 250,
     rotation: 0,
     updatedX: canvas.width / 2 - 210,
     updatedY: canvas.height / 2 - 90,

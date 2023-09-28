@@ -69,9 +69,9 @@ const responsiveRAlphabetValues = (canvas) => [
   {
     screenWidth: 1920,
     x: 15,
-    y: canvas.height - 195,
-    width: 80,
-    height: 105,
+    y: canvas.height - 245,
+    width: 100,
+    height: 125,
     rotation: -20,
     updatedX: canvas.width / 2 - 275,
     updatedY: canvas.height / 2 + 100,

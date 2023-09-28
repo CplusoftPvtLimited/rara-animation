@@ -69,7 +69,7 @@ const responsiveRoboticHandValues = (canvas) => [
   {
     screenWidth: 1920,
     x: 275,
-    y: canvas.height - 185,
+    y: canvas.height - 250,
     width: 255,
     height: 235,
     rotation: 0,

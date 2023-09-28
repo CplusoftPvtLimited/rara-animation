@@ -2839,7 +2839,7 @@ const index = () => {
               </div>
             </div>
             <div
-              className="lVision-section-image -first -view"
+              className="lVision-section-image -first -view hidden lg:block"
               data-play-sprite=""
               data-play-sprite-step="25"
               data-play-sprite-duration="0.8"
@@ -2941,6 +2941,18 @@ const index = () => {
               </picture>
             </div>
           </div>
+          <div
+            className="lVision-section-image -first -view md:hidden"
+            data-play-sprite=""
+            data-play-sprite-step="25"
+            data-play-sprite-duration="0.8"
+            style={{
+              backgroundImage: `url(${headOpenBGImage})`,
+              transform: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,35.8191,0,1)",
+            }}
+            data-scroll-speed="0.7"
+            data-scroll=""
+          ></div>
           <div className="lVision-section -second" data-vision-section="2">
             <div className="lVision-section-writing">
               <div
@@ -3032,7 +3044,7 @@ const index = () => {
                 transform: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,-75.0279,0,1)",
               }}
             >
-              <picture>
+              <picture className="hidden">
                 <source
                   srcSet="
                         https://rara.ritsumei.ac.jp/assets/img/index/vision/sp/1x/b-vision_illust06.png    1x,
