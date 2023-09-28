@@ -479,6 +479,7 @@ const index = () => {
         id="fellows"
         data-fellows-inner=""
         data-scroll=""
+        id="fellows_section"
       >
         <div className="lFellows-content" data-fellows-content="">
           <div className="lFellows-slider" data-fellows-slider="">
@@ -771,6 +772,7 @@ const index = () => {
                     <li className="lFellows-slider-dots-item"></li>
                   </ul> */}
             </div>
+
             <div className="lFellows-btn">
               <a className="lFellows-btn-link" href="/fellows">
                 VIEW ALL FELLOWS

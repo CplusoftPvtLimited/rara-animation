@@ -7,7 +7,7 @@ function News() {
     <section>
       {/************************** Svg ******************************/}
       <div className="gap-12 mt-[150px] lg:mt-[300px] lg:ml-[130px] lg:flex">
-        <div className=" w-[80%] pl-[30px] lg:w-[100%] ">
+        <div className=" w-[80%] pl-[30px] lg:w-[100%]">
           <h1 className="lFellows-title-main" data-fellows-title="">
             <svg viewBox="0 0 83.8 14">
               <title>UPDATES</title>

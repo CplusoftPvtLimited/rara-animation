@@ -5,12 +5,60 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./index.css";
 
 gsap.registerPlugin(ScrollTrigger);
-
 const index = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
+  };
+
+  const scrollToHomeSection = () => {
+    const homeSection = document.getElementById("home-section");
+
+    if (homeSection) {
+      homeSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToVisionSection = () => {
+    const visionSection = document.getElementById("vision-section");
+
+    if (visionSection) {
+      visionSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToGuidelinesSection = () => {
+    const guidelinesSection = document.getElementById("guideline");
+
+    if (guidelinesSection) {
+      guidelinesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToFellowsSection = () => {
+    const fellowsSection = document.getElementById("fellows_section");
+
+    if (fellowsSection) {
+      fellowsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToUpdatesSection = () => {
+    console.log("scrollToUpdatesSection");
+    const updatesSection = document.getElementById("updates-section");
+
+    if (updatesSection) {
+      updatesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToContactSection = () => {
+    const contactSection = document.getElementById("contact-section");
+
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -350,10 +398,10 @@ const index = () => {
                     <li className="cMenuContent-list-item -anchor">
                       <a
                         className="cMenuContent-list-link -guideline"
-                        href="/"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToHomeSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -386,10 +434,10 @@ const index = () => {
                     <li className="cMenuContent-list-item -anchor">
                       <a
                         className="cMenuContent-list-link -guideline"
-                        href="/#vision"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToVisionSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -425,10 +473,10 @@ const index = () => {
                     >
                       <a
                         className="cMenuContent-list-link -guideline"
-                        href="/#contact"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToContactSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -461,10 +509,11 @@ const index = () => {
                     <li className="cMenuContent-list-item">
                       <a
                         className="cMenuContent-list-link -fellows"
-                        href="/#research"
+                        // href="/#research"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToUpdatesSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -527,10 +576,11 @@ const index = () => {
                     <li className="cMenuContent-list-item">
                       <a
                         className="cMenuContent-list-link -fellows"
-                        href="/fellow"
+                        // href="/fellow"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToFellowsSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -620,10 +670,15 @@ const index = () => {
                   transform: "scaleX(1.05)",
                 }}
               >
-                <a className="cHeader-list-link" data-disable-hash="">
+                <a
+                  className="cHeader-list-link"
+                  data-disable-hash=""
+                  onClick={scrollToHomeSection}
+                >
                   DISCOVER
                 </a>
               </li>
+
               <li
                 className="cFlatText cHeader-list-item"
                 data-flat-text=""
@@ -634,12 +689,13 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/#vision"
                   data-disable-hash=""
+                  onClick={scrollToVisionSection}
                 >
                   EXPLORE
                 </a>
               </li>
+
               <li
                 className="cFlatText cHeader-list-item"
                 data-flat-text=""
@@ -650,8 +706,8 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/#guideline"
                   data-disable-hash=""
+                  onClick={scrollToGuidelinesSection}
                 >
                   FOCUS AREA
                 </a>
@@ -666,8 +722,9 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/#fellows_trigger"
+                  // href="/#fellows_trigger"
                   data-disable-hash=""
+                  onClick={scrollToFellowsSection}
                 >
                   FELLOWS
                 </a>
@@ -682,8 +739,8 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/#updates"
                   data-disable-hash=""
+                  onClick={scrollToUpdatesSection}
                 >
                   RESEARCH
                 </a>

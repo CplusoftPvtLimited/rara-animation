@@ -47,6 +47,7 @@ const index = () => {
             className="cSubTitle -right lContact-title-sub"
             data-subtitle="true"
             style={{ overflow: "hidden" }}
+            id="contact-section"
           >
             <div
               className="cFlatText cSubTitle-inner"

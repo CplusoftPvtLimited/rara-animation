@@ -129,7 +129,6 @@ import GuideLines from "./Guidelines/index";
 import Fellows from "./Fellows/index";
 import Blogs from "./Blogs/index";
 import Contact from "./Contact/index";
-// import { Equipment } from "../../components/homeCanvas/Images/equipment";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
@@ -597,25 +596,6 @@ const index = () => {
 
       images.push(Aalphabet(AalphabetData, canvas, gsap, scrollContainer, c));
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width - 115,
-      //     canvas.height / 2 - 140,
-      //     require("../../assets/home/images/header_31.png"),
-      //     40,
-      //     30,
-      //     -40,
-      //     canvas.width / 2 + 145,
-      //     canvas.height / 2 - 45,
-      //     115,
-      //     85,
-      //     95,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
       // man with hand direction ---- done
 
       const ManWithHandDirectionData =
@@ -659,48 +639,10 @@ const index = () => {
         RoofWithRedTop(RoofWithRedTopData, canvas, gsap, scrollContainer, c)
       );
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     require("../../assets/home/images/header_34.png"),
-      //     0,
-      //     0,
-      //     0,
-      //     canvas.width / 2 + 45,
-      //     canvas.height / 2 - 15,
-      //     185,
-      //     150,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
       // red book ---- done
 
       const RedBookData = getResponsiveRedBookDimensions(canvas, screenWidth);
       images.push(RedBook(RedBookData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 220,
-      //     canvas.height / 2 - 220,
-      //     require("../../assets/home/images/header_36.png"),
-      //     100,
-      //     95,
-      //     0,
-      //     canvas.width / 2 + 140,
-      //     canvas.height / 2 - 130,
-      //     45,
-      //     35,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
 
       // car image --- done
 
@@ -754,30 +696,8 @@ const index = () => {
         )
       );
 
-      // girl --- done
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 205,
-      //     canvas.height / 2 - 255,
-      //     require("../../assets/home/images/header_9.png"),
-      //     300,
-      //     340,
-      //     0,
-      //     canvas.width / 2 - 0,
-      //     canvas.height / 2 - 33,
-      //     170,
-      //     175,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
       //Girl  --- done
       const GirlData = getResponsiveGirlDimensions(canvas, screenWidth);
-      console.log("🚀 ~ file: home.jsx:468 ~ init ~ GirlData:", GirlData);
-
       images.push(YoungGirl(GirlData, canvas, gsap, scrollContainer, c));
 
       //girl circle ---- DONE
@@ -786,31 +706,7 @@ const index = () => {
         canvas,
         screenWidth
       );
-      console.log(
-        "🚀 ~ file: home.jsx:468 ~ init ~ GirlCircleData:",
-        GirlCircleData
-      );
-
       images.push(GirlCircle(GirlCircleData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 400,
-      //     canvas.height / 2 - 145,
-      //     require("../../assets/home/images/header_6.png"),
-      //     200,
-      //     130,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
 
       // man with joined hand --- done
       // GlassesBoy
@@ -821,25 +717,6 @@ const index = () => {
       );
       images.push(GlassesBoy(GlassesBoyData, canvas, gsap, scrollContainer, c));
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 300,
-      //     canvas.width,
-      //     require("../../assets/home/images/header_42.png"),
-      //     100,
-      //     135,
-      //     0,
-      //     canvas.width / 2 + 95,
-      //     canvas.height / 2 + 40,
-      //     95,
-      //     125,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
       // black rock front of girl and behind book lady --- done
 
       const BlackRockData = getResponsiveBlackRockDimensions(
@@ -848,47 +725,8 @@ const index = () => {
       );
       images.push(BlackRock(BlackRockData, canvas, gsap, scrollContainer, c));
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     require("../../assets/home/images/header_35.png"),
-      //     0,
-      //     0,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2 + 80,
-      //     200,
-      //     75,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // eye --- done
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 355,
-      //     canvas.height / 2 + 150,
-      //     require("../../assets/home/images/header_8.png"),
-      //     275,
-      //     215,
-      //     0,
-      //     canvas.width / 2 + 105,
-      //     canvas.height / 2 + 100,
-      //     130,
-      //     95,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
+      // Eye
       const EyeData = getResponsiveEyeDimensions(canvas, screenWidth);
-      console.log("🚀 ~ file: home.jsx:468 ~ init ~ LadyData:", EyeData);
-
       images.push(Eye(EyeData, canvas, gsap, scrollContainer, c));
 
       // Leaf --- done
@@ -917,54 +755,14 @@ const index = () => {
         canvas,
         screenWidth
       );
-
       images.push(
         PersonAboveCart(PersonAboveCartData, canvas, gsap, scrollContainer, c)
       );
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width - 91,
-      //     canvas.height / 2 - 75,
-      //     require("../../assets/home/images/header_17.png"),
-      //     50,
-      //     100,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
       // cart --- done
 
       const CartData = getResponsiveCartDimensions(canvas, screenWidth);
-
       images.push(Cart(CartData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width - 185,
-      //     canvas.height / 2 - 20,
-      //     require("../../assets/home/images/header_33.png"),
-      //     230,
-      //     255,
-      //     0,
-      //     canvas.width / 2 + 285,
-      //     canvas.height / 2 - 30,
-      //     75,
-      //     85,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
 
       // person on phone bottom right corner
 
@@ -996,25 +794,6 @@ const index = () => {
       images.push(
         ResearchPerson(ResearchPersonData, canvas, gsap, scrollContainer, c)
       );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 35,
-      //     canvas.height / 2 + 101,
-      //     require("../../assets/home/images/header_41.png"),
-      //     80,
-      //     130,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
 
       // boy left to glasses man --- done
       images.push(
@@ -1059,24 +838,24 @@ const index = () => {
 
       //glasses peron --- DONE
 
-      // images.push(
-      //   new UploadedImage(
-      //     265,
-      //     canvas.height / 2 - 180,
-      //     require("../../assets/home/images/header_10.png"),
-      //     370,
-      //     440,
-      //     0,
-      //     canvas.width / 2 - 210,
-      //     canvas.height / 2 - 90,
-      //     175,
-      //     200,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
+      images.push(
+        new UploadedImage(
+          265,
+          canvas.height / 2 - 180,
+          require("../../assets/home/images/.png"),
+          370,
+          440,
+          0,
+          canvas.width / 2 - 210,
+          canvas.height / 2 - 90,
+          175,
+          200,
+          0,
+          gsap,
+          scrollContainer,
+          c
+        )
+      );
 
       // red A alphabet --- done
 
@@ -1204,30 +983,10 @@ const index = () => {
       const LadyData = getResponsiveLadyDimensions(canvas, screenWidth);
       images.push(Lady(LadyData, canvas, gsap, scrollContainer, c));
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 17,
-      //     canvas.height / 2 - 83,
-      //     require("../../assets/home/images/header_14.png"),
-      //     430,
-      //     500,
-      //     0,
-      //     canvas.width / 2 - 105,
-      //     canvas.height / 2 + 45,
-      //     205,
-      //     235,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
       //Circle with three colors of lady book --- done
 
       const CircleWithThreeColorData =
         getResponsiveCircleWithThreeColorDimensions(canvas, screenWidth);
-
       images.push(
         CircleWithThreeColor(
           CircleWithThreeColorData,
@@ -1238,25 +997,6 @@ const index = () => {
         )
       );
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 260,
-      //     canvas.height / 2 + 210,
-      //     require("../../assets/home/images/header_3.png"),
-      //     220,
-      //     165,
-      //     0,
-      //     canvas.width / 2 + 25,
-      //     canvas.height / 2 + 160,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
       //equipment --- done
 
       const EquipmentData = getResponsiveEquipmentDimensions(
@@ -1264,25 +1004,6 @@ const index = () => {
         screenWidth
       );
       images.push(Equipment(EquipmentData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 45,
-      //     canvas.height / 2 + 75,
-      //     require("../../assets/home/images/header_1.png"),
-      //     150,
-      //     150,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
 
       //ship done
 
@@ -1328,24 +1049,24 @@ const index = () => {
 
       // person with lines and run pose ---done
 
-      // images.push(
-      //   new UploadedImage(
-      //     -45,
-      //     77,
-      //     require("../../assets/home/images/header_13_1.png"),
-      //     295,
-      //     260,
-      //     0,
-      //     canvas.width / 2 - 420,
-      //     canvas.height / 2 - 62,
-      //     135,
-      //     115,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
+      images.push(
+        new UploadedImage(
+          -45,
+          77,
+          require("../../assets/home/images/header_13_1.png"),
+          295,
+          260,
+          0,
+          canvas.width / 2 - 420,
+          canvas.height / 2 - 62,
+          135,
+          115,
+          0,
+          gsap,
+          scrollContainer,
+          c
+        )
+      );
 
       //head skull with red dot --- done
 
@@ -1477,25 +1198,6 @@ const index = () => {
       const SkullData = getResponsiveSkullDimensions(canvas, screenWidth);
       images.push(Skull(SkullData, canvas, gsap, scrollContainer, c));
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 80,
-      //     -20,
-      //     require("../../assets/home/images/header_46.png"),
-      //     125,
-      //     135,
-      //     0,
-      //     canvas.width / 2 + 235,
-      //     canvas.height / 2 - 145,
-      //     80,
-      //     50,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
       // Upper circle with man --- done
       images.push(
         new UploadedImage(
@@ -1518,24 +1220,24 @@ const index = () => {
 
       // ellipse with circles and lines --- DONE
 
-      // images.push(
-      //   new UploadedImage(
-      //     145,
-      //     220,
-      //     require("../../assets/home/images/header_12.png"),
-      //     270,
-      //     200,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
+      images.push(
+        new UploadedImage(
+          145,
+          220,
+          require("../../assets/home/images/header_12.png"),
+          270,
+          200,
+          0,
+          canvas.width / 2,
+          canvas.height / 2,
+          0,
+          0,
+          0,
+          gsap,
+          scrollContainer,
+          c
+        )
+      );
 
       //big red circle --- DONE
 
@@ -1560,24 +1262,24 @@ const index = () => {
 
       // hand --- DONE
 
-      // images.push(
-      //   new UploadedImage(
-      //     55,
-      //     canvas.height - 270,
-      //     require("../../assets/home/images/header_7.png"),
-      //     300,
-      //     285,
-      //     0,
-      //     canvas.width / 2 - 345,
-      //     canvas.height / 2 + 40,
-      //     165,
-      //     150,
-      //     5,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
+      images.push(
+        new UploadedImage(
+          55,
+          canvas.height - 270,
+          require("../../assets/home/images/header_7.png"),
+          300,
+          285,
+          0,
+          canvas.width / 2 - 345,
+          canvas.height / 2 + 40,
+          165,
+          150,
+          5,
+          gsap,
+          scrollContainer,
+          c
+        )
+      );
 
       // robotic hand --- done
 
@@ -2684,7 +2386,7 @@ const index = () => {
         <canvas id="canvas1" width="1538" height="800"></canvas>
       </div>
 
-      <div className="lVision" id="vision" data-vision="">
+      <div className="lVision" id="vision-section" data-vision="">
         <div className="lVision-contents">
           <div className="lVision-section -first -flex" data-vision-section="1">
             <div className="lVision-section-writing -first">

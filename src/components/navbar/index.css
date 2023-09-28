@@ -152,6 +152,12 @@ p {
   }
 } */
 
+@media screen and (max-width: 768px) {
+  .cHeader-content {
+    display: none;
+  }
+}
+
 @media screen and (min-width: 375px) {
   .cMenuContent-list-link.-home {
     width: 6rem;
@@ -303,7 +309,6 @@ p {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  margin: 0px 15px;
   transition-duration: 0.4s;
   cursor: pointer;
   font-size: 0.78125rem;

@@ -323,7 +323,7 @@ img {
   }
 
   .cHeader-list-item + .cHeader-list-item {
-    margin-left: 2rem;
+    margin-left: 1rem;
   }
 
   #pIndex .cHeader-logo {
@@ -652,6 +652,8 @@ a {
 .cMenu-btn-container {
   display: block;
   text-align: right;
+  position: relative;
+  top: 6px;
 }
 .cMenu-bg-overlay {
   background-color: #000;
