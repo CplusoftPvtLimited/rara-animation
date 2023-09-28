@@ -235,12 +235,12 @@ img {
     padding-top: 5.25rem;
     padding-left: 11rem;
   }
-  .cMenuContent-list {
+  /* .cMenuContent-list {
     margin-top: 2.375rem;
-  }
-  .cMenuContent-list-link.-home {
+  } */
+  /* .cMenuContent-list-link.-home {
     width: 10.44rem;
-  }
+  } */
   .cMenuContent-list-link {
     position: relative;
   }
@@ -271,7 +271,7 @@ img {
   }
 
   .cMenuContent-list-link.-guideline {
-    width: 5.34rem;
+    /* width: 5.34rem; */
   }
 
   .cMenuContent-list-item.-anchor + .cMenuContent-list-item.-anchor {
@@ -284,9 +284,9 @@ img {
   .cMenuContent-list-item + .cMenuContent-list-item {
     margin-top: 1.6875rem;
   }
-  .cMenuContent-list-link.-fellows {
+  /* .cMenuContent-list-link.-fellows {
     width: 15.54rem;
-  }
+  } */
   .cMenuContent-list-item + .cMenuContent-list-item {
     margin-top: 1.6875rem;
   }
@@ -502,9 +502,52 @@ ul {
   -webkit-overflow-scrolling: touch;
 }
 .cMenuContent-content {
+  /* width: 21rem; */
   width: 31.5rem;
   height: 35.25rem;
 }
+
+@media (min-width: 425px) {
+  .cMenuContent-content {
+    width: 24.5rem;
+    height: 35.25rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .cMenuContent-content {
+    width: 31.5rem;
+    height: 35.25rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .cMenuContent-content {
+    width: 29.5rem;
+    height: 35.25rem;
+  }
+}
+
+/* @media (min-width: 1024px) {
+  .cMenuContent-content {
+    width: 31.5rem;
+    height: 35.25rem;
+  }
+}
+@media (min-width: 768px) {
+  .cMenuContent-content {
+    width: 21rem;
+    height: 35.25rem;
+  }
+}
+
+@media (min-width: 375px) {
+  .cMenuContent-content {
+    width: 31.5rem;
+    height: 35.25rem;
+  }
+} */
+
 .cModal {
   z-index: 1300;
   display: none;
@@ -634,7 +677,24 @@ a {
   pointer-events: none;
   transform: scale(0);
   transform-origin: right top;
+
+  translate: none;
+  rotate: none;
+  scale: none;
+  transform: translate(111px, -43px);
 }
+
+/* @media (min-width: 768px) { */
+/* @media screen and (min-width: 768px) {
+  .cMenu-bg {
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(111px, -43px);
+    transform-origin: right top;
+  }
+} */
+
 .cMenu-btn {
   margin-left: auto;
   display: block;

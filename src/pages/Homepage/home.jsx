@@ -893,24 +893,24 @@ const index = () => {
 
       // Leaf --- done
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width - 225,
-      //     canvas.height / 2 - 85,
-      //     require("../../assets/home/images/header_50.png"),
-      //     150,
-      //     115,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
+      images.push(
+        new UploadedImage(
+          canvas.width - 225,
+          canvas.height / 2 - 85,
+          require("../../assets/home/images/header_50.png"),
+          150,
+          115,
+          0,
+          canvas.width / 2,
+          canvas.height / 2,
+          0,
+          0,
+          0,
+          gsap,
+          scrollContainer,
+          c
+        )
+      );
 
       // person above the cart --- done
       const PersonAboveCartData = getResponsivePersonAboveCartDimensions(
