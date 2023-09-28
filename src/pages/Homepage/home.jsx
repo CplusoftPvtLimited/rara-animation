@@ -2767,7 +2767,10 @@ const index = () => {
 
       <div className="lVision" id="vision" data-vision="">
         <div className="lVision-contents">
-          <div className="lVision-section -first -flex" data-vision-section="1">
+          <div
+            className="lVision-section -first -flex "
+            data-vision-section="1"
+          >
             <div className="lVision-section-writing -first">
               <div
                 className="cFlatText lVision-section-writing-text -mb"
@@ -2839,7 +2842,7 @@ const index = () => {
               </div>
             </div>
             <div
-              className="lVision-section-image -first -view hidden lg:block"
+              className="lVision-section-image -first -view block"
               data-play-sprite=""
               data-play-sprite-step="25"
               data-play-sprite-duration="0.8"
@@ -2941,7 +2944,7 @@ const index = () => {
               </picture>
             </div>
           </div>
-          <div
+          {/* <div
             className="lVision-section-image -first -view md:hidden"
             data-play-sprite=""
             data-play-sprite-step="25"
@@ -2952,7 +2955,7 @@ const index = () => {
             }}
             data-scroll-speed="0.7"
             data-scroll=""
-          ></div>
+          ></div> */}
           <div className="lVision-section -second" data-vision-section="2">
             <div className="lVision-section-writing">
               <div
