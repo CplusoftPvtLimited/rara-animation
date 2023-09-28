@@ -842,7 +842,7 @@ const index = () => {
         new UploadedImage(
           265,
           canvas.height / 2 - 180,
-          require("../../assets/home/images/.png"),
+          require("../../assets/home/images/header_10.png"),
           370,
           440,
           0,
