@@ -820,6 +820,7 @@ const index = () => {
               </li>
               <li
                 className="cFlatText cHeader-list-item"
+                id="focusArea"
                 data-flat-text=""
                 style={{
                   padding: "0px 1.175px",
@@ -862,6 +863,7 @@ const index = () => {
                   className="cHeader-list-link"
                   href="/#updates"
                   data-disable-hash=""
+                  id="resarchLink"
                 >
                   RESEARCH
                 </a>

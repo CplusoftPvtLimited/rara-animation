@@ -773,3 +773,75 @@
     transition: right 0.7s, top 0.7s;
   }
 }
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .lFellows-slider-inner {
+    position: absolute;
+    width: 100%;
+    transform: scale(0.72);
+    left: -30%;
+  }
+  /* .cHeader-list {
+    margin-top: -5.8px !important;
+  }
+  .cHeader-logo-item {
+    margin-top: -30px;
+  }
+  .lUpdates-title-main {
+    width: 300% !important;
+    margin-left: -100%;
+  }
+  .lUpdates-ornament.-view {
+      left: 20%;
+      top: -11.5rem;
+  }
+  .lGuideline-title-svg {
+    margin-left: 16%;
+  }
+  #contact {
+    margin-left: -20%;
+  } */
+
+  }
+  /* @media only screen and (max-width: 767px) {
+    .cHeader-logo.-kvLoaded {
+      top: 1.4rem !important;
+    }
+    #focusArea {
+      width: 72px;
+    }
+    .cHeader-list-link {
+      font-size: 12px;
+    }
+    .cMenu-btn-container {
+      margin-top: -7%;
+      padding-left: 20px;
+      position: relative;
+      left: 10%;
+    }
+    .dropdown-content {
+      z-index: 2222222222222222;
+      
+    }
+    .lGuideline-title-inner {
+      transform: scale(0.45);
+      left: -67%;
+    }
+    .cHeader {
+       transform: scaleX(0.95) !important;
+    }
+    .lUpdates-ornament.-view {
+      width: 100%;
+    }
+    #resarchLink {
+      margin-left: -3.5px;
+    }
+    .lContact-title {
+      margin-left: 0%;
+    }
+    .lContact-lead-svg._pc {
+      transform: scale(0.5);
+          left: -23%;
+      position: relative;
+    }
+  } */
+  
