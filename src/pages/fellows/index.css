@@ -775,7 +775,7 @@
 }
 @media only screen and (min-width: 1920px) {
 .lFellows-bg-inner {
-  padding: 70px;
+  padding: 80px;
 }
 .lFellows-content {
   overflow: visible !important;
@@ -799,6 +799,9 @@
   /* .lFellows-slider-inner {
      left: -10% !important;
 } */
+.lFellows-bg-inner {
+  padding: 70px;
+}
 .lFellows-content {
   overflow: visible !important;
 }
