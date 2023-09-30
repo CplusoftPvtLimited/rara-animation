@@ -3,433 +3,437 @@ import React, { useEffect } from "react";
 import "./index.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./mobile.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const index = () => {
   useEffect(() => {
-    const scrollContainer = document.querySelector(".custom-container");
+    if (window.innerWidth > 425) {
+      console.log("Window width is greater than 425 pixels");
+      console.log("***********Inner Width: ", window.innerWidth);
+      const scrollContainer = document.querySelector(".custom-container");
+      function toggleDivOnScroll1() {
+        const animationDuration = 1.5; // Adjust the duration of the animation in seconds
+        const animationDelay = 0.5; // Adjust the delay before the animation starts in seconds
+        let isActive = false; // Flag to track if animation is active
 
-    function toggleDivOnScroll1() {
-      const animationDuration = 1.5; // Adjust the duration of the animation in seconds
-      const animationDelay = 0.5; // Adjust the delay before the animation starts in seconds
-      let isActive = false; // Flag to track if animation is active
+        ScrollTrigger.create({
+          trigger: "#guideline",
+          scroller: scrollContainer,
+          start: "top +50%", // Adjust the start position based on your preference
+          onEnter: () => {
+            console.log("ENTERED IN GUIDELINE ANIMATION");
+            // When scrolling down, apply the styles to display the div
+            gsap.fromTo(
+              ".gt1",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1,
+                delay: 0,
+              }
+            );
+            gsap.fromTo(
+              ".gt2",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1.3,
+                delay: 0,
+              }
+            );
+            gsap.fromTo(
+              ".gt3",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1.3,
+                delay: 0.2,
+              }
+            );
+            gsap.fromTo(
+              ".gt4",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1.3,
+                delay: 0.3,
+              }
+            );
+            gsap.fromTo(
+              ".gt5",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1.3,
+                delay: 0.4,
+              }
+            );
+            gsap.fromTo(
+              ".gt6",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1.3,
+                delay: 0.5,
+              }
+            );
+            gsap.fromTo(
+              ".gt7",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1.3,
+                delay: 0.6,
+              }
+            );
+            gsap.fromTo(
+              ".gt8",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1.3,
+                delay: 0.7,
+              }
+            );
+            gsap.fromTo(
+              ".gt9",
+              {
+                transform: "scale(0)",
+              },
+              {
+                transform: "scale(1)",
+                duration: 1.3,
+                delay: 0.8,
+              }
+            );
+            gsap.fromTo(
+              ".cSubTitle-text",
+              { transform: "translate(0px, 130%)" },
+              {
+                transform: "translate(0px, 0%)",
+                duration: 1,
+              }
+            );
+          },
+        });
+      }
+      // ScrollTrigger.create({
+      //   trigger: "#guideline",
+      //   scroller: scrollContainer,
+      //   start: "start 20%",
+      //   pin: true,
+      //   onEnter: (self) => {
+      //     const progress = 105 - 105 * self.progress;
+      //     gsap.to(".lGuideline-card", {
+      //       x: 0,
+      //       scrollTrigger: {
+      //         trigger: "#guideline",
+      //         scroller: scrollContainer,
+      //         start: "start 20%",
+      //         scrub: true,
+      //       },
+      //     });
+      //   },
+      // });
 
+      const guidelineItem = document.querySelector(".guideline_item");
       ScrollTrigger.create({
-        trigger: "#guideline",
+        trigger: ".guideline_item",
         scroller: scrollContainer,
-        start: "top +50%", // Adjust the start position based on your preference
+        start: "start top",
+        end: "+=3600",
+        scrub: true,
+        pin: true,
+        pinType: "fixed",
+        pinSpacing: false,
         onEnter: () => {
-          console.log("ENTERED IN GUIDELINE ANIMATION");
-          // When scrolling down, apply the styles to display the div
-          gsap.fromTo(
-            ".gt1",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
+          gsap.to(".lGuideline-card", {
+            x: window.innerWidth, // Animate from right to left
+          });
+          gsap.to(".-card2", {
+            x: window.innerWidth, // Animate from right to left
+          });
+        },
+        onUpdate: (self) => {
+          const scrollProgress = self.progress;
+          // console.log(
+          //   "🚀 ~ file: index.jsx:176 ~ useEffect ~ scrollProgress:",
+          //   scrollProgress
+          // );
+
+          // Calculate the starting point for x position (right of the screen)
+          const startingX = window.innerWidth; // Assuming you want the element to start from the right edge of the screen
+
+          // Calculate the distance to animate based on scroll progress
+          const xDistance = startingX - scrollProgress * startingX;
+
+          // Use the calculated distance to animate the x position of .lGuideline-card
+          gsap.to(".lGuideline-card", {
+            x: xDistance, // Animate from right to left
+          });
+
+          const minProgressCard1 = 0.76;
+
+          if (scrollProgress >= minProgressCard1) {
+            // Animate rotation only when scroll progress is equal or greater than minProgress
+            gsap.to(".-card1", {
+              rotateY: -cardRotation(scrollProgress, 180, minProgressCard1, 1),
+            });
+          }
+
+          // Calculate the starting point for x position (right of the screen)
+          const startingX2 = window.innerWidth + 1021; // Assuming you want the element to start from the right edge of the screen
+
+          // Calculate the distance to animate based on scroll progress
+          const xDistance2 = startingX2 - scrollProgress * startingX2;
+
+          const minProgressCard2 = 0.9;
+
+          gsap.to(".-card2", {
+            x: xDistance2, // Animate from right to left
+          });
+          if (scrollProgress >= minProgressCard2) {
+            gsap.to(".-card2", {
+              rotateY: -cardRotation(scrollProgress, 180, minProgressCard2, 1),
               duration: 1,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".gt2",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".gt3",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.2,
-            }
-          );
-          gsap.fromTo(
-            ".gt4",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.3,
-            }
-          );
-          gsap.fromTo(
-            ".gt5",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.4,
-            }
-          );
-          gsap.fromTo(
-            ".gt6",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.5,
-            }
-          );
-          gsap.fromTo(
-            ".gt7",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.6,
-            }
-          );
-          gsap.fromTo(
-            ".gt8",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.7,
-            }
-          );
-          gsap.fromTo(
-            ".gt9",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.8,
-            }
-          );
-          gsap.fromTo(
-            ".cSubTitle-text",
-            { transform: "translate(0px, 130%)" },
-            {
-              transform: "translate(0px, 0%)",
+            });
+          }
+
+          // 614.4px
+
+          // Calculate the starting point for x position (right of the screen)
+          const startingX3 = window.innerWidth + 1021 + 3000; // Assuming you want the element to start from the right edge of the screen
+
+          // Calculate the distance to animate based on scroll progress
+          const xDistance3 = startingX3 - scrollProgress * startingX3;
+          const minProgressCard3 = 0.96;
+
+          gsap.to(".-card3", {
+            x: xDistance3, // Animate from right to left
+          });
+          if (scrollProgress >= minProgressCard2) {
+            gsap.to(".-card3", {
+              rotateY: -cardRotation(scrollProgress, 180, minProgressCard3, 1),
               duration: 1,
-            }
-          );
+            });
+          }
+
+          // 307.4
+
+          // Calculate the starting point for x position (right of the screen)
+          const startingX4 = window.innerWidth + 1021 + 3000 + 4000; // Assuming you want the element to start from the right edge of the screen
+
+          // Calculate the distance to animate based on scroll progress
+          const xDistance4 = startingX4 - scrollProgress * startingX4;
+          const minProgressCard4 = 0.992;
+          gsap.to(".-card4", {
+            x: xDistance4, // Animate from right to left
+          });
+          if (scrollProgress >= minProgressCard2) {
+            gsap.to(".-card4", {
+              rotateY: -cardRotation(scrollProgress, 180, minProgressCard4, 1),
+              duration: 2,
+            });
+          }
+        },
+        onEnterBack: () => {
+          // console.log("🚀 ~ file: index.jsx:158 ~ useEffect ~ onEnterBack:");
+
+          gsap.to(".lGuideline-text-child", {
+            transform: "translate(0px,120%)",
+          });
+        },
+        onLeave: () => {
+          const pinSpacer = document.querySelector("#guideline .pin-spacer");
+          // console.log("🚀 ~ file: index.jsx:158 ~ useEffect ~ onLeave:");
+          // console.log("file PIN SPACER ---------------", pinSpacer);
+          guidelineItem.style.height = "700px";
+          pinSpacer.style.height = "4400px";
+
+          gsap.to(".lGuideline-text-child", {
+            transform: "translate(0px,0%)",
+          });
+        },
+        onLeaveBack: () => {
+          // console.log("🚀 ~ file: index.jsx:164 ~ useEffect ~ onLeaveBack:");
         },
       });
-    }
-    // ScrollTrigger.create({
-    //   trigger: "#guideline",
-    //   scroller: scrollContainer,
-    //   start: "start 20%",
-    //   pin: true,
-    //   onEnter: (self) => {
-    //     const progress = 105 - 105 * self.progress;
-    //     gsap.to(".lGuideline-card", {
-    //       x: 0,
-    //       scrollTrigger: {
-    //         trigger: "#guideline",
-    //         scroller: scrollContainer,
-    //         start: "start 20%",
-    //         scrub: true,
-    //       },
-    //     });
-    //   },
-    // });
 
-    const guidelineItem = document.querySelector(".guideline_item");
-    ScrollTrigger.create({
-      trigger: ".guideline_item",
-      scroller: scrollContainer,
-      start: "start top",
-      end: "+=3600",
-      scrub: true,
-      pin: true,
-      pinType: "fixed",
-      pinSpacing: false,
-      onEnter: () => {
-        gsap.to(".lGuideline-card", {
-          x: window.innerWidth, // Animate from right to left
-        });
-        gsap.to(".-card2", {
-          x: window.innerWidth, // Animate from right to left
-        });
-      },
-      onUpdate: (self) => {
-        const scrollProgress = self.progress;
-        // console.log(
-        //   "🚀 ~ file: index.jsx:176 ~ useEffect ~ scrollProgress:",
-        //   scrollProgress
-        // );
+      function cardRotation(
+        getScrollProgress,
+        getRotationRange,
+        getMinProgress,
+        getMaxProgress
+      ) {
+        const scrollProgress = getScrollProgress;
+        const rotationRange = getRotationRange; // Maximum rotation angle
+        const minProgress = getMinProgress;
+        const maxProgress = getMaxProgress;
 
-        // Calculate the starting point for x position (right of the screen)
-        const startingX = window.innerWidth; // Assuming you want the element to start from the right edge of the screen
+        let cardRotation = 0;
 
-        // Calculate the distance to animate based on scroll progress
-        const xDistance = startingX - scrollProgress * startingX;
-
-        // Use the calculated distance to animate the x position of .lGuideline-card
-        gsap.to(".lGuideline-card", {
-          x: xDistance, // Animate from right to left
-        });
-
-        const minProgressCard1 = 0.76;
-
-        if (scrollProgress >= minProgressCard1) {
-          // Animate rotation only when scroll progress is equal or greater than minProgress
-          gsap.to(".-card1", {
-            rotateY: -cardRotation(scrollProgress, 180, minProgressCard1, 1),
-          });
+        if (scrollProgress >= minProgress) {
+          // Calculate the rotation angle based on progress between minProgress and maxProgress
+          const progressInRange =
+            (scrollProgress - minProgress) / (maxProgress - minProgress);
+          cardRotation = progressInRange * rotationRange;
         }
-
-        // Calculate the starting point for x position (right of the screen)
-        const startingX2 = window.innerWidth + 1021; // Assuming you want the element to start from the right edge of the screen
-
-        // Calculate the distance to animate based on scroll progress
-        const xDistance2 = startingX2 - scrollProgress * startingX2;
-
-        const minProgressCard2 = 0.9;
-
-        gsap.to(".-card2", {
-          x: xDistance2, // Animate from right to left
-        });
-        if (scrollProgress >= minProgressCard2) {
-          gsap.to(".-card2", {
-            rotateY: -cardRotation(scrollProgress, 180, minProgressCard2, 1),
-            duration: 1,
-          });
-        }
-
-        // 614.4px
-
-        // Calculate the starting point for x position (right of the screen)
-        const startingX3 = window.innerWidth + 1021 + 3000; // Assuming you want the element to start from the right edge of the screen
-
-        // Calculate the distance to animate based on scroll progress
-        const xDistance3 = startingX3 - scrollProgress * startingX3;
-        const minProgressCard3 = 0.96;
-
-        gsap.to(".-card3", {
-          x: xDistance3, // Animate from right to left
-        });
-        if (scrollProgress >= minProgressCard2) {
-          gsap.to(".-card3", {
-            rotateY: -cardRotation(scrollProgress, 180, minProgressCard3, 1),
-            duration: 1,
-          });
-        }
-
-        // 307.4
-
-        // Calculate the starting point for x position (right of the screen)
-        const startingX4 = window.innerWidth + 1021 + 3000 + 4000; // Assuming you want the element to start from the right edge of the screen
-
-        // Calculate the distance to animate based on scroll progress
-        const xDistance4 = startingX4 - scrollProgress * startingX4;
-        const minProgressCard4 = 0.992;
-        gsap.to(".-card4", {
-          x: xDistance4, // Animate from right to left
-        });
-        if (scrollProgress >= minProgressCard2) {
-          gsap.to(".-card4", {
-            rotateY: -cardRotation(scrollProgress, 180, minProgressCard4, 1),
-            duration: 2,
-          });
-        }
-      },
-      onEnterBack: () => {
-        // console.log("🚀 ~ file: index.jsx:158 ~ useEffect ~ onEnterBack:");
-
-        gsap.to(".lGuideline-text-child", {
-          transform: "translate(0px,120%)",
-        });
-      },
-      onLeave: () => {
-        const pinSpacer = document.querySelector("#guideline .pin-spacer");
-        // console.log("🚀 ~ file: index.jsx:158 ~ useEffect ~ onLeave:");
-        // console.log("file PIN SPACER ---------------", pinSpacer);
-        guidelineItem.style.height = "700px";
-        pinSpacer.style.height = "4400px";
-
-        gsap.to(".lGuideline-text-child", {
-          transform: "translate(0px,0%)",
-        });
-      },
-      onLeaveBack: () => {
-        // console.log("🚀 ~ file: index.jsx:164 ~ useEffect ~ onLeaveBack:");
-      },
-    });
-
-    function cardRotation(
-      getScrollProgress,
-      getRotationRange,
-      getMinProgress,
-      getMaxProgress
-    ) {
-      const scrollProgress = getScrollProgress;
-      const rotationRange = getRotationRange; // Maximum rotation angle
-      const minProgress = getMinProgress;
-      const maxProgress = getMaxProgress;
-
-      let cardRotation = 0;
-
-      if (scrollProgress >= minProgress) {
-        // Calculate the rotation angle based on progress between minProgress and maxProgress
-        const progressInRange =
-          (scrollProgress - minProgress) / (maxProgress - minProgress);
-        cardRotation = progressInRange * rotationRange;
+        return cardRotation;
       }
-      return cardRotation;
+
+      // gsap.to(".lGuideline-card", {
+      //   x: 0,
+      //   duration: 5,
+      //   scrollTrigger: {
+      //     trigger: ".guideline_item",
+      //     scroller: scrollContainer,
+      //     start: "start top",
+      //     end: "+=3600",
+      //     scrub: true,
+      //     pin: true,
+      //     pinType: "fixed",
+      //     pinSpacing: false,
+      //   },
+      // });
+      // gsap.to(".-card2", {
+      //   x: 0,
+      //   duration: 5,
+      //   delay: 25000,
+      //   scrollTrigger: {
+      //     trigger: ".guideline_item",
+      //     scroller: scrollContainer,
+      //     start: "start center-=45%",
+      //     end: "+=3600",
+      //     scrub: true,
+      //   },
+      // });
+      // ScrollTrigger.create({
+      //   trigger: ".guideline_item",
+      //   scroller: scrollContainer,
+      //   start: "start top",
+      //   end: "+=3600",
+      //   scrub: true,
+      //   onUpdate: (self) => {
+      //     const progress = self.progress;
+      //     const xValue = 0; // Set your desired value here
+
+      //     gsap.to(".-card2", { x: xValue * progress });
+      //   },
+      // });
+      // const animateCard = () => {
+      //   gsap.to(".-card3", {
+      //     x: 0,
+      //     duration: 5,
+      //     delay: 10,
+      //   });
+      // };
+
+      // // Create the scroll trigger with a delay when entering
+      // ScrollTrigger.create({
+      //   trigger: ".guideline_item",
+      //   scroller: scrollContainer,
+      //   start: "start top",
+      //   end: "+=3600",
+      //   scrub: true,
+      //   onEnter: () => {
+      //     setTimeout(animateCard, 10000); // Delay the animation by 1 second (1000 milliseconds) after entering
+      //   },
+      // });
+      // gsap.to(".-card4", {
+      //   x: 0,
+      //   duration: 5,
+      //   scrollTrigger: {
+      //     trigger: ".guideline_item",
+      //     scroller: scrollContainer,
+      //     start: "+=5%",
+      //     end: "+=3600",
+      //     scrub: true,
+      //   },
+      // });
+
+      // ScrollTrigger.create({
+      //   trigger: ".guideline_item",
+      //   scroller: scrollContainer,
+      //   start: "start top",
+      //   end: "+=3600",
+      //   pin: true,
+      //   scrub: true,
+      //   pinType: "fixed",
+      // });
+
+      // ScrollTrigger.create(".guideline_item", {
+      //   trigger: "",
+      // });
+
+      // const cardsWidth = document.querySelector(".lGuideline-card");
+      // function getScrollAmount() {
+      //   let getCardsWidth = cardsWidth.scrollWidth;
+      //   return -(getCardsWidth - window.innerWidth);
+      // }
+      // console.log(
+      //   "🚀 ~ file: index.jsx:134 ~ useEffect ~ cardsWidth.scrollWidth:",
+      //   cardsWidth.scrollWidth
+      // );
+      // console.log(
+      //   "🚀 ~ file: index.jsx:134 ~ useEffect ~ window.innerWidth:",
+      //   document.documentElement.clientWidth
+      // );
+      // console.log(
+      //   "🚀 ~ file: index.jsx:134 ~ useEffect ~ getCardScrollAmount:",
+      //   getScrollAmount()
+      // );
+
+      // const tween = gsap.to(".lGuideline-card", {
+      //   x: getScrollAmount(),
+      //   duration: 5,
+      //   ease: "none",
+      // });
+
+      // ScrollTrigger.create({
+      //   trigger: ".guideline_item",
+      //   scroller: scrollContainer,
+      //   start: "top 20%",
+
+      //   pin: true,
+      //   animation: tween,
+      //   scrub: 1,
+      //   invalidateOnRefresh: true,
+      //   markers: true,
+      //   onEnter: (self) => {
+      //     console.log("SELF ----------------", self);
+      //     const card2 = 921.6 - 921.6 * self.progress;
+      //     gsap.fromTo(
+      //       ".-card2",
+      //       {
+      //         transform: "translate(921.6px, 0px)",
+      //       },
+      //       {
+      //         transform: `translate(${card2}px,0px)`,
+      //       }
+      //     );
+      //   },
+      // });
+
+      toggleDivOnScroll1();
     }
-
-    // gsap.to(".lGuideline-card", {
-    //   x: 0,
-    //   duration: 5,
-    //   scrollTrigger: {
-    //     trigger: ".guideline_item",
-    //     scroller: scrollContainer,
-    //     start: "start top",
-    //     end: "+=3600",
-    //     scrub: true,
-    //     pin: true,
-    //     pinType: "fixed",
-    //     pinSpacing: false,
-    //   },
-    // });
-    // gsap.to(".-card2", {
-    //   x: 0,
-    //   duration: 5,
-    //   delay: 25000,
-    //   scrollTrigger: {
-    //     trigger: ".guideline_item",
-    //     scroller: scrollContainer,
-    //     start: "start center-=45%",
-    //     end: "+=3600",
-    //     scrub: true,
-    //   },
-    // });
-    // ScrollTrigger.create({
-    //   trigger: ".guideline_item",
-    //   scroller: scrollContainer,
-    //   start: "start top",
-    //   end: "+=3600",
-    //   scrub: true,
-    //   onUpdate: (self) => {
-    //     const progress = self.progress;
-    //     const xValue = 0; // Set your desired value here
-
-    //     gsap.to(".-card2", { x: xValue * progress });
-    //   },
-    // });
-    // const animateCard = () => {
-    //   gsap.to(".-card3", {
-    //     x: 0,
-    //     duration: 5,
-    //     delay: 10,
-    //   });
-    // };
-
-    // // Create the scroll trigger with a delay when entering
-    // ScrollTrigger.create({
-    //   trigger: ".guideline_item",
-    //   scroller: scrollContainer,
-    //   start: "start top",
-    //   end: "+=3600",
-    //   scrub: true,
-    //   onEnter: () => {
-    //     setTimeout(animateCard, 10000); // Delay the animation by 1 second (1000 milliseconds) after entering
-    //   },
-    // });
-    // gsap.to(".-card4", {
-    //   x: 0,
-    //   duration: 5,
-    //   scrollTrigger: {
-    //     trigger: ".guideline_item",
-    //     scroller: scrollContainer,
-    //     start: "+=5%",
-    //     end: "+=3600",
-    //     scrub: true,
-    //   },
-    // });
-
-    // ScrollTrigger.create({
-    //   trigger: ".guideline_item",
-    //   scroller: scrollContainer,
-    //   start: "start top",
-    //   end: "+=3600",
-    //   pin: true,
-    //   scrub: true,
-    //   pinType: "fixed",
-    // });
-
-    // ScrollTrigger.create(".guideline_item", {
-    //   trigger: "",
-    // });
-
-    // const cardsWidth = document.querySelector(".lGuideline-card");
-    // function getScrollAmount() {
-    //   let getCardsWidth = cardsWidth.scrollWidth;
-    //   return -(getCardsWidth - window.innerWidth);
-    // }
-    // console.log(
-    //   "🚀 ~ file: index.jsx:134 ~ useEffect ~ cardsWidth.scrollWidth:",
-    //   cardsWidth.scrollWidth
-    // );
-    // console.log(
-    //   "🚀 ~ file: index.jsx:134 ~ useEffect ~ window.innerWidth:",
-    //   document.documentElement.clientWidth
-    // );
-    // console.log(
-    //   "🚀 ~ file: index.jsx:134 ~ useEffect ~ getCardScrollAmount:",
-    //   getScrollAmount()
-    // );
-
-    // const tween = gsap.to(".lGuideline-card", {
-    //   x: getScrollAmount(),
-    //   duration: 5,
-    //   ease: "none",
-    // });
-
-    // ScrollTrigger.create({
-    //   trigger: ".guideline_item",
-    //   scroller: scrollContainer,
-    //   start: "top 20%",
-
-    //   pin: true,
-    //   animation: tween,
-    //   scrub: 1,
-    //   invalidateOnRefresh: true,
-    //   markers: true,
-    //   onEnter: (self) => {
-    //     console.log("SELF ----------------", self);
-    //     const card2 = 921.6 - 921.6 * self.progress;
-    //     gsap.fromTo(
-    //       ".-card2",
-    //       {
-    //         transform: "translate(921.6px, 0px)",
-    //       },
-    //       {
-    //         transform: `translate(${card2}px,0px)`,
-    //       }
-    //     );
-    //   },
-    // });
-
-    toggleDivOnScroll1();
   }, []);
 
   return (
@@ -642,202 +646,411 @@ const index = () => {
             </div>
           </div>
         </div>
-        <div
-          className="lGuideline-card card_1"
-          data-guideline-card-container=""
-          style={{ transform: "translate(105%, 0px)" }}
-        >
+        <div className="hidden h-auto md:h-[4500px] md:block">
           <div
-            className="lGuideline-card-item -card1"
-            data-guideline-card=""
-            style={{ transform: "perspective(3225.81px)" }}
+            className="lGuideline-card card_1 "
+            data-guideline-card-container=""
+            style={{ transform: "translate(105%, 0px)" }}
           >
-            <div className="lGuideline-card-item-front">
-              <div className="lGuideline-card-item-headline">
-                <img
-                  className="lGuideline-card-item-number -l01"
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png"
-                  width="72"
-                  height="130"
-                  alt=""
-                  loading="lazy"
-                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number01@2x.png 2x"
-                />
+            <div
+              className="lGuideline-card-item -card1 mobile-card-back-01"
+              data-guideline-card=""
+              style={{ transform: "perspective(3225.81px)" }}
+            >
+              <div className="lGuideline-card-item-front mobile-card-back-01">
+                <div className="lGuideline-card-item-headline">
+                  <img
+                    className="lGuideline-card-item-number -l01"
+                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png"
+                    width="72"
+                    height="130"
+                    alt=""
+                    loading="lazy"
+                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number01@2x.png 2x"
+                  />
+                  <div
+                    className="cFlatText lGuideline-card-item-title"
+                    data-flat-text=""
+                    style={{
+                      padding: "0px 0.825px",
+                      transform: "scaleX(1.05)",
+                    }}
+                  >
+                    志
+                  </div>
+                </div>
                 <div
-                  className="cFlatText lGuideline-card-item-title"
+                  className="cFlatText lGuideline-card-item-text"
                   data-flat-text=""
-                  style={{ padding: "0px 0.825px", transform: "scaleX(1.05)" }}
+                  style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
                 >
-                  志
+                  Examining how cognitive biases and psychological factors
+                  influence financial decision-making while aiming to develop
+                  strategies that help individuals make more informed and
+                  responsible financial choices.
                 </div>
               </div>
-              <div
-                className="cFlatText lGuideline-card-item-text"
-                data-flat-text=""
-                style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
-              >
-                Examining how cognitive biases and psychological factors
-                influence financial decision-making while aiming to develop
-                strategies that help individuals make more informed and
-                responsible financial choices.
+              <div className="lGuideline-card-item-back ">
+                <img
+                  className="lGuideline-card-item-back-illust -l01"
+                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png"
+                  width="234"
+                  height="302"
+                  alt=""
+                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
+                />
               </div>
             </div>
-            <div className="lGuideline-card-item-back">
-              <img
-                className="lGuideline-card-item-back-illust -l01"
-                src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png"
-                width="234"
-                height="302"
-                alt=""
-                srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
-              />
-            </div>
-          </div>
-          <div
-            className="lGuideline-card-item -card2 -large"
-            data-guideline-card=""
-            style={{
-              transform: "perspective(3225.81px) translate(921.6px, 0px)",
-            }}
-          >
-            <div className="lGuideline-card-item-front">
-              <div className="lGuideline-card-item-headline">
-                <img
-                  className="lGuideline-card-item-number -l02"
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png"
-                  width="93"
-                  height="132"
-                  alt=""
-                  loading="lazy"
-                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number02@2x.png 2x"
-                />
+            <div
+              className="lGuideline-card-item -card2 -large mobile-card-back-02"
+              data-guideline-card=""
+              style={{
+                transform: "perspective(3225.81px) translate(921.6px, 0px)",
+              }}
+            >
+              <div className="lGuideline-card-item-front">
+                <div className="lGuideline-card-item-headline">
+                  <img
+                    className="lGuideline-card-item-number -l02"
+                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png"
+                    width="93"
+                    height="132"
+                    alt=""
+                    loading="lazy"
+                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number02@2x.png 2x"
+                  />
+                  <div
+                    className="cFlatText lGuideline-card-item-title"
+                    data-flat-text=""
+                    style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
+                  >
+                    共創
+                  </div>
+                </div>
                 <div
-                  className="cFlatText lGuideline-card-item-title"
+                  className="cFlatText lGuideline-card-item-text"
+                  data-flat-text=""
+                  style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
+                >
+                  Exploring innovative ways to create inclusive financial
+                  systems by designing financial products that cater to unique
+                  needs of underserved and marginalized communities.
+                </div>
+              </div>
+              <div className="lGuideline-card-item-back">
+                <img
+                  className="lGuideline-card-item-back-illust -l02"
+                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png"
+                  width="235"
+                  height="307"
+                  alt=""
+                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
+                />
+              </div>
+            </div>
+            <div
+              className="lGuideline-card-item -card3 mobile-card-back-03"
+              data-guideline-card=""
+              style={{
+                transform: "perspective(3225.81px) translate(614.4px, 0px)",
+              }}
+            >
+              <div className="lGuideline-card-item-front">
+                <div className="lGuideline-card-item-headline">
+                  <img
+                    className="lGuideline-card-item-number -l03"
+                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png"
+                    width="81"
+                    height="135"
+                    alt=""
+                    loading="lazy"
+                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number03@2x.png 2x"
+                  />
+                  <div
+                    className="cFlatText lGuideline-card-item-title"
+                    data-flat-text=""
+                    style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
+                  >
+                    変革
+                  </div>
+                </div>
+                <div
+                  className="cFlatText lGuideline-card-item-text"
+                  data-flat-text=""
+                  style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
+                >
+                  Researching ethical banking practices, ethical investment
+                  vehicles, and how financial institutions can integrate ethical
+                  principles into their operations while maintaining
+                  profitability.
+                </div>
+              </div>
+              <div className="lGuideline-card-item-back">
+                <img
+                  className="lGuideline-card-item-back-illust -l03"
+                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png"
+                  width="220"
+                  height="301"
+                  alt=""
+                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
+                />
+              </div>
+            </div>
+            <div
+              className="lGuideline-card-item -card4 mobile-card-back-04"
+              data-guideline-card=""
+              style={{
+                transform: "perspective(3225.81px) translate(307.2px, 0px)",
+              }}
+            >
+              <div className="lGuideline-card-item-front">
+                <div className="lGuideline-card-item-headline">
+                  <img
+                    className="lGuideline-card-item-number -l04"
+                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png"
+                    width="98"
+                    height="133"
+                    alt=""
+                    loading="lazy"
+                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number04@2x.png 2x"
+                  />
+                  <div
+                    className="cFlatText lGuideline-card-item-title"
+                    data-flat-text=""
+                    style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
+                  >
+                    信頼
+                  </div>
+                </div>
+                <div
+                  className="cFlatText lGuideline-card-item-text"
                   data-flat-text=""
                   style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
                 >
-                  共創
+                  Pecunia focuses on research related to financing sustainable
+                  development goals (SDGs). This includes examining financial
+                  instruments, policies, and partnerships that can mobilize
+                  capital for projects aligned with the SDGs.
                 </div>
               </div>
-              <div
-                className="cFlatText lGuideline-card-item-text"
-                data-flat-text=""
-                style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
-              >
-                Exploring innovative ways to create inclusive financial systems
-                by designing financial products that cater to unique needs of
-                underserved and marginalized communities.
+              <div className="lGuideline-card-item-back">
+                <img
+                  className="lGuideline-card-item-back-illust -l04"
+                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png"
+                  width="295"
+                  height="297"
+                  alt=""
+                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
+                />
               </div>
             </div>
-            <div className="lGuideline-card-item-back">
-              <img
-                className="lGuideline-card-item-back-illust -l02"
-                src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png"
-                width="235"
-                height="307"
-                alt=""
-                srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
-              />
-            </div>
           </div>
+        </div>
+        {/** Bottom */}
+
+        {/** Mobile */}
+        <div className="h-auto md:hidden">
           <div
-            className="lGuideline-card-item -card3"
-            data-guideline-card=""
-            style={{
-              transform: "perspective(3225.81px) translate(614.4px, 0px)",
-            }}
+            // className="lGuideline-card card_1 "
+            data-guideline-card-container=""
+            // style={{ transform: "translate(105%, 0px)" }}
           >
-            <div className="lGuideline-card-item-front">
-              <div className="lGuideline-card-item-headline">
-                <img
-                  className="lGuideline-card-item-number -l03"
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png"
-                  width="81"
-                  height="135"
-                  alt=""
-                  loading="lazy"
-                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number03@2x.png 2x"
-                />
+            <div
+              // className="lGuideline-card-item -card1 mobile-card-back-01"
+              data-guideline-card=""
+              // style={{ transform: "perspective(3225.81px)" }}
+            >
+              <div className="">
+                <div className="">
+                  <img
+                    className=""
+                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png"
+                    width="72"
+                    height="130"
+                    alt=""
+                    loading="lazy"
+                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number01@2x.png 2x"
+                  />
+                  <div
+                    className=""
+                    data-flat-text=""
+                    // style={{
+                    //   padding: "0px 0.825px",
+                    //   transform: "scaleX(1.05)",
+                    // }}
+                  >
+                    志
+                  </div>
+                </div>
                 <div
-                  className="cFlatText lGuideline-card-item-title"
+                  className=""
+                  data-flat-text=""
+                  // style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
+                >
+                  Examining how cognitive biases and psychological factors
+                  influence financial decision-making while aiming to develop
+                  strategies that help individuals make more informed and
+                  responsible financial choices.
+                </div>
+              </div>
+              <div className="">
+                <img
+                  className=""
+                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png"
+                  width="234"
+                  height="302"
+                  alt=""
+                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
+                />
+              </div>
+            </div>
+            <div
+              className=""
+              data-guideline-card=""
+              // style={{
+              //   transform: "perspective(3225.81px) translate(921.6px, 0px)",
+              // }}
+            >
+              <div className="">
+                <div className="">
+                  {/* <img
+                    className=""
+                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png"
+                    width="93"
+                    height="132"
+                    alt=""
+                    loading="lazy"
+                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number02@2x.png 2x"
+                  /> */}
+                  <div
+                    className=""
+                    data-flat-text=""
+                    // style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
+                  >
+                    共創
+                  </div>
+                </div>
+                <div
+                  // className="cFlatText lGuideline-card-item-text"
+                  data-flat-text=""
+                  // style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
+                >
+                  Exploring innovative ways to create inclusive financial
+                  systems by designing financial products that cater to unique
+                  needs of underserved and marginalized communities.
+                </div>
+              </div>
+              <div className="lGuideline-card-item-back">
+                <img
+                  className="lGuideline-card-item-back-illust -l02"
+                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png"
+                  width="235"
+                  height="307"
+                  alt=""
+                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
+                />
+              </div>
+            </div>
+            <div
+              className="lGuideline-card-item -card3 mobile-card-back-03"
+              data-guideline-card=""
+              // style={{
+              //   transform: "perspective(3225.81px) translate(614.4px, 0px)",
+              // }}
+            >
+              <div className="">
+                <div className="">
+                  <img
+                    className=""
+                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png"
+                    width="81"
+                    height="135"
+                    alt=""
+                    loading="lazy"
+                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number03@2x.png 2x"
+                  />
+                  <div
+                    className="cFlatText lGuideline-card-item-title"
+                    data-flat-text=""
+                    style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
+                  >
+                    変革
+                  </div>
+                </div>
+                <div
+                  className=""
+                  data-flat-text=""
+                  // style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
+                >
+                  Researching ethical banking practices, ethical investment
+                  vehicles, and how financial institutions can integrate ethical
+                  principles into their operations while maintaining
+                  profitability.
+                </div>
+              </div>
+              <div className="lGuideline-card-item-back">
+                <img
+                  className="lGuideline-card-item-back-illust -l03"
+                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png"
+                  width="220"
+                  height="301"
+                  alt=""
+                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
+                />
+              </div>
+            </div>
+            <div
+              // className="lGuideline-card-item -card4 mobile-card-back-04"
+              data-guideline-card=""
+              // style={{
+              //   transform: "perspective(3225.81px) translate(307.2px, 0px)",
+              // }}
+            >
+              <div className="">
+                <div className="l">
+                  <img
+                    className=""
+                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png"
+                    width="98"
+                    height="133"
+                    alt=""
+                    loading="lazy"
+                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number04@2x.png 2x"
+                  />
+                  <div
+                    className=""
+                    data-flat-text=""
+                    style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
+                  >
+                    信頼
+                  </div>
+                </div>
+                <div
+                  className=""
                   data-flat-text=""
                   style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
                 >
-                  変革
+                  Pecunia focuses on research related to financing sustainable
+                  development goals (SDGs). This includes examining financial
+                  instruments, policies, and partnerships that can mobilize
+                  capital for projects aligned with the SDGs.
                 </div>
               </div>
-              <div
-                className="cFlatText lGuideline-card-item-text"
-                data-flat-text=""
-                style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
-              >
-                Researching ethical banking practices, ethical investment
-                vehicles, and how financial institutions can integrate ethical
-                principles into their operations while maintaining
-                profitability.
-              </div>
-            </div>
-            <div className="lGuideline-card-item-back">
-              <img
-                className="lGuideline-card-item-back-illust -l03"
-                src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png"
-                width="220"
-                height="301"
-                alt=""
-                srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
-              />
-            </div>
-          </div>
-          <div
-            className="lGuideline-card-item -card4"
-            data-guideline-card=""
-            style={{
-              transform: "perspective(3225.81px) translate(307.2px, 0px)",
-            }}
-          >
-            <div className="lGuideline-card-item-front">
-              <div className="lGuideline-card-item-headline">
+              <div className="">
                 <img
-                  className="lGuideline-card-item-number -l04"
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png"
-                  width="98"
-                  height="133"
+                  className=""
+                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png"
+                  width="295"
+                  height="297"
                   alt=""
-                  loading="lazy"
-                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number04@2x.png 2x"
+                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
                 />
-                <div
-                  className="cFlatText lGuideline-card-item-title"
-                  data-flat-text=""
-                  style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
-                >
-                  信頼
-                </div>
               </div>
-              <div
-                className="cFlatText lGuideline-card-item-text"
-                data-flat-text=""
-                style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
-              >
-                Pecunia focuses on research related to financing sustainable
-                development goals (SDGs). This includes examining financial
-                instruments, policies, and partnerships that can mobilize
-                capital for projects aligned with the SDGs.
-              </div>
-            </div>
-            <div className="lGuideline-card-item-back">
-              <img
-                className="lGuideline-card-item-back-illust -l04"
-                src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png"
-                width="295"
-                height="297"
-                alt=""
-                srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
-              />
             </div>
           </div>
         </div>
       </div>
+      {/**Bottom */}
       <div
         className="cContainer -leftSmall -rightSmall -spLeftWide -spRightWide lGuideline-text"
         data-guideline-lead=""
