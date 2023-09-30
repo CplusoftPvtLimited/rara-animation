@@ -192,13 +192,13 @@ const index = () => {
       //   "🚀 ~ file: index.jsx:96 ~ handleMouseMovement ~ SliderMove:",
       //   SliderMove
       // );
-      prevSliderDiv.style.transform = "translate3d(0%,0%,0px)";
+      prevSliderDiv.style.transform = "translate3d(0%,10%,0px)";
       nextSliderDiv.style.transform = "translateX(110%)";
 
       setCoordinates({ x: adjustedX, y: adjustedY });
     } else if (adjustedX > 870) {
       setSliderMove(2);
-      nextSliderDiv.style.transform = "translate3d(0%,0%,0px)";
+      nextSliderDiv.style.transform = "translate3d(0%,10%,0px)";
       prevSliderDiv.style.transform = "translateX(110%)";
       setCoordinates({ x: adjustedX, y: adjustedY });
     } else {
