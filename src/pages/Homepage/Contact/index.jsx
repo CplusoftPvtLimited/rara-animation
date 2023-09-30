@@ -106,6 +106,7 @@ const index = () => {
               height="76.801"
               viewBox="0 0 356.243 76.801"
               xmlns="http://www.w3.org/2000/svg"
+              className="firstSvg"
             >
               <g
                 id="svgGroup"

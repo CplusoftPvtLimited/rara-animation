@@ -2,6 +2,58 @@ import { UploadedImage } from "../../UploadedImage";
 
 const responsiveRockWithLabelValues = (canvas) => [
   {
+    screenWidth: 375,
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    width: 0,
+    height: 0,
+    rotation: 0,
+    updatedX: canvas.width / 2 + 45,
+    updatedY: canvas.height / 2 - 65,
+    updatedWidth: 100,
+    updatedHeight: 70,
+    updatedRotation: 0,
+  },
+  {
+    screenWidth: 425,
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    width: 0,
+    height: 0,
+    rotation: 0,
+    updatedX: canvas.width / 2 + 45,
+    updatedY: canvas.height / 2 - 65,
+    updatedWidth: 130,
+    updatedHeight: 80,
+    updatedRotation: 0,
+  },
+  {
+    screenWidth: 768,
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    width: 0,
+    height: 0,
+    rotation: 0,
+    updatedX: canvas.width / 2 + 45,
+    updatedY: canvas.height / 2 - 65,
+    updatedWidth: 130,
+    updatedHeight: 80,
+    updatedRotation: 0,
+  },
+  {
+    screenWidth: 1024,
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    width: 0,
+    height: 0,
+    rotation: 0,
+    updatedX: canvas.width / 2 + 45,
+    updatedY: canvas.height / 2 - 95,
+    updatedWidth: 170,
+    updatedHeight: 125,
+    updatedRotation: 0,
+  },
+  {
     screenWidth: 1440,
     x: canvas.width / 2,
     y: canvas.height / 2,
@@ -40,7 +92,6 @@ const responsiveRockWithLabelValues = (canvas) => [
     updatedHeight: 125,
     updatedRotation: 0,
   },
-  // Add more rules for larger screens if needed
 ];
 
 export function getResponsiveRockWithLebelDimensions(canvas, screenWidth) {
