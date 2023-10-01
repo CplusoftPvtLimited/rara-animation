@@ -1,201 +1,655 @@
-
-
 .ut0 {
-    fill: #E6E6E6;
-    stroke: #000000;
-    stroke-width: 0.2;
-    stroke-miterlimit: 10;
+  fill: #e6e6e6;
+  stroke: #000000;
+  stroke-width: 0.2;
+  stroke-miterlimit: 10;
 }
 .lContact-title {
-    width: 14.375rem;
-    margin-bottom: 1.75rem;
-    margin-left: auto;
+  width: 14.375rem;
+  margin-bottom: 1.75rem;
+  margin-left: auto;
 }
 
-h1, h2, h3, h4, h5, h6, small, strong, sub, sup, th {
-    font-size: inherit;
-    font-weight: inherit;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+strong,
+sub,
+sup,
+th {
+  font-size: inherit;
+  font-weight: inherit;
 }
 .lContact-title-main {
-    margin-left: auto;
-    margin-bottom: 1.25rem;
+  margin-left: auto;
+  margin-bottom: 1.25rem;
 }
 svg {
-    overflow: visible;
+  overflow: visible;
 }
 .lContact-title-sub {
-    text-align: right;
-    font-size: 1.125rem;
+  text-align: right;
+  font-size: 1.125rem;
 }
 .cSubTitle {
-    padding-bottom: 0.13em;
+  padding-bottom: 0.13em;
 }
 
 .lContact-lead {
-    position: relative;
-    width: 51.875rem;
+  position: relative;
+  width: 51.875rem;
 }
 .lContact-lead:before {
-    content: "";
-    display: block;
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
+  content: "";
+  display: block;
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .lContact-link.-mail {
-    font-family: Cormorant Garamond,Shippori Mincho B1,YuMincho,游明朝,Times New Roman,Hiragino Mincho ProN,HGS明朝B,ＭＳ Ｐ明朝,serif;
-    font-weight: 800;
-    letter-spacing: -.02em;
+  font-family: Cormorant Garamond, Shippori Mincho B1, YuMincho, 游明朝,
+    Times New Roman, Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 .lContact-link {
-    display: block;
-    color: #ad181f !important;
-    position: relative;
+  display: block;
+  color: #ad181f !important;
+  position: relative;
 }
-a, button, input[type=checkbox], input[type=radio], label, select {
-    cursor: pointer;
+a,
+button,
+input[type="checkbox"],
+input[type="radio"],
+label,
+select {
+  cursor: pointer;
 }
-a, abbr[title], ins {
-    text-decoration: none;
-}
-.lContact-link:before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 1px;
-    background-color: #000;
-    bottom: 0;
-    left: 0;
+a,
+abbr[title],
+ins {
+  text-decoration: none;
 }
 .lContact-link:before {
-    background-color: #ad181f;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+  bottom: 0;
+  left: 0;
+}
+.lContact-link:before {
+  background-color: #ad181f;
 }
 .lContact-link.-mail:after {
-    background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-mail.svg) 0 0/cover no-repeat;
+  background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-mail.svg)
+    0 0 / cover no-repeat;
 }
 .lContact-link:after {
-    content: "";
-    display: block;
-    position: absolute;
+  content: "";
+  display: block;
+  position: absolute;
 }
 .lContact-link {
-    display: block;
-    color: #ad181f !important;
-    position: relative;
+  display: block;
+  color: #ad181f !important;
+  position: relative;
 }
 .lContact-link.-newsletter {
-    font-family: Cormorant Garamond,Shippori Mincho B1,YuMincho,游明朝,Times New Roman,Hiragino Mincho ProN,HGS明朝B,ＭＳ Ｐ明朝,serif;
-    font-weight: 800;
-    display: flex;
-    white-space: nowrap;
-    letter-spacing: -.04em;
+  font-family: Cormorant Garamond, Shippori Mincho B1, YuMincho, 游明朝,
+    Times New Roman, Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif;
+  font-weight: 800;
+  display: flex;
+  white-space: nowrap;
+  letter-spacing: -0.04em;
 }
 .lContact-link:before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 1px;
-    background-color: #000;
-    bottom: 0;
-    left: 0;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+  bottom: 0;
+  left: 0;
 }
 .lContact-link:before {
-    background-color: #ad181f;
+  background-color: #ad181f;
 }
 .lContact-link:after {
-    content: "";
-    display: block;
-    position: absolute;
+  content: "";
+  display: block;
+  position: absolute;
 }
 @keyframes textLink-border {
-    0% {
-        width: 0; /* Starting state */
-    }
-    100% {
-        width: 100%; /* Ending state */
-    }
+  0% {
+    width: 0; /* Starting state */
+  }
+  100% {
+    width: 100%; /* Ending state */
+  }
 }
 .lContact-link:hover:before {
-    animation: textLink-border .5s cubic-bezier(.56,-.01,.04,1) forwards;
+  animation: textLink-border 0.5s cubic-bezier(0.56, -0.01, 0.04, 1) forwards;
 }
 
+@media (min-width: 375px) and (max-width: 424px) {
+  .cContainer.-rightMiddle {
+    padding-right: 5.9375rem;
+  }
+  .cContainer.-leftMiddle {
+    padding-left: 1.9375rem;
+  }
+  .lContact-title {
+    display: none;
+  }
+  .lContact-container {
+    margin-top: 7.8125rem;
+    padding-top: 7.8125rem;
+  }
+  .cSubTitle.-right {
+    text-align: right;
+  }
+  .cSubTitle {
+    font-size: 1.125rem;
+  }
+  .lContact-lead:before {
+    background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
+    width: 8.8125rem;
+    height: 24.875rem;
+    top: 4.125rem;
+    left: 10.875rem;
+  }
+  .lContact-lead {
+    width: 16.875rem;
+  }
+  .lContact-lead .firstSvg {
+    width: 63%;
+  }
+  .lContact-lead svg {
+    width: 100%;
+  }
+  ._sp {
+    display: none !important;
+  }
+  .lContact-holder {
+    width: 16.625rem;
+    margin-top: 0.875rem;
+    margin-left: auto;
+    letter-spacing: -0.05em;
+  }
+  .lContact-text {
+    font-size: 1rem;
+  }
+  .lContact-linkHolder {
+    margin-top: 2rem;
+    /*  */
+    width: "30rem";
+  }
+  .lContact-link.-mail {
+    width: 18.75rem;
+    font-size: 1.525rem;
+    padding-bottom: 1.125rem;
+  }
+  .lContact-link {
+    padding-left: 4rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-mail:after {
+    width: 0.92rem;
+    height: 0.575rem;
+    top: 1.5rem;
+    left: 0.15rem;
+  }
+  .lContact-link.-newsletter {
+    width: 19.75rem;
+    font-size: 1.525rem;
+    /* margin-top: 2rem; */
+    padding-bottom: 0.4375rem;
+  }
+  .lContact-link {
+    padding-left: 2rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-newsletter:after {
+    width: 0.72rem;
+    height: 0.92rem;
+    top: 1.375rem;
+    left: 0.15rem;
+  }
+  .lContact-link.-newsletter:after {
+    background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-newsletter.svg)
+      0 0 / contain no-repeat;
+  }
+}
 
+@media (min-width: 425px) and (max-width: 767px) {
+  .cContainer.-rightMiddle {
+    padding-right: 5.9375rem;
+  }
+  .cContainer.-leftMiddle {
+    padding-left: 1.9375rem;
+  }
+  .lContact-title {
+    display: none;
+  }
+  .lContact-container {
+    margin-top: 7.8125rem;
+    padding-top: 7.8125rem;
+  }
+  .cSubTitle.-right {
+    text-align: right;
+  }
+  .cSubTitle {
+    font-size: 1.125rem;
+  }
+  .lContact-lead:before {
+    background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
+    width: 12.8125rem;
+    height: 24.875rem;
+    top: 4.125rem;
+    left: 9.875rem;
+  }
+  .lContact-lead {
+    width: 16.875rem;
+  }
+  .lContact-lead .firstSvg {
+    width: 63%;
+  }
+  .lContact-lead svg {
+    width: 100%;
+  }
+  ._sp {
+    display: none !important;
+  }
+  .lContact-holder {
+    width: 16.625rem;
+    margin-top: 0.875rem;
+    margin-left: auto;
+    letter-spacing: -0.05em;
+  }
+  .lContact-text {
+    font-size: 1rem;
+  }
+  .lContact-linkHolder {
+    margin-top: 2rem;
+    /*  */
+    width: "30rem";
+  }
+  .lContact-link.-mail {
+    width: 18.75rem;
+    font-size: 1.525rem;
+    padding-bottom: 1.125rem;
+  }
+  .lContact-link {
+    padding-left: 4rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-mail:after {
+    width: 0.92rem;
+    height: 0.575rem;
+    top: 1.5rem;
+    left: 0.15rem;
+  }
+  .lContact-link.-newsletter {
+    width: 19.75rem;
+    font-size: 1.525rem;
+    /* margin-top: 2rem; */
+    padding-bottom: 0.4375rem;
+  }
+  .lContact-link {
+    padding-left: 2rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-newsletter:after {
+    width: 0.72rem;
+    height: 0.92rem;
+    top: 1.375rem;
+    left: 0.15rem;
+  }
+  .lContact-link.-newsletter:after {
+    background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-newsletter.svg)
+      0 0 / contain no-repeat;
+  }
+}
 
-@media screen and (min-width: 768px){
-    .cContainer.-rightMiddle {
-        padding-right: 10.9375rem;
-    }
-    .cContainer.-leftMiddle {
-        padding-left: 10.9375rem;
-    }
-    .lContact-container {
-        margin-top: 7.8125rem;
-        padding-top: 7.8125rem;
-    }
-    .cSubTitle.-right {
-        text-align: right;
-    }
-    .cSubTitle {
-        font-size: 1.125rem;
-    }
-    .lContact-lead:before {
-        background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
-        width: 26.8125rem;
-        height: 22.875rem;
-        top: 3.125rem;
-        left: 40.875rem;
-    }
-    ._sp {
-        display: none!important;
-    }
-    .lContact-holder {
-        width: 35.625rem;
-        margin-top: 0.875rem;
-        margin-left: auto;
-        letter-spacing: -.05em;
-    }
-    .lContact-text {
-        font-size: 1rem;
-    }
-    .lContact-linkHolder {
-        margin-top: 2rem;
-    }
-    .lContact-link.-mail {
-        width: 35.75rem;
-        font-size: 3.125rem;
-        padding-bottom: 1.125rem;
-    }
-    .lContact-link {
-        padding-left: 5rem;
-    }
-    .lContact-link:before {
-        height: 3px;
-    }
-    .lContact-link.-mail:after {
-        width: 1.1875rem;
-        height: 0.875rem;
-        top: 1.5rem;
-        left: 1.75rem;
-    }
-    .lContact-link.-newsletter {
-        width: 35.75rem;
-        font-size: 3.125rem;
-        margin-top: 2rem;
-        padding-bottom: 0.4375rem;
-    }
-    .lContact-link {
-        padding-left: 5rem;
-    }
-    .lContact-link:before {
-        height: 3px;
-    }
-    .lContact-link.-newsletter:after {
-        width: 1rem;
-        height: 1.375rem;
-        top: 1.375rem;
-        left: 1.875rem;
-    }
-    .lContact-link.-newsletter:after {
-        background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-newsletter.svg) 0 0/contain no-repeat;
-    }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cContainer.-rightMiddle {
+    padding-right: 10.9375rem;
+  }
+  .cContainer.-leftMiddle {
+    padding-left: 4.9375rem;
+  }
+  .lContact-container {
+    margin-top: 7.8125rem;
+    padding-top: 7.8125rem;
+  }
+  .cSubTitle.-right {
+    text-align: right;
+  }
+  .cSubTitle {
+    font-size: 1.125rem;
+  }
+  .lContact-lead:before {
+    background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
+    width: 15.8125rem;
+    height: 22.875rem;
+    top: 1.125rem;
+    left: 23.875rem;
+  }
+  ._sp {
+    display: none !important;
+  }
+  .lContact-holder {
+    width: 16.625rem;
+    margin-top: 0.875rem;
+    margin-left: auto;
+    letter-spacing: -0.05em;
+  }
+  .lContact-text {
+    font-size: 1rem;
+  }
+  .lContact-linkHolder {
+    margin-top: 2rem;
+    /*  */
+    width: "30rem";
+  }
+  .lContact-link.-mail {
+    width: 21.75rem;
+    font-size: 1.525rem;
+    padding-bottom: 1.125rem;
+  }
+  .lContact-link {
+    padding-left: 5rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-mail:after {
+    width: 1.1875rem;
+    height: 0.875rem;
+    top: 1.5rem;
+    left: 1.75rem;
+  }
+  .lContact-link.-newsletter {
+    width: 22.75rem;
+    font-size: 1.525rem;
+    /* margin-top: 2rem; */
+    padding-bottom: 0.4375rem;
+  }
+  .lContact-link {
+    padding-left: 5rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-newsletter:after {
+    width: 1rem;
+    height: 1.375rem;
+    top: 1.375rem;
+    left: 1.875rem;
+  }
+  .lContact-link.-newsletter:after {
+    background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-newsletter.svg)
+      0 0 / contain no-repeat;
+  }
+}
+
+/* 1024 */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .cContainer.-rightMiddle {
+    padding-right: 10.9375rem;
+  }
+  .cContainer.-leftMiddle {
+    padding-left: 10.9375rem;
+  }
+  .lContact-container {
+    margin-top: 7.8125rem;
+    padding-top: 7.8125rem;
+  }
+  .cSubTitle.-right {
+    text-align: right;
+  }
+  .cSubTitle {
+    font-size: 1.125rem;
+  }
+  .lContact-lead:before {
+    background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
+    width: 17.8125rem;
+    height: 22.875rem;
+    top: 1.125rem;
+    left: 27.875rem;
+  }
+  ._sp {
+    display: none !important;
+  }
+  .lContact-holder {
+    width: 25.625rem;
+    margin-top: 0.875rem;
+    margin-left: auto;
+    letter-spacing: -0.05em;
+  }
+  .lContact-text {
+    font-size: 1rem;
+  }
+  .lContact-linkHolder {
+    margin-top: 2rem;
+    /*  */
+    width: "30rem";
+  }
+  .lContact-link.-mail {
+    width: 27.75rem;
+    font-size: 2.125rem;
+    padding-bottom: 1.125rem;
+  }
+  .lContact-link {
+    padding-left: 5rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-mail:after {
+    width: 1.1875rem;
+    height: 0.875rem;
+    top: 1.5rem;
+    left: 1.75rem;
+  }
+  .lContact-link.-newsletter {
+    width: 28.75rem;
+    font-size: 2.125rem;
+    margin-top: 1rem;
+    padding-bottom: 0.4375rem;
+  }
+  .lContact-link {
+    padding-left: 5rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-newsletter:after {
+    width: 1rem;
+    height: 1.375rem;
+    top: 1.375rem;
+    left: 1.875rem;
+  }
+  .lContact-link.-newsletter:after {
+    background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-newsletter.svg)
+      0 0 / contain no-repeat;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .cContainer.-rightMiddle {
+    padding-right: 10.9375rem;
+  }
+  .cContainer.-leftMiddle {
+    padding-left: 10.9375rem;
+  }
+  .lContact-container {
+    margin-top: 7.8125rem;
+    padding-top: 7.8125rem;
+  }
+  .cSubTitle.-right {
+    text-align: right;
+  }
+  .cSubTitle {
+    font-size: 1.125rem;
+  }
+  .lContact-lead:before {
+    background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
+    width: 17.8125rem;
+    height: 22.875rem;
+    top: 1.125rem;
+    left: 27.875rem;
+  }
+  ._sp {
+    display: none !important;
+  }
+  .lContact-holder {
+    width: 25.625rem;
+    margin-top: 0.875rem;
+    margin-left: auto;
+    letter-spacing: -0.05em;
+  }
+  .lContact-text {
+    font-size: 1rem;
+  }
+  .lContact-linkHolder {
+    margin-top: 2rem;
+    /*  */
+    width: "30rem";
+  }
+  .lContact-link.-mail {
+    width: 27.75rem;
+    font-size: 2.125rem;
+    padding-bottom: 1.125rem;
+  }
+  .lContact-link {
+    padding-left: 5rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-mail:after {
+    width: 1.1875rem;
+    height: 0.875rem;
+    top: 1.5rem;
+    left: 1.75rem;
+  }
+  .lContact-link.-newsletter {
+    width: 28.75rem;
+    font-size: 2.125rem;
+    margin-top: 1rem;
+    padding-bottom: 0.4375rem;
+  }
+  .lContact-link {
+    padding-left: 5rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-newsletter:after {
+    width: 1rem;
+    height: 1.375rem;
+    top: 1.375rem;
+    left: 1.875rem;
+  }
+  .lContact-link.-newsletter:after {
+    background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-newsletter.svg)
+      0 0 / contain no-repeat;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  /* phale 768 tha is pa */
+  /* @media screen and (min-width: 1440px) { */
+  .cContainer.-rightMiddle {
+    padding-right: 10.9375rem;
+  }
+  .cContainer.-leftMiddle {
+    padding-left: 10.9375rem;
+  }
+  .lContact-container {
+    margin-top: 7.8125rem;
+    padding-top: 7.8125rem;
+  }
+  .cSubTitle.-right {
+    text-align: right;
+  }
+  .cSubTitle {
+    font-size: 1.125rem;
+  }
+  .lContact-lead:before {
+    background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
+    width: 26.8125rem;
+    height: 22.875rem;
+    top: 3.125rem;
+    left: 40.875rem;
+  }
+  ._sp {
+    display: none !important;
+  }
+  .lContact-holder {
+    width: 35.625rem;
+    margin-top: 0.875rem;
+    margin-left: auto;
+    letter-spacing: -0.05em;
+  }
+  .lContact-text {
+    font-size: 1rem;
+  }
+  .lContact-linkHolder {
+    margin-top: 2rem;
+  }
+  .lContact-link.-mail {
+    width: 35.75rem;
+    font-size: 3.125rem;
+    padding-bottom: 1.125rem;
+  }
+  .lContact-link {
+    padding-left: 5rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-mail:after {
+    width: 1.1875rem;
+    height: 0.875rem;
+    top: 1.5rem;
+    left: 1.75rem;
+  }
+  .lContact-link.-newsletter {
+    width: 35.75rem;
+    font-size: 3.125rem;
+    margin-top: 2rem;
+    padding-bottom: 0.4375rem;
+  }
+  .lContact-link {
+    padding-left: 5rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-newsletter:after {
+    width: 1rem;
+    height: 1.375rem;
+    top: 1.375rem;
+    left: 1.875rem;
+  }
+  .lContact-link.-newsletter:after {
+    background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-newsletter.svg)
+      0 0 / contain no-repeat;
+  }
 }

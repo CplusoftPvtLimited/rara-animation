@@ -1,35 +1,106 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./index.css";
 
 gsap.registerPlugin(ScrollTrigger);
 const index = () => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  const scrollToHomeSection = () => {
+    const homeSection = document.getElementById("home-section");
+
+    if (homeSection) {
+      homeSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToVisionSection = () => {
+    const visionSection = document.getElementById("vision-section");
+
+    if (visionSection) {
+      visionSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToGuidelinesSection = () => {
+    const guidelinesSection = document.getElementById("guideline");
+
+    if (guidelinesSection) {
+      guidelinesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToFellowsSection = () => {
+    const fellowsSection = document.getElementById("fellows_section");
+
+    if (fellowsSection) {
+      fellowsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToUpdatesSection = () => {
+    console.log("scrollToUpdatesSection");
+    const updatesSection = document.getElementById("updates-section");
+
+    if (updatesSection) {
+      updatesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToContactSection = () => {
+    const contactSection = document.getElementById("contact-section");
+
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const menuBtnElement = document.querySelector(".cMenu-btn-inner");
     const donationBtnElement = document.querySelector(".button4");
-    console.log(
-      "🚀 ~ file: index.jsx:11 ~ useEffect ~ donationBtnElement:",
-      donationBtnElement
-    );
     const countryBtnElement = document.querySelector(".dropbtn");
-    console.log(
-      "🚀 ~ file: index.jsx:13 ~ useEffect ~ countryBtnElement:",
-      countryBtnElement
-    );
 
     const tl = gsap.timeline({ paused: true, reversed: true });
+
+    console.log("screenWidth: " + screenWidth);
+
+    let transformValue = "translate(0, 0)";
+
+    switch (true) {
+      case screenWidth <= 375:
+        transformValue = "translate(171px, -51px)";
+        break;
+      case screenWidth <= 425:
+        transformValue = "translate(111px, -43px)";
+        break;
+      case screenWidth <= 768:
+        transformValue = "translate(111px, -43px)";
+        break;
+      case screenWidth <= 1024:
+        transformValue = "translate(114px, -19px)";
+        break;
+      case screenWidth <= 1440:
+        transformValue = "translate(111px, -43px)";
+        break;
+    }
 
     tl.fromTo(
       ".cMenu-bg",
       {
-        transform: "scale(0,0)",
+        transform: "scale(0, 0)",
       },
       {
-        transform: "translate(0, 0)",
+        transform: transformValue,
       }
     );
+
+    window.removeEventListener("resize", handleResize);
 
     if (window.location.pathname != "/") {
       gsap.fromTo(
@@ -200,15 +271,19 @@ const index = () => {
                     DONATE
                   </button>
                 </a>
+
                 <a className="cMenu-btn-inner-btn" style={{ margin: 0 }}>
                   <div className="dropdown">
                     <button className="dropbtn">
                       COUNTRY <span className="caret"></span>
                     </button>
                     <div className="dropdown-content">
-                      <a href="#">Option 1</a>
-                      <a href="#">Option 2</a>
-                      <a href="#">Option 3</a>
+                      <a href="#">Indo-Pacific</a>
+                      <a href="#">Middle East</a>
+                      <a href="#">Europe & Central Asia</a>
+                      <a href="#">South Asia</a>
+                      <a href="#">Africa</a>
+                      <a href="#">Americas</a>
                     </div>
                   </div>
                 </a>
@@ -322,12 +397,11 @@ const index = () => {
                     {/* discover */}
                     <li className="cMenuContent-list-item -anchor">
                       <a
-                        // className="cMenuContent-list-link -vision"
                         className="cMenuContent-list-link -guideline"
-                        href="/"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToHomeSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -359,12 +433,11 @@ const index = () => {
                     {/* Explore */}
                     <li className="cMenuContent-list-item -anchor">
                       <a
-                        // className="cMenuContent-list-link -vision"
                         className="cMenuContent-list-link -guideline"
-                        href="/#vision"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToVisionSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -394,14 +467,16 @@ const index = () => {
                     </li>
 
                     {/* Contact */}
-                    <li className="cMenuContent-list-item -anchor">
+                    <li
+                      className="cMenuContent-list-item -anchor"
+                      style={{ marginBottom: "10px" }}
+                    >
                       <a
-                        // className="cMenuContent-list-link -vision"
                         className="cMenuContent-list-link -guideline"
-                        href="/#contact"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToContactSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -434,10 +509,11 @@ const index = () => {
                     <li className="cMenuContent-list-item">
                       <a
                         className="cMenuContent-list-link -fellows"
-                        href="/#research"
+                        // href="/#research"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToUpdatesSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -463,7 +539,7 @@ const index = () => {
                     {/* Idea */}
                     <li className="cMenuContent-list-item">
                       <a
-                        className="cMenuContent-list-link -fellows"
+                        className="cMenuContent-list-link -idea"
                         href="/idea"
                         data-menu-item=""
                         data-disable-hash=""
@@ -500,10 +576,11 @@ const index = () => {
                     <li className="cMenuContent-list-item">
                       <a
                         className="cMenuContent-list-link -fellows"
-                        href="/fellow"
+                        // href="/fellow"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
+                        onClick={scrollToFellowsSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -567,215 +644,10 @@ const index = () => {
                         </svg>
                       </a>
                     </li>
-
-                    {/* <li className="cMenuContent-list-item">
-                      <a
-                        className="cMenuContent-list-link -fellows"
-                        href="/fellow"
-                        data-menu-item=""
-                        data-disable-hash=""
-                        style={{ opacity: 0 }}
-                      >
-                        <svg
-                          className="cMenuContent-list-svg"
-                          viewBox="0 0 936.1 150.5"
-                        >
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M100.9,49v51.2h-3.1C96.1,79,85.2,79.4,67.6,79.4H44.7v31.7c0,22.5,1.1,26.9,30.2,31.3v3.2H0.1v-3.2                    c25.2-3.4,25.4-9.7,26-31.3V37.2c-0.6-21.6-0.8-27.9-26-31.3V2.7h111.1l-3.4,33.2h-3.2c-1.3-27.1-18.9-28.1-41-28.1H44.5v62.8h22.9                    C85,70.6,96,68.9,97.6,49L100.9,49L100.9,49z"
-                            ></path>
-                          </g>
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M121,142.4c25.2-3.4,25.4-9.7,26-31.3V37.2c-0.6-21.6-0.8-27.9-26-31.3V2.7h112.8L231.3,35h-3.1                    c-1.5-27.1-21-27.3-42.2-27.3h-20.4v59.9h21.8c15.8,0,27.7-1.3,30-19.3h3.1v46.8h-3.1c-2.7-18.5-14.3-18.7-30-18.7h-21.8v34.4                    c0,12.4-2.9,29.6,31.5,29.6c26.5,0,39.5-10.1,44.7-36.5h3.1c-0.2,16-2.9,29-7.1,41.6H121V142.4z"
-                            ></path>
-                          </g>
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M247,142.4c25.2-3.4,25.4-9.7,26-31.3V37.2c-0.6-21.6-0.8-27.9-26-31.3V2.7h70.6v3.2c-25.2,3.4-26,9.7-26,31.3                    v68.9c0,10.5,0,21.6,3.1,31.7l25.6,1.9c31.9,2.3,37.2-7.6,53.3-34.4l2.7,1.3l-12,39.1H247V142.4z"
-                            ></path>
-                          </g>
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M373,142.4c25.2-3.4,25.4-9.7,26-31.3V37.2c-0.6-21.6-0.8-27.9-26-31.3V2.7h70.6v3.2c-25.2,3.4-26,9.7-26,31.3                    v68.9c0,10.5,0,21.6,3.1,31.7l25.6,1.9c31.9,2.3,37.2-7.6,53.3-34.4l2.7,1.3l-12,39.1H373V142.4z"
-                            ></path>
-                          </g>
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M580.5,0.2c-43.9,0-76.7,29-76.7,73.7c0,45.4,32.6,74.1,76.9,74.1c44.1,0,76.9-28.8,76.9-73.9                    C657.6,36.8,634.3,0.2,580.5,0.2z M583.2,143c-37.8,0-55-41.6-55-74.1c0-28.4,14.5-63.6,50.6-63.6c32.1,0,53.8,35.3,54.4,72.5                    C633.2,107.8,617.9,143,583.2,143z"
-                            ></path>
-                          </g>
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M706.1,150.4H704L669.8,33c-5.2-15.3-5.9-22.3-23.3-27.1V2.7h59.4v3.2c-25.6,3.8-20.4,14.5-15.3,31.7l22.1,74.6                    l33-87.8C741.5,11.6,734.6,8.2,722,5.9V2.7h61.3v3.2c-22.9,3.2-20.2,13-16.4,25.2l26.7,83.2L810.2,67c3.6-10.5,13-36.8,13-46.8                    c0-10.3-9.5-11.8-21-14.3V2.7H857v3.2c-12.6,0.8-18.9,8-23.3,19.1L819,65.1l-30.9,85.3h-2.3L748.3,33.6L706.1,150.4z"
-                            ></path>
-                          </g>
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M927.4,39.7H924c-3.4-17-8.8-33.4-29.6-33.4c-13.4,0-24.6,9.2-24.6,23.1c0,36.3,66.2,35.1,66.2,77.5                    c0,27.1-26.9,41.2-51,41.2c-12.8,0-26.3-3.8-37-10.7l-6.1-35.7h3.8c5.2,20.2,19.3,40.1,42.4,40.1c15.5,0,27.7-9.2,27.7-25.6                    c0-37.4-64.3-34-64.3-76c0-24.6,24.4-40.1,46.8-40.1c10.7,0,21.4,3.1,30.7,8.2L927.4,39.7z"
-                            ></path>
-                          </g>
-                        </svg>
-                      </a>
-                    </li>
-
-                    <li className="cMenuContent-list-item">
-                      <a
-                        className="cMenuContent-list-link -updates"
-                        href="/news"
-                        data-menu-item=""
-                        data-disable-hash=""
-                        style={{ opacity: 0 }}
-                      >
-                        <svg
-                          className="cMenuContent-list-svg"
-                          viewBox="0 0 83.8 14"
-                        >
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M15,0.8v0.3c-1.7,0.2-1.8,1.3-1.9,3.8L13,9c-0.1,2.5-1.1,4.9-5.3,4.9c-5.9,0-5.3-4.3-5.3-5.8V3.9C2.3,2,2.3,1.4,0,1.1V0.8h6.6v0.3C4.1,1.5,4.1,1.8,4.1,3.9v3.9c0,0.4-0.6,5.3,4.6,5.3c4.1,0,3.7-3.9,3.7-6.2v-2                    c0-2.4-0.2-3.5-2.8-3.8V0.8H15z"
-                            ></path>
-                          </g>
-
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M15.4,0.9l4.1-0.2c5.6-0.2,6,2.8,6,3.5c0,2.7-2.6,3.6-4.9,3.9l-0.1-0.3c1.7-0.3,3-1.2,3-3.1                    c0-2.5-2.1-3.6-4.3-3.6v9.4c0,2.1,0,2.5,2.5,2.8v0.3h-6.6v-0.3c2.3-0.3,2.3-0.9,2.4-2.8V4.7c0-2.6,0-3.4-2.2-3.5V0.9z"
-                            ></path>
-                          </g>
-
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M26,0.9l4.6-0.2c8.4-0.3,9.2,4.6,9.2,6.5c0,2.7-1.7,6.5-8.3,6.5l-5.7,0v-0.3c2.3-0.3,2.3-0.9,2.4-2.8V4                    c-0.1-2-0.1-2.5-2.2-2.8V0.9z M29.9,10.8c0,1.3,0.2,2.5,2.6,2.5c2.2,0,5.1-1.4,5.1-5.7c0-4.6-3.6-6.5-7.7-6.4V10.8z"
-                            ></path>
-                          </g>
-
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M43.2,8.3c-0.3,1-1.2,2.9-1.2,3.8c0,1.2,1.3,1.2,2.2,1.3v0.3H39v-0.3c1.7-0.5,1.9-0.8,2.5-2.3l2.1-5.6                    l1.1-3.1c0.2-0.5,0.4-0.9,0.2-1.3c0.5-0.2,1-0.6,1.4-1l4.2,11.1c0.5,1.4,0.8,1.9,2.4,2.2v0.3h-5.6v-0.3c0.7-0.2,1.5-0.4,1.5-1.2                    c0-0.8-0.7-2.6-1.2-3.9H43.2z M45.3,2.5l-1.8,4.9h3.8L45.3,2.5z"
-                            ></path>
-                          </g>
-
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M63,0.2h0.2l0.3,3.6l-0.3,0.1c-0.7-2.4-1.7-2.5-3.9-2.5h-1.1v8.8c0,2.4,0.1,3,2.7,3.3v0.3h-7v-0.3                    c2.5-0.3,2.7-0.9,2.7-3.3V1.4h-1.1c-2.2,0-3.2,0.1-3.9,2.5l-0.3-0.1l0.3-3.6h0.2l0.2,0.2c0.5,0.4,0.6,0.4,1.2,0.4h8.7                    c0.6,0,0.7,0,1.2-0.4L63,0.2z"
-                            ></path>
-                          </g>
-
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M63.6,13.5c2.3-0.3,2.3-0.9,2.4-2.8V3.9c-0.1-2-0.1-2.5-2.4-2.8V0.8h10.2l-0.2,2.9h-0.3                    c-0.1-2.5-1.9-2.5-3.8-2.5h-1.8v5.4h2c1.4,0,2.5-0.1,2.7-1.7h0.3v4.2h-0.3C72,7.5,71,7.5,69.6,7.5h-2v3.1c0,1.1-0.3,2.7,2.8,2.7                    c2.4,0,3.6-0.9,4-3.3h0.3c0,1.4-0.3,2.6-0.6,3.8H63.6V13.5z"
-                            ></path>
-                          </g>
-
-                          <g
-                            data-svg-title-item=""
-                            style={{
-                              transformOrigin: "left",
-                              transform: "scale(0)",
-                            }}
-                          >
-                            <path
-                              className="st0"
-                              d="M82.9,4.2h-0.3c-0.3-1.5-0.8-3-2.7-3c-1.2,0-2.2,0.8-2.2,2.1c0,3.3,6,3.2,6,7c0,2.5-2.4,3.7-4.6,3.7                    c-1.2,0-2.4-0.3-3.3-1l-0.6-3.2h0.3c0.5,1.8,1.7,3.6,3.8,3.6c1.4,0,2.5-0.8,2.5-2.3c0-3.4-5.8-3.1-5.8-6.9c0-2.2,2.2-3.6,4.2-3.6                    c1,0,1.9,0.3,2.8,0.7L82.9,4.2z"
-                            ></path>
-                          </g>
-                        </svg>
-                      </a>
-                    </li> */}
                   </ul>
                 </div>
               </div>
+
               <div
                 className="cModal-backdrop cMenuContent-backdrop"
                 data-modal-backdrop=""
@@ -798,10 +670,15 @@ const index = () => {
                   transform: "scaleX(1.05)",
                 }}
               >
-                <a className="cHeader-list-link" data-disable-hash="">
+                <a
+                  className="cHeader-list-link"
+                  data-disable-hash=""
+                  onClick={scrollToHomeSection}
+                >
                   DISCOVER
                 </a>
               </li>
+
               <li
                 className="cFlatText cHeader-list-item"
                 data-flat-text=""
@@ -812,12 +689,13 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/#vision"
                   data-disable-hash=""
+                  onClick={scrollToVisionSection}
                 >
                   EXPLORE
                 </a>
               </li>
+
               <li
                 className="cFlatText cHeader-list-item"
                 data-flat-text=""
@@ -828,8 +706,8 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/#guideline"
                   data-disable-hash=""
+                  onClick={scrollToGuidelinesSection}
                 >
                   FOCUS AREA
                 </a>
@@ -844,8 +722,9 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/#fellows_trigger"
+                  // href="/#fellows_trigger"
                   data-disable-hash=""
+                  onClick={scrollToFellowsSection}
                 >
                   FELLOWS
                 </a>
@@ -860,8 +739,8 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  href="/#updates"
                   data-disable-hash=""
+                  onClick={scrollToUpdatesSection}
                 >
                   RESEARCH
                 </a>

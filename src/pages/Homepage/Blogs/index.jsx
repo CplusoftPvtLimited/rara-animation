@@ -95,6 +95,7 @@ const index = () => {
           </div>
         </div>
       </h2>
+
       <div
         className="lUpdates-ornament -view"
         data-scroll=""
@@ -117,6 +118,9 @@ const index = () => {
           />
         </picture>
       </div>
+
+      {/* list */}
+      <div></div>
       <ul className="lUpdates-List">
         <li className="cUpdatesItem -wide">
           <a
@@ -147,7 +151,8 @@ const index = () => {
               </div>
             </div>
           </a>
-        </li>{" "}
+        </li>
+
         <li className="cUpdatesItem -wide">
           <a
             className="cUpdatesItem-inner"
@@ -175,7 +180,8 @@ const index = () => {
               </div>
             </div>
           </a>
-        </li>{" "}
+        </li>
+
         <li className="cUpdatesItem -wide">
           <a
             className="cUpdatesItem-inner"
@@ -205,8 +211,9 @@ const index = () => {
               </div>
             </div>
           </a>
-        </li>{" "}
+        </li>
       </ul>
+
       <div className="lUpdates-linkArea">
         <a className="lUpdates-link" href="/updates/">
           VIEW ALL UPDATES
