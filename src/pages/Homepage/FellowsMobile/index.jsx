@@ -21,6 +21,7 @@ const index = () => {
   const [SliderMove, setSliderMove] = useState(null);
   const [sliderRotate, setsliderRotate] = useState(-30);
   const [FellowName, setFellowName] = useState(null);
+  const [firstTime, setFirstTime] = useState(false);
   const [FellowDescription1, setFellowDescription1] = useState(null);
   const [FellowDescription2, setFellowDescription2] = useState(null);
   useEffect(() => {
@@ -77,14 +78,14 @@ const index = () => {
 
   const [fellowsData, setfellowsData] = useState([
     {
-      image: require("../../../assets/fellows/david_chen.jpg"),
-      clothAnimatedImage: require("../../../assets/fellows/david_chen_animated.jpg"),
+      image: require("../../../assets/fellows/tamaki_patel.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
       firstGraphicImage:
-        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-7.png)",
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
       secondGraphicImage:
-        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-7.png)",
-      name: "Professor David Chen",
-      description: "Behavioral Economics and Financial Decision-Making",
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
+      name: "Mrs. Tamaki Patel1",
+      description: "Impact Investing and Measurement",
       description_detailed: "",
     },
     {
@@ -94,19 +95,8 @@ const index = () => {
         "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
       secondGraphicImage:
         "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
-      name: "Mr. Dominick Mitchell",
+      name: "Mr. Dominick Mitchell2",
       description: "Sustainable Development Finance",
-      description_detailed: "",
-    },
-    {
-      image: require("../../../assets/fellows/maria_hernandez.jpg"),
-      clothAnimatedImage: require("../../../assets/fellows/maria_hernandez.jpg"),
-      firstGraphicImage:
-        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-5.png)",
-      secondGraphicImage:
-        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-5.png)",
-      name: "Dr. Maria Hernandez",
-      description: "Ethical Banking and Finance",
       description_detailed: "",
     },
     {
@@ -116,19 +106,30 @@ const index = () => {
         "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
       secondGraphicImage:
         "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-      name: "Mrs. Tamaki Patel",
+      name: "Mrs. Tamaki Patel5",
       description: "Impact Investing and Measurement",
       description_detailed: "",
     },
     {
-      image: require("../../../assets/fellows/doran_reynolds.jpg"),
-      clothAnimatedImage: require("../../../assets/fellows/doran_reynolds.jpg"),
+      image: require("../../../assets/fellows/d_mitchell.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/d_mitchell_animated.jpg"),
       firstGraphicImage:
-        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/02.png)",
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
+      name: "Mr. Dominick Mitchell3",
+      description: "Sustainable Development Finance",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/tamaki_patel.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
       secondGraphicImage:
         "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-      name: "Sir. Doran Reynolds",
-      description: "Inclusive Financial Systems",
+      name: "Mrs. Tamaki Patel4",
+      description: "Impact Investing and Measurement",
       description_detailed: "",
     },
   ]);
@@ -147,17 +148,22 @@ const index = () => {
   }, []);
 
   useEffect(() => {
-    const sliderRotateElement = document.querySelector(
-      `[data-rotate="${sliderRotate}"]`
-    );
-    setFellowName("Dr. Maria Hernandez");
+    setFellowName("Mrs. Tamaki Patel5");
     setFellowDescription1("Ethical Banking and Finance");
     setFellowDescription2("");
-    sliderRotateElement?.classList.add("-isCurrent");
-    console.log(
-      "🚀 ~ file: index.jsx:17 ~ useEffect ~ sliderRotateElement:",
-      sliderRotateElement
-    );
+    setFirstTime(true);
+    setTimeout(() => {
+      const sliderItems = document.querySelectorAll(".lFellows-slider-item");
+      sliderItems.forEach((element) => {
+        const dataRotate = element.getAttribute("data-rotate");
+        console.log("data-rotate", dataRotate);
+        if (dataRotate === "30") {
+          element?.classList.add("-isCurrent");
+        } else {
+          element.style.visibility = "hidden";
+        }
+      });
+    }, 1000);
   }, []);
 
   const handleMouseLeave = () => {
@@ -207,9 +213,15 @@ const index = () => {
   }
 
   async function handleSliderRotation() {
+    console.log("click449");
     const sliderElements = document.querySelectorAll(".lFellows-slider-item");
     sliderElements.forEach((element) => {
       element.classList.remove("-isCurrent");
+      if (firstTime === true) {
+        setFirstTime(false);
+      } else {
+        element.style.visibility = "hidden";
+      }
     });
     // console.log(
     //   "🚀 ~ file: index.jsx:119 ~ handleSliderRotation ~ coordinates:",
@@ -343,13 +355,19 @@ const index = () => {
         setFellowDescription1(currentFellowData?.data?.description);
         setFellowDescription2(currentFellowData?.data?.description_detailed);
       }
-
-      const sliderRotateElement = document.querySelector(
-        `[data-rotate="${fellowRotation[currentFellow]?.rotation}"]`
-      );
+      let sliderRotateElement;
+      if (firstTime === true) {
+        sliderRotateElement = document.querySelector(`[data-rotate="45"]`);
+        setFirstTime(false);
+      } else {
+        sliderRotateElement = document.querySelector(
+          `[data-rotate="${fellowRotation[currentFellow]?.rotation}"]`
+        );
+      }
       setsliderRotate(sliderRotate - 15);
 
       sliderRotateElement.classList.add("-isCurrent");
+      sliderRotateElement.style.visibility = "visible";
 
       previousClicked = 2;
     }
@@ -359,6 +377,11 @@ const index = () => {
       fellowRotation
     );
     // }
+    // const sliderElements2 = document.querySelectorAll(".lFellows-slider-item");
+    // sliderElements2.forEach((element) => {
+    //   console.log("hidden", sliderElements2);
+    //   element.style.visibility = "hidden";
+    // });
   }
 
   const FellowData = (rotation) => {
@@ -479,7 +502,6 @@ const index = () => {
         id="fellows"
         data-fellows-inner=""
         data-scroll=""
-        id="fellows_section"
       >
         <div className="lFellows-content" data-fellows-content="">
           <div className="lFellows-slider" data-fellows-slider="">
@@ -489,7 +511,10 @@ const index = () => {
                 data-svg-title=""
                 data-fellows-title=""
               >
-                <svg viewBox="0 0 936.1 150.5">
+                <svg
+                  viewBox="0 0 936.1 150.5"
+                  style={{ height: "60px", position: "relative", top: "120px" }}
+                >
                   <path
                     className="st0"
                     data-svg-title-item=""
@@ -772,7 +797,6 @@ const index = () => {
                     <li className="lFellows-slider-dots-item"></li>
                   </ul> */}
             </div>
-
             <div className="lFellows-btn">
               <a className="lFellows-btn-link" href="/fellows">
                 VIEW ALL FELLOWS

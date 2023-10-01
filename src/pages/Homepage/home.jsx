@@ -207,6 +207,8 @@ import { BuildingTwoRedLines } from "../../components/homeCanvas/Images/Building
 
 import GuideLines from "./Guidelines/index";
 import Fellows from "./Fellows/index";
+import FellowsMobile from "./FellowsMobile/index";
+
 import Blogs from "./Blogs/index";
 import Contact from "./Contact/index";
 
@@ -3052,7 +3054,8 @@ const index = () => {
         </div>
       </div>
       <GuideLines />
-      <Fellows />
+      {window.innerWidth < 768 && <FellowsMobile />}
+      {window.innerWidth > 767 && <Fellows />}
       <Blogs />
       <Contact />
     </div>
