@@ -1,56 +1,57 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveBlueR_AlphabetValues = (canvas) => [
+const responsiveR_AlphabetWithLabelValues = (canvas) => [
   {
     screenWidth: 320,
-    x: canvas.width / 1.12,
-    y: canvas.width / 1,
-    width: 25,
-    height: 25,
+    x: canvas.width / 2 + 465,
+    y: canvas.height / 2 + 100,
+    width: 85,
+    height: 100,
     rotation: -45,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.height / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    updatedX: canvas.width / 2 + 3,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 80,
+    updatedHeight: 100,
+    updatedRotation: 0,
     updatedRotation: 0,
   },
   {
-    screenWidth: 380,
-    x: canvas.width / 1.17,
-    y: canvas.width / 1,
-    width: 35,
-    height: 35,
+    screenWidth: 375,
+    x: canvas.width / 2 + 465,
+    y: canvas.height / 2 + 100,
+    width: 85,
+    height: 100,
     rotation: -45,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.height / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    updatedX: canvas.width / 2 + 3,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 80,
+    updatedHeight: 100,
     updatedRotation: 0,
   },
   {
     screenWidth: 430,
-    x: canvas.width / 1.17,
-    y: canvas.width / 1,
-    width: 45,
-    height: 45,
+    x: canvas.width / 2 + 465,
+    y: canvas.height / 2 + 100,
+    width: 85,
+    height: 100,
     rotation: -45,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.height / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    updatedX: canvas.width / 2 + 3,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 80,
+    updatedHeight: 100,
     updatedRotation: 0,
   },
   {
     screenWidth: 768,
-    x: canvas.width - 85,
-    y: canvas.height - 140,
-    width: 100,
+    x: canvas.width / 2 + 465,
+    y: canvas.height / 2 + 100,
+    width: 85,
     height: 100,
-    rotation: -30,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.height / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
+    rotation: -45,
+    updatedX: canvas.width / 2 + 3,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 80,
+    updatedHeight: 100,
     updatedRotation: 0,
   },
   {
@@ -133,19 +134,19 @@ const responsiveBlueR_AlphabetValues = (canvas) => [
   },
 ];
 
-export function getResponsiveBlueR_AlphabetDimensions(canvas, screenWidth) {
-  let x = 363;
-  let y = 220;
-  let width = 50;
-  let height = 50;
-  let rotation = -15;
-  let updatedX = canvas.width / 2 - 140;
-  let updatedY = canvas.height / 2 - 35;
-  let updatedWidth = 95;
-  let updatedHeight = 100;
-  let updatedRotation = -40;
+export function getResponsiveR_AlphabetDimensions(canvas, screenWidth) {
+  let x = canvas.width / 2 + 995;
+  let y = canvas.height / 2 - 2055;
+  let width = 0;
+  let height = 0;
+  let rotation = 0;
+  let updatedX = canvas.width / 2 + 0;
+  let updatedY = canvas.height / 2 - 33;
+  let updatedWidth = 170;
+  let updatedHeight = 175;
+  let updatedRotation = 0;
 
-  for (const rule of responsiveBlueR_AlphabetValues(canvas)) {
+  for (const rule of responsiveR_AlphabetWithLabelValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -176,25 +177,25 @@ export function getResponsiveBlueR_AlphabetDimensions(canvas, screenWidth) {
   };
 }
 
-export const BlueR_Alphabet = (
-  BlueR_Alphabet,
+export const R_Alphabet = (
+  RockWithLabelData,
   canvas,
   gsap,
   scrollContainer,
   c
 ) =>
   new UploadedImage(
-    BlueR_Alphabet.x,
-    BlueR_Alphabet.y,
+    RockWithLabelData.x,
+    RockWithLabelData.y,
     require("../../../../assets/home/images/header_52_1.png"),
-    BlueR_Alphabet.width,
-    BlueR_Alphabet.height,
-    BlueR_Alphabet.rotation,
-    BlueR_Alphabet.updatedX,
-    BlueR_Alphabet.updatedY,
-    BlueR_Alphabet.updatedWidth,
-    BlueR_Alphabet.updatedHeight,
-    BlueR_Alphabet.updatedRotation,
+    RockWithLabelData.width,
+    RockWithLabelData.height,
+    RockWithLabelData.rotation,
+    RockWithLabelData.updatedX,
+    RockWithLabelData.updatedY,
+    RockWithLabelData.updatedWidth,
+    RockWithLabelData.updatedHeight,
+    RockWithLabelData.updatedRotation,
     gsap,
     scrollContainer,
     c
