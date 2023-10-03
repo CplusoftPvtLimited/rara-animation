@@ -56,7 +56,7 @@ const responsiveGirlCircleWithLabelValues = (canvas) => [
   {
     screenWidth: 1024,
     x: canvas.width / 2 + 300,
-    y: canvas.height / 2 - 175,
+    y: canvas.height / 2 - 200,
     width: 130,
     height: 90,
     rotation: 0,

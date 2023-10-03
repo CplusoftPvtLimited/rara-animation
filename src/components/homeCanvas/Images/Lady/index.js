@@ -69,8 +69,8 @@ const responsiveLadyWithLabelValues = (canvas) => [
   {
     screenWidth: 1440,
     x: canvas.width / 2 + 40,
-    y: canvas.height / 2 - 80,
-    width: canvas.width / 2 - 330,
+    y: canvas.height / 2 - 20,
+    width: canvas.width / 2 - 250,
     height: canvas.height / 2 + 95,
     rotation: 0,
     updatedX: canvas.width / 2 - 70,

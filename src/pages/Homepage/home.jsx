@@ -1514,25 +1514,6 @@ const index = () => {
 
       // images.push(
       //   new UploadedImage(
-      //     canvas.width / 2 + 240,
-      //     -180,
-      //     require("../../assets/home/images/header_16.png"),
-      //     325,
-      //     280,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // images.push(
-      //   new UploadedImage(
       //     145,
       //     220,
       //     require("../../assets/home/images/header_12.png"),

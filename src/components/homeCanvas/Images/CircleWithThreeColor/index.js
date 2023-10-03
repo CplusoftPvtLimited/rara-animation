@@ -55,8 +55,8 @@ const responsiveCircleWithThreeColorWithLabelValues = (canvas) => [
   },
   {
     screenWidth: 1024,
-    x: canvas.width / 2 + 260,
-    y: canvas.height / 2 + 210,
+    x: canvas.width / 2 + 220,
+    y: canvas.height / 2 + 150,
     width: 170,
     height: 135,
     rotation: 0,
@@ -68,8 +68,8 @@ const responsiveCircleWithThreeColorWithLabelValues = (canvas) => [
   },
   {
     screenWidth: 1440,
-    x: canvas.width / 2 + 260,
-    y: canvas.height / 2 + 210,
+    x: canvas.width / 2 + 310,
+    y: canvas.height / 2 + 250,
     width: 220,
     height: 165,
     rotation: 0,
