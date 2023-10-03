@@ -51,6 +51,10 @@
   z-index: -1;
   border-radius: 7px;
 }
+.card-front-mobile {
+  display: flex;
+  justify-content: center;
+}
 
 .lGuideline-card-item-back {
   position: absolute;
@@ -129,13 +133,33 @@
   left: 0;
   margin: auto;
 }
+.lGuideline-card-item-number-mobile {
+  margin: auto;
+}
 
 .lGuideline-card-item-text {
   line-height: 2;
 }
 
+.lGuideline-card-item-text-mobile {
+  line-height: 2;
+  font-size: 14px;
+  text-align: center;
+}
 .lGuideline-card-item-title {
   letter-spacing: 0.35em;
+}
+.lGuideline-card-item-title-mobile {
+  letter-spacing: 0.35em;
+  position: absolute;
+  top: 50;
+}
+
+.card-mobile {
+  background-color: #f6f6f6;
+  margin: 3rem;
+  padding: 0.75rem;
+  border-radius: 6px;
 }
 
 .lGuideline-card-item {

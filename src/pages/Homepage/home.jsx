@@ -56,6 +56,11 @@ import {
 } from "../../components/homeCanvas/Images/RoboticHand";
 
 import {
+  getResponsiveBoyLedftToGlassesManDimensions,
+  BoyLedftToGlassesMan,
+} from "../../components/homeCanvas/Images/BoyLedftToGlassesMan";
+
+import {
   getResponsiveCircleOnGlassesPersonDimensions,
   CircleOnGlassesPerson,
 } from "../../components/homeCanvas/Images/CircleOnGlassesPerson";
@@ -69,6 +74,11 @@ import {
   getResponsiveAeroplaneManDimensions,
   AeroplaneMan,
 } from "../../components/homeCanvas/Images/AeroplaneMan";
+
+import {
+  getResponsiveBuildingAtLeftDimensions,
+  BuildingAtLeft,
+} from "../../components/homeCanvas/Images/BuildingAtLeft";
 
 import {
   getResponsiveHandDimensions,
@@ -91,9 +101,19 @@ import {
 } from "../../components/homeCanvas/Images/Map";
 
 import {
+  getResponsiveBuildingWithSpeakerDimensions,
+  BuildingWithSpeaker,
+} from "../../components/homeCanvas/Images/BuildingWithSpeaker";
+
+import {
   getResponsivePenDimensions,
   Pen,
 } from "../../components/homeCanvas/Images/Pen";
+
+import {
+  getResponsiveRedBuildingDimensions,
+  RedBuilding,
+} from "../../components/homeCanvas/Images/RedBuilding";
 
 import {
   YoungGirl,
@@ -151,6 +171,11 @@ import {
 } from "../../components/homeCanvas/Images/CarImage";
 
 import {
+  ManWithOnlyFace,
+  getResponsiveManWithOnlyFaceDimensions,
+} from "../../components/homeCanvas/Images/ManWithOnlyFace";
+
+import {
   Cart,
   getResponsiveCartDimensions,
 } from "../../components/homeCanvas/Images/Cart";
@@ -181,6 +206,11 @@ import {
 } from "../../components/homeCanvas/Images/R_Alphabet";
 
 import {
+  HandFoldingMan,
+  getResponsiveHandFoldingManDimensions,
+} from "../../components/homeCanvas/Images/HandFoldingMan";
+
+import {
   ManWithHandDirection,
   getResponsiveManWithHandDirectionDimensions,
 } from "../../components/homeCanvas/Images/ManWithHandDirection";
@@ -189,6 +219,12 @@ import {
   RoofWithRedTop,
   getResponsiveRoofWithRedTopDimensions,
 } from "../../components/homeCanvas/Images/RoofWithRedTop";
+
+// getResponsiveRedA_AlphabetDimensions
+import {
+  getResponsiveRedA_AlphabetDimensions,
+  RedA_Alphabet,
+} from "../../components/homeCanvas/Images/RedA_Alpahbet";
 
 import {
   ResearchPerson,
@@ -251,6 +287,12 @@ import {
   SecondCircleOutsideMiddleCircle,
   getResponsiveSecondCircleOutsideMiddleCircleDimensions,
 } from "../../components/homeCanvas/middleCircle/FilledCircleRotation/FilledCircleOutsideCircle/secondCircle";
+
+import {
+  ManOutsideEllipse,
+  getResponsiveManOutsideEllipseDimensions,
+} from "../../components/homeCanvas/Images/ManOutsideEllipse";
+
 import {
   FirstCircleOutsideEllipse,
   getResponsiveFirstCircleOutsideEllipseDimensions,
@@ -259,10 +301,6 @@ import {
   SecondCircleOutsideEllipse,
   getResponsiveSecondCircleOutsideEllipseDimensions,
 } from "../../components/homeCanvas/middleEllipse/FilledCircleOutsideEllipse/SecondCircle";
-import {
-  RedA_Alphabet,
-  getResponsiveRedA_AlphabetDimensions,
-} from "../../components/homeCanvas/Images/RedA_Alpahbet";
 import {
   BlueR_Alphabet,
   getResponsiveBlueR_AlphabetDimensions,
@@ -787,7 +825,6 @@ const index = () => {
         canvas,
         screenWidth
       );
-      console.log("🚀 ~ file: home.jsx:468 ~ init ~ GirlData:", AalphabetData);
 
       images.push(Aalphabet(AalphabetData, canvas, gsap, scrollContainer, c));
 
@@ -992,45 +1029,70 @@ const index = () => {
       );
 
       // boy left to glasses man --- done
+
+      const BoyLeftToGlassMannData =
+        getResponsiveBoyLedftToGlassesManDimensions(canvas, screenWidth);
       images.push(
-        new UploadedImage(
-          canvas.width / 2,
-          canvas.height / 2,
-          require("../../assets/home/images/header_61.png"),
-          0,
-          0,
-          0,
-          canvas.width / 2 - 195,
-          canvas.height / 2 - 60,
-          75,
-          105,
-          0,
+        BoyLedftToGlassesMan(
+          BoyLeftToGlassMannData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     require("../../assets/home/images/header_61.png"),
+      //     0,
+      //     0,
+      //     0,
+      //     canvas.width / 2 - 195,
+      //     canvas.height / 2 - 60,
+      //     75,
+      //     105,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // building with speaker --- done
 
+      const BuildingWithSpeakerData =
+        getResponsiveBuildingWithSpeakerDimensions(canvas, screenWidth);
       images.push(
-        new UploadedImage(
-          canvas.width / 2,
-          canvas.height / 2,
-          require("../../assets/home/images/header_37.png"),
-          0,
-          0,
-          0,
-          canvas.width / 2 - 247,
-          canvas.height / 2 - 13,
-          200,
-          100,
-          0,
+        BuildingWithSpeaker(
+          BuildingWithSpeakerData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     require("../../assets/home/images/header_37.png"),
+      //     0,
+      //     0,
+      //     0,
+      //     canvas.width / 2 - 247,
+      //     canvas.height / 2 - 13,
+      //     200,
+      //     100,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       //glasses peron --- DONE
       // With hands open
@@ -1088,6 +1150,24 @@ const index = () => {
       images.push(
         RedA_Alphabet(RedA_AlphabetData, canvas, gsap, scrollContainer, c)
       );
+      // images.push(
+      //   new UploadedImage(
+      //     363,
+      //     220,
+      //     require("../../assets/home/images/header_43.png"),
+      //     50,
+      //     50,
+      //     0,
+      //     canvas.width / 2 - 140,
+      //     canvas.height / 2 - 35,
+      //     95,
+      //     100,
+      //     -40,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // images.push(
       //   new UploadedImage(
@@ -1110,104 +1190,154 @@ const index = () => {
 
       // red building --- done
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2,
-          canvas.height / 2,
-          require("../../assets/home/images/header_23.png"),
-          0,
-          0,
-          0,
-          canvas.width / 2 - 225,
-          canvas.height / 2 + 30,
-          145,
-          115,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const RedBuildingData = getResponsiveRedBuildingDimensions(
+        canvas,
+        screenWidth
       );
+      images.push(
+        RedBuilding(RedBuildingData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     require("../../assets/home/images/header_23.png"),
+      //     0,
+      //     0,
+      //     0,
+      //     canvas.width / 2 - 225,
+      //     canvas.height / 2 + 30,
+      //     145,
+      //     115,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // man with only face --- done
-      images.push(
-        new UploadedImage(
-          -300,
-          550,
-          require("../../assets/home/images/header_38.png"),
-          165,
-          165,
-          0,
-          canvas.width / 2 - 140,
-          canvas.height / 2 - 8,
-          165,
-          165,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+
+      const ManWithOnlyFaceData = getResponsiveManWithOnlyFaceDimensions(
+        canvas,
+        screenWidth
       );
+      images.push(
+        ManWithOnlyFace(ManWithOnlyFaceData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(
+      //   new UploadedImage(
+      //     -300,
+      //     550,
+      //     require("../../assets/home/images/header_38.png"),
+      //     165,
+      //     165,
+      //     0,
+      //     canvas.width / 2 - 140,
+      //     canvas.height / 2 - 8,
+      //     165,
+      //     165,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // hand folding person ---- done
-      images.push(
-        new UploadedImage(
-          600,
-          canvas.width,
-          require("../../assets/home/images/header_49.png"),
-          115,
-          160,
-          0,
-          canvas.width / 2 - 120,
-          canvas.height / 2 + 45,
-          115,
-          160,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+
+      const HandHoldingPersonData = getResponsiveHandFoldingManDimensions(
+        canvas,
+        screenWidth
       );
+      images.push(
+        HandFoldingMan(HandHoldingPersonData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(
+      //   new UploadedImage(
+      //     600,
+      //     canvas.width,
+      //     require("../../assets/home/images/header_49.png"),
+      //     115,
+      //     160,
+      //     0,
+      //     canvas.width / 2 - 120,
+      //     canvas.height / 2 + 45,
+      //     115,
+      //     160,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // man with hand outside ellipse --- done
+
+      const ManOutsideEllipseData = getResponsiveManOutsideEllipseDimensions(
+        canvas,
+        screenWidth
+      );
       images.push(
-        new UploadedImage(
-          500,
-          canvas.width,
-          require("../../assets/home/images/header_51.png"),
-          110,
-          155,
-          0,
-          canvas.width / 2 - 170,
-          canvas.height / 2 + 75,
-          95,
-          150,
-          0,
+        ManOutsideEllipse(
+          ManOutsideEllipseData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
 
+      // images.push(
+      //   new UploadedImage(
+      //     500,
+      //     canvas.width,
+      //     require("../../assets/home/images/header_51.png"),
+      //     110,
+      //     155,
+      //     0,
+      //     canvas.width / 2 - 170,
+      //     canvas.height / 2 + 75,
+      //     95,
+      //     150,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
+
       // building at left side in bottom --- done
-      images.push(
-        new UploadedImage(
-          canvas.width / 2,
-          canvas.height / 2,
-          require("../../assets/home/images/header_24.png"),
-          0,
-          0,
-          0,
-          canvas.width / 2 - 360,
-          canvas.height / 2 + 10,
-          165,
-          100,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+
+      const BuildingAtLeftData = getResponsiveBuildingAtLeftDimensions(
+        canvas,
+        screenWidth
       );
+      images.push(
+        BuildingAtLeft(BuildingAtLeftData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     require("../../assets/home/images/header_24.png"),
+      //     0,
+      //     0,
+      //     0,
+      //     canvas.width / 2 - 360,
+      //     canvas.height / 2 + 10,
+      //     165,
+      //     100,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // lady with the book --- DONE
       const LadyData = getResponsiveLadyDimensions(canvas, screenWidth);
@@ -2802,29 +2932,6 @@ const index = () => {
                 boundaries. Our multidisciplinary team of experts, known as
                 Fellows, is committed to exploring the vast potential of social
                 finance as a catalyst for positive global transformation.
-                {/* <br />
-                <a
-                  className="cLink lVision-section-link"
-                  href="http://www.ritsumei.ac.jp/features/r2030/"
-                  target="_blank"
-                >
-                </a>
-                <span className="_cl1">「</span>挑戦をもっと自由に
-                <span className="_cr1">」</span>
-                <br className="_sp" />
-                のもと、
-                <br className="_pc" />
-                立命館大学では
-                <br className="_sp" />
-                <span className="_cl1">「</span>チャレンジデザイン
-                <span className="_cr1">」</span>を策定しています。
-                <br />
-                人類に共通する社会課題を解決するため、
-                <br />
-                社会共生価値の創造とイノベーションに取り組む
-                <br />
-                <span className="_cl1">「</span>
-                次世代研究大学」の実現を目指します。 */}
                 <br />
               </div>
               <div
@@ -2845,12 +2952,6 @@ const index = () => {
                 partnerships, we create and disseminate cutting-edge insights,
                 equipping decision-makers with the tools they need to navigate
                 the evolving landscape of finance.
-                {/* <br />
-                (立命館先進研究アカデミー)は、次世代研究大学として、
-                <br className="_pc" />
-                未来社会に貢献する新しい研究分野の創出を
-                <br className="_pc" />
-                目指して設立されました。 */}
               </div>
             </div>
             <div
@@ -2956,18 +3057,7 @@ const index = () => {
               </picture>
             </div>
           </div>
-          {/* <div
-            className="lVision-section-image -first -view md:hidden"
-            data-play-sprite=""
-            data-play-sprite-step="25"
-            data-play-sprite-duration="0.8"
-            style={{
-              backgroundImage: `url(${headOpenBGImage})`,
-              transform: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,35.8191,0,1)",
-            }}
-            data-scroll-speed="0.7"
-            data-scroll=""
-          ></div> */}
+
           <div className="lVision-section -second" data-vision-section="2">
             <div className="lVision-section-writing">
               <div
@@ -2985,11 +3075,6 @@ const index = () => {
                 socioeconomic boundaries. We aim to address the most pressing
                 challenges faced by these communities, thereby contributing to a
                 more equitable and sustainable global landscape.
-                {/* RARAとは、立命館大学の先導的・先進的研究拠点の形成に向けてリーダーシップを発揮することが
-                <span className="_nowrap">期待される</span>
-                中核研究者の集まり(アカデミー)のことです。
-                <br className="_sp" />
-                RARAを基盤にする研究者(RARAフェロー)は、本大学の核となり、他の研究者を巻き込み、先進研究を構想・企画・牽引することを目指します。 */}
               </div>
               <div
                 className="cFlatText lVision-section-writing-text"
@@ -3008,21 +3093,6 @@ const index = () => {
                 forefront of pioneering research, innovative financial
                 solutions, and collaborations that truly make a difference in
                 communities worldwide.
-                {/* RARAには、RARAフェロー同士の融合や他大学・他研究機関との連携を通じて、
-                <br />
-                新たな価値を生み出す先進的な学際研究拠点の創成に結びつける役割を
-                <br />
-                担う狙いもあります。互いに異分野の研究を理解し、
-                <br className="_sp" />
-                それらを融合した
-                <br className="_pc" />
-                新たな研究分野、
-                <br className="_sp" />
-                学際領域を創造することで、
-                <br />
-                世界と伍する先進研究拠点の
-                <br className="_sp" />
-                早期実現を目指します。 */}
               </div>
             </div>
 
