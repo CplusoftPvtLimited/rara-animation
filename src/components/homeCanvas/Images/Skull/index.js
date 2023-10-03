@@ -81,6 +81,19 @@ const responsiveSkullWithLabelValues = (canvas) => [
   },
   // full
   {
+    screenWidth: 1728,
+    x: canvas.width / 2 + 80,
+    y: -20,
+    width: 125,
+    height: 135,
+    rotation: 0,
+    updatedX: canvas.width / 2 + 235,
+    updatedY: canvas.height / 2 - 145,
+    updatedWidth: 80,
+    updatedHeight: 50,
+    updatedRotation: 0,
+  },
+  {
     screenWidth: 1920,
     x: canvas.width / 2 + 80,
     y: -20,
