@@ -2,9 +2,9 @@ import { UploadedImage } from "../../UploadedImage";
 
 const responsivePersonWithRunPoseValues = (canvas) => [
   {
-    screenWidth: 320,
+    screenWidth: 330,
     x: -20,
-    y: canvas.height / 2 - 165,
+    y: canvas.width / 2.1,
     width: 100,
     height: 90,
     rotation: 0,
@@ -17,9 +17,9 @@ const responsivePersonWithRunPoseValues = (canvas) => [
   {
     screenWidth: 380,
     x: -20,
-    y: canvas.height / 2 - 165,
-    width: 100,
-    height: 90,
+    y: canvas.width / 2.1,
+    width: 110,
+    height: 100,
     rotation: 0,
     updatedX: canvas.width / 2 - 420,
     updatedY: canvas.height / 2 - 90,
@@ -28,11 +28,11 @@ const responsivePersonWithRunPoseValues = (canvas) => [
     updatedRotation: 0,
   },
   {
-    screenWidth: 430,
+    screenWidth: 435,
     x: -20,
-    y: canvas.height / 2 - 165,
-    width: 115,
-    height: 90,
+    y: canvas.width / 2.1,
+    width: 120,
+    height: 110,
     rotation: 0,
     updatedX: canvas.width / 2 - 420,
     updatedY: canvas.height / 2 - 90,

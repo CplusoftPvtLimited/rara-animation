@@ -1,12 +1,12 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveShipValues = (canvas) => [
+const responsiveLeafWithLabelValues = (canvas) => [
   {
     screenWidth: 320,
-    x: canvas.width / 2 - 80,
-    y: canvas.width / 1.15,
+    x: canvas.width / 1.42,
+    y: canvas.width / 3.7,
     width: 50,
-    height: 50,
+    height: 40,
     rotation: 0,
     updatedX: canvas.width / 2,
     updatedY: canvas.height / 2,
@@ -16,10 +16,10 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 380,
-    x: canvas.width / 2 - 95,
-    y: canvas.width / 1.15,
-    width: 60,
-    height: 60,
+    x: canvas.width / 1.37,
+    y: canvas.width / 3.7,
+    width: 50,
+    height: 40,
     rotation: 0,
     updatedX: canvas.width / 2,
     updatedY: canvas.height / 2,
@@ -29,23 +29,23 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 430,
-    x: canvas.width / 4,
-    y: canvas.width / 1.18,
-    width: 70,
-    height: 70,
+    x: canvas.width / 1.3,
+    y: canvas.width / 3.7,
+    width: 50,
+    height: 40,
     rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.height / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
-    updatedRotation: 0,
+    updatedX: canvas.width / 2 + 145,
+    updatedY: canvas.height / 2 - 75,
+    updatedWidth: 115,
+    updatedHeight: 85,
+    updatedRotation: 95,
   },
   {
-    screenWidth: 770,
-    x: canvas.width / 2 - 140,
-    y: canvas.height / 2 - 100,
-    width: 85,
-    height: 85,
+    screenWidth: 768,
+    x: canvas.width / 2 - 35,
+    y: canvas.height / 2 + 101,
+    width: 50,
+    height: 130,
     rotation: 0,
     updatedX: canvas.width / 2,
     updatedY: canvas.height / 2,
@@ -55,10 +55,10 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 1024,
-    x: canvas.width / 2 - 180,
-    y: canvas.height / 2 - 155,
-    width: 120,
-    height: 135,
+    x: canvas.width / 2 - 35,
+    y: canvas.height / 2 + 101,
+    width: 80,
+    height: 130,
     rotation: 0,
     updatedX: canvas.width / 2,
     updatedY: canvas.height / 2,
@@ -68,10 +68,10 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 1440,
-    x: canvas.width / 2 - 250,
-    y: canvas.height / 2 - 145,
-    width: 150,
-    height: 165,
+    x: canvas.width / 2 - 35,
+    y: canvas.height / 2 + 75,
+    width: 80,
+    height: 130,
     rotation: 0,
     updatedX: canvas.width / 2,
     updatedY: canvas.height / 2,
@@ -79,12 +79,13 @@ const responsiveShipValues = (canvas) => [
     updatedHeight: 0,
     updatedRotation: 0,
   },
+  // full
   {
     screenWidth: 1920,
-    x: canvas.width / 2 - 270,
-    y: canvas.height / 2 - 175,
-    width: 150,
-    height: 165,
+    x: canvas.width / 2 - 35,
+    y: canvas.height / 2 + 101,
+    width: 80,
+    height: 130,
     rotation: 0,
     updatedX: canvas.width / 2,
     updatedY: canvas.height / 2,
@@ -92,27 +93,13 @@ const responsiveShipValues = (canvas) => [
     updatedHeight: 0,
     updatedRotation: 0,
   },
-  {
-    screenWidth: 3000,
-    x: canvas.width / 3.3,
-    y: canvas.height / 3.2,
-    width: canvas.width / 10,
-    height: canvas.height / 5,
-    rotation: 0,
-    updatedX: canvas.width / 2,
-    updatedY: canvas.height / 2,
-    updatedWidth: 0,
-    updatedHeight: 0,
-    updatedRotation: 0,
-  },
-  // Add more rules for larger screens if needed
 ];
 
-export function getResponsiveShipDimensions(canvas, screenWidth) {
-  let x = canvas.width / 2 - 250;
-  let y = canvas.height / 2 - 145;
+export function getResponsiveLeafDimensions(canvas, screenWidth) {
+  let x = canvas.width - 225;
+  let y = canvas.height / 2 - 85;
   let width = 150;
-  let height = 165;
+  let height = 115;
   let rotation = 0;
   let updatedX = canvas.width / 2;
   let updatedY = canvas.height / 2;
@@ -120,7 +107,7 @@ export function getResponsiveShipDimensions(canvas, screenWidth) {
   let updatedHeight = 0;
   let updatedRotation = 0;
 
-  for (const rule of responsiveShipValues(canvas)) {
+  for (const rule of responsiveLeafWithLabelValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -151,19 +138,19 @@ export function getResponsiveShipDimensions(canvas, screenWidth) {
   };
 }
 
-export const Ship = (ShipData, canvas, gsap, scrollContainer, c) =>
+export const Leaf = (LeafData, canvas, gsap, scrollContainer, c) =>
   new UploadedImage(
-    ShipData.x,
-    ShipData.y,
-    require("../../../../assets/home/images/header_47.png"),
-    ShipData.width,
-    ShipData.height,
-    ShipData.rotation,
-    ShipData.updatedX,
-    ShipData.updatedY,
-    ShipData.updatedWidth,
-    ShipData.updatedHeight,
-    ShipData.updatedRotation,
+    LeafData.x,
+    LeafData.y,
+    require("../../../../assets/home/images/header_50.png"),
+    LeafData.width,
+    LeafData.height,
+    LeafData.rotation,
+    LeafData.updatedX,
+    LeafData.updatedY,
+    LeafData.updatedWidth,
+    LeafData.updatedHeight,
+    LeafData.updatedRotation,
     gsap,
     scrollContainer,
     c

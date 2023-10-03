@@ -4,7 +4,7 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 320,
     x: 25,
-    y: 83,
+    y: canvas.width / 3.8,
     width: 20,
     height: 30,
     rotation: 0,
@@ -17,7 +17,7 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 380,
     x: 33,
-    y: 90,
+    y: canvas.width / 3.8,
     width: 20,
     height: 30,
     rotation: 0,
@@ -29,10 +29,10 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   },
   {
     screenWidth: 430,
-    x: 33,
-    y: 90,
-    width: 20,
-    height: 30,
+    x: 43,
+    y: canvas.width / 3.5,
+    width: 25,
+    height: 35,
     rotation: 0,
     updatedX: canvas.width / 2,
     updatedY: canvas.height / 2,

@@ -4,7 +4,7 @@ const responsivePersonAboveCartWithLabelValues = (canvas) => [
   {
     screenWidth: 320,
     x: canvas.width - 45,
-    y: canvas.height / 2 - 245,
+    y: canvas.width / 4.1,
     width: 30,
     height: 50,
     rotation: 0,
@@ -17,7 +17,7 @@ const responsivePersonAboveCartWithLabelValues = (canvas) => [
   {
     screenWidth: 375,
     x: canvas.width - 45,
-    y: canvas.height / 2 - 240,
+    y: canvas.width / 4.1,
     width: 30,
     height: 50,
     rotation: 0,
@@ -30,7 +30,7 @@ const responsivePersonAboveCartWithLabelValues = (canvas) => [
   {
     screenWidth: 430,
     x: canvas.width - 45,
-    y: canvas.height / 2 - 240,
+    y: canvas.width / 4.1,
     width: 30,
     height: 50,
     rotation: 0,
@@ -43,7 +43,7 @@ const responsivePersonAboveCartWithLabelValues = (canvas) => [
   {
     screenWidth: 768,
     x: canvas.width - 60,
-    y: canvas.height / 2 - 100,
+    y: canvas.width / 2 - 100,
     width: 40,
     height: 60,
     rotation: 0,

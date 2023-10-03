@@ -15,6 +15,9 @@ const HocCustomScrollbar = (WrappedComponent) => {
       const scrollContainer = document.querySelector(".custom-container");
       const scrollbar = document.querySelector(".c-scrollbar_thumb");
 
+      let touchStartPos = 0;
+      let touchScrollPos = 0;
+
       function updateScrollbar() {
         const scrollbarHeight =
           (scrollContainer.offsetHeight * scrollContainer.offsetHeight) /
@@ -82,6 +85,64 @@ const HocCustomScrollbar = (WrappedComponent) => {
             onComplete: () => {
               ScrollTrigger.update();
               // console.log("SCROLL TRIGGER UPDATE ---------", scrollPos);
+            },
+          });
+
+          e.preventDefault();
+        },
+        { passive: false }
+      );
+
+      // Adjusted touch event handling
+      scrollContainer.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartPos = e.touches[0].clientY;
+          touchScrollPos = scrollPos;
+        },
+        { passive: true }
+      );
+      let scrollDebounceTimeout = null;
+      scrollContainer.addEventListener(
+        "touchmove",
+        (e) => {
+          clearTimeout(debounceTimeout); // Clear previous timeout
+
+          const touchY = e.touches[0].clientY;
+          const deltaY = touchY - touchStartPos;
+          const sensitivity = 1.5;
+          const newScrollPos = gsap.utils.clamp(
+            0,
+            scrollContainer.scrollHeight - scrollContainer.offsetHeight,
+            touchScrollPos - deltaY * sensitivity
+          );
+
+          // Limit scroll to 60 when at the top
+          if (newScrollPos < 60) {
+            scrollPos = newScrollPos;
+          } else if (scrollPos < 60 && deltaY > 0) {
+            scrollPos = gsap.utils.clamp(
+              0,
+              60,
+              scrollPos + deltaY * sensitivity
+            );
+          } else {
+            scrollPos = gsap.utils.clamp(
+              0,
+              scrollContainer.scrollHeight - scrollContainer.offsetHeight,
+              newScrollPos
+            );
+          }
+
+          scrollPos = newScrollPos;
+          gsap.to(scrollContainer, {
+            scrollTop: scrollPos,
+            overwrite: "auto",
+            onUpdate: updateScrollbar,
+            duration: 0.1,
+            ease: "power1.inOut",
+            onComplete: () => {
+              ScrollTrigger.update();
             },
           });
 

@@ -4,7 +4,7 @@ const responsiveAalphabetWithLabelValues = (canvas) => [
   {
     screenWidth: 320,
     x: canvas.width - 80,
-    y: canvas.height / 2 - 130,
+    y: canvas.width / 1.7,
     width: 20,
     height: 15,
     rotation: -40,
@@ -17,7 +17,7 @@ const responsiveAalphabetWithLabelValues = (canvas) => [
   {
     screenWidth: 375,
     x: canvas.width - 90,
-    y: canvas.height / 2 - 130,
+    y: canvas.width / 1.85,
     width: 30,
     height: 25,
     rotation: -40,
@@ -30,7 +30,7 @@ const responsiveAalphabetWithLabelValues = (canvas) => [
   {
     screenWidth: 430,
     x: canvas.width - 90,
-    y: canvas.height / 2 - 130,
+    y: canvas.width / 1.85,
     width: 30,
     height: 25,
     rotation: -40,

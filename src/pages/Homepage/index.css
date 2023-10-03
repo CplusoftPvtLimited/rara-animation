@@ -1203,10 +1203,34 @@ html.has-scroll-smooth {
   }
 }
 
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 450px) {
   .lKv-coreBall {
     position: absolute;
-    top: 27%;
+    top: 15.5pc;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    bottom: 0px;
+    right: 0px;
+    margin: 0%;
+  }
+}
+@media screen and (max-width: 415px) {
+  .lKv-coreBall {
+    position: absolute;
+    top: 15pc;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    bottom: 0px;
+    right: 0px;
+    margin: 0%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .lKv-coreBall {
+    position: absolute;
+    top: 14pc;
     left: 30%;
     width: 40%;
     height: 40%;
@@ -1218,8 +1242,8 @@ html.has-scroll-smooth {
 
 @media screen and (max-width: 380px) {
   .lKv-coreBall {
-    position: fixed;
-    top: 30%;
+    position: absolute;
+    top: 14pc;
     left: 30%;
     width: 40%;
     height: 40%;
@@ -1231,11 +1255,11 @@ html.has-scroll-smooth {
 
 @media screen and (max-width: 360px) {
   .lKv-coreBall {
-    position: fixed;
-    top: 31%;
+    position: absolute;
+    top: 14pc;
     left: 30%;
     width: 40%;
-    height: 40%;
+    height: 30%;
     bottom: 0px;
     right: 0px;
     margin: 0%;
@@ -1244,8 +1268,8 @@ html.has-scroll-smooth {
 
 @media screen and (max-width: 320px) {
   .lKv-coreBall {
-    position: fixed;
-    top: 33%;
+    position: absolute;
+    top: 13pc;
     left: 25%;
     width: 10pc;
     height: 10pc;
@@ -1256,7 +1280,7 @@ html.has-scroll-smooth {
 }
 @media screen and (max-width: 280px) {
   .lKv-coreBall {
-    position: fixed;
+    position: absolute;
     top: 35%;
     left: 28%;
     width: 8pc;

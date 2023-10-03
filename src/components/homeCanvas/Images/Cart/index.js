@@ -4,7 +4,7 @@ const responsiveCartWithLabelValues = (canvas) => [
   {
     screenWidth: 320,
     x: canvas.width - 70,
-    y: canvas.height / 2 - 205,
+    y: canvas.width / 3,
     width: 80,
     height: 90,
     rotation: 0,
@@ -17,7 +17,7 @@ const responsiveCartWithLabelValues = (canvas) => [
   {
     screenWidth: 375,
     x: canvas.width - 70,
-    y: canvas.height / 2 - 200,
+    y: canvas.width / 3,
     width: 80,
     height: 90,
     rotation: 0,
@@ -30,7 +30,7 @@ const responsiveCartWithLabelValues = (canvas) => [
   {
     screenWidth: 430,
     x: canvas.width - 70,
-    y: canvas.height / 2 - 200,
+    y: canvas.width / 3,
     width: 80,
     height: 90,
     rotation: 0,

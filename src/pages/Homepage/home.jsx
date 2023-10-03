@@ -244,6 +244,18 @@ import {
   SecondCircleOutsideEllipse,
   getResponsiveSecondCircleOutsideEllipseDimensions,
 } from "../../components/homeCanvas/middleEllipse/FilledCircleOutsideEllipse/SecondCircle";
+import {
+  RedA_Alphabet,
+  getResponsiveRedA_AlphabetDimensions,
+} from "../../components/homeCanvas/Images/RedA_Alpahbet";
+import {
+  BlueR_Alphabet,
+  getResponsiveBlueR_AlphabetDimensions,
+} from "../../components/homeCanvas/Images/BlueR_Alphabet";
+import {
+  Leaf,
+  getResponsiveLeafDimensions,
+} from "../../components/homeCanvas/Images/Leaf";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
@@ -828,24 +840,33 @@ const index = () => {
 
       // R alphabet center --- done
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 + 465,
-          canvas.height / 2 + 100,
-          require("../../assets/home/images/header_52_1.png"),
-          85,
-          100,
-          -45,
-          canvas.width / 2 + 3,
-          canvas.height / 2 - 90,
-          80,
-          100,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const BlueR_AlphabetData = getResponsiveBlueR_AlphabetDimensions(
+        canvas,
+        screenWidth
       );
+
+      images.push(
+        BlueR_Alphabet(BlueR_AlphabetData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 + 465,
+      //     canvas.height / 2 + 100,
+      //     require("../../assets/home/images/header_52_1.png"),
+      //     85,
+      //     100,
+      //     -45,
+      //     canvas.width / 2 + 3,
+      //     canvas.height / 2 - 90,
+      //     80,
+      //     100,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // slim man with glasses ---done
 
@@ -902,6 +923,9 @@ const index = () => {
       images.push(Eye(EyeData, canvas, gsap, scrollContainer, c));
 
       // Leaf --- done
+
+      const LeafData = getResponsiveLeafDimensions(canvas, screenWidth);
+      images.push(Leaf(LeafData, canvas, gsap, scrollContainer, c));
 
       // images.push(
       //   new UploadedImage(
@@ -1088,24 +1112,32 @@ const index = () => {
 
       // red A alphabet --- done
 
-      images.push(
-        new UploadedImage(
-          363,
-          220,
-          require("../../assets/home/images/header_43.png"),
-          50,
-          50,
-          0,
-          canvas.width / 2 - 140,
-          canvas.height / 2 - 35,
-          95,
-          100,
-          -40,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const RedA_AlphabetData = getResponsiveRedA_AlphabetDimensions(
+        canvas,
+        screenWidth
       );
+      images.push(
+        RedA_Alphabet(RedA_AlphabetData, canvas, gsap, scrollContainer, c)
+      );
+
+      // images.push(
+      //   new UploadedImage(
+      //     363,
+      //     220,
+      //     require("../../assets/home/images/header_43.png"),
+      //     50,
+      //     50,
+      //     0,
+      //     canvas.width / 2 - 140,
+      //     canvas.height / 2 - 35,
+      //     95,
+      //     100,
+      //     -40,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // red building --- done
 
