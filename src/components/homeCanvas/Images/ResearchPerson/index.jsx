@@ -79,19 +79,19 @@ const responsiveResearchPersonValues = (canvas) => [
     updatedHeight: 0,
     updatedRotation: 0,
   },
-  {
-    screenWidth: 2500,
-    x: canvas.width / 2 - 35,
-    y: canvas.height / 2 + 101,
-    width: 80,
-    height: 130,
-    rotation: -20,
-    updatedX: canvas.width / 2 - 275,
-    updatedY: canvas.height / 2 + 100,
-    updatedWidth: 0,
-    updatedHeight: 0,
-    updatedRotation: 0,
-  },
+  // {
+  //   screenWidth: 2500,
+  //   x: canvas.width / 2 - 35,
+  //   y: canvas.height / 2 + 101,
+  //   width: 80,
+  //   height: 130,
+  //   rotation: -20,
+  //   updatedX: canvas.width / 2 - 275,
+  //   updatedY: canvas.height / 2 + 100,
+  //   updatedWidth: 0,
+  //   updatedHeight: 0,
+  //   updatedRotation: 0,
+  // },
 ];
 
 export function getResponsiveResearchPersonDimensions(canvas, screenWidth) {

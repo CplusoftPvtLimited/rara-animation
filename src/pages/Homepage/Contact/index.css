@@ -137,6 +137,98 @@ ins {
   animation: textLink-border 0.5s cubic-bezier(0.56, -0.01, 0.04, 1) forwards;
 }
 
+@media (min-width: 320px) and (max-width: 374px) {
+  .cContainer.-rightMiddle {
+    padding-right: 5.9375rem;
+  }
+  .cContainer.-leftMiddle {
+    padding-left: 1.9375rem;
+  }
+  .lContact-title {
+    display: none;
+  }
+  .lContact-container {
+    margin-top: 7.8125rem;
+    padding-top: 7.8125rem;
+  }
+  .cSubTitle.-right {
+    text-align: right;
+  }
+  .cSubTitle {
+    font-size: 1.125rem;
+  }
+  .lContact-lead:before {
+    background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
+    width: 7.8125rem;
+    height: 24.875rem;
+    top: 4.125rem;
+    left: 8.875rem;
+  }
+  .lContact-lead {
+    width: 14.875rem;
+  }
+  .lContact-lead .firstSvg {
+    width: 63%;
+  }
+  .lContact-lead svg {
+    width: 100%;
+  }
+  ._sp {
+    display: none !important;
+  }
+  .lContact-holder {
+    width: 16.625rem;
+    margin-top: 0.875rem;
+    margin-left: auto;
+    letter-spacing: -0.05em;
+  }
+  .lContact-text {
+    font-size: 1rem;
+  }
+  .lContact-linkHolder {
+    margin-top: 2rem;
+    width: "30rem";
+  }
+  .lContact-link.-mail {
+    width: 15.75rem;
+    font-size: 1.225rem;
+    padding-bottom: 1.125rem;
+  }
+  .lContact-link {
+    padding-left: 4rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-mail:after {
+    width: 0.92rem;
+    height: 0.575rem;
+    top: 1rem;
+    left: 0.15rem;
+  }
+  .lContact-link.-newsletter {
+    width: 16.75rem;
+    font-size: 1.225rem;
+    padding-bottom: 0.4375rem;
+  }
+  .lContact-link {
+    padding-left: 2rem;
+  }
+  .lContact-link:before {
+    height: 3px;
+  }
+  .lContact-link.-newsletter:after {
+    width: 0.72rem;
+    height: 0.92rem;
+    top: 0.475rem;
+    left: 0.15rem;
+  }
+  .lContact-link.-newsletter:after {
+    background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-newsletter.svg)
+      0 0 / contain no-repeat;
+  }
+}
+
 @media (min-width: 375px) and (max-width: 424px) {
   .cContainer.-rightMiddle {
     padding-right: 5.9375rem;
@@ -187,7 +279,6 @@ ins {
   }
   .lContact-linkHolder {
     margin-top: 2rem;
-    /*  */
     width: "30rem";
   }
   .lContact-link.-mail {
@@ -210,7 +301,6 @@ ins {
   .lContact-link.-newsletter {
     width: 19.75rem;
     font-size: 1.525rem;
-    /* margin-top: 2rem; */
     padding-bottom: 0.4375rem;
   }
   .lContact-link {
@@ -281,7 +371,6 @@ ins {
   }
   .lContact-linkHolder {
     margin-top: 2rem;
-    /*  */
     width: "30rem";
   }
   .lContact-link.-mail {
@@ -304,7 +393,6 @@ ins {
   .lContact-link.-newsletter {
     width: 19.75rem;
     font-size: 1.525rem;
-    /* margin-top: 2rem; */
     padding-bottom: 0.4375rem;
   }
   .lContact-link {
@@ -363,7 +451,6 @@ ins {
   }
   .lContact-linkHolder {
     margin-top: 2rem;
-    /*  */
     width: "30rem";
   }
   .lContact-link.-mail {
@@ -386,7 +473,6 @@ ins {
   .lContact-link.-newsletter {
     width: 22.75rem;
     font-size: 1.525rem;
-    /* margin-top: 2rem; */
     padding-bottom: 0.4375rem;
   }
   .lContact-link {
@@ -407,7 +493,6 @@ ins {
   }
 }
 
-/* 1024 */
 @media (min-width: 1024px) and (max-width: 1439px) {
   .cContainer.-rightMiddle {
     padding-right: 10.9375rem;
@@ -528,7 +613,6 @@ ins {
   }
   .lContact-linkHolder {
     margin-top: 2rem;
-    /*  */
     width: "30rem";
   }
   .lContact-link.-mail {
@@ -572,14 +656,12 @@ ins {
   }
 }
 
-@media screen and (min-width: 1920px) {
-  /* phale 768 tha is pa */
-  /* @media screen and (min-width: 1440px) { */
+@media (min-width: 1920px) and (max-width: 2560px) {
   .cContainer.-rightMiddle {
-    padding-right: 10.9375rem;
+    padding-right: 22.9375rem;
   }
   .cContainer.-leftMiddle {
-    padding-left: 10.9375rem;
+    padding-left: 22.9375rem;
   }
   .lContact-container {
     margin-top: 7.8125rem;
@@ -591,20 +673,26 @@ ins {
   .cSubTitle {
     font-size: 1.125rem;
   }
+  .lContact-title {
+    width: 23.375rem !important;
+  }
+  .lContact-lead {
+    width: 56.875rem;
+  }
   .lContact-lead:before {
     background-image: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/pc/b-contact_illust.png);
-    width: 26.8125rem;
-    height: 22.875rem;
-    top: 3.125rem;
-    left: 40.875rem;
+    width: 25.8125rem;
+    height: 21.875rem;
+    top: -0.875rem;
+    left: 44.875rem;
   }
   ._sp {
     display: none !important;
   }
   .lContact-holder {
-    width: 35.625rem;
+    width: 25.625rem;
     margin-top: 0.875rem;
-    margin-left: auto;
+    margin-left: 62rem;
     letter-spacing: -0.05em;
   }
   .lContact-text {
@@ -612,10 +700,11 @@ ins {
   }
   .lContact-linkHolder {
     margin-top: 2rem;
+    width: "30rem";
   }
   .lContact-link.-mail {
-    width: 35.75rem;
-    font-size: 3.125rem;
+    width: 48.75rem;
+    font-size: 4.125rem;
     padding-bottom: 1.125rem;
   }
   .lContact-link {
@@ -625,15 +714,15 @@ ins {
     height: 3px;
   }
   .lContact-link.-mail:after {
-    width: 1.1875rem;
-    height: 0.875rem;
-    top: 1.5rem;
+    width: 2.1875rem;
+    height: 1.4rem;
+    top: 2.5rem;
     left: 1.75rem;
   }
   .lContact-link.-newsletter {
-    width: 35.75rem;
-    font-size: 3.125rem;
-    margin-top: 2rem;
+    width: 52.75rem;
+    font-size: 4.125rem;
+    margin-top: 1rem;
     padding-bottom: 0.4375rem;
   }
   .lContact-link {
@@ -643,9 +732,9 @@ ins {
     height: 3px;
   }
   .lContact-link.-newsletter:after {
-    width: 1rem;
-    height: 1.375rem;
-    top: 1.375rem;
+    width: 2rem;
+    height: 2rem;
+    top: 2.375rem;
     left: 1.875rem;
   }
   .lContact-link.-newsletter:after {

@@ -106,9 +106,19 @@ import {
 } from "../../components/homeCanvas/Images/Lady";
 
 import {
+  Leaf,
+  getResponsiveLeafDimensions,
+} from "../../components/homeCanvas/Images/Leaf";
+
+import {
   Eye,
   getResponsiveEyeDimensions,
 } from "../../components/homeCanvas/Images/Eye";
+
+import {
+  SlimManWithGlasses,
+  getResponsiveSlimManWithGlassesDimensions,
+} from "../../components/homeCanvas/Images/SlimManWithGlasses";
 
 import {
   Equipment,
@@ -164,6 +174,11 @@ import {
   Skull,
   getResponsiveSkullDimensions,
 } from "../../components/homeCanvas/Images/Skull";
+
+import {
+  R_Alphabet,
+  getResponsiveR_AlphabetDimensions,
+} from "../../components/homeCanvas/Images/R_Alphabet";
 
 import {
   ManWithHandDirection,
@@ -828,40 +843,22 @@ const index = () => {
 
       // R alphabet center --- done
 
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 + 465,
-          canvas.height / 2 + 100,
-          require("../../assets/home/images/header_52_1.png"),
-          85,
-          100,
-          -45,
-          canvas.width / 2 + 3,
-          canvas.height / 2 - 90,
-          80,
-          100,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+      const R_AlphabetData = getResponsiveR_AlphabetDimensions(
+        canvas,
+        screenWidth
       );
+      images.push(R_Alphabet(R_AlphabetData, canvas, gsap, scrollContainer, c));
 
       // slim man with glasses ---done
 
+      const SlimManWithGlassesData = getResponsiveSlimManWithGlassesDimensions(
+        canvas,
+        screenWidth
+      );
       images.push(
-        new UploadedImage(
-          1200,
-          -500,
-          require("../../assets/home/images/header_39.png"),
-          110,
-          170,
-          0,
-          canvas.width / 2 - 55,
-          canvas.height / 2 - 52,
-          115,
-          160,
-          0.5,
+        SlimManWithGlasses(
+          SlimManWithGlassesData,
+          canvas,
           gsap,
           scrollContainer,
           c
@@ -903,26 +900,11 @@ const index = () => {
 
       // Leaf --- done
 
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width - 225,
-      //     canvas.height / 2 - 85,
-      //     require("../../assets/home/images/header_50.png"),
-      //     150,
-      //     115,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
+      const LeafData = getResponsiveLeafDimensions(canvas, screenWidth);
+      images.push(Leaf(LeafData, canvas, gsap, scrollContainer, c));
 
       // person above the cart --- done
+
       const PersonAboveCartData = getResponsivePersonAboveCartDimensions(
         canvas,
         screenWidth
@@ -978,25 +960,6 @@ const index = () => {
       images.push(
         ResearchPerson(ResearchPersonData, canvas, gsap, scrollContainer, c)
       );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 35,
-      //     canvas.height / 2 + 101,
-      //     require("../../assets/home/images/header_41.png"),
-      //     80,
-      //     130,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
 
       // boy left to glasses man --- done
       images.push(
