@@ -847,206 +847,183 @@ const index = () => {
           </div>
         </div>
         {/** Bottom */}
+      </div>
+      {/** Mobile */}
 
-        {/** Mobile */}
-        <div className="h-auto md:hidden">
-          <div
-            // className="lGuideline-card card_1 "
-            data-guideline-card-container=""
-            // style={{ transform: "translate(105%, 0px)" }}
-          >
-            <div
-              // className="lGuideline-card-item -card1 mobile-card-back-01"
-              data-guideline-card=""
-              // style={{ transform: "perspective(3225.81px)" }}
-            >
-              <div className="">
-                <div className="">
-                  <img
-                    className=""
-                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png"
-                    width="72"
-                    height="130"
-                    alt=""
-                    loading="lazy"
-                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number01@2x.png 2x"
-                  />
-                  <div
-                    className=""
-                    data-flat-text=""
-                    // style={{
-                    //   padding: "0px 0.825px",
-                    //   transform: "scaleX(1.05)",
-                    // }}
-                  >
-                    志
-                  </div>
-                </div>
-                <div
-                  className=""
-                  data-flat-text=""
-                  // style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
-                >
-                  Examining how cognitive biases and psychological factors
-                  influence financial decision-making while aiming to develop
-                  strategies that help individuals make more informed and
-                  responsible financial choices.
-                </div>
-              </div>
-              <div className="">
-                <img
-                  className=""
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png"
-                  width="234"
-                  height="302"
-                  alt=""
-                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
-                />
+      <div>
+        <div className="main-guideline-mobile">
+          <div className="card-mobile">
+            <div className="lGuideline-card-item-headline pt-[15px] pb-[50px]">
+              <img
+                className="lGuideline-card-item-number-mobile"
+                src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png"
+                width="72"
+                height="130"
+                alt=""
+                loading="lazy"
+                srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number01@2x.png 2x"
+              />
+              <div
+                className="cFlatText lGuideline-card-item-title-mobile"
+                data-flat-text=""
+                style={{
+                  padding: "0px 0.825px",
+                  transform: "scaleX(1.05)",
+                }}
+              >
+                志
               </div>
             </div>
             <div
+              className="cFlatText lGuideline-card-item-text-mobile"
+              data-flat-text=""
+              style={{ padding: "0px 15px", transform: "scaleX(1.05)" }}
+            >
+              Examining how cognitive biases and psychological factors influence
+              financial decision-making while aiming to develop strategies that
+              help individuals make more informed and responsible financial
+              choices.
+            </div>
+          </div>
+          <div className="card-front-mobile">
+            <img
               className=""
-              data-guideline-card=""
-              // style={{
-              //   transform: "perspective(3225.81px) translate(921.6px, 0px)",
-              // }}
-            >
-              <div className="">
-                <div className="">
-                  {/* <img
-                    className=""
-                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png"
-                    width="93"
-                    height="132"
-                    alt=""
-                    loading="lazy"
-                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number02@2x.png 2x"
-                  /> */}
-                  <div
-                    className=""
-                    data-flat-text=""
-                    // style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
-                  >
-                    共創
-                  </div>
-                </div>
-                <div
-                  // className="cFlatText lGuideline-card-item-text"
-                  data-flat-text=""
-                  // style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
-                >
-                  Exploring innovative ways to create inclusive financial
-                  systems by designing financial products that cater to unique
-                  needs of underserved and marginalized communities.
-                </div>
-              </div>
-              <div className="lGuideline-card-item-back">
-                <img
-                  className="lGuideline-card-item-back-illust -l02"
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png"
-                  width="235"
-                  height="307"
-                  alt=""
-                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
-                />
+              src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png"
+              width="234"
+              height="302"
+              alt=""
+              srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
+            />
+          </div>
+          {/**Second Box */}
+          <div className="card-mobile">
+            <div className="lGuideline-card-item-headline pt-[15px] pb-[50px]">
+              <img
+                className="lGuideline-card-item-number-mobile"
+                src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png"
+                width="93"
+                height="132"
+                alt=""
+                loading="lazy"
+                srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number02@2x.png 2x"
+              />
+              <div
+                className="cFlatText lGuideline-card-item-title-mobile"
+                data-flat-text=""
+                style={{
+                  padding: "0px 0.825px",
+                  transform: "scaleX(1.05)",
+                }}
+              >
+                共創
               </div>
             </div>
             <div
-              className="lGuideline-card-item -card3 mobile-card-back-03"
-              data-guideline-card=""
-              // style={{
-              //   transform: "perspective(3225.81px) translate(614.4px, 0px)",
-              // }}
+              className="cFlatText lGuideline-card-item-text-mobile"
+              data-flat-text=""
+              style={{ padding: "0px 15px", transform: "scaleX(1.05)" }}
             >
-              <div className="">
-                <div className="">
-                  <img
-                    className=""
-                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png"
-                    width="81"
-                    height="135"
-                    alt=""
-                    loading="lazy"
-                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number03@2x.png 2x"
-                  />
-                  <div
-                    className="cFlatText lGuideline-card-item-title"
-                    data-flat-text=""
-                    style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
-                  >
-                    変革
-                  </div>
-                </div>
-                <div
-                  className=""
-                  data-flat-text=""
-                  // style={{ padding: "0px 6.3px", transform: "scaleX(1.05)" }}
-                >
-                  Researching ethical banking practices, ethical investment
-                  vehicles, and how financial institutions can integrate ethical
-                  principles into their operations while maintaining
-                  profitability.
-                </div>
-              </div>
-              <div className="lGuideline-card-item-back">
-                <img
-                  className="lGuideline-card-item-back-illust -l03"
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png"
-                  width="220"
-                  height="301"
-                  alt=""
-                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
-                />
+              Exploring innovative ways to create inclusive financial systems by
+              designing financial products that cater to unique needs of
+              underserved and marginalized communities.
+            </div>
+          </div>
+          <div className="card-front-mobile">
+            <img
+              className=""
+              src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png"
+              width="235"
+              height="307"
+              alt=""
+              srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
+            />
+          </div>
+          {/** 3rd Box */}
+          <div className="card-mobile">
+            <div className="lGuideline-card-item-headline pt-[15px] pb-[50px]">
+              <img
+                className="lGuideline-card-item-number-mobile"
+                src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png"
+                width="81"
+                height="135"
+                alt=""
+                loading="lazy"
+                srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number03@2x.png 2x"
+              />
+              <div
+                className="cFlatText lGuideline-card-item-title-mobile"
+                data-flat-text=""
+                style={{
+                  padding: "0px 0.825px",
+                  transform: "scaleX(1.05)",
+                }}
+              >
+                変革
               </div>
             </div>
             <div
-              // className="lGuideline-card-item -card4 mobile-card-back-04"
-              data-guideline-card=""
-              // style={{
-              //   transform: "perspective(3225.81px) translate(307.2px, 0px)",
-              // }}
+              className="cFlatText lGuideline-card-item-text-mobile"
+              data-flat-text=""
+              style={{ padding: "0px 15px", transform: "scaleX(1.05)" }}
             >
-              <div className="">
-                <div className="l">
-                  <img
-                    className=""
-                    src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png"
-                    width="98"
-                    height="133"
-                    alt=""
-                    loading="lazy"
-                    srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number04@2x.png 2x"
-                  />
-                  <div
-                    className=""
-                    data-flat-text=""
-                    style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
-                  >
-                    信頼
-                  </div>
-                </div>
-                <div
-                  className=""
-                  data-flat-text=""
-                  style={{ padding: "0px 1.65px", transform: "scaleX(1.05)" }}
-                >
-                  Pecunia focuses on research related to financing sustainable
-                  development goals (SDGs). This includes examining financial
-                  instruments, policies, and partnerships that can mobilize
-                  capital for projects aligned with the SDGs.
-                </div>
-              </div>
-              <div className="">
-                <img
-                  className=""
-                  src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png"
-                  width="295"
-                  height="297"
-                  alt=""
-                  srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
-                />
+              Researching ethical banking practices, ethical investment
+              vehicles, and how financial institutions can integrate ethical
+              principles into their operations while maintaining profitability.
+            </div>
+          </div>
+          <div className="card-front-mobile">
+            <img
+              className=""
+              src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png"
+              width="220"
+              height="301"
+              alt=""
+              srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
+            />
+          </div>
+          {/** 4th Box */}
+          <div className="card-mobile">
+            <div className="lGuideline-card-item-headline pt-[15px] pb-[50px]">
+              <img
+                className="lGuideline-card-item-number-mobile"
+                src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png"
+                width="98"
+                height="133"
+                alt=""
+                loading="lazy"
+                srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_number04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_number04@2x.png 2x"
+              />
+              <div
+                className="cFlatText lGuideline-card-item-title-mobile"
+                data-flat-text=""
+                style={{
+                  padding: "0px 0.825px",
+                  transform: "scaleX(1.05)",
+                }}
+              >
+                信頼
               </div>
             </div>
+            <div
+              className="cFlatText lGuideline-card-item-text-mobile"
+              data-flat-text=""
+              style={{ padding: "0px 15px", transform: "scaleX(1.05)" }}
+            >
+              Pecunia focuses on research related to financing sustainable
+              development goals (SDGs). This includes examining financial
+              instruments, policies, and partnerships that can mobilize capital
+              for projects aligned with the SDGs.
+            </div>
+          </div>
+          <div className="card-front-mobile">
+            <img
+              className=""
+              src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png"
+              width="295"
+              height="297"
+              alt=""
+              srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
+            />
           </div>
         </div>
       </div>

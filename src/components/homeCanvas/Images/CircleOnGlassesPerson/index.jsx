@@ -67,7 +67,73 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
     updatedRotation: 0,
   },
   {
+    screenWidth: 1280,
+    x: canvas.width / 2 - 320,
+    y: canvas.height / 2 - 13,
+    width: 215,
+    height: 120,
+    rotation: 0,
+    updatedX: canvas.width / 2 - 210,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 0,
+    updatedHeight: 0,
+    updatedRotation: 0,
+  },
+  {
+    screenWidth: 1366,
+    x: canvas.width / 2 - 350,
+    y: canvas.height / 2 - 13,
+    width: 215,
+    height: 120,
+    rotation: 0,
+    updatedX: canvas.width / 2 - 210,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 0,
+    updatedHeight: 0,
+    updatedRotation: 0,
+  },
+  {
     screenWidth: 1440,
+    x: canvas.width / 2 - 400,
+    y: canvas.height / 2 - 13,
+    width: 215,
+    height: 120,
+    rotation: 0,
+    updatedX: canvas.width / 2 - 210,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 0,
+    updatedHeight: 0,
+    updatedRotation: 0,
+  },
+  {
+    screenWidth: 1536,
+    x: canvas.width / 2 - 450,
+    y: canvas.height / 2 - 13,
+    width: 220,
+    height: 120,
+    rotation: 0,
+    updatedX: canvas.width / 2 - 210,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 0,
+    updatedHeight: 0,
+    updatedRotation: 0,
+  },
+  {
+    screenWidth: 1728,
+    x: canvas.width / 2 - 430,
+    y: canvas.height / 2 - 100,
+    width: 275,
+    height: 180,
+    rotation: 0,
+    updatedX: canvas.width / 2 - 210,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 0,
+    updatedHeight: 0,
+    updatedRotation: 0,
+  },
+
+  {
+    screenWidth: 1920,
     x: canvas.width / 2 - 500,
     y: canvas.height / 2 - 13,
     width: 215,
@@ -80,7 +146,7 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
     updatedRotation: 0,
   },
   {
-    screenWidth: 1930,
+    screenWidth: 2500,
     x: canvas.width / 2 - 500,
     y: canvas.height / 2 - 13,
     width: 215,
@@ -94,15 +160,15 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   },
   {
     screenWidth: 3000,
-    x: canvas.width / 6.3,
-    y: canvas.width / 4,
-    width: canvas.width / 6,
-    height: canvas.width / 12,
+    x: canvas.width / 2 - 400,
+    y: canvas.width / 2 - 400,
+    width: 215,
+    height: 120,
     rotation: 0,
-    updatedX: canvas.width / 2 - 210,
-    updatedY: canvas.height / 2 - 90,
-    updatedWidth: 175,
-    updatedHeight: 200,
+    updatedX: canvas.width / 2 + 45,
+    updatedY: canvas.height / 2 - 95,
+    updatedWidth: 0,
+    updatedHeight: 0,
     updatedRotation: 0,
   },
   // Add more rules for larger screens if needed
@@ -112,8 +178,8 @@ export function getResponsiveCircleOnGlassesPersonDimensions(
   canvas,
   screenWidth
 ) {
-  let x = canvas.width / 2 - 500;
-  let y = canvas.height / 2 - 13;
+  let x = canvas.width / 2 - 400;
+  let y = canvas.width / 2 - 400;
   let width = 215;
   let height = 120;
   let rotation = 0;
