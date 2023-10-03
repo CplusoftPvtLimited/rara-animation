@@ -2,19 +2,19 @@ const responsiveCircleValues = (canvas) => [
   {
     screenWidth: 320,
     width: canvas.width / 2,
-    height: canvas.height / 2.25,
+    height: canvas.width / 1.1,
     radius: canvas.width / 3.1,
   },
   {
     screenWidth: 380,
     width: canvas.width / 2,
-    height: canvas.height / 2.15,
+    height: canvas.width / 1.1,
     radius: canvas.width / 3.1,
   },
   {
     screenWidth: 480,
     width: canvas.width / 2,
-    height: canvas.height / 2.25,
+    height: canvas.width / 1.1,
     radius: canvas.width / 3,
   },
   {

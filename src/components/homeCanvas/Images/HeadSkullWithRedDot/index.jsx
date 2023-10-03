@@ -4,7 +4,7 @@ const responsiveHeadSkullWithRedDotValues = (canvas) => [
   {
     screenWidth: 320,
     x: 25,
-    y: 105,
+    y: canvas.width / 3,
     width: 35,
     height: 40,
     rotation: 0,
@@ -17,7 +17,7 @@ const responsiveHeadSkullWithRedDotValues = (canvas) => [
   {
     screenWidth: 380,
     x: 35,
-    y: 110,
+    y: canvas.width / 3.2,
     width: 35,
     height: 40,
     rotation: 0,
@@ -29,10 +29,10 @@ const responsiveHeadSkullWithRedDotValues = (canvas) => [
   },
   {
     screenWidth: 430,
-    x: 35,
-    y: 110,
-    width: 35,
-    height: 40,
+    x: 45,
+    y: canvas.width / 2.9,
+    width: 40,
+    height: 45,
     rotation: 0,
     updatedX: canvas.width / 2 - 260,
     updatedY: canvas.height / 2 - 137,

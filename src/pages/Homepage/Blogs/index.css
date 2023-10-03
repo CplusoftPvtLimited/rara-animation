@@ -1,3 +1,118 @@
+@media (min-width: 320px) and (max-width: 374px) {
+  .cContainer.-rightWide {
+    padding-right: 1rem;
+  }
+  .cContainer.-leftWide {
+    padding-left: 1rem;
+  }
+  .lUpdates {
+    padding-top: 12.5rem;
+    padding-bottom: 6.25rem;
+    margin-top: -15.625rem;
+    position: relative;
+  }
+  .lUpdates-title-main {
+    width: 17rem;
+  }
+  .lUpdates-title-sub {
+    letter-spacing: 0.05em;
+    margin-top: 0.625rem;
+  }
+  .cSubTitle {
+    font-size: 0.8rem;
+  }
+  .lUpdates-ornament {
+    display: none;
+  }
+  .lUpdates-List {
+    margin-top: 3rem !important;
+    width: 36rem !important;
+    margin-top: 3rem !important;
+    padding: 0 1.25rem !important;
+  }
+
+  .lUpdates-title-inner {
+    display: block;
+    margin-left: 25px !important;
+  }
+
+  .cUpdatesItem + .cUpdatesItem.-wide {
+    margin-top: 1.125rem;
+  }
+  .cUpdatesItem {
+    height: 27.25rem;
+  }
+  .cUpdatesItem-inner {
+    display: flex;
+    flex-direction: column;
+  }
+  .cUpdatesItem-thumbnail {
+    width: 46%;
+    height: 11.25rem;
+    margin-right: 1.75rem;
+    border-radius: 0.25rem;
+  }
+  .cUpdatesItem-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(100% - 18.35rem);
+    margin-top: 18px;
+    height: 170px;
+  }
+  .cUpdatesItem-category {
+    font-size: 8px;
+    margin-left: 0.125rem;
+    padding-left: 1.0625rem;
+  }
+  .cUpdatesItem-category:before {
+    width: 0.375rem;
+    height: 0.375rem;
+    min-width: 5px;
+    min-height: 5px;
+    top: 0.375rem;
+    left: 0.125rem;
+  }
+  .cUpdatesItem-category .slash {
+    margin: 0 0.375rem;
+  }
+  .cUpdatesItem-articleTitle {
+    font-size: 11px;
+    line-height: 2;
+  }
+
+  .cUpdatesItem-bottom {
+    font-size: 0.625rem;
+    padding: 0.4375rem 0.125rem;
+    /* width: 17.7rem; */
+  }
+  .cUpdatesItem-more {
+    display: inline-block;
+  }
+  .cUpdatesItem-more:after {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 0.625rem;
+    top: 0;
+    bottom: 0;
+    background: #ad181f;
+    margin: auto -0.625rem auto 0;
+    transform: scale(0);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+      margin 1s cubic-bezier(0.16, 1, 0.3, 1);
+    vertical-align: -0.0625rem;
+  }
+  .lUpdates-linkArea {
+    margin-top: 3.625rem !important;
+  }
+  .lUpdates-link {
+    font-size: 14px;
+  }
+}
+
 @media (min-width: 375px) and (max-width: 424px) {
   .cContainer.-rightWide {
     padding-right: 1rem;
@@ -582,12 +697,12 @@
   }
 }
 
-@media screen and (min-width: 1920px) {
+@media (min-width: 1920px) and (max-width: 2560px) {
   .cContainer.-rightWide {
-    padding-right: 18.75rem;
+    padding-right: 32.75rem;
   }
   .cContainer.-leftWide {
-    padding-left: 18.75rem;
+    padding-left: 32.75rem;
   }
   .lUpdates {
     padding-top: 12.5rem;
@@ -596,7 +711,7 @@
     position: relative;
   }
   .lUpdates-title-main {
-    width: 50.75rem;
+    width: 78.75rem;
   }
   .lUpdates-title-sub {
     letter-spacing: 0.05em;
@@ -607,26 +722,29 @@
   }
   .lUpdates-ornament {
     position: absolute;
-    width: 30.4375rem;
-    height: 32.3125rem;
-    top: -4.375rem;
+    width: 45.4375rem;
+    height: 28.3125rem;
+    top: -10.375rem;
     right: 0;
   }
+
   .lUpdates-List {
     margin-top: 6.125rem;
+    width: 100% !important;
   }
   .cUpdatesItem + .cUpdatesItem.-wide {
     margin-top: 5.125rem;
   }
   .cUpdatesItem {
-    height: 13.25rem;
+    height: 21.25rem;
+    margin-bottom: 5rem;
   }
   .cUpdatesItem-inner {
     display: flex;
   }
   .cUpdatesItem-thumbnail {
-    width: 20rem;
-    height: 13.25rem;
+    width: 37rem;
+    height: 20.25rem;
     margin-right: 1.75rem;
     border-radius: 0.25rem;
   }
@@ -635,6 +753,10 @@
     flex-direction: column;
     justify-content: space-between;
     width: calc(100% - 21.75rem);
+  }
+
+  .cUpdatesItem-detail p {
+    font-size: 22px !important;
   }
   .cUpdatesItem-category {
     font-size: 0.75rem;
@@ -653,7 +775,7 @@
     margin: 0 0.375rem;
   }
   .cUpdatesItem-articleTitle {
-    font-size: 1rem;
+    font-size: 1.5rem;
     line-height: 2;
   }
 
@@ -685,6 +807,14 @@
   }
   .lUpdates-link {
     font-size: 1.875rem;
+  }
+
+  .lUpdates-title-inner {
+    display: block;
+    margin-left: -10px !important;
+  }
+  .cFlatText {
+    font-size: "28px";
   }
 }
 

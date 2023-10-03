@@ -40,7 +40,6 @@ const responsiveGirlWithLabelValues = (canvas) => [
     updatedHeight: 125,
     updatedRotation: 0,
   },
-  // Add more rules for larger screens if needed
 ];
 
 export function getResponsiveGirlDimensions(canvas, screenWidth) {

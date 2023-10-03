@@ -76,122 +76,63 @@ const index = () => {
     });
   }, []);
 
-  const [fellowsData, setfellowsData] = useState(
-    //   [
-    //   {
-    //     image: require("../../../assets/fellows/tamaki_patel.jpg"),
-    //     clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
-    //     firstGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
-    //     secondGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-    //     name: "Mrs. Tamaki Patel1",
-    //     description: "Impact Investing and Measurement",
-    //     description_detailed: "",
-    //   },
-    //   {
-    //     image: require("../../../assets/fellows/d_mitchell.jpg"),
-    //     clothAnimatedImage: require("../../../assets/fellows/d_mitchell_animated.jpg"),
-    //     firstGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
-    //     secondGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
-    //     name: "Mr. Dominick Mitchell2",
-    //     description: "Sustainable Development Finance",
-    //     description_detailed: "",
-    //   },
-    //   {
-    //     image: require("../../../assets/fellows/tamaki_patel.jpg"),
-    //     clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
-    //     firstGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
-    //     secondGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-    //     name: "Mrs. Tamaki Patel5",
-    //     description: "Impact Investing and Measurement",
-    //     description_detailed: "",
-    //   },
-    //   {
-    //     image: require("../../../assets/fellows/d_mitchell.jpg"),
-    //     clothAnimatedImage: require("../../../assets/fellows/d_mitchell_animated.jpg"),
-    //     firstGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
-    //     secondGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
-    //     name: "Mr. Dominick Mitchell3",
-    //     description: "Sustainable Development Finance",
-    //     description_detailed: "",
-    //   },
-    //   {
-    //     image: require("../../../assets/fellows/tamaki_patel.jpg"),
-    //     clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
-    //     firstGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
-    //     secondGraphicImage:
-    //       "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-    //     name: "Mrs. Tamaki Patel4",
-    //     description: "Impact Investing and Measurement",
-    //     description_detailed: "",
-    //   },
-    // ]
-    [
-      {
-        image: require("../../../assets/fellows/david_chen.jpg"),
-        clothAnimatedImage: require("../../../assets/fellows/david_chen_animated.jpg"),
-        firstGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-7.png)",
-        secondGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-7.png)",
-        name: "Professor David Chen",
-        description: "Behavioral Economics and Financial Decision-Making",
-        description_detailed: "",
-      },
-      {
-        image: require("../../../assets/fellows/d_mitchell.jpg"),
-        clothAnimatedImage: require("../../../assets/fellows/d_mitchell_animated.jpg"),
-        firstGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
-        secondGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
-        name: "Mr. Dominick Mitchell",
-        description: "Sustainable Development Finance",
-        description_detailed: "",
-      },
-      {
-        image: require("../../../assets/fellows/maria_hernandez.jpg"),
-        clothAnimatedImage: require("../../../assets/fellows/maria_hernandez.jpg"),
-        firstGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-5.png)",
-        secondGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-5.png)",
-        name: "Dr. Maria Hernandez",
-        description: "Ethical Banking and Finance",
-        description_detailed: "",
-      },
-      {
-        image: require("../../../assets/fellows/tamaki_patel.jpg"),
-        clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
-        firstGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
-        secondGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-        name: "Mrs. Tamaki Patel",
-        description: "Impact Investing and Measurement",
-        description_detailed: "",
-      },
-      {
-        image: require("../../../assets/fellows/doran_reynolds.jpg"),
-        clothAnimatedImage: require("../../../assets/fellows/doran_reynolds.jpg"),
-        firstGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/02.png)",
-        secondGraphicImage:
-          "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
-        name: "Sir. Doran Reynolds",
-        description: "Inclusive Financial Systems",
-        description_detailed: "",
-      },
-    ]
-  );
+  const [fellowsData, setfellowsData] = useState([
+    {
+      image: require("../../../assets/fellows/tamaki_patel.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
+      name: "Mrs. Tamaki Patel1",
+      description: "Impact Investing and Measurement",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/d_mitchell.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/d_mitchell_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
+      name: "Mr. Dominick Mitchell2",
+      description: "Sustainable Development Finance",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/tamaki_patel.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
+      name: "Mrs. Tamaki Patel5",
+      description: "Impact Investing and Measurement",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/d_mitchell.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/d_mitchell_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic01-6.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-6.png)",
+      name: "Mr. Dominick Mitchell3",
+      description: "Sustainable Development Finance",
+      description_detailed: "",
+    },
+    {
+      image: require("../../../assets/fellows/tamaki_patel.jpg"),
+      clothAnimatedImage: require("../../../assets/fellows/tamaki_patel_animated.jpg"),
+      firstGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/03.png)",
+      secondGraphicImage:
+        "url(https://rara.ritsumei.ac.jp/cms/wp-content/uploads/2022/04/graphic02-4.png)",
+      name: "Mrs. Tamaki Patel4",
+      description: "Impact Investing and Measurement",
+      description_detailed: "",
+    },
+  ]);
   const [fellowRotation, setfellowRotation] = useState([]);
 
   useEffect(() => {
@@ -207,7 +148,7 @@ const index = () => {
   }, []);
 
   useEffect(() => {
-    setFellowName("Dr. Maria Hernandez");
+    setFellowName("Mrs. Tamaki Patel5");
     setFellowDescription1("Ethical Banking and Finance");
     setFellowDescription2("");
     setFirstTime(true);
@@ -219,7 +160,7 @@ const index = () => {
         if (dataRotate === "30") {
           element?.classList.add("-isCurrent");
         } else {
-          // element.style.visibility = "hidden";
+          element.style.visibility = "hidden";
         }
       });
     }, 1000);
@@ -240,12 +181,12 @@ const index = () => {
       ".cSliderMouseStalker-text.-next"
     );
 
-    const adjustedX = clientX + window.scrollX + 20;
+    const adjustedX = clientX + window.scrollX;
     // console.log(
     //   "🚀 ~ file: index.jsx:91 ~ handleMouseMovement ~ adjustedX:",
     //   adjustedX
     // );
-    const adjustedY = clientY + window.scrollY - 500;
+    const adjustedY = clientY + window.scrollY;
     // console.log(
     //   "🚀 ~ file: index.jsx:93 ~ handleMouseMovement ~ adjustedY:",
     //   adjustedY
@@ -279,7 +220,7 @@ const index = () => {
       if (firstTime === true) {
         setFirstTime(false);
       } else {
-        // element.style.visibility = "hidden";
+        element.style.visibility = "hidden";
       }
     });
     // console.log(
