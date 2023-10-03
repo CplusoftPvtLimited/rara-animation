@@ -8,7 +8,7 @@ const responsiveCircleValues = (canvas) => [
   {
     screenWidth: 380,
     width: canvas.width / 2,
-    height: canvas.height / 2.35,
+    height: canvas.height / 2.15,
     radius: canvas.width / 3.1,
   },
   {

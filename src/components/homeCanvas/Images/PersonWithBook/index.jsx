@@ -3,8 +3,8 @@ import { UploadedImage } from "../../UploadedImage";
 const responsivePersonWithBookValues = (canvas) => [
   {
     screenWidth: 380,
-    x: 50,
-    y: canvas.height - 115,
+    x: 25,
+    y: canvas.height - 125,
     width: 60,
     height: 70,
     rotation: 0,
@@ -15,9 +15,9 @@ const responsivePersonWithBookValues = (canvas) => [
     updatedRotation: 0,
   },
   {
-    screenWidth: 425,
-    x: 50,
-    y: canvas.height - 115,
+    screenWidth: 430,
+    x: 25,
+    y: canvas.height - 125,
     width: 60,
     height: 70,
     rotation: 0,
@@ -32,7 +32,7 @@ const responsivePersonWithBookValues = (canvas) => [
     x: -10,
     y: canvas.height - 135,
     width: 90,
-    height: 125,
+    height: 100,
     rotation: 0,
     updatedX: canvas.width / 2 - 275,
     updatedY: canvas.height / 2 + 100,

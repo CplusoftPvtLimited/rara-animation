@@ -1,54 +1,54 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveAeroplaneManValues = (canvas) => [
+const responsiveRedA_AlphabetValues = (canvas) => [
   {
     screenWidth: 320,
-    x: canvas.width / 2 - 45,
-    y: 20,
-    width: 30,
-    height: 50,
+    x: canvas.width - 100,
+    y: canvas.height - 150,
+    width: 0,
+    height: 0,
     rotation: 0,
-    updatedX: canvas.width / 2 + 70,
-    updatedY: canvas.height / 2 - 243,
+    updatedX: canvas.width / 2,
+    updatedY: canvas.height / 2,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 380,
-    x: canvas.width / 2 - 45,
-    y: 20,
-    width: 30,
-    height: 50,
-    rotation: 0,
-    updatedX: canvas.width / 2 + 70,
-    updatedY: canvas.height / 2 - 243,
+    x: canvas.width - 100,
+    y: canvas.height - 140,
+    width: 75,
+    height: 75,
+    rotation: 15,
+    updatedX: canvas.width / 2,
+    updatedY: canvas.height / 2,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 430,
-    x: canvas.width / 2 - 45,
-    y: 20,
-    width: 30,
-    height: 50,
-    rotation: 0,
-    updatedX: canvas.width / 2 + 70,
-    updatedY: canvas.height / 2 - 243,
+    x: canvas.width - 115,
+    y: canvas.height - 140,
+    width: 100,
+    height: 100,
+    rotation: 15,
+    updatedX: canvas.width / 2,
+    updatedY: canvas.height / 2,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
-    screenWidth: 770,
-    x: canvas.width / 2 - 60,
-    y: 15,
-    width: 30,
-    height: 50,
-    rotation: 0,
-    updatedX: canvas.width / 2 + 70,
-    updatedY: canvas.height / 2 - 243,
+    screenWidth: 768,
+    x: canvas.width - 85,
+    y: canvas.height - 140,
+    width: 100,
+    height: 100,
+    rotation: -30,
+    updatedX: canvas.width / 2,
+    updatedY: canvas.height / 2,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
@@ -107,19 +107,19 @@ const responsiveAeroplaneManValues = (canvas) => [
   },
 ];
 
-export function getResponsiveAeroplaneManDimensions(canvas, screenWidth) {
-  let x = canvas.width / 2 - 70;
-  let y = 10;
-  let width = 40;
-  let height = 90;
-  let rotation = -20;
-  let updatedX = canvas.width / 2 + 70;
-  let updatedY = canvas.height / 2 - 243;
-  let updatedWidth = 0;
-  let updatedHeight = 0;
-  let updatedRotation = 0;
+export function getResponsiveRedA_AlphabetDimensions(canvas, screenWidth) {
+  let x = 363;
+  let y = 220;
+  let width = 50;
+  let height = 50;
+  let rotation = -15;
+  let updatedX = canvas.width / 2 - 140;
+  let updatedY = canvas.height / 2 - 35;
+  let updatedWidth = 95;
+  let updatedHeight = 100;
+  let updatedRotation = -40;
 
-  for (const rule of responsiveAeroplaneManValues(canvas)) {
+  for (const rule of responsiveRedA_AlphabetValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -150,25 +150,25 @@ export function getResponsiveAeroplaneManDimensions(canvas, screenWidth) {
   };
 }
 
-export const AeroplaneMan = (
-  AeroplaneManData,
+export const RedA_Alphabet = (
+  RedA_Alphabet,
   canvas,
   gsap,
   scrollContainer,
   c
 ) =>
   new UploadedImage(
-    AeroplaneManData.x,
-    AeroplaneManData.y,
-    require("../../../../assets/home/images/header_20.png"),
-    AeroplaneManData.width,
-    AeroplaneManData.height,
-    AeroplaneManData.rotation,
-    AeroplaneManData.updatedX,
-    AeroplaneManData.updatedY,
-    AeroplaneManData.updatedWidth,
-    AeroplaneManData.updatedHeight,
-    AeroplaneManData.updatedRotation,
+    RedA_Alphabet.x,
+    RedA_Alphabet.y,
+    require("../../../../assets/home/images/header_43.png"),
+    RedA_Alphabet.width,
+    RedA_Alphabet.height,
+    RedA_Alphabet.rotation,
+    RedA_Alphabet.updatedX,
+    RedA_Alphabet.updatedY,
+    RedA_Alphabet.updatedWidth,
+    RedA_Alphabet.updatedHeight,
+    RedA_Alphabet.updatedRotation,
     gsap,
     scrollContainer,
     c

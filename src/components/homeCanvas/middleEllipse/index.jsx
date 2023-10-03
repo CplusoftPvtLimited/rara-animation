@@ -9,7 +9,7 @@ const responsiveEllipseValues = (canvas) => [
   {
     screenWidth: 380,
     width: canvas.width / 2,
-    height: canvas.height / 2.3,
+    height: canvas.height / 2.1,
     radius: canvas.width / 1.6,
     verticalScale: canvas.width / 1.6,
   },

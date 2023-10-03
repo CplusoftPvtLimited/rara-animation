@@ -1,54 +1,54 @@
 import { UploadedImage } from "../../UploadedImage";
 
-const responsiveAeroplaneManValues = (canvas) => [
+const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 320,
-    x: canvas.width / 2 - 45,
-    y: 20,
-    width: 30,
-    height: 50,
+    x: 25,
+    y: 83,
+    width: 20,
+    height: 30,
     rotation: 0,
-    updatedX: canvas.width / 2 + 70,
-    updatedY: canvas.height / 2 - 243,
+    updatedX: canvas.width / 2,
+    updatedY: canvas.height / 2,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 380,
-    x: canvas.width / 2 - 45,
-    y: 20,
-    width: 30,
-    height: 50,
+    x: 33,
+    y: 90,
+    width: 20,
+    height: 30,
     rotation: 0,
-    updatedX: canvas.width / 2 + 70,
-    updatedY: canvas.height / 2 - 243,
+    updatedX: canvas.width / 2,
+    updatedY: canvas.height / 2,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
     screenWidth: 430,
-    x: canvas.width / 2 - 45,
-    y: 20,
-    width: 30,
-    height: 50,
+    x: 33,
+    y: 90,
+    width: 20,
+    height: 30,
     rotation: 0,
-    updatedX: canvas.width / 2 + 70,
-    updatedY: canvas.height / 2 - 243,
+    updatedX: canvas.width / 2,
+    updatedY: canvas.height / 2,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
   },
   {
-    screenWidth: 770,
-    x: canvas.width / 2 - 60,
-    y: 15,
+    screenWidth: 768,
+    x: 165,
+    y: 55,
     width: 30,
-    height: 50,
+    height: 40,
     rotation: 0,
-    updatedX: canvas.width / 2 + 70,
-    updatedY: canvas.height / 2 - 243,
+    updatedX: canvas.width / 2,
+    updatedY: canvas.height / 2,
     updatedWidth: 0,
     updatedHeight: 0,
     updatedRotation: 0,
@@ -107,19 +107,22 @@ const responsiveAeroplaneManValues = (canvas) => [
   },
 ];
 
-export function getResponsiveAeroplaneManDimensions(canvas, screenWidth) {
-  let x = canvas.width / 2 - 70;
-  let y = 10;
+export function getResponsivePersonLaptopAboveSkullDimensions(
+  canvas,
+  screenWidth
+) {
+  let x = 341;
+  let y = 59;
   let width = 40;
-  let height = 90;
-  let rotation = -20;
-  let updatedX = canvas.width / 2 + 70;
-  let updatedY = canvas.height / 2 - 243;
+  let height = 55;
+  let rotation = 0;
+  let updatedX = canvas.width / 2;
+  let updatedY = canvas.height / 2;
   let updatedWidth = 0;
   let updatedHeight = 0;
   let updatedRotation = 0;
 
-  for (const rule of responsiveAeroplaneManValues(canvas)) {
+  for (const rule of responsivePersonLaptopAboveSkullValues(canvas)) {
     if (screenWidth <= rule.screenWidth) {
       x = rule.x;
       y = rule.y;
@@ -150,25 +153,25 @@ export function getResponsiveAeroplaneManDimensions(canvas, screenWidth) {
   };
 }
 
-export const AeroplaneMan = (
-  AeroplaneManData,
+export const PersonLaptopAboveSkull = (
+  PersonLaptopAboveSkullData,
   canvas,
   gsap,
   scrollContainer,
   c
 ) =>
   new UploadedImage(
-    AeroplaneManData.x,
-    AeroplaneManData.y,
-    require("../../../../assets/home/images/header_20.png"),
-    AeroplaneManData.width,
-    AeroplaneManData.height,
-    AeroplaneManData.rotation,
-    AeroplaneManData.updatedX,
-    AeroplaneManData.updatedY,
-    AeroplaneManData.updatedWidth,
-    AeroplaneManData.updatedHeight,
-    AeroplaneManData.updatedRotation,
+    PersonLaptopAboveSkullData.x,
+    PersonLaptopAboveSkullData.y,
+    require("../../../../assets/home/images/header_58.png"),
+    PersonLaptopAboveSkullData.width,
+    PersonLaptopAboveSkullData.height,
+    PersonLaptopAboveSkullData.rotation,
+    PersonLaptopAboveSkullData.updatedX,
+    PersonLaptopAboveSkullData.updatedY,
+    PersonLaptopAboveSkullData.updatedWidth,
+    PersonLaptopAboveSkullData.updatedHeight,
+    PersonLaptopAboveSkullData.updatedRotation,
     gsap,
     scrollContainer,
     c

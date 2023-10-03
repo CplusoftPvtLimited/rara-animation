@@ -31,11 +31,6 @@ import {
 } from "../../components/homeCanvas/Images/PersonWithRunPose";
 
 import {
-  YoungGirl,
-  getResponsiveGirlDimensions,
-} from "../../components/homeCanvas/Images/YoungGirl/YoungGirl";
-
-import {
   getResponsiveGlassesPersonDimensions,
   GlassesPerson,
 } from "../../components/homeCanvas/Images/GlassesPerson";
@@ -84,11 +79,6 @@ import {
   getResponsivePersonWithBookDimensions,
   PersonWithBook,
 } from "../../components/homeCanvas/Images/PersonWithBook";
-
-import {
-  getResponsiveResearchPersonDimensions,
-  ResearchPerson,
-} from "../../components/homeCanvas/Images/ResearchPerson";
 
 import {
   getResponsiveHeadSkullWithRedDotDimensions,
@@ -201,7 +191,10 @@ import { UploadedImage } from "../../components/homeCanvas/UploadedImage";
 
 import { UploadedImageTransparent } from "../../components/homeCanvas/UploadImageTransparent";
 
-import { R_Alpabet } from "../../components/homeCanvas/Images/R_Aphabet";
+import {
+  RAlphabet,
+  getResponsiveRAlphabetDimensions,
+} from "../../components/homeCanvas/Images/RAlphabet";
 
 import { BuildingTwoRedLines } from "../../components/homeCanvas/Images/BuildingTwoRedLines";
 
@@ -211,6 +204,46 @@ import FellowsMobile from "./FellowsMobile/index";
 
 import Blogs from "./Blogs/index";
 import Contact from "./Contact/index";
+import {
+  BigRedCircle,
+  getResponsiveBigRedCircleDimensions,
+} from "../../components/homeCanvas/Images/bigRedCircle";
+import {
+  UpperCircleWithMan,
+  getResponsiveUpperCircleWithManDimensions,
+} from "../../components/homeCanvas/Images/UpperCircleWithMan";
+import {
+  PersonLaptopAboveSkull,
+  getResponsivePersonLaptopAboveSkullDimensions,
+} from "../../components/homeCanvas/Images/PersonLaptopAboveSkull";
+import {
+  PersonOnPhoneBottomRight,
+  getResponsivePersonOnPhoneBottomRightDimensions,
+} from "../../components/homeCanvas/Images/PersonOnPhoneBottomRight";
+import {
+  getResponsiveRedCircleInsideMiddleCircleDimensions,
+  RedCircleInsideMiddleCircle,
+} from "../../components/homeCanvas/middleCircle/FilledCircleRotation/FilledCircleInsideCircle/redCircle";
+import {
+  BlueCircleInsideMiddleCircle,
+  getResponsiveBlueCircleInsideMiddleCircleDimensions,
+} from "../../components/homeCanvas/middleCircle/FilledCircleRotation/FilledCircleInsideCircle/blueCircle";
+import {
+  FirstCircleOutsideMiddleCircle,
+  getResponsiveFirstCircleOutsideMiddleCircleDimensions,
+} from "../../components/homeCanvas/middleCircle/FilledCircleRotation/FilledCircleOutsideCircle/firstCircle";
+import {
+  SecondCircleOutsideMiddleCircle,
+  getResponsiveSecondCircleOutsideMiddleCircleDimensions,
+} from "../../components/homeCanvas/middleCircle/FilledCircleRotation/FilledCircleOutsideCircle/secondCircle";
+import {
+  FirstCircleOutsideEllipse,
+  getResponsiveFirstCircleOutsideEllipseDimensions,
+} from "../../components/homeCanvas/middleEllipse/FilledCircleOutsideEllipse/FirstCircle";
+import {
+  SecondCircleOutsideEllipse,
+  getResponsiveSecondCircleOutsideEllipseDimensions,
+} from "../../components/homeCanvas/middleEllipse/FilledCircleOutsideEllipse/SecondCircle";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
@@ -325,6 +358,19 @@ const index = () => {
       canvas.width = document.documentElement.clientWidth;
       canvas.height = document.documentElement.clientHeight;
 
+      // if (canvas.width <= 320) {
+      //   canvas.height = 650;
+      //   canvas.style.height = 650 + "px";
+      // }
+      // if (canvas.width <= 375) {
+      //   canvas.height = 636;
+      //   canvas.style.height = 636 + "px";
+      // }
+      // if (canvas.width <= 500) {
+      //   canvas.height = 636;
+      //   canvas.style.height = 636 + "px";
+      // }
+
       init();
     });
 
@@ -362,45 +408,66 @@ const index = () => {
           innerHeight
         )
       );
-
+      const FirstCircleOutsideEllipseData =
+        getResponsiveFirstCircleOutsideEllipseDimensions(canvas, screenWidth);
       circles.push(
-        new FilledCircle(
-          canvas.width / 2,
-          canvas.height / 2,
-          25,
-          "#af292f",
-          0,
-          0.0002,
-          700,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        FirstCircleOutsideEllipse(
+          FirstCircleOutsideEllipseData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+      // circles.push(
+      //   new FilledCircle(
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     25,
+      //     "#af292f",
+      //     0,
+      //     0.0002,
+      //     700,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
+      const SecondCircleOutsideEllipseData =
+        getResponsiveSecondCircleOutsideEllipseDimensions(canvas, screenWidth);
       circles.push(
-        new FilledCircle(
-          canvas.width / 2,
-          canvas.height / 2,
-          25,
-          "#af292f",
-          3.125,
-          0.0002,
-          700,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        SecondCircleOutsideEllipse(
+          SecondCircleOutsideEllipseData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+      // circles.push(
+      //   new FilledCircle(
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     25,
+      //     "#af292f",
+      //     3.125,
+      //     0.0002,
+      //     700,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       const { width, height, radius, verticalScale } =
         getResponsiveEllipseDimensions(canvas, screenWidth);
@@ -438,82 +505,102 @@ const index = () => {
           c
         )
       );
+
+      // Red Circle Inside Middle Circle
+      const RedCircleInsideMiddleCircleData =
+        getResponsiveRedCircleInsideMiddleCircleDimensions(canvas, screenWidth);
       circles.push(
-        new FilledCircle(
-          canvas.width / 2,
-          canvas.height / 2,
-          5,
-          "#af292f",
-          0.75,
-          0.001,
-          130,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        RedCircleInsideMiddleCircle(
+          RedCircleInsideMiddleCircleData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      const BlueCircleInsideMiddleCircleData =
+        getResponsiveBlueCircleInsideMiddleCircleDimensions(
+          canvas,
+          screenWidth
+        );
       circles.push(
-        new FilledCircle(
-          canvas.width / 2,
-          canvas.height / 2,
-          10,
-          "rgb(91, 146, 157)",
-          4.125,
-          0.001,
-          125,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        BlueCircleInsideMiddleCircle(
+          BlueCircleInsideMiddleCircleData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      const FirstCircleOutsideMiddleCircleData =
+        getResponsiveFirstCircleOutsideMiddleCircleDimensions(
+          canvas,
+          screenWidth
+        );
       circles.push(
-        new FilledCircle(
-          canvas.width / 2,
-          canvas.height / 2,
-          10,
-          "#af292f",
-          0,
-          0.001,
-          305,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        FirstCircleOutsideMiddleCircle(
+          FirstCircleOutsideMiddleCircleData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+      // circles.push(
+      //   new FilledCircle(
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     10,
+      //     "#af292f",
+      //     0,
+      //     0.001,
+      //     305,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
+
+      const SecondCircleOutsideMiddleCircleData =
+        getResponsiveSecondCircleOutsideMiddleCircleDimensions(
+          canvas,
+          screenWidth
+        );
       circles.push(
-        new FilledCircle(
-          canvas.width / 2,
-          canvas.height / 2,
-          10,
-          "#af292f",
-          3.125,
-          0.001,
-          305,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        SecondCircleOutsideMiddleCircle(
+          SecondCircleOutsideMiddleCircleData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+      // circles.push(
+      //   new FilledCircle(
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     10,
+      //     "#af292f",
+      //     3.125,
+      //     0.001,
+      //     305,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // Ellipse when scrolled down --- done
 
@@ -816,24 +903,24 @@ const index = () => {
 
       // Leaf --- done
 
-      images.push(
-        new UploadedImage(
-          canvas.width - 225,
-          canvas.height / 2 - 85,
-          require("../../assets/home/images/header_50.png"),
-          150,
-          115,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width - 225,
+      //     canvas.height / 2 - 85,
+      //     require("../../assets/home/images/header_50.png"),
+      //     150,
+      //     115,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // person above the cart --- done
       const PersonAboveCartData = getResponsivePersonAboveCartDimensions(
@@ -851,24 +938,36 @@ const index = () => {
 
       // person on phone bottom right corner
 
+      const PersonOnPhoneBottomRightData =
+        getResponsivePersonOnPhoneBottomRightDimensions(canvas, screenWidth);
       images.push(
-        new UploadedImage(
-          canvas.width - 130,
-          canvas.height - 153,
-          require("../../assets/home/images/header_27.png"),
-          115,
-          135,
-          -15,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        PersonOnPhoneBottomRight(
+          PersonOnPhoneBottomRightData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width - 130,
+      //     canvas.height - 153,
+      //     require("../../assets/home/images/header_27.png"),
+      //     115,
+      //     135,
+      //     -15,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // researcher person --- done
 
@@ -1159,6 +1258,23 @@ const index = () => {
       //   )
       // );
 
+      // ellipse with circles and lines --- DONE
+
+      const EllipseWithCircleData = getResponsiveEllipseWithCirclesDimensions(
+        canvas,
+        screenWidth
+      );
+
+      images.push(
+        EllipseWithCircles(
+          EllipseWithCircleData,
+          canvas,
+          gsap,
+          scrollContainer,
+          c
+        )
+      );
+
       //circle with colors on glasses person --- DONE
 
       const CircleOnGlassesPersonWithLabel =
@@ -1269,24 +1385,36 @@ const index = () => {
 
       // person laptop above skull ---- done
 
+      const PersonLaptopAboveSkullData =
+        getResponsivePersonLaptopAboveSkullDimensions(canvas, screenWidth);
       images.push(
-        new UploadedImage(
-          341,
-          59,
-          require("../../assets/home/images/header_58.png"),
-          40,
-          55,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
+        PersonLaptopAboveSkull(
+          PersonLaptopAboveSkullData,
+          canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     341,
+      //     59,
+      //     require("../../assets/home/images/header_58.png"),
+      //     40,
+      //     55,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // PEN ---- done
 
@@ -1406,41 +1534,39 @@ const index = () => {
       images.push(Skull(SkullData, canvas, gsap, scrollContainer, c));
 
       // Upper circle with man --- done
-      images.push(
-        new UploadedImage(
-          canvas.width / 2 + 240,
-          -180,
-          require("../../assets/home/images/header_16.png"),
-          325,
-          280,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
 
-      // ellipse with circles and lines --- DONE
-
-      const EllipseWithCircleData = getResponsiveEllipseWithCirclesDimensions(
+      const UpperCricleWithManData = getResponsiveUpperCircleWithManDimensions(
         canvas,
         screenWidth
       );
-
       images.push(
-        EllipseWithCircles(
-          EllipseWithCircleData,
+        UpperCircleWithMan(
+          UpperCricleWithManData,
           canvas,
           gsap,
           scrollContainer,
           c
         )
       );
+
+      // images.push(
+      //   new UploadedImage(
+      //     canvas.width / 2 + 240,
+      //     -180,
+      //     require("../../assets/home/images/header_16.png"),
+      //     325,
+      //     280,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // images.push(
       //   new UploadedImage(
@@ -1462,25 +1588,32 @@ const index = () => {
       // );
 
       //big red circle --- DONE
+      const BigRedCircleData = getResponsiveBigRedCircleDimensions(
+        canvas,
+        screenWidth
+      );
 
       images.push(
-        new UploadedImage(
-          -220,
-          canvas.height - 95,
-          require("../../assets/home/images/header_55.png"),
-          675,
-          550,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
+        BigRedCircle(BigRedCircleData, canvas, gsap, scrollContainer, c)
       );
+      // images.push(
+      //   new UploadedImage(
+      //     -220,
+      //     canvas.height - 95,
+      //     require("../../assets/home/images/header_55.png"),
+      //     675,
+      //     550,
+      //     0,
+      //     canvas.width / 2,
+      //     canvas.height / 2,
+      //     0,
+      //     0,
+      //     0,
+      //     gsap,
+      //     scrollContainer,
+      //     c
+      //   )
+      // );
 
       // hand --- DONE
 

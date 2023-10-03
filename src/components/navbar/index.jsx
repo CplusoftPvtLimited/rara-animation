@@ -212,7 +212,7 @@ const index = () => {
       data-header=""
     >
       <div className="cHeader-inner">
-        <h1
+        {/* <h1
           className="cHeader-logo -kvLoaded"
           data-header-logo=""
           style={{ transform: "translate(0px, 108.5825px)" }}
@@ -246,7 +246,7 @@ const index = () => {
               />
             </g>
           </svg>
-        </h1>
+        </h1> */}
         <div className="cHeader-menu">
           <div className="cMenu" data-el="">
             <div

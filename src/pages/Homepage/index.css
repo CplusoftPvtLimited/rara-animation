@@ -1202,3 +1202,67 @@ html.has-scroll-smooth {
     margin: auto;
   }
 }
+
+@media screen and (max-width: 490px) {
+  .lKv-coreBall {
+    position: absolute;
+    top: 27%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    bottom: 0px;
+    right: 0px;
+    margin: 0%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .lKv-coreBall {
+    position: fixed;
+    top: 30%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    bottom: 0px;
+    right: 0px;
+    margin: 0%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .lKv-coreBall {
+    position: fixed;
+    top: 31%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    bottom: 0px;
+    right: 0px;
+    margin: 0%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .lKv-coreBall {
+    position: fixed;
+    top: 33%;
+    left: 25%;
+    width: 10pc;
+    height: 10pc;
+    bottom: 0px;
+    right: 0px;
+    margin: 0%;
+  }
+}
+@media screen and (max-width: 280px) {
+  .lKv-coreBall {
+    position: fixed;
+    top: 35%;
+    left: 28%;
+    width: 8pc;
+    height: 8pc;
+    bottom: 0px;
+    right: 0px;
+    margin: 0%;
+  }
+}
