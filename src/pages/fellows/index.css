@@ -813,9 +813,9 @@
     position: absolute;
     width: 100%;
     transform: scale(0.72);
-    left: -30%;
+    left: -35%;
   }
-  .-drag{
+  /* .-drag{
     display: none !important;
   }
   .-prev{
@@ -823,7 +823,7 @@
   }
   .cSliderMouseStalker-circle {
     display: none !important;
-  }
+  } */
   .lFellows-bg-inner {
        padding: 70px;
   }

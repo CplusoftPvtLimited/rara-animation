@@ -3187,7 +3187,8 @@ const index = () => {
         </div>
       </div>
       <GuideLines />
-      {window.innerWidth < 768 && <FellowsMobile />}
+      {/* <FellowsMobile /> */}
+      {window.innerWidth < 767 && <FellowsMobile />}
       {window.innerWidth > 767 && <Fellows />}
       <Blogs />
       <Contact />
