@@ -681,6 +681,10 @@ const index = () => {
               onMouseLeave={handleMouseLeave}
               onClick={handleSliderRotation}
             >
+              <div className="button-container">
+                <button className="next-button">Next</button>
+                <button className="prev-button">Next</button>
+              </div>
               <div
                 className="cSliderMouseStalker"
                 data-slider-stalker=""
@@ -728,6 +732,17 @@ const index = () => {
                 className="lFellows-slider-list-continer"
                 data-slider-list-inner=""
               >
+                <div className="cSliderMouseStalker-inner">
+                  <div
+                    className="cSliderMouseStalker-circle"
+                    style={{
+                      backgroundColor: "transparent",
+                      borderColor: "rgb(255, 255, 255)",
+                    }}
+                    data-slider-stalker-circle=""
+                  ></div>
+                </div>
+
                 <ul
                   className="lFellows-slider-list"
                   data-slider-list=""
@@ -856,6 +871,7 @@ const index = () => {
                     <li className="lFellows-slider-dots-item"></li>
                   </ul> */}
             </div>
+
             <div className="lFellows-btn">
               <a className="lFellows-btn-link" href="/fellows">
                 VIEW ALL FELLOWS
