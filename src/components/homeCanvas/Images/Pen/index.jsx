@@ -56,7 +56,7 @@ const responsivePenValues = (canvas) => [
   {
     screenWidth: 1024,
     x: canvas.width / 2 - 330,
-    y: -45,
+    y: canvas.width / 2 - 560,
     width: 85,
     height: 150,
     rotation: -3,
@@ -69,7 +69,7 @@ const responsivePenValues = (canvas) => [
   {
     screenWidth: 1280,
     x: canvas.width / 2 - 330,
-    y: -45,
+    y: canvas.width / 2 - 720,
     width: 125,
     height: 240,
     rotation: -3,
@@ -82,7 +82,7 @@ const responsivePenValues = (canvas) => [
   {
     screenWidth: 1366,
     x: canvas.width / 2 - 330,
-    y: -45,
+    y: canvas.width / 2 - 780,
     width: 125,
     height: 240,
     rotation: -3,
@@ -95,7 +95,7 @@ const responsivePenValues = (canvas) => [
   {
     screenWidth: 1440,
     x: canvas.width / 2 - 330,
-    y: -45,
+    y: canvas.width / 2 - 790,
     width: 125,
     height: 240,
     rotation: -3,
@@ -108,7 +108,7 @@ const responsivePenValues = (canvas) => [
   {
     screenWidth: 1536,
     x: canvas.width / 2 - 330,
-    y: -45,
+    y: canvas.width / 2 - 800,
     width: 125,
     height: 240,
     rotation: -3,
@@ -121,7 +121,7 @@ const responsivePenValues = (canvas) => [
   {
     screenWidth: 1728,
     x: canvas.width / 2 - 330,
-    y: -45,
+    y: canvas.width / 2 - 900,
     width: 125,
     height: 240,
     rotation: -3,
@@ -134,7 +134,7 @@ const responsivePenValues = (canvas) => [
   {
     screenWidth: 1920,
     x: canvas.width / 2 - 330,
-    y: -45,
+    y: canvas.width / 2 - 950,
     width: 125,
     height: 240,
     rotation: -3,

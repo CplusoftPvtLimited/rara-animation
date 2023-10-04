@@ -42,8 +42,8 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   },
   {
     screenWidth: 770,
-    x: canvas.width / 2 - 230,
-    y: canvas.height / 2 - 45,
+    x: canvas.width / 2 - 220,
+    y: canvas.width / 2 - 20,
     width: canvas.width / 4 - 90,
     height: canvas.width / 4 - 130,
     rotation: 0,
@@ -56,7 +56,7 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   {
     screenWidth: 1024,
     x: canvas.width / 2 - 320,
-    y: canvas.height / 2 - 50,
+    y: canvas.width / 2 - 140,
     width: 180,
     height: 100,
     rotation: 0,
@@ -69,7 +69,7 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   {
     screenWidth: 1280,
     x: canvas.width / 2 - 320,
-    y: canvas.height / 2 - 13,
+    y: canvas.width / 2 - 240,
     width: 215,
     height: 120,
     rotation: 0,
@@ -82,7 +82,7 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   {
     screenWidth: 1366,
     x: canvas.width / 2 - 350,
-    y: canvas.height / 2 - 13,
+    y: canvas.width / 2 - 290,
     width: 215,
     height: 120,
     rotation: 0,
@@ -95,7 +95,7 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   {
     screenWidth: 1440,
     x: canvas.width / 2 - 400,
-    y: canvas.height / 2 - 13,
+    y: canvas.width / 2 - 290,
     width: 215,
     height: 120,
     rotation: 0,
@@ -108,7 +108,7 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   {
     screenWidth: 1536,
     x: canvas.width / 2 - 450,
-    y: canvas.height / 2 - 13,
+    y: canvas.width / 2 - 250,
     width: 220,
     height: 120,
     rotation: 0,
@@ -120,8 +120,8 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   },
   {
     screenWidth: 1728,
-    x: canvas.width / 2 - 430,
-    y: canvas.height / 2 - 100,
+    x: canvas.width / 2 - 450,
+    y: canvas.width / 2 - 420,
     width: 275,
     height: 180,
     rotation: 0,
@@ -135,7 +135,7 @@ const responsiveCircleOnGlassesPersonValues = (canvas) => [
   {
     screenWidth: 1920,
     x: canvas.width / 2 - 500,
-    y: canvas.height / 2 - 13,
+    y: canvas.width / 2 - 380,
     width: 215,
     height: 120,
     rotation: 0,

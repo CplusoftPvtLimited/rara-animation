@@ -56,7 +56,7 @@ const responsiveMapValues = (canvas) => [
   {
     screenWidth: 1024,
     x: canvas.width / 2 - 310,
-    y: 5,
+    y: canvas.width / 2 - 530,
     width: 150,
     height: 95,
     rotation: 0,
@@ -69,7 +69,7 @@ const responsiveMapValues = (canvas) => [
   {
     screenWidth: 1280,
     x: canvas.width / 2 - 310,
-    y: 5,
+    y: canvas.width / 2 - 650,
     width: 215,
     height: 125,
     rotation: 0,
@@ -82,7 +82,7 @@ const responsiveMapValues = (canvas) => [
   {
     screenWidth: 1366,
     x: canvas.width / 2 - 310,
-    y: 5,
+    y: canvas.width / 2 - 690,
     width: 215,
     height: 125,
     rotation: 0,
@@ -95,7 +95,7 @@ const responsiveMapValues = (canvas) => [
   {
     screenWidth: 1440,
     x: canvas.width / 2 - 310,
-    y: 5,
+    y: canvas.width / 2 - 720,
     width: 215,
     height: 125,
     rotation: 0,
@@ -108,7 +108,7 @@ const responsiveMapValues = (canvas) => [
   {
     screenWidth: 1536,
     x: canvas.width / 2 - 310,
-    y: 5,
+    y: canvas.width / 2 - 720,
     width: 215,
     height: 125,
     rotation: 0,
@@ -121,7 +121,7 @@ const responsiveMapValues = (canvas) => [
   {
     screenWidth: 1728,
     x: canvas.width / 2 - 310,
-    y: 5,
+    y: canvas.width / 2 - 840,
     width: 215,
     height: 125,
     rotation: 0,
@@ -134,7 +134,7 @@ const responsiveMapValues = (canvas) => [
   {
     screenWidth: 1920,
     x: canvas.width / 2 - 310,
-    y: 5,
+    y: canvas.width / 2 - 920,
     width: 215,
     height: 125,
     rotation: 0,
