@@ -1,12 +1,39 @@
 @media screen and (max-width: 425px) {
   .guideline_item {
     /* height: auto; */
-    padding: 125px 50px 0px 50px;
+    padding: 0;
     overflow: hidden;
   }
   .lGuideline-card {
     display: block;
     justify-content: space-between;
     margin-bottom: 5.625rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card_container {
+    display: block;
+    margin: 0 1.40625rem 3.75rem;
+  }
+  .lGuideline-card-item {
+    width: 100%;
+    height: 23.34375rem;
+    margin-bottom: 2.1875rem;
+  }
+  .lGuideline-card-item-front {
+    border-radius: 0.3125rem;
+    padding: 4rem 1rem;
+  }
+  .lGuideline-card-item-number.-l01 {
+    width: 4.4375rem;
+    height: 8.125rem;
+  }
+  .lGuideline-card-item-back-illust.-l01 {
+    width: 11.93728rem;
+    height: 15.40625rem;
+  }
+  .cSubTitle-inner {
+    left: 0%;
   }
 }
