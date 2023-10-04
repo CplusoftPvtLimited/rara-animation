@@ -55,10 +55,10 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   },
   {
     screenWidth: 1024,
-    x: canvas.width / 2 - 85,
-    y: 0,
-    width: 40,
-    height: 90,
+    x: canvas.width / 2 - 275,
+    y: canvas.width / 2 - 390,
+    width: 30,
+    height: 40,
     rotation: 0,
     updatedX: canvas.width / 2 + 70,
     updatedY: canvas.height / 2 - 243,
@@ -69,7 +69,7 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 1280,
     x: canvas.width / 2 - 350,
-    y: canvas.height / 2 - 280,
+    y: canvas.width / 2 - 540,
     width: 40,
     height: 50,
     rotation: 0,
@@ -82,7 +82,7 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 1366,
     x: canvas.width / 2 - 400,
-    y: canvas.height / 2 - 330,
+    y: canvas.width / 2 - 540,
     width: 40,
     height: 50,
     rotation: 0,
@@ -95,7 +95,7 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 1440,
     x: canvas.width / 2 - 400,
-    y: canvas.height / 2 - 330,
+    y: canvas.width / 2 - 580,
     width: 40,
     height: 50,
     rotation: 0,
@@ -108,7 +108,7 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 1536,
     x: canvas.width / 2 - 400,
-    y: canvas.height / 2 - 370,
+    y: canvas.width / 2 - 560,
     width: 40,
     height: 50,
     rotation: 0,
@@ -122,7 +122,7 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 1728,
     x: canvas.width / 2 - 450,
-    y: canvas.height / 2 - 400,
+    y: canvas.width / 2 - 680,
     width: 40,
     height: 50,
     rotation: 0,
@@ -135,7 +135,7 @@ const responsivePersonLaptopAboveSkullValues = (canvas) => [
   {
     screenWidth: 1920,
     x: canvas.width / 2 - 450,
-    y: canvas.height / 2 - 490,
+    y: canvas.width / 2 - 830,
     width: 40,
     height: 50,
     rotation: 0,

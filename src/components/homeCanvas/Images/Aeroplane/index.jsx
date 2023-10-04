@@ -69,7 +69,7 @@ const responsiveAeroplaneValues = (canvas) => [
   {
     screenWidth: 1280,
     x: canvas.width / 2 - 145,
-    y: 45,
+    y: canvas.width / 2 - 580,
     width: 180,
     height: 70,
     rotation: 0,
@@ -82,7 +82,7 @@ const responsiveAeroplaneValues = (canvas) => [
   {
     screenWidth: 1366,
     x: canvas.width / 2 - 145,
-    y: 45,
+    y: canvas.width / 2 - 650,
     width: 180,
     height: 70,
     rotation: 0,
@@ -95,7 +95,7 @@ const responsiveAeroplaneValues = (canvas) => [
   {
     screenWidth: 1440,
     x: canvas.width / 2 - 145,
-    y: 45,
+    y: canvas.width / 2 - 650,
     width: 180,
     height: 70,
     rotation: 0,
@@ -108,7 +108,7 @@ const responsiveAeroplaneValues = (canvas) => [
   {
     screenWidth: 1536,
     x: canvas.width / 2 - 145,
-    y: 135,
+    y: canvas.width / 2 - 650,
     width: 180,
     height: 70,
     rotation: 0,
@@ -121,7 +121,7 @@ const responsiveAeroplaneValues = (canvas) => [
   {
     screenWidth: 1728,
     x: canvas.width / 2 - 145,
-    y: 85,
+    y: canvas.width / 2 - 800,
     width: 180,
     height: 70,
     rotation: 0,
@@ -134,7 +134,7 @@ const responsiveAeroplaneValues = (canvas) => [
   {
     screenWidth: 1920,
     x: canvas.width / 2 - 145,
-    y: 45,
+    y: canvas.width / 2 - 900,
     width: 180,
     height: 70,
     rotation: 0,

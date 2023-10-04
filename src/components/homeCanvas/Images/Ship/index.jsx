@@ -43,7 +43,7 @@ const responsiveShipValues = (canvas) => [
   {
     screenWidth: 770,
     x: canvas.width / 2 - 140,
-    y: canvas.height / 2 - 100,
+    y: canvas.width / 2 - 70,
     width: 85,
     height: 85,
     rotation: 0,
@@ -56,7 +56,7 @@ const responsiveShipValues = (canvas) => [
   {
     screenWidth: 1024,
     x: canvas.width / 2 - 180,
-    y: canvas.height / 2 - 155,
+    y: canvas.width / 2 - 240,
     width: 120,
     height: 135,
     rotation: 0,
@@ -69,7 +69,7 @@ const responsiveShipValues = (canvas) => [
   {
     screenWidth: 1280,
     x: canvas.width / 2 - 150,
-    y: canvas.height / 2 - 145,
+    y: canvas.width / 2 - 360,
     width: 150,
     height: 165,
     rotation: 0,
@@ -81,8 +81,8 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 1366,
-    x: canvas.width / 2 - 170,
-    y: canvas.height / 2 - 145,
+    x: canvas.width / 2 - 180,
+    y: canvas.width / 2 - 420,
     width: 150,
     height: 165,
     rotation: 0,
@@ -94,8 +94,8 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 1440,
-    x: canvas.width / 2 - 250,
-    y: canvas.height / 2 - 145,
+    x: canvas.width / 2 - 230,
+    y: canvas.width / 2 - 420,
     width: 150,
     height: 165,
     rotation: 0,
@@ -107,8 +107,8 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 1536,
-    x: canvas.width / 2 - 250,
-    y: canvas.height / 2 - 145,
+    x: canvas.width / 2 - 270,
+    y: canvas.width / 2 - 370,
     width: 150,
     height: 165,
     rotation: 0,
@@ -120,8 +120,8 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 1728,
-    x: canvas.width / 2 - 240,
-    y: canvas.height / 2 - 195,
+    x: canvas.width / 2 - 220,
+    y: canvas.width / 2 - 530,
     width: 150,
     height: 165,
     rotation: 0,
@@ -133,8 +133,8 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 1920,
-    x: canvas.width / 2 - 270,
-    y: canvas.height / 2 - 175,
+    x: canvas.width / 2 - 285,
+    y: canvas.width / 2 - 550,
     width: 150,
     height: 165,
     rotation: 0,
@@ -146,8 +146,8 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 3000,
-    x: canvas.width / 3.3,
-    y: canvas.height / 3.2,
+    x: canvas.width / 2 - 270,
+    y: canvas.height / 2 - 175,
     width: canvas.width / 10,
     height: canvas.height / 5,
     rotation: 0,

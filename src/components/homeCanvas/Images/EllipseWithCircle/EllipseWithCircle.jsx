@@ -42,8 +42,8 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   },
   {
     screenWidth: 768,
-    x: 60,
-    y: 245,
+    x: canvas.width / 2 - 350,
+    y: canvas.width / 2 - 60,
     width: 140,
     height: 100,
     rotation: 0,
@@ -55,8 +55,8 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   },
   {
     screenWidth: 1024,
-    x: canvas.width / 2 - 490,
-    y: canvas.height / 2 - 130,
+    x: canvas.width / 2 - 440,
+    y: canvas.width / 2 - 240,
     width: 200,
     height: 150,
     rotation: 0,
@@ -68,8 +68,8 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   },
   {
     screenWidth: 1280,
-    x: canvas.width / 2 - 550,
-    y: canvas.height / 2 - 130,
+    x: canvas.width / 2 - 520,
+    y: canvas.width / 2 - 340,
     width: 270,
     height: 200,
     rotation: 0,
@@ -82,7 +82,7 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   {
     screenWidth: 1366,
     x: canvas.width / 2 - 550,
-    y: canvas.height / 2 - 130,
+    y: canvas.width / 2 - 380,
     width: 270,
     height: 200,
     rotation: 0,
@@ -95,7 +95,7 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   {
     screenWidth: 1440,
     x: canvas.width / 2 - 600,
-    y: canvas.height / 2 - 130,
+    y: canvas.width / 2 - 390,
     width: 270,
     height: 200,
     rotation: 0,
@@ -108,7 +108,7 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   {
     screenWidth: 1536,
     x: canvas.width / 2 - 690,
-    y: canvas.height / 2 - 130,
+    y: canvas.width / 2 - 340,
     width: 330,
     height: 250,
     rotation: 0,
@@ -121,7 +121,7 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   {
     screenWidth: 1728,
     x: canvas.width / 2 - 700,
-    y: canvas.height / 2 - 150,
+    y: canvas.width / 2 - 480,
     width: 350,
     height: 230,
     rotation: 0,
@@ -134,7 +134,7 @@ const responsiveEllipseWithCirclesValues = (canvas) => [
   {
     screenWidth: 1920,
     x: canvas.width / 2 - 850,
-    y: canvas.height / 2 - 150,
+    y: canvas.width / 2 - 500,
     width: 400,
     height: 250,
     rotation: 0,

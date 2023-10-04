@@ -56,7 +56,7 @@ const responsivePersonWithRunPoseValues = (canvas) => [
   {
     screenWidth: 1024,
     x: canvas.width / 2 - 550,
-    y: canvas.height / 2 - 350,
+    y: canvas.width / 2 - 420,
     width: 265,
     height: 250,
     rotation: 0,
@@ -68,8 +68,8 @@ const responsivePersonWithRunPoseValues = (canvas) => [
   },
   {
     screenWidth: 1280,
-    x: canvas.width / 2 - 690,
-    y: canvas.height / 2 - 350,
+    x: canvas.width / 2 - 660,
+    y: canvas.width / 2 - 560,
     width: 255,
     height: 250,
     rotation: 0,
@@ -82,7 +82,7 @@ const responsivePersonWithRunPoseValues = (canvas) => [
   {
     screenWidth: 1440,
     x: canvas.width / 2 - 750,
-    y: canvas.height / 2 - 350,
+    y: canvas.width / 2 - 640,
     width: 295,
     height: 260,
     rotation: 0,
@@ -95,7 +95,7 @@ const responsivePersonWithRunPoseValues = (canvas) => [
   {
     screenWidth: 1536,
     x: canvas.width / 2 - 770,
-    y: canvas.height / 2 - 480,
+    y: canvas.width / 2 - 680,
     width: 340,
     height: 320,
     rotation: 0,
@@ -108,7 +108,7 @@ const responsivePersonWithRunPoseValues = (canvas) => [
   {
     screenWidth: 1728,
     x: canvas.width / 2 - 900,
-    y: canvas.height / 2 - 450,
+    y: canvas.width / 2 - 780,
     width: 390,
     height: 330,
     rotation: 0,
@@ -121,7 +121,7 @@ const responsivePersonWithRunPoseValues = (canvas) => [
   {
     screenWidth: 1920,
     x: canvas.width / 2 - 1000,
-    y: canvas.height / 2 - 500,
+    y: canvas.width / 2 - 850,
     width: 390,
     height: 330,
     rotation: 0,
