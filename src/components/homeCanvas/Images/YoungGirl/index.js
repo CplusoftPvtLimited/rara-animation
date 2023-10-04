@@ -108,9 +108,9 @@ const responsiveGirlWithLabelValues = (canvas) => [
   {
     screenWidth: 1920,
     x: canvas.width / 2 + 200,
-    y: canvas.height / 2 - 230,
-    width: 300,
-    height: 350,
+    y: canvas.height / 2 - 300,
+    width: 380,
+    height: 400,
     rotation: 0,
     updatedX: canvas.width / 2 - 0,
     updatedY: canvas.height / 2 - 3,
