@@ -66,6 +66,20 @@ const responsiveGlassesPersonValues = (canvas) => [
     updatedHeight: 200,
     updatedRotation: 0,
   },
+
+  {
+    screenWidth: 1114,
+    x: 245,
+    y: canvas.width / 2 - 300,
+    width: canvas.width / 2 - 300,
+    height: canvas.width / 2 - 230,
+    rotation: 0,
+    updatedX: canvas.width / 2 - 210,
+    updatedY: canvas.height / 2 - 90,
+    updatedWidth: 175,
+    updatedHeight: 200,
+    updatedRotation: 0,
+  },
   {
     screenWidth: 1280,
     x: 275,

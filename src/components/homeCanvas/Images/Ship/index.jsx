@@ -68,8 +68,8 @@ const responsiveShipValues = (canvas) => [
   },
   {
     screenWidth: 1114,
-    x: canvas.width / 2 - 120,
-    y: canvas.width / 2 - 350,
+    x: canvas.width / 2 - 140,
+    y: canvas.width / 2 - 240,
     width: canvas.width / 2 - 480,
     height: canvas.width / 2 - 480,
     rotation: 0,
