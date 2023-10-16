@@ -9,7 +9,7 @@ import {
 
 import { HiOutlineHome } from "react-icons/hi";
 import { PiStudentLight } from "react-icons/pi";
-
+import { AiOutlineHome } from "react-icons/ai";
 import { IoIosLaptop } from "react-icons/io";
 
 import logo from "../Assets/logo.png";
@@ -143,6 +143,17 @@ function Sidebar() {
             >
               <PiStudentLight className="sidebar-icon" />
               <p>Student</p>
+            </div>
+          </Link>
+          {/** Home Page */}
+          <Link to="/home" className="sidebar-link">
+            <div
+              className={`sidebar-item ${
+                isActive(history, "/home") && "active"
+              }`}
+            >
+              <AiOutlineHome className="sidebar-icon" />
+              <p>Home</p>
             </div>
           </Link>
         </div>

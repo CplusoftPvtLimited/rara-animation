@@ -11,7 +11,6 @@ import Fellows from "./Core/Fellows Pages/Fellows";
 import AddFellow from "./Core/Fellows Pages/AddFellow";
 import EditFellow from "./Core/Fellows Pages/EditFellow";
 import PaymentMethods from "./Core/Payment Methods Pages/PaymentMethods";
-
 import Home from "./Core/Home/Home.js";
 import Student from "./Core/Student/Student";
 
@@ -41,7 +40,7 @@ function App() {
 
             <Route path="/paymentMethods" exact component={PaymentMethods} />
 
-            {/* <Route path="/home" exact component={Home} /> */}
+            <Route path="/home" exact component={Home} />
             <Route path="/student" exact component={Student} />
           </Switch>
         </Router>

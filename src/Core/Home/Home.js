@@ -12,14 +12,18 @@ function EditHome(props) {
   const [homeData, setHomeData] = useState();
   const [fellowData, setFellowData] = useState([]);
   const [blogData, setBlogData] = useState([]);
-
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState([]);
+  // const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
   const [selectedFellowOptions, setSelectedFellowOptions] = useState([]);
   const [selectedBlogOptions, setSelectedBlogOptions] = useState([]);
   const [removedBlogOptions, setRemovedBlogOptions] = useState([]);
 
   const history = useHistory();
   const fileInputRef = useRef(null);
+  const file1InputRef = useRef(null);
+  const file2InputRef = useRef(null);
+  const file3InputRef = useRef(null);
+  const file4InputRef = useRef(null);
 
   const onFellowSelectOptions = (selectedList, selectedItem) => {
     setSelectedFellowOptions([...selectedFellowOptions, selectedItem]);
@@ -110,25 +114,48 @@ function EditHome(props) {
     const { name, value, files } = event.target;
     console.log("file: ", files);
 
-    if (name === "imagePath") {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreviewUrl(reader.result);
-      };
-      if (files && files.length > 0) {
-        reader.readAsDataURL(files[0]);
+    // if (name === "imagePath" || name === "mainResearchImage") {
+    //   const reader = new FileReader();
+    //   reader.onloadend = () => {
+    //     setImagePreviewUrl(reader.result);
+    //   };
+    //   if (files && files.length > 0) {
+    //     reader.readAsDataURL(files[0]);
+    //     setHomeData((prev) => ({
+    //       ...prev,
+    //       imagePath: files[0],
+    //     }));
+    //   }
+    // } else {
+    //   setHomeData((prev) => ({ ...prev, [name]: value }));
+    // }
+  };
+  const handleImageInputChange = (event, name) => {
+    const file = event.target.files[0];
+    console.log("File:", file);
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      if (name) {
+        setImagePreviewUrl((prev) => {
+          const updatedPreview = prev.filter((item) => item.path !== name);
+          return [...updatedPreview, { path: name, file: reader.result }];
+        });
+
         setHomeData((prev) => ({
           ...prev,
-          imagePath: files[0],
+          [name]: file,
         }));
       }
-    } else {
-      setHomeData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
 
-  const handleImageClick = () => {
-    fileInputRef.current.click();
+  const handleImageClick = (fileInput) => {
+    fileInput.current.click();
   };
 
   const fellowIds = selectedFellowOptions.map((option) => option?.id);
@@ -254,7 +281,7 @@ function EditHome(props) {
                   <div className="main">
                     <h2> Main Section</h2>
                   </div>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Main Heading</p>
                       <input
@@ -264,8 +291,8 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
-                  <Col>
+                  </Col> */}
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Main Subheading</p>
                       <input
@@ -275,45 +302,108 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Main About</p>
-                      <input
+                      <CKEditor
+                        style={{ height: "100px" }}
+                        editor={ClassicEditor}
+                        data={homeData.mainAbout}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          console.log("Editor Data:", data);
+                          handleChange({
+                            target: {
+                              name: "mainAbout",
+                              value: data,
+                            },
+                          });
+                        }}
+                        onBlur={(event, editor) => {
+                          console.log("Blur.", editor);
+                        }}
+                        onFocus={(event, editor) => {
+                          console.log("Focus.", editor);
+                        }}
+                      />
+                      {/* <input
                         type="text"
                         name="mainAbout"
                         value={homeData.mainAbout}
                         onChange={handleChange}
-                      />
+                      /> */}
                     </div>
                   </Col>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Main Establish</p>
-                      <input
+                      <CKEditor
+                        style={{ height: "100px" }}
+                        editor={ClassicEditor}
+                        data={homeData.mainEstablish}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          console.log("Editor Data:", data);
+                          handleChange({
+                            target: {
+                              name: "mainEstablish",
+                              value: data,
+                            },
+                          });
+                        }}
+                        onBlur={(event, editor) => {
+                          console.log("Blur.", editor);
+                        }}
+                        onFocus={(event, editor) => {
+                          console.log("Focus.", editor);
+                        }}
+                      />
+                      {/* <input
                         type="text"
                         name="mainEstablish"
                         value={homeData.mainEstablish}
                         onChange={handleChange}
-                      />
+                      /> */}
                     </div>
                   </Col>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Main ResearchTitle</p>
-                      <input
+                      <CKEditor
+                        style={{ height: "100px" }}
+                        editor={ClassicEditor}
+                        data={homeData.mainResearchTitle}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          console.log("Editor Data:", data);
+                          handleChange({
+                            target: {
+                              name: "mainResearchTitle",
+                              value: data,
+                            },
+                          });
+                        }}
+                        onBlur={(event, editor) => {
+                          console.log("Blur.", editor);
+                        }}
+                        onFocus={(event, editor) => {
+                          console.log("Focus.", editor);
+                        }}
+                      />
+                      {/* <input
                         type="text"
                         name="mainResearchTitle"
                         value={homeData.mainResearchTitle}
                         onChange={handleChange}
-                      />
+                      /> */}
                     </div>
                   </Col>
                 </Row>
-                <Row>
+                {/* <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Main Research Image</p>
@@ -339,7 +429,7 @@ function EditHome(props) {
                       </div>
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
                 <Row>
                   <Col>
                     <div className="add-product-input-div">
@@ -352,7 +442,10 @@ function EditHome(props) {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: {
+                              name: "mainDescription",
+                              value: data,
+                            },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -376,7 +469,10 @@ function EditHome(props) {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: {
+                              name: "mainResearchDescription",
+                              value: data,
+                            },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -396,7 +492,7 @@ function EditHome(props) {
                   <div className="cards">
                     <h2> Card Details</h2>
                   </div>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 1 Heading</p>
                       <input
@@ -406,8 +502,8 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
-                  <Col>
+                  </Col> */}
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 1 Title</p>
                       <input
@@ -417,7 +513,7 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
@@ -426,27 +522,33 @@ function EditHome(props) {
                       <p>Card 1 Image</p>
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? homeData?.card1Image}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "card1Image"
+                            )?.file ?? homeData?.card1Image
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file1InputRef)}
                         />
                         <input
                           type="file"
                           name="card1Image"
-                          ref={fileInputRef}
-                          onChange={handleChange}
+                          ref={file1InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "card1Image")
+                          }
                           accept="image/jpeg, image/png, image/gif"
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 1 Inside Image</p>
                       <div className="product-image-div">
@@ -470,7 +572,7 @@ function EditHome(props) {
                         />
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
@@ -485,7 +587,7 @@ function EditHome(props) {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: { name: "card1Description", value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -501,7 +603,7 @@ function EditHome(props) {
 
                 {/** Cards 2*/}
 
-                <Row>
+                {/* <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Card 2 Heading</p>
@@ -524,7 +626,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
 
                 <Row>
                   <Col>
@@ -532,27 +634,33 @@ function EditHome(props) {
                       <p>Card 2 Image</p>
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? homeData?.card2Image}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "card2Image"
+                            )?.file ?? homeData?.card2Image
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file2InputRef)}
                         />
                         <input
                           type="file"
                           name="card2Image"
-                          ref={fileInputRef}
-                          onChange={handleChange}
+                          ref={file2InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "card2Image")
+                          }
                           accept="image/jpeg, image/png, image/gif"
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 2 Inside Image</p>
                       <div className="product-image-div">
@@ -576,7 +684,7 @@ function EditHome(props) {
                         />
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
@@ -591,7 +699,7 @@ function EditHome(props) {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: { name: "card2Description", value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -607,7 +715,7 @@ function EditHome(props) {
 
                 {/** Cards 3*/}
 
-                <Row>
+                {/* <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Card 3 Heading</p>
@@ -631,7 +739,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
 
                 <Row>
                   <Col>
@@ -639,27 +747,33 @@ function EditHome(props) {
                       <p>Card 3 Image</p>
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? homeData?.card3Image}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "card3Image"
+                            )?.file ?? homeData?.card3Image
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file3InputRef)}
                         />
                         <input
                           type="file"
                           name="card3Image"
-                          ref={fileInputRef}
-                          onChange={handleChange}
+                          ref={file3InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "card3Image")
+                          }
                           accept="image/jpeg, image/png, image/gif"
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 3 Inside Image</p>
                       <div className="product-image-div">
@@ -683,7 +797,7 @@ function EditHome(props) {
                         />
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
@@ -698,7 +812,7 @@ function EditHome(props) {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: { name: "card3Description", value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -713,7 +827,7 @@ function EditHome(props) {
                 </Row>
                 {/** Cards 4*/}
 
-                <Row>
+                {/* <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Card 4 Heading</p>
@@ -737,7 +851,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
 
                 <Row>
                   <Col>
@@ -745,27 +859,33 @@ function EditHome(props) {
                       <p>Card 4 Image</p>
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? homeData?.card4Image}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "card4Image"
+                            )?.file ?? homeData?.card2Image
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file4InputRef)}
                         />
                         <input
                           type="file"
                           name="card4Image"
-                          ref={fileInputRef}
-                          onChange={handleChange}
+                          ref={file4InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "card4Image")
+                          }
                           accept="image/jpeg, image/png, image/gif"
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 4 Inside Image</p>
                       <div className="product-image-div">
@@ -789,7 +909,7 @@ function EditHome(props) {
                         />
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
                 <Row>
                   <Col>
@@ -803,7 +923,7 @@ function EditHome(props) {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: { name: "card4Description", value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -829,7 +949,10 @@ function EditHome(props) {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: {
+                              name: "cardGuidelineDescription",
+                              value: data,
+                            },
                           });
                         }}
                         onBlur={(event, editor) => {
