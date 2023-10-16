@@ -153,6 +153,7 @@ const updateHome = async (req, res) => {
     }
 
     const baseUrl = "https://backend.pecunia.institute/";
+    // const baseUrl = "http://localhost:4500/";
     const mainResearchImage =
       req.files?.mainResearchImage &&
       typeof req.files?.mainResearchImage == "object"
