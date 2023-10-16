@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -309,7 +309,27 @@ import {
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
 const index = () => {
+  const [homeData, setHomeData] = useState("");
   useEffect(() => {
+    const apiURL = "http://localhost:4500/api/home/getHome";
+
+    const getHomeData = async () => {
+      try {
+        const response = await fetch(apiURL);
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(
+          "***🚀 ~ file: home.jsx:323 ~ getHomeData ~ data:",
+          data.home[0]
+        );
+        setHomeData(data.home[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
     const canvas = document.querySelector("#canvas1");
 
     const canvasContainer = document.querySelector(".spacer");
@@ -2593,11 +2613,13 @@ const index = () => {
         },
       });
     }
-
+    getHomeData();
     firstDivlVisionScrollAnimation();
     secondDivlVisionScrollAnimation();
     thirdDivlVisionScrollAnimation();
   }, []);
+
+  useEffect;
 
   return (
     <div>
@@ -2905,14 +2927,7 @@ const index = () => {
                   color: "#707070",
                 }}
               >
-                Pecunia Institute is at the forefront of a financial revolution
-                with a vision deeply rooted in societal change. Founded on the
-                belief that finance holds the key to building a more socially
-                connected and sustainable world, we are dedicated to pioneering
-                innovative solutions that transcend traditional financial
-                boundaries. Our multidisciplinary team of experts, known as
-                Fellows, is committed to exploring the vast potential of social
-                finance as a catalyst for positive global transformation.
+                {homeData.mainAbout}
                 <br />
               </div>
               <div
@@ -2925,14 +2940,7 @@ const index = () => {
                   fontFamily: "sans-serif",
                 }}
               >
-                At Pecunia, our mission is to empower individuals,
-                organizations, and communities to harness the power of finance
-                for social impact. Our relentless pursuit of groundbreaking
-                research, coupled with a dedication to sharing knowledge, forms
-                the cornerstone of our work. Through our extensive network and
-                partnerships, we create and disseminate cutting-edge insights,
-                equipping decision-makers with the tools they need to navigate
-                the evolving landscape of finance.
+                {homeData.mainEstablish}
               </div>
             </div>
             <div
@@ -3046,34 +3054,14 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
               >
-                At Pecunia, our overarching mission is deeply rooted in the
-                belief that finance can serve as a catalyst for positive global
-                change. We strive to create a world where the potential of
-                finance is harnessed not just for profit, but for the greater
-                good. Our commitment extends to empowering communities,
-                particularly those that have been marginalized or overlooked,
-                and fostering a sense of inclusivity that transcends
-                socioeconomic boundaries. We aim to address the most pressing
-                challenges faced by these communities, thereby contributing to a
-                more equitable and sustainable global landscape.
+                {homeData.mainResearchTitle}
               </div>
               <div
                 className="cFlatText lVision-section-writing-text"
                 data-flat-text=""
                 style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
               >
-                Central to our mission is the Pecunia Endowment Fund that
-                embodies our long-term vision for change. This endowment fund
-                serves as a financial engine for sustainable transformation. It
-                aims to provide the necessary resources, stability, and
-                continuity to support our initiatives in perpetuity. Through
-                prudent investment and strategic allocation of funds, we ensure
-                that our impact continues to grow over time. The endowment fund
-                is not merely a financial vehicle; it is a commitment to the
-                enduring legacy of our mission. It enables us to remain at the
-                forefront of pioneering research, innovative financial
-                solutions, and collaborations that truly make a difference in
-                communities worldwide.
+                {homeData.mainDescription}
               </div>
             </div>
 
@@ -3175,18 +3163,11 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 12.45px", transform: "scaleX(1.05)" }}
               >
-                Central to our mission is the Pecunia Endowment Fund that
-                embodies our long-term vision for change. This endowment fund
-                serves as a financial engine for sustainable transformation. It
-                aims to provide the necessary resources, stability, and
-                continuity to support our initiatives in perpetuity. Through
-                prudent investment and strategic allocation of funds, we ensure
-                that our impact continues to grow over time. The endowment fund
-                is not merely a financial vehicle; it is a commitment to the
-                enduring legacy of our mission. It enables us to remain at the
-                forefront of pioneering research, innovative financial
-                solutions, and collaborations that truly make a difference in
-                communities worldwide.
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainResearchDescription,
+                  }}
+                />
               </div>
             </div>
             <div

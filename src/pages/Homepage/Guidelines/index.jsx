@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,7 +8,26 @@ import "./mobile.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const index = () => {
+  const [homeData, setHomeData] = useState("");
   useEffect(() => {
+    const apiURL = "http://localhost:4500/api/home/getHome";
+
+    const getHomeData = async () => {
+      try {
+        const response = await fetch(apiURL);
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(
+          "***🚀 ~ file: home.jsx:323 ~ getHomeData ~ data:",
+          data.home[0]
+        );
+        setHomeData(data.home[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
     if (document.documentElement.clientWidth > 500) {
       console.log("Window width is greater than 425 pixels");
       console.log("***********Inner Width: ", window.innerWidth);
@@ -620,6 +639,7 @@ const index = () => {
 
       toggleDivOnScrollMobile();
     }
+    getHomeData();
   }, []);
 
   return (
@@ -882,20 +902,22 @@ const index = () => {
                         transform: "scaleX(1.05)",
                       }}
                     >
-                      Examining how cognitive biases and psychological factors
-                      influence financial decision-making while aiming to
-                      develop strategies that help individuals make more
-                      informed and responsible financial choices.
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: homeData.card1Description,
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="lGuideline-card-item-back ">
                     <img
                       className="lGuideline-card-item-back-illust -l01"
-                      src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png"
+                      src={homeData.card1Image}
                       width="234"
                       height="302"
                       alt=""
-                      srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
+                      // srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
+                      srcSet={homeData.card1Image}
                     />
                   </div>
                 </div>
@@ -936,19 +958,22 @@ const index = () => {
                         transform: "scaleX(1.05)",
                       }}
                     >
-                      Exploring innovative ways to create inclusive financial
-                      systems by designing financial products that cater to
-                      unique needs of underserved and marginalized communities.
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: homeData.card2Description,
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="lGuideline-card-item-back">
                     <img
                       className="lGuideline-card-item-back-illust -l02"
-                      src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png"
+                      src={homeData.card2Image}
                       width="235"
                       height="307"
                       alt=""
-                      srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
+                      // srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
+                      srcSet={homeData.card2Image}
                     />
                   </div>
                 </div>
@@ -989,20 +1014,22 @@ const index = () => {
                         transform: "scaleX(1.05)",
                       }}
                     >
-                      Researching ethical banking practices, ethical investment
-                      vehicles, and how financial institutions can integrate
-                      ethical principles into their operations while maintaining
-                      profitability.
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: homeData.card3Description,
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="lGuideline-card-item-back">
                     <img
                       className="lGuideline-card-item-back-illust -l03"
-                      src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png"
+                      src={homeData.card3Image}
                       width="220"
                       height="301"
                       alt=""
-                      srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
+                      srcSet={homeData.card3Image}
+                      // srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
                     />
                   </div>
                 </div>
@@ -1043,23 +1070,43 @@ const index = () => {
                         transform: "scaleX(1.05)",
                       }}
                     >
-                      Pecunia focuses on research related to financing
-                      sustainable development goals (SDGs). This includes
-                      examining financial instruments, policies, and
-                      partnerships that can mobilize capital for projects
-                      aligned with the SDGs.
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: homeData.card4Description,
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="lGuideline-card-item-back">
                     <img
                       className="lGuideline-card-item-back-illust -l04"
-                      src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png"
+                      src={homeData.card4Image}
                       width="295"
                       height="297"
                       alt=""
-                      srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
+                      srcSet={homeData.card4Image}
+                      // srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
                     />
                   </div>
+                </div>
+              </div>
+              <div
+                className="cContainer -leftSmall -rightSmall -spLeftWide -spRightWide lGuideline-text"
+                data-guideline-lead=""
+              >
+                <div
+                  className="cFlatText lGuideline-text-child"
+                  data-flat-text=""
+                  style={{
+                    padding: "0px 21.225px",
+                    transform: "translate(0px, 120%) scale(1.05, 1)",
+                  }}
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: homeData.cardGuidelineDescription,
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -1107,20 +1154,22 @@ const index = () => {
                         transform: "scaleX(1.05)",
                       }}
                     >
-                      Examining how cognitive biases and psychological factors
-                      influence financial decision-making while aiming to
-                      develop strategies that help individuals make more
-                      informed and responsible financial choices.
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: homeData.card1Description,
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="lGuideline-card-item-back">
                     <img
                       className="lGuideline-card-item-back-illust -l01"
-                      src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png"
+                      src={homeData.card1Image}
                       width="234"
                       height="302"
                       alt=""
-                      srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
+                      // srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust01.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust01@2x.png 2x"
+                      srcSet={homeData.card1Image}
                     />
                   </div>
                 </div>
@@ -1161,19 +1210,22 @@ const index = () => {
                         transform: "scaleX(1.05)",
                       }}
                     >
-                      Exploring innovative ways to create inclusive financial
-                      systems by designing financial products that cater to
-                      unique needs of underserved and marginalized communities.
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: homeData.card2Description,
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="lGuideline-card-item-back">
                     <img
                       className="lGuideline-card-item-back-illust -l02"
-                      src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png"
+                      src={homeData.card2Image}
                       width="235"
                       height="307"
                       alt=""
-                      srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
+                      srcSet={homeData.card2Image}
+                      // srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust02.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust02@2x.png 2x"
                     />
                   </div>
                 </div>
@@ -1214,20 +1266,23 @@ const index = () => {
                         transform: "scaleX(1.05)",
                       }}
                     >
-                      Researching ethical banking practices, ethical investment
-                      vehicles, and how financial institutions can integrate
-                      ethical principles into their operations while maintaining
-                      profitability.
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: homeData.card3Description,
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="lGuideline-card-item-back">
                     <img
                       className="lGuideline-card-item-back-illust -l03"
-                      src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png"
+                      src={homeData.card3Image}
+                      // src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png"
                       width="220"
                       height="301"
                       alt=""
-                      srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
+                      srcSet={homeData.card3Image}
+                      // srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust03.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust03@2x.png 2x"
                     />
                   </div>
                 </div>
@@ -1268,21 +1323,23 @@ const index = () => {
                         transform: "scaleX(1.05)",
                       }}
                     >
-                      Pecunia focuses on research related to financing
-                      sustainable development goals (SDGs). This includes
-                      examining financial instruments, policies, and
-                      partnerships that can mobilize capital for projects
-                      aligned with the SDGs.
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: homeData.card4Description,
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="lGuideline-card-item-back">
                     <img
                       className="lGuideline-card-item-back-illust -l04"
-                      src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png"
+                      src={homeData.card4Image}
+                      // src="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png"
                       width="295"
                       height="297"
                       alt=""
-                      srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
+                      srcSet={homeData.card4Image}
+                      // srcSet="https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/1x/b-guideline_illust04.png 1x,https://rara.ritsumei.ac.jp/assets/img/index/guideline/pc/2x/b-guideline_illust04@2x.png 2x"
                     />
                   </div>
                 </div>
@@ -1299,13 +1356,11 @@ const index = () => {
                     transform: "translate(0px, 120%) scale(1.05, 1)",
                   }}
                 >
-                  Our focus areas represent Pecunia core mission, driving our
-                  relentless pursuit of transformative change in the realm of
-                  social finance. Through dedicated exploration, we strive to
-                  catalyze meaningful impact, fostering inclusivity and
-                  sustainability. We undertake in-depth research to reveal
-                  opportunities, address challenges, and advocate for best
-                  practices, shaping a more equitable financial landscape.
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: homeData.cardGuidelineDescription,
+                    }}
+                  />
                 </div>
               </div>
             </div>
