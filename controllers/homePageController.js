@@ -238,8 +238,8 @@ const updateHome = async (req, res) => {
       card4Description: req.body.card4Description || home.card4Description,
       cardGuidelineDescription:
         req.body.cardGuidelineDescription || home.cardGuidelineDescription,
-      fellows: req.body.fellow,
-      blogs: req.body.blogs,
+      fellows: req.body.fellows || home.fellows,
+      blogs: req.body.blogs || home.blogs,
       contactHeading: req.body.contactHeading || home.contactHeading,
       contactEmail: req.body.contactEmail || home.contactEmail,
       contactMailchimpKey:
