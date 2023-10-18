@@ -260,6 +260,20 @@ const index = () => {
               <div className="cMenu-btn-container">
                 <a
                   className="cMenu-btn-inner-btn"
+                  href="/sponsership"
+                  style={{ margin: 0 }}
+                >
+                  <button
+                    type="button"
+                    className="custom_button button4"
+                    style={{}}
+                  >
+                    SPONSERSHIP
+                  </button>
+                </a>
+
+                <a
+                  className="cMenu-btn-inner-btn"
                   href="/donation"
                   style={{ margin: 0 }}
                 >
