@@ -306,2303 +306,2306 @@ import {
   getResponsiveBlueR_AlphabetDimensions,
 } from "../../components/homeCanvas/Images/BlueR_Alphabet";
 
+import videoSrc from "../../assets/videos/WeAreWVÉS.mp4";
+
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
 const index = () => {
-  useEffect(() => {
-    const canvas = document.querySelector("#canvas1");
-
-    const canvasContainer = document.querySelector(".spacer");
-
-    const spacerHeight = canvasContainer.clientHeight;
-
-    // Calculate 1% of window's height
-    const scrollLimit = spacerHeight * 0.01;
-
-    const scrollContainer = document.querySelector(".custom-container");
-
-    const c = canvas.getContext("2d");
-
-    canvas.width = document.documentElement.clientWidth;
-    canvas.height = document.documentElement.clientHeight;
-
-    canvas.style.width = document.documentElement.clientWidth;
-    +"px";
-    canvas.style.height = document.documentElement.clientHeight;
-    +"px";
-
-    const mouse = {
-      x: innerWidth / 2,
-      y: innerHeight / 2,
-    };
-
-    let prevMouseX = null;
-    let prevMouseY = null;
-
-    let deltaX = null;
-    let deltaY = null;
-
-    const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
-
-    const timeline = gsap.timeline();
-
-    const canvasScroll = gsap.to("#canvas1", {
-      scrollTrigger: {
-        trigger: "#canvas1",
-        scroller: scrollContainer,
-        start: "top top",
-        end: "+=1%",
-        scrub: true,
-        pin: true, // pin the canvas in place
-        anticipatePin: 1, // 1 means it will anticipate the pin and unpin before they happen.
-      },
-    });
-
-    // Attach an event listener to the canvas for the mousemove event
-    canvas.addEventListener("mousemove", (event) => {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
-
-      if (prevMouseX !== null && prevMouseY !== null) {
-        deltaX = mouseX - prevMouseX;
-        deltaY = mouseY - prevMouseY;
-        // console.log("MOUSE X ------", mouseX);
-
-        images.forEach((image) => {
-          let imageX = null;
-          let imageY = null;
-
-          if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            if (deltaX > 0) {
-              // console.log("Right--");
-              if (mouseX == innerWidth / 2) {
-                // image.x = image.x1;
-              } else {
-                image.x = image.x - 0.1;
-              }
-            } else {
-              if (mouseX == innerWidth / 2) {
-                // image.x = image.x1;
-              } else {
-                image.x = image.x + 0.1;
-              }
-              // console.log("Left---", deltaX);
-            }
-          } else {
-            if (deltaY > 0) {
-              if (mouseY == innerHeight / 2) {
-                // image.y = image.y1;
-              } else {
-                image.y = image.y - 0.1;
-              }
-              // Mouse is moving down
-              // console.log("Down");
-            } else {
-              if (mouseY == innerHeight / 2) {
-                // image.y = image.y1;
-              } else {
-                // Mouse is moving up
-                image.y = image.y + 0.1;
-              }
-              // console.log("Up");
-            }
-          }
-        });
-      }
-
-      prevMouseX = mouseX;
-      prevMouseY = mouseY;
-    });
-
-    window.addEventListener("resize", () => {
-      canvas.width = document.documentElement.clientWidth;
-      canvas.height = document.documentElement.clientHeight;
-
-      // if (canvas.width <= 320) {
-      //   canvas.height = 650;
-      //   canvas.style.height = 650 + "px";
-      // }
-      // if (canvas.width <= 375) {
-      //   canvas.height = 636;
-      //   canvas.style.height = 636 + "px";
-      // }
-      // if (canvas.width <= 500) {
-      //   canvas.height = 636;
-      //   canvas.style.height = 636 + "px";
-      // }
-
-      init();
-    });
-
-    // Implementation
-    let circles;
-    let images;
-
-    let staticImages;
-    let circleAboveImages;
-
-    let imageDummy;
-
-    let images1;
-
-    function init() {
-      const screenWidth = document.documentElement.clientWidth;
-
-      circles = [];
-      images = [];
-      staticImages = [];
-      circleAboveImages = [];
-      imageDummy = [];
-
-      images1 = [];
-
-      imageDummy.push(
-        new UploadedImageTransparent(
-          gsap,
-          scrollContainer,
-          c,
-          0,
-          30,
-          require("../../assets/home/images/header_60.png"),
-          innerWidth,
-          innerHeight
-        )
-      );
-      const FirstCircleOutsideEllipseData =
-        getResponsiveFirstCircleOutsideEllipseDimensions(canvas, screenWidth);
-      circles.push(
-        FirstCircleOutsideEllipse(
-          FirstCircleOutsideEllipseData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-      // circles.push(
-      //   new FilledCircle(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     25,
-      //     "#af292f",
-      //     0,
-      //     0.0002,
-      //     700,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-      const SecondCircleOutsideEllipseData =
-        getResponsiveSecondCircleOutsideEllipseDimensions(canvas, screenWidth);
-      circles.push(
-        SecondCircleOutsideEllipse(
-          SecondCircleOutsideEllipseData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-      // circles.push(
-      //   new FilledCircle(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     25,
-      //     "#af292f",
-      //     3.125,
-      //     0.0002,
-      //     700,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      const { width, height, radius, verticalScale } =
-        getResponsiveEllipseDimensions(canvas, screenWidth);
-
-      circles.push(
-        new Ellipse(
-          width,
-          height,
-          radius,
-          verticalScale,
-          "grey",
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      const { circleWidth, circleHeight, circleRadius } =
-        getResponsiveCircleRadius(canvas, screenWidth);
-      circles.push(
-        new Circle(
-          circleWidth,
-          circleHeight,
-          circleRadius,
-          "grey",
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // Red Circle Inside Middle Circle
-      const RedCircleInsideMiddleCircleData =
-        getResponsiveRedCircleInsideMiddleCircleDimensions(canvas, screenWidth);
-      circles.push(
-        RedCircleInsideMiddleCircle(
-          RedCircleInsideMiddleCircleData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      const BlueCircleInsideMiddleCircleData =
-        getResponsiveBlueCircleInsideMiddleCircleDimensions(
-          canvas,
-          screenWidth
-        );
-      circles.push(
-        BlueCircleInsideMiddleCircle(
-          BlueCircleInsideMiddleCircleData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      const FirstCircleOutsideMiddleCircleData =
-        getResponsiveFirstCircleOutsideMiddleCircleDimensions(
-          canvas,
-          screenWidth
-        );
-      circles.push(
-        FirstCircleOutsideMiddleCircle(
-          FirstCircleOutsideMiddleCircleData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-      // circles.push(
-      //   new FilledCircle(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     10,
-      //     "#af292f",
-      //     0,
-      //     0.001,
-      //     305,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      const SecondCircleOutsideMiddleCircleData =
-        getResponsiveSecondCircleOutsideMiddleCircleDimensions(
-          canvas,
-          screenWidth
-        );
-      circles.push(
-        SecondCircleOutsideMiddleCircle(
-          SecondCircleOutsideMiddleCircleData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-      // circles.push(
-      //   new FilledCircle(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     10,
-      //     "#af292f",
-      //     3.125,
-      //     0.001,
-      //     305,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // Ellipse when scrolled down --- done
-
-      circleAboveImages.push(
-        new Ellipse(
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          0,
-          "#ADADAD",
-          canvas.width / 2,
-          canvas.height / 2,
-          615,
-          215,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // Ellipse rotating circle when scrolled down --- done
-      circleAboveImages.push(
-        new CircleWithEllipseRotation(
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          "rgb(91, 146, 157)",
-          0,
-          0,
-          0,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          10,
-          0.1,
-          0.003,
-          615,
-          215,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      circleAboveImages.push(
-        new CircleWithEllipseRotation(
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          "#af292f",
-          0,
-          0,
-          0,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          5,
-          0.1,
-          0.003,
-          -615,
-          -215,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      circleAboveImages.push(
-        new CircleWithEllipseRotation(
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          "#af292f",
-          0,
-          0,
-          0,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          10,
-          17.3,
-          0.003,
-          615,
-          215,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      circleAboveImages.push(
-        new CircleWithEllipseRotation(
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          "#af292f",
-          0,
-          0,
-          0,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          10,
-          -4.7,
-          0.003,
-          615,
-          215,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // RAlphabet --- DONE
-
-      const RAlphabetWithLabelData = getResponsiveRAlphabetDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        RAlphabet(RAlphabetWithLabelData, canvas, gsap, scrollContainer, c)
-      );
-
-      // images.push(RAlpabet(canvas, gsap, scrollContainer, c));
-
-      // building with two red lines and left of center --- done
-      images.push(BuildingTwoRedLines(canvas, gsap, scrollContainer, c));
-
-      // Rock with red label --- done
-      const RockWithLabelData = getResponsiveRockWithLebelDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
-      );
-
-      // tower with clock center --- done
-      images.push(
-        new UploadedImage(
-          canvas.width / 2,
-          canvas.height / 2,
-          require("../../assets/home/images/header_29.png"),
-          0,
-          0,
-          0,
-          canvas.width / 2 - 115,
-          canvas.height / 2 - 135,
-          215,
-          200,
-          0,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // A alphabet ---- done
-
-      const AalphabetData = getResponsiveAalphabetDimensions(
-        canvas,
-        screenWidth
-      );
-
-      images.push(Aalphabet(AalphabetData, canvas, gsap, scrollContainer, c));
-
-      // man with hand direction ---- done
-
-      const ManWithHandDirectionData =
-        getResponsiveManWithHandDirectionDimensions(canvas, screenWidth);
-      images.push(
-        ManWithHandDirection(
-          ManWithHandDirectionData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width,
-      //     canvas.height / 2 - 15,
-      //     require("../../assets/home/images/header_22.png"),
-      //     115,
-      //     150,
-      //     0,
-      //     canvas.width / 2 + 195,
-      //     canvas.height / 2 + 15,
-      //     115,
-      //     160,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // roof with red top --- done
-      const RoofWithRedTopData = getResponsiveRoofWithRedTopDimensions(
-        canvas,
-        screenWidth
-      );
-
-      images.push(
-        RoofWithRedTop(RoofWithRedTopData, canvas, gsap, scrollContainer, c)
-      );
-
-      // red book ---- done
-
-      const RedBookData = getResponsiveRedBookDimensions(canvas, screenWidth);
-      images.push(RedBook(RedBookData, canvas, gsap, scrollContainer, c));
-
-      // car image --- done
-
-      const CarImageData = getResponsiveCarImageDimensions(canvas, screenWidth);
-      images.push(CarImage(CarImageData, canvas, gsap, scrollContainer, c));
-
-      // dryer --- done
-
-      const DryerData = getResponsiveDryerDimensions(canvas, screenWidth);
-      images.push(Dryer(DryerData, canvas, gsap, scrollContainer, c));
-
-      // R alphabet center --- done
-
-      const BlueR_AlphabetData = getResponsiveBlueR_AlphabetDimensions(
-        canvas,
-        screenWidth
-      );
-
-      images.push(
-        BlueR_Alphabet(BlueR_AlphabetData, canvas, gsap, scrollContainer, c)
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 + 465,
-      //     canvas.height / 2 + 100,
-      //     require("../../assets/home/images/header_52_1.png"),
-      //     85,
-      //     100,
-      //     -45,
-      //     canvas.width / 2 + 3,
-      //     canvas.height / 2 - 90,
-      //     80,
-      //     100,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // slim man with glasses ---done
-
-      const SlimManWithGlassesData = getResponsiveSlimManWithGlassesDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        SlimManWithGlasses(
-          SlimManWithGlassesData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      //Girl  --- done
-      const GirlData = getResponsiveGirlDimensions(canvas, screenWidth);
-      images.push(YoungGirl(GirlData, canvas, gsap, scrollContainer, c));
-
-      //girl circle ---- DONE
-
-      const GirlCircleData = getResponsiveGirlCircleDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(GirlCircle(GirlCircleData, canvas, gsap, scrollContainer, c));
-
-      // man with joined hand --- done
-      // GlassesBoy
-
-      const GlassesBoyData = getResponsiveGlassesBoyDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(GlassesBoy(GlassesBoyData, canvas, gsap, scrollContainer, c));
-
-      // black rock front of girl and behind book lady --- done
-
-      const BlackRockData = getResponsiveBlackRockDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(BlackRock(BlackRockData, canvas, gsap, scrollContainer, c));
-
-      // Eye
-      const EyeData = getResponsiveEyeDimensions(canvas, screenWidth);
-      images.push(Eye(EyeData, canvas, gsap, scrollContainer, c));
-
-      // Leaf --- done
-
-      const LeafData = getResponsiveLeafDimensions(canvas, screenWidth);
-      images.push(Leaf(LeafData, canvas, gsap, scrollContainer, c));
-
-      // person above the cart --- done
-
-      const PersonAboveCartData = getResponsivePersonAboveCartDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        PersonAboveCart(PersonAboveCartData, canvas, gsap, scrollContainer, c)
-      );
-
-      // cart --- done
-
-      const CartData = getResponsiveCartDimensions(canvas, screenWidth);
-      images.push(Cart(CartData, canvas, gsap, scrollContainer, c));
-
-      // person on phone bottom right corner
-
-      const PersonOnPhoneBottomRightData =
-        getResponsivePersonOnPhoneBottomRightDimensions(canvas, screenWidth);
-      images.push(
-        PersonOnPhoneBottomRight(
-          PersonOnPhoneBottomRightData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width - 130,
-      //     canvas.height - 153,
-      //     require("../../assets/home/images/header_27.png"),
-      //     115,
-      //     135,
-      //     -15,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // researcher person --- done
-
-      const ResearchPersonData = getResponsiveResearchPersonDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        ResearchPerson(ResearchPersonData, canvas, gsap, scrollContainer, c)
-      );
-
-      // boy left to glasses man --- done
-
-      const BoyLeftToGlassMannData =
-        getResponsiveBoyLedftToGlassesManDimensions(canvas, screenWidth);
-      images.push(
-        BoyLedftToGlassesMan(
-          BoyLeftToGlassMannData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     require("../../assets/home/images/header_61.png"),
-      //     0,
-      //     0,
-      //     0,
-      //     canvas.width / 2 - 195,
-      //     canvas.height / 2 - 60,
-      //     75,
-      //     105,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // building with speaker --- done
-
-      const BuildingWithSpeakerData =
-        getResponsiveBuildingWithSpeakerDimensions(canvas, screenWidth);
-      images.push(
-        BuildingWithSpeaker(
-          BuildingWithSpeakerData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     require("../../assets/home/images/header_37.png"),
-      //     0,
-      //     0,
-      //     0,
-      //     canvas.width / 2 - 247,
-      //     canvas.height / 2 - 13,
-      //     200,
-      //     100,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      //glasses peron --- DONE
-      // With hands open
-      // const { width, height, radius, verticalScale } =
-      //   getResponsiveEllipseDimensions(canvas, screenWidth);
-      // getResponsiveGlassesPersonDimensions
-
-      // const RockWithLabelData = getResponsiveRockWithLebelDimensions(
-      //   canvas,
-      //   screenWidth
-      // );
-      // images.push(
-      //   RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
-      // );
-
-      const GlassesPersonWithLabelData = getResponsiveGlassesPersonDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        GlassesPerson(
-          GlassesPersonWithLabelData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     265, // position-x
-      //     canvas.height / 2 - 180,
-      //     require("../../assets/home/images/header_10.png"),
-      //     370, //width
-      //     440, //height
-      //     0, // rotation
-      //     canvas.width / 2 - 210,
-      //     canvas.height / 2 - 90,
-      //     175,
-      //     200,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // red A alphabet --- done
-
-      const RedA_AlphabetData = getResponsiveRedA_AlphabetDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        RedA_Alphabet(RedA_AlphabetData, canvas, gsap, scrollContainer, c)
-      );
-      // images.push(
-      //   new UploadedImage(
-      //     363,
-      //     220,
-      //     require("../../assets/home/images/header_43.png"),
-      //     50,
-      //     50,
-      //     0,
-      //     canvas.width / 2 - 140,
-      //     canvas.height / 2 - 35,
-      //     95,
-      //     100,
-      //     -40,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // images.push(
-      //   new UploadedImage(
-      //     363,
-      //     220,
-      //     require("../../assets/home/images/header_43.png"),
-      //     50,
-      //     50,
-      //     0,
-      //     canvas.width / 2 - 140,
-      //     canvas.height / 2 - 35,
-      //     95,
-      //     100,
-      //     -40,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // red building --- done
-
-      const RedBuildingData = getResponsiveRedBuildingDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        RedBuilding(RedBuildingData, canvas, gsap, scrollContainer, c)
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     require("../../assets/home/images/header_23.png"),
-      //     0,
-      //     0,
-      //     0,
-      //     canvas.width / 2 - 225,
-      //     canvas.height / 2 + 30,
-      //     145,
-      //     115,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // man with only face --- done
-
-      const ManWithOnlyFaceData = getResponsiveManWithOnlyFaceDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        ManWithOnlyFace(ManWithOnlyFaceData, canvas, gsap, scrollContainer, c)
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     -300,
-      //     550,
-      //     require("../../assets/home/images/header_38.png"),
-      //     165,
-      //     165,
-      //     0,
-      //     canvas.width / 2 - 140,
-      //     canvas.height / 2 - 8,
-      //     165,
-      //     165,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // hand folding person ---- done
-
-      const HandHoldingPersonData = getResponsiveHandFoldingManDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        HandFoldingMan(HandHoldingPersonData, canvas, gsap, scrollContainer, c)
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     600,
-      //     canvas.width,
-      //     require("../../assets/home/images/header_49.png"),
-      //     115,
-      //     160,
-      //     0,
-      //     canvas.width / 2 - 120,
-      //     canvas.height / 2 + 45,
-      //     115,
-      //     160,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // man with hand outside ellipse --- done
-
-      const ManOutsideEllipseData = getResponsiveManOutsideEllipseDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        ManOutsideEllipse(
-          ManOutsideEllipseData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     500,
-      //     canvas.width,
-      //     require("../../assets/home/images/header_51.png"),
-      //     110,
-      //     155,
-      //     0,
-      //     canvas.width / 2 - 170,
-      //     canvas.height / 2 + 75,
-      //     95,
-      //     150,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // building at left side in bottom --- done
-
-      const BuildingAtLeftData = getResponsiveBuildingAtLeftDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        BuildingAtLeft(BuildingAtLeftData, canvas, gsap, scrollContainer, c)
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     require("../../assets/home/images/header_24.png"),
-      //     0,
-      //     0,
-      //     0,
-      //     canvas.width / 2 - 360,
-      //     canvas.height / 2 + 10,
-      //     165,
-      //     100,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // lady with the book --- DONE
-      const LadyData = getResponsiveLadyDimensions(canvas, screenWidth);
-      images.push(Lady(LadyData, canvas, gsap, scrollContainer, c));
-
-      //Circle with three colors of lady book --- done
-
-      const CircleWithThreeColorData =
-        getResponsiveCircleWithThreeColorDimensions(canvas, screenWidth);
-      images.push(
-        CircleWithThreeColor(
-          CircleWithThreeColorData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      //equipment --- done
-
-      const EquipmentData = getResponsiveEquipmentDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(Equipment(EquipmentData, canvas, gsap, scrollContainer, c));
-
-      //ship done
-
-      const ShipLabelData = getResponsiveShipDimensions(canvas, screenWidth);
-      images.push(Ship(ShipLabelData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 250,
-      //     canvas.height / 2 - 145,
-      //     require("../../assets/home/images/header_47.png"),
-      //     150,
-      //     165,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // ellipse with circles and lines --- DONE
-
-      const EllipseWithCircleData = getResponsiveEllipseWithCirclesDimensions(
-        canvas,
-        screenWidth
-      );
-
-      images.push(
-        EllipseWithCircles(
-          EllipseWithCircleData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      //circle with colors on glasses person --- DONE
-
-      const CircleOnGlassesPersonWithLabel =
-        getResponsiveCircleOnGlassesPersonDimensions(canvas, screenWidth);
-      images.push(
-        CircleOnGlassesPerson(
-          CircleOnGlassesPersonWithLabel,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 445,
-      //     canvas.height / 2 - 13,
-      //     require("../../assets/home/images/header_4.png"),
-      //     215,
-      //     120,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // person with lines and run pose ---done
-
-      const PersonWithRunPoseData = getResponsivePersonWithRunPoseDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        PersonWithRunPose(
-          PersonWithRunPoseData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     -45,
-      //     77,
-      //     require("../../assets/home/images/header_13_1.png"),
-      //     295,
-      //     260,
-      //     0,
-      //     canvas.width / 2 - 420,
-      //     canvas.height / 2 - 62,
-      //     135,
-      //     115,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      //head skull with red dot --- done
-
-      //Here I am
-      // import {
-      //   getResponsiveHeadSkullWithRedDotDimensions,
-      //   HeadSkullWithRedDot,
-      // } from "../../components/homeCanvas/Images/HeadSkullWithRedDot";
-
-      const HeadSkullWithLabelData = getResponsiveHeadSkullWithRedDotDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        HeadSkullWithRedDot(
-          HeadSkullWithLabelData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-      // images.push(
-      //   new UploadedImage(
-      //     340,
-      //     87,
-      //     require("../../assets/home/images/header_44.png"),
-      //     95,
-      //     90,
-      //     0,
-      //     canvas.width / 2 - 260,
-      //     canvas.height / 2 - 137,
-      //     60,
-      //     57,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // person laptop above skull ---- done
-
-      const PersonLaptopAboveSkullData =
-        getResponsivePersonLaptopAboveSkullDimensions(canvas, screenWidth);
-      images.push(
-        PersonLaptopAboveSkull(
-          PersonLaptopAboveSkullData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     341,
-      //     59,
-      //     require("../../assets/home/images/header_58.png"),
-      //     40,
-      //     55,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // PEN ---- done
-
-      const PenWithLabelData = getResponsivePenDimensions(canvas, screenWidth);
-      images.push(Pen(PenWithLabelData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 330,
-      //     -45,
-      //     require("../../assets/home/images/header_11.png"),
-      //     125,
-      //     240,
-      //     -3,
-      //     canvas.width / 2 - 180,
-      //     canvas.height / 2 - 190,
-      //     45,
-      //     72,
-      //     -10,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // Map --- done
-
-      const MapWithLabelData = getResponsiveMapDimensions(canvas, screenWidth);
-      images.push(Map(MapWithLabelData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 310,
-      //     5,
-      //     require("../../assets/home/images/header_54.png"),
-      //     215,
-      //     125,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      //AEROPLANE MAN ---- done
-
-      const AeroplaneManWithLabelData = getResponsiveAeroplaneManDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        AeroplaneMan(
-          AeroplaneManWithLabelData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 70,
-      //     10,
-      //     require("../../assets/home/images/header_20.png"),
-      //     40,
-      //     90,
-      //     -20,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // Aeroplane --- done
-
-      const AeroplaneWithLabelData = getResponsiveAeroplaneDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        Aeroplane(AeroplaneWithLabelData, canvas, gsap, scrollContainer, c)
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 145,
-      //     45,
-      //     require("../../assets/home/images/header_2.png"),
-      //     180,
-      //     70,
-      //     0,
-      //     canvas.width / 2 + 70,
-      //     canvas.height / 2 - 243,
-      //     100,
-      //     40,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // Skull with brain --- done
-
-      const SkullData = getResponsiveSkullDimensions(canvas, screenWidth);
-      images.push(Skull(SkullData, canvas, gsap, scrollContainer, c));
-
-      // Upper circle with man --- done
-
-      const UpperCricleWithManData = getResponsiveUpperCircleWithManDimensions(
-        canvas,
-        screenWidth
-      );
-      images.push(
-        UpperCircleWithMan(
-          UpperCricleWithManData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     145,
-      //     220,
-      //     require("../../assets/home/images/header_12.png"),
-      //     270,
-      //     200,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      //big red circle --- DONE
-      const BigRedCircleData = getResponsiveBigRedCircleDimensions(
-        canvas,
-        screenWidth
-      );
-
-      images.push(
-        BigRedCircle(BigRedCircleData, canvas, gsap, scrollContainer, c)
-      );
-      // images.push(
-      //   new UploadedImage(
-      //     -220,
-      //     canvas.height - 95,
-      //     require("../../assets/home/images/header_55.png"),
-      //     675,
-      //     550,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // hand --- DONE
-
-      const HandLabelData = getResponsiveHandDimensions(canvas, screenWidth);
-
-      images.push(Hand(HandLabelData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     55,
-      //     canvas.height - 270,
-      //     require("../../assets/home/images/header_7.png"),
-      //     300,
-      //     285,
-      //     0,
-      //     canvas.width / 2 - 345,
-      //     canvas.height / 2 + 40,
-      //     165,
-      //     150,
-      //     5,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // robotic hand --- done
-
-      const RoboticHanLabelData = getResponsiveRoboticHandDimensions(
-        canvas,
-        screenWidth
-      );
-
-      images.push(
-        RoboticHand(RoboticHanLabelData, canvas, gsap, scrollContainer, c)
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     275,
-      //     canvas.height - 185,
-      //     require("../../assets/home/images/header_5.png"),
-      //     255,
-      //     235,
-      //     0,
-      //     canvas.width / 2 - 275,
-      //     canvas.height / 2 + 100,
-      //     100,
-      //     100,
-      //     5,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      // insect
-
-      const InsectLabelData = getResponsiveInsectDimensions(
-        canvas,
-        screenWidth
-      );
-
-      images.push(Insect(InsectLabelData, canvas, gsap, scrollContainer, c));
-
-      // images.push(
-      //   new UploadedImage(
-      //     canvas.width / 2 - 280,
-      //     canvas.height - 115,
-      //     require("../../assets/home/images/header_53.png"),
-      //     150,
-      //     115,
-      //     0,
-      //     canvas.width / 2 - 160,
-      //     canvas.height / 2 + 175,
-      //     70,
-      //     55,
-      //     90,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-
-      //person with book holding --- DONE
-
-      const PersonWithBookLabelData = getResponsivePersonWithBookDimensions(
-        canvas,
-        screenWidth
-      );
-
-      images.push(
-        PersonWithBook(
-          PersonWithBookLabelData,
-          canvas,
-          gsap,
-          scrollContainer,
-          c
-        )
-      );
-
-      // images.push(
-      //   new UploadedImage(
-      //     75,
-      //     canvas.height - 135,
-      //     require("../../assets/home/images/header_40.png"),
-      //     100,
-      //     135,
-      //     0,
-      //     canvas.width / 2,
-      //     canvas.height / 2,
-      //     0,
-      //     0,
-      //     0,
-      //     gsap,
-      //     scrollContainer,
-      //     c
-      //   )
-      // );
-    }
-
-    // Animation Loop
-    function animate() {
-      requestAnimationFrame(animate);
-      c.clearRect(0, 0, canvas.width, canvas.height);
-      imageDummy.forEach((image) => {
-        // image.draw();
-      });
-      circles.forEach((object) => {
-        object.update();
-      });
-      circleAboveImages.forEach((image) => {
-        image.update();
-      });
-      staticImages.forEach((image) => {
-        // image.draw();
-      });
-      images.forEach((image) => {
-        image.draw();
-      });
-      images1.forEach((image) => {
-        image.draw();
-      });
-    }
-
-    init();
-    animate();
-
-    function animateOnScroll() {
-      ScrollTrigger.create({
-        trigger: ".spacer",
-        scroller: scrollContainer,
-        start: "top top", // Adjust the start position based on your preference
-        onEnter: () => {
-          // When scrolling down, apply the styles to display the div
-          gsap.set(".lKv-people", {
-            opacity: 1,
-          });
-        },
-        onLeaveBack: () => {
-          // When scrolling back up, apply the styles to hide the div
-          gsap.set(".lKv-people", {
-            opacity: 0,
-          });
-        },
-      });
-    }
-
-    function toggleDivOnScroll() {
-      const animationDuration = 1.5; // Adjust the duration of the animation in seconds
-      const animationDelay = 0.5; // Adjust the delay before the animation starts in seconds
-      let isActive = false; // Flag to track if animation is active
-
-      ScrollTrigger.create({
-        trigger: ".spacer",
-        scroller: scrollContainer,
-        start: "top top", // Adjust the start position based on your preference
-        onEnter: () => {
-          // When scrolling down, apply the styles to display the div
-          // gsap.set(".lKv-people-item-l01", {
-          //   display: "block",
-          //   transform: "translate(0, 0)",
-          //   delay: 0.5,
-          // });
-          gsap.fromTo(
-            ".-l01",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0.5,
-            }
-          );
-          gsap.fromTo(
-            ".-l02",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0.5,
-            }
-          );
-          gsap.fromTo(
-            ".-l03",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 1,
-            }
-          );
-          gsap.fromTo(
-            ".-l04",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".-l05",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0.7,
-            }
-          );
-          gsap.fromTo(
-            ".-l06",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".-l07",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 1.2,
-            }
-          );
-          gsap.fromTo(
-            ".-l08",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".st1",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".st2",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".st3",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.2,
-            }
-          );
-          gsap.fromTo(
-            ".st4",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.3,
-            }
-          );
-          gsap.fromTo(
-            ".st5",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.4,
-            }
-          );
-          gsap.fromTo(
-            ".st6",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.5,
-            }
-          );
-          gsap.fromTo(
-            ".lKv-coreBall",
-            {
-              transform: "scale(0.5267, 0.5267)",
-            },
-            {
-              transform: "translate(0px, -75.024px)",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-subTitle-item > img ",
-            {
-              transform: "translate(0px, 0%)",
-            },
-            {
-              transform: "translate(0px, 130%)",
-            }
-          );
-          gsap.fromTo(
-            ".cHeader-logo",
-            {
-              transform: "translate(-40px, 99.5825px)",
-              top: 0,
-              left: 0,
-            },
-            {
-              transform: "scale(0.266,0.266)",
-              top: "1.9rem",
-              left: "0rem",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-lead-text",
-            {
-              transform: "translate(0px,130%)",
-            },
-            {
-              transform: "translate(0px, 0%)",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-lead",
-            {
-              transform: "translate(0px, 130%)",
-            },
-            {
-              transform: "translate(0px,0%)",
-            }
-          );
-        },
-        onLeaveBack: () => {
-          // When scrolling back up, apply the styles to hide the div
-          gsap.fromTo(
-            ".lKv-people-item",
-            {
-              transform: "translate(0, 0)",
-            },
-            {
-              transform: "translate(-573px, 272px)",
-              duration: 1,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".st",
-            {
-              transform: "scale(1)",
-            },
-            {
-              transform: "scale(0)",
-              duration: 0.5,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".lKv-coreBall",
-            { transform: "translate(0px, -108.024px)" },
-            {
-              transform: "scale(0.5267, 0.5267)",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-subTitle-item > img ",
-            {
-              transform: "translate(0px, 130%)",
-            },
-            {
-              transform: "translate(0px, 0%)",
-            }
-          );
-          gsap.fromTo(
-            ".cHeader-logo",
-            {
-              transform: "scale(0.266,0.266)",
-              top: "1.9rem",
-              left: "0rem",
-            },
-            {
-              transform: "translate(0px, 108.5825px)",
-              top: 0,
-              left: 0,
-            }
-          );
-          gsap.fromTo(
-            ".lKv-lead-text",
-            {
-              transform: "translate(0px, 0%)",
-            },
-            {
-              transform: "translate(0px,130%)",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-lead",
-            {
-              transform: "translate(0px, 0%)",
-            },
-            {
-              transform: "translate(0px,130%)",
-            }
-          );
-        },
-      });
-    }
-
-    // Call the function to start the animations
-    animateOnScroll();
-    toggleDivOnScroll();
-
-    let scrollDirection = 1;
-
-    function firstDivlVisionScrollAnimation() {
-      const headOpenDiv = document.querySelector(
-        ".lVision-section-image.-first"
-      );
-      const shipDiv = document.querySelector(".lVision-illust.-second");
-      const shipDivImage = document.querySelector(
-        ".lVision-illust.-second > img"
-      );
-      const penDiv = document.querySelector(".lVision-illust.-first");
-
-      const runPoseDiv = document.querySelector(".lVision-illust.-third");
-
-      gsap.to(headOpenDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "top top",
-          scrub: true,
-          onEnter: () => {
-            headOpenDiv.classList.add("cPlaySprite");
-          },
-          onUpdate: (self) => {
-            const progress = self.progress;
-            // Determine the scroll direction based on the progress
-            const currentScrollDirection = progress > 0.5 ? 1 : -1;
-            // If the scroll direction changed, update the scrollDirection variable
-            if (currentScrollDirection !== scrollDirection) {
-              scrollDirection = currentScrollDirection;
-            }
-            const updatedValueY =
-              35.8191 + 200 * progress * currentScrollDirection;
-            if (updatedValueY > -36 && updatedValueY < 36) {
-              headOpenDiv.style.transform = `matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-
-      gsap.to(shipDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "top top",
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            // Determine the scroll direction based on the progress
-            const currentScrollDirection = progress > 0.5 ? 1 : -1;
-            // If the scroll direction changed, update the scrollDirection variable
-            if (currentScrollDirection !== scrollDirection) {
-              scrollDirection = currentScrollDirection;
-            }
-            const updatedValueY = 150 * progress;
-            const updatedValueRotationImg = progress * 75;
-            if (updatedValueRotationImg < 27) {
-              shipDivImage.style.transform = `rotate(${-updatedValueRotationImg}deg)`;
-            }
-            if (updatedValueY > -45 && updatedValueY < 45) {
-              shipDiv.style.transform = `matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-      gsap.to(penDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "top top",
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            const updatedValueY = -55.1816 + 200 * progress;
-            if (updatedValueY > -56 && updatedValueY < 15) {
-              penDiv.style.transform = `rotate(10deg) matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-
-      gsap.to(runPoseDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "top top",
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            const updatedValueY = 150 * progress;
-            if (updatedValueY > -15 && updatedValueY < 15) {
-              runPoseDiv.style.transform = `matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-    }
-
-    function secondDivlVisionScrollAnimation() {
-      const nodeDiv = document.querySelector(".lVision-node.-left");
-      const cartDiv = document.querySelector(".lVision-illust.-forth");
-      const cartDivImage = document.querySelector(
-        ".lVision-illust.-forth > img"
-      );
-
-      const skullWithBrainDiv = document.querySelector(
-        ".lVision-illust.-fifth"
-      );
-      const skullWithBrainDivImage = document.querySelector(
-        ".lVision-illust.-fifth > picture  > img"
-      );
-
-      gsap.to(nodeDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "top top",
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            // Determine the scroll direction based on the progress
-            const currentScrollDirection = progress > 0.5 ? 1 : -1;
-            // If the scroll direction changed, update the scrollDirection variable
-            if (currentScrollDirection !== scrollDirection) {
-              scrollDirection = currentScrollDirection;
-            }
-            const updatedValueY = 200 * progress * currentScrollDirection;
-            if (updatedValueY > -55 && updatedValueY < 36) {
-              nodeDiv.style.transform = `matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-      gsap.to(cartDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "top top",
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            // Determine the scroll direction based on the progress
-            const currentScrollDirection = progress > 0.5 ? 1 : -1;
-            // If the scroll direction changed, update the scrollDirection variable
-            if (currentScrollDirection !== scrollDirection) {
-              scrollDirection = currentScrollDirection;
-            }
-            const updatedValueY = 100 * progress * currentScrollDirection;
-            const updatedValueRotationImg = progress * 75;
-            if (updatedValueRotationImg < 34) {
-              cartDivImage.style.transform = `rotate(${-updatedValueRotationImg}deg)`;
-            }
-            if (updatedValueY > -9 && updatedValueY < 10) {
-              cartDiv.style.transform = `matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-
-      gsap.to(skullWithBrainDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "top top",
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            // Determine the scroll direction based on the progress
-            const currentScrollDirection = progress > 0.5 ? 1 : -1;
-            // If the scroll direction changed, update the scrollDirection variable
-            if (currentScrollDirection !== scrollDirection) {
-              scrollDirection = currentScrollDirection;
-            }
-            const updatedValueRotationImg = progress * 75;
-            const updatedValueY = -75.0279 + 150 * progress;
-            if (updatedValueRotationImg < 50) {
-              skullWithBrainDivImage.style.transform = `rotate(${updatedValueRotationImg}deg)`;
-            }
-            if (updatedValueY > -50 && updatedValueY < 10) {
-              skullWithBrainDiv.style.transform = `matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-    }
-
-    function thirdDivlVisionScrollAnimation() {
-      const handOpenDiv = document.querySelector(
-        ".lVision-section-image.-third"
-      );
-      const skullWithDotDiv = document.querySelector(".lVision-illust.-sixth");
-      const skullWithDotDivImage = document.querySelector(
-        ".lVision-illust.-sixth > picture > img"
-      );
-
-      gsap.to(handOpenDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "+=65%",
-          scrub: true,
-          onEnter: () => {
-            handOpenDiv.classList.add("cPlaySpriteHand");
-          },
-          onUpdate: (self) => {
-            const progress = self.progress;
-            // Determine the scroll direction based on the progress
-            const currentScrollDirection = progress > 0.5 ? 1 : -1;
-            // If the scroll direction changed, update the scrollDirection variable
-            if (currentScrollDirection !== scrollDirection) {
-              scrollDirection = currentScrollDirection;
-            }
-            const updatedValueY =
-              12.3016 + 200 * progress * currentScrollDirection;
-            if (updatedValueY > -36 && updatedValueY < 36) {
-              handOpenDiv.style.transform = `matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-      gsap.to(skullWithDotDiv, {
-        scrollTrigger: {
-          trigger: ".lVision",
-          scroller: scrollContainer,
-          start: "+=50%",
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            // Determine the scroll direction based on the progress
-            const currentScrollDirection = progress > 0.5 ? 1 : -1;
-            // If the scroll direction changed, update the scrollDirection variable
-            if (currentScrollDirection !== scrollDirection) {
-              scrollDirection = currentScrollDirection;
-            }
-            const updatedValueY = 150 * progress;
-            const updatedValueRotationImg = 30 + progress * 100;
-
-            if (updatedValueRotationImg < 50) {
-              skullWithDotDivImage.style.transform = `rotate(${updatedValueRotationImg}deg)`;
-            }
-            if (updatedValueY > -45 && updatedValueY < 45) {
-              skullWithDotDiv.style.transform = `matrix3d(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            ${updatedValueY},
-            0,
-            1
-          )`;
-            }
-          },
-        },
-      });
-    }
-
-    firstDivlVisionScrollAnimation();
-    secondDivlVisionScrollAnimation();
-    thirdDivlVisionScrollAnimation();
-  }, []);
+  // useEffect(() => {
+  //   const canvas = document.querySelector("#canvas1");
+
+  //   const canvasContainer = document.querySelector(".spacer");
+
+  //   const spacerHeight = canvasContainer.clientHeight;
+
+  //   // Calculate 1% of window's height
+  //   const scrollLimit = spacerHeight * 0.01;
+
+  //   const scrollContainer = document.querySelector(".custom-container");
+
+  //   const c = canvas.getContext("2d");
+
+  //   canvas.width = document.documentElement.clientWidth;
+  //   canvas.height = document.documentElement.clientHeight;
+
+  //   canvas.style.width = document.documentElement.clientWidth;
+  //   +"px";
+  //   canvas.style.height = document.documentElement.clientHeight;
+  //   +"px";
+
+  //   const mouse = {
+  //     x: innerWidth / 2,
+  //     y: innerHeight / 2,
+  //   };
+
+  //   let prevMouseX = null;
+  //   let prevMouseY = null;
+
+  //   let deltaX = null;
+  //   let deltaY = null;
+
+  //   const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
+
+  //   const timeline = gsap.timeline();
+
+  //   const canvasScroll = gsap.to("#canvas1", {
+  //     scrollTrigger: {
+  //       trigger: "#canvas1",
+  //       scroller: scrollContainer,
+  //       start: "top top",
+  //       end: "+=1%",
+  //       scrub: true,
+  //       pin: true, // pin the canvas in place
+  //       anticipatePin: 1, // 1 means it will anticipate the pin and unpin before they happen.
+  //     },
+  //   });
+
+  //   // Attach an event listener to the canvas for the mousemove event
+  //   canvas.addEventListener("mousemove", (event) => {
+  //     const rect = canvas.getBoundingClientRect();
+  //     const mouseX = event.clientX - rect.left;
+  //     const mouseY = event.clientY - rect.top;
+
+  //     if (prevMouseX !== null && prevMouseY !== null) {
+  //       deltaX = mouseX - prevMouseX;
+  //       deltaY = mouseY - prevMouseY;
+  //       // console.log("MOUSE X ------", mouseX);
+
+  //       images.forEach((image) => {
+  //         let imageX = null;
+  //         let imageY = null;
+
+  //         if (Math.abs(deltaX) > Math.abs(deltaY)) {
+  //           if (deltaX > 0) {
+  //             // console.log("Right--");
+  //             if (mouseX == innerWidth / 2) {
+  //               // image.x = image.x1;
+  //             } else {
+  //               image.x = image.x - 0.1;
+  //             }
+  //           } else {
+  //             if (mouseX == innerWidth / 2) {
+  //               // image.x = image.x1;
+  //             } else {
+  //               image.x = image.x + 0.1;
+  //             }
+  //             // console.log("Left---", deltaX);
+  //           }
+  //         } else {
+  //           if (deltaY > 0) {
+  //             if (mouseY == innerHeight / 2) {
+  //               // image.y = image.y1;
+  //             } else {
+  //               image.y = image.y - 0.1;
+  //             }
+  //             // Mouse is moving down
+  //             // console.log("Down");
+  //           } else {
+  //             if (mouseY == innerHeight / 2) {
+  //               // image.y = image.y1;
+  //             } else {
+  //               // Mouse is moving up
+  //               image.y = image.y + 0.1;
+  //             }
+  //             // console.log("Up");
+  //           }
+  //         }
+  //       });
+  //     }
+
+  //     prevMouseX = mouseX;
+  //     prevMouseY = mouseY;
+  //   });
+
+  //   window.addEventListener("resize", () => {
+  //     canvas.width = document.documentElement.clientWidth;
+  //     canvas.height = document.documentElement.clientHeight;
+
+  //     // if (canvas.width <= 320) {
+  //     //   canvas.height = 650;
+  //     //   canvas.style.height = 650 + "px";
+  //     // }
+  //     // if (canvas.width <= 375) {
+  //     //   canvas.height = 636;
+  //     //   canvas.style.height = 636 + "px";
+  //     // }
+  //     // if (canvas.width <= 500) {
+  //     //   canvas.height = 636;
+  //     //   canvas.style.height = 636 + "px";
+  //     // }
+
+  //     init();
+  //   });
+
+  //   // Implementation
+  //   let circles;
+  //   let images;
+
+  //   let staticImages;
+  //   let circleAboveImages;
+
+  //   let imageDummy;
+
+  //   let images1;
+
+  //   function init() {
+  //     const screenWidth = document.documentElement.clientWidth;
+
+  //     circles = [];
+  //     images = [];
+  //     staticImages = [];
+  //     circleAboveImages = [];
+  //     imageDummy = [];
+
+  //     images1 = [];
+
+  //     imageDummy.push(
+  //       new UploadedImageTransparent(
+  //         gsap,
+  //         scrollContainer,
+  //         c,
+  //         0,
+  //         30,
+  //         require("../../assets/home/images/header_60.png"),
+  //         innerWidth,
+  //         innerHeight
+  //       )
+  //     );
+  //     const FirstCircleOutsideEllipseData =
+  //       getResponsiveFirstCircleOutsideEllipseDimensions(canvas, screenWidth);
+  //     circles.push(
+  //       FirstCircleOutsideEllipse(
+  //         FirstCircleOutsideEllipseData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+  //     // circles.push(
+  //     //   new FilledCircle(
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     25,
+  //     //     "#af292f",
+  //     //     0,
+  //     //     0.0002,
+  //     //     700,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+  //     const SecondCircleOutsideEllipseData =
+  //       getResponsiveSecondCircleOutsideEllipseDimensions(canvas, screenWidth);
+  //     circles.push(
+  //       SecondCircleOutsideEllipse(
+  //         SecondCircleOutsideEllipseData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+  //     // circles.push(
+  //     //   new FilledCircle(
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     25,
+  //     //     "#af292f",
+  //     //     3.125,
+  //     //     0.0002,
+  //     //     700,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     const { width, height, radius, verticalScale } =
+  //       getResponsiveEllipseDimensions(canvas, screenWidth);
+
+  //     circles.push(
+  //       new Ellipse(
+  //         width,
+  //         height,
+  //         radius,
+  //         verticalScale,
+  //         "grey",
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         0,
+  //         0,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     const { circleWidth, circleHeight, circleRadius } =
+  //       getResponsiveCircleRadius(canvas, screenWidth);
+  //     circles.push(
+  //       new Circle(
+  //         circleWidth,
+  //         circleHeight,
+  //         circleRadius,
+  //         "grey",
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         0,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // Red Circle Inside Middle Circle
+  //     const RedCircleInsideMiddleCircleData =
+  //       getResponsiveRedCircleInsideMiddleCircleDimensions(canvas, screenWidth);
+  //     circles.push(
+  //       RedCircleInsideMiddleCircle(
+  //         RedCircleInsideMiddleCircleData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     const BlueCircleInsideMiddleCircleData =
+  //       getResponsiveBlueCircleInsideMiddleCircleDimensions(
+  //         canvas,
+  //         screenWidth
+  //       );
+  //     circles.push(
+  //       BlueCircleInsideMiddleCircle(
+  //         BlueCircleInsideMiddleCircleData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     const FirstCircleOutsideMiddleCircleData =
+  //       getResponsiveFirstCircleOutsideMiddleCircleDimensions(
+  //         canvas,
+  //         screenWidth
+  //       );
+  //     circles.push(
+  //       FirstCircleOutsideMiddleCircle(
+  //         FirstCircleOutsideMiddleCircleData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+  //     // circles.push(
+  //     //   new FilledCircle(
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     10,
+  //     //     "#af292f",
+  //     //     0,
+  //     //     0.001,
+  //     //     305,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     const SecondCircleOutsideMiddleCircleData =
+  //       getResponsiveSecondCircleOutsideMiddleCircleDimensions(
+  //         canvas,
+  //         screenWidth
+  //       );
+  //     circles.push(
+  //       SecondCircleOutsideMiddleCircle(
+  //         SecondCircleOutsideMiddleCircleData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+  //     // circles.push(
+  //     //   new FilledCircle(
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     10,
+  //     //     "#af292f",
+  //     //     3.125,
+  //     //     0.001,
+  //     //     305,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // Ellipse when scrolled down --- done
+
+  //     circleAboveImages.push(
+  //       new Ellipse(
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         0,
+  //         0,
+  //         "#ADADAD",
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         615,
+  //         215,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // Ellipse rotating circle when scrolled down --- done
+  //     circleAboveImages.push(
+  //       new CircleWithEllipseRotation(
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         0,
+  //         "rgb(91, 146, 157)",
+  //         0,
+  //         0,
+  //         0,
+  //         0,
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         10,
+  //         0.1,
+  //         0.003,
+  //         615,
+  //         215,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     circleAboveImages.push(
+  //       new CircleWithEllipseRotation(
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         0,
+  //         "#af292f",
+  //         0,
+  //         0,
+  //         0,
+  //         0,
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         5,
+  //         0.1,
+  //         0.003,
+  //         -615,
+  //         -215,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     circleAboveImages.push(
+  //       new CircleWithEllipseRotation(
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         0,
+  //         "#af292f",
+  //         0,
+  //         0,
+  //         0,
+  //         0,
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         10,
+  //         17.3,
+  //         0.003,
+  //         615,
+  //         215,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     circleAboveImages.push(
+  //       new CircleWithEllipseRotation(
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         0,
+  //         "#af292f",
+  //         0,
+  //         0,
+  //         0,
+  //         0,
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         10,
+  //         -4.7,
+  //         0.003,
+  //         615,
+  //         215,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // RAlphabet --- DONE
+
+  //     const RAlphabetWithLabelData = getResponsiveRAlphabetDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       RAlphabet(RAlphabetWithLabelData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // images.push(RAlpabet(canvas, gsap, scrollContainer, c));
+
+  //     // building with two red lines and left of center --- done
+  //     images.push(BuildingTwoRedLines(canvas, gsap, scrollContainer, c));
+
+  //     // Rock with red label --- done
+  //     const RockWithLabelData = getResponsiveRockWithLebelDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // tower with clock center --- done
+  //     images.push(
+  //       new UploadedImage(
+  //         canvas.width / 2,
+  //         canvas.height / 2,
+  //         require("../../assets/home/images/header_29.png"),
+  //         0,
+  //         0,
+  //         0,
+  //         canvas.width / 2 - 115,
+  //         canvas.height / 2 - 135,
+  //         215,
+  //         200,
+  //         0,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // A alphabet ---- done
+
+  //     const AalphabetData = getResponsiveAalphabetDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+
+  //     images.push(Aalphabet(AalphabetData, canvas, gsap, scrollContainer, c));
+
+  //     // man with hand direction ---- done
+
+  //     const ManWithHandDirectionData =
+  //       getResponsiveManWithHandDirectionDimensions(canvas, screenWidth);
+  //     images.push(
+  //       ManWithHandDirection(
+  //         ManWithHandDirectionData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width,
+  //     //     canvas.height / 2 - 15,
+  //     //     require("../../assets/home/images/header_22.png"),
+  //     //     115,
+  //     //     150,
+  //     //     0,
+  //     //     canvas.width / 2 + 195,
+  //     //     canvas.height / 2 + 15,
+  //     //     115,
+  //     //     160,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // roof with red top --- done
+  //     const RoofWithRedTopData = getResponsiveRoofWithRedTopDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+
+  //     images.push(
+  //       RoofWithRedTop(RoofWithRedTopData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // red book ---- done
+
+  //     const RedBookData = getResponsiveRedBookDimensions(canvas, screenWidth);
+  //     images.push(RedBook(RedBookData, canvas, gsap, scrollContainer, c));
+
+  //     // car image --- done
+
+  //     const CarImageData = getResponsiveCarImageDimensions(canvas, screenWidth);
+  //     images.push(CarImage(CarImageData, canvas, gsap, scrollContainer, c));
+
+  //     // dryer --- done
+
+  //     const DryerData = getResponsiveDryerDimensions(canvas, screenWidth);
+  //     images.push(Dryer(DryerData, canvas, gsap, scrollContainer, c));
+
+  //     // R alphabet center --- done
+
+  //     const BlueR_AlphabetData = getResponsiveBlueR_AlphabetDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+
+  //     images.push(
+  //       BlueR_Alphabet(BlueR_AlphabetData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2 + 465,
+  //     //     canvas.height / 2 + 100,
+  //     //     require("../../assets/home/images/header_52_1.png"),
+  //     //     85,
+  //     //     100,
+  //     //     -45,
+  //     //     canvas.width / 2 + 3,
+  //     //     canvas.height / 2 - 90,
+  //     //     80,
+  //     //     100,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // slim man with glasses ---done
+
+  //     const SlimManWithGlassesData = getResponsiveSlimManWithGlassesDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       SlimManWithGlasses(
+  //         SlimManWithGlassesData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     //Girl  --- done
+  //     const GirlData = getResponsiveGirlDimensions(canvas, screenWidth);
+  //     images.push(YoungGirl(GirlData, canvas, gsap, scrollContainer, c));
+
+  //     //girl circle ---- DONE
+
+  //     const GirlCircleData = getResponsiveGirlCircleDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(GirlCircle(GirlCircleData, canvas, gsap, scrollContainer, c));
+
+  //     // man with joined hand --- done
+  //     // GlassesBoy
+
+  //     const GlassesBoyData = getResponsiveGlassesBoyDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(GlassesBoy(GlassesBoyData, canvas, gsap, scrollContainer, c));
+
+  //     // black rock front of girl and behind book lady --- done
+
+  //     const BlackRockData = getResponsiveBlackRockDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(BlackRock(BlackRockData, canvas, gsap, scrollContainer, c));
+
+  //     // Eye
+  //     const EyeData = getResponsiveEyeDimensions(canvas, screenWidth);
+  //     images.push(Eye(EyeData, canvas, gsap, scrollContainer, c));
+
+  //     // Leaf --- done
+
+  //     const LeafData = getResponsiveLeafDimensions(canvas, screenWidth);
+  //     images.push(Leaf(LeafData, canvas, gsap, scrollContainer, c));
+
+  //     // person above the cart --- done
+
+  //     const PersonAboveCartData = getResponsivePersonAboveCartDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       PersonAboveCart(PersonAboveCartData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // cart --- done
+
+  //     const CartData = getResponsiveCartDimensions(canvas, screenWidth);
+  //     images.push(Cart(CartData, canvas, gsap, scrollContainer, c));
+
+  //     // person on phone bottom right corner
+
+  //     const PersonOnPhoneBottomRightData =
+  //       getResponsivePersonOnPhoneBottomRightDimensions(canvas, screenWidth);
+  //     images.push(
+  //       PersonOnPhoneBottomRight(
+  //         PersonOnPhoneBottomRightData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width - 130,
+  //     //     canvas.height - 153,
+  //     //     require("../../assets/home/images/header_27.png"),
+  //     //     115,
+  //     //     135,
+  //     //     -15,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // researcher person --- done
+
+  //     const ResearchPersonData = getResponsiveResearchPersonDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       ResearchPerson(ResearchPersonData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // boy left to glasses man --- done
+
+  //     const BoyLeftToGlassMannData =
+  //       getResponsiveBoyLedftToGlassesManDimensions(canvas, screenWidth);
+  //     images.push(
+  //       BoyLedftToGlassesMan(
+  //         BoyLeftToGlassMannData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     require("../../assets/home/images/header_61.png"),
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     canvas.width / 2 - 195,
+  //     //     canvas.height / 2 - 60,
+  //     //     75,
+  //     //     105,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // building with speaker --- done
+
+  //     const BuildingWithSpeakerData =
+  //       getResponsiveBuildingWithSpeakerDimensions(canvas, screenWidth);
+  //     images.push(
+  //       BuildingWithSpeaker(
+  //         BuildingWithSpeakerData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     require("../../assets/home/images/header_37.png"),
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     canvas.width / 2 - 247,
+  //     //     canvas.height / 2 - 13,
+  //     //     200,
+  //     //     100,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     //glasses peron --- DONE
+  //     // With hands open
+  //     // const { width, height, radius, verticalScale } =
+  //     //   getResponsiveEllipseDimensions(canvas, screenWidth);
+  //     // getResponsiveGlassesPersonDimensions
+
+  //     // const RockWithLabelData = getResponsiveRockWithLebelDimensions(
+  //     //   canvas,
+  //     //   screenWidth
+  //     // );
+  //     // images.push(
+  //     //   RockWithLabel(RockWithLabelData, canvas, gsap, scrollContainer, c)
+  //     // );
+
+  //     const GlassesPersonWithLabelData = getResponsiveGlassesPersonDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       GlassesPerson(
+  //         GlassesPersonWithLabelData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     265, // position-x
+  //     //     canvas.height / 2 - 180,
+  //     //     require("../../assets/home/images/header_10.png"),
+  //     //     370, //width
+  //     //     440, //height
+  //     //     0, // rotation
+  //     //     canvas.width / 2 - 210,
+  //     //     canvas.height / 2 - 90,
+  //     //     175,
+  //     //     200,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // red A alphabet --- done
+
+  //     const RedA_AlphabetData = getResponsiveRedA_AlphabetDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       RedA_Alphabet(RedA_AlphabetData, canvas, gsap, scrollContainer, c)
+  //     );
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     363,
+  //     //     220,
+  //     //     require("../../assets/home/images/header_43.png"),
+  //     //     50,
+  //     //     50,
+  //     //     0,
+  //     //     canvas.width / 2 - 140,
+  //     //     canvas.height / 2 - 35,
+  //     //     95,
+  //     //     100,
+  //     //     -40,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     363,
+  //     //     220,
+  //     //     require("../../assets/home/images/header_43.png"),
+  //     //     50,
+  //     //     50,
+  //     //     0,
+  //     //     canvas.width / 2 - 140,
+  //     //     canvas.height / 2 - 35,
+  //     //     95,
+  //     //     100,
+  //     //     -40,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // red building --- done
+
+  //     const RedBuildingData = getResponsiveRedBuildingDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       RedBuilding(RedBuildingData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     require("../../assets/home/images/header_23.png"),
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     canvas.width / 2 - 225,
+  //     //     canvas.height / 2 + 30,
+  //     //     145,
+  //     //     115,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // man with only face --- done
+
+  //     const ManWithOnlyFaceData = getResponsiveManWithOnlyFaceDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       ManWithOnlyFace(ManWithOnlyFaceData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     -300,
+  //     //     550,
+  //     //     require("../../assets/home/images/header_38.png"),
+  //     //     165,
+  //     //     165,
+  //     //     0,
+  //     //     canvas.width / 2 - 140,
+  //     //     canvas.height / 2 - 8,
+  //     //     165,
+  //     //     165,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // hand folding person ---- done
+
+  //     const HandHoldingPersonData = getResponsiveHandFoldingManDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       HandFoldingMan(HandHoldingPersonData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     600,
+  //     //     canvas.width,
+  //     //     require("../../assets/home/images/header_49.png"),
+  //     //     115,
+  //     //     160,
+  //     //     0,
+  //     //     canvas.width / 2 - 120,
+  //     //     canvas.height / 2 + 45,
+  //     //     115,
+  //     //     160,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // man with hand outside ellipse --- done
+
+  //     const ManOutsideEllipseData = getResponsiveManOutsideEllipseDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       ManOutsideEllipse(
+  //         ManOutsideEllipseData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     500,
+  //     //     canvas.width,
+  //     //     require("../../assets/home/images/header_51.png"),
+  //     //     110,
+  //     //     155,
+  //     //     0,
+  //     //     canvas.width / 2 - 170,
+  //     //     canvas.height / 2 + 75,
+  //     //     95,
+  //     //     150,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // building at left side in bottom --- done
+
+  //     const BuildingAtLeftData = getResponsiveBuildingAtLeftDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       BuildingAtLeft(BuildingAtLeftData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     require("../../assets/home/images/header_24.png"),
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     canvas.width / 2 - 360,
+  //     //     canvas.height / 2 + 10,
+  //     //     165,
+  //     //     100,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // lady with the book --- DONE
+  //     const LadyData = getResponsiveLadyDimensions(canvas, screenWidth);
+  //     images.push(Lady(LadyData, canvas, gsap, scrollContainer, c));
+
+  //     //Circle with three colors of lady book --- done
+
+  //     const CircleWithThreeColorData =
+  //       getResponsiveCircleWithThreeColorDimensions(canvas, screenWidth);
+  //     images.push(
+  //       CircleWithThreeColor(
+  //         CircleWithThreeColorData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     //equipment --- done
+
+  //     const EquipmentData = getResponsiveEquipmentDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(Equipment(EquipmentData, canvas, gsap, scrollContainer, c));
+
+  //     //ship done
+
+  //     const ShipLabelData = getResponsiveShipDimensions(canvas, screenWidth);
+  //     images.push(Ship(ShipLabelData, canvas, gsap, scrollContainer, c));
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2 - 250,
+  //     //     canvas.height / 2 - 145,
+  //     //     require("../../assets/home/images/header_47.png"),
+  //     //     150,
+  //     //     165,
+  //     //     0,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // ellipse with circles and lines --- DONE
+
+  //     const EllipseWithCircleData = getResponsiveEllipseWithCirclesDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+
+  //     images.push(
+  //       EllipseWithCircles(
+  //         EllipseWithCircleData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     //circle with colors on glasses person --- DONE
+
+  //     const CircleOnGlassesPersonWithLabel =
+  //       getResponsiveCircleOnGlassesPersonDimensions(canvas, screenWidth);
+  //     images.push(
+  //       CircleOnGlassesPerson(
+  //         CircleOnGlassesPersonWithLabel,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2 - 445,
+  //     //     canvas.height / 2 - 13,
+  //     //     require("../../assets/home/images/header_4.png"),
+  //     //     215,
+  //     //     120,
+  //     //     0,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // person with lines and run pose ---done
+
+  //     const PersonWithRunPoseData = getResponsivePersonWithRunPoseDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       PersonWithRunPose(
+  //         PersonWithRunPoseData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     -45,
+  //     //     77,
+  //     //     require("../../assets/home/images/header_13_1.png"),
+  //     //     295,
+  //     //     260,
+  //     //     0,
+  //     //     canvas.width / 2 - 420,
+  //     //     canvas.height / 2 - 62,
+  //     //     135,
+  //     //     115,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     //head skull with red dot --- done
+
+  //     //Here I am
+  //     // import {
+  //     //   getResponsiveHeadSkullWithRedDotDimensions,
+  //     //   HeadSkullWithRedDot,
+  //     // } from "../../components/homeCanvas/Images/HeadSkullWithRedDot";
+
+  //     const HeadSkullWithLabelData = getResponsiveHeadSkullWithRedDotDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       HeadSkullWithRedDot(
+  //         HeadSkullWithLabelData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     340,
+  //     //     87,
+  //     //     require("../../assets/home/images/header_44.png"),
+  //     //     95,
+  //     //     90,
+  //     //     0,
+  //     //     canvas.width / 2 - 260,
+  //     //     canvas.height / 2 - 137,
+  //     //     60,
+  //     //     57,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // person laptop above skull ---- done
+
+  //     const PersonLaptopAboveSkullData =
+  //       getResponsivePersonLaptopAboveSkullDimensions(canvas, screenWidth);
+  //     images.push(
+  //       PersonLaptopAboveSkull(
+  //         PersonLaptopAboveSkullData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     341,
+  //     //     59,
+  //     //     require("../../assets/home/images/header_58.png"),
+  //     //     40,
+  //     //     55,
+  //     //     0,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // PEN ---- done
+
+  //     const PenWithLabelData = getResponsivePenDimensions(canvas, screenWidth);
+  //     images.push(Pen(PenWithLabelData, canvas, gsap, scrollContainer, c));
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2 - 330,
+  //     //     -45,
+  //     //     require("../../assets/home/images/header_11.png"),
+  //     //     125,
+  //     //     240,
+  //     //     -3,
+  //     //     canvas.width / 2 - 180,
+  //     //     canvas.height / 2 - 190,
+  //     //     45,
+  //     //     72,
+  //     //     -10,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // Map --- done
+
+  //     const MapWithLabelData = getResponsiveMapDimensions(canvas, screenWidth);
+  //     images.push(Map(MapWithLabelData, canvas, gsap, scrollContainer, c));
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2 - 310,
+  //     //     5,
+  //     //     require("../../assets/home/images/header_54.png"),
+  //     //     215,
+  //     //     125,
+  //     //     0,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     //AEROPLANE MAN ---- done
+
+  //     const AeroplaneManWithLabelData = getResponsiveAeroplaneManDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       AeroplaneMan(
+  //         AeroplaneManWithLabelData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2 - 70,
+  //     //     10,
+  //     //     require("../../assets/home/images/header_20.png"),
+  //     //     40,
+  //     //     90,
+  //     //     -20,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // Aeroplane --- done
+
+  //     const AeroplaneWithLabelData = getResponsiveAeroplaneDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       Aeroplane(AeroplaneWithLabelData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2 - 145,
+  //     //     45,
+  //     //     require("../../assets/home/images/header_2.png"),
+  //     //     180,
+  //     //     70,
+  //     //     0,
+  //     //     canvas.width / 2 + 70,
+  //     //     canvas.height / 2 - 243,
+  //     //     100,
+  //     //     40,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // Skull with brain --- done
+
+  //     const SkullData = getResponsiveSkullDimensions(canvas, screenWidth);
+  //     images.push(Skull(SkullData, canvas, gsap, scrollContainer, c));
+
+  //     // Upper circle with man --- done
+
+  //     const UpperCricleWithManData = getResponsiveUpperCircleWithManDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+  //     images.push(
+  //       UpperCircleWithMan(
+  //         UpperCricleWithManData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     145,
+  //     //     220,
+  //     //     require("../../assets/home/images/header_12.png"),
+  //     //     270,
+  //     //     200,
+  //     //     0,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     //big red circle --- DONE
+  //     const BigRedCircleData = getResponsiveBigRedCircleDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+
+  //     images.push(
+  //       BigRedCircle(BigRedCircleData, canvas, gsap, scrollContainer, c)
+  //     );
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     -220,
+  //     //     canvas.height - 95,
+  //     //     require("../../assets/home/images/header_55.png"),
+  //     //     675,
+  //     //     550,
+  //     //     0,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // hand --- DONE
+
+  //     const HandLabelData = getResponsiveHandDimensions(canvas, screenWidth);
+
+  //     images.push(Hand(HandLabelData, canvas, gsap, scrollContainer, c));
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     55,
+  //     //     canvas.height - 270,
+  //     //     require("../../assets/home/images/header_7.png"),
+  //     //     300,
+  //     //     285,
+  //     //     0,
+  //     //     canvas.width / 2 - 345,
+  //     //     canvas.height / 2 + 40,
+  //     //     165,
+  //     //     150,
+  //     //     5,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // robotic hand --- done
+
+  //     const RoboticHanLabelData = getResponsiveRoboticHandDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+
+  //     images.push(
+  //       RoboticHand(RoboticHanLabelData, canvas, gsap, scrollContainer, c)
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     275,
+  //     //     canvas.height - 185,
+  //     //     require("../../assets/home/images/header_5.png"),
+  //     //     255,
+  //     //     235,
+  //     //     0,
+  //     //     canvas.width / 2 - 275,
+  //     //     canvas.height / 2 + 100,
+  //     //     100,
+  //     //     100,
+  //     //     5,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     // insect
+
+  //     const InsectLabelData = getResponsiveInsectDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+
+  //     images.push(Insect(InsectLabelData, canvas, gsap, scrollContainer, c));
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     canvas.width / 2 - 280,
+  //     //     canvas.height - 115,
+  //     //     require("../../assets/home/images/header_53.png"),
+  //     //     150,
+  //     //     115,
+  //     //     0,
+  //     //     canvas.width / 2 - 160,
+  //     //     canvas.height / 2 + 175,
+  //     //     70,
+  //     //     55,
+  //     //     90,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+
+  //     //person with book holding --- DONE
+
+  //     const PersonWithBookLabelData = getResponsivePersonWithBookDimensions(
+  //       canvas,
+  //       screenWidth
+  //     );
+
+  //     images.push(
+  //       PersonWithBook(
+  //         PersonWithBookLabelData,
+  //         canvas,
+  //         gsap,
+  //         scrollContainer,
+  //         c
+  //       )
+  //     );
+
+  //     // images.push(
+  //     //   new UploadedImage(
+  //     //     75,
+  //     //     canvas.height - 135,
+  //     //     require("../../assets/home/images/header_40.png"),
+  //     //     100,
+  //     //     135,
+  //     //     0,
+  //     //     canvas.width / 2,
+  //     //     canvas.height / 2,
+  //     //     0,
+  //     //     0,
+  //     //     0,
+  //     //     gsap,
+  //     //     scrollContainer,
+  //     //     c
+  //     //   )
+  //     // );
+  //   }
+
+  //   // Animation Loop
+  //   function animate() {
+  //     requestAnimationFrame(animate);
+  //     c.clearRect(0, 0, canvas.width, canvas.height);
+  //     imageDummy.forEach((image) => {
+  //       // image.draw();
+  //     });
+  //     circles.forEach((object) => {
+  //       object.update();
+  //     });
+  //     circleAboveImages.forEach((image) => {
+  //       image.update();
+  //     });
+  //     staticImages.forEach((image) => {
+  //       // image.draw();
+  //     });
+  //     images.forEach((image) => {
+  //       image.draw();
+  //     });
+  //     images1.forEach((image) => {
+  //       image.draw();
+  //     });
+  //   }
+
+  //   init();
+  //   animate();
+
+  //   function animateOnScroll() {
+  //     ScrollTrigger.create({
+  //       trigger: ".spacer",
+  //       scroller: scrollContainer,
+  //       start: "top top", // Adjust the start position based on your preference
+  //       onEnter: () => {
+  //         // When scrolling down, apply the styles to display the div
+  //         gsap.set(".lKv-people", {
+  //           opacity: 1,
+  //         });
+  //       },
+  //       onLeaveBack: () => {
+  //         // When scrolling back up, apply the styles to hide the div
+  //         gsap.set(".lKv-people", {
+  //           opacity: 0,
+  //         });
+  //       },
+  //     });
+  //   }
+
+  //   function toggleDivOnScroll() {
+  //     const animationDuration = 1.5; // Adjust the duration of the animation in seconds
+  //     const animationDelay = 0.5; // Adjust the delay before the animation starts in seconds
+  //     let isActive = false; // Flag to track if animation is active
+
+  //     ScrollTrigger.create({
+  //       trigger: ".spacer",
+  //       scroller: scrollContainer,
+  //       start: "top top", // Adjust the start position based on your preference
+  //       onEnter: () => {
+  //         // When scrolling down, apply the styles to display the div
+  //         // gsap.set(".lKv-people-item-l01", {
+  //         //   display: "block",
+  //         //   transform: "translate(0, 0)",
+  //         //   delay: 0.5,
+  //         // });
+  //         gsap.fromTo(
+  //           ".-l01",
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //           },
+  //           {
+  //             transform: "translate(0, 0)",
+  //             duration: 1.5,
+  //             delay: 0.5,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".-l02",
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //           },
+  //           {
+  //             transform: "translate(0, 0)",
+  //             duration: 1.5,
+  //             delay: 0.5,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".-l03",
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //           },
+  //           {
+  //             transform: "translate(0, 0)",
+  //             duration: 1.5,
+  //             delay: 1,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".-l04",
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //           },
+  //           {
+  //             transform: "translate(0, 0)",
+  //             duration: 1.5,
+  //             delay: 0,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".-l05",
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //           },
+  //           {
+  //             transform: "translate(0, 0)",
+  //             duration: 1.5,
+  //             delay: 0.7,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".-l06",
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //           },
+  //           {
+  //             transform: "translate(0, 0)",
+  //             duration: 1.5,
+  //             delay: 0,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".-l07",
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //           },
+  //           {
+  //             transform: "translate(0, 0)",
+  //             duration: 1.5,
+  //             delay: 1.2,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".-l08",
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //           },
+  //           {
+  //             transform: "translate(0, 0)",
+  //             duration: 1.5,
+  //             delay: 0,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".st1",
+  //           {
+  //             transform: "scale(0)",
+  //           },
+  //           {
+  //             transform: "scale(1)",
+  //             duration: 1,
+  //             delay: 0,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".st2",
+  //           {
+  //             transform: "scale(0)",
+  //           },
+  //           {
+  //             transform: "scale(1)",
+  //             duration: 1.3,
+  //             delay: 0,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".st3",
+  //           {
+  //             transform: "scale(0)",
+  //           },
+  //           {
+  //             transform: "scale(1)",
+  //             duration: 1.3,
+  //             delay: 0.2,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".st4",
+  //           {
+  //             transform: "scale(0)",
+  //           },
+  //           {
+  //             transform: "scale(1)",
+  //             duration: 1.3,
+  //             delay: 0.3,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".st5",
+  //           {
+  //             transform: "scale(0)",
+  //           },
+  //           {
+  //             transform: "scale(1)",
+  //             duration: 1.3,
+  //             delay: 0.4,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".st6",
+  //           {
+  //             transform: "scale(0)",
+  //           },
+  //           {
+  //             transform: "scale(1)",
+  //             duration: 1.3,
+  //             delay: 0.5,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".lKv-coreBall",
+  //           {
+  //             transform: "scale(0.5267, 0.5267)",
+  //           },
+  //           {
+  //             transform: "translate(0px, -75.024px)",
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".lKv-subTitle-item > img ",
+  //           {
+  //             transform: "translate(0px, 0%)",
+  //           },
+  //           {
+  //             transform: "translate(0px, 130%)",
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".cHeader-logo",
+  //           {
+  //             transform: "translate(-40px, 99.5825px)",
+  //             top: 0,
+  //             left: 0,
+  //           },
+  //           {
+  //             transform: "scale(0.266,0.266)",
+  //             top: "1.9rem",
+  //             left: "0rem",
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".lKv-lead-text",
+  //           {
+  //             transform: "translate(0px,130%)",
+  //           },
+  //           {
+  //             transform: "translate(0px, 0%)",
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".lKv-lead",
+  //           {
+  //             transform: "translate(0px, 130%)",
+  //           },
+  //           {
+  //             transform: "translate(0px,0%)",
+  //           }
+  //         );
+  //       },
+  //       onLeaveBack: () => {
+  //         // When scrolling back up, apply the styles to hide the div
+  //         gsap.fromTo(
+  //           ".lKv-people-item",
+  //           {
+  //             transform: "translate(0, 0)",
+  //           },
+  //           {
+  //             transform: "translate(-573px, 272px)",
+  //             duration: 1,
+  //             delay: 0,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".st",
+  //           {
+  //             transform: "scale(1)",
+  //           },
+  //           {
+  //             transform: "scale(0)",
+  //             duration: 0.5,
+  //             delay: 0,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".lKv-coreBall",
+  //           { transform: "translate(0px, -108.024px)" },
+  //           {
+  //             transform: "scale(0.5267, 0.5267)",
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".lKv-subTitle-item > img ",
+  //           {
+  //             transform: "translate(0px, 130%)",
+  //           },
+  //           {
+  //             transform: "translate(0px, 0%)",
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".cHeader-logo",
+  //           {
+  //             transform: "scale(0.266,0.266)",
+  //             top: "1.9rem",
+  //             left: "0rem",
+  //           },
+  //           {
+  //             transform: "translate(0px, 108.5825px)",
+  //             top: 0,
+  //             left: 0,
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".lKv-lead-text",
+  //           {
+  //             transform: "translate(0px, 0%)",
+  //           },
+  //           {
+  //             transform: "translate(0px,130%)",
+  //           }
+  //         );
+  //         gsap.fromTo(
+  //           ".lKv-lead",
+  //           {
+  //             transform: "translate(0px, 0%)",
+  //           },
+  //           {
+  //             transform: "translate(0px,130%)",
+  //           }
+  //         );
+  //       },
+  //     });
+  //   }
+
+  //   // Call the function to start the animations
+  //   animateOnScroll();
+  //   toggleDivOnScroll();
+
+  //   let scrollDirection = 1;
+
+  //   function firstDivlVisionScrollAnimation() {
+  //     const headOpenDiv = document.querySelector(
+  //       ".lVision-section-image.-first"
+  //     );
+  //     const shipDiv = document.querySelector(".lVision-illust.-second");
+  //     const shipDivImage = document.querySelector(
+  //       ".lVision-illust.-second > img"
+  //     );
+  //     const penDiv = document.querySelector(".lVision-illust.-first");
+
+  //     const runPoseDiv = document.querySelector(".lVision-illust.-third");
+
+  //     gsap.to(headOpenDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "top top",
+  //         scrub: true,
+  //         onEnter: () => {
+  //           headOpenDiv.classList.add("cPlaySprite");
+  //         },
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           // Determine the scroll direction based on the progress
+  //           const currentScrollDirection = progress > 0.5 ? 1 : -1;
+  //           // If the scroll direction changed, update the scrollDirection variable
+  //           if (currentScrollDirection !== scrollDirection) {
+  //             scrollDirection = currentScrollDirection;
+  //           }
+  //           const updatedValueY =
+  //             35.8191 + 200 * progress * currentScrollDirection;
+  //           if (updatedValueY > -36 && updatedValueY < 36) {
+  //             headOpenDiv.style.transform = `matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+
+  //     gsap.to(shipDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "top top",
+  //         scrub: true,
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           // Determine the scroll direction based on the progress
+  //           const currentScrollDirection = progress > 0.5 ? 1 : -1;
+  //           // If the scroll direction changed, update the scrollDirection variable
+  //           if (currentScrollDirection !== scrollDirection) {
+  //             scrollDirection = currentScrollDirection;
+  //           }
+  //           const updatedValueY = 150 * progress;
+  //           const updatedValueRotationImg = progress * 75;
+  //           if (updatedValueRotationImg < 27) {
+  //             shipDivImage.style.transform = `rotate(${-updatedValueRotationImg}deg)`;
+  //           }
+  //           if (updatedValueY > -45 && updatedValueY < 45) {
+  //             shipDiv.style.transform = `matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+  //     gsap.to(penDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "top top",
+  //         scrub: true,
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           const updatedValueY = -55.1816 + 200 * progress;
+  //           if (updatedValueY > -56 && updatedValueY < 15) {
+  //             penDiv.style.transform = `rotate(10deg) matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+
+  //     gsap.to(runPoseDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "top top",
+  //         scrub: true,
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           const updatedValueY = 150 * progress;
+  //           if (updatedValueY > -15 && updatedValueY < 15) {
+  //             runPoseDiv.style.transform = `matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+  //   }
+
+  //   function secondDivlVisionScrollAnimation() {
+  //     const nodeDiv = document.querySelector(".lVision-node.-left");
+  //     const cartDiv = document.querySelector(".lVision-illust.-forth");
+  //     const cartDivImage = document.querySelector(
+  //       ".lVision-illust.-forth > img"
+  //     );
+
+  //     const skullWithBrainDiv = document.querySelector(
+  //       ".lVision-illust.-fifth"
+  //     );
+  //     const skullWithBrainDivImage = document.querySelector(
+  //       ".lVision-illust.-fifth > picture  > img"
+  //     );
+
+  //     gsap.to(nodeDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "top top",
+  //         scrub: true,
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           // Determine the scroll direction based on the progress
+  //           const currentScrollDirection = progress > 0.5 ? 1 : -1;
+  //           // If the scroll direction changed, update the scrollDirection variable
+  //           if (currentScrollDirection !== scrollDirection) {
+  //             scrollDirection = currentScrollDirection;
+  //           }
+  //           const updatedValueY = 200 * progress * currentScrollDirection;
+  //           if (updatedValueY > -55 && updatedValueY < 36) {
+  //             nodeDiv.style.transform = `matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+  //     gsap.to(cartDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "top top",
+  //         scrub: true,
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           // Determine the scroll direction based on the progress
+  //           const currentScrollDirection = progress > 0.5 ? 1 : -1;
+  //           // If the scroll direction changed, update the scrollDirection variable
+  //           if (currentScrollDirection !== scrollDirection) {
+  //             scrollDirection = currentScrollDirection;
+  //           }
+  //           const updatedValueY = 100 * progress * currentScrollDirection;
+  //           const updatedValueRotationImg = progress * 75;
+  //           if (updatedValueRotationImg < 34) {
+  //             cartDivImage.style.transform = `rotate(${-updatedValueRotationImg}deg)`;
+  //           }
+  //           if (updatedValueY > -9 && updatedValueY < 10) {
+  //             cartDiv.style.transform = `matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+
+  //     gsap.to(skullWithBrainDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "top top",
+  //         scrub: true,
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           // Determine the scroll direction based on the progress
+  //           const currentScrollDirection = progress > 0.5 ? 1 : -1;
+  //           // If the scroll direction changed, update the scrollDirection variable
+  //           if (currentScrollDirection !== scrollDirection) {
+  //             scrollDirection = currentScrollDirection;
+  //           }
+  //           const updatedValueRotationImg = progress * 75;
+  //           const updatedValueY = -75.0279 + 150 * progress;
+  //           if (updatedValueRotationImg < 50) {
+  //             skullWithBrainDivImage.style.transform = `rotate(${updatedValueRotationImg}deg)`;
+  //           }
+  //           if (updatedValueY > -50 && updatedValueY < 10) {
+  //             skullWithBrainDiv.style.transform = `matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+  //   }
+
+  //   function thirdDivlVisionScrollAnimation() {
+  //     const handOpenDiv = document.querySelector(
+  //       ".lVision-section-image.-third"
+  //     );
+  //     const skullWithDotDiv = document.querySelector(".lVision-illust.-sixth");
+  //     const skullWithDotDivImage = document.querySelector(
+  //       ".lVision-illust.-sixth > picture > img"
+  //     );
+
+  //     gsap.to(handOpenDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "+=65%",
+  //         scrub: true,
+  //         onEnter: () => {
+  //           handOpenDiv.classList.add("cPlaySpriteHand");
+  //         },
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           // Determine the scroll direction based on the progress
+  //           const currentScrollDirection = progress > 0.5 ? 1 : -1;
+  //           // If the scroll direction changed, update the scrollDirection variable
+  //           if (currentScrollDirection !== scrollDirection) {
+  //             scrollDirection = currentScrollDirection;
+  //           }
+  //           const updatedValueY =
+  //             12.3016 + 200 * progress * currentScrollDirection;
+  //           if (updatedValueY > -36 && updatedValueY < 36) {
+  //             handOpenDiv.style.transform = `matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+  //     gsap.to(skullWithDotDiv, {
+  //       scrollTrigger: {
+  //         trigger: ".lVision",
+  //         scroller: scrollContainer,
+  //         start: "+=50%",
+  //         scrub: true,
+  //         onUpdate: (self) => {
+  //           const progress = self.progress;
+  //           // Determine the scroll direction based on the progress
+  //           const currentScrollDirection = progress > 0.5 ? 1 : -1;
+  //           // If the scroll direction changed, update the scrollDirection variable
+  //           if (currentScrollDirection !== scrollDirection) {
+  //             scrollDirection = currentScrollDirection;
+  //           }
+  //           const updatedValueY = 150 * progress;
+  //           const updatedValueRotationImg = 30 + progress * 100;
+
+  //           if (updatedValueRotationImg < 50) {
+  //             skullWithDotDivImage.style.transform = `rotate(${updatedValueRotationImg}deg)`;
+  //           }
+  //           if (updatedValueY > -45 && updatedValueY < 45) {
+  //             skullWithDotDiv.style.transform = `matrix3d(
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           0,
+  //           0,
+  //           1,
+  //           0,
+  //           0,
+  //           ${updatedValueY},
+  //           0,
+  //           1
+  //         )`;
+  //           }
+  //         },
+  //       },
+  //     });
+  //   }
+
+  //   firstDivlVisionScrollAnimation();
+  //   secondDivlVisionScrollAnimation();
+  //   thirdDivlVisionScrollAnimation();
+  // }, []);
 
   return (
     <div>
-      <div className="spacer">
-        {/* <div className="lKv-subTitle" data-kv-subtitle="">
+      {/* canvas */}
+      {/* <div className="spacer"> */}
+      {/* <div className="lKv-subTitle" data-kv-subtitle="">
           <div
             className="lKv-subTitle-item -lm01"
             data-kv-subtitle-item=""
@@ -2657,10 +2660,11 @@ const index = () => {
             />
           </div>
         </div> */}
-        <div
+      {/* <div
           className="lKv-coreBall"
           data-kv-coreball=""
           style={{ transform: "scale(0.5267, 0.5267)" }}
+          id="home-section"
         >
           <picture>
             <source
@@ -2885,7 +2889,33 @@ const index = () => {
             </svg>
           </div>
         </div>
-        <canvas id="canvas1" width="1538" height="800"></canvas>
+        <canvas id="canvas1" width="1538" height="800"></canvas> */}
+      {/* </div> */}
+      <div
+        style={{
+          maxWidth: "100%",
+          position: "relative",
+          paddingBottom: "56.25%",
+        }}
+      >
+        <video
+          autoPlay
+          loop
+          muted
+          width="100%"
+          height="100%"
+          // style={{ objectFit: "fill" }}
+          style={{
+            objectFit: "fill",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
       </div>
 
       <div className="lVision" id="vision-section" data-vision="">

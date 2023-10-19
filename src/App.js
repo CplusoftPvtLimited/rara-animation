@@ -52,6 +52,7 @@ function App() {
           <Route path="/student" element={<Student />} />
           <Route path="/donation" element={<Donation />} />
           <Route path="/sponsership" element={<Sponsership />} />
+
           {keyData?.active ? (
             <Route path="/stripe" element={<Checkout />} />
           ) : (

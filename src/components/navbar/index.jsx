@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
 import "./index.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,6 +14,7 @@ const index = () => {
 
   const scrollToHomeSection = () => {
     const homeSection = document.getElementById("home-section");
+    console.log("home page");
 
     if (homeSection) {
       homeSection.scrollIntoView({ behavior: "smooth" });
@@ -46,7 +47,7 @@ const index = () => {
 
   const scrollToUpdatesSection = () => {
     console.log("scrollToUpdatesSection");
-    const updatesSection = document.getElementById("updates-section");
+    const updatesSection = document.getElementById("updates");
 
     if (updatesSection) {
       updatesSection.scrollIntoView({ behavior: "smooth" });
@@ -523,11 +524,10 @@ const index = () => {
                     <li className="cMenuContent-list-item">
                       <a
                         className="cMenuContent-list-link -fellows"
-                        // href="/#research"
+                        href="/updates"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
-                        onClick={scrollToUpdatesSection}
                       >
                         <svg
                           className="cMenuContent-list-svg"
@@ -554,7 +554,7 @@ const index = () => {
                     <li className="cMenuContent-list-item">
                       <a
                         className="cMenuContent-list-link -idea"
-                        href="/idea"
+                        href="/news"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
@@ -590,7 +590,7 @@ const index = () => {
                     <li className="cMenuContent-list-item">
                       <a
                         className="cMenuContent-list-link -fellows"
-                        // href="/fellow"
+                        href="/fellows"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
