@@ -891,7 +891,7 @@ const index = () => {
                           transform: "scaleX(1.05)",
                         }}
                       >
-                        志
+                        {homeData.card1Title}
                       </div>
                     </div>
                     <div
@@ -947,7 +947,7 @@ const index = () => {
                           transform: "scaleX(1.05)",
                         }}
                       >
-                        共創
+                        {homeData.card2Title}
                       </div>
                     </div>
                     <div
@@ -1003,7 +1003,7 @@ const index = () => {
                           transform: "scaleX(1.05)",
                         }}
                       >
-                        変革
+                        {homeData.card3Title}
                       </div>
                     </div>
                     <div
@@ -1059,7 +1059,7 @@ const index = () => {
                           transform: "scaleX(1.05)",
                         }}
                       >
-                        信頼
+                        {homeData.card4Title}
                       </div>
                     </div>
                     <div

@@ -21,9 +21,70 @@ const index = () => {
   const [SliderMove, setSliderMove] = useState(null);
   const [sliderRotate, setsliderRotate] = useState(-30);
   const [FellowName, setFellowName] = useState(null);
-  const [firstTime, setFirstTime] = useState(false);
   const [FellowDescription1, setFellowDescription1] = useState(null);
   const [FellowDescription2, setFellowDescription2] = useState(null);
+  const [selectedFellow, setSelectedFellows] = useState([]);
+  const [fellowData, setFellowData] = useState([]);
+  const [fellowRotation, setfellowRotation] = useState([]);
+
+  useEffect(() => {
+    const getHome = async () => {
+      try {
+        const response = await fetch(`http://localhost:4500/api/home/getHome`);
+        const data = await response.json();
+        const homeFellow = data.home[0].fellows
+          .split(",")
+          .map((id) => parseInt(id, 10));
+
+        return homeFellow;
+      } catch (error) {
+        console.log("Error fetching home data:", error.message);
+        return [];
+      }
+    };
+
+    const fetchAndFilterFellowData = async () => {
+      try {
+        const [homeFellowIds, fellowResponse] = await Promise.all([
+          getHome(),
+          axios({
+            method: "get",
+            url: `http://localhost:4500/api/profile/getAllProfiles`,
+          }),
+        ]);
+        const fellow = fellowResponse.data.profiles;
+        // Filter the blog data based on homeFellowIds
+        const filteredFellows = fellow.filter((fellow) =>
+          homeFellowIds.includes(fellow.id)
+        );
+        setSelectedFellows(filteredFellows);
+        // console.log(
+        //   "**000🚀 ~ file: index.jsx:116 ~ fetchAndFilterFellowData ~ filteredFellows:",
+        //   filteredFellows
+        // );
+      } catch (error) {
+        console.log(
+          "000🚀 Error fetching or filtering blog data:",
+          error.message
+        );
+      }
+    };
+    fetchAndFilterFellowData();
+  }, []);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `http://localhost:4500/api/profile/getAllProfiles`,
+    })
+      .then((response) => {
+        setFellowData(response.data.profiles);
+      })
+      .catch((error) => {
+        console.log("No profile found", error.message);
+      });
+  }, []);
+
   useEffect(() => {
     const scrollContainer = document.querySelector(".custom-container");
 
@@ -192,38 +253,31 @@ const index = () => {
       },
     ]
   );
-  const [fellowRotation, setfellowRotation] = useState([]);
 
   useEffect(() => {
-    let fellowRotateData = fellowsData.map((item, index) => {
+    let fellowRotateData = selectedFellow.map((item, index) => {
       return { data: item, rotation: index * 15 };
     });
-    console.log(
-      "🚀 ~ file: index.jsx:100 ~ fellowRotateData ~ fellowRotateData:",
-      fellowRotateData
-    );
 
     setfellowRotation(fellowRotateData);
-  }, []);
+  }, [selectedFellow]);
 
   useEffect(() => {
-    setFellowName("Dr. Maria Hernandez");
-    setFellowDescription1("Ethical Banking and Finance");
-    setFellowDescription2("");
-    setFirstTime(true);
-    setTimeout(() => {
-      const sliderItems = document.querySelectorAll(".lFellows-slider-item");
-      sliderItems.forEach((element) => {
-        const dataRotate = element.getAttribute("data-rotate");
-        console.log("data-rotate", dataRotate);
-        if (dataRotate === "30") {
-          element?.classList.add("-isCurrent");
-        } else {
-          // element.style.visibility = "hidden";
-        }
-      });
-    }, 1000);
-  }, []);
+    const sliderRotateElement = document.querySelector(
+      `[data-rotate="${sliderRotate}"]`
+    );
+
+    if (selectedFellow !== undefined) {
+      const firstProfile = selectedFellow[2];
+      if (firstProfile && firstProfile.nameEnglish) {
+        setFellowName(firstProfile.nameEnglish);
+        setFellowDescription1(firstProfile.tagLine);
+        setFellowDescription2("");
+        sliderRotateElement?.classList.add("-isCurrent");
+        console.log("***000 Fellow Name in English:", firstProfile.nameEnglish);
+      }
+    }
+  }, [selectedFellow]);
 
   const handleMouseLeave = () => {
     const SliderMoveDiv = document.querySelector(".cSliderMouseStalker-circle");
@@ -410,8 +464,8 @@ const index = () => {
       );
 
       if (currentFellowData) {
-        setFellowName(currentFellowData?.data?.name);
-        setFellowDescription1(currentFellowData?.data?.description);
+        setFellowName(currentFellowData?.data?.nameEnglish);
+        setFellowDescription1(currentFellowData?.data?.tagLine);
         setFellowDescription2(currentFellowData?.data?.description_detailed);
       }
       let sliderRotateElement;
@@ -773,7 +827,7 @@ const index = () => {
                             <div className="lFellows-slider-item-thumbnail">
                               <img
                                 className="lFellows-slider-item-thumbnail-img"
-                                src={item?.data?.image}
+                                src={item?.data?.imagePath}
                                 alt=""
                                 loading="lazy"
                               />

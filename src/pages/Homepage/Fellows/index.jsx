@@ -268,6 +268,7 @@ const index = () => {
 
   async function handleSliderRotation() {
     const sliderElements = document.querySelectorAll(".lFellows-slider-item");
+    console.log("0000****🚀 ~ file: index.jsx:271 ~ handleSliderRotation ~ sliderElements:", sliderElements)
     sliderElements.forEach((element) => {
       element.classList.remove("-isCurrent");
     });
@@ -427,31 +428,32 @@ const index = () => {
       "🚀 ~ file: index.jsx:169 ~ FellowData ~ sliderRotate:",
       sliderRotate
     );
-    if (fellowRotation?.length > 0) {
-      if (sliderRotation == fellowRotation[0]) {
-        setFellowName("Mr. Dominick Mitchell");
-        setFellowDescription1("Sustainable Development Finance");
-        setFellowDescription2("");
-      } else if (sliderRotation == fellowRotation[1]) {
-        setFellowName("Dr. Maria Hernandez");
-        setFellowDescription1("Ethical Banking and Finance");
-        setFellowDescription2("");
-      } else if (sliderRotation == fellowRotation[2]) {
-        setFellowName("Mrs. Tamaki Patel");
-        setFellowDescription1("Impact Investing and Measurement");
-        setFellowDescription2("");
-      } else if (sliderRotation == fellowRotation[3]) {
-        setFellowName("Sir. Doran Reynolds");
-        setFellowDescription1("Inclusive Financial Systems");
-        setFellowDescription2("");
-      } else if (sliderRotation == fellowRotation[4]) {
-        setFellowName("Professor David Chen");
-        setFellowDescription1(
-          "Behavioral Economics and Financial Decision-Making"
-        );
-        setFellowDescription2("");
-      }
-    }
+    // if (fellowRotation?.length > 0) {
+    //   if (sliderRotation == fellowRotation[0]) {
+    //     setFellowName("Mr. Dominick Mitchell");
+    //     setFellowDescription1("Sustainable Development Finance");
+    //     setFellowDescription2("");
+    //   } else if (sliderRotation == fellowRotation[1]) {
+    //     setFellowName("Dr. Maria Hernandez");
+    //     setFellowDescription1("Ethical Banking and Finance");
+    //     setFellowDescription2("");
+    //   } else if (sliderRotation == fellowRotation[2]) {
+    //     setFellowName("Mrs. Tamaki Patel");
+    //     setFellowDescription1("Impact Investing and Measurement");
+    //     setFellowDescription2("");
+    //   } else if (sliderRotation == fellowRotation[3]) {
+    //     setFellowName("Sir. Doran Reynolds");
+    //     setFellowDescription1("Inclusive Financial Systems");
+    //     setFellowDescription2("");
+    //   } else if (sliderRotation == fellowRotation[4]) {
+    //     setFellowName("Professor David Chen");
+    //     setFellowDescription1(
+    //       "Behavioral Economics and Financial Decision-Making"
+    //     );
+    //     setFellowDescription2("");
+    //   }
+    // }
+
     // else if (sliderRotation == 90) {
     //   setFellowName("Mr. Dominick Mitchell");
     //   setFellowDescription1("Sustainable Development Finance");
