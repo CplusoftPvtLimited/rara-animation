@@ -21,6 +21,9 @@ function EditFellow(props) {
   const file5InputRef = useRef(null);
   const file6InputRef = useRef(null);
   const file7InputRef = useRef(null);
+  const file8InputRef = useRef(null);
+  const file9InputRef = useRef(null);
+  const file10InputRef = useRef(null);
 
   const thumbsContainer = {
     display: "flex",
@@ -584,6 +587,101 @@ function EditFellow(props) {
                           ref={file6InputRef}
                           onChange={(event) =>
                             handleImageInputChange(event, "graphic3")
+                          }
+                          style={{ display: "none" }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
+
+                {/** Home Page Profile Images */}
+                <Row>
+                  <Col>
+                    <p>Cloth Animated Image</p>
+                    <div className="add-product-image-div">
+                      <div className="product-image-div">
+                        <img
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "clothAnimatedImage"
+                            )?.file ?? profileData?.clothAnimatedImage
+                          }
+                          alt="preview"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleImageClick(file8InputRef)}
+                        />
+                        <input
+                          type="file"
+                          name="clothAnimatedImage"
+                          ref={file8InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "clothAnimatedImage")
+                          }
+                          style={{ display: "none" }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col>
+                    <p>First Graphic Image</p>
+                    <div className="add-product-image-div">
+                      <div className="product-image-div">
+                        <img
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "firstGraphicImage"
+                            )?.file ?? profileData?.firstGraphicImage
+                          }
+                          alt="preview"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleImageClick(file9InputRef)}
+                        />
+                        <input
+                          type="file"
+                          name="firstGraphicImage"
+                          ref={file9InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "firstGraphicImage")
+                          }
+                          style={{ display: "none" }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+
+                  <Col>
+                    <p>Second Graphic Image</p>
+                    <div className="add-product-image-div">
+                      <div className="product-image-div">
+                        <img
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path === "secondGraphicImage"
+                            )?.file ?? profileData?.secondGraphicImage
+                          }
+                          alt="preview"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleImageClick(file10InputRef)}
+                        />
+                        <input
+                          type="file"
+                          name="secondGraphicImage"
+                          ref={file10InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "secondGraphicImage")
                           }
                           style={{ display: "none" }}
                         />

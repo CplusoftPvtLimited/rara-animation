@@ -112,7 +112,7 @@ const Fellows = () => {
                               style={{ width: "100px", height: "100px" }}
                             />
                           </td>
-                          <td>{fellow.name}</td>
+                          <td>{fellow.nameEnglish}</td>
                           <td>{fellow.jobPost}</td>
                           <td>
                             <Link to={`/fellow/edit/${fellow.id}`}>
