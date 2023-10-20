@@ -311,6 +311,28 @@ import videoSrc from "../../assets/videos/WeAreWVÉS.mp4";
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
 const index = () => {
+  const [homeData, setHomeData] = useState("");
+  useEffect(() => {
+    const apiURL = "http://localhost:4500/api/home/getHome";
+
+    const getHomeData = async () => {
+      try {
+        const response = await fetch(apiURL);
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(
+          "***🚀 ~ file: home.jsx:323 ~ getHomeData ~ data:",
+          data.home[0]
+        );
+        setHomeData(data.home[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getHomeData();
+  }, []);
   // useEffect(() => {
   //   const canvas = document.querySelector("#canvas1");
 
