@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import "./index.css";
 
-const index = () => {
+const index = ({ props }) => {
+  const [homeData, setHomeData] = useState("");
+
+  useEffect(() => {
+    const apiURL = "http://localhost:4500/api/home/getHome";
+
+    const getHomeData = async () => {
+      try {
+        const response = await fetch(apiURL);
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+        const data = await response.json();
+        setHomeData(data.home[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getHomeData();
+  });
+
   return (
     <div
       className="cContainer -leftMiddle -rightMiddle -spLeftSmall -spRightSmall lContact"
@@ -321,14 +341,14 @@ const index = () => {
               data-whatintent="mouse"
               href="mailto:enquiries@pecunia.institute"
             >
-              enquiries@pecunia.institute
+              {homeData.contactEmail}
             </a>
             <a
               className="lContact-link -mail"
               data-whatintent="mouse"
               href="tel:(302) 200-6733"
             >
-              (302) 200-6733
+              {homeData.phoneNumber}
             </a>
             <button
               className="lContact-link -newsletter"
@@ -337,7 +357,7 @@ const index = () => {
               data-modal-trigger="mail"
               id="lContact-newsletter"
             >
-              Subscribe to Pecunia Newsletter
+              {homeData.contactMailchimpKey}
             </button>
           </div>
         </div>
