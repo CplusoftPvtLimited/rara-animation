@@ -4,30 +4,106 @@ import Sidebar from "../../Components/Sidebar";
 import { useHistory } from "react-router";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Multiselect } from "multiselect-react-dropdown";
 import axios from "axios";
 import "./Home.css";
 
 function EditHome(props) {
   const [homeData, setHomeData] = useState();
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
-  const [newImageFile, setNewImageFile] = useState(null);
+  const [fellowData, setFellowData] = useState([]);
+  const [blogData, setBlogData] = useState([]);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState([]);
+  // const [imagePreviewUrl, setImagePreviewUrl] = useState(undefined);
+  const [selectedFellowOptions, setSelectedFellowOptions] = useState([]);
+  const [selectedBlogOptions, setSelectedBlogOptions] = useState([]);
+  const [removedBlogOptions, setRemovedBlogOptions] = useState([]);
 
   const history = useHistory();
   const fileInputRef = useRef(null);
+  const file1InputRef = useRef(null);
+  const file2InputRef = useRef(null);
+  const file3InputRef = useRef(null);
+  const file4InputRef = useRef(null);
+
+  const onFellowSelectOptions = (selectedList, selectedItem) => {
+    setSelectedFellowOptions([...selectedFellowOptions, selectedItem]);
+  };
+
+  const onFellowRemoveOptions = (selectedList, removedItem) => {
+    setSelectedFellowOptions(
+      selectedFellowOptions.filter((item) => item != removedItem)
+    );
+  };
+
+  const onBlogSelectOptions = (selectedList, selectedItem) => {
+    setSelectedBlogOptions([...selectedBlogOptions, selectedItem]);
+  };
+
+  const onBlogRemoveOptions = (selectedList, removedItem) => {
+    setSelectedBlogOptions(
+      selectedBlogOptions.filter((item) => item != removedItem)
+    );
+  };
 
   useEffect(() => {
-    getHome();
+    axios({
+      method: "get",
+      url: `${process.env.REACT_APP_BACKEND}/blog/getAllBlogPosts`,
+    })
+      .then((response) => {
+        setBlogData(response.data.blogPosts);
+      })
+      .catch((error) => {
+        console.log("No blog found", error.message);
+      });
   }, []);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `${process.env.REACT_APP_BACKEND}/profile/getAllProfiles`,
+    })
+      .then((response) => {
+        setFellowData(response.data.profiles);
+      })
+      .catch((error) => {
+        console.log("No profile found", error.message);
+      });
+  }, []);
+  useEffect(() => {
+    getHome();
+  }, [blogData, fellowData]);
 
   const getHome = () => {
     setHomeData();
     axios({
       method: "get",
-      url: `http://localhost:4500/api/home/getHome`,
+      url: `${process.env.REACT_APP_BACKEND}/home/getHome`,
     })
       .then((response) => {
         setHomeData(response.data.home[0]);
-        console.log("homeData: ", response.data.home[0]);
+        const blogsArray = JSON.parse(response.data.home[0]?.blogs)?.split(",");
+        const fellowsArray = JSON.parse(response.data.home[0]?.fellows)?.split(
+          ","
+        );
+        if (blogsArray.length > 0) {
+          if (blogData.length > 0) {
+            const blogsFilterSelected = blogsArray
+              .map((item) => blogData.find((item2) => item2.id == item))
+              .filter((item) => item != undefined);
+
+            setSelectedBlogOptions(blogsFilterSelected);
+          }
+        }
+        if (fellowsArray.length > 0) {
+          if (fellowData.length > 0) {
+            const fellowFilterSelected = fellowsArray
+              .map((item) => fellowData.find((item2) => item2.id == item))
+              .filter((item) => item != undefined);
+
+            setSelectedFellowOptions(fellowFilterSelected);
+          }
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -35,29 +111,59 @@ function EditHome(props) {
   };
 
   const handleChange = (event) => {
-    const { name, value, files } = event.target;
-    console.log("file: ", files);
+    const { name, value } = event.target;
+    setHomeData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    if (name === "imagePath") {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreviewUrl(reader.result);
-      };
-      if (files && files.length > 0) {
-        reader.readAsDataURL(files[0]);
+  // const handleImageInputChange = (event, name) => {
+  //   const file = event.target.files[0];
+  //   console.log("File:", file);
+  //   const reader = new FileReader();
+
+  //   reader.onloadend = () => {
+  //     if (name) {
+  //       setImagePreviewUrl((prev) => {
+  //         const updatedPreview = prev.filter((item) => item.path !== name);
+  //         return [...updatedPreview, { path: name, file: reader.result }];
+  //       });
+
+  //       setHomeData((prev) => ({
+  //         ...prev,
+  //         [name]: file,
+  //       }));
+  //     }
+  //   };
+  const handleImageInputChange = (event, name) => {
+    const file = event.target.files[0];
+    console.log("File:", file);
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      if (name) {
+        setImagePreviewUrl((prev) => {
+          const updatedPreview = prev.filter((item) => item.path !== name);
+          return [...updatedPreview, { path: name, file: reader.result }];
+        });
+
         setHomeData((prev) => ({
           ...prev,
-          imagePath: files[0],
+          [name]: file,
         }));
       }
-    } else {
-      setHomeData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
 
-  const handleImageClick = () => {
-    fileInputRef.current.click();
+  const handleImageClick = (fileInput) => {
+    fileInput.current.click();
   };
+
+  const fellowIds = selectedFellowOptions.map((option) => option?.id);
+  const blogIds = selectedBlogOptions.map((option) => option?.id);
+
   const editHome = (event) => {
     event.preventDefault();
     const updatedData = new FormData();
@@ -91,6 +197,14 @@ function EditHome(props) {
     updatedData.append("card4Heading", homeData.card4Heading);
     updatedData.append("card4Image", homeData.card4Image);
     updatedData.append("card4Title", homeData.card4Title);
+
+    // if (typeof JSON !== "undefined" && typeof JSON.stringify === "function") {
+    //   updatedData.append("fellows", JSON.stringify(homeData.fellows));
+    // } else {
+    //   updatedData.append("fellows", homeData.fellows.join(","));
+    // }
+    updatedData.append("fellows", fellowIds);
+    updatedData.append("blogs", blogIds);
     updatedData.append("card4Description", homeData.card4Description);
     updatedData.append("card4InsideImage", homeData.card4InsideImage);
     updatedData.append(
@@ -99,11 +213,15 @@ function EditHome(props) {
     );
     updatedData.append("contactHeading", homeData.contactHeading);
     updatedData.append("contactEmail", homeData.contactEmail);
+    updatedData.append("phoneNumber", homeData.phoneNumber);
     updatedData.append("contactMailchimpKey", homeData.contactMailchimpKey);
     try {
       console.log("updatedData: ", updatedData);
       axios
-        .put(`http://localhost:4500/api/home/updateHome/1`, updatedData)
+        .patch(
+          `${process.env.REACT_APP_BACKEND}/home/updateHome/1`,
+          updatedData
+        )
         .then((response) => {
           console.log("edit data", response);
           setHomeData({
@@ -139,6 +257,7 @@ function EditHome(props) {
             cardGuidelineDescription: "",
             contactHeading: "",
             contactEmail: "",
+            phoneNumber: "",
             contactMailchimpKey: "",
           });
           history.push("/");
@@ -167,7 +286,7 @@ function EditHome(props) {
                   <div className="main">
                     <h2> Main Section</h2>
                   </div>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Main Heading</p>
                       <input
@@ -177,8 +296,8 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
-                  <Col>
+                  </Col> */}
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Main Subheading</p>
                       <input
@@ -188,45 +307,108 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Main About</p>
-                      <input
+                      <CKEditor
+                        style={{ height: "100px" }}
+                        editor={ClassicEditor}
+                        data={homeData.mainAbout}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          console.log("Editor Data:", data);
+                          handleChange({
+                            target: {
+                              name: "mainAbout",
+                              value: data,
+                            },
+                          });
+                        }}
+                        onBlur={(event, editor) => {
+                          console.log("Blur.", editor);
+                        }}
+                        onFocus={(event, editor) => {
+                          console.log("Focus.", editor);
+                        }}
+                      />
+                      {/* <input
                         type="text"
                         name="mainAbout"
                         value={homeData.mainAbout}
                         onChange={handleChange}
-                      />
+                      /> */}
                     </div>
                   </Col>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Main Establish</p>
-                      <input
+                      <CKEditor
+                        style={{ height: "100px" }}
+                        editor={ClassicEditor}
+                        data={homeData.mainEstablish}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          console.log("Editor Data:", data);
+                          handleChange({
+                            target: {
+                              name: "mainEstablish",
+                              value: data,
+                            },
+                          });
+                        }}
+                        onBlur={(event, editor) => {
+                          console.log("Blur.", editor);
+                        }}
+                        onFocus={(event, editor) => {
+                          console.log("Focus.", editor);
+                        }}
+                      />
+                      {/* <input
                         type="text"
                         name="mainEstablish"
                         value={homeData.mainEstablish}
                         onChange={handleChange}
-                      />
+                      /> */}
                     </div>
                   </Col>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Main ResearchTitle</p>
-                      <input
+                      <CKEditor
+                        style={{ height: "100px" }}
+                        editor={ClassicEditor}
+                        data={homeData.mainResearchTitle}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          console.log("Editor Data:", data);
+                          handleChange({
+                            target: {
+                              name: "mainResearchTitle",
+                              value: data,
+                            },
+                          });
+                        }}
+                        onBlur={(event, editor) => {
+                          console.log("Blur.", editor);
+                        }}
+                        onFocus={(event, editor) => {
+                          console.log("Focus.", editor);
+                        }}
+                      />
+                      {/* <input
                         type="text"
                         name="mainResearchTitle"
                         value={homeData.mainResearchTitle}
                         onChange={handleChange}
-                      />
+                      /> */}
                     </div>
                   </Col>
                 </Row>
-                <Row>
+                {/* <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Main Research Image</p>
@@ -252,7 +434,7 @@ function EditHome(props) {
                       </div>
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
                 <Row>
                   <Col>
                     <div className="add-product-input-div">
@@ -261,14 +443,14 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.mainDescription}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: {
+                              name: "mainDescription",
+                              value: data,
+                            },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -288,14 +470,14 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.mainResearchDescription}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: {
+                              name: "mainResearchDescription",
+                              value: data,
+                            },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -315,7 +497,7 @@ function EditHome(props) {
                   <div className="cards">
                     <h2> Card Details</h2>
                   </div>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 1 Heading</p>
                       <input
@@ -325,8 +507,8 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
-                  <Col>
+                  </Col> */}
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 1 Title</p>
                       <input
@@ -336,7 +518,7 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
@@ -345,27 +527,33 @@ function EditHome(props) {
                       <p>Card 1 Image</p>
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? homeData?.card1Image}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "card1Image"
+                            )?.file ?? homeData?.card1Image
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file1InputRef)}
                         />
                         <input
                           type="file"
                           name="card1Image"
-                          ref={fileInputRef}
-                          onChange={handleChange}
+                          ref={file1InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "card1Image")
+                          }
                           accept="image/jpeg, image/png, image/gif"
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 1 Inside Image</p>
                       <div className="product-image-div">
@@ -389,7 +577,7 @@ function EditHome(props) {
                         />
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
@@ -400,14 +588,11 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.card1Description}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: { name: "card1Description", value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -423,7 +608,7 @@ function EditHome(props) {
 
                 {/** Cards 2*/}
 
-                <Row>
+                {/* <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Card 2 Heading</p>
@@ -446,7 +631,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
 
                 <Row>
                   <Col>
@@ -454,27 +639,33 @@ function EditHome(props) {
                       <p>Card 2 Image</p>
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? homeData?.card2Image}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "card2Image"
+                            )?.file ?? homeData?.card2Image
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file2InputRef)}
                         />
                         <input
                           type="file"
                           name="card2Image"
-                          ref={fileInputRef}
-                          onChange={handleChange}
+                          ref={file2InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "card2Image")
+                          }
                           accept="image/jpeg, image/png, image/gif"
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 2 Inside Image</p>
                       <div className="product-image-div">
@@ -498,7 +689,7 @@ function EditHome(props) {
                         />
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
@@ -509,14 +700,11 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.card2Description}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: { name: "card2Description", value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -532,7 +720,7 @@ function EditHome(props) {
 
                 {/** Cards 3*/}
 
-                <Row>
+                {/* <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Card 3 Heading</p>
@@ -556,7 +744,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
 
                 <Row>
                   <Col>
@@ -564,27 +752,33 @@ function EditHome(props) {
                       <p>Card 3 Image</p>
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? homeData?.card3Image}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "card3Image"
+                            )?.file ?? homeData?.card3Image
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file3InputRef)}
                         />
                         <input
                           type="file"
                           name="card3Image"
-                          ref={fileInputRef}
-                          onChange={handleChange}
+                          ref={file3InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "card3Image")
+                          }
                           accept="image/jpeg, image/png, image/gif"
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 3 Inside Image</p>
                       <div className="product-image-div">
@@ -608,7 +802,7 @@ function EditHome(props) {
                         />
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
 
                 <Row>
@@ -619,14 +813,11 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.card3Description}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: { name: "card3Description", value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -641,7 +832,7 @@ function EditHome(props) {
                 </Row>
                 {/** Cards 4*/}
 
-                <Row>
+                {/* <Row>
                   <Col>
                     <div className="add-product-input-div">
                       <p>Card 4 Heading</p>
@@ -665,7 +856,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                </Row>
+                </Row> */}
 
                 <Row>
                   <Col>
@@ -673,27 +864,33 @@ function EditHome(props) {
                       <p>Card 4 Image</p>
                       <div className="product-image-div">
                         <img
-                          src={imagePreviewUrl ?? homeData?.card4Image}
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "card4Image"
+                            )?.file ?? homeData?.card2Image
+                          }
                           alt="preview"
                           style={{
                             width: "100px",
                             height: "100px",
                             cursor: "pointer",
                           }}
-                          onClick={handleImageClick}
+                          onClick={() => handleImageClick(file4InputRef)}
                         />
                         <input
                           type="file"
                           name="card4Image"
-                          ref={fileInputRef}
-                          onChange={handleChange}
+                          ref={file4InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "card4Image")
+                          }
                           accept="image/jpeg, image/png, image/gif"
                           style={{ display: "none" }}
                         />
                       </div>
                     </div>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 4 Inside Image</p>
                       <div className="product-image-div">
@@ -717,7 +914,7 @@ function EditHome(props) {
                         />
                       </div>
                     </div>
-                  </Col>
+                  </Col> */}
                 </Row>
                 <Row>
                   <Col>
@@ -727,14 +924,11 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.card4Description}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: { name: "card4Description", value: data },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -756,14 +950,14 @@ function EditHome(props) {
                         style={{ height: "100px" }}
                         editor={ClassicEditor}
                         data={homeData.cardGuidelineDescription}
-                        onReady={(editor) => {
-                          console.log("Editor is ready to use!", editor);
-                        }}
                         onChange={(event, editor) => {
                           const data = editor.getData();
                           console.log("Editor Data:", data);
                           handleChange({
-                            target: { name: "content", value: data },
+                            target: {
+                              name: "cardGuidelineDescription",
+                              value: data,
+                            },
                           });
                         }}
                         onBlur={(event, editor) => {
@@ -776,7 +970,46 @@ function EditHome(props) {
                     </div>
                   </Col>
                 </Row>
+                {/**MultiSelect */}
+                <Row>
+                  <Col>
+                    <div className="add-product-input-div">
+                      <p>Fellows</p>
+                      <Multiselect
+                        name="fellow"
+                        options={fellowData}
+                        onSelect={onFellowSelectOptions}
+                        onRemove={onFellowRemoveOptions}
+                        onChange={handleChange}
+                        displayValue="name"
+                        closeIcon="cancel"
+                        placeholder="Select Options"
+                        selectedValues={selectedFellowOptions}
+                        className="multiSelectContainer"
+                      />
+                    </div>
+                  </Col>
 
+                  <Col>
+                    <div className="add-product-input-div">
+                      <p>Blogs</p>
+                      {blogData.length > 0 && (
+                        <Multiselect
+                          name="fellow"
+                          options={blogData}
+                          onSelect={onBlogSelectOptions}
+                          onRemove={onBlogRemoveOptions}
+                          onChange={handleChange}
+                          displayValue="title"
+                          closeIcon="cancel"
+                          placeholder="Select Options"
+                          selectedValues={selectedBlogOptions}
+                          className="multiSelectContainer"
+                        />
+                      )}
+                    </div>
+                  </Col>
+                </Row>
                 <Row>
                   <Col>
                     <div className="add-product-input-div">
@@ -784,7 +1017,7 @@ function EditHome(props) {
                       <input
                         type="text"
                         name="contactHeading"
-                        value={homeData.contactHeading}
+                        value={homeData?.contactHeading}
                         onChange={handleChange}
                       />
                     </div>
@@ -795,7 +1028,7 @@ function EditHome(props) {
                       <input
                         type="text"
                         name="contactEmail"
-                        value={homeData.contactEmail}
+                        value={homeData?.contactEmail}
                         onChange={handleChange}
                       />
                     </div>
@@ -805,11 +1038,23 @@ function EditHome(props) {
                 <Row>
                   <Col>
                     <div className="add-product-input-div">
+                      <p>Phone Number</p>
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        value={homeData?.phoneNumber}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </Col>
+
+                  <Col>
+                    <div className="add-product-input-div">
                       <p>Contact Mailchimp Key</p>
                       <input
                         type="text"
                         name="contactMailchimpKey"
-                        value={homeData.contactMailchimpKey}
+                        value={homeData?.contactMailchimpKey}
                         onChange={handleChange}
                       />
                     </div>

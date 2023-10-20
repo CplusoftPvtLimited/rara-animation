@@ -11,7 +11,6 @@ import Fellows from "./Core/Fellows Pages/Fellows";
 import AddFellow from "./Core/Fellows Pages/AddFellow";
 import EditFellow from "./Core/Fellows Pages/EditFellow";
 import PaymentMethods from "./Core/Payment Methods Pages/PaymentMethods";
-
 import Home from "./Core/Home/Home.js";
 import Student from "./Core/Student/Student";
 

@@ -19,7 +19,7 @@ function EditStudent(props) {
     setStudentData();
     axios({
       method: "get",
-      url: `http://localhost:4500/api/student/getStudentPage/1`,
+      url: `${process.env.REACT_APP_BACKEND}/student/getStudentPage/1`,
     })
       .then((response) => {
         setStudentData(response.data.student[0]);
@@ -44,7 +44,7 @@ function EditStudent(props) {
       console.log("***updatedData: ", studentData);
       const response = await axios
         .put(
-          `http://localhost:4500/api/student/updateStudentPage/1`,
+          `${process.env.REACT_APP_BACKEND}/student/updateStudentPage/1`,
           studentData
         )
         .then((response) => {

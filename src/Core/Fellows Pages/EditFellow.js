@@ -21,6 +21,9 @@ function EditFellow(props) {
   const file5InputRef = useRef(null);
   const file6InputRef = useRef(null);
   const file7InputRef = useRef(null);
+  const file8InputRef = useRef(null);
+  const file9InputRef = useRef(null);
+  const file10InputRef = useRef(null);
 
   const thumbsContainer = {
     display: "flex",
@@ -95,10 +98,9 @@ function EditFellow(props) {
     setProfileData();
     try {
       const response = await axios.get(
-        `http://localhost:4500/api/profile/${profileId}`
+        `${process.env.REACT_APP_BACKEND}/profile/${profileId}`
       );
       const data = response.data.profile;
-      console.log("🚀 ~ file: EditFellow.js:98 ~ getProfile ~ data:", data);
       const { pictureSlider, ...profileDataWithoutPictureSlider } =
         response.data?.profile;
       setProfileData(profileDataWithoutPictureSlider);
@@ -126,18 +128,21 @@ function EditFellow(props) {
     const file = event.target.files[0];
     console.log("File:", file);
     const reader = new FileReader();
+
     reader.onloadend = () => {
       if (name) {
-        setImagePreviewUrl((prev) => [
-          ...prev,
-          { path: name, file: reader.result },
-        ]);
+        setImagePreviewUrl((prev) => {
+          const updatedPreview = prev.filter((item) => item.path !== name);
+          return [...updatedPreview, { path: name, file: reader.result }];
+        });
+
         setProfileData((prev) => ({
           ...prev,
           [name]: file,
         }));
       }
     };
+
     if (file) {
       reader.readAsDataURL(file);
     }
@@ -161,7 +166,7 @@ function EditFellow(props) {
     try {
       console.log("updatedData: ", updatedData);
       const response = await axios.patch(
-        `http://localhost:4500/api/profile/updateProfile/${profileId}`,
+        `${process.env.REACT_APP_BACKEND}/profile/updateProfile/${profileId}`,
         updatedData,
         {
           headers: {
@@ -191,6 +196,10 @@ function EditFellow(props) {
       console.log("err: ", err);
     }
   };
+  // console.log(
+  //   "🚀 ~ file: EditFellow.js:195 ~ EditFellow ~ pictureSliderArray:",
+  //   pictureSliderArray
+  // );
   return (
     <div className="dashboard-parent-div">
       <Row>
@@ -433,10 +442,6 @@ function EditFellow(props) {
                     <p>Animated Image</p>
                     <div className="add-product-image-div">
                       <div className="product-image-div">
-                        {console.log(
-                          "Profile ---------",
-                          profileData.animatedImage
-                        )}
                         <img
                           src={
                             imagePreviewUrl.find(
@@ -501,7 +506,6 @@ function EditFellow(props) {
                     <p>Animated Graphic - 1</p>
                     <div className="add-product-image-div">
                       <div className="product-image-div">
-                        {console.log("Profile ---------", profileData.graphic1)}
                         <img
                           src={
                             imagePreviewUrl.find(
@@ -591,6 +595,101 @@ function EditFellow(props) {
                   </Col>
                 </Row>
 
+                {/** Home Page Profile Images */}
+                <Row>
+                  <Col>
+                    <p>Cloth Animated Image</p>
+                    <div className="add-product-image-div">
+                      <div className="product-image-div">
+                        <img
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "clothAnimatedImage"
+                            )?.file ?? profileData?.clothAnimatedImage
+                          }
+                          alt="preview"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleImageClick(file8InputRef)}
+                        />
+                        <input
+                          type="file"
+                          name="clothAnimatedImage"
+                          ref={file8InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "clothAnimatedImage")
+                          }
+                          style={{ display: "none" }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col>
+                    <p>First Graphic Image</p>
+                    <div className="add-product-image-div">
+                      <div className="product-image-div">
+                        <img
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path == "firstGraphicImage"
+                            )?.file ?? profileData?.firstGraphicImage
+                          }
+                          alt="preview"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleImageClick(file9InputRef)}
+                        />
+                        <input
+                          type="file"
+                          name="firstGraphicImage"
+                          ref={file9InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "firstGraphicImage")
+                          }
+                          style={{ display: "none" }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+
+                  <Col>
+                    <p>Second Graphic Image</p>
+                    <div className="add-product-image-div">
+                      <div className="product-image-div">
+                        <img
+                          src={
+                            imagePreviewUrl.find(
+                              (item) => item.path === "secondGraphicImage"
+                            )?.file ?? profileData?.secondGraphicImage
+                          }
+                          alt="preview"
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleImageClick(file10InputRef)}
+                        />
+                        <input
+                          type="file"
+                          name="secondGraphicImage"
+                          ref={file10InputRef}
+                          onChange={(event) =>
+                            handleImageInputChange(event, "secondGraphicImage")
+                          }
+                          style={{ display: "none" }}
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
+
                 {/**Slider Image */}
                 <Row>
                   <Col>
@@ -608,12 +707,12 @@ function EditFellow(props) {
                   </Col>
                 </Row>
 
-                <Row>
+                {/* <Row>
                   <h3>Slider Images Preview</h3>
                   <div className="slider-preview">
                     <div className="product-image-div">
                       {pictureSliderArray.length > 0 &&
-                        pictureSliderArray.map((item, index) => (
+                        pictureSliderArray?.map((item, index) => (
                           <Col key={index}>
                             <img
                               src={item}
@@ -629,7 +728,7 @@ function EditFellow(props) {
                         ))}
                     </div>
                   </div>
-                </Row>
+                </Row> */}
 
                 <button
                   onClick={editFellow}

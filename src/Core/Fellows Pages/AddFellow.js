@@ -23,6 +23,9 @@ const AddProfile = () => {
     thumbnailPath: "",
     animateImage: "",
     featuredImage: "",
+    clothAnimatedImage: "",
+    firstGraphicImage: "",
+    secondGraphicImage: "",
     graphic1: "",
     graphic2: "",
     graphic3: "",
@@ -44,6 +47,9 @@ const AddProfile = () => {
     animateImage: "",
     thumbnailPath: "",
     featuredImage: "",
+    clothAnimatedImage: "",
+    firstGraphicImage: "",
+    secondGraphicImage: "",
     graphic1: "",
     graphic2: "",
     graphic3: "",
@@ -70,6 +76,9 @@ const AddProfile = () => {
       name === "animatedImage" ||
       name === "thumbnailPath" ||
       name === "featuredImage" ||
+      name === "clothAnimatedImage" ||
+      name === "firstGraphicImage" ||
+      name === "secondGraphicImage" ||
       name === "graphic1" ||
       name === "graphic2" ||
       name === "graphic3"
@@ -98,8 +107,6 @@ const AddProfile = () => {
     setValidationErrors((prev) => ({ ...prev, [name]: "" }));
   }
 
-  console.log("formData: ", formData);
-
   function handleSubmit(event) {
     event.preventDefault();
     const errors = validateForm();
@@ -119,6 +126,9 @@ const AddProfile = () => {
       formDataToSend.append("animatedImage", formData.animatedImage);
       formDataToSend.append("thumbnailPath", formData.thumbnailPath);
       formDataToSend.append("featuredImage", formData.featuredImage);
+      formDataToSend.append("clothAnimatedImage", formData.clothAnimatedImage);
+      formDataToSend.append("firstGraphicImage", formData.firstGraphicImage);
+      formDataToSend.append("secondGraphicImage", formData.secondGraphicImage);
       formDataToSend.append("graphic1", formData.graphic1);
       formDataToSend.append("graphic2", formData.graphic2);
       formDataToSend.append("graphic3", formData.graphic3);
@@ -134,7 +144,10 @@ const AddProfile = () => {
         formDataToSend.append("pictureSlider", image);
       });
       axios
-        .post("http://localhost:4500/api/profile/createProfile", formDataToSend)
+        .post(
+          `${process.env.REACT_APP_BACKEND}/profile/createProfile`,
+          formDataToSend
+        )
         .then((response) => {
           setFormData({
             name: "",
@@ -148,6 +161,9 @@ const AddProfile = () => {
             paragraph: "",
             thumbnailPath: "",
             featuredImage: "",
+            clothAnimatedImage: "",
+            firstGraphicImage: "",
+            secondGraphicImage: "",
             graphic1: "",
             graphic2: "",
             graphic3: "",
@@ -198,6 +214,39 @@ const AddProfile = () => {
 
     if (!formData.imagePath) {
       errors.imagePath = "Please select an image";
+    }
+
+    if (!formData.thumbnailPath) {
+      errors.thumbnailPath = "Please select an image";
+    }
+
+    if (!formData.animatedImage) {
+      errors.animatedImage = "Please select an image";
+    }
+
+    if (!formData.featuredImage) {
+      errors.featuredImage = "Please select an image";
+    }
+
+    if (!formData.clothAnimatedImage) {
+      errors.clothAnimatedImage = "Please select an image";
+    }
+    if (!formData.firstGraphicImage) {
+      errors.firstGraphicImage = "Please select an image";
+    }
+    if (!formData.secondGraphicImage) {
+      errors.secondGraphicImage = "Please select an image";
+    }
+    if (!formData.graphic1) {
+      errors.graphic1 = "Please select an image";
+    }
+
+    if (!formData.graphic2) {
+      errors.graphic2 = "Please select an image";
+    }
+
+    if (!formData.graphic3) {
+      errors.graphic3 = "Please select an image";
     }
 
     return errors;
@@ -347,7 +396,7 @@ const AddProfile = () => {
                     />
                     {validationErrors.paragraph && (
                       <p style={{ color: "red" }}>
-                        {validationErrors.formData.paragraph}
+                        {validationErrors.paragraph}
                       </p>
                     )}
                   </div>
@@ -491,7 +540,72 @@ const AddProfile = () => {
                   </div>
                 </Col>
               </Row>
+              {/**  Home Page Profile Images */}
 
+              <Row>
+                <Col>
+                  <div className="add-product-image-div">
+                    <div className="add-fellow-image">
+                      <p>Cloth Animated Image</p>
+                    </div>
+                    {/* <img src={image} alt='preview' /> */}
+                    <div className="product-image-div">
+                      <input
+                        type="file"
+                        name="clothAnimatedImage"
+                        // value={formData.imagePath?.name}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.clothAnimatedImage && (
+                        <p style={{ color: "red" }}>
+                          {validationErrors.clothAnimatedImage}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+
+                <Col>
+                  <div className="add-product-image-div">
+                    <div className="add-fellow-image">
+                      <p>First Graphic Image</p>
+                    </div>
+                    <div className="product-image-div">
+                      <input
+                        type="file"
+                        name="firstGraphicImage"
+                        onChange={handleChange}
+                      />
+                      {validationErrors.firstGraphicImage && (
+                        <p style={{ color: "red" }}>
+                          {validationErrors.firstGraphicImage}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+
+                <Col>
+                  <div className="add-product-image-div">
+                    <div className="add-fellow-image">
+                      <p>Second Graphic Image</p>
+                    </div>
+                    <div className="product-image-div">
+                      <input
+                        type="file"
+                        name="secondGraphicImage"
+                        onChange={handleChange}
+                      />
+                      {validationErrors.secondGraphicImage && (
+                        <p style={{ color: "red" }}>
+                          {validationErrors.secondGraphicImage}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+              {/** Animated Graphics */}
               <Row>
                 <Col>
                   <div className="add-product-image-div">
