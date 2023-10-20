@@ -66,6 +66,8 @@ const createBlogPost = async (req, res) => {
 };
 
 const getAllBlogs = async (req, res) => {
+  const blogPosts = await Blog.findAll({ order: [["createdAt", "DESC"]] });
+  console.log("getAllBlogs: ", blogPosts);
   try {
     const blogPosts = await Blog.findAll({ order: [["createdAt", "DESC"]] });
 
@@ -125,7 +127,6 @@ const getAllBlogs = async (req, res) => {
     }));
 
     res.status(200).send({ blogPosts: blogsWithCategories });
-    // res.status(200).send({ blogPosts });
   } catch (err) {
     console.log("err: ", err);
     res.status(403).json({ err });
