@@ -83,10 +83,12 @@ const index = () => {
     const getHome = async () => {
       try {
         const response = await fetch(`http://localhost:4500/api/home/getHome`);
+
         const data = await response.json();
         const homeFellow = data.home[0].fellows
           .split(",")
           .map((id) => parseInt(id, 10));
+        console.log("-----home fellows: ", data.home[0].fellows);
 
         return homeFellow;
       } catch (error) {
@@ -268,7 +270,10 @@ const index = () => {
 
   async function handleSliderRotation() {
     const sliderElements = document.querySelectorAll(".lFellows-slider-item");
-    console.log("0000****🚀 ~ file: index.jsx:271 ~ handleSliderRotation ~ sliderElements:", sliderElements)
+    console.log(
+      "0000****🚀 ~ file: index.jsx:271 ~ handleSliderRotation ~ sliderElements:",
+      sliderElements
+    );
     sliderElements.forEach((element) => {
       element.classList.remove("-isCurrent");
     });

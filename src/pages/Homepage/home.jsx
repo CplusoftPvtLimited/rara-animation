@@ -2618,8 +2618,8 @@ const index = () => {
     }
 
     firstDivlVisionScrollAnimation();
-    // secondDivlVisionScrollAnimation();
-    // thirdDivlVisionScrollAnimation();
+    secondDivlVisionScrollAnimation();
+    thirdDivlVisionScrollAnimation();
   }, []);
 
   return (
