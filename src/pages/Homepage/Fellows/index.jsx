@@ -83,6 +83,7 @@ const index = () => {
     const getHome = async () => {
       try {
         const response = await fetch(`http://localhost:4500/api/home/getHome`);
+
         const data = await response.json();
         const homeFellow = data.home[0].fellows
           .trim()
