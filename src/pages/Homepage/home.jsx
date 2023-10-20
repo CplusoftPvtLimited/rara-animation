@@ -312,7 +312,6 @@ gsap.registerPlugin(ScrollTrigger, Draggable);
 
 const index = () => {
   const [homeData, setHomeData] = useState("");
-
   useEffect(() => {
     const apiURL = "http://localhost:4500/api/home/getHome";
 
@@ -460,15 +459,15 @@ const index = () => {
     // });
 
     // Implementation
-    let circles;
-    let images;
+    // let circles;
+    // let images;
 
-    let staticImages;
-    let circleAboveImages;
+    // let staticImages;
+    // let circleAboveImages;
 
-    let imageDummy;
+    // let imageDummy;
 
-    let images1;
+    // let images1;
 
     // function init() {
     //   const screenWidth = document.documentElement.clientWidth;
@@ -1898,324 +1897,324 @@ const index = () => {
     // init();
     // animate();
 
-    function animateOnScroll() {
-      ScrollTrigger.create({
-        trigger: ".spacer",
-        scroller: scrollContainer,
-        start: "top top", // Adjust the start position based on your preference
-        onEnter: () => {
-          // When scrolling down, apply the styles to display the div
-          gsap.set(".lKv-people", {
-            opacity: 1,
-          });
-        },
-        onLeaveBack: () => {
-          // When scrolling back up, apply the styles to hide the div
-          gsap.set(".lKv-people", {
-            opacity: 0,
-          });
-        },
-      });
-    }
+    // function animateOnScroll() {
+    //   ScrollTrigger.create({
+    //     trigger: ".spacer",
+    //     scroller: scrollContainer,
+    //     start: "top top", // Adjust the start position based on your preference
+    //     onEnter: () => {
+    //       // When scrolling down, apply the styles to display the div
+    //       gsap.set(".lKv-people", {
+    //         opacity: 1,
+    //       });
+    //     },
+    //     onLeaveBack: () => {
+    //       // When scrolling back up, apply the styles to hide the div
+    //       gsap.set(".lKv-people", {
+    //         opacity: 0,
+    //       });
+    //     },
+    //   });
+    // }
 
-    function toggleDivOnScroll() {
-      const animationDuration = 1.5; // Adjust the duration of the animation in seconds
-      const animationDelay = 0.5; // Adjust the delay before the animation starts in seconds
-      let isActive = false; // Flag to track if animation is active
+    // function toggleDivOnScroll() {
+    //   const animationDuration = 1.5; // Adjust the duration of the animation in seconds
+    //   const animationDelay = 0.5; // Adjust the delay before the animation starts in seconds
+    //   let isActive = false; // Flag to track if animation is active
 
-      ScrollTrigger.create({
-        trigger: ".spacer",
-        scroller: scrollContainer,
-        start: "top top", // Adjust the start position based on your preference
-        onEnter: () => {
-          // When scrolling down, apply the styles to display the div
-          // gsap.set(".lKv-people-item-l01", {
-          //   display: "block",
-          //   transform: "translate(0, 0)",
-          //   delay: 0.5,
-          // });
-          gsap.fromTo(
-            ".-l01",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0.5,
-            }
-          );
-          gsap.fromTo(
-            ".-l02",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0.5,
-            }
-          );
-          gsap.fromTo(
-            ".-l03",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 1,
-            }
-          );
-          gsap.fromTo(
-            ".-l04",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".-l05",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0.7,
-            }
-          );
-          gsap.fromTo(
-            ".-l06",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".-l07",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 1.2,
-            }
-          );
-          gsap.fromTo(
-            ".-l08",
-            {
-              transform: "translate(-573px, 272px)",
-            },
-            {
-              transform: "translate(0, 0)",
-              duration: 1.5,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".st1",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".st2",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".st3",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.2,
-            }
-          );
-          gsap.fromTo(
-            ".st4",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.3,
-            }
-          );
-          gsap.fromTo(
-            ".st5",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.4,
-            }
-          );
-          gsap.fromTo(
-            ".st6",
-            {
-              transform: "scale(0)",
-            },
-            {
-              transform: "scale(1)",
-              duration: 1.3,
-              delay: 0.5,
-            }
-          );
-          gsap.fromTo(
-            ".lKv-coreBall",
-            {
-              transform: "scale(0.5267, 0.5267)",
-            },
-            {
-              transform: "translate(0px, -75.024px)",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-subTitle-item > img ",
-            {
-              transform: "translate(0px, 0%)",
-            },
-            {
-              transform: "translate(0px, 130%)",
-            }
-          );
-          gsap.fromTo(
-            ".cHeader-logo",
-            {
-              transform: "translate(-40px, 99.5825px)",
-              top: 0,
-              left: 0,
-            },
-            {
-              transform: "scale(0.266,0.266)",
-              top: "1.9rem",
-              left: "0rem",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-lead-text",
-            {
-              transform: "translate(0px,130%)",
-            },
-            {
-              transform: "translate(0px, 0%)",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-lead",
-            {
-              transform: "translate(0px, 130%)",
-            },
-            {
-              transform: "translate(0px,0%)",
-            }
-          );
-        },
-        onLeaveBack: () => {
-          // When scrolling back up, apply the styles to hide the div
-          gsap.fromTo(
-            ".lKv-people-item",
-            {
-              transform: "translate(0, 0)",
-            },
-            {
-              transform: "translate(-573px, 272px)",
-              duration: 1,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".st",
-            {
-              transform: "scale(1)",
-            },
-            {
-              transform: "scale(0)",
-              duration: 0.5,
-              delay: 0,
-            }
-          );
-          gsap.fromTo(
-            ".lKv-coreBall",
-            { transform: "translate(0px, -108.024px)" },
-            {
-              transform: "scale(0.5267, 0.5267)",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-subTitle-item > img ",
-            {
-              transform: "translate(0px, 130%)",
-            },
-            {
-              transform: "translate(0px, 0%)",
-            }
-          );
-          gsap.fromTo(
-            ".cHeader-logo",
-            {
-              transform: "scale(0.266,0.266)",
-              top: "1.9rem",
-              left: "0rem",
-            },
-            {
-              transform: "translate(0px, 108.5825px)",
-              top: 0,
-              left: 0,
-            }
-          );
-          gsap.fromTo(
-            ".lKv-lead-text",
-            {
-              transform: "translate(0px, 0%)",
-            },
-            {
-              transform: "translate(0px,130%)",
-            }
-          );
-          gsap.fromTo(
-            ".lKv-lead",
-            {
-              transform: "translate(0px, 0%)",
-            },
-            {
-              transform: "translate(0px,130%)",
-            }
-          );
-        },
-      });
-    }
+    //   ScrollTrigger.create({
+    //     trigger: ".spacer",
+    //     scroller: scrollContainer,
+    //     start: "top top", // Adjust the start position based on your preference
+    //     onEnter: () => {
+    //       // When scrolling down, apply the styles to display the div
+    //       // gsap.set(".lKv-people-item-l01", {
+    //       //   display: "block",
+    //       //   transform: "translate(0, 0)",
+    //       //   delay: 0.5,
+    //       // });
+    //       gsap.fromTo(
+    //         ".-l01",
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //         },
+    //         {
+    //           transform: "translate(0, 0)",
+    //           duration: 1.5,
+    //           delay: 0.5,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".-l02",
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //         },
+    //         {
+    //           transform: "translate(0, 0)",
+    //           duration: 1.5,
+    //           delay: 0.5,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".-l03",
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //         },
+    //         {
+    //           transform: "translate(0, 0)",
+    //           duration: 1.5,
+    //           delay: 1,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".-l04",
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //         },
+    //         {
+    //           transform: "translate(0, 0)",
+    //           duration: 1.5,
+    //           delay: 0,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".-l05",
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //         },
+    //         {
+    //           transform: "translate(0, 0)",
+    //           duration: 1.5,
+    //           delay: 0.7,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".-l06",
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //         },
+    //         {
+    //           transform: "translate(0, 0)",
+    //           duration: 1.5,
+    //           delay: 0,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".-l07",
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //         },
+    //         {
+    //           transform: "translate(0, 0)",
+    //           duration: 1.5,
+    //           delay: 1.2,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".-l08",
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //         },
+    //         {
+    //           transform: "translate(0, 0)",
+    //           duration: 1.5,
+    //           delay: 0,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".st1",
+    //         {
+    //           transform: "scale(0)",
+    //         },
+    //         {
+    //           transform: "scale(1)",
+    //           duration: 1,
+    //           delay: 0,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".st2",
+    //         {
+    //           transform: "scale(0)",
+    //         },
+    //         {
+    //           transform: "scale(1)",
+    //           duration: 1.3,
+    //           delay: 0,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".st3",
+    //         {
+    //           transform: "scale(0)",
+    //         },
+    //         {
+    //           transform: "scale(1)",
+    //           duration: 1.3,
+    //           delay: 0.2,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".st4",
+    //         {
+    //           transform: "scale(0)",
+    //         },
+    //         {
+    //           transform: "scale(1)",
+    //           duration: 1.3,
+    //           delay: 0.3,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".st5",
+    //         {
+    //           transform: "scale(0)",
+    //         },
+    //         {
+    //           transform: "scale(1)",
+    //           duration: 1.3,
+    //           delay: 0.4,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".st6",
+    //         {
+    //           transform: "scale(0)",
+    //         },
+    //         {
+    //           transform: "scale(1)",
+    //           duration: 1.3,
+    //           delay: 0.5,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".lKv-coreBall",
+    //         {
+    //           transform: "scale(0.5267, 0.5267)",
+    //         },
+    //         {
+    //           transform: "translate(0px, -75.024px)",
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".lKv-subTitle-item > img ",
+    //         {
+    //           transform: "translate(0px, 0%)",
+    //         },
+    //         {
+    //           transform: "translate(0px, 130%)",
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".cHeader-logo",
+    //         {
+    //           transform: "translate(-40px, 99.5825px)",
+    //           top: 0,
+    //           left: 0,
+    //         },
+    //         {
+    //           transform: "scale(0.266,0.266)",
+    //           top: "1.9rem",
+    //           left: "0rem",
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".lKv-lead-text",
+    //         {
+    //           transform: "translate(0px,130%)",
+    //         },
+    //         {
+    //           transform: "translate(0px, 0%)",
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".lKv-lead",
+    //         {
+    //           transform: "translate(0px, 130%)",
+    //         },
+    //         {
+    //           transform: "translate(0px,0%)",
+    //         }
+    //       );
+    //     },
+    //     onLeaveBack: () => {
+    //       // When scrolling back up, apply the styles to hide the div
+    //       gsap.fromTo(
+    //         ".lKv-people-item",
+    //         {
+    //           transform: "translate(0, 0)",
+    //         },
+    //         {
+    //           transform: "translate(-573px, 272px)",
+    //           duration: 1,
+    //           delay: 0,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".st",
+    //         {
+    //           transform: "scale(1)",
+    //         },
+    //         {
+    //           transform: "scale(0)",
+    //           duration: 0.5,
+    //           delay: 0,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".lKv-coreBall",
+    //         { transform: "translate(0px, -108.024px)" },
+    //         {
+    //           transform: "scale(0.5267, 0.5267)",
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".lKv-subTitle-item > img ",
+    //         {
+    //           transform: "translate(0px, 130%)",
+    //         },
+    //         {
+    //           transform: "translate(0px, 0%)",
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".cHeader-logo",
+    //         {
+    //           transform: "scale(0.266,0.266)",
+    //           top: "1.9rem",
+    //           left: "0rem",
+    //         },
+    //         {
+    //           transform: "translate(0px, 108.5825px)",
+    //           top: 0,
+    //           left: 0,
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".lKv-lead-text",
+    //         {
+    //           transform: "translate(0px, 0%)",
+    //         },
+    //         {
+    //           transform: "translate(0px,130%)",
+    //         }
+    //       );
+    //       gsap.fromTo(
+    //         ".lKv-lead",
+    //         {
+    //           transform: "translate(0px, 0%)",
+    //         },
+    //         {
+    //           transform: "translate(0px,130%)",
+    //         }
+    //       );
+    //     },
+    //   });
+    // }
 
     // Call the function to start the animations
-    animateOnScroll();
-    toggleDivOnScroll();
+    // animateOnScroll();
+    // toggleDivOnScroll();
 
     let scrollDirection = 1;
 
@@ -2619,8 +2618,8 @@ const index = () => {
     }
 
     firstDivlVisionScrollAnimation();
-    secondDivlVisionScrollAnimation();
-    thirdDivlVisionScrollAnimation();
+    // secondDivlVisionScrollAnimation();
+    // thirdDivlVisionScrollAnimation();
   }, []);
 
   return (
