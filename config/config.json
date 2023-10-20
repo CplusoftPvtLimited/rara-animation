@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "123",
-    "database": "rara",
+    "password": "",
+    "database": "newRaraDB",
     "host": "localhost",
     "dialect": "mysql"
   },

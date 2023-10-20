@@ -243,6 +243,10 @@ const Home = sequelize.define("Home", {
       notEmpty: true,
     },
   },
+  phoneNumber: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
   createdAt: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
