@@ -1,7 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
+import axios from "axios";
 
 const index = () => {
+  const [fellowData, setFellowData] = useState([]);
+  const [blogData, setBlogData] = useState([]);
+  const [homeData, setHomeData] = useState([]);
+  const [selectedBlog, setSelectedBlogs] = useState([]);
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `http://localhost:4500/api/profile/getAllProfiles`,
+    })
+      .then((response) => {
+        setFellowData(response.data.profiles);
+      })
+      .catch((error) => {
+        console.log("No profile found", error.message);
+      });
+  }, []);
+
+  useEffect(() => {
+    // Define an async function to fetch home data
+    const getHome = async () => {
+      try {
+        const response = await fetch(`http://localhost:4500/api/home/getHome`);
+        const data = await response.json();
+        const homeBlog = data.home[0].blogs
+          .split(",")
+          .map((id) => parseInt(id, 10));
+        return homeBlog;
+      } catch (error) {
+        console.log("Error fetching home data:", error.message);
+        return [];
+      }
+    };
+
+    // Define a function to fetch blog data and filter it
+    const fetchAndFilterBlogData = async () => {
+      try {
+        const [homeBlogIds, blogResponse] = await Promise.all([
+          getHome(),
+          axios({
+            method: "get",
+            url: `http://localhost:4500/api/blog/getAllBlogPosts`,
+          }),
+        ]);
+        console.log(
+          "🚀 ~ file: index.jsx:50 ~ fetchAndFilterBlogData ~ homeBlogIds:",
+          homeBlogIds
+        );
+
+        const blogData = blogResponse.data.blogPosts;
+
+        // Filter the blog data based on homeBlogIds
+        const selectedBlogs = blogData.filter((blog) =>
+          homeBlogIds.includes(blog.id)
+        );
+        setBlogData(selectedBlogs);
+      } catch (error) {
+        console.log("Error fetching or filtering blog data:", error.message);
+      }
+    };
+    fetchAndFilterBlogData();
+  }, []);
+
   return (
     <div
       className="cContainer -leftWide -rightWide -spLeftSmall -spRightSmall lUpdates"
@@ -120,8 +183,7 @@ const index = () => {
       </div>
 
       {/* list */}
-      <div></div>
-      <ul className="lUpdates-List">
+      {/* <ul className="lUpdates-List">
         <li className="cUpdatesItem -wide">
           <a
             className="cUpdatesItem-inner"
@@ -212,6 +274,40 @@ const index = () => {
             </div>
           </a>
         </li>
+      </ul> */}
+
+      <ul className="lUpdates-List">
+        {blogData.map((blog, index) => (
+          <li className="cUpdatesItem -wide" key={index}>
+            <a className="cUpdatesItem-inner" href="#">
+              <div className="cUpdatesItem-thumbnail">
+                <img
+                  className="cUpdatesItem-image"
+                  src={blog.imagePath}
+                  alt=""
+                />
+              </div>
+              <div className="cUpdatesItem-detail">
+                <p className="cUpdatesItem-category">
+                  <span className="category">
+                    {blog.category.title} / {blog.fellow.name}
+                  </span>
+                </p>
+                <h3 className="cUpdatesItem-articleTitle">{blog.title}</h3>
+                <div className="cUpdatesItem-bottom">
+                  <p className="cUpdatesItem-date">
+                    {new Date(blog.activationDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })}
+                  </p>
+                  <p className="cUpdatesItem-more">VIEW DETAIL</p>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))}
       </ul>
 
       <div className="lUpdates-linkArea">
