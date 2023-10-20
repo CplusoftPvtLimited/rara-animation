@@ -11,6 +11,9 @@ const keysRoutes = require("./routes/keysRoutes");
 const coinbaseKeysRoutes = require("./routes/coinbaseKeysRoutes");
 const bankRoutes = require("./routes/bankRoutes");
 const RssFeedRoutes = require("./routes/RssFeedRoutes");
+const homeRoutes = require("./routes/homeRoutes");
+
+const studentRoutes = require("./routes/studentRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 4500;
@@ -36,7 +39,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/blog", blogRoutes);
 //Category Route
 app.use("/api/category", categoryRoutes);
-//Profile Route
+// Home Route
+app.use("/api/home", homeRoutes);
 app.use("/api/profile", profileRoutes);
 //Stripe Payment Route
 app.use("/api/checkout", checkoutRoute);
@@ -50,6 +54,8 @@ app.use("/api/bank", bankRoutes);
 
 // RSS Route
 app.use("/api/news", RssFeedRoutes);
+
+app.use("/api/student", studentRoutes);
 
 // Start the server
 app.listen(PORT, () => {
