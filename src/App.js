@@ -11,6 +11,7 @@ import Updates from "./pages/Updates/index";
 import UpdateSingle from "./pages/update-single/index";
 import Student from "./pages/student/index";
 import Donation from "./pages/donate/index";
+import Sponsership from "./pages/sponsership/index";
 import Checkout from "./components/Donation/checkout/Checkout";
 import PaymentCompletionPage from "./pages/donate/PaymentSuccess";
 
@@ -50,6 +51,8 @@ function App() {
           <Route path="/blog/:blogId" element={<UpdateSingle />} />
           <Route path="/student" element={<Student />} />
           <Route path="/donation" element={<Donation />} />
+          <Route path="/sponsership" element={<Sponsership />} />
+
           {keyData?.active ? (
             <Route path="/stripe" element={<Checkout />} />
           ) : (
