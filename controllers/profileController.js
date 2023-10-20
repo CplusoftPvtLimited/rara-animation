@@ -49,6 +49,9 @@ const createProfile = async (req, res) => {
     const imagePath = req.files.imagePath[0].path;
     const animatedImage = req.files.animatedImage[0].path;
     const featuredImagePath = req.files.featuredImage[0].path;
+    const clothAnimatedImage = req.files.clothAnimatedImage[0].path;
+    const firstGraphicImage = req.files.firstGraphicImage[0].path;
+    const secondGraphicImage = req.files.secondGraphicImage[0].path;
     const graphic1 = req.files.graphic1[0].path;
     const graphic2 = req.files.graphic2[0].path;
     const graphic3 = req.files.graphic3[0].path;
@@ -75,6 +78,9 @@ const createProfile = async (req, res) => {
       imagePath: baseUrl + imagePath,
       animatedImage: baseUrl + animatedImage,
       featuredImage: baseUrl + featuredImagePath,
+      clothAnimatedImage: baseUrl + clothAnimatedImage,
+      firstGraphicImage: baseUrl + firstGraphicImage,
+      secondGraphicImage: baseUrl + secondGraphicImage,
       graphic1: baseUrl + graphic1,
       graphic2: baseUrl + graphic2,
       graphic3: baseUrl + graphic3,
@@ -190,6 +196,25 @@ const updateProfile = async (req, res) => {
       req.files?.featuredImage && typeof req.files?.featuredImage == "object"
         ? baseUrl + req.files?.featuredImage[0].path
         : profile.featuredImage;
+
+    const clothAnimatedImage =
+      req.files?.clothAnimatedImage &&
+      typeof req.files?.clothAnimatedImage == "object"
+        ? baseUrl + req.files?.clothAnimatedImage[0].path
+        : profile.clothAnimatedImage;
+
+    const firstGraphicImage =
+      req.files?.firstGraphicImage &&
+      typeof req.files?.firstGraphicImage == "object"
+        ? baseUrl + req.files?.firstGraphicImage[0].path
+        : profile.firstGraphicImage;
+
+    const secondGraphicImage =
+      req.files?.secondGraphicImage &&
+      typeof req.files?.secondGraphicImage == "object"
+        ? baseUrl + req.files?.secondGraphicImage[0].path
+        : profile.secondGraphicImage;
+
     const graphic1 =
       req.files?.graphic1 && typeof req.files?.graphic1 == "object"
         ? baseUrl + req.files?.graphic1[0].path
@@ -222,6 +247,9 @@ const updateProfile = async (req, res) => {
       thumbnailPath: thumbnailPath,
       imagePath: imagePath,
       animatedImage: animatedImage,
+      clothAnimatedImage,
+      firstGraphicImage,
+      secondGraphicImage,
       featuredImage: featuredImagePath,
       pictureSlider: pictureSliderJSON,
       graphic1: graphic1,

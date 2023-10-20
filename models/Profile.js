@@ -69,6 +69,18 @@ const Profile = sequelize.define("Profile", {
     type: DataTypes.STRING,
     // allowNull: true,
   },
+  clothAnimatedImage: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  firstGraphicImage: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
+  secondGraphicImage: {
+    type: DataTypes.STRING,
+    // allowNull: true,
+  },
   graphic1: {
     type: DataTypes.STRING,
     // allowNull: true,
