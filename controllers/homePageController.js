@@ -30,6 +30,7 @@ const addHome = async (req, res) => {
     blogs,
     contactHeading,
     contactEmail,
+    phoneNumber,
     contactMailchimpKey,
   } = req.body;
 
@@ -59,6 +60,7 @@ const addHome = async (req, res) => {
     "blogs",
     "contactHeading",
     "contactEmail",
+    "phoneNumber",
     "contactMailchimpKey",
   ];
 
@@ -116,6 +118,7 @@ const addHome = async (req, res) => {
       blogs,
       contactHeading,
       contactEmail,
+      phoneNumber,
       contactMailchimpKey,
     });
 
@@ -243,6 +246,7 @@ const updateHome = async (req, res) => {
       blogs: req.body.blogs || home.blogs,
       contactHeading: req.body.contactHeading || home.contactHeading,
       contactEmail: req.body.contactEmail || home.contactEmail,
+      phoneNumber: req.body.phoneNumber || home.phoneNumber,
       contactMailchimpKey:
         req.body.contactMailchimpKey || home.contactMailchimpKey,
     };

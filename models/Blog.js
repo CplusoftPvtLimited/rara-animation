@@ -1,8 +1,8 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const RelatedBlog = require('./RelatedBlog');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
+const RelatedBlog = require("./RelatedBlog");
 
-const Blog = sequelize.define('Blog', {
+const Blog = sequelize.define("Blog", {
   imagePath: {
     type: DataTypes.STRING,
     allowNull: true,

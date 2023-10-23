@@ -104,6 +104,8 @@ const createProfile = async (req, res) => {
 };
 
 const getAllProfiles = async (req, res) => {
+  const profiles = await Profile.findAll({ order: [["createdAt", "DESC"]] });
+  console.log("profiles: ", profiles);
   try {
     const profiles = await Profile.findAll({ order: [["createdAt", "DESC"]] });
     if (!profiles.length) {
