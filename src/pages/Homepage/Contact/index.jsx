@@ -349,7 +349,7 @@ const index = ({ props }) => {
               href="tel:(302) 200-6733"
             >
               {/* {homeData.phoneNumber} */}
-              xxx-xxx-xxx
+              {homeData.phoneNumber}
             </a>
             <button
               className="lContact-link -newsletter"
