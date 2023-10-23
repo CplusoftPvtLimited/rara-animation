@@ -69,7 +69,8 @@ const addHome = async (req, res) => {
   }
 
   try {
-    const baseUrl = "https://backend.pecunia.institute/";
+    // const baseUrl = "https://backend.pecunia.institute/";
+    const baseUrl = "http://localhost:4500/";
     let mainResearchImage = baseUrl + req.files.mainResearchImage[0].path;
     let card1Image = baseUrl + req.files.card1Image[0].path;
     let card2Image = baseUrl + req.files.card2Image[0].path;
@@ -152,8 +153,8 @@ const updateHome = async (req, res) => {
       return res.status(404).json({ error: "No Info Found" });
     }
 
-    const baseUrl = "https://backend.pecunia.institute/";
-    // const baseUrl = "http://localhost:4500/";
+    // const baseUrl = "https://backend.pecunia.institute/";
+    const baseUrl = "http://localhost:4500/";
     const mainResearchImage =
       req.files?.mainResearchImage &&
       typeof req.files?.mainResearchImage == "object"
