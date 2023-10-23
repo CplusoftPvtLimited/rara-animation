@@ -1330,7 +1330,8 @@ const index = () => {
                       />
                     </div>
                   </div>
-                  <div className="lGuideline-card-item-back">
+
+                  <div className="lGuideline-card-item-back" id="fellows">
                     <img
                       className="lGuideline-card-item-back-illust -l04"
                       src={homeData.card4Image}

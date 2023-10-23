@@ -21,7 +21,7 @@ const index = ({ props }) => {
       }
     };
     getHomeData();
-  });
+  }, []);
 
   return (
     <div
@@ -348,7 +348,8 @@ const index = ({ props }) => {
               data-whatintent="mouse"
               href="tel:(302) 200-6733"
             >
-              {homeData.phoneNumber}
+              {/* {homeData.phoneNumber} */}
+              xxx-xxx-xxx
             </a>
             <button
               className="lContact-link -newsletter"

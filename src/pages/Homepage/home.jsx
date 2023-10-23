@@ -328,7 +328,7 @@ const index = () => {
       }
     };
     getHomeData();
-  });
+  }, []);
 
   useEffect(() => {
     // const canvas = document.querySelector("#canvas1");
@@ -2957,7 +2957,11 @@ const index = () => {
                   color: "#707070",
                 }}
               >
-                {homeData.mainAbout}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainAbout,
+                  }}
+                />
                 <br />
               </div>
               <div
@@ -2970,7 +2974,11 @@ const index = () => {
                   fontFamily: "sans-serif",
                 }}
               >
-                {homeData.mainEstablish}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainEstablish,
+                  }}
+                />
               </div>
             </div>
             <div
@@ -3084,14 +3092,22 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
               >
-                {homeData.mainResearchTitle}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainResearchTitle,
+                  }}
+                />
               </div>
               <div
                 className="cFlatText lVision-section-writing-text"
                 data-flat-text=""
                 style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
               >
-                {homeData.mainDescription}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainDescription,
+                  }}
+                />
               </div>
             </div>
 
