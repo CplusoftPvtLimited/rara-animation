@@ -115,6 +115,24 @@ function EditHome(props) {
     setHomeData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // const handleImageInputChange = (event, name) => {
+  //   const file = event.target.files[0];
+  //   console.log("File:", file);
+  //   const reader = new FileReader();
+
+  //   reader.onloadend = () => {
+  //     if (name) {
+  //       setImagePreviewUrl((prev) => {
+  //         const updatedPreview = prev.filter((item) => item.path !== name);
+  //         return [...updatedPreview, { path: name, file: reader.result }];
+  //       });
+
+  //       setHomeData((prev) => ({
+  //         ...prev,
+  //         [name]: file,
+  //       }));
+  //     }
+  //   };
   const handleImageInputChange = (event, name) => {
     const file = event.target.files[0];
     console.log("File:", file);
@@ -195,6 +213,7 @@ function EditHome(props) {
     );
     updatedData.append("contactHeading", homeData.contactHeading);
     updatedData.append("contactEmail", homeData.contactEmail);
+    updatedData.append("phoneNumber", homeData.phoneNumber);
     updatedData.append("contactMailchimpKey", homeData.contactMailchimpKey);
     try {
       console.log("updatedData: ", updatedData);
@@ -238,6 +257,7 @@ function EditHome(props) {
             cardGuidelineDescription: "",
             contactHeading: "",
             contactEmail: "",
+            phoneNumber: "",
             contactMailchimpKey: "",
           });
           history.push("/");
@@ -997,7 +1017,7 @@ function EditHome(props) {
                       <input
                         type="text"
                         name="contactHeading"
-                        value={homeData.contactHeading}
+                        value={homeData?.contactHeading}
                         onChange={handleChange}
                       />
                     </div>
@@ -1008,7 +1028,7 @@ function EditHome(props) {
                       <input
                         type="text"
                         name="contactEmail"
-                        value={homeData.contactEmail}
+                        value={homeData?.contactEmail}
                         onChange={handleChange}
                       />
                     </div>
@@ -1018,11 +1038,23 @@ function EditHome(props) {
                 <Row>
                   <Col>
                     <div className="add-product-input-div">
+                      <p>Phone Number</p>
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        value={homeData?.phoneNumber}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </Col>
+
+                  <Col>
+                    <div className="add-product-input-div">
                       <p>Contact Mailchimp Key</p>
                       <input
                         type="text"
                         name="contactMailchimpKey"
-                        value={homeData.contactMailchimpKey}
+                        value={homeData?.contactMailchimpKey}
                         onChange={handleChange}
                       />
                     </div>
