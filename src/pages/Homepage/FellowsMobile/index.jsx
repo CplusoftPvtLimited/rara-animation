@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./index.css";
+import axios from "axios";
 
 gsap.registerPlugin(ScrollTrigger);
 
