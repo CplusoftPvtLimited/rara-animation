@@ -695,7 +695,7 @@ const index = () => {
                 data-fellows-subtitle=""
                 style={{ overflow: "hidden" }}
               >
-                <div
+                {/* <div
                   className="cFlatText cSubTitle-inner"
                   data-flat-text=""
                   style={{ padding: "0px 1.625px", transform: "scaleX(1.05)" }}
@@ -742,7 +742,7 @@ const index = () => {
                   >
                     介
                   </span>
-                </div>
+                </div> */}
               </div>
             </div>
             <div
@@ -752,10 +752,10 @@ const index = () => {
               onMouseLeave={handleMouseLeave}
               onClick={handleSliderRotation}
             >
-              <div className="button-container">
+              {/* <div className="button-container">
                 <button className="next-button">Next</button>
                 <button className="prev-button">Next</button>
-              </div>
+              </div> */}
               <div
                 className="cSliderMouseStalker"
                 data-slider-stalker=""
@@ -917,7 +917,7 @@ const index = () => {
                   ></div>
                 </div>
               </div>
-              <div className="lFellows-slider-info-more">
+              {/* <div className="lFellows-slider-info-more">
                 <a
                   className="lFellows-slider-info-more-link"
                   href="https://rara.ritsumei.ac.jp/fellows/yuki-orikasa/"
@@ -933,7 +933,7 @@ const index = () => {
                     height="15"
                   ></svg>
                 </a>
-              </div>
+              </div> */}
               {/* <ul className="lFellows-slider-dots" data-slider-dots="">
                     <li className="lFellows-slider-dots-item"></li>
                     <li className="lFellows-slider-dots-item"></li>
