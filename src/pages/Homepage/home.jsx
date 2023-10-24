@@ -306,7 +306,7 @@ import {
   getResponsiveBlueR_AlphabetDimensions,
 } from "../../components/homeCanvas/Images/BlueR_Alphabet";
 
-import videoSrc from "../../assets/videos/WeAreWVÉS.mp4";
+import videoSrc from "../../assets/videos/WeAreOne.mp4";
 
 import FooterContainer from "./FooterContainer/index";
 
