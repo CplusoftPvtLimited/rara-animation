@@ -292,7 +292,7 @@ const index = () => {
               <div className="cUpdatesItem-detail">
                 <p className="cUpdatesItem-category">
                   <span className="category">
-                    {blog.category.title} / {blog.fellow.name}
+                    {blog?.category?.title} / {blog?.fellow?.name}
                   </span>
                 </p>
                 <h3 className="cUpdatesItem-articleTitle">{blog.title}</h3>
