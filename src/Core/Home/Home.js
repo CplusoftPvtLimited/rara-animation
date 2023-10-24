@@ -166,107 +166,111 @@ function EditHome(props) {
 
   const editHome = (event) => {
     event.preventDefault();
-    const updatedData = new FormData();
-    updatedData.append("mainHeading", homeData.mainHeading);
-    updatedData.append("mainSubHeading", homeData.mainSubHeading);
-    updatedData.append("mainAbout", homeData.mainAbout);
-    updatedData.append("mainEstablish", homeData.mainEstablish);
-    updatedData.append("mainDescription", homeData.mainDescription);
-    updatedData.append("mainAim", homeData.mainAim);
-    updatedData.append("mainResearchImage", homeData.mainResearchImage);
-    updatedData.append("mainResearchTitle", homeData.mainResearchTitle);
-    updatedData.append(
-      "mainResearchDescription",
-      homeData.mainResearchDescription
-    );
-    updatedData.append("card1Heading", homeData.card1Heading);
-    updatedData.append("card1Image", homeData.card1Image);
-    updatedData.append("card1Title", homeData.card1Title);
-    updatedData.append("card1Description", homeData.card1Description);
-    updatedData.append("card1InsideImage", homeData.card1InsideImage);
-    updatedData.append("card2Heading", homeData.card2Heading);
-    updatedData.append("card2Image", homeData.card2Image);
-    updatedData.append("card2Title", homeData.card2Title);
-    updatedData.append("card2Description", homeData.card2Description);
-    updatedData.append("card2InsideImage", homeData.card2InsideImage);
-    updatedData.append("card3Heading", homeData.card3Heading);
-    updatedData.append("card3Image", homeData.card3Image);
-    updatedData.append("card3Title", homeData.card3Title);
-    updatedData.append("card3Description", homeData.card3Description);
-    updatedData.append("card3InsideImage", homeData.card3InsideImage);
-    updatedData.append("card4Heading", homeData.card4Heading);
-    updatedData.append("card4Image", homeData.card4Image);
-    updatedData.append("card4Title", homeData.card4Title);
+    if (fellowIds?.length < 5) {
+      alert("Please select atleast 5 fellows in multi-select");
+    } else {
+      const updatedData = new FormData();
+      updatedData.append("mainHeading", homeData.mainHeading);
+      updatedData.append("mainSubHeading", homeData.mainSubHeading);
+      updatedData.append("mainAbout", homeData.mainAbout);
+      updatedData.append("mainEstablish", homeData.mainEstablish);
+      updatedData.append("mainDescription", homeData.mainDescription);
+      updatedData.append("mainAim", homeData.mainAim);
+      updatedData.append("mainResearchImage", homeData.mainResearchImage);
+      updatedData.append("mainResearchTitle", homeData.mainResearchTitle);
+      updatedData.append(
+        "mainResearchDescription",
+        homeData.mainResearchDescription
+      );
+      updatedData.append("card1Heading", homeData.card1Heading);
+      updatedData.append("card1Image", homeData.card1Image);
+      updatedData.append("card1Title", homeData.card1Title);
+      updatedData.append("card1Description", homeData.card1Description);
+      updatedData.append("card1InsideImage", homeData.card1InsideImage);
+      updatedData.append("card2Heading", homeData.card2Heading);
+      updatedData.append("card2Image", homeData.card2Image);
+      updatedData.append("card2Title", homeData.card2Title);
+      updatedData.append("card2Description", homeData.card2Description);
+      updatedData.append("card2InsideImage", homeData.card2InsideImage);
+      updatedData.append("card3Heading", homeData.card3Heading);
+      updatedData.append("card3Image", homeData.card3Image);
+      updatedData.append("card3Title", homeData.card3Title);
+      updatedData.append("card3Description", homeData.card3Description);
+      updatedData.append("card3InsideImage", homeData.card3InsideImage);
+      updatedData.append("card4Heading", homeData.card4Heading);
+      updatedData.append("card4Image", homeData.card4Image);
+      updatedData.append("card4Title", homeData.card4Title);
 
-    // if (typeof JSON !== "undefined" && typeof JSON.stringify === "function") {
-    //   updatedData.append("fellows", JSON.stringify(homeData.fellows));
-    // } else {
-    //   updatedData.append("fellows", homeData.fellows.join(","));
-    // }
-    updatedData.append("fellows", fellowIds);
-    updatedData.append("blogs", blogIds);
-    updatedData.append("card4Description", homeData.card4Description);
-    updatedData.append("card4InsideImage", homeData.card4InsideImage);
-    updatedData.append(
-      "cardGuidelineDescription",
-      homeData.cardGuidelineDescription
-    );
-    updatedData.append("contactHeading", homeData.contactHeading);
-    updatedData.append("contactEmail", homeData.contactEmail);
-    updatedData.append("phoneNumber", homeData.phoneNumber);
-    updatedData.append("contactMailchimpKey", homeData.contactMailchimpKey);
-    try {
-      console.log("updatedData: ", updatedData);
-      axios
-        .patch(
-          `${process.env.REACT_APP_BACKEND}/home/updateHome/1`,
-          updatedData
-        )
-        .then((response) => {
-          console.log("edit data", response);
-          setHomeData({
-            mainHeading: "",
-            mainSubHeading: "",
-            mainAbout: "",
-            mainEstablish: "",
-            mainDescription: "",
-            mainAim: "",
-            mainResearchImage: "",
-            mainResearchTitle: "",
-            mainResearchDescription: "",
-            card1Heading: "",
-            card1Image: "",
-            card1Title: "",
-            card1Description: "",
-            card1InsideImage: "",
-            card2Heading: "",
-            card2Image: "",
-            card2Title: "",
-            card2Description: "",
-            card2InsideImage: "",
-            card3Heading: "",
-            card3Image: "",
-            card3Title: "",
-            card3Description: "",
-            card3InsideImage: "",
-            card4Heading: "",
-            card4Image: "",
-            card4Title: "",
-            card4Description: "",
-            card4InsideImage: "",
-            cardGuidelineDescription: "",
-            contactHeading: "",
-            contactEmail: "",
-            phoneNumber: "",
-            contactMailchimpKey: "",
+      // if (typeof JSON !== "undefined" && typeof JSON.stringify === "function") {
+      //   updatedData.append("fellows", JSON.stringify(homeData.fellows));
+      // } else {
+      //   updatedData.append("fellows", homeData.fellows.join(","));
+      // }
+      updatedData.append("fellows", fellowIds);
+      updatedData.append("blogs", blogIds);
+      updatedData.append("card4Description", homeData.card4Description);
+      updatedData.append("card4InsideImage", homeData.card4InsideImage);
+      updatedData.append(
+        "cardGuidelineDescription",
+        homeData.cardGuidelineDescription
+      );
+      updatedData.append("contactHeading", homeData.contactHeading);
+      updatedData.append("contactEmail", homeData.contactEmail);
+      updatedData.append("phoneNumber", homeData.phoneNumber);
+      updatedData.append("contactMailchimpKey", homeData.contactMailchimpKey);
+      try {
+        console.log("updatedData: ", updatedData);
+        axios
+          .patch(
+            `${process.env.REACT_APP_BACKEND}/home/updateHome/1`,
+            updatedData
+          )
+          .then((response) => {
+            console.log("edit data", response);
+            setHomeData({
+              mainHeading: "",
+              mainSubHeading: "",
+              mainAbout: "",
+              mainEstablish: "",
+              mainDescription: "",
+              mainAim: "",
+              mainResearchImage: "",
+              mainResearchTitle: "",
+              mainResearchDescription: "",
+              card1Heading: "",
+              card1Image: "",
+              card1Title: "",
+              card1Description: "",
+              card1InsideImage: "",
+              card2Heading: "",
+              card2Image: "",
+              card2Title: "",
+              card2Description: "",
+              card2InsideImage: "",
+              card3Heading: "",
+              card3Image: "",
+              card3Title: "",
+              card3Description: "",
+              card3InsideImage: "",
+              card4Heading: "",
+              card4Image: "",
+              card4Title: "",
+              card4Description: "",
+              card4InsideImage: "",
+              cardGuidelineDescription: "",
+              contactHeading: "",
+              contactEmail: "",
+              phoneNumber: "",
+              contactMailchimpKey: "",
+            });
+            history.push("/");
+          })
+          .catch((err) => {
+            console.log("err: ", err);
           });
-          history.push("/");
-        })
-        .catch((err) => {
-          console.log("err: ", err);
-        });
-    } catch (err) {
-      console.log("Error: " + err.message);
+      } catch (err) {
+        console.log("Error: " + err.message);
+      }
     }
   };
 
