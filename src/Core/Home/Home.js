@@ -512,7 +512,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col> */}
-                  {/* <Col>
+                  <Col>
                     <div className="add-product-input-div">
                       <p>Card 1 Title</p>
                       <input
@@ -522,7 +522,7 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col> */}
+                  </Col>
                 </Row>
 
                 <Row>
@@ -612,8 +612,8 @@ function EditHome(props) {
 
                 {/** Cards 2*/}
 
-                {/* <Row>
-                  <Col>
+                <Row>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 2 Heading</p>
                       <input
@@ -623,7 +623,7 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
+                  </Col> */}
                   <Col>
                     <div className="add-product-input-div">
                       <p> Card 2 Title </p>
@@ -635,7 +635,7 @@ function EditHome(props) {
                       />
                     </div>
                   </Col>
-                </Row> */}
+                </Row>
 
                 <Row>
                   <Col>
@@ -724,8 +724,8 @@ function EditHome(props) {
 
                 {/** Cards 3*/}
 
-                {/* <Row>
-                  <Col>
+                <Row>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 3 Heading</p>
                       <input
@@ -735,20 +735,20 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
+                  </Col> */}
 
                   <Col>
                     <div className="add-product-input-div">
                       <p> Card 3 Title </p>
                       <input
                         type="text"
-                        name="card2Title"
+                        name="card3Title"
                         value={homeData.card3Title}
                         onChange={handleChange}
                       />
                     </div>
                   </Col>
-                </Row> */}
+                </Row>
 
                 <Row>
                   <Col>
@@ -836,8 +836,8 @@ function EditHome(props) {
                 </Row>
                 {/** Cards 4*/}
 
-                {/* <Row>
-                  <Col>
+                <Row>
+                  {/* <Col>
                     <div className="add-product-input-div">
                       <p>Card 4 Heading</p>
                       <input
@@ -847,20 +847,20 @@ function EditHome(props) {
                         onChange={handleChange}
                       />
                     </div>
-                  </Col>
+                  </Col> */}
 
                   <Col>
                     <div className="add-product-input-div">
                       <p> Card 4 Title </p>
                       <input
                         type="text"
-                        name="card2Title"
+                        name="card4Title"
                         value={homeData.card4Title}
                         onChange={handleChange}
                       />
                     </div>
                   </Col>
-                </Row> */}
+                </Row>
 
                 <Row>
                   <Col>
