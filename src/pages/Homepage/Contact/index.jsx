@@ -6,7 +6,7 @@ const index = ({ props }) => {
   const [homeData, setHomeData] = useState("");
 
   useEffect(() => {
-    const apiURL = "http://localhost:4500/api/home/getHome";
+    const apiURL = `${process.env.REACT_APP_SERVER}/api/home/getHome`;
 
     const getHomeData = async () => {
       try {
@@ -348,6 +348,7 @@ const index = ({ props }) => {
               data-whatintent="mouse"
               href="tel:(302) 200-6733"
             >
+              {/* {homeData.phoneNumber} */}
               {homeData.phoneNumber}
             </a>
             <button

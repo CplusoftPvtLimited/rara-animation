@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const index = () => {
   const [homeData, setHomeData] = useState("");
   useEffect(() => {
-    const apiURL = "http://localhost:4500/api/home/getHome";
+    const apiURL = `${process.env.REACT_APP_SERVER}/api/home/getHome`;
 
     const getHomeData = async () => {
       try {
@@ -1330,7 +1330,8 @@ const index = () => {
                       />
                     </div>
                   </div>
-                  <div className="lGuideline-card-item-back">
+
+                  <div className="lGuideline-card-item-back" id="fellows">
                     <img
                       className="lGuideline-card-item-back-illust -l04"
                       src={homeData.card4Image}

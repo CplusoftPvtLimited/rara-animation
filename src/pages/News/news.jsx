@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./card";
-import Logo from "../../assets/images/b-logo-rara.svg";
+import Logo from "../../assets/images/pecunia_logo_bg.png";
 import "./index.css";
 function News() {
   return (
@@ -22,7 +22,7 @@ function News() {
           </h1>
         </div>
         <div className="mt-[20px] w-[80%] pl-[30px] lg:w-[58%] lg:my-auto ">
-          <p className="text-[13px] lg:text-[19px]">更新情報</p>
+          <p className="text-[13px] lg:text-[19px]"></p>
         </div>
       </div>
 

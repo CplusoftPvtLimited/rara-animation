@@ -315,7 +315,7 @@ gsap.registerPlugin(ScrollTrigger, Draggable);
 const index = () => {
   const [homeData, setHomeData] = useState("");
   useEffect(() => {
-    const apiURL = "http://localhost:4500/api/home/getHome";
+    const apiURL = `${process.env.REACT_APP_SERVER}/api/home/getHome`;
 
     const getHomeData = async () => {
       try {
@@ -2698,7 +2698,7 @@ const index = () => {
   return (
     <div>
       {/* canvas */}
-      <div className="spacer">
+      <div className="spacer" id="home-section">
         {window.innerWidth > 768 && (
           <div className="lKv-subTitle" data-kv-subtitle="">
             <div
@@ -2840,7 +2840,11 @@ const index = () => {
                   color: "#707070",
                 }}
               >
-                {homeData.mainAbout}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainAbout,
+                  }}
+                />
                 <br />
               </div>
               <div
@@ -2853,7 +2857,11 @@ const index = () => {
                   fontFamily: "sans-serif",
                 }}
               >
-                {homeData.mainEstablish}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainEstablish,
+                  }}
+                />
               </div>
             </div>
             <div
@@ -2967,14 +2975,22 @@ const index = () => {
                 data-flat-text=""
                 style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
               >
-                {homeData.mainResearchTitle}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainResearchTitle,
+                  }}
+                />
               </div>
               <div
                 className="cFlatText lVision-section-writing-text"
                 data-flat-text=""
                 style={{ padding: "0px 14.25px", transform: "scaleX(1.05)" }}
               >
-                {homeData.mainDescription}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: homeData.mainDescription,
+                  }}
+                />
               </div>
             </div>
 

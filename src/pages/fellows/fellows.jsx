@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Pic from "../../assets/images/pic.jpg";
 import Footer from "../../assets/images/fellow-beforefooter.png";
 import websiteIcon from "../../assets/images/website-icon.svg";
-import Logo from "../../assets/images/b-logo-rara.svg";
+import Logo from "../../assets/images/pecunia_logo_bg.png";
 // import graphics1 from "../../assets/images/graphic03-2.png";
 // import graphics2 from "../../assets/images/graphic04-2.png";
 // import graphics3 from "../../assets/images/graphics05-2.svg";
@@ -135,8 +135,11 @@ function Fellows() {
                             onClick={() => handleViewDetails(fellow.id)}
                           >
                             <a
-                              href="#"
                               className="det-btn text-[10px] lg:text-[12px]"
+                              style={{
+                                color: "#383838",
+                                textDecoration: "none",
+                              }}
                             >
                               VIEW DETAILS
                             </a>
@@ -230,8 +233,11 @@ function Fellows() {
                             onClick={() => handleViewDetails(fellow.id)}
                           >
                             <a
-                              href="#"
                               className="det-btn text-[10px] lg:text-[12px]"
+                              style={{
+                                color: "#383838",
+                                textDecoration: "none",
+                              }}
                             >
                               VIEW DETAILS
                             </a>
@@ -287,7 +293,10 @@ function Fellows() {
               Today
             </p>
             <div className="website-btn mt-8">
-              <a href="/student">
+              <a
+                href="/student"
+                style={{ color: "#383838", textDecoration: "none" }}
+              >
                 {" "}
                 VIEW WEBSITE{" "}
                 <img

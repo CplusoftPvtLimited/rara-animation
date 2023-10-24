@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import "./updateSingle.css";
-import Logo from "../../assets/images/b-logo-rara.svg";
+import Logo from "../../assets/images/pecunia_logo_bg.png";
 
 function UpdateSingle() {
   const { blogId } = useParams();

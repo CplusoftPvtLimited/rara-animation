@@ -32,7 +32,9 @@ const index = () => {
   useEffect(() => {
     const getHome = async () => {
       try {
-        const response = await fetch(`http://localhost:4500/api/home/getHome`);
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER}/api/home/getHome`
+        );
         const data = await response.json();
         const homeFellow = JSON.parse(data.home[0].fellows)
           .split(",")
@@ -51,7 +53,7 @@ const index = () => {
           getHome(),
           axios({
             method: "get",
-            url: `http://localhost:4500/api/profile/getAllProfiles`,
+            url: `${process.env.REACT_APP_SERVER}/api/profile/getAllProfiles`,
           }),
         ]);
         const fellow = fellowResponse.data.profiles;
@@ -77,7 +79,7 @@ const index = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:4500/api/profile/getAllProfiles`,
+      url: `${process.env.REACT_APP_SERVER}/api/profile/getAllProfiles`,
     })
       .then((response) => {
         setFellowData(response.data.profiles);

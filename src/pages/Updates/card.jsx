@@ -386,7 +386,7 @@ function Card() {
             className="w-[50%] sm:w-auto flex justify-end md:gap-8 cursor-pointer mt-[50px] md:mt-0"
             onClick={() => fellowToggleHandler()}
           >
-            <p>フェローで絞り込む</p>
+            <p>Filter by Fellow</p>
             {fellowToggle ? (
               <HiMinus className="m-auto" />
             ) : (

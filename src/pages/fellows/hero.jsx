@@ -218,7 +218,7 @@ function Hero() {
           </h1>
         </div>
         <div className="mt-[20px] w-[80%] pl-[30px] lg:w-[58%] lg:my-auto ">
-          <p className="text-[13px] lg:text-[19px]">フェロー紹介</p>
+          <p className="text-[13px] lg:text-[19px]"></p>
         </div>
       </div>
       {/************************** Description ******************************/}

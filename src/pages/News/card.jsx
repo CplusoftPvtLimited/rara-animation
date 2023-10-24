@@ -81,14 +81,12 @@ function Card() {
           >
             Old to new
           </button>
-          <button
-            className={`filter-btn ${
-              sortOption === "更新情報" ? "active" : " "
-            }`}
-            onClick={() => handleSortingOption("更新情報")}
+          {/* <button
+            className={`filter-btn ${sortOption === "Active" ? "active" : " "}`}
+            onClick={() => handleSortingOption("Active")}
           >
-            更新情報
-          </button>
+            Active
+          </button> */}
         </div>
       </div>
 
@@ -98,13 +96,16 @@ function Card() {
           <div className="flex flex-wrap justify-between">
             {console.log(sortOption, sortedNewsData)}
             {sortedNewsData.slice(startIndex, endIndex).map((news, index) => (
-              <a href={news.link}>
+              <a
+                href={news.link}
+                style={{ color: "#383838", textDecoration: "none" }}
+              >
                 <div className="news-card mt-[70px] cursor-pointer" key={index}>
                   <div className="img-box">
                     <img className="img" src={Image} alt="" />
                   </div>
                   <div className="news-cat my-auto">
-                    <h5>研究活動レポート / 松村 浩由</h5>
+                    <h5>Research activity report</h5>
                   </div>
                   <div className="mt-[30px]">
                     <p>{truncateText(news.title, 80)}</p>
@@ -117,7 +118,10 @@ function Card() {
                     </div>
                     <div>
                       {" "}
-                      <a href={news.link}>
+                      <a
+                        href={news.link}
+                        style={{ color: "#383838", textDecoration: "none" }}
+                      >
                         <h5 className="text-[10px] lg:text-[11px]">
                           VIEW DETAILS
                         </h5>

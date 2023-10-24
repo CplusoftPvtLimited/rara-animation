@@ -55,23 +55,39 @@ function Student() {
 
             <div className="main-buttons w-[80%] mx-auto xl:w-[80%] z-50">
               <div className="flex gap-8 justify-center xl:gap-24 mt-[70px]">
-                <a href="#about">
+                <a
+                  href="#about"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
                   <div>
                     <h4 className="">About</h4>
                   </div>
                 </a>
-                <a href="#program">
+                <a
+                  href="#program"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
                   <h4 className="cursor-pointer">Join</h4>
                 </a>
-                <a href="#outline">
+                <a
+                  href="#outline"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
                   <h4>Structure</h4>
                 </a>
               </div>
               <div className="flex gap-8 xl:gap-24 justify-center mt-8">
-                <a href="#application" className="cursor-pointer">
+                <a
+                  href="#application"
+                  className="cursor-pointer"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
                   <h4>Funding</h4>
                 </a>
-                <a href="#contact">
+                <a
+                  href="#contact"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
                   <h4 className="">Contact</h4>
                 </a>
               </div>
@@ -92,34 +108,50 @@ function Student() {
 
             <div className="logo-text w-[70%] m-auto xl:w-[80%]">
               <h4>
-                立命館先進研究アカデミー 次世代研究者育成プログラム
-                RARA学生フェロー
+                Empowering Finance, Sustaining Impact: The Pecunia Endowment
+                Fund
               </h4>
             </div>
             {/** Buttons */}
 
             <div className="main-buttons w-[80%] mx-auto z-50">
               <div className="flex justify-between xl:gap-24 mt-[70px]">
-                <a href="#about">
-                  <h4 className="">RARAとは</h4>
+                <a
+                  href="#about"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
+                  <h4 className="">About</h4>
                 </a>
-                <a href="#program">
-                  <h4 className="cursor-pointer">プログラムについて</h4>
-                </a>
-              </div>
-
-              <div className="flex justify-between xl:gap-24 mt-[70px]">
-                <a href="#outline">
-                  <h4>プログラム概要</h4>
-                </a>
-                <a href="#application" className="cursor-pointer">
-                  <h4>募集について</h4>
+                <a
+                  href="#program"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
+                  <h4 className="cursor-pointer">Join</h4>
                 </a>
               </div>
 
               <div className="flex justify-between xl:gap-24 mt-[70px]">
-                <a href="#contact">
-                  <h4 className="">お問い合わせ</h4>
+                <a
+                  href="#outline"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
+                  <h4>Structure</h4>
+                </a>
+                <a
+                  href="#application"
+                  className="cursor-pointer"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
+                  <h4>Funding</h4>
+                </a>
+              </div>
+
+              <div className="flex justify-between xl:gap-24 mt-[70px]">
+                <a
+                  href="#contact"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
+                  <h4 className="">Contact</h4>
                 </a>
               </div>
 

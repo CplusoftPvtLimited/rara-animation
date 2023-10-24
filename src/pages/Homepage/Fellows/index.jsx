@@ -97,7 +97,9 @@ const index = () => {
   useEffect(() => {
     const getHome = async () => {
       try {
-        const response = await fetch(`http://localhost:4500/api/home/getHome`);
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER}/api/home/getHome`
+        );
 
         const data = await response.json();
         const homeFellow = JSON.parse(data.home[0].fellows)
@@ -130,7 +132,7 @@ const index = () => {
           getHome(),
           axios({
             method: "get",
-            url: `http://localhost:4500/api/profile/getAllProfiles`,
+            url: `${process.env.REACT_APP_SERVER}/api/profile/getAllProfiles`,
           }),
         ]);
         const fellow = fellowResponse.data.profiles;
@@ -156,7 +158,7 @@ const index = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:4500/api/profile/getAllProfiles`,
+      url: `${process.env.REACT_APP_SERVER}/api/profile/getAllProfiles`,
     })
       .then((response) => {
         setFellowData(response.data.profiles);
@@ -642,7 +644,7 @@ const index = () => {
                 data-fellows-subtitle=""
                 style={{ overflow: "hidden" }}
               >
-                <div
+                {/* <div
                   className="cFlatText cSubTitle-inner"
                   data-flat-text=""
                   style={{ padding: "0px 1.625px", transform: "scaleX(1.05)" }}
@@ -689,7 +691,7 @@ const index = () => {
                   >
                     介
                   </span>
-                </div>
+                </div> */}
               </div>
             </div>
             <div

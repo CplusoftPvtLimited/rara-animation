@@ -26,8 +26,7 @@ const index = () => {
     const scrollContainer = document.querySelector(".custom-container");
 
     if (visionSection) {
-      const targetScrollPos =
-        visionSection.offsetTop - scrollContainer.offsetTop;
+      visionSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -40,7 +39,7 @@ const index = () => {
   };
 
   const scrollToFellowsSection = () => {
-    const fellowsSection = document.getElementById("fellows_section");
+    const fellowsSection = document.getElementById("fellows");
 
     if (fellowsSection) {
       fellowsSection.scrollIntoView({ behavior: "smooth" });
@@ -620,7 +619,6 @@ const index = () => {
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}
-                        onClick={scrollToFellowsSection}
                       >
                         <svg
                           width="190.28"
@@ -767,7 +765,7 @@ const index = () => {
               >
                 <a
                   className="cHeader-list-link"
-                  // href="/#fellows_trigger"
+                  // href="http://localhost:3000/#fellows"
                   data-disable-hash=""
                   onClick={scrollToFellowsSection}
                 >
@@ -786,6 +784,7 @@ const index = () => {
                   className="cHeader-list-link"
                   data-disable-hash=""
                   onClick={scrollToUpdatesSection}
+                  id=""
                 >
                   RESEARCH
                 </a>

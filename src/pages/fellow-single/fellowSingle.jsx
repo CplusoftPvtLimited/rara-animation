@@ -12,7 +12,7 @@ import partialBall from "../../assets/images/partial-ball.png";
 // import BackIcon from "../../assets/images/b-back_icon.svg";
 // import graphics1 from "../../assets/images/graphic03-2.png";
 // import graphics2 from "../../assets/images/graphic04-2.png";
-import Logo from "../../assets/images/b-logo-rara.svg";
+import Logo from "../../assets/images/pecunia_logo_bg.png";
 import { TweenMax, Power3, Linear, gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
