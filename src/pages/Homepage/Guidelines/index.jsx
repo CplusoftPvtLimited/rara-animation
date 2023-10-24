@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const index = () => {
   const [homeData, setHomeData] = useState("");
   useEffect(() => {
-    const apiURL = `${process.env.REACT_APP_SERVER}/api/home/getHome`;
+    const apiURL = `${process.env.REACT_APP_SERVER}/home/getHome`;
 
     const getHomeData = async () => {
       try {

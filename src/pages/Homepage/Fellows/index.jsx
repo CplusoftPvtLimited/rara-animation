@@ -98,7 +98,7 @@ const index = () => {
     const getHome = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_SERVER}/api/home/getHome`
+          `${process.env.REACT_APP_SERVER}/home/getHome`
         );
 
         const data = await response.json();
@@ -132,7 +132,7 @@ const index = () => {
           getHome(),
           axios({
             method: "get",
-            url: `${process.env.REACT_APP_SERVER}/api/profile/getAllProfiles`,
+            url: `${process.env.REACT_APP_SERVER}/profile/getAllProfiles`,
           }),
         ]);
         const fellow = fellowResponse.data.profiles;
@@ -158,7 +158,7 @@ const index = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `${process.env.REACT_APP_SERVER}/api/profile/getAllProfiles`,
+      url: `${process.env.REACT_APP_SERVER}/profile/getAllProfiles`,
     })
       .then((response) => {
         setFellowData(response.data.profiles);
