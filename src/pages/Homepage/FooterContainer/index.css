@@ -1,0 +1,238 @@
+.lFooter-inner {
+  position: relative;
+  margin: auto;
+  margin-top: 5pc;
+}
+
+.lFooter-ring.-isPlay {
+  animation: rotate_ring 60s linear infinite;
+}
+
+.lFooter-ring {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform-origin: center;
+  width: 33.25rem;
+  height: 33.25rem;
+}
+
+.lFooter-particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.lFooter-particle.-first {
+  background-color: #4a8794;
+  top: 0.8125rem;
+  left: 33.3125rem;
+}
+
+.lFooter-particle.-second {
+  background-color: #4a8794;
+  top: 26.5rem;
+  left: 18.125rem;
+}
+
+.lFooter-particle.-third {
+  background-color: #ad181f;
+  top: 31.375rem;
+  left: 26.0625rem;
+}
+
+.lFooter-particle.-forth {
+  width: 6px;
+  height: 6px;
+  background-color: #ad181f;
+  top: 35.5625rem;
+  left: 12.0625rem;
+}
+
+.lFooter-particle.-fifth {
+  width: 7px;
+  height: 7px;
+  background-color: #ad181f;
+  top: 25.625rem;
+  left: 59.1875rem;
+}
+
+.lFooter-particle.-sixth {
+  background-color: #ad181f;
+  top: 26.375rem;
+  left: 79.75rem;
+  width: 15px;
+  height: 15px;
+}
+
+.lFooter-image-left {
+  position: absolute;
+  transform: rotate(0);
+  display: block;
+}
+
+.lFooter-image-right {
+  width: 32.125rem;
+  height: 21.9375rem;
+  top: 0.125rem;
+  right: 10.1875rem;
+}
+
+.lFooter-image-right {
+  position: absolute;
+  transform: rotate(0);
+  display: block;
+}
+
+.lFooter-image-logo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.lFooter-image-logo img,
+.lFooter-image-logo svg {
+  width: 100%;
+  height: unset;
+}
+
+.lFooter-image-illust {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.lFooter-image-illust > picture > img {
+  display: block;
+  width: 100%;
+  height: unset;
+}
+
+@keyframes rotate_ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .lFooter-inner {
+    width: 100%;
+    height: 48.75rem;
+  }
+  .lFooter-ring {
+    top: 4.5625rem;
+  }
+  .lFooter-image-left {
+    width: 28.875rem;
+    height: 22.9375rem;
+    top: -0.8125rem;
+    left: 10.625rem;
+  }
+  .lFooter-image-logo {
+    width: 9.125rem;
+    height: 9.5rem;
+    top: 15.3125rem;
+  }
+  .lFooter-image-illust {
+    bottom: -3.4375rem;
+    width: 21.8125rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .lFooter-inner {
+    width: 100%;
+    height: 28.4375rem;
+    overflow: hidden;
+  }
+  .lFooter-inner {
+    width: 100%;
+    height: 48.75rem;
+  }
+  .lFooter-ring {
+    width: 16.65625rem;
+    height: 16.65625rem;
+    top: 7.1875rem;
+  }
+  .lFooter-image-left {
+    transform: translate3d(0px, 46.9724px, 0px) rotate(0.6055deg) !important;
+    width: 10.5625rem;
+    height: 9.1875rem;
+    top: 0.3125rem;
+    left: 0;
+  }
+  .lFooter-image-right {
+    width: 10.875rem;
+    height: 8.78125rem;
+    top: 0.5625rem;
+    right: 0.5125rem;
+  }
+  .lFooter-image-logo {
+    width: 9.125rem;
+    height: 9.5rem;
+    top: 11.3125rem;
+  }
+  .lFooter-image-illust {
+    bottom: -3.4375rem;
+    width: 21.8125rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #footerContainer {
+    margin-top: 10pc;
+  }
+  .lFooter-image-left {
+    transform: translate3d(20px, 46.9724px, 0px) rotate(0.6055deg) !important;
+    width: 10.5625rem;
+    height: 10.1875rem;
+    top: 0.3125rem;
+    left: 0;
+  }
+  .lFooter-image-right {
+    width: 10.875rem;
+    height: 10.78125rem;
+    top: 0.5625rem;
+    right: 0.5125rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .lFooter-image-left {
+    transform: translate3d(0px, 46.9724px, 0px) rotate(0.6055deg) !important;
+    width: 10.5625rem;
+    height: 9.1875rem;
+    top: 0.3125rem;
+    left: 0;
+  }
+  .lFooter-image-right {
+    width: 10.875rem;
+    height: 8.78125rem;
+    top: 0.5625rem;
+    right: 0.5125rem;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .lFooter-image-left {
+    transform: translate3d(0px, 46.9724px, 0px) rotate(0.6055deg) !important;
+    width: 8.5625rem;
+    height: 8.1875rem;
+    top: 1.3125rem;
+    left: 0;
+  }
+  .lFooter-image-right {
+    width: 8.875rem;
+    height: 8.78125rem;
+    top: 1.5625rem;
+    right: 0.5125rem;
+  }
+}

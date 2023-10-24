@@ -279,7 +279,10 @@
 
 /* 768 */
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 450px) {
+  .guideline_item {
+    height: 3000px;
+  }
   .lGuideline-card {
     display: flex;
     flex-direction: column;

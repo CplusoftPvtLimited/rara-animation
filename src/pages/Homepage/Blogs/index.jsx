@@ -26,7 +26,7 @@ const index = () => {
       try {
         const response = await fetch(`http://localhost:4500/api/home/getHome`);
         const data = await response.json();
-        const homeBlog = data.home[0].blogs
+        const homeBlog = JSON.parse(data.home[0].blogs)
           .split(",")
           .map((id) => parseInt(id, 10));
         return homeBlog;
@@ -276,7 +276,7 @@ const index = () => {
         </li>
       </ul> */}
 
-      <ul className="lUpdates-List">
+      <ul className="lUpdates-Blog-List">
         {blogData.map((blog, index) => (
           <li className="cUpdatesItem -wide" key={index}>
             <a className="cUpdatesItem-inner" href="#">
@@ -302,7 +302,9 @@ const index = () => {
                       day: "2-digit",
                     })}
                   </p>
-                  <p className="cUpdatesItem-more">VIEW DETAIL</p>
+                  <a id="blog_link" href={`/blog/${blog.id}`}>
+                    <p className="cUpdatesItem-more">VIEW DETAIL</p>
+                  </a>
                 </div>
               </div>
             </a>

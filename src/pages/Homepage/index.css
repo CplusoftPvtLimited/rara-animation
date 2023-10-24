@@ -9,10 +9,10 @@ body {
   height: 100vh;
 }
 .spacer {
-  height: 111vh;
   position: relative;
   overflow: hidden;
 }
+
 canvas {
   position: absolute !important;
   top: 0;
@@ -170,15 +170,15 @@ img {
     stroke-miterlimit: 10;
   }
   .lKv-subTitle {
-    width: 19.5rem;
+    width: 50rem;
     top: 30vh;
   }
   .lKv-subTitle-item.-lm01 {
-    width: 19rem;
+    /* width: 19rem; */
   }
   .lKv-subTitle-item.-lm02 {
-    width: 15.1rem;
-    margin-top: 0.3rem;
+    width: 25rem;
+    margin-top: 0.5rem;
   }
   .lKv-subTitle-item.-lm03 {
     width: 10.25rem;
@@ -510,7 +510,7 @@ ul {
   height: 35.25rem;
 }
 
-@media (min-width: 425px) {
+@media (min-width: 430px) {
   .cMenuContent-content {
     width: 24.5rem;
     height: 35.25rem;
@@ -743,6 +743,7 @@ a {
   right: 0;
   margin: auto;
   pointer-events: none;
+  z-index: 1;
 }
 .lKv-subTitle-item {
   display: inline-block;
@@ -1118,7 +1119,7 @@ html.has-scroll-smooth {
     height: 6.25rem;
   }
   .lVision-section-image.-first {
-    width: 31.1875rem;
+    width: 32.1875rem;
     height: 35.875rem;
     background-size: auto 100%;
     position: relative;
@@ -1132,17 +1133,46 @@ html.has-scroll-smooth {
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (min-width: 1920) {
+  .lVision-section-writing-text {
+    font-size: 1.2rem;
+  }
+  .lVision-section.-second {
+    padding: 0 13.5rem 8.625rem 31.75rem;
+  }
+  .lVision-section-image.-third {
+    width: 13rem;
+    height: 11.75rem;
+    margin-right: 3.375rem;
+    margin-top: 4.6875rem;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .lKv-coreBall {
+    position: absolute;
+    top: 15.5pc;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    bottom: 0px;
+    right: 0px;
+    margin: 0%;
+  }
+  #vision-section {
+    margin-top: 10pc;
+  }
   .lVision-section-writing.-first {
     width: 20.25rem;
     margin-right: 2.5rem;
   }
   .lVision-section-image.-first {
-    width: 23.1875rem;
+    width: 22.1875rem;
     height: 35.875rem;
     background-size: auto 70%;
     position: relative;
-    right: 2.1875rem;
+    right: 1.1875rem;
     background-repeat: no-repeat;
   }
   .lVision-section.-first {
@@ -1184,37 +1214,10 @@ html.has-scroll-smooth {
     margin-right: 3.375rem;
     margin-top: 4.6875rem;
     margin: auto;
+    margin-top: 3pc;
   }
 }
 
-@media screen and (min-width: 1920) {
-  .lVision-section-writing-text {
-    font-size: 1.2rem;
-  }
-  .lVision-section.-second {
-    padding: 0 13.5rem 8.625rem 31.75rem;
-  }
-  .lVision-section-image.-third {
-    width: 13rem;
-    height: 11.75rem;
-    margin-right: 3.375rem;
-    margin-top: 4.6875rem;
-    margin: auto;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .lKv-coreBall {
-    position: absolute;
-    top: 15.5pc;
-    left: 30%;
-    width: 40%;
-    height: 40%;
-    bottom: 0px;
-    right: 0px;
-    margin: 0%;
-  }
-}
 @media screen and (max-width: 415px) {
   .lKv-coreBall {
     position: absolute;
@@ -1251,6 +1254,14 @@ html.has-scroll-smooth {
     right: 0px;
     margin: 0%;
   }
+  .lVision-section-image.-first {
+    width: 22.1875rem;
+    height: 35.875rem;
+    background-size: auto 70%;
+    position: relative;
+    right: 2rem;
+    background-repeat: no-repeat;
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -1266,7 +1277,12 @@ html.has-scroll-smooth {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 330px) {
+  .lVision-section-writing.-first {
+    width: 100%;
+    margin-right: 0;
+    padding-right: 1.8rem;
+  }
   .lKv-coreBall {
     position: absolute;
     top: 13pc;
@@ -1277,8 +1293,20 @@ html.has-scroll-smooth {
     right: 0px;
     margin: 0%;
   }
+  .lVision-section-image.-first {
+    width: 17.1875rem;
+    height: 27.875rem;
+    background-size: auto 70%;
+    position: relative;
+    right: 1rem;
+    background-repeat: no-repeat;
+  }
 }
-@media screen and (max-width: 280px) {
+@media screen and (max-width: 290px) {
+  .lVision-section-writing.-first {
+    width: 100%;
+    margin-right: 0;
+  }
   .lKv-coreBall {
     position: absolute;
     top: 35%;

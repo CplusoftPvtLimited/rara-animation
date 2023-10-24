@@ -21,7 +21,7 @@ const index = ({ props }) => {
       }
     };
     getHomeData();
-  });
+  }, []);
 
   return (
     <div

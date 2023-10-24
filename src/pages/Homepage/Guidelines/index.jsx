@@ -583,7 +583,7 @@ const index = () => {
         trigger: ".guideline_item",
         scroller: scrollContainer,
         start: "start top",
-        end: "+=2000",
+        end: "+=1800",
         scrub: true,
         onEnter: () => {
           console.log("🚀 ~ file: index.jsx:570 ~ useEffect ~ onEnter:");

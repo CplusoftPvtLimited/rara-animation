@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./index.css";
+import axios from "axios";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,13 +27,14 @@ const index = () => {
   const [selectedFellow, setSelectedFellows] = useState([]);
   const [fellowData, setFellowData] = useState([]);
   const [fellowRotation, setfellowRotation] = useState([]);
+  const [firstTime, setFirstTime] = useState(false);
 
   useEffect(() => {
     const getHome = async () => {
       try {
         const response = await fetch(`http://localhost:4500/api/home/getHome`);
         const data = await response.json();
-        const homeFellow = data.home[0].fellows
+        const homeFellow = JSON.parse(data.home[0].fellows)
           .split(",")
           .map((id) => parseInt(id, 10));
 
@@ -133,6 +135,21 @@ const index = () => {
             });
           }
         }
+      },
+      onEnterBack: () => {
+        gsap.to(".lFellows-bg-inner", {
+          display: "block",
+        });
+      },
+      onLeave: () => {
+        console.log("🚀 ~ file: index.jsx:82 ~ useEffect ~ onLeave:");
+        gsap.to(".lFellows-bg-inner", {
+          display: "none",
+          transform: "scale(0)",
+        });
+        gsap.to(".lFellows-inner", {
+          transform: "scale(0px,0px)",
+        });
       },
     });
   }, []);

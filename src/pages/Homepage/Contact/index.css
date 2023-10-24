@@ -321,7 +321,7 @@ ins {
   }
 }
 
-@media (min-width: 425px) and (max-width: 767px) {
+@media (min-width: 420px) and (max-width: 767px) {
   .cContainer.-rightMiddle {
     padding-right: 5.9375rem;
   }
