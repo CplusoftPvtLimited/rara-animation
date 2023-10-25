@@ -12,7 +12,7 @@ const coinbaseKeysRoutes = require("./routes/coinbaseKeysRoutes");
 const bankRoutes = require("./routes/bankRoutes");
 const RssFeedRoutes = require("./routes/RssFeedRoutes");
 const homeRoutes = require("./routes/homeRoutes");
-
+const authRoutes = require("./routes/auth.js");
 const studentRoutes = require("./routes/studentRoutes");
 
 const app = express();
@@ -34,6 +34,9 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Auth Route
+app.use("/api/auth", authRoutes);
 
 //Blog Route
 app.use("/api/blog", blogRoutes);
