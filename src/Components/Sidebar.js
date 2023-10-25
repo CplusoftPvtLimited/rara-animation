@@ -1,20 +1,10 @@
 import React from "react";
-import {
-  RiDashboardLine,
-  RiShoppingCart2Line,
-  RiUser3Line,
-  RiAddFill,
-  RiFileList3Line,
-} from "react-icons/ri";
-
-import { HiOutlineHome } from "react-icons/hi";
 import { PiStudentLight } from "react-icons/pi";
 import { AiOutlineHome } from "react-icons/ai";
 import { IoIosLaptop } from "react-icons/io";
-
-import logo from "../Assets/logo.png";
-import "./Sidebar.css";
 import { Link, useHistory } from "react-router-dom";
+import { RiDashboardLine, RiAddFill, RiFileList3Line } from "react-icons/ri";
+import "./Sidebar.css";
 
 function Sidebar() {
   const history = useHistory();
@@ -30,9 +20,6 @@ function Sidebar() {
   return (
     <div className="sidebar-parent-div">
       <div className="sidebar-content-div">
-        <div className="sidebar-logo-div">
-          <h4>PECUNIA</h4>
-        </div>
         <div className="sidebar-links-div">
           <Link to="/" className="sidebar-link">
             <div
@@ -113,28 +100,6 @@ function Sidebar() {
             </div>
           </Link>
 
-          {/* <Link to='/stripeKey/add' className='sidebar-link'>
-            <div
-              className={`sidebar-item ${
-                isActive(history, '/stripeKey/add') && 'active'
-              }`}
-            >
-              <RiFileList3Line className='sidebar-icon' />
-              <p>Add Stripe Keys</p>
-            </div>
-          </Link> */}
-
-          {/* <Link to="/Home" className="sidebar-link">
-            <div
-              className={`sidebar-item ${
-                isActive(history, "/Home") && "active"
-              }`}
-            >
-              <HiOutlineHome className="sidebar-icon" />
-              <p>Home</p>
-            </div>
-          </Link> */}
-
           <Link to="/student" className="sidebar-link">
             <div
               className={`sidebar-item ${
@@ -145,7 +110,6 @@ function Sidebar() {
               <p>Student</p>
             </div>
           </Link>
-          {/** Home Page */}
           <Link to="/home" className="sidebar-link">
             <div
               className={`sidebar-item ${

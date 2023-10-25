@@ -13,12 +13,10 @@ const PaymentMethods = () => {
   const [keyData, setKeyData] = useState();
   const [coinbaseData, setCoinbaseData] = useState();
   const [bankData, setBankData] = useState();
-  // const [checked, setChecked] = useState(false);
 
   const [stripeChecked, setStripeChecked] = useState();
   const [coinbaseChecked, setCoinbaseChecked] = useState();
   const [bankChecked, setBankChecked] = useState();
-  // console.log('keyData?.active: ', keyData?.active);
 
   useEffect(() => {
     getStripeKey();
@@ -120,10 +118,6 @@ const PaymentMethods = () => {
       });
     }
   };
-
-  // console.log('stripeChecked: ', stripeChecked);
-  // console.log('coinbaseChecked: ', coinbaseChecked);
-  console.log("bankChecked: ", bankChecked);
 
   const editStripeKey = (event) => {
     event.preventDefault();
