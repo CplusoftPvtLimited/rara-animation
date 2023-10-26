@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import BeforeFooter from "../../pages/Homepage/FooterContainer";
 
 import "./updateSingle.css";
 import Logo from "../../assets/images/pecunia_logo_bg.png";
@@ -75,7 +76,7 @@ function UpdateSingle() {
         <div className="content-text sm:mx-[3rem] py-[5rem] lg:py-[10rem] lg:px-[4rem] xl:px-[7.6875rem]">
           <h3>{blogData.content}</h3>
         </div>
-        <div className="flex justify-end px-[7.6875rem] pb-[200px]">
+        <div className="flex justify-end pr-[7.6875rem] pb-[200px]">
           <div className="share-text flex md:w-[20%]">
             <h4>SHARE ON</h4>
           </div>
@@ -102,8 +103,11 @@ function UpdateSingle() {
       {/***********************Cards ***************************/}
       <div className="card-wrapper pb-[75px] w-[95%] mx-auto md:flex md:justify-center">
         {postData.length > 0 ? (
-          <div className="Cards mt-[50px] mb-[100px] w-[80%] m-auto" id="card">
-            <div className="flex flex-wrap justify-between">
+          <div
+            className="Cards mt-[50px] mb-[100px] w-[90%] lg:w-[80%] m-auto"
+            id="card"
+          >
+            <div className="flex flex-wrap lg:gap-16 md:gap-8">
               {console.log("Data", postData)}
               {postData.slice(0, 3).map((post, index) => (
                 <div
@@ -147,7 +151,9 @@ function UpdateSingle() {
             </div>
           </div>
         ) : (
-          <div>Loading...</div>
+          <div className="mx-auto my-[50px] text-center">
+            <p>No Related Blog Found</p>
+          </div>
         )}
       </div>
 
@@ -167,8 +173,8 @@ function UpdateSingle() {
 
       {/************************** Before Footer Logo******************************/}
 
-      <div className="before-footer footer-update py-[16rem]  mt-[10px] w-[95%] mx-auto">
-        <img className="m-auto" src={Logo} alt="" width={133} height={139} />
+      <div className="before-footer pt-[2rem]">
+        <BeforeFooter />
       </div>
     </section>
   );

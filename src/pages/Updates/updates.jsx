@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./card";
 import Logo from "../../assets/images/pecunia_logo_bg.png";
+import BeforeFooter from "../../pages/Homepage/FooterContainer";
 import "./updates.css";
 function News() {
   return (
@@ -54,8 +55,8 @@ function News() {
 
       {/************************** Before Footer Logo******************************/}
 
-      <div className="footer py-[16rem] mt-[10px] mx-auto">
-        <img className="m-auto" src={Logo} alt="" width={133} height={139} />
+      <div className="footer pt-[2rem] mt-[10px] mx-auto">
+        <BeforeFooter />
       </div>
     </section>
   );

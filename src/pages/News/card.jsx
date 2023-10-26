@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import Image from "../../assets/images/news-image.jpg";
+import Image from "../../assets/images/Logo.png";
 import { useState, useEffect } from "react";
 
 function Card() {
@@ -18,6 +18,7 @@ function Card() {
         `${process.env.REACT_APP_SERVER}/news/getAllNews`
       );
       const data = await response.json();
+      console.log("***🚀 ~ file: card.jsx:21 ~ fetchNews ~ data:", data);
       setNewsData(data.items);
       setSortedNewsData(data.items);
     };
@@ -100,17 +101,22 @@ function Card() {
                 href={news.link}
                 style={{ color: "#383838", textDecoration: "none" }}
               >
-                <div className="news-card mt-[70px] cursor-pointer" key={index}>
+                <div
+                  className="news-card mt-[70px] cursor-pointer"
+                  key={index}
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  {/* Set a fixed height for the card container, adjust as needed */}
                   <div className="img-box">
                     <img className="img" src={Image} alt="" />
                   </div>
                   <div className="news-cat my-auto">
                     <h5>Research activity report</h5>
                   </div>
-                  <div className="mt-[30px]">
+                  <div className="mt-[30px] flex-grow">
                     <p>{truncateText(news.title, 80)}</p>
                   </div>
-                  <div className="date-box flex mt-[90px] justify-between">
+                  <div className="date-box flex justify-between mt-[10px]">
                     <div>
                       <p className="date">
                         {new Date(news.isoDate).toLocaleDateString()}
@@ -134,7 +140,9 @@ function Card() {
           </div>
         </div>
       ) : (
-        <div>Loading...</div>
+        <div className="mx-auto my-[50px] text-center">
+          <p>No Feed Found</p>
+        </div>
       )}
 
       {/* Pagination */}

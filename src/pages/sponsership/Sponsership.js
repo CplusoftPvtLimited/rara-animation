@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
+import BeforeFooter from "../../pages/Homepage/FooterContainer";
+
 import {
   Button,
   ButtonGroup,
@@ -346,6 +348,11 @@ const Sponsership = () => {
           )}
         </Row>
       </Container>
+      {/************************** Before Footer Logo******************************/}
+
+      <div className="before-footer-1 mt-[2rem]">
+        <BeforeFooter />
+      </div>
     </div>
   );
 };

@@ -6,51 +6,39 @@ import "./index.css";
 function Footer() {
   return (
     <section className="relative">
-      <div className=" bg-[#111111] w-[100%] pl-[25px] py-[50px] md:py-[50px] lg:p-8 ">
+      <div className=" bg-[#111111] w-[100%] pl-[25px] py-[30px]  md:py-[50px] lg:px-8 lg:pt-[0.6rem] lg:pb-[0rem]  ">
         <div className="footer-logo">
           {/* <img className="w-[130px]" src={footerLogo} alt="footer logo" /> */}
-          <h2 className="text-white">Pecunia</h2>
+          <h2 className="text-white text-[22px] mt-[5px]">Pecunia</h2>
         </div>
-        <div className="footer-text flex lg:justify-center lg:text-center lg:mt-[-32px]">
-          <p>Empowering Finance for a Social World</p>
-          {/* <ul className="lg:flex gap-4 justify-center mt-[20px] lg:mt-auto">
-            <li className="text-white text-[12px] lg:text flex cursor-pointer mt-4 lg:mt-auto">
-              {" "}
-              プライバシーポリシー{" "}
-              <img
-                className="w-[25px] h-[20px] my-auto ml-[5px] cursor-pointer "
-                src={linkIcon}
-                alt="icon1"
-              />{" "}
-            </li>
-            <li className="text-white text-[12px] lg:text flex cursor-pointer mt-4 lg:mt-auto">
-              {" "}
-              立命館大学（研究・産学連携）{" "}
-              <img
-                className="w-[25px] h-[20px] my-auto ml-[5px] cursor-pointer"
-                src={linkIcon}
-                alt="icon2"
-              />{" "}
-            </li>
-            <li className="text-white text-[12px] lg:text flex cursor-pointer mt-4 lg:mt-auto">
-              {" "}
-              立命館大学 研究部（学内者向け）
-              <img
-                className="w-[25px] h-[20px] my-auto ml-[5px] cursor-pointer"
-                src={linkIcon}
-                alt="icon3"
-              />{" "}
-            </li>
-            <li className="text-white text-[12px] lg:text flex cursor-pointer mt-4 lg:mt-auto">
-              {" "}
-              学園ビジョンR2030{" "}
-              <img
-                className="w-[25px] h-[20px] my-auto ml-[5px] cursor-pointer"
-                src={linkIcon}
-                alt="icon4"
-              />{" "}
-            </li>
-          </ul> */}
+        <div className="footer-text lg:text-center lg:mt-[-25px] lg:ml-[250px] lg:flex lg:justify-center">
+          <p>Bridging Prosperity with Purpose</p>
+          <div className=" ml-[-20px] lg:ml-[0px] lg:mt-[2px]">
+            <ul className="lg:flex lg:gap-4 lg:justify-center pl-[20px]">
+              <a href="/donation">
+                <li className="text-white text-[12px] lg:text flex cursor-pointer">
+                  {" "}
+                  Donate to Pecunia's Endowment Fund{" "}
+                  <img
+                    className="w-[25px] h-[20px] my-auto ml-[5px] cursor-pointer "
+                    src={linkIcon}
+                    alt="icon1"
+                  />{" "}
+                </li>
+              </a>
+              <a href="/sponsership">
+                <li className="text-white text-[12px] lg:text flex cursor-pointer">
+                  {" "}
+                  Sponsor a Research Paper{" "}
+                  <img
+                    className="w-[25px] h-[20px] my-auto ml-[5px] cursor-pointer"
+                    src={linkIcon}
+                    alt="icon2"
+                  />{" "}
+                </li>
+              </a>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
