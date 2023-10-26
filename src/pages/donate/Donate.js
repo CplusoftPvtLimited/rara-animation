@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "bootstrap/dist/css/bootstrap.min.css";
-import BeforeFooter from "../../pages/Homepage/FooterContainer";
-
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -454,7 +451,7 @@ const Donate = () => {
                     variant="light"
                     className="rupee"
                     onClick={() => handleAmountClick(10000)}
-                    style={{ display: "flex", alignItems: "center" }}
+                    style={{ display: "flex", justifyContent: "center" }}
                   >
                     $10,000{renderTickSign(10000)}
                   </Button>
@@ -462,7 +459,7 @@ const Donate = () => {
                     variant="light"
                     className="rupee"
                     onClick={() => handleAmountClick(25000)}
-                    style={{ display: "flex", alignItems: "center" }}
+                    style={{ display: "flex", justifyContent: "center" }}
                   >
                     $25,000{renderTickSign(25000)}
                   </Button>
@@ -471,7 +468,7 @@ const Donate = () => {
                     variant="light"
                     className="rupee"
                     onClick={() => handleAmountClick(50000)}
-                    style={{ display: "flex", alignItems: "center" }}
+                    style={{ display: "flex", justifyContent: "center" }}
                   >
                     $50,000{renderTickSign(50000)}
                   </Button>

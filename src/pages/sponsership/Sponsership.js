@@ -347,12 +347,12 @@ const Sponsership = () => {
               }}
             >
               <h5 className="sponsor">Ready to Sponsor a Research Paper?</h5>
-              <p style={{ padding: "0 75px" }}>
+              <div style={{ padding: "0 20px" }}>
                 To become a sponsor, please fill out the form below, and our
                 team will reach out to you promptly to discuss the details and
                 select a research project aligned with your values and
                 interests.
-              </p>
+              </div>
               {/* <SponserForm /> */}
 
               <div className="dashboard-parent-div">
@@ -364,7 +364,7 @@ const Sponsership = () => {
                     margin: "auto",
                   }}
                 >
-                  <Col className="add-category-content" lg={10}>
+                  <Col className="add-category-content">
                     <Card className="add-product-form-card">
                       <Form>
                         <Row>
