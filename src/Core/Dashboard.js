@@ -1,24 +1,15 @@
-// import React from 'react';
-// import { Card, Col, Row } from 'react-bootstrap';
-// import Sidebar from '../Components/Sidebar';
-// import { RiUser3Line } from 'react-icons/ri';
-// import './Dashboard.css';
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Card, Col, Row } from "react-bootstrap";
-import Sidebar from "../Components/Sidebar";
-import {
-  RiShoppingCart2Line,
-  RiUser3Line,
-  RiFeedbackLine,
-} from "react-icons/ri";
+import { RiShoppingCart2Line, RiUser3Line } from "react-icons/ri";
 import { IoIosLaptop } from "react-icons/io";
-import { FaDollarSign } from "react-icons/fa";
 import { BsViewList } from "react-icons/bs";
 import { FaLaptopMedical } from "react-icons/fa";
-import ReactLoading from "react-loading";
-import "./Dashboard.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import ReactLoading from "react-loading";
+import Topbar from "../Components/Topbar";
+import Sidebar from "../Components/Sidebar";
+import "./Dashboard.css";
 
 function Dashboard() {
   const [blogs, setBlogs] = useState();
@@ -80,6 +71,17 @@ function Dashboard() {
   return (
     <div className="dashboard-parent-div">
       <Row>
+        <Row>
+          <Col
+            lg={12}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Topbar />
+          </Col>
+        </Row>
         <Col lg={2}>
           <Sidebar />
         </Col>
@@ -90,12 +92,21 @@ function Dashboard() {
           <Row>
             <Col>
               {loading ? (
-                <ReactLoading
-                  type="spokes"
-                  color="#2D46B9"
-                  height={50}
-                  width={50}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <ReactLoading
+                    type="spokes"
+                    color="#2D46B9"
+                    height={50}
+                    width={50}
+                  />
+                </div>
               ) : (
                 blogs && (
                   <Card className="dashboard-card">
@@ -117,12 +128,21 @@ function Dashboard() {
 
             <Col>
               {loading ? (
-                <ReactLoading
-                  type="spokes"
-                  color="#2D46B9"
-                  height={50}
-                  width={50}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <ReactLoading
+                    type="spokes"
+                    color="#2D46B9"
+                    height={50}
+                    width={50}
+                  />
+                </div>
               ) : (
                 fellow && (
                   <Card className="dashboard-card">
@@ -136,12 +156,21 @@ function Dashboard() {
 
             <Col>
               {loading ? (
-                <ReactLoading
-                  type="spokes"
-                  color="#2D46B9"
-                  height={50}
-                  width={50}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <ReactLoading
+                    type="spokes"
+                    color="#2D46B9"
+                    height={50}
+                    width={50}
+                  />
+                </div>
               ) : (
                 categories && (
                   <Card className="dashboard-card">

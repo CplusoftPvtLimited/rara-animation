@@ -2,8 +2,6 @@
   height: 100vh;
   padding: 8px !important;
   padding-bottom: 16px;
-  /* padding: 8px; */
-  /* #2D46B9 */
 }
 
 .sidebar-content-div {
@@ -11,10 +9,6 @@
   border-radius: 12px;
   overflow-y: auto;
 }
-
-/* .sidebar-content-div::-webkit-scrollbar-track {
-  background-color: red;
-} */
 
 .sidebar-logo-div {
   height: 20vh;

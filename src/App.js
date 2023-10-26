@@ -1,5 +1,10 @@
-import Dashboard from "./Core/Dashboard";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Blogs from "./Core/Blogs Pages/Blogs";
 import AddBlog from "./Core/Blogs Pages/AddBlog";
 import EditBlog from "./Core/Blogs Pages/EditBlog";
@@ -13,35 +18,109 @@ import EditFellow from "./Core/Fellows Pages/EditFellow";
 import PaymentMethods from "./Core/Payment Methods Pages/PaymentMethods";
 import Home from "./Core/Home/Home.js";
 import Student from "./Core/Student/Student";
+import Login from "./Core/Login/Login.js";
+import Dashboard from "./Core/Dashboard";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    if (email) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   return (
     <div className="App">
       <SnackbarProvider>
         <Router>
           <Switch>
-            <Route path="/" exact component={Dashboard} />
+            <Route path="/login" exact>
+              {isAuthenticated ? <Redirect to="/" /> : <Login />}
+            </Route>
+            <Route path="/" exact>
+              {isAuthenticated ? <Dashboard /> : <Redirect to="/login" />}
+            </Route>
 
-            <Route path="/blogs" exact component={Blogs} />
-            <Route path="/blog/add" exact component={AddBlog} />
-            <Route path="/blog/edit/:blogId" exact component={EditBlog} />
+            <PrivateRoute
+              path="/blogs"
+              exact
+              component={Blogs}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
+              path="/blog/add"
+              exact
+              component={AddBlog}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
+              path="/blog/edit/:blogId"
+              exact
+              component={EditBlog}
+              isAuthenticated={isAuthenticated}
+            />
 
-            <Route path="/categories" exact component={Categories} />
-            <Route path="/category/add" exact component={AddCategory} />
-            <Route
+            <PrivateRoute
+              path="/categories"
+              exact
+              component={Categories}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
+              path="/category/add"
+              exact
+              component={AddCategory}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
               path="/category/:categoryId"
               exact
               component={EditCategory}
+              isAuthenticated={isAuthenticated}
             />
 
-            <Route path="/fellows" exact component={Fellows} />
-            <Route path="/fellow/add" exact component={AddFellow} />
-            <Route path="/fellow/edit/:fellowId" exact component={EditFellow} />
+            <PrivateRoute
+              path="/fellows"
+              exact
+              component={Fellows}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
+              path="/fellow/add"
+              exact
+              component={AddFellow}
+              isAuthenticated={isAuthenticated}
+            />
+            <PrivateRoute
+              path="/fellow/edit/:fellowId"
+              exact
+              component={EditFellow}
+              isAuthenticated={isAuthenticated}
+            />
 
-            <Route path="/paymentMethods" exact component={PaymentMethods} />
+            <PrivateRoute
+              path="/paymentMethods"
+              exact
+              component={PaymentMethods}
+              isAuthenticated={isAuthenticated}
+            />
 
-            <Route path="/home" exact component={Home} />
-            <Route path="/student" exact component={Student} />
+            <PrivateRoute
+              path="/home"
+              exact
+              component={Home}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/student"
+              exact
+              component={Student}
+              isAuthenticated={isAuthenticated}
+            />
           </Switch>
         </Router>
       </SnackbarProvider>
