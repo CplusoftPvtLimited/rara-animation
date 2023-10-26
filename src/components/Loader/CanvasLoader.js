@@ -1,56 +1,3 @@
-// import React, { useEffect, useRef, useState } from "react";
-// import "./canvasLoader.css";
-
-// function CanvasLoader({ onComplete }) {
-//   const canvasRef = useRef(null);
-//   const [animationComplete, setAnimationComplete] = useState(false);
-
-//   useEffect(() => {
-//     const canvas = canvasRef.current;
-//     const context = canvas.getContext("2d");
-//     const canvasWidth = window.innerWidth;
-//     const canvasHeight = window.innerHeight;
-//     const animationSpeed = 3;
-
-//     let x = canvasWidth;
-//     let y = 0;
-
-//     function animate() {
-//       context.clearRect(0, 0, canvasWidth, canvasHeight);
-//       context.beginPath();
-//       context.moveTo(x, y);
-//       context.lineTo(canvasWidth - x, canvasHeight - y);
-//       context.stroke();
-//       x -= animationSpeed;
-//       y += animationSpeed;
-
-//       if (x <= 0 || y >= canvasHeight) {
-//         setAnimationComplete(true);
-//         onComplete(); // Call the onComplete callback when animation completes
-//       } else {
-//         requestAnimationFrame(animate);
-//       }
-//     }
-
-//     animate();
-//   }, [onComplete]);
-
-//   return (
-//     <div
-//       className={`canvas-loader-container ${animationComplete ? "hidden" : ""}`}
-//     >
-//       <canvas
-//         ref={canvasRef}
-//         className="canvas-loader"
-//         width={window.innerWidth}
-//         height={window.innerHeight}
-//       ></canvas>
-//     </div>
-//   );
-// }
-
-// export default CanvasLoader;
-
 import React, { useEffect, useRef, useState } from "react";
 import "./canvasLoader.css";
 
@@ -63,12 +10,13 @@ function CanvasLoader({ onComplete }) {
     const context = canvas.getContext("2d");
     const canvasWidth = window.innerWidth;
     const canvasHeight = window.innerHeight;
-    const animationSpeed = 5;
+    const animationSpeed = 6;
     const lineLength = 500;
 
-    let x = canvasWidth - 130; // Start from the top-right corner
+    let x = document.documentElement.clientWidth; // Start from the top-right corner
     let y = -280; // Start from the top-right corner
 
+    console.log("x: ", x);
     function animate() {
       context.clearRect(0, 0, canvasWidth, canvasHeight);
       context.beginPath();
@@ -81,7 +29,7 @@ function CanvasLoader({ onComplete }) {
 
       if (x <= canvasWidth - lineLength || y >= canvasHeight) {
         setAnimationComplete(true);
-        onComplete(); // Call the onComplete callback when animation completes
+        onComplete();
       } else {
         requestAnimationFrame(animate);
       }
