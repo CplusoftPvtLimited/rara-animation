@@ -254,8 +254,7 @@ const HocCustomScrollbar = (WrappedComponent) => {
 };
 
 function FooterRoute() {
-  const location = useLocation();
-  const isInStudentRoute = location.pathname.includes("/student");
+  const isInStudentRoute = window.location.pathname.includes("/student");
   return isInStudentRoute ? null : <Footer />;
 }
 

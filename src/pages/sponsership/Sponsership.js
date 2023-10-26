@@ -13,12 +13,14 @@ import {
   Form,
   Modal,
   Row,
+  Card,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAmount, setPaymentMethod } from "../../store/donationSlice";
-import DonatePage from "../../components/Donation/donate/DonatePage";
-import "./sponsership.css";
+import Sponser from "./Sponser";
+import SponserForm from "./SponserForm";
+import "./sponsorship.css";
 
 const Sponsership = () => {
   const navigate = useNavigate();
@@ -36,8 +38,6 @@ const Sponsership = () => {
   const actualSelectedAmount = useSelector(
     (state) => state.donation.selectedAmount
   );
-
-  console.log("actualSelectedAmount: ", actualSelectedAmount);
   useEffect(() => {
     getCoinbaseKey();
     getBankDetails();
@@ -57,21 +57,107 @@ const Sponsership = () => {
       });
   }, [selectedAmount]);
 
-  console.log("hosted url: ", hostedUrl);
+  //
+  const [formData, setFormData] = useState({
+    organizationName: "",
+    contact: "",
+    email: "",
+    number: "",
+    message: "",
+  });
+  const [validationErrors, setValidationErrors] = useState({
+    organizationName: "",
+    contact: "",
+    email: "",
+    number: "",
+    message: "",
+  });
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
+
+  const handleCheckboxChange = (e) => {
+    const amount = event.target.checked ? 250000 : null;
+    console.log("amount amount: ", amount);
+    setCheckboxChecked(e.target.checked);
+    dispatch(setAmount(amount));
+    setSelectedAmount(amount);
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+    try {
+      const formDataToSend = new FormData();
+      console.log("formData: ", formData);
+      formDataToSend.append("organizationName", formData.organizationName);
+      formDataToSend.append("contact", formData.contact);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("number", formData.number);
+      formDataToSend.append("message", formData.message);
+      if (actualSelectedAmount) {
+        axios
+          .post("http://localhost:4500/api/sponsor/createPost", formData)
+          .then((response) => {
+            console.log("response response: ", response);
+            setFormData({
+              organizationName: "",
+              contact: "",
+              email: "",
+              number: "",
+              message: "",
+            });
+            setShowRightColumn(true);
+          })
+          .catch((error) => {
+            console.log("Error: " + error.message);
+          });
+      }
+    } catch (err) {
+      console.log("Error: " + err.message);
+    }
+  }
+
+  const validateForm = () => {
+    let errors = {};
+
+    if (formData.organizationName.trim() === "") {
+      errors.organizationName = "This field is required";
+    }
+    if (formData.contact.trim() === "") {
+      errors.contact = "This field is required";
+    }
+    if (formData.email.trim() === "") {
+      errors.email = "This field is required";
+    }
+    if (formData.number.trim() === "") {
+      errors.number = "This field is required";
+    }
+    if (!checkboxChecked) {
+      errors.sponsorship = "Sponsorship is required";
+    }
+
+    return errors;
+  };
+  //
+
   const handleButtonClick = (value) => {
     setSelectedButton(value);
     setError(null);
   };
 
-  const handleAmountClick = (amount) => {
-    setOtherValue(null);
-    setSelectedAmount(amount);
-    dispatch(setAmount(amount));
-  };
-
   const handleDonateClick = () => {
-    if (selectedAmount !== null || otherValue !== null) {
-      console.log("Selected Donation Amount: $" + selectedAmount);
+    if (actualSelectedAmount) {
       setError(null);
       setShowRightColumn(true);
     } else {
@@ -80,7 +166,6 @@ const Sponsership = () => {
   };
 
   const handlePaymentMethodChange = (event) => {
-    // setSelectedPaymentMethod(event.target.value);
     const selectedMethod = event.target.value;
     console.log("selectedMethod: ", selectedMethod);
     dispatch(setPaymentMethod(event.target.value));
@@ -91,11 +176,11 @@ const Sponsership = () => {
     }
   };
 
-  const renderTickSign = (amount) => {
-    return selectedAmount === amount ? (
-      <FontAwesomeIcon icon={faCheck} style={{ marginLeft: "5px" }} />
-    ) : null;
-  };
+  // const renderTickSign = (amount) => {
+  //   return selectedAmount === amount ? (
+  //     <FontAwesomeIcon icon={faCheck} style={{ marginLeft: "5px" }} />
+  //   ) : null;
+  // };
 
   const getCoinbaseKey = () => {
     setCoinbaseData();
@@ -146,20 +231,22 @@ const Sponsership = () => {
     }
   }, [selectedPaymentMethod]);
 
-  console.log("selectedAmount: ", selectedAmount);
+  // console.log("selectedAmount: ", selectedAmount);
   return (
     <div>
       <Container className="donateUs">
-        <h2 style={{ fontSize: "144px" }}>SPONSERSHIP</h2>
+        <h2 className="sponsorship" style={{ fontSize: "144px" }}>
+          SPONSERSHIP
+        </h2>
       </Container>
 
       <Container style={{ marginTop: "40px", marginBottom: "40px" }}>
         <Row>
-          <Col xs={6}>
-            <DonatePage />
+          <Col xs={12} lg={6}>
+            <Sponser />
           </Col>
           {showRightColumn ? (
-            <Col xs={6}>
+            <Col xs={12} lg={6}>
               <Form>
                 <Form.Group controlId="paymentMethod">
                   <Form.Label>Select Payment Method:</Form.Label>
@@ -253,82 +340,137 @@ const Sponsership = () => {
             </Col>
           ) : (
             <Col
-              xs={6}
+              xs={12}
+              lg={6}
               style={{
                 backgroundColor: "rgba(227, 227, 227, 1)",
               }}
             >
-              <h5 className="donate">How often would you like to sponsor?</h5>
-              <ButtonGroup
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  paddingBottom: "45px",
-                }}
-              >
-                <Button
-                  variant={
-                    selectedButton === "once" ? "primary" : "outline-primary"
-                  }
-                  onClick={() => handleButtonClick("once")}
-                  style={{
-                    backgroundColor:
-                      selectedButton === "once"
-                        ? "rgba(138, 0, 0, 1)"
-                        : "white",
-                    color:
-                      selectedButton === "once"
-                        ? "white"
-                        : "rgba(138, 0, 0, 1)",
-                    border: "none",
-                    width: "130px",
-                    flexGrow: "inherit",
-                  }}
-                >
-                  Once Only
-                </Button>
-                <Button
-                  variant={
-                    selectedButton === "monthly" ? "primary" : "outline-primary"
-                  }
-                  onClick={() => handleButtonClick("monthly")}
-                  style={{
-                    backgroundColor:
-                      selectedButton === "monthly"
-                        ? "rgba(138, 0, 0, 1)"
-                        : "white",
-                    color:
-                      selectedButton === "monthly"
-                        ? "white"
-                        : "rgba(138, 0, 0, 1)",
-                    border: "none",
-                    width: "130px",
-                    flexGrow: "inherit",
-                  }}
-                >
-                  Monthly
-                </Button>
-              </ButtonGroup>
+              <h5 className="sponsor">Ready to Sponsor a Research Paper?</h5>
+              <p style={{ padding: "0 75px" }}>
+                To become a sponsor, please fill out the form below, and our
+                team will reach out to you promptly to discuss the details and
+                select a research project aligned with your values and
+                interests.
+              </p>
+              {/* <SponserForm /> */}
 
-              <hr
-                style={{
-                  width: "460px",
-                  margin: "auto",
-                  paddingBottom: "35px",
-                }}
-              />
-              <h5 className="donate">How much would you like to sponsor?</h5>
-              <div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button
-                    variant="light"
-                    className="rupee"
-                    onClick={() => handleAmountClick(25000)}
-                  >
-                    $25,000{renderTickSign(25000)}
-                  </Button>
-                </div>
+              <div className="dashboard-parent-div">
+                <Row
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "auto",
+                  }}
+                >
+                  <Col className="add-category-content" lg={10}>
+                    <Card className="add-product-form-card">
+                      <Form>
+                        <Row>
+                          <Col>
+                            <div className="add-product-input-div">
+                              <p>Organization Name</p>
+                              <input
+                                type="text"
+                                name="organizationName"
+                                value={formData.organizationName}
+                                onChange={handleChange}
+                              />
+                              {validationErrors.organizationName && (
+                                <p style={{ color: "red" }}>
+                                  {validationErrors.organizationName}
+                                </p>
+                              )}
+                            </div>
+                          </Col>
+                          <Col>
+                            <div className="add-product-input-div">
+                              <p>Contact Person</p>
+                              <input
+                                type="text"
+                                name="contact"
+                                value={formData.contact}
+                                onChange={handleChange}
+                              />
+                              {validationErrors.contact && (
+                                <p style={{ color: "red" }}>
+                                  {validationErrors.contact}
+                                </p>
+                              )}
+                            </div>
+                          </Col>
+                        </Row>
+
+                        <Row>
+                          <Col>
+                            <div className="add-product-input-div">
+                              <p>Email</p>
+                              <input
+                                type="text"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                              />
+                              {validationErrors.email && (
+                                <p style={{ color: "red" }}>
+                                  {validationErrors.email}
+                                </p>
+                              )}
+                            </div>
+                          </Col>
+                          <Col>
+                            <div className="add-product-input-div">
+                              <p>Number</p>
+                              <input
+                                type="text"
+                                name="number"
+                                value={formData.number}
+                                onChange={handleChange}
+                              />
+                              {validationErrors.number && (
+                                <p style={{ color: "red" }}>
+                                  {validationErrors.number}
+                                </p>
+                              )}
+                            </div>
+                          </Col>
+                        </Row>
+
+                        <Row>
+                          <Col>
+                            <div className="add-product-input-div">
+                              <p>Message</p>
+                              <textarea
+                                type="text"
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                row="114"
+                                cols="24"
+                                style={{ width: "100%", height: "150px" }}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+
+                        <Form.Check
+                          type="checkbox"
+                          label="I am interested in sponsoring a research paper for $25,000 USD."
+                          checked={checkboxChecked}
+                          onChange={handleCheckboxChange}
+                        />
+                        {validationErrors.sponsorship && (
+                          <p style={{ color: "red" }}>
+                            {validationErrors.sponsorship}
+                          </p>
+                        )}
+                      </Form>
+                    </Card>
+                  </Col>
+                </Row>
               </div>
+
               <Container style={{ display: "flex" }}>
                 <Button
                   variant="primary"
@@ -339,9 +481,10 @@ const Sponsership = () => {
                     marginBottom: "20px",
                   }}
                   size="lg"
-                  onClick={handleDonateClick}
+                  onClick={handleSubmit}
+                  // type="submit"
                 >
-                  Sponsership
+                  Sponsorship
                 </Button>
               </Container>
             </Col>

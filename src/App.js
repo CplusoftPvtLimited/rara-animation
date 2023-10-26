@@ -1,4 +1,5 @@
-import "./index.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Fellows from "./pages/fellows/index";
 import FellowSingle from "./pages/fellow-single/index";
@@ -14,14 +15,14 @@ import Donation from "./pages/donate/index";
 import Sponsership from "./pages/sponsership/index";
 import Checkout from "./components/Donation/checkout/Checkout";
 import PaymentCompletionPage from "./pages/donate/PaymentSuccess";
-
-import { useEffect, useState } from "react";
-import axios from "axios";
+import "./index.css";
 
 import { ScrollProvider } from "./components/ScrollContext";
 
 function App() {
   const [keyData, setKeyData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
     getStripeKey();
@@ -35,11 +36,15 @@ function App() {
       .then((response) => {
         console.log("keyData: ", response);
         setKeyData(response?.data);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   return (
     <BrowserRouter>
       <ScrollProvider>
