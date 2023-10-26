@@ -13,6 +13,7 @@ const bankRoutes = require("./routes/bankRoutes");
 const RssFeedRoutes = require("./routes/RssFeedRoutes");
 const homeRoutes = require("./routes/homeRoutes");
 const authRoutes = require("./routes/auth.js");
+const postRoutes = require("./routes/postRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 
 const app = express();
@@ -37,6 +38,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Auth Route
 app.use("/api/auth", authRoutes);
+
+// Sponsor Route
+app.use("/api/sponsor", postRoutes);
 
 //Blog Route
 app.use("/api/blog", blogRoutes);
