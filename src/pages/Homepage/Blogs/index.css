@@ -652,7 +652,7 @@ ul {
     position: relative;
   }
   .lUpdates-title-main {
-    width: 20rem;
+    width: 100%;
   }
   .lUpdates-title-sub {
     letter-spacing: 0.05em;

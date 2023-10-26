@@ -4,8 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import "./index.css";
 
-import { useScroll } from "../ScrollContext";
-
 import PecuniaRedLogo from "../../assets/images/Pecunia_red_symbol.png";
 
 import { useNavigate } from "react-router-dom";
@@ -13,12 +11,6 @@ import { useNavigate } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 const index = ({ updateScrollPos }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  const { scrollPosFunction } = useScroll();
-  console.log(
-    "🚀 ~ file: index.jsx:14 ~ index ~ scrollPosFunction:",
-    scrollPosFunction
-  );
 
   const navigate = useNavigate();
 
@@ -48,7 +40,6 @@ const index = ({ updateScrollPos }) => {
 
   const scrollToVisionSection = () => {
     const visionSection = document.getElementById("vision-section");
-    const scrollContainer = document.querySelector(".custom-container");
 
     if (window.location.pathname == "/") {
       if (visionSection) {
@@ -69,20 +60,20 @@ const index = ({ updateScrollPos }) => {
   const scrollToGuidelinesSection = () => {
     const guidelinesSection = document.getElementById("guideline");
 
-    if (window.location.pathname == "/") {
-      if (guidelinesSection) {
-        guidelinesSection.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      navigate("/");
+    // if (window.location.pathname == "/") {
+    //   if (guidelinesSection) {
+    //     guidelinesSection.scrollIntoView({ behavior: "smooth" });
+    //   }
+    // } else {
+    //   navigate("/");
 
-      if (window.location.pathname == "/") {
-        setTimeout(() => {
-          const guidelinesSection = document.getElementById("guideline");
-          guidelinesSection.scrollIntoView({ behavior: "smooth" });
-        }, 800);
-      }
-    }
+    //   if (window.location.pathname == "/") {
+    //     setTimeout(() => {
+    //       const guidelinesSection = document.getElementById("guideline");
+    //       guidelinesSection.scrollIntoView({ behavior: "smooth" });
+    //     }, 800);
+    //   }
+    // }
   };
 
   const scrollToFellowsSection = () => {
@@ -155,11 +146,14 @@ const index = ({ updateScrollPos }) => {
     let transformValue = "translate(0, 0)";
 
     switch (true) {
-      case screenWidth <= 375:
-        transformValue = "translate(171px, -51px)";
+      case screenWidth <= 320:
+        transformValue = "translate(200px, -50px)";
         break;
-      case screenWidth <= 425:
-        transformValue = "translate(111px, -43px)";
+      case screenWidth <= 380:
+        transformValue = "translate(180px, -45px)";
+        break;
+      case screenWidth <= 450:
+        transformValue = "translate(180px, -40px)";
         break;
       case screenWidth <= 768:
         transformValue = "translate(111px, -43px)";
@@ -168,7 +162,7 @@ const index = ({ updateScrollPos }) => {
         transformValue = "translate(114px, -19px)";
         break;
       case screenWidth <= 1440:
-        transformValue = "translate(111px, -43px)";
+        transformValue = "translate(0px, 0px)";
         break;
     }
 
@@ -188,7 +182,7 @@ const index = ({ updateScrollPos }) => {
       gsap.fromTo(
         ".cHeader-logo",
         {
-          transform: "translate(-40px, 99.5825px)",
+          transform: "translate(0px, 99.5825px)",
           top: 0,
           left: 0,
         },
@@ -228,10 +222,9 @@ const index = ({ updateScrollPos }) => {
           opacity: 0,
         });
       }
-
+      menuBtn.classList.toggle("-isWhite");
+      menuBtn.classList.toggle("-isOpen");
       if (window.innerWidth > 768) {
-        menuBtn.classList.toggle("-isWhite");
-        menuBtn.classList.toggle("-isOpen");
         sponsorBtnElement.classList.toggle("-isOpen");
         donationBtnElement.classList.toggle("-isOpen");
       }
@@ -305,14 +298,12 @@ const index = ({ updateScrollPos }) => {
           className="cHeader-logo -kvLoaded"
           data-header-logo=""
           style={{
+            width: "100%",
+            margin: "auto",
             transform:
               window.innerWidth > 768 && window.innerHeight > 900
-                ? "translate(0%, 43vh)"
-                : window.innerWidth > 768
-                ? "translate(0%, 40vh)"
-                : window.innerWidth > 330
-                ? "translate(18%, 40vh)"
-                : "translate(14%, 40vh)",
+                ? "translate(0%, 42vh)"
+                : "translate(0%, 39vh)",
           }}
         >
           <svg
@@ -320,6 +311,7 @@ const index = ({ updateScrollPos }) => {
             height="55.275"
             viewBox="0 0 355.125 55.275"
             xmlns="http://www.w3.org/2000/svg"
+            style={{ width: "100%" }}
           >
             <g
               id="svgGroup"
@@ -433,6 +425,9 @@ const index = ({ updateScrollPos }) => {
                         <svg
                           className="cMenuContent-list-svg"
                           viewBox="0 0 303.4 70.4"
+                          style={{
+                            width: window.innerWidth <= 768 ? "100%" : "",
+                          }}
                         >
                           <g
                             className="box1"
@@ -499,7 +494,12 @@ const index = ({ updateScrollPos }) => {
                         style={{ opacity: 0 }}
                         onClick={scrollToHomeSection}
                       >
-                        <svg viewBox="0 0 767.78 151.37">
+                        <svg
+                          viewBox="0 0 767.78 151.37"
+                          style={{
+                            width: window.innerWidth <= 768 ? "100%" : "",
+                          }}
+                        >
                           <g
                             className="cMenuContent-list-svg"
                             id="svgGroup"
@@ -533,7 +533,12 @@ const index = ({ updateScrollPos }) => {
                         style={{ opacity: 0 }}
                         onClick={scrollToVisionSection}
                       >
-                        <svg viewBox="0 0 767.78 151.37">
+                        <svg
+                          viewBox="0 0 767.78 151.37"
+                          style={{
+                            width: window.innerWidth <= 768 ? "100%" : "",
+                          }}
+                        >
                           <g
                             className="cMenuContent-list-svg"
                             id="svgGroup"
@@ -570,7 +575,12 @@ const index = ({ updateScrollPos }) => {
                         style={{ opacity: 0 }}
                         onClick={scrollToContactSection}
                       >
-                        <svg viewBox="0 0 767.78 151.37">
+                        <svg
+                          viewBox="0 0 767.78 151.37"
+                          style={{
+                            width: window.innerWidth <= 768 ? "100%" : "",
+                          }}
+                        >
                           <g
                             className="cMenuContent-list-svg"
                             id="svgGroup"
@@ -609,6 +619,9 @@ const index = ({ updateScrollPos }) => {
                           height="29.204"
                           viewBox="0 0 219.32 29.204"
                           xmlns="http://www.w3.org/2000/svg"
+                          style={{
+                            width: window.innerWidth <= 768 ? "100%" : "",
+                          }}
                         >
                           <g
                             className="cMenuContent-list-svg"
@@ -676,6 +689,9 @@ const index = ({ updateScrollPos }) => {
                           height="28.802"
                           viewBox="0 0 102.12 28.802"
                           xmlns="http://www.w3.org/2000/svg"
+                          style={{
+                            width: window.innerWidth <= 768 ? "100%" : "",
+                          }}
                         >
                           <g
                             className="cMenuContent-list-svg"
@@ -727,6 +743,9 @@ const index = ({ updateScrollPos }) => {
                           height="28.64"
                           viewBox="0 0 190.28 28.64"
                           xmlns="http://www.w3.org/2000/svg"
+                          style={{
+                            width: window.innerWidth <= 768 ? "100%" : "",
+                          }}
                         >
                           <g
                             className="cMenuContent-list-svg"
@@ -780,7 +799,7 @@ const index = ({ updateScrollPos }) => {
                     {window.innerWidth < 768 && (
                       <li className="cMenuContent-list-item">
                         <a
-                          className="cMenuContent-list-link -fellows"
+                          className="cMenuContent-list-link -donate"
                           href="/donation"
                           data-menu-item=""
                           data-disable-hash=""
@@ -791,6 +810,7 @@ const index = ({ updateScrollPos }) => {
                             height="29.48"
                             viewBox="0 0 175.48 29.48"
                             xmlns="http://www.w3.org/2000/svg"
+                            style={{ width: "100%" }}
                           >
                             <g
                               className="cMenuContent-list-svg"
@@ -841,7 +861,7 @@ const index = ({ updateScrollPos }) => {
                     {window.innerWidth < 768 && (
                       <li className="cMenuContent-list-item">
                         <a
-                          className="cMenuContent-list-link -fellows"
+                          className="cMenuContent-list-link -sponsorship"
                           href="/donation"
                           data-menu-item=""
                           data-disable-hash=""
@@ -852,6 +872,7 @@ const index = ({ updateScrollPos }) => {
                             height="28.48"
                             viewBox="0 0 287.44 28.48"
                             xmlns="http://www.w3.org/2000/svg"
+                            style={{ width: "100%" }}
                           >
                             <g
                               className="cMenuContent-list-svg"

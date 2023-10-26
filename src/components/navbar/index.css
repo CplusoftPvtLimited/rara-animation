@@ -94,7 +94,7 @@ p {
   transition: transform 0.3s cubic-bezier(0.56, -0.01, 0.04, 1);
 }
 .cMenuContent-list-item + .cMenuContent-list-item {
-  margin-top: 3px !important;
+  margin-top: 3px;
   /* margin-top: 1.6875rem; */
   /* margin-top: 12px !important; */
 }
@@ -167,49 +167,77 @@ p {
 }
 
 @media screen and (min-width: 250px) {
+  .cMenuContent-inner {
+    padding-left: 9rem;
+  }
   .cHeader-logo-item {
     width: 90%;
+  }
+  .cMenuContent-list-link.-home {
+    width: 6rem;
+  }
+  .cMenuContent-list-link.-guideline {
+    width: 3.34rem;
+    display: block;
+    margin-top: 7px;
+  }
+  .cMenuContent-list-link.-research {
+    width: 8rem;
+    display: block;
+  }
+  .cMenuContent-list-link.-idea {
+    width: 4rem;
+    display: block;
+  }
+  .cMenuContent-list-link.-fellows {
+    width: 7rem;
+    display: block;
+  }
+  .cMenuContent-list-link.-donate {
+    width: 7rem;
+    display: block;
+  }
+  .cMenuContent-list-link.-sponsorship {
+    width: 10rem;
+    display: block;
   }
 }
 
 @media screen and (min-width: 375px) {
-  .cMenuContent-list-link.-home {
-    width: 6rem;
-  }
-
-  .cMenuContent-list-link.-fellows,
-  .cMenuContent-list-link.-idea {
-    width: 8.54rem;
-  }
-  .cMenuContent-list-link.-guideline {
-    width: 3.34rem;
+  .cMenuContent-inner {
+    padding-left: 11rem;
   }
 }
 
-@media screen and (min-width: 430px) {
-  .cMenuContent-list-link.-home {
-    width: 6rem;
-  }
-  .cMenuContent-list-link.-fellows,
-  .cMenuContent-list-link.-idea {
-    width: 8.54rem;
-  }
-  .cMenuContent-list-link.-guideline {
-    width: 3.34rem;
+@media screen and (min-width: 400px) {
+  .cMenuContent-inner {
+    padding-left: 14rem;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .cMenuContent-list-link.-home {
-    width: 5.875rem;
+  .cMenuContent-list-item + .cMenuContent-list-item {
+    margin-top: 0.6875rem;
   }
-
-  .cMenuContent-list-link.-fellows,
-  .cMenuContent-list-link.-idea {
-    width: 9.2rem;
+  .cMenuContent-list-link.-home {
+    width: 7rem;
   }
   .cMenuContent-list-link.-guideline {
-    width: 3.8rem;
+    width: 3.34rem;
+    display: block;
+    margin-top: 7px;
+  }
+  .cMenuContent-list-link.-research {
+    width: 12rem;
+    display: block;
+  }
+  .cMenuContent-list-link.-idea {
+    width: 6rem;
+    display: block;
+  }
+  .cMenuContent-list-link.-fellows {
+    width: 12rem;
+    display: block;
   }
 }
 

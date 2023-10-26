@@ -11,7 +11,7 @@ function Footer() {
           {/* <img className="w-[130px]" src={footerLogo} alt="footer logo" /> */}
           <h2 className="text-white text-[22px] mt-[5px]">Pecunia</h2>
         </div>
-        <div className="footer-text lg:text-center lg:mt-[-25px] lg:ml-[250px] lg:flex lg:justify-center">
+        <div className="footer-text lg:text-center lg:mt-[-30px] lg:flex lg:justify-center">
           <p>Bridging Prosperity with Purpose</p>
           <div className=" ml-[-20px] lg:ml-[0px] lg:mt-[2px]">
             <ul className="lg:flex lg:gap-4 lg:justify-center pl-[20px]">

@@ -57,10 +57,11 @@ const index = () => {
                 : window.innerWidth > 768
                 ? "translate(0%, 40vh)"
                 : window.innerWidth > 330
-                ? "translate(18%, 40vh)"
-                : "translate(14%, 40vh)",
+                ? "translate(0%, 40vh)"
+                : "translate(0%, 40vh)",
             top: 0,
             left: 0,
+            margin: "auto",
           },
           {
             transform:
@@ -69,6 +70,7 @@ const index = () => {
                 : "scale(0.266,0.266) translate(-130%,-20px)",
             top: "2.9rem",
             left: "0rem",
+            margin: "auto 3px",
           }
         );
         gsap.fromTo(
@@ -92,6 +94,7 @@ const index = () => {
                 : "scale(0.266,0.266) translate(-130%,-20px)",
             top: "2.9rem",
             left: "0rem",
+            margin: "auto 3px",
           },
           {
             transform:
@@ -100,10 +103,11 @@ const index = () => {
                 : window.innerWidth > 768
                 ? "translate(0%, 40vh)"
                 : window.innerWidth > 330
-                ? "translate(18%, 40vh)"
-                : "translate(14%, 40vh)",
+                ? "translate(0%, 40vh)"
+                : "translate(0%, 40vh)",
             top: 0,
             left: 0,
+            margin: "auto",
           }
         );
         gsap.fromTo(

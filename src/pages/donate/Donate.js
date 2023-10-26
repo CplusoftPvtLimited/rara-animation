@@ -19,6 +19,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { setAmount, setPaymentMethod } from "../../store/donationSlice";
 import DonatePage from "../../components/Donation/donate/DonatePage";
 import SponserForm from "../sponsership/SponserForm";
+import BeforeFooter from "../../pages/Homepage/FooterContainer";
+
 import "./donate.css";
 
 const Donate = () => {

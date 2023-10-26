@@ -123,9 +123,21 @@ const index = () => {
               top: "unset",
               bottom: "-100px",
             });
+            console.log(
+              "🚀 ~ file: index.jsx:133 ~ useEffect ~ bigCirlceValue11111111111:",
+              bigCirlceValue
+            );
+            gsap.to(".lFellows-btn", {
+              scale: 1,
+            });
           }
         } else {
           bigCirlceValue = 25 - (progress - 0.6) * 1.4 * 100;
+
+          console.log(
+            "🚀 ~ file: index.jsx:133 ~ useEffect ~ bigCirlceValue22222222:",
+            bigCirlceValue
+          );
           gsap.to(".lFellows-bg", {
             transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)`,
           });
@@ -136,21 +148,41 @@ const index = () => {
               bottom: "inherit",
             });
           }
+          if (bigCirlceValue >= 5) {
+            gsap.to(".lFellows-btn", {
+              scale: 1,
+            });
+          } else {
+            gsap.to(".lFellows-btn", {
+              scale: 0,
+            });
+          }
         }
       },
       onEnterBack: () => {
+        console.log(
+          "🚀 ~ file: index.jsx:82 ~ FELLOWS useEffect ~ onEnterBack:"
+        );
         gsap.to(".lFellows-bg-inner", {
+          display: "block",
+        });
+        gsap.to(".lFellows-btn", {
           display: "block",
         });
       },
       onLeave: () => {
-        console.log("🚀 ~ file: index.jsx:82 ~ useEffect ~ onLeave:");
+        console.log("🚀 ~ file: index.jsx:82 ~ FELLOWS useEffect ~ onLeave:");
+
         gsap.to(".lFellows-bg-inner", {
           display: "none",
           transform: "scale(0)",
         });
         gsap.to(".lFellows-inner", {
           transform: "scale(0px,0px)",
+        });
+        gsap.to(".lFellows-btn", {
+          display: "none",
+          transform: "scale(0)",
         });
       },
     });

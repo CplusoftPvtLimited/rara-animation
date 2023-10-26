@@ -647,12 +647,17 @@ const index = () => {
       <div className="guideline " id="guideline">
         <div className="guideline_item">
           <div className="lGuideline-title-inner">
-            <h2 className="lGuideline-title-svg" data-svg-title="">
+            <h2
+              className="lGuideline-title-svg"
+              data-svg-title=""
+              style={{ width: window.innerWidth < 700 ? "90%" : "" }}
+            >
               <svg
                 width="541.99"
                 height="60.598"
                 viewBox="0 0 541.99 60.598"
                 xmlns="http://www.w3.org/2000/svg"
+                style={{ width: window.innerWidth < 700 ? "100%" : "" }}
               >
                 <g
                   id="svgGroup"
@@ -734,7 +739,10 @@ const index = () => {
                 </g>
               </svg>
             </h2>
-            <div className="lGuideline-title-sub">
+            <div
+              className="lGuideline-title-sub"
+              style={{ width: window.innerWidth < 700 ? "93%" : "" }}
+            >
               <div
                 className="cSubTitle -right"
                 data-subtitle="true"
