@@ -36,7 +36,7 @@ function UpdateSingle() {
   }, []);
 
   const handleClick = (blogId) => {
-    navigate(`/blog/${blogId}`);
+    navigate(`/research/${blogId}`);
     window.location.reload();
     window.scrollTo(0, 0);
   };

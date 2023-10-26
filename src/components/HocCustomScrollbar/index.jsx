@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,11 +6,21 @@ import { Draggable } from "gsap/Draggable";
 import Footer from "../footer";
 import { useLocation } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger, Draggable);
+
+import { useScroll } from "../ScrollContext";
 // Define the HOC
 const HocCustomScrollbar = (WrappedComponent) => {
   const CustomScrollbar = (props) => {
-    const [scrollY, setscrollY] = useState(0);
+    const { scrollPosFunction, setScrollPosFunction } = useScroll();
+
     let scrollPos = 0;
+
+    const updateScrollPos = (newScrollPos) => {
+      // This is our callback to update scroll position
+      scrollPos = newScrollPos;
+    };
+
+    const [scrollY, setscrollY] = useState(0);
     useEffect(() => {
       const scrollContainer = document.querySelector(".custom-container");
       const scrollbar = document.querySelector(".c-scrollbar_thumb");
@@ -189,7 +199,39 @@ const HocCustomScrollbar = (WrappedComponent) => {
 
       ScrollTrigger.refresh();
       // Return the WrappedComponent with the clickCount prop and the onClick handler
+
+      const setScrollPos = (value) => {
+        scrollPos = value;
+        gsap.to(scrollContainer, {
+          scrollTop: scrollPos,
+          overwrite: "auto",
+          onUpdate: updateScrollbar,
+          duration: 0.1,
+          onComplete: () => ScrollTrigger.update(),
+        });
+      };
+
+      console.log(
+        "🚀 ~ file: index.jsx:214 ~ useEffect ~ setScrollPos:",
+        setScrollPos
+      );
+      // Set the function in context
+      setScrollPosFunction(setScrollPos);
+
+      // Synchronize the scrollPos with the actual scrollTop
+      scrollContainer.addEventListener("scroll", () => {
+        scrollPos = scrollContainer.scrollTop;
+        updateScrollbar();
+      });
+
+      return () => {
+        setScrollPosFunction(null);
+      };
     }, []);
+    console.log(
+      "🚀 ~ file: index.jsx:221 ~ useEffect ~ scrollPosFunction:",
+      scrollPosFunction
+    );
     return (
       <div className="scrollContainer">
         <div className="custom-container">

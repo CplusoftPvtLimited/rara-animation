@@ -188,7 +188,7 @@ function Card() {
   };
 
   const handleClick = (blogId) => {
-    navigate(`/blog/${blogId}`);
+    navigate(`/research/${blogId}`);
   };
 
   const uniqueFellows = new Set(fellowArray.map((post) => post.name));

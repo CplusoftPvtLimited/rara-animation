@@ -66,7 +66,7 @@ function FellowSingle() {
   };
 
   const handleClick = (blogId) => {
-    navigate(`/blog/${blogId}`);
+    navigate(`/research/${blogId}`);
   };
 
   const handleNextSlide = () => {

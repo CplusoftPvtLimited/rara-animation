@@ -23,10 +23,11 @@ const index = ({ props }) => {
     getHomeData();
   }, []);
 
+  console.log("🚀 ~ file: index.jsx:28 ~ index ~ homeData:", homeData);
   return (
     <div
       className="cContainer -leftMiddle -rightMiddle -spLeftSmall -spRightSmall lContact"
-      id="contact"
+      id="contact-container"
       data-contact=""
     >
       <div className="lContact-container">
@@ -68,56 +69,7 @@ const index = ({ props }) => {
             data-subtitle="true"
             style={{ overflow: "hidden" }}
             id="contact-section"
-          >
-            <div
-              className="cFlatText cSubTitle-inner"
-              data-flat-text=""
-              style={{ padding: "0px 4.425px", transform: "scaleX(1.05)" }}
-            >
-              <span
-                className="cSubTitle-text"
-                data-subtitle-item=""
-                style={{ transform: "translate(0px, 130%)" }}
-              >
-                お
-              </span>
-              <span
-                className="cSubTitle-text"
-                data-subtitle-item=""
-                style={{ transform: "translate(0px, 130%)" }}
-              >
-                問
-              </span>
-              <span
-                className="cSubTitle-text"
-                data-subtitle-item=""
-                style={{ transform: "translate(0px, 130%)" }}
-              >
-                い
-              </span>
-              <span
-                className="cSubTitle-text"
-                data-subtitle-item=""
-                style={{ transform: "translate(0px, 130%)" }}
-              >
-                合
-              </span>
-              <span
-                className="cSubTitle-text"
-                data-subtitle-item=""
-                style={{ transform: "translate(0px, 130%)" }}
-              >
-                わ
-              </span>
-              <span
-                className="cSubTitle-text"
-                data-subtitle-item=""
-                style={{ transform: "translate(0px, 130%)" }}
-              >
-                せ
-              </span>
-            </div>
-          </div>
+          ></div>
         </h2>
         <div className="lContact-lead">
           <div className="lContact-lead-svg _pc" data-svg-title="">
@@ -346,7 +298,7 @@ const index = ({ props }) => {
             <a
               className="lContact-link -mail"
               data-whatintent="mouse"
-              href="tel:(302) 200-6733"
+              href={`tel:${homeData.phoneNumber}`}
             >
               {/* {homeData.phoneNumber} */}
               {homeData.phoneNumber}
