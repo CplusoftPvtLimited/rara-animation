@@ -157,7 +157,7 @@ function FellowSingle() {
   return (
     <section>
       {console.log("*************Blog", blogData)}
-      <div className="pl-[30px] mt-[100px] lg:flex lg:justify-between w-[100%] lg:mt-[0px]">
+      <div className="pl-[30px] pr-[30px] md:pr-[0px] mt-[100px] lg:flex lg:justify-between w-[100%] lg:mt-[0px]">
         <div className="left lg:max-w-[50%] lg:m-auto lg:pl-[10px] xl:pl-[100px] w-[75%] lg:w-[100%]">
           {/** Left */}
           <div className="shape-1 absolute hidden lg:block" ref={shape1Ref}>
@@ -408,7 +408,7 @@ function FellowSingle() {
 
       {/************************** Before Footer Logo******************************/}
 
-      <div className="before-footer py-[16rem]  mt-[10px] w-[95%] mx-auto">
+      <div className="before-footer pt-[2rem]  mt-[10px] w-[95%] mx-auto">
         <img className="m-auto" src={Logo} alt="" width={133} height={139} />
       </div>
     </section>

@@ -1,9 +1,15 @@
 .footer-logo {
   font-family: "Shippori Mincho B1";
   font-size: 18px;
+  margin: 0px;
+  padding: 0px;
 }
 .footer-text {
   font-family: "Shippori Mincho B1";
-  font-size: 14px;
+  font-size: 13px;
   color: white;
+  /* margin-left: 225px; */
+}
+a {
+  text-decoration: none !important;
 }

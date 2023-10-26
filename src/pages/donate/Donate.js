@@ -2,6 +2,8 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import BeforeFooter from "../../pages/Homepage/FooterContainer";
+
 import React, { useEffect, useState } from "react";
 import {
   Button,
@@ -397,6 +399,11 @@ const Donate = () => {
           )}
         </Row>
       </Container>
+      {/************************** Before Footer Logo******************************/}
+
+      <div className="before-footer-1 mt-[2rem] border-t-0">
+        <BeforeFooter />
+      </div>
     </div>
   );
 };

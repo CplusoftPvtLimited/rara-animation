@@ -6,6 +6,8 @@ import Pic from "../../assets/images/pic.jpg";
 import Footer from "../../assets/images/fellow-beforefooter.png";
 import websiteIcon from "../../assets/images/website-icon.svg";
 import Logo from "../../assets/images/pecunia_logo_bg.png";
+import BeforeFooter from "../../pages/Homepage/FooterContainer";
+
 // import graphics1 from "../../assets/images/graphic03-2.png";
 // import graphics2 from "../../assets/images/graphic04-2.png";
 // import graphics3 from "../../assets/images/graphics05-2.svg";
@@ -73,8 +75,8 @@ function Fellows() {
 
       <div className="rows-wrapper px-[20px] lg:px-[0px]">
         {fellows.length === 0 ? (
-          <div className="mx-auto my-[50px]">
-            <p>Loading...</p>
+          <div className="mx-auto my-[50px] text-center">
+            <p>No Fellow Found</p>
           </div>
         ) : (
           fellows.map(
@@ -170,8 +172,8 @@ function Fellows() {
 
       <div className="rows-wrapper px-[20px] lg:px-[0px]">
         {associateFellow.length === 0 ? (
-          <div className="mx-auto my-[50px]">
-            <p>Loading...</p>
+          <div className="mx-auto my-[50px] text-center">
+            <p>No Assosiate Fellow Found</p>
           </div>
         ) : (
           associateFellow.map(
@@ -279,7 +281,7 @@ function Fellows() {
 
       <div className="w-[100%]  my-[150px]">
         <div className=" px-[30px] lg:flex lg:justify-center ">
-          <div className="my-auto w-[50%]">
+          <div className="my-auto lg:w-[50%]">
             <p className=" text-[14px] lg:text-[16px]">
               Our Fellowship Program isn't just an opportunity; it's an
               invitation to be part of a global hub of visionaries. Here, you'll
@@ -300,7 +302,7 @@ function Fellows() {
                 {" "}
                 VIEW WEBSITE{" "}
                 <img
-                  className="inline"
+                  className="inline mx-auto"
                   src={websiteIcon}
                   alt=""
                   width={20}
@@ -316,8 +318,8 @@ function Fellows() {
 
       {/************************** Before Footer Logo******************************/}
 
-      <div className="before-footer py-[16rem]">
-        <img className="m-auto" src={Logo} alt="" width={133} height={139} />
+      <div className="before-footer pt-[2rem]">
+        <BeforeFooter />
       </div>
     </section>
   );
