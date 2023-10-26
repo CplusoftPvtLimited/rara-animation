@@ -147,7 +147,7 @@ input[type="checkbox"] {
   border: none !important;
   background-color: rgb(227, 227, 227);
   border-radius: 12px;
-  padding: 16px !important;
+  /* padding: 16px !important; */
 }
 
 .add-product-input-div {
