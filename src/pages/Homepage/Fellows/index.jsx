@@ -68,9 +68,15 @@ const index = () => {
           gsap.to(".lFellows-bg", {
             transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)`,
           });
-          if (bigCirlceValue >= 0) {
+          if (bigCirlceValue >= 3) {
             gsap.to(".lFellows-bg-inner", {
               scale: bigCirlceValue,
+              top: "-100px",
+              bottom: "inherit",
+            });
+          } else {
+            gsap.to(".lFellows-bg-inner", {
+              scale: 0,
               top: "-100px",
               bottom: "inherit",
             });
@@ -137,6 +143,10 @@ const index = () => {
         ]);
         const fellow = fellowResponse.data.profiles;
         // Filter the blog data based on homeFellowIds
+        console.log(
+          "🚀 ~ file: index.jsx:140 ~ fetchAndFilterFellowData ~ homeFellowIds:",
+          homeFellowIds
+        );
         const filteredFellows = fellow.filter((fellow) =>
           homeFellowIds.includes(fellow.id)
         );

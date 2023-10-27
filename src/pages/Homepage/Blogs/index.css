@@ -687,7 +687,8 @@ ul {
         } */
   .lUpdates-Blog-List {
     margin-top: 6.125rem;
-    width: 46rem !important;
+    width: 100% !important;
+    padding: 0 2rem;
   }
 
   .lUpdates-title-inner {
@@ -706,7 +707,7 @@ ul {
     flex-direction: column;
   }
   .cUpdatesItem-thumbnail {
-    width: 50%;
+    width: 100%;
     height: 15.25rem;
     margin-right: 1.75rem;
     border-radius: 0.25rem;
@@ -715,7 +716,7 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: calc(100% - 21.75rem);
+    width: 100%;
     margin-top: 18px;
     height: 170px;
   }
@@ -805,7 +806,8 @@ ul {
   }
   .lUpdates-Blog-List {
     margin-top: 3rem !important;
-    width: 38rem !important;
+    width: 100% !important;
+    padding: 0 2rem;
   }
 
   .lUpdates-title-inner {
@@ -824,7 +826,7 @@ ul {
     flex-direction: column;
   }
   .cUpdatesItem-thumbnail {
-    width: 50%;
+    width: 100%;
     height: 15.25rem;
     margin-right: 1.75rem;
     border-radius: 0.25rem;
@@ -833,7 +835,7 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: calc(100% - 18.35rem);
+    width: 100%;
     margin-top: 18px;
     height: 170px;
   }
@@ -894,7 +896,7 @@ ul {
   }
 }
 
-@media (min-width: 320px) and (max-width: 374px) {
+@media (min-width: 280px) and (max-width: 374px) {
   .cContainer.-rightWide {
     padding-right: 1rem;
   }
