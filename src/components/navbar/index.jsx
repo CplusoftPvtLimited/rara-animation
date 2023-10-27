@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import "./index.css";
@@ -7,10 +7,17 @@ import "./index.css";
 import PecuniaRedLogo from "../../assets/images/Pecunia_red_symbol.png";
 
 import { useNavigate } from "react-router-dom";
+import { ScrollContext } from "../ScrollContext";
 
 gsap.registerPlugin(ScrollTrigger);
 const index = ({ updateScrollPos }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const ScrollContextValue = useContext(ScrollContext);
+  console.log(
+    "🚀 ~ file: index.jsx:17 ~ index ~ ScrollContextValue:",
+    ScrollContextValue
+  );
 
   const navigate = useNavigate();
 
@@ -18,13 +25,33 @@ const index = ({ updateScrollPos }) => {
     setScreenWidth(window.innerWidth);
   };
 
+  const scrollContainerScrollPosition = () => {
+    const scrollContainer = document.querySelector(".custom-container");
+    const onScroll = () => {
+      // Clear any existing timeout to reset the timer
+      clearTimeout(scrollTimeout);
+
+      // Set a new timeout
+      scrollTimeout = setTimeout(() => {
+        // console.log("🚀 ~ scrollTop:", scrollContainer.scrollTop);
+        ScrollContextValue.setScrollY(scrollContainer.scrollTop);
+
+        // Remove the event listener once we're sure scrolling has stopped
+        scrollContainer.removeEventListener("scroll", onScroll);
+      }, 100); // 100ms delay to wait after the last scroll event
+    };
+
+    // Add the event listener to the scroll container
+    scrollContainer.addEventListener("scroll", onScroll);
+  };
+
   const scrollToHomeSection = () => {
     const homeSection = document.getElementById("home-section");
-    console.log("home page");
 
     if (window.location.pathname == "/") {
       if (homeSection) {
         homeSection.scrollIntoView({ behavior: "smooth" });
+        scrollContainerScrollPosition();
       }
     } else {
       navigate("/");
@@ -32,18 +59,38 @@ const index = ({ updateScrollPos }) => {
       if (window.location.pathname == "/") {
         setTimeout(() => {
           const homeSection = document.getElementById("home-section");
+
+          gsap.to(".cHeader-logo", {
+            transform:
+              window.innerWidth > 768 && window.innerHeight > 900
+                ? "translate(0%, 43vh)"
+                : window.innerWidth > 768
+                ? "translate(0%, 40vh)"
+                : window.innerWidth > 330
+                ? "translate(0%, 40vh)"
+                : "translate(0%, 40vh)",
+            top: 0,
+            left: 0,
+            margin: "auto",
+          });
+
           homeSection.scrollIntoView({ behavior: "smooth" });
+          scrollContainerScrollPosition();
         }, 800);
       }
     }
   };
 
+  let scrollTimeout;
+
   const scrollToVisionSection = () => {
     const visionSection = document.getElementById("vision-section");
+    const scrollContainer = document.querySelector(".custom-container");
 
     if (window.location.pathname == "/") {
       if (visionSection) {
         visionSection.scrollIntoView({ behavior: "smooth" });
+        scrollContainerScrollPosition();
       }
     } else {
       navigate("/");
@@ -52,6 +99,7 @@ const index = ({ updateScrollPos }) => {
         setTimeout(() => {
           const visionSection = document.getElementById("vision-section");
           visionSection.scrollIntoView({ behavior: "smooth" });
+          scrollContainerScrollPosition();
         }, 800);
       }
     }
@@ -59,21 +107,24 @@ const index = ({ updateScrollPos }) => {
 
   const scrollToGuidelinesSection = () => {
     const guidelinesSection = document.getElementById("guideline");
+    const scrollContainer = document.querySelector(".custom-container");
 
-    // if (window.location.pathname == "/") {
-    //   if (guidelinesSection) {
-    //     guidelinesSection.scrollIntoView({ behavior: "smooth" });
-    //   }
-    // } else {
-    //   navigate("/");
+    if (window.location.pathname == "/") {
+      if (guidelinesSection) {
+        guidelinesSection.scrollIntoView({ behavior: "smooth" });
+        scrollContainerScrollPosition();
+      }
+    } else {
+      navigate("/");
 
-    //   if (window.location.pathname == "/") {
-    //     setTimeout(() => {
-    //       const guidelinesSection = document.getElementById("guideline");
-    //       guidelinesSection.scrollIntoView({ behavior: "smooth" });
-    //     }, 800);
-    //   }
-    // }
+      if (window.location.pathname == "/") {
+        setTimeout(() => {
+          const guidelinesSection = document.getElementById("guideline");
+          guidelinesSection.scrollIntoView({ behavior: "smooth" });
+          scrollContainerScrollPosition();
+        }, 800);
+      }
+    }
   };
 
   const scrollToFellowsSection = () => {
@@ -82,6 +133,7 @@ const index = ({ updateScrollPos }) => {
     if (window.location.pathname == "/") {
       if (fellowsSection) {
         fellowsSection.scrollIntoView({ behavior: "smooth" });
+        scrollContainerScrollPosition();
       }
     } else {
       navigate("/");
@@ -90,6 +142,7 @@ const index = ({ updateScrollPos }) => {
         setTimeout(() => {
           const fellowsSection = document.getElementById("fellows");
           fellowsSection.scrollIntoView({ behavior: "smooth" });
+          scrollContainerScrollPosition();
         }, 800);
       }
     }
@@ -102,6 +155,7 @@ const index = ({ updateScrollPos }) => {
     if (window.location.pathname == "/") {
       if (updatesSection) {
         updatesSection.scrollIntoView({ behavior: "smooth" });
+        scrollContainerScrollPosition();
       }
     } else {
       navigate("/");
@@ -110,6 +164,7 @@ const index = ({ updateScrollPos }) => {
         setTimeout(() => {
           const updatesSection = document.getElementById("updates");
           updatesSection.scrollIntoView({ behavior: "smooth" });
+          scrollContainerScrollPosition();
         }, 800);
       }
     }
@@ -121,6 +176,7 @@ const index = ({ updateScrollPos }) => {
     if (window.location.pathname == "/") {
       if (contactSection) {
         contactSection.scrollIntoView({ behavior: "smooth" });
+        scrollContainerScrollPosition();
       }
     } else {
       navigate("/");
@@ -129,6 +185,7 @@ const index = ({ updateScrollPos }) => {
         setTimeout(() => {
           const contactSection = document.getElementById("contact-container");
           contactSection.scrollIntoView({ behavior: "smooth" });
+          scrollContainerScrollPosition();
         }, 1000);
       }
     }
@@ -679,7 +736,7 @@ const index = ({ updateScrollPos }) => {
                     <li className="cMenuContent-list-item">
                       <a
                         className="cMenuContent-list-link -idea"
-                        href="/news"
+                        href="/ideas"
                         data-menu-item=""
                         data-disable-hash=""
                         style={{ opacity: 0 }}

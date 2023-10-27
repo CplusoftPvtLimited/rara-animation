@@ -33,6 +33,12 @@ const index = () => {
         }
         const data = await response.json();
         setHomeData(data.home[0]);
+        const scrollContainer = document.querySelector(".custom-container");
+        ScrollTrigger.addEventListener("refreshInit", () => {
+          gsap.set(scrollContainer, { overflowY: "scroll" });
+        });
+
+        ScrollTrigger.refresh();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -622,7 +628,7 @@ const index = () => {
             maxWidth: "100%",
             position: "relative",
             paddingBottom: "56.25%",
-            height: window.innerWidth < 768 ? "35pc" : "100%",
+            height: window.innerWidth < 768 ? "100vh" : "100vh",
           }}
         >
           <video

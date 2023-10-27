@@ -263,7 +263,7 @@ function Hero() {
                       setHandClass("hand-3");
                     }}
                   >
-                    RARAフェロー
+                    Fellows
                     <IoMdArrowDropdown className="my-auto ml-1 text-[16px]" />
                   </div>
                 </li>
@@ -276,7 +276,7 @@ function Hero() {
                       setHandClass("hand-3");
                     }}
                   >
-                    RARAアソシエイトフェロー
+                    Associate Fellows
                     <IoMdArrowDropdown className="my-auto ml-1 text-[16px]" />
                   </div>
                 </li>
@@ -289,7 +289,7 @@ function Hero() {
                       setHandClass("hand-3");
                     }}
                   >
-                    RARA学生フェロー
+                    Student Fellow
                     <IoMdArrowDropdown className="my-auto ml-1 text-[16px]" />
                   </div>
                 </li>

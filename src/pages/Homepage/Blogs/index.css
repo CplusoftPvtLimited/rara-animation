@@ -159,6 +159,12 @@ ul {
   text-decoration: none;
   color: #383838;
 }
+.cUpdatesItem-date {
+  color: #383838;
+}
+.cUpdatesItem-articleTitle {
+  color: #383838;
+}
 
 @media (min-width: 1920px) and (max-width: 2560px) {
   .cContainer.-rightWide {
@@ -635,6 +641,12 @@ ul {
   .lUpdates-link {
     font-size: 14px;
   }
+  .cUpdatesItem-date {
+    color: #383838;
+  }
+  .cUpdatesItem-articleTitle {
+    color: #383838;
+  }
 }
 
 @media (min-width: 420px) and (max-width: 767px) {
@@ -757,6 +769,12 @@ ul {
   .lUpdates-link {
     font-size: 14px;
   }
+  .cUpdatesItem-date {
+    color: #383838;
+  }
+  .cUpdatesItem-articleTitle {
+    color: #383838;
+  }
 }
 
 @media (min-width: 375px) and (max-width: 424px) {
@@ -838,6 +856,10 @@ ul {
   .cUpdatesItem-articleTitle {
     font-size: 11px;
     line-height: 2;
+    color: #383838;
+  }
+  .cUpdatesItem-date {
+    color: #383838;
   }
 
   .cUpdatesItem-bottom {
@@ -987,5 +1009,11 @@ ul {
   }
   .lUpdates-link {
     font-size: 14px;
+  }
+  .cUpdatesItem-date {
+    color: #383838;
+  }
+  .cUpdatesItem-articleTitle {
+    color: #383838;
   }
 }

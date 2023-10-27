@@ -107,7 +107,7 @@ const Sponsership = () => {
       formDataToSend.append("message", formData.message);
       if (actualSelectedAmount) {
         axios
-          .post("http://localhost:4500/api/sponsor/createPost", formData)
+          .post(`${process.env.REACT_APP_SERVER}/sponsor/createPost`, formData)
           .then((response) => {
             console.log("response response: ", response);
             setFormData({

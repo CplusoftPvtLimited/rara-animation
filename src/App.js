@@ -15,6 +15,9 @@ import Donation from "./pages/donate/index";
 import Sponsership from "./pages/sponsership/index";
 import Checkout from "./components/Donation/checkout/Checkout";
 import PaymentCompletionPage from "./pages/donate/PaymentSuccess";
+
+import { ScrollContextProvider } from "./components/ScrollContext/index";
+
 import "./index.css";
 
 function App() {
@@ -46,55 +49,57 @@ function App() {
   return (
     <BrowserRouter>
       <div className="bg">
-        <HeaderRoute />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/fellows" element={<Fellows />} />
-          <Route path="/fellow/:fellowId" element={<FellowSingle />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/research" element={<Updates />} />
-          <Route path="/research/:blogId" element={<UpdateSingle />} />
-          <Route path="/student" element={<Student />} />
-          <Route path="/donation" element={<Donation />} />
-          <Route path="/sponsership" element={<Sponsership />} />
+        <ScrollContextProvider>
+          <HeaderRoute />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/fellows" element={<Fellows />} />
+            <Route path="/fellow/:fellowId" element={<FellowSingle />} />
+            <Route path="/ideas" element={<News />} />
+            <Route path="/research" element={<Updates />} />
+            <Route path="/research/:blogId" element={<UpdateSingle />} />
+            <Route path="/student" element={<Student />} />
+            <Route path="/donation" element={<Donation />} />
+            <Route path="/sponsership" element={<Sponsership />} />
 
-          {keyData?.active ? (
-            <Route path="/stripe" element={<Checkout />} />
-          ) : (
+            {keyData?.active ? (
+              <Route path="/stripe" element={<Checkout />} />
+            ) : (
+              <Route
+                path="/stripe"
+                element={
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "100vh",
+                      padding: "20px",
+                      fontSize: 25,
+                      fontWeight: 600,
+                    }}
+                  >
+                    Stripe Payment is not available at the moment.
+                  </div>
+                }
+              />
+            )}
+            {keyData?.active && (
+              <Route
+                path="/payment-success"
+                element={<PaymentCompletionPage />}
+              />
+            )}
+
             <Route
-              path="/stripe"
+              path="/coinbase"
               element={
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "100vh",
-                    padding: "20px",
-                    fontSize: 25,
-                    fontWeight: 600,
-                  }}
-                >
-                  Stripe Payment is not available at the moment.
-                </div>
+                <div>Coinbase Payment is not available at the moment.</div>
               }
             />
-          )}
-          {keyData?.active && (
-            <Route
-              path="/payment-success"
-              element={<PaymentCompletionPage />}
-            />
-          )}
-
-          <Route
-            path="/coinbase"
-            element={
-              <div>Coinbase Payment is not available at the moment.</div>
-            }
-          />
-        </Routes>
+          </Routes>
+        </ScrollContextProvider>
       </div>
     </BrowserRouter>
   );

@@ -130,6 +130,12 @@ const index = () => {
             gsap.to(".lFellows-btn", {
               scale: 1,
             });
+          } else {
+            gsap.to(".lFellows-bg-inner", {
+              scale: 0,
+              top: "-100px",
+              bottom: "inherit",
+            });
           }
         } else {
           bigCirlceValue = 25 - (progress - 0.6) * 1.4 * 100;
@@ -141,14 +147,20 @@ const index = () => {
           gsap.to(".lFellows-bg", {
             transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)`,
           });
-          if (bigCirlceValue >= 0) {
+          if (bigCirlceValue >= 7) {
             gsap.to(".lFellows-bg-inner", {
               scale: bigCirlceValue,
               top: "-100px",
               bottom: "inherit",
             });
+          } else {
+            gsap.to(".lFellows-bg-inner", {
+              scale: 0,
+              top: "-100px",
+              bottom: "inherit",
+            });
           }
-          if (bigCirlceValue >= 5) {
+          if (bigCirlceValue >= 7) {
             gsap.to(".lFellows-btn", {
               scale: 1,
             });

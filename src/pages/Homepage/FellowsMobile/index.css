@@ -583,9 +583,6 @@ ul {
 
     left: -39%;
   }
-  .-l03 {
-    transform: scale(0.6) !important;
-  }
   .button-container {
     display: flex;
     justify-content: space-between;

@@ -24,6 +24,12 @@ const index = () => {
           data.home[0]
         );
         setHomeData(data.home[0]);
+
+        const scrollContainer = document.querySelector(".custom-container");
+        ScrollTrigger.addEventListener("refreshInit", () => {
+          gsap.set(scrollContainer, { overflowY: "scroll" });
+        });
+        ScrollTrigger.refresh();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -464,7 +470,7 @@ const index = () => {
         ScrollTrigger.create({
           trigger: "#guideline",
           scroller: scrollContainer,
-          start: "top +50%", // Adjust the start position based on your preference
+          start: "top bottom", // Adjust the start position based on your preference
           onEnter: () => {
             console.log("ENTERED IN GUIDELINE ANIMATION");
             // When scrolling down, apply the styles to display the div
@@ -577,65 +583,65 @@ const index = () => {
             );
           },
         });
-      }
 
-      ScrollTrigger.create({
-        trigger: ".guideline_item",
-        scroller: scrollContainer,
-        start: "start top",
-        end: "+=1800",
-        scrub: true,
-        onEnter: () => {
-          console.log("🚀 ~ file: index.jsx:570 ~ useEffect ~ onEnter:");
-          // gsap.to(".-mobile_card1", {
-          //   transform: "rotateY(180deg)",
-          // });
-        },
-        onUpdate: (self) => {
-          console.log("🚀 ~ file: index.jsx:576 ~ useEffect ~ onUpdate:");
-          const scrollProgress = self.progress;
-          console.log(
-            "🚀 ~ file: index.jsx:176 ~ useEffect ~ scrollProgress:",
-            scrollProgress
-          );
-          if (scrollProgress >= 0.045) {
-            gsap.to(".-mobile_card1", {
-              transform: "rotateY(180deg)",
-              duration: 0.5,
+        ScrollTrigger.create({
+          trigger: ".guideline_item",
+          scroller: scrollContainer,
+          start: "start top",
+          end: "+=1800",
+          scrub: true,
+          onEnter: () => {
+            console.log("🚀 ~ file: index.jsx:570 ~ useEffect ~ onEnter:");
+            // gsap.to(".-mobile_card1", {
+            //   transform: "rotateY(180deg)",
+            // });
+          },
+          onUpdate: (self) => {
+            console.log("🚀 ~ file: index.jsx:576 ~ useEffect ~ onUpdate:");
+            const scrollProgress = self.progress;
+            console.log(
+              "🚀 ~ file: index.jsx:176 ~ useEffect ~ scrollProgress:",
+              scrollProgress
+            );
+            if (scrollProgress >= 0.045) {
+              gsap.to(".-mobile_card1", {
+                transform: "rotateY(180deg)",
+                duration: 0.5,
+              });
+            }
+            if (scrollProgress >= 0.3) {
+              gsap.to(".-mobile_card2", {
+                transform: "rotateY(180deg)",
+                duration: 0.5,
+              });
+            }
+            if (scrollProgress >= 0.5) {
+              gsap.to(".-mobile_card3", {
+                transform: "rotateY(180deg)",
+                duration: 0.5,
+              });
+            }
+            if (scrollProgress >= 0.767) {
+              gsap.to(".-mobile_card4", {
+                transform: "rotateY(180deg)",
+                duration: 0.5,
+              });
+            }
+          },
+          onEnterBack: () => {
+            console.log("🚀 ~ file: index.jsx:582 ~ useEffect ~ onEnterBack:");
+          },
+          onLeave: () => {
+            console.log("🚀 ~ file: index.jsx:586 ~ useEffect ~ onLeave:");
+            gsap.to(".lGuideline-text-child", {
+              transform: "translate(0px,0%)",
             });
-          }
-          if (scrollProgress >= 0.3) {
-            gsap.to(".-mobile_card2", {
-              transform: "rotateY(180deg)",
-              duration: 0.5,
-            });
-          }
-          if (scrollProgress >= 0.5) {
-            gsap.to(".-mobile_card3", {
-              transform: "rotateY(180deg)",
-              duration: 0.5,
-            });
-          }
-          if (scrollProgress >= 0.767) {
-            gsap.to(".-mobile_card4", {
-              transform: "rotateY(180deg)",
-              duration: 0.5,
-            });
-          }
-        },
-        onEnterBack: () => {
-          console.log("🚀 ~ file: index.jsx:582 ~ useEffect ~ onEnterBack:");
-        },
-        onLeave: () => {
-          console.log("🚀 ~ file: index.jsx:586 ~ useEffect ~ onLeave:");
-          gsap.to(".lGuideline-text-child", {
-            transform: "translate(0px,0%)",
-          });
-        },
-        onLeaveBack: () => {
-          console.log("🚀 ~ file: index.jsx:590 ~ useEffect ~ onLeaveBack:");
-        },
-      });
+          },
+          onLeaveBack: () => {
+            console.log("🚀 ~ file: index.jsx:590 ~ useEffect ~ onLeaveBack:");
+          },
+        });
+      }
 
       toggleDivOnScrollMobile();
     }

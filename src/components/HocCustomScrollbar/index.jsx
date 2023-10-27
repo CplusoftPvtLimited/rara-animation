@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Draggable } from "gsap/Draggable";
 import Footer from "../footer";
 import { useLocation } from "react-router-dom";
+import { ScrollContext } from "../ScrollContext";
 gsap.registerPlugin(ScrollTrigger, Draggable);
 // Define the HOC
+
+let scrollPos = 0;
+
+let firstScroll = true;
+
 const HocCustomScrollbar = (WrappedComponent) => {
   const CustomScrollbar = (props) => {
     const [scrollY, setscrollY] = useState(0);
-    let scrollPos = 0;
+
+    const ScrollContextValue = useContext(ScrollContext);
+
     useEffect(() => {
       const scrollContainer = document.querySelector(".custom-container");
       const scrollbar = document.querySelector(".c-scrollbar_thumb");
@@ -50,7 +58,6 @@ const HocCustomScrollbar = (WrappedComponent) => {
         pinType: "transform",
       });
 
-      let firstScroll = true;
       let debounceTimeout = null; // For debouncing the scroll event
 
       scrollContainer.addEventListener(
@@ -85,6 +92,11 @@ const HocCustomScrollbar = (WrappedComponent) => {
             onComplete: () => {
               ScrollTrigger.update();
               // console.log("SCROLL TRIGGER UPDATE ---------", scrollPos);
+
+              // console.log(
+              //   "🚀 ~ file: index.jsx:96 ~ useEffect ~ firstScroll:",
+              //   firstScroll
+              // );
             },
           });
 
@@ -190,6 +202,41 @@ const HocCustomScrollbar = (WrappedComponent) => {
       ScrollTrigger.refresh();
       // Return the WrappedComponent with the clickCount prop and the onClick handler
     }, []);
+
+    useEffect(() => {
+      const scrollContainer = document.querySelector(".custom-container");
+      const scrollbar = document.querySelector(".c-scrollbar_thumb");
+      scrollPos = ScrollContextValue.scrollY;
+      function updateScrollbar() {
+        firstScroll = false;
+        // console.log(
+        //   "🚀 ~ file: index.jsx:199 ~ useEffect ~       useEffect navbar scrollContext:",
+        //   scrollPos
+        // );
+        const scrollbarHeight =
+          (scrollContainer.offsetHeight * scrollContainer.offsetHeight) /
+          scrollContainer.scrollHeight;
+
+        gsap.set(scrollbar, {
+          height: scrollbarHeight,
+          y:
+            (scrollPos * (scrollContainer.offsetHeight - scrollbarHeight)) /
+            (scrollContainer.scrollHeight - scrollContainer.offsetHeight),
+        });
+      }
+      gsap.to(scrollContainer, {
+        scrollTop: scrollPos,
+        overwrite: "auto",
+        onUpdate: updateScrollbar,
+        duration: 0.1,
+        scrub: 1,
+        onComplete: () => {
+          ScrollTrigger.update();
+          // console.log("SCROLL TRIGGER UPDATE ---------", scrollPos);
+        },
+      });
+    }, [ScrollContextValue?.scrollY]);
+
     return (
       <div className="scrollContainer">
         <div className="custom-container">

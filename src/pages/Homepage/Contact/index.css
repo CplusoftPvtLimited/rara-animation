@@ -137,15 +137,12 @@ ins {
   animation: textLink-border 0.5s cubic-bezier(0.56, -0.01, 0.04, 1) forwards;
 }
 
-@media (min-width: 320px) and (max-width: 374px) {
+@media (min-width: 280px) and (max-width: 374px) {
   .cContainer.-rightMiddle {
     padding-right: 5.9375rem;
   }
   .cContainer.-leftMiddle {
     padding-left: 1.9375rem;
-  }
-  .lContact-title {
-    display: none;
   }
   .lContact-container {
     margin-top: 7.8125rem;
@@ -236,9 +233,6 @@ ins {
   .cContainer.-leftMiddle {
     padding-left: 1.9375rem;
   }
-  .lContact-title {
-    display: none;
-  }
   .lContact-container {
     margin-top: 7.8125rem;
     padding-top: 7.8125rem;
@@ -327,9 +321,6 @@ ins {
   }
   .cContainer.-leftMiddle {
     padding-left: 1.9375rem;
-  }
-  .lContact-title {
-    display: none;
   }
   .lContact-container {
     margin-top: 7.8125rem;
