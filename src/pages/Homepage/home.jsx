@@ -972,13 +972,19 @@ const index = () => {
           </div>
         </div>
       </div>
-      <GuideLines />
+      {homeData && <GuideLines data={homeData} />}
       {/* <FellowsMobile /> */}
-      {window.innerWidth < 767 && <FellowsMobile />}
-      {window.innerWidth > 767 && <Fellows />}
-      <Blogs />
-      <Contact />
-      <FooterContainer />
+      {window.innerWidth < 767 && homeData && (
+        <FellowsMobile homeData={homeData} />
+      )}
+      {window.innerWidth > 767 && homeData && <Fellows homeData={homeData} />}
+      {homeData && (
+        <>
+          <Blogs homeData={homeData} />
+          <Contact data={homeData} />
+          <FooterContainer />
+        </>
+      )}
     </div>
   );
 };

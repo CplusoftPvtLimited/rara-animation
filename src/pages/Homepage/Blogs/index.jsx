@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 import axios from "axios";
 
-const index = () => {
+const index = ({ homeData }) => {
   const [fellowData, setFellowData] = useState([]);
   const [blogData, setBlogData] = useState([]);
-  const [homeData, setHomeData] = useState([]);
+  // const [homeData, setHomeData] = useState([]);
   const [selectedBlog, setSelectedBlogs] = useState([]);
   useEffect(() => {
     axios({
@@ -21,16 +21,16 @@ const index = () => {
   }, []);
 
   useEffect(() => {
+    // setHomeData(data);
     // Define an async function to fetch home data
     const getHome = async () => {
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_SERVER}/home/getHome`
+        const data = homeData;
+        const homeBlog = data.blogs.split(",").map((id) => parseInt(id, 10));
+        console.log(
+          "*******000000000🚀 ~ file: index.jsx:30 ~ getHome ~ homeBlog:",
+          homeBlog
         );
-        const data = await response.json();
-        const homeBlog = JSON.parse(data.home[0].blogs)
-          .split(",")
-          .map((id) => parseInt(id, 10));
         return homeBlog;
       } catch (error) {
         console.log("Error fetching home data:", error.message);
@@ -49,7 +49,7 @@ const index = () => {
           }),
         ]);
         console.log(
-          "🚀 ~ file: index.jsx:50 ~ fetchAndFilterBlogData ~ homeBlogIds:",
+          "*********00000🚀 ~ file: index.jsx:50 ~ fetchAndFilterBlogData ~ homeBlogIds:",
           homeBlogIds
         );
 

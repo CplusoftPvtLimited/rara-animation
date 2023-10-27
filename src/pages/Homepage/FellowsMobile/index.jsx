@@ -17,7 +17,7 @@ var previousTotal = 360;
 
 var previousClicked = 0;
 
-const index = () => {
+const index = ({ homeData }) => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const [SliderMove, setSliderMove] = useState(null);
   const [sliderRotate, setsliderRotate] = useState(-30);
@@ -32,11 +32,8 @@ const index = () => {
   useEffect(() => {
     const getHome = async () => {
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_SERVER}/home/getHome`
-        );
-        const data = await response.json();
-        const homeFellow = JSON.parse(data.home[0].fellows)
+        const data = homeData;
+        const homeFellow = data.home[0].fellows
           .split(",")
           .map((id) => parseInt(id, 10));
 
