@@ -1,4 +1,5 @@
 const Profile = require("../models/Profile");
+const Home = require("../models/homePage");
 
 const createProfile = async (req, res) => {
   // console.log("req.file file: ", req.files);
@@ -279,7 +280,23 @@ const deleteProfile = async (req, res) => {
     if (!profile) {
       return res.status(404).json({ error: "Profile not found" });
     }
+
+    // Delete the profile
     await profile.destroy();
+
+    // Remove the ID from the Home table's "fellows" column
+    const home = await Home.findOne();
+    if (home) {
+      const currentFellows = home.fellows
+        .split(",")
+        .map((fellow) => fellow.trim()); // Split the string into an array
+      const updatedFellows = currentFellows.filter(
+        (fellowId) => fellowId !== id
+      );
+      const updatedFellowsString = updatedFellows.join(","); // Join the array back to a string
+      await home.update({ fellows: updatedFellowsString });
+    }
+
     res.json({ message: "Profile deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: "Profile Not Deleted" });

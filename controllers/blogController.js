@@ -1,6 +1,7 @@
 // const Blog = require('../models/Blog');
 const { Category } = require("../models/Category");
 const Profile = require("../models/Profile");
+const Home = require("../models/homePage");
 const {
   Blog,
   RelatedBlog,
@@ -254,23 +255,40 @@ const updateBlogPost = async (req, res) => {
 
 const deleteBlogPost = async (req, res) => {
   if (!req.params.id) {
-    return res.status(400).json({ error: "Add a id to delete a blog post" });
+    return res.status(400).json({ error: "Add an ID to delete a blog post" });
   }
   try {
     const blogPost = await Blog.findByPk(req.params.id);
     if (!blogPost) {
       return res.status(404).json({ error: "Blog post not found" });
     }
+
+    // Find and delete related blog entries
     await RelatedBlog.destroy({
       where: {
         blogId: req.params.id,
       },
     });
 
+    // Delete the blog post itself
     await blogPost.destroy();
-    res.status(200).json({ message: "Blog post deleted successfully" });
+
+    // Remove the ID from the Home table's "blogs" column
+    const home = await Home.findOne();
+    if (home) {
+      const currentBlogs = home.blogs.split(",").map((blogId) => blogId.trim());
+      const updatedBlogs = currentBlogs.filter(
+        (blogId) => blogId !== req.params.id
+      );
+      const updatedBlogsString = updatedBlogs.join(",");
+      await home.update({ blogs: updatedBlogsString });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Blog post and related blogs deleted successfully" });
   } catch (err) {
-    res.status(403).json({ err });
+    res.status(403).json({ error: "Blog post and related blogs not deleted" });
   }
 };
 
