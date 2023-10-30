@@ -7,6 +7,11 @@ import "../Blogs Pages/AddBlog.css";
 
 const Accounts = () => {
   const [account, setAccount] = useState([]);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     getAdminAccount();
@@ -28,32 +33,64 @@ const Accounts = () => {
 
   const editAdminAccount = (event) => {
     event.preventDefault();
-    const updatedData = new FormData();
-    updatedData.append("password", account.password);
-    updatedData.append("userId", account.id);
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+      setError("Please fill in all the fields.");
+      return;
+    }
+
+    if (newPassword !== confirmNewPassword) {
+      setError("New Password and Confirm New Password must match.");
+      return;
+    }
+
+    if (currentPassword !== account.password) {
+      setError("Current password is incorrect.");
+      return;
+    }
+
+    const updatedData = {
+      userId: account.id,
+      password: newPassword,
+    };
 
     try {
       axios
         .put(
           `${process.env.REACT_APP_BACKEND}/auth/changeAdminPassword`,
-          account
+          updatedData
         )
         .then((response) => {
-          console.log("updated Data: ", response);
+          setSuccessMessage("Password successfully updated!");
+          clearMessages();
         })
         .catch((err) => {
           console.log("err: ", err);
+          setError("Error updating password. Please try again.");
         });
     } catch (err) {
       console.log("Error: " + err.message);
+      setError("Error updating password. Please try again.");
     }
+  };
+
+  const clearMessages = () => {
+    setTimeout(() => {
+      setNewPassword("");
+      setConfirmNewPassword("");
+      setCurrentPassword("");
+      setSuccessMessage("");
+    }, 3000);
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setAccount((prev) => {
-      return { ...prev, [name]: value };
-    });
+    if (name === "currentPassword") {
+      setCurrentPassword(value);
+    } else if (name === "newPassword") {
+      setNewPassword(value);
+    } else if (name === "confirmNewPassword") {
+      setConfirmNewPassword(value);
+    }
   };
 
   return (
@@ -78,9 +115,7 @@ const Accounts = () => {
           <h4>Admin Details</h4>
           <p>Here are the admin details</p>
           <Card className="add-product-form-card">
-            <Form
-            // onSubmit={handleSubmit}
-            >
+            <Form>
               <Row>
                 <Col sm={6}>
                   <div className="add-product-input-div">
@@ -92,28 +127,53 @@ const Accounts = () => {
                       onChange={handleChange}
                       disabled
                     />
-                    {/* {validationErrors.title && (
-                      <p style={{ color: "red" }}>{validationErrors.title}</p>
-                    )} */}
                   </div>
                 </Col>
               </Row>
               <Row>
                 <Col sm={6}>
                   <div className="add-product-input-div">
-                    <p>Password</p>
+                    <p>Current Password</p>
+
                     <input
-                      type="text"
-                      name="password"
-                      value={account?.password}
+                      type="password"
+                      name="currentPassword"
+                      value={currentPassword}
                       onChange={handleChange}
                     />
-                    {/* {validationErrors.content && (
-                      <p style={{ color: "red" }}>{validationErrors.content}</p>
-                    )} */}
                   </div>
                 </Col>
               </Row>
+              <Row>
+                <Col sm={6}>
+                  <div className="add-product-input-div">
+                    <p>New Password</p>
+                    <input
+                      type="password"
+                      name="newPassword"
+                      value={newPassword}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={6}>
+                  <div className="add-product-input-div">
+                    <p>Confirm New Password</p>
+                    <input
+                      type="password"
+                      name="confirmNewPassword"
+                      value={confirmNewPassword}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </Col>
+              </Row>
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              {successMessage && (
+                <p style={{ color: "green" }}>{successMessage}</p>
+              )}
 
               <button
                 type="submit"
