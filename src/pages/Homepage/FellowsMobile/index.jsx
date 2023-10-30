@@ -129,12 +129,7 @@ const index = () => {
             );
             gsap.to(".lFellows-btn", {
               scale: 1,
-            });
-          } else {
-            gsap.to(".lFellows-bg-inner", {
-              scale: 0,
-              top: "-100px",
-              bottom: "inherit",
+              transform: "translate(0pc,-30pc)",
             });
           }
         } else {
@@ -163,10 +158,12 @@ const index = () => {
           if (bigCirlceValue >= 7) {
             gsap.to(".lFellows-btn", {
               scale: 1,
+              transform: "translate(0pc,-30pc)",
             });
           } else {
             gsap.to(".lFellows-btn", {
               scale: 0,
+              transform: "translate(0pc,0pc)",
             });
           }
         }

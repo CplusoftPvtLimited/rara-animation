@@ -2,8 +2,7 @@
   .hand {
     position: absolute;
     right: 50%;
-    top: 99%;
-    transform: translateY(-50%);
+    top: 55%;
     z-index: 100;
   }
 
@@ -77,7 +76,7 @@
     cursor: pointer;
   }
 
-  .website-btn{
+  .website-btn {
     color: #ad181f;
     font-size: 21px;
     font-family: "Cormorant Garamond";
@@ -86,7 +85,7 @@
     text-underline-offset: 0.4em;
   }
 
-  .det-btn{
+  .det-btn {
     text-decoration: underline;
     text-underline-offset: 0.4em;
     padding-top: 50px;
@@ -98,10 +97,26 @@
     width: 0;
     height: 0;
     border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent; 
-    border-left: 5px solid black; 
-    margin-left: 5px; 
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid black;
+    margin-left: 5px;
   }
-  
-  
+}
+
+@media screen and (max-width: 375px) {
+  .hand {
+    position: absolute;
+    right: 50%;
+    top: 57%;
+    z-index: 100;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  .hand {
+    position: absolute;
+    right: 40%;
+    top: 60%;
+    z-index: 100;
+  }
 }

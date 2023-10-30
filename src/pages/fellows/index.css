@@ -51,8 +51,8 @@
 
 .hand-3 {
   position: absolute;
-  right: 37%;
-  top: 125%;
+  right: 35%;
+  top: 75%;
   transform: translateY(-50%);
   transition: right 0.3s, top 0.3s;
 }
@@ -481,8 +481,8 @@
 
   .hand-3 {
     position: absolute;
-    right: 55%;
-    top: 137%;
+    right: 50%;
+    top: 85%;
     z-index: 5;
     width: 350px;
     transform: translateY(-50%);
@@ -586,8 +586,8 @@
 
   .hand-3 {
     position: absolute;
-    right: 43%;
-    top: 134%;
+    right: 45%;
+    top: 85%;
     z-index: 5;
     width: 350px;
     transform: translateY(-50%);
@@ -640,6 +640,16 @@
   .thumbnail {
     width: 16rem;
     height: 28.25rem;
+  }
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1550px) {
+  .hand-3 {
+    position: absolute;
+    right: 35%;
+    top: 125%;
+    transform: translateY(-50%);
+    transition: right 0.3s, top 0.3s;
   }
 }
 

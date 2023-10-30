@@ -99,6 +99,7 @@ function Card() {
             {sortedNewsData.slice(startIndex, endIndex).map((news, index) => (
               <a
                 href={news.link}
+                target="_blank"
                 style={{ color: "#383838", textDecoration: "none" }}
               >
                 <div

@@ -242,10 +242,10 @@ function Hero() {
           {/**Mobile*/}
           <div className="md:hidden lg:hidden">
             <img
-              style={{
-                right: positions[positionIndex].right,
-                top: positions[positionIndex].top,
-              }}
+              // style={{
+              //   right: positions[positionIndex].right,
+              //   top: positions[positionIndex].top,
+              // }}
               className="hand"
               src={handMob}
               alt=""
