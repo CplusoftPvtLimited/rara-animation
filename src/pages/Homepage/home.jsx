@@ -60,7 +60,7 @@ const index = () => {
                 ? "translate(0%, 40vh)"
                 : "translate(0%, 40vh)",
             top: 0,
-            left: 0,
+            left: "0 !important",
             margin: "auto",
           },
           {
@@ -69,7 +69,7 @@ const index = () => {
                 ? "scale(0.266,0.266)"
                 : "scale(0.266,0.266) translate(-130%,-20px)",
             top: "2.9rem",
-            left: "0rem",
+            left: "0rem !important",
             margin: "auto 3px",
           }
         );

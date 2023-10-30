@@ -189,10 +189,25 @@ const index = ({ updateScrollPos }) => {
         {
           transform: "scale(0.266,0.266)",
           top: "2.9rem",
-          left: "0rem",
+          left: window.innerWidth < 768 ? "-19rem" : "0rem",
         }
       );
     }
+    // if ((window.location.pathname = "/research")) {
+    //   gsap.fromTo(
+    //     ".cHeader-logo",
+    //     {
+    //       transform: "translate(0px, 99.5825px)",
+    //       top: 0,
+    //       left: 0,
+    //     },
+    //     {
+    //       transform: "scale(0.266,0.266)",
+    //       top: "2.9rem",
+    //       left: window.innerWidth < 768 ? "-19rem" : "0rem",
+    //     }
+    //   );
+    // }
 
     // Add a click event listener to the element
     menuBtnElement.addEventListener("click", function () {
@@ -287,6 +302,43 @@ const index = ({ updateScrollPos }) => {
     });
   }, []);
 
+  useEffect(() => {
+    // Check if the current page path is "/update"
+    if (window.location.pathname === "/research") {
+      // Animate the element
+      gsap.fromTo(
+        ".cHeader-logo",
+        {
+          transform: "translate(0px, 99.5825px)",
+          top: 0,
+          left: 0,
+        },
+        {
+          transform: "scale(0.266,0.266)",
+          top: "2.69rem",
+          left: "-19rem",
+        }
+      );
+    }
+
+    // if (window.innerWidth > 768) {
+    //   // Animate the element
+    //   gsap.fromTo(
+    //     ".cHeader-logo",
+    //     {
+    //       transform: "translate(0px, 99.5825px)",
+    //       top: 0,
+    //       left: 0,
+    //     },
+    //     {
+    //       transform: "scale(0.266,0.266)",
+    //       top: "2.69rem",
+    //       left: "0rem",
+    //     }
+    //   );
+    // }
+  }, []);
+
   return (
     <header
       className="cContainer -leftSmall -rightSmall -spLeftSmall -spRightSmall cHeader -menu"
@@ -294,6 +346,7 @@ const index = ({ updateScrollPos }) => {
       data-header=""
     >
       <div className="cHeader-inner">
+        {/** Home Page logo */}
         <h1
           className="cHeader-logo -kvLoaded"
           data-header-logo=""
