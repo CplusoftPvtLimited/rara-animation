@@ -31,4 +31,48 @@ const loginAdmin = async (req, res) => {
   }
 };
 
-module.exports = { createAdmin, loginAdmin };
+const adminAccount = async (req, res) => {
+  try {
+    const admin = await Admin.findOne({
+      where: { role: "admin" },
+    });
+
+    // const adminAccount = admin;
+
+    console.log("admin: ", admin);
+    if (admin) {
+      res.status(200).json({ admin });
+    } else {
+      res.status(404).json({ message: "Admin not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+const changeAdminPassword = async (req, res) => {
+  console.log("body: ", req.body);
+  try {
+    const { id, password } = req.body;
+
+    // Find the admin user by userId
+    const adminUser = await Admin.findByPk(id);
+    console.log("admmin password update: ", adminUser);
+
+    if (!adminUser) {
+      return res.status(404).json({ message: "Admin user not found" });
+    }
+
+    // Update the password for the admin user
+    adminUser.password = password;
+    await adminUser.save();
+
+    res.json({ message: "Password changed successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+module.exports = { createAdmin, loginAdmin, adminAccount, changeAdminPassword };
