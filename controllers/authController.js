@@ -54,11 +54,11 @@ const adminAccount = async (req, res) => {
 const changeAdminPassword = async (req, res) => {
   console.log("body: ", req.body);
   try {
-    const { id, password } = req.body;
+    const { userId, password } = req.body;
 
     // Find the admin user by userId
-    const adminUser = await Admin.findByPk(id);
-    console.log("admmin password update: ", adminUser);
+    const adminUser = await Admin.findByPk(userId);
+    console.log("adminUser: ", adminUser);
 
     if (!adminUser) {
       return res.status(404).json({ message: "Admin user not found" });
