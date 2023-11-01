@@ -20,6 +20,7 @@ import Home from "./Core/Home/Home.js";
 import Student from "./Core/Student/Student";
 import Login from "./Core/Login/Login.js";
 import Dashboard from "./Core/Dashboard";
+import Account from "./Core/Account/Account";
 import PrivateRoute from "./PrivateRoute";
 
 function App() {
@@ -119,6 +120,13 @@ function App() {
               path="/student"
               exact
               component={Student}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/account"
+              exact
+              component={Account}
               isAuthenticated={isAuthenticated}
             />
           </Switch>

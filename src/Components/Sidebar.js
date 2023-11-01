@@ -120,6 +120,18 @@ function Sidebar() {
               <p>Home</p>
             </div>
           </Link>
+
+          {/* account */}
+          <Link to="/account" className="sidebar-link">
+            <div
+              className={`sidebar-item ${
+                isActive(history, "/account") && "active"
+              }`}
+            >
+              <RiFileList3Line className="sidebar-icon" />
+              <p>Account</p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
