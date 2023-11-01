@@ -7,33 +7,29 @@ import "./mobile.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const index = () => {
+const index = ({ data }) => {
   const [homeData, setHomeData] = useState("");
   useEffect(() => {
-    const apiURL = `${process.env.REACT_APP_SERVER}/home/getHome`;
+    setHomeData(data);
 
-    const getHomeData = async () => {
-      try {
-        const response = await fetch(apiURL);
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log(
-          "***🚀 ~ file: home.jsx:323 ~ getHomeData ~ data:",
-          data.home[0]
-        );
-        setHomeData(data.home[0]);
+    // const apiURL = `${process.env.REACT_APP_SERVER}/home/getHome`;
 
-        const scrollContainer = document.querySelector(".custom-container");
-        ScrollTrigger.addEventListener("refreshInit", () => {
-          gsap.set(scrollContainer, { overflowY: "scroll" });
-        });
-        ScrollTrigger.refresh();
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    // const getHomeData = async () => {
+    //   try {
+    //     const response = await fetch(apiURL);
+    //     if (!response.ok) {
+    //       throw new Error(`Request failed with status: ${response.status}`);
+    //     }
+    //     const data = await response.json();
+    //     console.log(
+    //       "***🚀 ~ file: home.jsx:323 ~ getHomeData ~ data:",
+    //       data.home[0]
+    //     );
+    //     setHomeData(data.home[0]);
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //   }
+    // };
     if (document.documentElement.clientWidth > 500) {
       console.log("Window width is greater than 425 pixels");
       console.log("***********Inner Width: ", window.innerWidth);
@@ -645,7 +641,7 @@ const index = () => {
 
       toggleDivOnScrollMobile();
     }
-    getHomeData();
+    // getHomeData();
   }, []);
 
   return (

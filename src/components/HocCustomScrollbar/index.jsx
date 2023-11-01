@@ -37,6 +37,8 @@ const HocCustomScrollbar = (WrappedComponent) => {
             (scrollPos * (scrollContainer.offsetHeight - scrollbarHeight)) /
             (scrollContainer.scrollHeight - scrollContainer.offsetHeight),
         });
+
+        ScrollContextValue.setScrollPos(scrollPos);
       }
 
       ScrollTrigger.scrollerProxy(scrollContainer, {
@@ -91,6 +93,7 @@ const HocCustomScrollbar = (WrappedComponent) => {
             scrub: 1,
             onComplete: () => {
               ScrollTrigger.update();
+
               // console.log("SCROLL TRIGGER UPDATE ---------", scrollPos);
 
               // console.log(
@@ -153,6 +156,7 @@ const HocCustomScrollbar = (WrappedComponent) => {
             onUpdate: updateScrollbar,
             duration: 0.1,
             ease: "power1.inOut",
+
             onComplete: () => {
               ScrollTrigger.update();
             },
@@ -186,7 +190,10 @@ const HocCustomScrollbar = (WrappedComponent) => {
             overwrite: "auto",
             onUpdate: updateScrollbar,
             duration: 0.1,
-            onComplete: () => ScrollTrigger.update(),
+
+            onComplete: () => {
+              ScrollTrigger.update();
+            },
           });
         },
       });
@@ -200,6 +207,7 @@ const HocCustomScrollbar = (WrappedComponent) => {
       });
 
       ScrollTrigger.refresh();
+
       // Return the WrappedComponent with the clickCount prop and the onClick handler
     }, []);
 
@@ -235,6 +243,7 @@ const HocCustomScrollbar = (WrappedComponent) => {
           // console.log("SCROLL TRIGGER UPDATE ---------", scrollPos);
         },
       });
+      ScrollContextValue.setScrollPos(scrollPos);
     }, [ScrollContextValue?.scrollY]);
 
     return (

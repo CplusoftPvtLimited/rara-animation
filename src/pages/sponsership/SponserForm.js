@@ -186,7 +186,6 @@ const SponserForm = () => {
                   </div>
                 </Col>
               </Row>
-
               {/* <button type="submit" className="add-category-btn">
                 Post
               </button> */}

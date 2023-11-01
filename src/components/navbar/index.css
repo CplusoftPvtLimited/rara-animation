@@ -12,7 +12,7 @@ p {
 #pIndex .cHeader-logo {
   width: 23.5rem;
 }
-.cHeader-logo {
+/* .cHeader-logo {
   right: 0;
   display: block;
   margin: 0 auto;
@@ -20,7 +20,7 @@ p {
   top: 2.1875rem;
   text-align: center;
   transform-origin: center top;
-}
+} */
 .cMenu {
   width: 31.5rem;
   height: 35.25rem;
@@ -133,6 +133,11 @@ p {
 .cMenuContent-list-link.-updates {
   width: 14.76rem;
 }
+.scrollColor {
+  border: 1px solid #e9e9e9;
+  background-color: #e9e9e9;
+  top: 0 !important;
+}
 
 /* media queries */
 
@@ -163,6 +168,17 @@ p {
     align-items: center;
     margin: 2.4rem 1rem;
     padding: 0rem 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .cMenu-btn-container {
+    /* background-color: white; */
+    /* border-bottom: 1px solid black; */
+  }
+
+  .cHeader-logo {
+    z-index: 100;
   }
 }
 

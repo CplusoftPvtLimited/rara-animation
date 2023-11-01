@@ -17,7 +17,7 @@ var previousTotal = 360;
 
 var previousClicked = 0;
 
-const index = () => {
+const index = ({ homeData }) => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const [SliderMove, setSliderMove] = useState(null);
   const [sliderRotate, setsliderRotate] = useState(-30);
@@ -103,18 +103,11 @@ const index = () => {
   useEffect(() => {
     const getHome = async () => {
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_SERVER}/home/getHome`
-        );
-
-        const data = await response.json();
-        const homeFellow = JSON.parse(data.home[0].fellows)
-          .trim()
-          .split(",")
-          .map((id) => +id);
+        const data = homeData;
+        const homeFellow = data.fellows.split(",").map((id) => +id);
 
         console.log(
-          "***********🚀 ~ file: index.jsx:90 ~ getHome ~ homeFellow:",
+          "***********000🚀 ~ file: index.jsx:90 ~ getHome ~ homeFellow:",
           homeFellow
         );
 
@@ -143,18 +136,18 @@ const index = () => {
         ]);
         const fellow = fellowResponse.data.profiles;
         // Filter the blog data based on homeFellowIds
-        console.log(
-          "🚀 ~ file: index.jsx:140 ~ fetchAndFilterFellowData ~ homeFellowIds:",
-          homeFellowIds
-        );
+        // console.log(
+        //   "🚀 ~ file: index.jsx:140 ~ fetchAndFilterFellowData ~ homeFellowIds:",
+        //   homeFellowIds
+        // );
         const filteredFellows = fellow.filter((fellow) =>
           homeFellowIds.includes(fellow.id)
         );
         setSelectedFellows(filteredFellows);
-        // console.log(
-        //   "**000🚀 ~ file: index.jsx:116 ~ fetchAndFilterFellowData ~ filteredFellows:",
-        //   filteredFellows
-        // );
+        console.log(
+          "**000🚀 ~ file: index.jsx:116 ~ fetchAndFilterFellowData ~ filteredFellows:",
+          filteredFellows
+        );
       } catch (error) {
         console.log(
           "000🚀 Error fetching or filtering blog data:",

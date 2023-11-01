@@ -4,9 +4,12 @@ export const ScrollContext = createContext();
 
 export const ScrollContextProvider = ({ children }) => {
   const [scrollY, setScrollY] = useState(0);
+  const [scrollPos, setScrollPos] = useState(0);
 
   return (
-    <ScrollContext.Provider value={{ scrollY, setScrollY }}>
+    <ScrollContext.Provider
+      value={{ scrollY, setScrollY, scrollPos, setScrollPos }}
+    >
       {children}
     </ScrollContext.Provider>
   );

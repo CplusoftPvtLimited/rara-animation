@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./index.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,11 +17,15 @@ import Contact from "./Contact/index";
 import videoSrc from "../../assets/videos/WeAreOne.mp4";
 
 import FooterContainer from "./FooterContainer/index";
+import { ScrollContext } from "../../components/ScrollContext";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
 const index = () => {
   const [homeData, setHomeData] = useState("");
+
+  const scrollContextValue = useContext(ScrollContext);
+
   useEffect(() => {
     const apiURL = `${process.env.REACT_APP_SERVER}/home/getHome`;
 
@@ -66,7 +70,7 @@ const index = () => {
                 ? "translate(0%, 40vh)"
                 : "translate(0%, 40vh)",
             top: 0,
-            left: 0,
+            left: "0 !important",
             margin: "auto",
           },
           {
@@ -75,7 +79,7 @@ const index = () => {
                 ? "scale(0.266,0.266)"
                 : "scale(0.266,0.266) translate(-130%,-20px)",
             top: "2.9rem",
-            left: "0rem",
+            left: "0rem !important",
             margin: "auto 3px",
           }
         );
@@ -534,6 +538,40 @@ const index = () => {
     thirdDivlVisionScrollAnimation();
   }, []);
 
+  useEffect(() => {
+    const handleScrollForMobile = () => {
+      const homeVideo = document.querySelector("#homeVideo");
+
+      console.log(
+        "🚀 ~ file: home.jsx:545 ~ handleScrollForMobile ~ scrollContainer?.scrollTop:",
+        scrollContextValue?.scrollPos
+      );
+      if (homeVideo) {
+        const homeVideoBottom = homeVideo.getBoundingClientRect().bottom;
+        console.log(
+          "🚀 ~ file: home.jsx:543 ~ handleScrollForMobile ~ homeVideo:",
+          homeVideoBottom
+        );
+        const navbarSection =
+          window.innerWidth > 500
+            ? document.querySelector(".cHeader")
+            : document.querySelector(".cMenu-btn-container");
+        if (homeVideoBottom <= 0) {
+          if (navbarSection) {
+            navbarSection.classList.add("scrollColor");
+          }
+        } else {
+          if (navbarSection) {
+            navbarSection.classList.remove("scrollColor");
+          }
+        }
+      }
+    };
+    if (scrollContextValue?.scrollPos >= 0) {
+      handleScrollForMobile();
+    }
+  }, [scrollContextValue?.scrollPos]);
+
   return (
     <div>
       {/* canvas */}
@@ -632,6 +670,7 @@ const index = () => {
           }}
         >
           <video
+            id="homeVideo"
             autoPlay
             loop
             muted
@@ -978,13 +1017,19 @@ const index = () => {
           </div>
         </div>
       </div>
-      <GuideLines />
+      {homeData && <GuideLines data={homeData} />}
       {/* <FellowsMobile /> */}
-      {window.innerWidth < 767 && <FellowsMobile />}
-      {window.innerWidth > 767 && <Fellows />}
-      <Blogs />
-      <Contact />
-      <FooterContainer />
+      {window.innerWidth < 767 && homeData && (
+        <FellowsMobile homeData={homeData} />
+      )}
+      {window.innerWidth > 767 && homeData && <Fellows homeData={homeData} />}
+      {homeData && (
+        <>
+          <Blogs homeData={homeData} />
+          <Contact data={homeData} />
+          <FooterContainer />
+        </>
+      )}
     </div>
   );
 };

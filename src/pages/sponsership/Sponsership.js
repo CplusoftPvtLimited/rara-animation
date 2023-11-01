@@ -466,6 +466,14 @@ const Sponsership = () => {
                           </p>
                         )}
                       </Form>
+                      <br />
+                      <Row>
+                        <p style={{ color: "#000" }}>
+                          Thank you for considering sponsorship to Pecunia. Your
+                          support is instrumental in sculpting a brighter,
+                          inclusive, and sustainable financial future.
+                        </p>
+                      </Row>
                     </Card>
                   </Col>
                 </Row>

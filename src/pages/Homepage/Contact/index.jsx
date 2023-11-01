@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import "./index.css";
 
-const index = ({ props }) => {
+const index = ({ data }) => {
   const [homeData, setHomeData] = useState("");
 
   useEffect(() => {
@@ -10,12 +10,11 @@ const index = ({ props }) => {
 
     const getHomeData = async () => {
       try {
-        const response = await fetch(apiURL);
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
-        }
-        const data = await response.json();
-        setHomeData(data.home[0]);
+        // const response = await fetch(apiURL);
+        // if (!response.ok) {
+        //   throw new Error(`Request failed with status: ${response.status}`);
+        // }
+        setHomeData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

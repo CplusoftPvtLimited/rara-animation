@@ -238,7 +238,7 @@ const Donate = () => {
     <div>
       <Container className="donateUs">
         <h2 className="sponsorship" style={{ fontSize: "144px" }}>
-          DONATE US
+          DONATE
         </h2>
       </Container>
 
@@ -594,6 +594,14 @@ const Donate = () => {
                               />
                             </div>
                           </Col>
+                        </Row>
+
+                        <Row>
+                          <p style={{ color: "#000" }}>
+                            Thank you for considering donation to Pecunia. Your
+                            support is instrumental in sculpting a brighter,
+                            inclusive, and sustainable financial future.
+                          </p>
                         </Row>
 
                         {/* <button type="submit" className="add-category-btn">
