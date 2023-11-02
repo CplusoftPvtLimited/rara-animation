@@ -289,8 +289,12 @@ const deleteProfile = async (req, res) => {
       const updatedFellows = currentFellows.filter(
         (fellowId) => fellowId !== id
       );
-      const updatedFellowsString = updatedFellows.join(","); // Join the array back to a string
-      await home.update({ fellows: updatedFellowsString });
+      if (updatedFellows.length >= 5) {
+        const updatedFellowsString = updatedFellows.join(","); // Join the array back to a string
+        await home.update({ fellows: updatedFellowsString });
+      } else {
+        await home.update({ fellows: NULL });
+      }
     }
     // Delete the profile
     await profile.destroy();

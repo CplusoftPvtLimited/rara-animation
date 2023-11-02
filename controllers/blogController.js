@@ -278,8 +278,12 @@ const deleteBlogPost = async (req, res) => {
       const updatedBlogs = currentBlogs.filter(
         (blogId) => blogId !== req.params.id
       );
-      const updatedBlogsString = updatedBlogs.join(",");
-      await home.update({ blogs: updatedBlogsString });
+      if (updatedBlogs?.length >= 2) {
+        const updatedBlogsString = updatedBlogs.join(",");
+        await home.update({ blogs: updatedBlogsString });
+      } else {
+        await home.update({ blogs: NULL });
+      }
     }
     // Delete the blog post itself
     await blogPost.destroy();
