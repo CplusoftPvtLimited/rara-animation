@@ -1,5 +1,5 @@
 // const Blog = require('../models/Blog');
-const { Category } = require("../models/Category");
+const { Category } = require("../models/category");
 const Profile = require("../models/Profile");
 const {
   Blog,

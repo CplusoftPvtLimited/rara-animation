@@ -1,5 +1,5 @@
 // const Category = require('../models/category');
-var Category = require("../models/Category").Category;
+var Category = require("../models/category").Category;
 // var Blog = require('../models/blog').Blog;
 
 const createCategory = async (req, res) => {
