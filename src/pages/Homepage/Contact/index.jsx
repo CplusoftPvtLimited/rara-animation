@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import RedPhone from "../../../assets/images/red_phone.png";
+
 import "./index.css";
 
 const index = ({ data }) => {
@@ -295,9 +297,14 @@ const index = ({ data }) => {
               {homeData.contactEmail}
             </a>
             <a
-              className="lContact-link -mail"
+              className="lContact-link -mail -phone"
               data-whatintent="mouse"
               href={`tel:${homeData.phoneNumber}`}
+              style={{
+                lContact_link__mail_after: {
+                  background: `url(${RedPhone})\n    0 0 / cover no-repeat`,
+                },
+              }}
             >
               {/* {homeData.phoneNumber} */}
               {homeData.phoneNumber}

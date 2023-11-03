@@ -33,7 +33,7 @@ const index = ({ homeData }) => {
     const getHome = async () => {
       try {
         const data = homeData;
-        const homeFellow = data.home[0].fellows
+        const homeFellow = JSON.parse(data.home[0].fellows)
           .split(",")
           .map((id) => parseInt(id, 10));
 

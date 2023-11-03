@@ -26,7 +26,9 @@ const index = ({ homeData }) => {
     const getHome = async () => {
       try {
         const data = homeData;
-        const homeBlog = data.blogs.split(",").map((id) => parseInt(id, 10));
+        const homeBlog = JSON.parse(data.blogs)
+          .split(",")
+          .map((id) => parseInt(id, 10));
         console.log(
           "*******000000000🚀 ~ file: index.jsx:30 ~ getHome ~ homeBlog:",
           homeBlog

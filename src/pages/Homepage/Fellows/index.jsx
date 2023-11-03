@@ -104,7 +104,9 @@ const index = ({ homeData }) => {
     const getHome = async () => {
       try {
         const data = homeData;
-        const homeFellow = data.fellows.split(",").map((id) => +id);
+        const homeFellow = JSON.parse(data.fellows)
+          .split(",")
+          .map((id) => +id);
 
         console.log(
           "***********000🚀 ~ file: index.jsx:90 ~ getHome ~ homeFellow:",
@@ -135,6 +137,10 @@ const index = ({ homeData }) => {
           }),
         ]);
         const fellow = fellowResponse.data.profiles;
+        console.log(
+          "🚀 ~ file: index.jsx:138 ~ fetchAndFilterFellowData ~ fellow:",
+          fellow
+        );
         // Filter the blog data based on homeFellowIds
         // console.log(
         //   "🚀 ~ file: index.jsx:140 ~ fetchAndFilterFellowData ~ homeFellowIds:",

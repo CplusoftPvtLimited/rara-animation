@@ -72,6 +72,7 @@ const index = () => {
             top: 0,
             left: "0 !important",
             margin: "auto",
+            zIndex: window.innerWidth < 768 ? 0 : "",
           },
           {
             transform:
@@ -81,6 +82,7 @@ const index = () => {
             top: "2.9rem",
             left: "0rem !important",
             margin: "auto 3px",
+            zIndex: window.innerWidth < 768 ? 1 : "",
           }
         );
         gsap.fromTo(
@@ -105,6 +107,7 @@ const index = () => {
             top: "2.9rem",
             left: "0rem",
             margin: "auto 3px",
+            zIndex: window.innerWidth < 768 ? 1 : "",
           },
           {
             transform:
@@ -118,6 +121,7 @@ const index = () => {
             top: 0,
             left: 0,
             margin: "auto",
+            zIndex: window.innerWidth < 768 ? 0 : "",
           }
         );
         gsap.fromTo(

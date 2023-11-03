@@ -90,6 +90,10 @@ ins {
   background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-mail.svg)
     0 0 / cover no-repeat;
 }
+.lContact-link.-mail.-phone:after {
+  background: url(https://rara.ritsumei.ac.jp/assets/img/index/contact/icon-mail.svg)
+    0 0 / cover no-repeat;
+}
 .lContact-link:after {
   content: "";
   display: block;

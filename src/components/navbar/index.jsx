@@ -398,7 +398,7 @@ const index = ({ updateScrollPos }) => {
 
   return (
     <header
-      className="cContainer -leftSmall -rightSmall -spLeftSmall -spRightSmall cHeader -menu"
+      className="cContainer -leftSmall -rightSmall -spLeftSmall -spRightSmall cHeader -menu scrollColor"
       data-el=""
       data-header=""
     >
@@ -410,6 +410,7 @@ const index = ({ updateScrollPos }) => {
           style={{
             width: "100%",
             margin: "auto",
+            zIndex: window.innerWidth < 768 ? 0 : "",
             transform:
               window.innerWidth > 768 && window.innerHeight > 900
                 ? "translate(0%, 42vh)"

@@ -683,6 +683,8 @@ a {
   transform: scale(0);
   transform-origin: right top;
 
+  z-index: 2;
+
   translate: none;
   rotate: none;
   scale: none;
