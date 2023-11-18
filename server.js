@@ -13,7 +13,9 @@ const bankRoutes = require("./routes/bankRoutes");
 const RssFeedRoutes = require("./routes/RssFeedRoutes");
 const homeRoutes = require("./routes/homeRoutes");
 const authRoutes = require("./routes/auth.js");
-const postRoutes = require("./routes/postRoutes");
+const donationRoutes = require("./routes/donationRoutes");
+const sponsorRoutes = require("./routes/sponsorRoutes");
+
 const studentRoutes = require("./routes/studentRoutes");
 
 const app = express();
@@ -39,9 +41,10 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Auth Route
 app.use("/api/auth", authRoutes);
 
-// Sponsor Route
-app.use("/api/sponsor", postRoutes);
-
+// donation Route
+app.use("/api/donation", donationRoutes);
+// sponsorship route
+app.use("/api/sponsor", sponsorRoutes);
 //Blog Route
 app.use("/api/blog", blogRoutes);
 //Category Route
