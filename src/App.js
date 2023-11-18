@@ -17,6 +17,10 @@ import AddFellow from "./Core/Fellows Pages/AddFellow";
 import EditFellow from "./Core/Fellows Pages/EditFellow";
 import PaymentMethods from "./Core/Payment Methods Pages/PaymentMethods";
 import Home from "./Core/Home/Home.js";
+import Donation from "./Core/Donations/Index.js";
+import DonationDetails from "./Core/Donations/DonationDetails.js";
+import Sponsorships from "./Core/Sponsorships/Index.js";
+import SponsorDetails from "./Core/Sponsorships/SponsorDetails.js";
 import Student from "./Core/Student/Student";
 import Login from "./Core/Login/Login.js";
 import Dashboard from "./Core/Dashboard";
@@ -113,6 +117,34 @@ function App() {
               path="/home"
               exact
               component={Home}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/donation"
+              exact
+              component={Donation}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/donation/:categoryId"
+              exact
+              component={DonationDetails}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/sponsorships"
+              exact
+              component={Sponsorships}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/sponsor/:categoryId"
+              exact
+              component={SponsorDetails}
               isAuthenticated={isAuthenticated}
             />
 

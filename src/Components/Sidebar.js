@@ -110,6 +110,29 @@ function Sidebar() {
               <p>Student</p>
             </div>
           </Link>
+
+          <Link to="/donation" className="sidebar-link">
+            <div
+              className={`sidebar-item ${
+                isActive(history, "/donation") && "active"
+              }`}
+            >
+              <AiOutlineHome className="sidebar-icon" />
+              <p>Donation</p>
+            </div>
+          </Link>
+
+          <Link to="/sponsorships" className="sidebar-link">
+            <div
+              className={`sidebar-item ${
+                isActive(history, "/sponsorships") && "active"
+              }`}
+            >
+              <AiOutlineHome className="sidebar-icon" />
+              <p>Sponsorships</p>
+            </div>
+          </Link>
+
           <Link to="/home" className="sidebar-link">
             <div
               className={`sidebar-item ${
