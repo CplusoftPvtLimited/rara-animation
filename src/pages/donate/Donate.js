@@ -34,11 +34,14 @@ const Donate = () => {
   const [showBankTransferModal, setShowBankTransferModal] = useState(false);
   const [otherValue, setOtherValue] = useState(null);
   const [bankData, setBankData] = useState();
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleDropdownSelect = (eventKey, event) => {
+    setSelectedOption(eventKey);
+  };
   const actualSelectedAmount = useSelector(
     (state) => state.donation.selectedAmount
   );
-
-  console.log("actual amount: ", actualSelectedAmount);
 
   useEffect(() => {
     getCoinbaseKey();
@@ -61,6 +64,9 @@ const Donate = () => {
 
   // form function
   const [formData, setFormData] = useState({
+    areaOfSupport: "",
+    donationType: "",
+    donation: "",
     organizationName: "",
     contact: "",
     email: "",
@@ -68,6 +74,9 @@ const Donate = () => {
     message: "",
   });
   const [validationErrors, setValidationErrors] = useState({
+    areaOfSupport: "",
+    donationType: "",
+    donation: "",
     organizationName: "",
     contact: "",
     email: "",
@@ -77,10 +86,16 @@ const Donate = () => {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
+      areaOfSupport: selectedOption,
+      donationType: selectedButton,
+      donation: actualSelectedAmount,
+      // areaOfSupport: prevFormData.selectedOption,
+      // donationType: prevFormData.selectedButton,
+      // donation: prevFormData.actualSelectedAmount,
+    }));
   }
 
   function handleSubmit(event) {
@@ -91,21 +106,37 @@ const Donate = () => {
       return;
     }
 
+    // console.log("formData: ", formData);
+    // console.log("selectedOption: ", selectedOption);
+    // console.log("selectedButton: ", selectedButton);
+    // console.log("actualSelectedAmount: ", actualSelectedAmount);
+
     try {
       const formDataToSend = new FormData();
 
-      console.log("formData: ", formData);
+      // console.log("formData: ", formData);
+      // console.log("selectedOption: ", selectedOption);
+      // console.log("selectedButton: ", selectedButton);
+      // console.log("actualSelectedAmount: ", actualSelectedAmount);
+
+      formDataToSend.append("areaOfSupport", selectedOption);
+      formDataToSend.append("donationType", selectedButton);
+      formDataToSend.append("donation", actualSelectedAmount);
       formDataToSend.append("organizationName", formData.organizationName);
       formDataToSend.append("contact", formData.contact);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("number", formData.number);
       formDataToSend.append("message", formData.message);
+      console.log("formData: ", formData);
       if (actualSelectedAmount) {
         axios
-          .post("http://localhost:4500/api/sponsor/createPost", formData)
+          .post("http://localhost:4500/api/donation/createPost", formData)
           .then((response) => {
             console.log("response response: ", response);
             setFormData({
+              areaOfSupport: "",
+              donationType: "",
+              donation: "",
               organizationName: "",
               contact: "",
               email: "",
@@ -356,7 +387,7 @@ const Donate = () => {
                 for people and the planet.
               </p>
 
-              <div style={{ textAlign: "center", padding: "20px 0" }}>
+              {/* <div style={{ textAlign: "center", padding: "20px 0" }}>
                 <Dropdown>
                   <Dropdown.Toggle
                     id="dropdown-basic"
@@ -378,7 +409,32 @@ const Donate = () => {
                     <Dropdown.Item href="#/action-3">Other</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+              </div> */}
+
+              <div style={{ textAlign: "center", padding: "20px 0" }}>
+                <Dropdown onSelect={handleDropdownSelect}>
+                  <Dropdown.Toggle
+                    id="dropdown-basic"
+                    style={{
+                      backgroundColor: "rgb(138, 0, 0)",
+                      border: "none",
+                    }}
+                  >
+                    {selectedOption || "Area of Support"}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item eventKey="Financial Education">
+                      Financial Education
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="Ethical Banking">
+                      Ethical Banking
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="Other">Other</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
+
               <h5 className="donate">How often would you like to donate?</h5>
               <ButtonGroup
                 style={{

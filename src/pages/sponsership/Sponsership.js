@@ -62,6 +62,7 @@ const Sponsership = () => {
     email: "",
     number: "",
     message: "",
+    donation: "",
   });
   const [validationErrors, setValidationErrors] = useState({
     organizationName: "",
@@ -84,6 +85,10 @@ const Sponsership = () => {
     const amount = event.target.checked ? 250000 : null;
     console.log("amount amount: ", amount);
     setCheckboxChecked(e.target.checked);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      donation: amount, // Update the donation field in formData
+    }));
     dispatch(setAmount(amount));
     setSelectedAmount(amount);
   };
@@ -103,6 +108,9 @@ const Sponsership = () => {
       formDataToSend.append("email", formData.email);
       formDataToSend.append("number", formData.number);
       formDataToSend.append("message", formData.message);
+      formDataToSend.append("donation", selectedAmount);
+
+      console.log("form data : ", formData);
       if (actualSelectedAmount) {
         axios
           .post("http://localhost:4500/api/sponsor/createPost", formData)
@@ -114,6 +122,7 @@ const Sponsership = () => {
               email: "",
               number: "",
               message: "",
+              donation: "",
             });
             setShowRightColumn(true);
           })
