@@ -26,8 +26,6 @@ const AddBlog = () => {
     content: "",
     imagePath: "",
   });
-  console.log("categories: ", categories);
-  console.log("fellows: ", fellows);
   const [validationErrors, setValidationErrors] = useState({
     title: "",
     profile: "",
@@ -39,6 +37,7 @@ const AddBlog = () => {
     content: "",
     imagePath: "",
   });
+
   useEffect(() => {
     getCategories();
     getFellows();
@@ -125,7 +124,6 @@ const AddBlog = () => {
     setValidationErrors((prev) => ({ ...prev, [name]: "" }));
   }
 
-  console.log("relatedBlogs : ", relatedBlogs);
   function handleSubmit(event) {
     event.preventDefault();
     const errors = validateForm();

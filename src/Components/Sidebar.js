@@ -133,6 +133,28 @@ function Sidebar() {
             </div>
           </Link>
 
+          <Link to="/fellowPage" className="sidebar-link">
+            <div
+              className={`sidebar-item ${
+                isActive(history, "/fellowPage") && "active"
+              }`}
+            >
+              <AiOutlineHome className="sidebar-icon" />
+              <p>Fellow Page</p>
+            </div>
+          </Link>
+
+          <Link to="/addFellowPage" className="sidebar-link">
+            <div
+              className={`sidebar-item ${
+                isActive(history, "/addFellowPage") && "active"
+              }`}
+            >
+              <AiOutlineHome className="sidebar-icon" />
+              <p>Add Fellow Page</p>
+            </div>
+          </Link>
+
           <Link to="/home" className="sidebar-link">
             <div
               className={`sidebar-item ${

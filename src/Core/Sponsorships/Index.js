@@ -32,6 +32,7 @@ const Index = () => {
         console.log("error: ", err);
       });
   };
+
   const deletePost = (postId) => {
     console.log("postId", postId);
     axios({
