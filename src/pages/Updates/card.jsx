@@ -455,7 +455,7 @@ function Card() {
                 </div>
                 <div className="news-cat my-auto">
                   <h5>
-                    ${post?.category?.title} {post?.fellow ? "/" : ""} $
+                    {post?.category?.title} {post?.fellow ? "/" : ""} $
                     {post.fellow?.name} {post?.associatedFellow ? "/" : ""}
                     {post?.associatedFellow?.name}
                   </h5>

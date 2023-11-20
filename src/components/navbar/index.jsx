@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import "./index.css";
 
-import PecuniaRedLogo from "../../assets/images/Pecunia_red_symbol.png";
+import PecuniaRedLogo from "../../assets/Logo/pecunia_header.png";
 
 import { useNavigate } from "react-router-dom";
 import { ScrollContext } from "../ScrollContext";
@@ -245,8 +245,8 @@ const index = ({ updateScrollPos }) => {
         },
         {
           transform: "scale(0.266,0.266)",
-          top: "2.9rem",
-          left: window.innerWidth < 768 ? "-19rem" : "0rem",
+          top: "2.2pc",
+          left: window.innerWidth < 768 ? "-65%" : "0rem",
         }
       );
     }
@@ -404,20 +404,8 @@ const index = ({ updateScrollPos }) => {
     >
       <div className="cHeader-inner">
         {/** Home Page logo */}
-        <h1
-          className="cHeader-logo -kvLoaded"
-          data-header-logo=""
-          style={{
-            width: "100%",
-            margin: "auto",
-            zIndex: window.innerWidth < 768 ? 0 : "",
-            transform:
-              window.innerWidth > 768 && window.innerHeight > 900
-                ? "translate(0%, 42vh)"
-                : "translate(0%, 39vh)",
-          }}
-        >
-          <svg
+        {/* <h1> */}
+        {/* <svg
             width="355.125"
             height="55.275"
             viewBox="0 0 355.125 55.275"
@@ -443,8 +431,31 @@ const index = ({ updateScrollPos }) => {
                 vector-effect="non-scaling-stroke"
               />
             </g>
-          </svg>
-        </h1>
+          </svg> */}
+        <div onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+          <img
+            src={PecuniaRedLogo}
+            alt=""
+            id="svgGroup"
+            className="cHeader-logo -kvLoaded"
+            data-header-logo=""
+            style={{
+              margin: "auto",
+              zIndex:
+                window.innerWidth < 768
+                  ? window.location.pathname == "/"
+                    ? 0
+                    : 1
+                  : "",
+              transform:
+                window.innerWidth > 768 && window.innerHeight > 900
+                  ? "translate(0%, 42vh)"
+                  : "translate(0%, 39vh)",
+            }}
+          />
+        </div>
+
+        {/* </h1> */}
         <div className="cHeader-menu">
           <div className="cMenu" data-el="">
             <div
@@ -455,7 +466,11 @@ const index = ({ updateScrollPos }) => {
               <div className="cMenu-bg-overlay" data-menu-bg-overlay=""></div>
             </div>
             <div className="cMenu-btn">
-              <div className="cMenu-btn-container">
+              <div
+                className={`cMenu-btn-container ${
+                  window.innerWidth < 768 ? "scrollColor" : ""
+                }`}
+              >
                 {window.innerWidth > 768 && (
                   <>
                     <a
@@ -796,9 +811,9 @@ const index = ({ updateScrollPos }) => {
                         style={{ opacity: 0 }}
                       >
                         <svg
-                          width="102.12"
-                          height="28.802"
-                          viewBox="0 0 102.12 28.802"
+                          width="120"
+                          height="29.2"
+                          viewBox="0 0 120 29.2"
                           xmlns="http://www.w3.org/2000/svg"
                           style={{
                             width: window.innerWidth <= 768 ? "100%" : "",
@@ -822,18 +837,27 @@ const index = ({ updateScrollPos }) => {
                             <path
                               d="M 13.44 2.12 L 13.44 1.52 L 0 1.52 L 0 2.12 C 4.721 2.749 4.837 3.92 4.954 7.878 A 555.494 555.494 0 0 1 4.96 8.08 L 4.96 22.16 A 555.494 555.494 0 0 1 4.954 22.362 C 4.837 26.32 4.721 27.491 0 28.12 L 0 28.72 L 13.44 28.72 L 13.44 28.12 C 8.719 27.491 8.603 26.32 8.486 22.362 A 555.494 555.494 0 0 1 8.48 22.16 L 8.48 8.08 A 555.494 555.494 0 0 1 8.486 7.878 C 8.603 3.92 8.719 2.749 13.44 2.12 Z"
                               id="0"
+                              vector-effect="non-scaling-stroke"
                             />
                             <path
                               d="M 20.92 8.28 L 20.92 22.16 A 555.494 555.494 0 0 1 20.914 22.362 C 20.797 26.32 20.681 27.491 15.96 28.12 L 15.96 28.72 L 27.88 28.8 A 34.954 34.954 0 0 0 28.185 28.801 C 41.018 28.801 44.932 21.651 45.292 16.068 A 13.509 13.509 0 0 0 45.32 15.2 C 45.32 11.04 43.48 0.88 25.88 1.44 L 16.2 1.76 L 16.2 2.32 C 20.681 2.949 20.797 4.118 20.914 8.068 A 556.148 556.148 0 0 1 20.92 8.28 Z M 24.44 22.56 L 24.44 2.24 A 27.925 27.925 0 0 1 24.569 2.24 C 33.195 2.24 40.68 6.247 40.68 15.8 C 40.68 24.92 34.48 27.8 29.88 27.8 A 10.563 10.563 0 0 1 28.053 27.657 C 25.595 27.224 24.789 25.855 24.542 24.219 A 11.187 11.187 0 0 1 24.44 22.56 Z"
                               id="1"
+                              vector-effect="non-scaling-stroke"
                             />
                             <path
                               d="M 48.76 28.72 L 71 28.72 A 25.735 25.735 0 0 0 72.173 23.629 A 26.026 26.026 0 0 0 72.36 20.8 L 71.76 20.8 A 13.25 13.25 0 0 1 70.919 23.584 C 69.612 26.538 67.26 27.738 63.347 27.76 A 19.593 19.593 0 0 1 63.24 27.76 C 57.158 27.76 57.196 24.941 57.234 22.649 A 32.362 32.362 0 0 0 57.24 22.12 L 57.24 15.56 L 61.4 15.56 A 21.062 21.062 0 0 1 63.664 15.639 C 65.082 15.798 66.165 16.273 66.75 17.696 A 6.078 6.078 0 0 1 67.12 19.12 L 67.72 19.12 L 67.72 10.2 L 67.12 10.2 A 5.717 5.717 0 0 1 66.76 11.648 C 65.912 13.712 63.908 13.88 61.4 13.88 L 57.24 13.88 L 57.24 2.48 L 61.12 2.48 A 22.738 22.738 0 0 1 65.046 2.701 C 67.234 3.098 68.862 4.214 69.136 7.34 A 10.225 10.225 0 0 1 69.16 7.68 L 69.76 7.68 L 70.24 1.52 L 48.76 1.52 L 48.76 2.12 C 53.481 2.749 53.597 3.92 53.714 7.878 A 555.494 555.494 0 0 1 53.72 8.08 L 53.72 22.16 A 555.494 555.494 0 0 1 53.714 22.362 C 53.597 26.32 53.481 27.491 48.76 28.12 L 48.76 28.72 Z"
                               id="2"
+                              vector-effect="non-scaling-stroke"
                             />
                             <path
                               d="M 90.36 28.12 L 90.36 28.72 L 102.12 28.72 L 102.12 28.12 C 99.139 27.561 98.345 26.516 97.377 24.016 A 41.205 41.205 0 0 1 97.16 23.44 L 88.36 0 A 7.796 7.796 0 0 1 86.641 1.532 A 7.162 7.162 0 0 1 85.44 2.16 C 85.88 2.92 85.36 3.88 85 4.92 L 82.6 11.44 L 78.08 23.24 A 129.912 129.912 0 0 1 77.886 23.725 C 76.792 26.447 76.288 27.212 72.92 28.12 L 72.92 28.72 L 83.88 28.72 L 83.88 28.12 A 18.538 18.538 0 0 0 83.448 28.059 C 81.67 27.825 79.32 27.652 79.32 25.4 C 79.32 23.554 80.947 19.637 81.677 17.56 A 25.048 25.048 0 0 0 81.76 17.32 L 90.88 17.32 A 224.966 224.966 0 0 0 91.272 18.364 C 92.232 20.912 93.368 23.892 93.437 25.419 A 3.128 3.128 0 0 1 93.44 25.56 C 93.44 27.103 92.206 27.647 90.971 27.972 A 19.041 19.041 0 0 1 90.36 28.12 Z M 90.36 15.48 L 82.44 15.48 L 86.2 5.08 L 90.36 15.48 Z"
                               id="3"
+                              vector-effect="non-scaling-stroke"
+                            />
+                            <path
+                              d="M 102.8 20.36 L 102.08 20.36 L 103.24 27.16 A 13.15 13.15 0 0 0 108.899 29.125 A 12.881 12.881 0 0 0 110.28 29.2 A 12.172 12.172 0 0 0 111.561 29.132 C 114.297 28.842 117.033 27.63 118.619 25.536 A 6.777 6.777 0 0 0 120 21.36 A 6.459 6.459 0 0 0 119.331 18.42 C 117.52 14.795 112.457 13.374 109.541 10.843 A 5.44 5.44 0 0 1 107.4 6.6 C 107.4 3.96 109.52 2.2 112.08 2.2 A 5.617 5.617 0 0 1 114.085 2.535 C 115.661 3.132 116.528 4.47 117.083 6.074 A 18.812 18.812 0 0 1 117.72 8.56 L 118.36 8.56 L 118.68 2.56 C 116.92 1.6 114.88 1 112.84 1 A 9.57 9.57 0 0 0 111.912 1.046 C 107.916 1.435 103.92 4.297 103.92 8.64 C 103.92 16.64 116.16 16 116.16 23.12 A 5.082 5.082 0 0 1 115.674 25.366 C 115.006 26.738 113.701 27.607 112.097 27.895 A 6.905 6.905 0 0 1 110.88 28 A 7.34 7.34 0 0 1 104.967 24.919 A 12.783 12.783 0 0 1 102.8 20.36 Z"
+                              id="4"
+                              vector-effect="non-scaling-stroke"
                             />
                           </g>
                         </svg>

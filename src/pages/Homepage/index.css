@@ -615,15 +615,16 @@ ul {
 .cMenu-btn-text {
   /* font-family: Open Sans, Shippori Mincho B1, YuMincho, 游明朝, Times New Roman,
     Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif; */
-  font-weight: 600;
+  font-weight: 650;
   letter-spacing: 0.03em;
   margin-top: 0.15625rem;
   transition: color 1s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   pointer-events: auto;
   overflow: hidden;
-  padding-left: 0.15625rem;
-  padding-right: 0.15625rem;
+  padding-left: 0.20625rem;
+  padding-right: 0.2625rem;
+  font-size: 0.7rem;
 }
 .cMenu-btn-circle {
   display: inline-block;

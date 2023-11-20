@@ -310,9 +310,9 @@ function Fellows() {
               </a>
             </div>
           </div>
-          <div>
+          {/* <div>
             <img src={Footer} alt="" />
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -59,8 +59,8 @@ function UpdateSingle() {
       <div className="top-section block mx-[3rem] md:flex justify-between md:mx-[3rem] md:gap-4 lg:gap-8 xl:gap-16 lg:mx-[5rem] xl:mx-[10.9375rem]">
         <div className="text w-[100%] xl:w-[80%]">
           <p>
-            {blogData?.category?.title} {blogData?.fellow ? "/" : ""} $
-            {blogData.fellow?.name} {blogData?.associatedFellow ? "/" : ""}
+            {blogData?.category?.title} {blogData?.fellow ? "/" : ""}{" "}
+            {blogData.fellow?.name} {blogData?.associatedFellow ? "/" : ""}{" "}
             {blogData?.associatedFellow?.name}
           </p>
           <h3 className="md:mt-[70px]">{blogData.title}</h3>
@@ -73,19 +73,20 @@ function UpdateSingle() {
 
       {/** Content  */}
       <div className="content-container  lg:mx-[5rem]  md:mx-[3rem] xl:mx-[10.9375rem] ">
-        <div className="content-text sm:mx-[3rem] py-[5rem] lg:py-[10rem] lg:px-[4rem] xl:px-[7.6875rem]">
-          <h3>{blogData.content}</h3>
-        </div>
+        <div
+          className="content-text sm:mx-[3rem] py-[5rem] lg:py-[10rem] lg:px-[4rem] xl:px-[7.6875rem]"
+          dangerouslySetInnerHTML={{ __html: blogData.content }}
+        ></div>
         <div className="flex justify-end pr-[7.6875rem] pb-[200px]">
           <div className="share-text flex md:w-[20%]">
             <h4>SHARE ON</h4>
           </div>
           <div className="social-text flex pl-[70px] gap-4">
             <a href="#">
-              <h3 className="cursor-pointer">Facebook</h3>
+              <h3 className="cursor-pointer">LinkedIn</h3>
             </a>
             <a href="#">
-              <h3 className="cursor-pointer">Twitter</h3>
+              <h3 className="cursor-pointer">Medium</h3>
             </a>
           </div>
         </div>
@@ -124,7 +125,7 @@ function UpdateSingle() {
                   </div>
                   <div className="news-cat my-auto">
                     <h5>
-                      ${post?.category?.title} / ${post?.fellow?.name}
+                      {post?.category?.title} / {post?.fellow?.name}
                     </h5>
                   </div>
 
