@@ -17,6 +17,7 @@ function Hero() {
   let [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [handClass, setHandClass] = useState("hand-3");
   const [positionIndex, setPositionIndex] = useState(0);
+  const [fellowPageData, setFellowPageData] = useState([]);
 
   const positions = [
     { right: "48%", top: "91%" },
@@ -30,6 +31,22 @@ function Hero() {
     }, 2000);
 
     return () => clearInterval(animationInterval);
+  }, []);
+
+  useEffect(() => {
+    const fellowData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:4500/api/fellow/getFellows"
+        );
+        const data = await response.json();
+        console.log("data: ", data);
+        setFellowPageData(data);
+      } catch (err) {
+        console.error("Error fetching fellows data:", err);
+      }
+    };
+    fellowData();
   }, []);
 
   useEffect(() => {
@@ -225,14 +242,16 @@ function Hero() {
       <div className="w-[80%] mx-auto mt-[100px] lg:mb-[20px] lg:w-[75%]">
         <div>
           <p className="text-[14px] lg:text-[17px] lg:pl-28 lg:w-[65%]">
-            Pecunia stands as a testament to the belief in the impact that
+            {/* Pecunia stands as a testament to the belief in the impact that
             research and innovative ideas can have on the world of finance. Our
             Fellowship Program is a unique avenue for forward-thinking
             professionals to embark on a transformative journey, working
             collaboratively within a diverse and dynamic community of esteemed
             experts and scholars. Together, we are dedicated to pushing the
             boundaries and propelling the field of social finance forward into
-            new realms of possibility.
+            new realms of possibility. */}
+
+            {fellowPageData[0]?.paragraph1}
           </p>
         </div>
         <div>

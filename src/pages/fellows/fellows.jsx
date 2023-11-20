@@ -13,6 +13,7 @@ import Logo from "../../assets/images/pecunia_logo_bg.png";
 function Fellows() {
   const [fellowsData, setFellowsData] = useState([]);
   const [fellows, setFellows] = useState([]);
+  const [fellowPageData, setFellowPageData] = useState([]);
   const [associateFellow, setAssociateFellows] = useState([]);
   const [fellowsCount, setFellowsCount] = useState(0);
   const [associateFellowsCount, setAssociateFellowsCount] = useState(0);
@@ -52,6 +53,22 @@ function Fellows() {
       }
     };
     fetchFellowData();
+  }, []);
+
+  useEffect(() => {
+    const fellowData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:4500/api/fellow/getFellows"
+        );
+        const data = await response.json();
+        console.log("data: ", data);
+        setFellowPageData(data);
+      } catch (err) {
+        console.error("Error fetching fellows data:", err);
+      }
+    };
+    fellowData();
   }, []);
 
   const handleViewDetails = (fellowId) => {
@@ -281,7 +298,7 @@ function Fellows() {
         <div className=" px-[30px] lg:flex lg:justify-center ">
           <div className="my-auto w-[50%]">
             <p className=" text-[14px] lg:text-[16px]">
-              Our Fellowship Program isn't just an opportunity; it's an
+              {/* Our Fellowship Program isn't just an opportunity; it's an
               invitation to be part of a global hub of visionaries. Here, you'll
               find a nurturing ecosystem that encourages creative thinking,
               fosters groundbreaking research, and amplifies the voices of those
@@ -290,21 +307,29 @@ function Fellows() {
               applying for the Pecunia Fellowship Program. Your ideas, your
               dedication, and your unique perspective could be the missing piece
               of the puzzle needed to drive our shared mission forward. Apply
-              Today
+              Today */}
+              {fellowPageData[0]?.paragraph2}
+              {/* {fellowPageData &&
+              Array.isArray(fellowPageData) &&
+              fellowPageData.map((fellowData, index) => (
+                <p className="text-[14px] lg:text-[16px]" key={index}>
+                  {fellowData.paragraph2}
+                </p>
+              ))} */}
             </p>
             <div className="website-btn mt-8">
               <a
                 href="/student"
                 style={{ color: "#383838", textDecoration: "none" }}
               >
-                {" "}
-                VIEW WEBSITE{" "}
+                VIEW WEBSITE
                 <img
                   className="inline"
-                  src={websiteIcon}
+                  // src={websiteIcon}
+                  src={fellowPageData[0]?.imagePath}
                   alt=""
                   width={20}
-                />{" "}
+                />
               </a>
             </div>
           </div>
