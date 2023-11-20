@@ -23,6 +23,7 @@ function EditBlog(props) {
     profile: "",
     imagePath: "",
   });
+
   const blogId = props.match.params.blogId;
   const history = useHistory();
   const fileInputRef = useRef(null);
@@ -172,14 +173,14 @@ function EditBlog(props) {
         .put(`${process.env.REACT_APP_BACKEND}/blog/${blogId}`, updatedData)
         .then((response) => {
           console.log("edit data", response);
-          // setBlogData({
-          //   title: '',
-          //   fellow: '',
-          //   category: '',
-          //   region: '',
-          //   content: '',
-          //   imagePath: '',
-          // });
+          setBlogData({
+            title: "",
+            fellow: "",
+            category: "",
+            region: "",
+            content: "",
+            imagePath: "",
+          });
           history.push("/blogs");
         })
         .catch((err) => {
