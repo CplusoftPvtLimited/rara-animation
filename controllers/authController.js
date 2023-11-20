@@ -20,7 +20,14 @@ const createAdmin = async (req, res) => {
 const loginAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await Admin.findOne({ where: { email, password } });
+    console.log(
+      "🚀 ~ file: authController.js:23 ~ loginAdmin ~ password:",
+      password
+    );
+    console.log("🚀 ~ file: authController.js:23 ~ loginAdmin ~ email:", email);
+    const user = await Admin.findOne({
+      where: { email: email, password: password },
+    });
     if (user) {
       res.status(200).json({ message: "Login successful", user });
     } else {

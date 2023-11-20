@@ -7,7 +7,7 @@ const SponsorshipPost = sequelize.define("SponsorshipPost", {
   email: DataTypes.STRING,
   number: DataTypes.STRING,
   message: DataTypes.TEXT,
-  donation: DataTypes.NUMBER,
+  donation: DataTypes.INTEGER,
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,
