@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,6 +22,7 @@ import SponserForm from "../sponsership/SponserForm";
 import BeforeFooter from "../../pages/Homepage/FooterContainer";
 
 import "./donate.css";
+import { ScrollContext } from "../../components/ScrollContext";
 
 const Donate = () => {
   const navigate = useNavigate();
@@ -40,6 +41,8 @@ const Donate = () => {
   const actualSelectedAmount = useSelector(
     (state) => state.donation.selectedAmount
   );
+
+  const ScrollContextValue = useContext(ScrollContext);
 
   const handleDropdownSelect = (eventKey) => {
     handleChange({ name: "areaOfSupport", value: eventKey });
@@ -115,6 +118,28 @@ const Donate = () => {
     }));
   }
 
+  const scrollContainerScrollPosition = () => {
+    const scrollContainer = document.querySelector(".custom-container");
+    const onScroll = () => {
+      // Clear any existing timeout to reset the timer
+      clearTimeout(scrollTimeout);
+
+      // Set a new timeout
+      scrollTimeout = setTimeout(() => {
+        // console.log("🚀 ~ scrollTop:", scrollContainer.scrollTop);
+        ScrollContextValue.setScrollY(scrollContainer.scrollTop);
+        ScrollContextValue.setScrollPos(scrollContainer.scrollTop);
+
+        // Remove the event listener once we're sure scrolling has stopped
+        scrollContainer.removeEventListener("scroll", onScroll);
+      }, 100); // 100ms delay to wait after the last scroll event
+    };
+
+    // Add the event listener to the scroll container
+    scrollContainer.addEventListener("scroll", onScroll);
+  };
+
+  let scrollTimeout;
   function handleSubmit(event) {
     event.preventDefault();
     const errors = validateForm();
@@ -136,9 +161,10 @@ const Donate = () => {
       console.log("formData: ", formData);
       if (actualSelectedAmount) {
         axios
-          .post(`${process.env.REACT_APP_SERVER}/sponsor/createPost`, formData)
+          .post(`${process.env.REACT_APP_SERVER}/donation/createPost`, formData)
           .then((response) => {
             console.log("response response: ", response);
+
             setFormData({
               areaOfSupport: "",
               donationType: "",
@@ -149,6 +175,11 @@ const Donate = () => {
               number: "",
               message: "",
             });
+
+            const donateSection = document.querySelector(".donateUs");
+            donateSection.scrollIntoView({ behavior: "smooth" });
+            scrollContainerScrollPosition();
+
             setShowRightColumn(true);
           })
           .catch((error) => {
