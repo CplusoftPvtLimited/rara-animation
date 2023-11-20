@@ -37,6 +37,7 @@ const createFellow = async (req, res) => {
         paragraph1: paragraph1,
         paragraph2: paragraph2,
         link: link,
+        imagePath: NULL,
       });
     }
 
