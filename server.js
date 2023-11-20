@@ -15,6 +15,7 @@ const homeRoutes = require("./routes/homeRoutes");
 const authRoutes = require("./routes/auth.js");
 const donationRoutes = require("./routes/donationRoutes");
 const sponsorRoutes = require("./routes/sponsorRoutes");
+const fellowRoutes = require("./routes/fellowRoutes");
 
 const studentRoutes = require("./routes/studentRoutes");
 
@@ -45,6 +46,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/donation", donationRoutes);
 // sponsorship route
 app.use("/api/sponsor", sponsorRoutes);
+// fellowPage route
+app.use("/api/fellow", fellowRoutes);
 //Blog Route
 app.use("/api/blog", blogRoutes);
 //Category Route
