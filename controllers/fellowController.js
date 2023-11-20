@@ -4,11 +4,11 @@ const createFellow = async (req, res) => {
   const { paragraph1, paragraph2, link } = req.body;
   console.log("body: ", req.body);
 
-  console.log("req.path: ", req.file);
+  // console.log("req.path: ", req.file);
 
-  if (!req.file) {
-    return res.status(400).json({ error: "No image provided" });
-  }
+  // if (!req.file) {
+  //   return res.status(400).json({ error: "No image provided" });
+  // }
 
   if (!paragraph1 || !paragraph2 || !link) {
     return res.status(400).json({ error: "Please enter details" });
@@ -16,21 +16,29 @@ const createFellow = async (req, res) => {
 
   try {
     const { originalname, path } = req.file;
-    console.log("req.path: ", req.file.path);
     let imagePath = null;
-    if (req.file) {
+    if (req?.file) {
       imagePath = req.file.path;
     }
 
     const baseUrl = "https://backend.pecunia.institute/";
     // const baseUrl = "http://localhost:4500/";
 
-    const fellow = await Fellow.create({
-      imagePath: baseUrl + path,
-      paragraph1: paragraph1,
-      paragraph2: paragraph2,
-      link: link,
-    });
+    let fellow;
+    if (req?.file) {
+      fellow = await Fellow.create({
+        imagePath: baseUrl + path,
+        paragraph1: paragraph1,
+        paragraph2: paragraph2,
+        link: link,
+      });
+    } else {
+      fellow = await Fellow.create({
+        paragraph1: paragraph1,
+        paragraph2: paragraph2,
+        link: link,
+      });
+    }
 
     return res
       .status(200)
