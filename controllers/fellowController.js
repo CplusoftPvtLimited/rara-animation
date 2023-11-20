@@ -22,8 +22,8 @@ const createFellow = async (req, res) => {
       imagePath = req.file.path;
     }
 
-    // const baseUrl = "https://backend.pecunia.institute/";
-    const baseUrl = "http://localhost:4500/";
+    const baseUrl = "https://backend.pecunia.institute/";
+    // const baseUrl = "http://localhost:4500/";
 
     const fellow = await Fellow.create({
       imagePath: baseUrl + path,
