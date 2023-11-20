@@ -432,7 +432,22 @@ const index = ({ updateScrollPos }) => {
               />
             </g>
           </svg> */}
-        <div onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+        <div
+          onClick={() => {
+            navigate("/");
+            gsap.to(".cHeader-logo", {
+              transform:
+                window.innerWidth > 768 && window.innerHeight > 900
+                  ? "translate(0%, 43vh)"
+                  : window.innerWidth > 768
+                  ? "translate(0%, 40vh)"
+                  : window.innerWidth > 330
+                  ? "translate(0%, 40vh)"
+                  : "translate(0%, 40vh)",
+            });
+          }}
+          style={{ cursor: "pointer" }}
+        >
           <img
             src={PecuniaRedLogo}
             alt=""
