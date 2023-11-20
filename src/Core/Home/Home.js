@@ -168,6 +168,9 @@ function EditHome(props) {
     event.preventDefault();
     if (fellowIds?.length < 5) {
       alert("Please select atleast 5 fellows in multi-select");
+    }
+    if (blogIds?.length < 2) {
+      alert("Please select atleast 2 blogs in multi-select");
     } else {
       const updatedData = new FormData();
       updatedData.append("mainHeading", homeData.mainHeading);
