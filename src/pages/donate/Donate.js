@@ -35,13 +35,28 @@ const Donate = () => {
   const [otherValue, setOtherValue] = useState(null);
   const [bankData, setBankData] = useState();
   const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleDropdownSelect = (eventKey, event) => {
-    setSelectedOption(eventKey);
-  };
   const actualSelectedAmount = useSelector(
     (state) => state.donation.selectedAmount
   );
+
+  const handleDropdownSelect = (eventKey) => {
+    handleChange({ name: "areaOfSupport", value: eventKey });
+    setSelectedOption(eventKey);
+  };
+
+  const handleButtonClick = (value) => {
+    handleChange({ name: "donationType", value: value });
+    setSelectedButton(value);
+    setError(null);
+  };
+
+  const handleAmountClick = (amount) => {
+    setOtherValue(null);
+    console.log("amount", amount);
+    handleChange({ name: "donation", value: amount });
+    setSelectedAmount(amount);
+    dispatch(setAmount(amount));
+  };
 
   useEffect(() => {
     getCoinbaseKey();
@@ -73,6 +88,7 @@ const Donate = () => {
     number: "",
     message: "",
   });
+
   const [validationErrors, setValidationErrors] = useState({
     areaOfSupport: "",
     donationType: "",
@@ -85,16 +101,15 @@ const Donate = () => {
   });
 
   function handleChange(event) {
-    const { name, value } = event.target;
+    const { name, value } = event.target || event;
+    console.log("event: ", event);
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
-      areaOfSupport: selectedOption,
-      donationType: selectedButton,
-      donation: actualSelectedAmount,
-      // areaOfSupport: prevFormData.selectedOption,
-      // donationType: prevFormData.selectedButton,
-      // donation: prevFormData.actualSelectedAmount,
+      areaOfSupport:
+        name === "areaOfSupport" ? value : prevFormData.areaOfSupport,
+      donationType: name === "donationType" ? value : prevFormData.donationType,
+      donation: name === "donation" ? value : prevFormData.donation,
     }));
   }
 
@@ -106,19 +121,8 @@ const Donate = () => {
       return;
     }
 
-    // console.log("formData: ", formData);
-    // console.log("selectedOption: ", selectedOption);
-    // console.log("selectedButton: ", selectedButton);
-    // console.log("actualSelectedAmount: ", actualSelectedAmount);
-
     try {
       const formDataToSend = new FormData();
-
-      // console.log("formData: ", formData);
-      // console.log("selectedOption: ", selectedOption);
-      // console.log("selectedButton: ", selectedButton);
-      // console.log("actualSelectedAmount: ", actualSelectedAmount);
-
       formDataToSend.append("areaOfSupport", selectedOption);
       formDataToSend.append("donationType", selectedButton);
       formDataToSend.append("donation", actualSelectedAmount);
@@ -157,6 +161,16 @@ const Donate = () => {
   const validateForm = () => {
     let errors = {};
 
+    if (formData.areaOfSupport.trim() === "") {
+      errors.areaOfSupport = "This field is required";
+    }
+    if (
+      formData.donation &&
+      typeof formData.donation === "string" &&
+      formData.donation.trim() === ""
+    ) {
+      errors.donation = "This field is required";
+    }
     if (formData.organizationName.trim() === "") {
       errors.organizationName = "This field is required";
     }
@@ -169,31 +183,7 @@ const Donate = () => {
     if (formData.number.trim() === "") {
       errors.number = "This field is required";
     }
-
     return errors;
-  };
-
-  // end
-
-  const handleButtonClick = (value) => {
-    setSelectedButton(value);
-    setError(null);
-  };
-
-  const handleAmountClick = (amount) => {
-    setOtherValue(null);
-    setSelectedAmount(amount);
-    dispatch(setAmount(amount));
-  };
-
-  const handleDonateClick = () => {
-    if (selectedAmount !== null || otherValue !== null) {
-      console.log("Selected Donation Amount: $" + selectedAmount);
-      setError(null);
-      setShowRightColumn(true);
-    } else {
-      setError("Please select a donation amount.");
-    }
   };
 
   const handlePaymentMethodChange = (event) => {
@@ -387,30 +377,6 @@ const Donate = () => {
                 for people and the planet.
               </p>
 
-              {/* <div style={{ textAlign: "center", padding: "20px 0" }}>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    id="dropdown-basic"
-                    style={{
-                      backgroundColor: "rgb(138, 0, 0)",
-                      border: "none",
-                    }}
-                  >
-                    Area of Support
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">
-                      Financial Education
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      Ethical Banking
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Other</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div> */}
-
               <div style={{ textAlign: "center", padding: "20px 0" }}>
                 <Dropdown onSelect={handleDropdownSelect}>
                   <Dropdown.Toggle
@@ -433,9 +399,15 @@ const Donate = () => {
                     <Dropdown.Item eventKey="Other">Other</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                {validationErrors.areaOfSupport && (
+                  <p style={{ color: "red" }}>
+                    {validationErrors.areaOfSupport}
+                  </p>
+                )}
               </div>
 
               <h5 className="donate">How often would you like to donate?</h5>
+
               <ButtonGroup
                 style={{
                   display: "flex",
@@ -487,13 +459,6 @@ const Donate = () => {
                 </Button>
               </ButtonGroup>
 
-              {/* <hr
-                style={{
-                  width: "460px",
-                  margin: "auto",
-                  paddingBottom: "35px",
-                }}
-              /> */}
               <h5 className="donate">How much would you like to donate?</h5>
               <div>
                 <div
@@ -539,14 +504,21 @@ const Donate = () => {
                       type="number"
                       placeholder="other"
                       onChange={(e) => {
-                        setSelectedAmount(null);
-                        setOtherValue(Number(e.target.value));
-                        dispatch(setAmount(Number(e.target.value)));
+                        const amount = Number(e.target.value);
+                        handleAmountClick(amount);
+                        setOtherValue(amount);
+                        dispatch(setAmount(amount));
                       }}
                     />
+                    {validationErrors.donation && (
+                      <p style={{ color: "red" }}>
+                        {validationErrors.donation}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
+
               {/* <SponserForm /> */}
               {/* form */}
               <div className="dashboard-parent-div">
