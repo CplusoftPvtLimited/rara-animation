@@ -24,6 +24,8 @@ import SponsorDetails from "./Core/Sponsorships/SponsorDetails.js";
 import AddFellowPage from "./Core/FellowPage/AddFellow.js";
 import FellowPage from "./Core/FellowPage/Fellow.js";
 import EditFellowPage from "./Core/FellowPage/EditFellow.js";
+import Contacts from "./Core/Contacts/Index.js";
+import ContactDetails from "./Core/Contacts/ContactDetails.js";
 
 import Student from "./Core/Student/Student";
 import Login from "./Core/Login/Login.js";
@@ -169,6 +171,20 @@ function App() {
               path="/sponsor/:categoryId"
               exact
               component={SponsorDetails}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/contacts"
+              exact
+              component={Contacts}
+              isAuthenticated={isAuthenticated}
+            />
+
+            <PrivateRoute
+              path="/contact/:contactId"
+              exact
+              component={ContactDetails}
               isAuthenticated={isAuthenticated}
             />
 

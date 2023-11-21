@@ -155,6 +155,17 @@ function Sidebar() {
             </div>
           </Link>
 
+          <Link to="/contacts" className="sidebar-link">
+            <div
+              className={`sidebar-item ${
+                isActive(history, "/contacts") && "active"
+              }`}
+            >
+              <AiOutlineHome className="sidebar-icon" />
+              <p>Student Contacts</p>
+            </div>
+          </Link>
+
           <Link to="/home" className="sidebar-link">
             <div
               className={`sidebar-item ${
