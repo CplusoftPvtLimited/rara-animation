@@ -37,7 +37,7 @@ function Hero() {
     const fellowData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4500/api/fellow/getFellows"
+          `${process.env.REACT_APP_SERVER}/fellow/getFellows`
         );
         const data = await response.json();
         console.log("data: ", data);

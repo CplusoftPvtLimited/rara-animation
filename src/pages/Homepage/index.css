@@ -605,7 +605,8 @@ ul {
   display: inline-block;
   width: 100%;
   text-align: center;
-  top: 100%;
+  top: 101%;
+  font-size: 0.75rem;
   left: -0.08em;
 }
 .cMenu-btn-text:after,
@@ -615,7 +616,7 @@ ul {
 .cMenu-btn-text {
   /* font-family: Open Sans, Shippori Mincho B1, YuMincho, 游明朝, Times New Roman,
     Hiragino Mincho ProN, HGS明朝B, ＭＳ Ｐ明朝, serif; */
-  font-weight: 650;
+  font-weight: 700;
   letter-spacing: 0.03em;
   margin-top: 0.15625rem;
   transition: color 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -624,7 +625,7 @@ ul {
   overflow: hidden;
   padding-left: 0.20625rem;
   padding-right: 0.2625rem;
-  font-size: 0.7rem;
+  font-size: 0.73rem;
 }
 .cMenu-btn-circle {
   display: inline-block;

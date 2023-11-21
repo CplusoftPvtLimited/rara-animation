@@ -266,7 +266,7 @@ const index = ({ homeData }) => {
       <ul className="lUpdates-Blog-List">
         {blogData.map((blog, index) => (
           <li className="cUpdatesItem -wide" key={index}>
-            <a className="cUpdatesItem-inner" href="#">
+            <a className="cUpdatesItem-inner" href={`/research/${blog.id}`}>
               <div className="cUpdatesItem-thumbnail">
                 <img
                   className="cUpdatesItem-image"
@@ -300,7 +300,7 @@ const index = ({ homeData }) => {
       </ul>
 
       <div className="lUpdates-linkArea">
-        <a className="lUpdates-link" href="/updates/">
+        <a className="lUpdates-link" href="/research">
           VIEW ALL UPDATES
         </a>
       </div>
