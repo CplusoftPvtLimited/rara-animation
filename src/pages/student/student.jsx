@@ -13,6 +13,7 @@ import FooterLink from "../../assets/images/footer-link.jpeg";
 import MainLogo from "../../assets/images/student-main.svg";
 import img1 from "../../assets/images/img_01.jpg";
 import { AiOutlineMail } from "react-icons/ai";
+import StudentContactFrom from "./StudentContactFrom";
 
 function Student() {
   const [studentData, setStudentData] = useState({});
@@ -60,20 +61,23 @@ function Student() {
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
                   <div>
-                    <h4 className="">About</h4>
+                    {/* <h4 className="">About</h4> */}
+                    <h4 className="">About Our Fellowships</h4>
                   </div>
                 </a>
                 <a
                   href="#program"
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
-                  <h4 className="cursor-pointer">Join</h4>
+                  {/* <h4 className="cursor-pointer">Join</h4> */}
+                  <h4 className="cursor-pointer">Program Outline</h4>
                 </a>
                 <a
                   href="#outline"
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
-                  <h4>Structure</h4>
+                  {/* <h4>Structure</h4> */}
+                  <h4>Duration</h4>
                 </a>
               </div>
               <div className="flex gap-8 xl:gap-24 justify-center mt-8">
@@ -82,13 +86,22 @@ function Student() {
                   className="cursor-pointer"
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
-                  <h4>Funding</h4>
+                  {/* <h4>Funding</h4> */}
+                  <h4>Application Process</h4>
                 </a>
                 <a
                   href="#contact"
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
-                  <h4 className="">Contact</h4>
+                  {/* <h4 className="">Contact</h4> */}
+                  <h4 className="">Your Next Steps</h4>
+                </a>
+                <a
+                  href="#contact"
+                  style={{ color: "#383838", textDecoration: "none" }}
+                >
+                  {/* <h4 className="">Contact</h4> */}
+                  <h4 className="">Join the Fellowship</h4>
                 </a>
               </div>
             </div>
@@ -120,7 +133,7 @@ function Student() {
                   href="#about"
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
-                  <h4 className="">About</h4>
+                  <h4 className="">e</h4>
                 </a>
                 <a
                   href="#program"
@@ -166,8 +179,9 @@ function Student() {
           <div className="about-container">
             {/** About heading */}
             <div className="about-section flex gap-4" id="about">
-              <img className="w-[80px] xl:w-[120px]" src={About} alt="" />
-              <p className="my-auto">The Endowment Fund</p>
+              {/* <img className="w-[80px] xl:w-[120px]" src={About} alt="" /> */}
+              <h2>ABOUT</h2>
+              {/* <p className="my-auto">The Endowment Fund</p> */}
             </div>
             {/** About content */}
             <div className="about-content">
@@ -190,8 +204,9 @@ function Student() {
           {/** Program heading */}
           <div className="program-container mt-[4.5rem]" id="program">
             <div className="program-section flex gap-4">
-              <img className="w-[130px] xl:w-[170px]" src={Program} alt="" />
-              <p className="my-auto">Why Join Our Endowment Fund</p>
+              {/* <img className="w-[130px] xl:w-[170px]" src={Program} alt="" /> */}
+              <h2>PROGRAM OUTLINE</h2>
+              {/* <p className="my-auto">Why Join Our Endowment Fund</p> */}
             </div>
 
             {/** About content */}
@@ -254,8 +269,9 @@ function Student() {
           {/** Outline heading */}
           <div className="outline-container mt-[4.5rem]" id="outline">
             <div className="outline-section flex gap-4">
-              <img className="w-[130px] xl:w-[160px]" src={Outline} alt="" />
-              <p className="my-auto">Governance and the Fund</p>
+              {/* <img className="w-[130px] xl:w-[160px]" src={Outline} alt="" /> */}
+              {/* <p className="my-auto">Governance and the Fund</p> */}
+              <h2>DURATION</h2>
             </div>
 
             {/** Outline content */}
@@ -270,7 +286,7 @@ function Student() {
             {/** Outline */}
             <div className="outline-section flex gap-4 mt-[150px]">
               <img className="w-[130px] xl:w-[160px]" src={Outline} alt="" />
-              <p className="my-auto">Investment Streams</p>
+              {/* <p className="my-auto">Investment Streams</p> */}
             </div>
             <div className="outline-content flex">
               <div>
@@ -330,12 +346,13 @@ function Student() {
           {/** Application heading */}
           <div className="application-container mt-[4.5rem]" id="application">
             <div className="application-section flex gap-4">
-              <img
+              {/* <img
                 className="w-[180px] xl:w-[250px]"
                 src={Application}
                 alt=""
-              />
-              <p className="letters mt-[50px]">How to Join</p>
+              /> */}
+              {/* <p className="letters mt-[50px]">How to Join</p> */}
+              <h2>APPLICATION PROCESS</h2>
             </div>
 
             {/** Application content */}
@@ -353,12 +370,14 @@ function Student() {
           {/** Contact heading */}
           <div className="contact-container mt-[4.5rem]" id="contact">
             <div className="contact-section flex gap-4">
-              <img className="w-[140px] xl:w-[180px]" src={Contact} alt="" />
-              <p className="my-auto">Fostering Change</p>
+              {/* <img className="w-[140px] xl:w-[180px]" src={Contact} alt="" /> */}
+              <h2>JOIN THE FOLLOWING</h2>
+              {/* <p className="my-auto">Fostering Change</p> */}
             </div>
 
+            <StudentContactFrom />
             {/** Contact content */}
-            <div className="contact-content flex">
+            {/* <div className="contact-content flex">
               <div className="divide w-[100%] mr-[10px] hidden md:block xl:mr-[80px]">
                 <p>Pecunia Office of Endownment</p>
               </div>
@@ -369,7 +388,7 @@ function Student() {
                 />
                 <h2 className="my-auto">enquiries@pecunia.fund</h2>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/******************************/}

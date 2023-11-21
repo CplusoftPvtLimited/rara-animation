@@ -432,6 +432,7 @@ const Donate = () => {
                     <Dropdown.Item eventKey="General">General</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                
                 {validationErrors.areaOfSupport && (
                   <p style={{ color: "red" }}>
                     {validationErrors.areaOfSupport}
@@ -671,6 +672,7 @@ const Donate = () => {
                   </Col>
                 </Row>
               </div>
+
               <Container style={{ display: "flex" }}>
                 <Button
                   variant="primary"
