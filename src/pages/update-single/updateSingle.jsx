@@ -49,10 +49,10 @@ function UpdateSingle() {
     }
     return text;
   }
-  console.log(
-    "🚀 ~ file: updateSingle.jsx:52 ~ UpdateSingle ~ blogData:",
-    blogData
-  );
+  // console.log(
+  //   "🚀 ~ file: updateSingle.jsx:52 ~ UpdateSingle ~ blogData:",
+  //   blogData
+  // );
   return (
     <section className="mt-[250px]">
       {/** Top Most Section */}

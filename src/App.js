@@ -108,7 +108,7 @@ function App() {
 function HeaderRoute() {
   const location = useLocation();
   const isInStudentRoute = location.pathname.includes("/student");
-  return isInStudentRoute ? null : <Header />;
+  return <Header />;
 }
 
 export default App;
