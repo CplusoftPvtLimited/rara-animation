@@ -14,27 +14,12 @@ const Student = sequelize.define("Student", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  businessPassage: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  specializedField: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  externalCommittee: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
+
   outline: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
   targetAudience: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  responsibilities: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
