@@ -142,6 +142,7 @@ function EditBlog(props) {
   const editBlog = (event) => {
     event.preventDefault();
     const errors = validateForm();
+    console.log("🚀 ~ file: EditBlog.js:145 ~ editBlog ~ errors:", errors);
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
       return;
@@ -152,8 +153,12 @@ function EditBlog(props) {
     const updatedData = new FormData();
     updatedData.append("title", blogData.title);
     updatedData.append("content", blogData.content);
-    updatedData.append("linkedinLink", blogData.linkedinLink);
-    updatedData.append("mediumLink", blogData.mediumLink);
+    if (blogData?.linkedinLink) {
+      updatedData.append("linkedinLink", blogData?.linkedinLink);
+    }
+    if (blogData?.mediumLink) {
+      updatedData.append("mediumLink", blogData?.mediumLink);
+    }
     updatedData.append("fellow", blogData?.fellow?.id);
     updatedData.append("associatedFellow", blogData?.associatedFellow?.id);
     updatedData.append("category", blogData?.category?.id);
@@ -208,17 +213,11 @@ function EditBlog(props) {
   const validateForm = () => {
     let errors = {};
 
-    if (blogData.title.trim() === "") {
+    if (blogData.title?.trim() === "") {
       errors.title = "This field is required";
     }
-    if (blogData.content.trim() === "") {
+    if (blogData.content?.trim() === "") {
       errors.content = "This field is required";
-    }
-    if (blogData.linkedinLink.trim() === "") {
-      errors.linkedinLink = "This field is required";
-    }
-    if (blogData.mediumLink.trim() === "") {
-      errors.mediumLink = "This field is required";
     }
     // if (blogData.fellow.trim() === '') {
     //   errors.fellow = 'This field is required';
@@ -294,41 +293,6 @@ function EditBlog(props) {
                       {validationErrors.profile && (
                         <p style={{ color: "red" }}>
                           {validationErrors.profile}
-                        </p>
-                      )}
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col>
-                    <div className="add-product-input-div">
-                      <p>Linkedin Link</p>
-                      <input
-                        type="text"
-                        name="linkedinLink"
-                        value={blogData?.linkedinLink}
-                        onChange={handleChange}
-                      />
-                      {validationErrors.linkedinLink && (
-                        <p style={{ color: "red" }}>
-                          {validationErrors.linkedinLink}
-                        </p>
-                      )}
-                    </div>
-                  </Col>
-                  <Col>
-                    <div className="add-product-input-div">
-                      <p>Medium Link</p>
-                      <input
-                        type="text"
-                        name="mediumLink"
-                        value={blogData?.mediumLink}
-                        onChange={handleChange}
-                      />
-                      {validationErrors.mediumLink && (
-                        <p style={{ color: "red" }}>
-                          {validationErrors.mediumLink}
                         </p>
                       )}
                     </div>
@@ -437,6 +401,40 @@ function EditBlog(props) {
                   </Col>
                 </Row>
 
+                <Row>
+                  <Col>
+                    <div className="add-product-input-div">
+                      <p>Linkedin Link</p>
+                      <input
+                        type="text"
+                        name="linkedinLink"
+                        value={blogData?.linkedinLink}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.linkedinLink && (
+                        <p style={{ color: "red" }}>
+                          {validationErrors.linkedinLink}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="add-product-input-div">
+                      <p>Medium Link</p>
+                      <input
+                        type="text"
+                        name="mediumLink"
+                        value={blogData?.mediumLink}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.mediumLink && (
+                        <p style={{ color: "red" }}>
+                          {validationErrors.mediumLink}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
                 <Row>
                   <Col>
                     <div className="add-product-input-div">

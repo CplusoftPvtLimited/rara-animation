@@ -144,8 +144,12 @@ const AddBlog = () => {
 
       formDataToSend.append("title", formData.title);
       formDataToSend.append("profile", formData.profile);
-      formDataToSend.append("linkedinLink", formData.linkedinLink);
-      formDataToSend.append("mediumLink", formData.mediumLink);
+      if (formData?.linkedinLink) {
+        formDataToSend.append("linkedinLink", formData?.linkedinLink);
+      }
+      if (formData?.mediumLink) {
+        formDataToSend.append("mediumLink", formData?.mediumLink);
+      }
       formDataToSend.append("category", formData.category);
       formDataToSend.append("region", formData.region);
       formDataToSend.append("fellow", formData.fellow);
@@ -212,12 +216,6 @@ const AddBlog = () => {
     }
     if (formData.content.trim() === "") {
       errors.content = "This field is required";
-    }
-    if (formData.linkedinLink.trim() === "") {
-      errors.linkedinLink = "This field is required";
-    }
-    if (formData.mediumLink.trim() === "") {
-      errors.mediumLink = "This field is required";
     }
     if (formData.fellow.trim() === "") {
       errors.fellow = "This field is required";
@@ -289,40 +287,6 @@ const AddBlog = () => {
                     />
                     {validationErrors.profile && (
                       <p style={{ color: "red" }}>{validationErrors.profile}</p>
-                    )}
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <div className="add-product-input-div">
-                    <p>Linkedin Link</p>
-                    <input
-                      type="text"
-                      name="linkedinLink"
-                      value={formData.linkedinLink}
-                      onChange={handleChange}
-                    />
-                    {validationErrors.linkedinLink && (
-                      <p style={{ color: "red" }}>
-                        {validationErrors.linkedinLink}
-                      </p>
-                    )}
-                  </div>
-                </Col>
-                <Col>
-                  <div className="add-product-input-div">
-                    <p>Medium Link</p>
-                    <input
-                      type="text"
-                      name="mediumLink"
-                      value={formData.mediumLink}
-                      onChange={handleChange}
-                    />
-                    {validationErrors.mediumLink && (
-                      <p style={{ color: "red" }}>
-                        {validationErrors.mediumLink}
-                      </p>
                     )}
                   </div>
                 </Col>
@@ -427,6 +391,40 @@ const AddBlog = () => {
                 </Col>
               </Row>
 
+              <Row>
+                <Col>
+                  <div className="add-product-input-div">
+                    <p>Linkedin Link</p>
+                    <input
+                      type="text"
+                      name="linkedinLink"
+                      value={formData.linkedinLink}
+                      onChange={handleChange}
+                    />
+                    {validationErrors.linkedinLink && (
+                      <p style={{ color: "red" }}>
+                        {validationErrors.linkedinLink}
+                      </p>
+                    )}
+                  </div>
+                </Col>
+                <Col>
+                  <div className="add-product-input-div">
+                    <p>Medium Link</p>
+                    <input
+                      type="text"
+                      name="mediumLink"
+                      value={formData.mediumLink}
+                      onChange={handleChange}
+                    />
+                    {validationErrors.mediumLink && (
+                      <p style={{ color: "red" }}>
+                        {validationErrors.mediumLink}
+                      </p>
+                    )}
+                  </div>
+                </Col>
+              </Row>
               {/* related blogs */}
               <Row>
                 {console.log("******Related Blogs", relatedBlogs)}
