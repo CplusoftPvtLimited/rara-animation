@@ -82,10 +82,10 @@ function UpdateSingle() {
             <h4>SHARE ON</h4>
           </div>
           <div className="social-text flex pl-[70px] gap-4">
-            <a href="#">
+            <a href={blogData?.linkedinLink} target="_blank">
               <h3 className="cursor-pointer">LinkedIn</h3>
             </a>
-            <a href="#">
+            <a href={blogData?.mediumLink} target="_blank">
               <h3 className="cursor-pointer">Medium</h3>
             </a>
           </div>
