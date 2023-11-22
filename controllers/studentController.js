@@ -6,12 +6,12 @@ const addStudent = async (req, res) => {
       about,
       aboutBottom,
       program,
-      businessPassage,
-      specializedField,
-      externalCommittee,
+      // businessPassage,
+      // specializedField,
+      // externalCommittee,
       outline,
       targetAudience,
-      responsibilities,
+      // responsibilities,
       recruitment,
     } = req.body;
 
@@ -19,12 +19,12 @@ const addStudent = async (req, res) => {
       "about",
       "aboutBottom",
       "program",
-      "businessPassage",
-      "specializedField",
-      "externalCommittee",
+      // "businessPassage",
+      // "specializedField",
+      // "externalCommittee",
       "outline",
       "targetAudience",
-      "responsibilities",
+      // "responsibilities",
     ];
 
     for (key of requiredFields) {
@@ -36,15 +36,12 @@ const addStudent = async (req, res) => {
       about,
       aboutBottom,
       program,
-      businessPassage,
-      specializedField,
-      externalCommittee,
+
       outline,
       targetAudience,
-      responsibilities,
       recruitment,
     });
-
+    console.log("newStudent: ", newStudent);
     return res.status(200).json({ newStudent });
   } catch (err) {
     res.status(403).json(err.message);
@@ -69,18 +66,15 @@ const updateStudent = async (req, res) => {
       about: req.body.about || student.about,
       aboutBottom: req.body.aboutBottom || student.aboutBottom,
       program: req.body.program || student.program,
-      businessPassage: req.body.businessPassage || student.businessPassage,
-      specializedField: req.body.specializedField || student.specializedField,
-      externalCommittee:
-        req.body.externalCommittee || student.externalCommittee,
+
       outline: req.body.outline || student.outline,
       targetAudience: req.body.targetAudience || student.targetAudience,
-      responsibilities: req.body.responsibilities || student.responsibilities,
       recruitment: req.body.recruitment || student.recruitment,
     };
 
     await student.update(updatedFields);
 
+    console.log("updatedFields: ", updatedFields);
     const updatedStudent = await Student.findByPk(studentId);
     res.status(200).json(updatedStudent);
   } catch (err) {
