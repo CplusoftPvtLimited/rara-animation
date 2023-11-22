@@ -162,7 +162,7 @@ function EditStudent(props) {
                       </div>
                     </Col>
                   </Row>
-                  <Row>
+                  {/* <Row>
                     <Col>
                       <div className="add-product-input-div">
                         <p>Business Management</p>
@@ -189,8 +189,8 @@ function EditStudent(props) {
                         />
                       </div>
                     </Col>
-                  </Row>
-                  <Row>
+                  </Row> */}
+                  {/* <Row>
                     <Col>
                       <div className="add-product-input-div">
                         <p>Specialized</p>
@@ -247,7 +247,7 @@ function EditStudent(props) {
                         />
                       </div>
                     </Col>
-                  </Row>
+                  </Row> */}
 
                   <Row>
                     <Col>
@@ -306,7 +306,7 @@ function EditStudent(props) {
                       </div>
                     </Col>
 
-                    <Col>
+                    {/* <Col>
                       <div className="add-product-input-div">
                         <p>Responsibilities</p>
                         <CKEditor
@@ -331,7 +331,7 @@ function EditStudent(props) {
                           }}
                         />
                       </div>
-                    </Col>
+                    </Col> */}
                   </Row>
 
                   <Row>
