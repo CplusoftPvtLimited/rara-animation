@@ -18,6 +18,8 @@ import {
 const StudentContactFrom = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [resetFileInputsKey, setResetFileInputsKey] = useState(0);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -109,6 +111,10 @@ const StudentContactFrom = () => {
         )
         .then((response) => {
           console.log("response response: ", response);
+          setSuccessMessage("*****Form submitted successfully!");
+          setTimeout(() => {
+            setSuccessMessage("");
+          }, 3000);
 
           setFormData({
             firstName: "",
@@ -123,12 +129,22 @@ const StudentContactFrom = () => {
           });
 
           setResetFileInputsKey((prevKey) => prevKey + 1);
+          setValidationErrors({});
+          setError("");
         })
         .catch((error) => {
           console.log("Error: " + error.message);
+          setError("Error submitting the form. Please try again.");
+          setTimeout(() => {
+            setError("");
+          }, 3000);
         });
     } catch (err) {
       console.log("Error: " + err.message);
+      setError("Error submitting the form. Please try again.");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
   }
 
@@ -185,6 +201,13 @@ const StudentContactFrom = () => {
               className="add-product-form-card"
               style={{ backgroundColor: "none" }}
             >
+              {successMessage && (
+                <div style={{ color: "green", textAlign: "center" }}>
+                  {successMessage}
+                </div>
+              )}
+              {error && <p style={{ color: "red" }}>{error}</p>}
+
               <Form onSubmit={handleSubmit}>
                 <Row>
                   <Col>
