@@ -17,6 +17,8 @@ function EditBlog(props) {
   const [validationErrors, setValidationErrors] = useState({
     title: "",
     content: "",
+    linkedinLink: "",
+    mediumLink: "",
     fellow: "",
     category: "",
     region: "",
@@ -150,9 +152,8 @@ function EditBlog(props) {
     const updatedData = new FormData();
     updatedData.append("title", blogData.title);
     updatedData.append("content", blogData.content);
-    // updatedData.append('fellow', blogData.fellow);
-    // updatedData.append('associatedFellow', blogData.associatedFellow);
-    // updatedData.append('category', blogData.category);
+    updatedData.append("linkedinLink", blogData.linkedinLink);
+    updatedData.append("mediumLink", blogData.mediumLink);
     updatedData.append("fellow", blogData?.fellow?.id);
     updatedData.append("associatedFellow", blogData?.associatedFellow?.id);
     updatedData.append("category", blogData?.category?.id);
@@ -213,6 +214,12 @@ function EditBlog(props) {
     if (blogData.content.trim() === "") {
       errors.content = "This field is required";
     }
+    if (blogData.linkedinLink.trim() === "") {
+      errors.linkedinLink = "This field is required";
+    }
+    if (blogData.mediumLink.trim() === "") {
+      errors.mediumLink = "This field is required";
+    }
     // if (blogData.fellow.trim() === '') {
     //   errors.fellow = 'This field is required';
     // }
@@ -267,7 +274,7 @@ function EditBlog(props) {
                       <input
                         type="text"
                         name="title"
-                        value={blogData.title}
+                        value={blogData?.title}
                         onChange={handleChange}
                       />
                       {validationErrors.title && (
@@ -281,12 +288,47 @@ function EditBlog(props) {
                       <input
                         type="text"
                         name="profile"
-                        value={blogData.profile}
+                        value={blogData?.profile}
                         onChange={handleChange}
                       />
                       {validationErrors.profile && (
                         <p style={{ color: "red" }}>
                           {validationErrors.profile}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <div className="add-product-input-div">
+                      <p>Linkedin Link</p>
+                      <input
+                        type="text"
+                        name="linkedinLink"
+                        value={blogData?.linkedinLink}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.linkedinLink && (
+                        <p style={{ color: "red" }}>
+                          {validationErrors.linkedinLink}
+                        </p>
+                      )}
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="add-product-input-div">
+                      <p>Medium Link</p>
+                      <input
+                        type="text"
+                        name="mediumLink"
+                        value={blogData?.mediumLink}
+                        onChange={handleChange}
+                      />
+                      {validationErrors.mediumLink && (
+                        <p style={{ color: "red" }}>
+                          {validationErrors.mediumLink}
                         </p>
                       )}
                     </div>
