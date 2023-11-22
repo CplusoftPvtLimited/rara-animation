@@ -11,13 +11,14 @@ const createBlogPost = async (req, res) => {
   const {
     title,
     content,
+    linkedinLink,
+    mediumLink,
     category,
     fellow,
     associatedFellow,
     relatedBlogs,
     region,
     profile,
-    imagePath,
   } = req.body;
 
   if (!req.file) {
@@ -41,6 +42,8 @@ const createBlogPost = async (req, res) => {
       imagePath: baseUrl + path,
       title: title,
       content: content,
+      linkedinLink: linkedinLink,
+      mediumLink: mediumLink,
       category: category,
       fellow: fellow,
       region: region,
@@ -202,6 +205,8 @@ const updateBlogPost = async (req, res) => {
   const {
     title,
     content,
+    linkedinLink,
+    mediumLink,
     region,
     fellow,
     associatedFellow,
@@ -217,6 +222,8 @@ const updateBlogPost = async (req, res) => {
 
   blogPost.title = title;
   blogPost.content = content;
+  blogPost.linkedinLink = linkedinLink;
+  blogPost.mediumLink = mediumLink;
   blogPost.region = region;
   blogPost.fellow = fellow;
   blogPost.associatedFellow = associatedFellow;
