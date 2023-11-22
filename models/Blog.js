@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
-const RelatedBlog = require("./RelatedBlog");
 
 const Blog = sequelize.define("Blog", {
   imagePath: {
@@ -14,10 +13,10 @@ const Blog = sequelize.define("Blog", {
     type: DataTypes.TEXT,
   },
   fellow: {
-    type: DataTypes.INTEGER, // Change the data type to INTEGER
+    type: DataTypes.INTEGER,
   },
   associatedFellow: {
-    type: DataTypes.INTEGER, // Change the data type to INTEGER
+    type: DataTypes.INTEGER,
   },
   category: {
     type: DataTypes.TEXT,
@@ -35,6 +34,12 @@ const Blog = sequelize.define("Blog", {
   publicationDate: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
+  },
+  linkedinLink: {
+    type: DataTypes.STRING,
+  },
+  mediumLink: {
+    type: DataTypes.STRING,
   },
   createdAt: {
     type: DataTypes.DATE,

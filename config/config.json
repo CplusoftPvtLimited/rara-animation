@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "root",
-    "password": "123",
-    "database": "rara",
+    "password": "",
+    "database": "newraradb",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "123",
-    "database": "rara",
+    "password": "",
+    "database": "newraradb",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "123",
-    "database": "rara",
+    "password": "",
+    "database": "newraradb",
     "host": "localhost",
     "dialect": "mysql"
   }
