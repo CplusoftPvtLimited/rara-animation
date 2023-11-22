@@ -723,3 +723,23 @@
     border-bottom-width: 2px;
   }
 }
+
+.add-product-input-div {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 8px !important;
+  border-radius: 12px;
+  margin: 12px 12px 12px 0 !important;
+}
+
+.add-product-input-div p {
+  font-size: 14px;
+}
+
+.add-product-input-div input,
+.add-product-input-div textarea {
+  outline: none !important;
+  border: none !important;
+  width: 100% !important;
+  resize: none !important;
+  /* background-color: "rgb(227, 227, 227) !important"; */
+}

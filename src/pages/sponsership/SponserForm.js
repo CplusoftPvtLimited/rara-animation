@@ -32,11 +32,6 @@ const SponserForm = () => {
     });
   }
 
-  // const handleCheckboxChange = (event) => {
-  //   const amount = event.target.checked ? 250000 : null;
-  //   dispatch(setAmount(amount));
-  // };
-
   function handleSubmit(event) {
     event.preventDefault();
     const errors = validateForm();
@@ -166,23 +161,6 @@ const SponserForm = () => {
                     {validationErrors.number && (
                       <p style={{ color: "red" }}>{validationErrors.number}</p>
                     )}
-                  </div>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col>
-                  <div className="add-product-input-div">
-                    <p>Message</p>
-                    <textarea
-                      type="text"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      row="114"
-                      cols="24"
-                      style={{ width: "100%", height: "150px" }}
-                    />
                   </div>
                 </Col>
               </Row>
