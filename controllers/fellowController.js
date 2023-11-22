@@ -15,17 +15,15 @@ const createFellow = async (req, res) => {
   }
 
   try {
-    const { originalname, path } = req.file;
     let imagePath = null;
-    if (req?.file) {
-      imagePath = req.file.path;
-    }
 
     const baseUrl = "https://backend.pecunia.institute/";
     // const baseUrl = "http://localhost:4500/";
 
     let fellow;
     if (req?.file) {
+      const { originalname, path } = req.file;
+      imagePath = req.file.path;
       fellow = await Fellow.create({
         imagePath: baseUrl + path,
         paragraph1: paragraph1,
@@ -37,7 +35,7 @@ const createFellow = async (req, res) => {
         paragraph1: paragraph1,
         paragraph2: paragraph2,
         link: link,
-        imagePath: NULL,
+        imagePath: imagePath,
       });
     }
 
@@ -46,7 +44,7 @@ const createFellow = async (req, res) => {
       .send({ message: "Fellow added successfully", Fellow: fellow });
   } catch (err) {
     console.log("err: ", err);
-    res.status(403).json({ err });
+    res.status(403).json({ error: err.message });
   }
 };
 
