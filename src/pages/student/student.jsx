@@ -55,13 +55,12 @@ function Student() {
             {/** Buttons */}
 
             <div className="main-buttons w-[80%] mx-auto xl:w-[80%] z-50">
-              <div className="flex gap-8 justify-center xl:gap-24 mt-[70px]">
+              <div className="flex gap-5 justify-center xl:gap-24 mt-[70px]">
                 <a
                   href="#about"
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
                   <div>
-                    {/* <h4 className="">About</h4> */}
                     <h4 className="">About Our Fellowships</h4>
                   </div>
                 </a>
@@ -69,44 +68,53 @@ function Student() {
                   href="#program"
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
-                  {/* <h4 className="cursor-pointer">Join</h4> */}
                   <h4 className="cursor-pointer">Program Outline</h4>
                 </a>
                 <a
                   href="#outline"
                   style={{ color: "#383838", textDecoration: "none" }}
                 >
-                  {/* <h4>Structure</h4> */}
                   <h4>Duration</h4>
                 </a>
               </div>
-              <div className="flex gap-8 xl:gap-24 justify-center mt-8">
+
+              <div className="flex gap-3 xl:gap-24 justify-center mt-8">
                 <a
                   href="#application"
                   className="cursor-pointer"
-                  style={{ color: "#383838", textDecoration: "none" }}
+                  style={{
+                    color: "#383838",
+                    textDecoration: "none",
+                    width: "40%",
+                  }}
                 >
-                  {/* <h4>Funding</h4> */}
                   <h4>Application Process</h4>
                 </a>
                 <a
                   href="#contact"
-                  style={{ color: "#383838", textDecoration: "none" }}
+                  style={{
+                    color: "#383838",
+                    textDecoration: "none",
+                    width: "35%",
+                  }}
                 >
-                  {/* <h4 className="">Contact</h4> */}
                   <h4 className="">Your Next Steps</h4>
                 </a>
                 <a
                   href="#contact"
-                  style={{ color: "#383838", textDecoration: "none" }}
+                  style={{
+                    color: "#383838",
+                    textDecoration: "none",
+                    width: "32%",
+                  }}
                 >
-                  {/* <h4 className="">Contact</h4> */}
-                  <h4 className="">Join the Fellowship</h4>
+                  <h4 className="">Join the Fellowship</h4>
                 </a>
               </div>
             </div>
           </div>
         </div>
+
         {/** Mobile Only */}
         {/** Left Side */}
         <div className=" md:hidden">
@@ -180,7 +188,7 @@ function Student() {
             {/** About heading */}
             <div className="about-section flex gap-4" id="about">
               {/* <img className="w-[80px] xl:w-[120px]" src={About} alt="" /> */}
-              <h2>ABOUT</h2>
+              <h2>ABOUT OUR FOLLOWSHIPS</h2>
               {/* <p className="my-auto">The Endowment Fund</p> */}
             </div>
             {/** About content */}
